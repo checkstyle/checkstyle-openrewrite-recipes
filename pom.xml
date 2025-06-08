@@ -111,6 +111,9 @@
                     <activeRecipes>
                         <recipe>org.checkstyle.autofix.CheckstyleAutoFix</recipe>
                     </activeRecipes>
+                    <exclusions>
+                        <exclusion>src/test/resources/**</exclusion>
+                    </exclusions>
                     <recipeArtifactCoordinates>
                         <coordinate>org.checkstyle.autofix:checkstyle-openrewrite-recipes:1.0.0</coordinate>
                     </recipeArtifactCoordinates>
