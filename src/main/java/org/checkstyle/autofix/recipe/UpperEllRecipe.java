@@ -20,7 +20,8 @@ public class UpperEllRecipe extends Recipe {
 
     @Override
     public String getDescription() {
-        return "Replace lowercase 'l' suffix in long literals with uppercase 'L' to improve readability.";
+        return "Replace lowercase 'l' suffix in long literals with uppercase 'L' "
+                + "to improve readability.";
     }
 
     @Override
@@ -28,17 +29,20 @@ public class UpperEllRecipe extends Recipe {
         return new UpperEllVisitor();
     }
 
-    private static class UpperEllVisitor extends JavaIsoVisitor<ExecutionContext> {
+    /**
+     * Visitor that replaces lowercase 'l' suffixes in long literals with uppercase 'L'.
+     */
+    private static final class UpperEllVisitor extends JavaIsoVisitor<ExecutionContext> {
         @Override
         public J.Literal visitLiteral(J.Literal literal, ExecutionContext ctx) {
             J.Literal result = super.visitLiteral(literal, ctx);
-            String valueSource = result.getValueSource();
+            final String valueSource = result.getValueSource();
 
             if (valueSource != null && valueSource.endsWith("l")
-                && result.getType() == JavaType.Primitive.Long) {
-                    String numericPart = valueSource.substring(0, valueSource.length() - 1);
-                    String newValueSource = numericPart + "L";
-                    result = result.withValueSource(newValueSource);
+                    && result.getType() == JavaType.Primitive.Long) {
+                final String numericPart = valueSource.substring(0, valueSource.length() - 1);
+                final String newValueSource = numericPart + "L";
+                result = result.withValueSource(newValueSource);
             }
             return result;
         }

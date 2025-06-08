@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<!DOCTYPE import-control PUBLIC
+        "-//Checkstyle//DTD ImportControl Configuration 1.3//EN"
+        "http://checkstyle.sourceforge.net/dtds/import_control_1_3.dtd">
+
+<import-control pkg="org.checkstyle.autofix">
+    <allow pkg="org.junit"/>
+    <allow pkg="org.openrewrite"/>
+    <allow pkg="org.checkstyle"/>
+</import-control>

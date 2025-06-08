@@ -24,6 +24,10 @@
         <recipe.bom.version>3.9.0</recipe.bom.version>
         <junit.version>5.13.0</junit.version>
         <assertj.version>3.24.2</assertj.version>
+
+        <!-- Checkstyle properties -->
+        <maven.checkstyle.plugin.version>3.6.0</maven.checkstyle.plugin.version>
+        <checkstyle.version>10.25.0</checkstyle.version>
     </properties>
 
     <dependencyManagement>
@@ -97,9 +101,46 @@
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
+
+            <!-- Checkstyle plugin for code style regulation -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>${maven.checkstyle.plugin.version}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.puppycrawl.tools</groupId>
+                        <artifactId>checkstyle</artifactId>
+                        <version>${checkstyle.version}</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <id>check</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <configuration>
+                            <includeResources>false</includeResources>
+                            <includeTestResources>false</includeTestResources>
+                            <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                            <configLocation>
+                                https://raw.githubusercontent.com/checkstyle/checkstyle/checkstyle-${checkstyle.version}/config/checkstyle-checks.xml
+                            </configLocation>
+                            <propertiesLocation>config/checkstyle.properties</propertiesLocation>
+                            <failOnViolation>true</failOnViolation>
+                            <logViolationsToConsole>true</logViolationsToConsole>
+                            <maxAllowedViolations>0</maxAllowedViolations>
+                            <violationSeverity>error</violationSeverity>
+                            <outputFileFormat>xml</outputFileFormat>
+                            <outputFile>
+                                ${project.build.directory}/checkstyle/checkstyle-report.xml
+                            </outputFile>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
-
-
 
 </project>
