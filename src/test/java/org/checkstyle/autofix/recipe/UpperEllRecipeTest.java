@@ -1,40 +1,29 @@
 package org.checkstyle.autofix.recipe;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.openrewrite.java.Assertions.java;
+import java.io.IOException;
 
 import org.junit.jupiter.api.Test;
-import org.openrewrite.test.RecipeSpec;
-import org.openrewrite.test.RewriteTest;
+import org.openrewrite.Recipe;
 
-public class UpperEllRecipeTest implements RewriteTest {
+public class UpperEllRecipeTest extends AbstractRecipeTest {
 
     @Override
-    public void defaults(RecipeSpec spec) {
-        spec.recipe(new UpperEllRecipe());
+    protected Recipe getRecipe() {
+        return new UpperEllRecipe();
     }
 
     @Test
-    void fixesLowercase() {
-        rewriteRun(
+    void hexOctalLiteralTest() throws IOException {
+        testRecipe("upperell", "HexOctalLiteral");
+    }
 
-            java(
-                "class Test {\n"
-                        + "    int value1 = 123l;\n"
-                        + "    long value2 = 0x123l;\n"
-                        + "    long value3 = 0123l;\n"
-                        + "    long value4 = 0b101l;\n"
-                        + "    String value5 = null;\n"
-                        + "}\n",
-                "class Test {\n"
-                        + "    int value1 = 123L;\n"
-                        + "    long value2 = 0x123L;\n"
-                        + "    long value3 = 0123L;\n"
-                        + "    long value4 = 0b101L;\n"
-                        + "    String value5 = null;\n"
-                        + "}\n"
-            )
-        );
-        assertTrue(true, "Test completed successfully");
+    @Test
+    void complexLongLiterals() throws IOException {
+        testRecipe("upperell", "ComplexLongLiterals");
+    }
+
+    @Test
+    void stringAndCommentTest() throws IOException {
+        testRecipe("upperell", "StringAndComments");
     }
 }

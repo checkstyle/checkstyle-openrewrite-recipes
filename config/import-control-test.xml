@@ -7,4 +7,6 @@
     <allow pkg="org.junit"/>
     <allow pkg="org.openrewrite"/>
     <allow pkg="org.checkstyle"/>
+    <allow pkg="java.io"/>
+    <allow pkg="java.nio"/>
 </import-control>
