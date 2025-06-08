@@ -1,14 +1,13 @@
 package org.checkstyle.autofix;
 
-import org.openrewrite.Recipe;
-
 import java.util.Collections;
 import java.util.List;
 
 import org.checkstyle.autofix.recipe.UpperEllRecipe;
+import org.openrewrite.Recipe;
 
 /**
- * Main recipe that automatically fixes all supported Checkstyle violations
+ * Main recipe that automatically fixes all supported Checkstyle violations.
  */
 public class CheckstyleAutoFix extends Recipe {
 
@@ -26,7 +25,7 @@ public class CheckstyleAutoFix extends Recipe {
     public List<Recipe> getRecipeList() {
         return Collections.singletonList(
 
-            new UpperEllRecipe()
+                new UpperEllRecipe()
         );
     }
 }
