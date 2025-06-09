@@ -21,6 +21,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <rewrite.version>8.54.0</rewrite.version>
+        <rewrite.maven.plugin>6.11.0</rewrite.maven.plugin>
         <recipe.bom.version>3.9.0</recipe.bom.version>
         <junit.version>5.13.0</junit.version>
         <assertj.version>3.24.2</assertj.version>
@@ -102,7 +103,31 @@
                 </configuration>
             </plugin>
 
+            <plugin>
+                <groupId>org.openrewrite.maven</groupId>
+                <artifactId>rewrite-maven-plugin</artifactId>
+                <version>${rewrite.maven.plugin}</version>
+                <configuration>
+                    <activeRecipes>
+                        <recipe>org.checkstyle.autofix.CheckstyleAutoFix</recipe>
+                    </activeRecipes>
+                    <recipeArtifactCoordinates>
+                        <coordinate>org.checkstyle.autofix:checkstyle-openrewrite-recipes:1.0.0</coordinate>
+                    </recipeArtifactCoordinates>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>checkstyle-autofix</id>
+                        <phase>process-sources</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
             <!-- Checkstyle plugin for code style regulation -->
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
