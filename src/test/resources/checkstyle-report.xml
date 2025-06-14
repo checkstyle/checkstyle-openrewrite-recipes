@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="10.25.0">
+    <file name="src/main/java/org/example/Test.java">
+        <error line="10" column="5" severity="error"
+               message="'if' construct must use '{}'s."
+               source="com.puppycrawl.tools.checkstyle.checks.blocks.NeedBracesCheck"/>
+        <error line="15" column="20" severity="error"
+               message="Line is longer than 100 characters."
+               source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+    </file>
+    <file name="src/main/java/org/example/AnotherTest.java">
+        <error line="5" column="10" severity="error"
+               message="Missing a Javadoc comment."
+               source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck"/>
+    </file>
+</checkstyle>

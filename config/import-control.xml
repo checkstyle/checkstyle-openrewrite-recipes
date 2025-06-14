@@ -5,6 +5,8 @@
 
 <import-control pkg="org.checkstyle.autofix" regex="true">
     <allow pkg="org.openrewrite"/>
+    <allow pkg="org.w3c.dom"/>
+    <allow pkg="javax.xml.parsers"/>
     <allow pkg="org.openrewrite.java"/>
     <allow pkg="org.openrewrite.java.tree"/>
     <allow pkg="java"/>
