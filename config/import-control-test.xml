@@ -7,4 +7,8 @@
     <allow pkg="org.junit"/>
     <allow pkg="org.openrewrite"/>
     <allow pkg="org.checkstyle"/>
+    <allow pkg="java.util"/>
+    <allow pkg="java.io"/>
+    <allow pkg="java.net"/>
+    <allow pkg="org.assertj.core.api.Assertions"/>
 </import-control>
