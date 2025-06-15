@@ -44,6 +44,14 @@
     </dependencyManagement>
 
     <dependencies>
+
+        <!-- Checkstyle dependency for parsing Checkstyle configs -->
+        <dependency>
+            <groupId>com.puppycrawl.tools</groupId>
+            <artifactId>checkstyle</artifactId>
+            <version>${checkstyle.version}</version>
+        </dependency>
+
         <!-- OpenRewrite core dependencies - using consistent versions -->
         <dependency>
             <groupId>org.openrewrite</groupId>

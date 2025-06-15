@@ -8,6 +8,7 @@
     <allow pkg="org.openrewrite.java"/>
     <allow pkg="org.openrewrite.java.tree"/>
     <allow pkg="java"/>
+    <allow pkg="javax.xml.stream"/>
     <allow pkg="org.checkstyle"/>
     <allow pkg="java.util"/>
 </import-control>
