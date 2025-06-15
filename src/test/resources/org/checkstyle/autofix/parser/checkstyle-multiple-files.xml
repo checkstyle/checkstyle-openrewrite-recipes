@@ -1,0 +1,9 @@
+<checkstyle>
+    <file name="Main.java">
+        <error line="10" column="5" severity="error" message="Missing javadoc" source="com.puppycrawl.Check"/>
+        <error line="20" column="2" severity="error" message="Indentation" source="com.puppycrawl.Indent"/>
+    </file>
+    <file name="Utils.java">
+        <error line="15" column="1" severity="warning" message="Unused import" source="com.puppycrawl.Import"/>
+    </file>
+</checkstyle>
