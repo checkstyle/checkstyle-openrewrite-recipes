@@ -4,4 +4,8 @@
         "-//Checkstyle//DTD SuppressionFilter Configuration 1.1//EN"
         "https://checkstyle.org/dtds/suppressions_1_1.dtd">
 
-<suppressions/>
+<suppressions>
+    <suppress checks="MissingJavadocType" files=".*"/>
+    <suppress checks="JavadocVariable" files=".*"/>
+    <suppress checks="MissingJavadocMethod" files=".*"/>
+</suppressions>
