@@ -1,0 +1,10 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: org.checkstyle.autofix.CheckstyleAutoFix
+displayName: Checkstyle autoFix
+description: Automatically fixes Checkstyle violations.
+tags:
+  - checkstyle
+  - static-analysis
+recipeList:
+  - org.checkstyle.autofix.recipe.UpperEllRecipe
