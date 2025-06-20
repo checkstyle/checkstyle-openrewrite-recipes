@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="8.0">
+    <file name="Example.java">
+        <error line="42" column="13" severity="error"
+               message="Example message"
+               source="com.puppycrawl.example.Check"/>
+    </file>
+</checkstyle>
