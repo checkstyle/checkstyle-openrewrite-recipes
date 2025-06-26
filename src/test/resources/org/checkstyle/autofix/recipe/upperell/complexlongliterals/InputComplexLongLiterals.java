@@ -11,8 +11,8 @@ public class InputComplexLongLiterals {
     private Long simpleLong = 1234l;
     private Long negativeLong = -5678l;
     private Long underscoreLong = 1_000_000l;
-    Long maxLongObject = 9223372036854775807l;
-    Long minLongObject = -9223372036854775808l;
+    Long maxLongObject = 9223372036854775807l;    //suppressed violation
+    Long minLongObject = -9223372036854775808l;    //suppressed violation
 
     public long calculate(long input1, long input2) {
         return input1 + input2 + 1000l;

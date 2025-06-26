@@ -18,7 +18,11 @@
 package org.checkstyle.autofix.recipe;
 
 import java.io.IOException;
+import java.nio.file.Path;
+import java.util.List;
 
+import org.checkstyle.autofix.parser.CheckstyleReportsParser;
+import org.checkstyle.autofix.parser.CheckstyleViolation;
 import org.junit.jupiter.api.Test;
 import org.openrewrite.Recipe;
 
@@ -26,7 +30,12 @@ public class UpperEllTest extends AbstractRecipeTest {
 
     @Override
     protected Recipe getRecipe() {
-        return new UpperEll();
+        final String reportPath = "src/test/resources/org/checkstyle/autofix/recipe/upperell"
+                + "/report.xml";
+
+        final List<CheckstyleViolation> violations =
+                CheckstyleReportsParser.parse(Path.of(reportPath));
+        return new UpperEll(violations);
     }
 
     @Test
