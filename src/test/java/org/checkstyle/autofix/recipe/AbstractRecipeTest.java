@@ -67,7 +67,8 @@ public abstract class AbstractRecipeTest implements RewriteTest {
      * @param testCaseName the name of the test case (should match directory and file names)
      * @throws IOException if files cannot be read
      */
-    protected void testRecipe(String recipePath, String testCaseName) throws IOException {
+    protected void testRecipe(String recipePath, String testCaseName)
+            throws IOException {
         final String testCaseDir = testCaseName.toLowerCase();
         final String inputFileName = "Input" + testCaseName + ".java";
         final String outputFileName = "Output" + testCaseName + ".java";

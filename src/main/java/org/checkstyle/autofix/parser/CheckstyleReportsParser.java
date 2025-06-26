@@ -55,8 +55,7 @@ public final class CheckstyleReportsParser {
 
     }
 
-    public static List<CheckstyleViolation> parse(Path xmlPath)
-            throws IOException, XMLStreamException {
+    public static List<CheckstyleViolation> parse(Path xmlPath) {
 
         final List<CheckstyleViolation> result = new ArrayList<>();
 
@@ -89,6 +88,11 @@ public final class CheckstyleReportsParser {
                     reader.close();
                 }
             }
+
+        }
+        catch (IOException | XMLStreamException exception) {
+            throw new IllegalArgumentException("Failed to parse checkstyle XML report from: "
+                    + xmlPath, exception);
         }
 
         return result;

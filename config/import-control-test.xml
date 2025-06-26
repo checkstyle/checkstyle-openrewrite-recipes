@@ -11,4 +11,5 @@
     <allow pkg="java.util"/>
     <allow pkg="java.nio"/>
     <allow pkg="java.lang"/>
+    <allow pkg="javax.xml.stream"/>
 </import-control>
