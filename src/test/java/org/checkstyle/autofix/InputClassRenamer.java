@@ -44,14 +44,9 @@ public class InputClassRenamer extends Recipe {
         return new ClassRenameVisitor();
     }
 
-    /**
-     * A visitor that traverse Java AST nodes and renames classes starting with "Input" to "Output".
-     */
     private static final class ClassRenameVisitor extends JavaIsoVisitor<ExecutionContext> {
 
-        /** The prefix to match in class names. */
         private static final String FROM_PREFIX = "Input";
-        /** The prefix to replace with in class names. */
         private static final String TO_PREFIX = "Output";
 
         @Override
@@ -82,13 +77,6 @@ public class InputClassRenamer extends Recipe {
             return result;
         }
 
-        /**
-         * Checks if a given class name starts with the FROM_PREFIX
-         * and returns the renamed version with TO_PREFIX.
-         *
-         * @param originalName The original class name.
-         * @return The new class name with TO_PREFIX if matched, otherwise null.
-         */
         private String renameIfMatch(String originalName) {
             final String result;
             if (originalName.startsWith(FROM_PREFIX)) {
