@@ -27,7 +27,7 @@ import org.openrewrite.java.tree.J;
  * Recipe to rename classes starting with 'Input' to 'Output'.
  * For example, a class named InputExample will be renamed to OutputExample.
  */
-public class ClassRenameRecipe extends Recipe {
+public class InputClassRenamer extends Recipe {
 
     @Override
     public String getDisplayName() {

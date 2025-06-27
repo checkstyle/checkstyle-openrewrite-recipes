@@ -22,11 +22,11 @@ import java.io.IOException;
 import org.junit.jupiter.api.Test;
 import org.openrewrite.Recipe;
 
-public class UpperEllRecipeTest extends AbstractRecipeTest {
+public class UpperEllTest extends AbstractRecipeTest {
 
     @Override
     protected Recipe getRecipe() {
-        return new UpperEllRecipe();
+        return new UpperEll();
     }
 
     @Test

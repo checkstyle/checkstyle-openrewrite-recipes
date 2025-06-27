@@ -20,7 +20,7 @@ package org.checkstyle.autofix;
 import java.util.Collections;
 import java.util.List;
 
-import org.checkstyle.autofix.recipe.UpperEllRecipe;
+import org.checkstyle.autofix.recipe.UpperEll;
 import org.openrewrite.Recipe;
 
 /**
@@ -42,7 +42,7 @@ public class CheckstyleAutoFix extends Recipe {
     public List<Recipe> getRecipeList() {
         return Collections.singletonList(
 
-                new UpperEllRecipe()
+                new UpperEll()
         );
     }
 }

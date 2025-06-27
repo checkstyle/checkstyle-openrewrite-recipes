@@ -24,7 +24,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import org.checkstyle.autofix.ClassRenameRecipe;
+import org.checkstyle.autofix.InputClassRenamer;
 import org.openrewrite.Recipe;
 import org.openrewrite.test.RewriteTest;
 
@@ -44,7 +44,7 @@ public abstract class AbstractRecipeTest implements RewriteTest {
      * @return the preprocessing recipe
      */
     private Recipe createPreprocessingRecipe() {
-        return new ClassRenameRecipe();
+        return new InputClassRenamer();
     }
 
     /**
