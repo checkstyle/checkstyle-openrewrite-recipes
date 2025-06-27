@@ -7,4 +7,4 @@ tags:
   - checkstyle
   - static-analysis
 recipeList:
-  - org.checkstyle.autofix.recipe.UpperEllRecipe
+  - org.checkstyle.autofix.recipe.UpperEll

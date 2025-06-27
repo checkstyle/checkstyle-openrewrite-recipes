@@ -28,7 +28,7 @@ import org.openrewrite.java.tree.JavaType;
  * Fixes Checkstyle UpperEll violations by replacing lowercase 'l' suffix
  * in long literals with uppercase 'L'.
  */
-public class UpperEllRecipe extends Recipe {
+public class UpperEll extends Recipe {
 
     @Override
     public String getDisplayName() {
