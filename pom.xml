@@ -111,32 +111,6 @@
                 </configuration>
             </plugin>
 
-            <plugin>
-                <groupId>org.openrewrite.maven</groupId>
-                <artifactId>rewrite-maven-plugin</artifactId>
-                <version>${rewrite.maven.plugin}</version>
-                <configuration>
-                    <activeRecipes>
-                        <recipe>org.checkstyle.autofix.CheckstyleAutoFix</recipe>
-                    </activeRecipes>
-                    <exclusions>
-                        <exclusion>src/test/resources/**</exclusion>
-                    </exclusions>
-                    <recipeArtifactCoordinates>
-                        <coordinate>org.checkstyle.autofix:checkstyle-openrewrite-recipes:1.0.0</coordinate>
-                    </recipeArtifactCoordinates>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>checkstyle-autofix</id>
-                        <phase>process-sources</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
             <!-- Checkstyle plugin for code style regulation -->
 
             <plugin>
@@ -176,6 +150,33 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>org.openrewrite.maven</groupId>
+                <artifactId>rewrite-maven-plugin</artifactId>
+                <version>${rewrite.maven.plugin}</version>
+                <configuration>
+                    <activeRecipes>
+                        <recipe>CheckstyleAutoFixConfigured</recipe>
+                    </activeRecipes>
+                    <exclusions>
+                        <exclusion>src/test/resources/**</exclusion>
+                    </exclusions>
+                    <recipeArtifactCoordinates>
+                        <coordinate>org.checkstyle.autofix:checkstyle-openrewrite-recipes:1.0.0</coordinate>
+                    </recipeArtifactCoordinates>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>checkstyle-autofix</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
 
