@@ -17,16 +17,23 @@
 
 package org.checkstyle.autofix;
 
-import java.util.Collections;
+import java.nio.file.Path;
 import java.util.List;
 
-import org.checkstyle.autofix.recipe.UpperEll;
+import org.checkstyle.autofix.parser.CheckstyleReportParser;
+import org.checkstyle.autofix.parser.CheckstyleViolation;
+import org.openrewrite.Option;
 import org.openrewrite.Recipe;
 
 /**
  * Main recipe that automatically fixes all supported Checkstyle violations.
  */
 public class CheckstyleAutoFix extends Recipe {
+
+    @Option(displayName = "Violation report path",
+            description = "Path to the checkstyle violation report XML file.",
+            example = "target/checkstyle/checkstyle-report.xml")
+    private String violationReportPath;
 
     @Override
     public String getDisplayName() {
@@ -38,11 +45,16 @@ public class CheckstyleAutoFix extends Recipe {
         return "Automatically fixes Checkstyle violations.";
     }
 
+    public String getViolationReportPath() {
+        return violationReportPath;
+    }
+
     @Override
     public List<Recipe> getRecipeList() {
-        return Collections.singletonList(
 
-                new UpperEll()
-        );
+        final List<CheckstyleViolation> violations = CheckstyleReportParser
+                .parse(Path.of(getViolationReportPath()));
+
+        return CheckstyleRecipeRegistry.getRecipes(violations);
     }
 }

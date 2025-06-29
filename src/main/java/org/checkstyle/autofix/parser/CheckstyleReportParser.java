@@ -33,7 +33,7 @@ import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
-public final class CheckstyleReportsParser {
+public final class CheckstyleReportParser {
 
     private static final String FILE_TAG = "file";
 
@@ -51,7 +51,7 @@ public final class CheckstyleReportsParser {
 
     private static final String SOURCE_ATTR = "source";
 
-    private CheckstyleReportsParser() {
+    private CheckstyleReportParser() {
 
     }
 

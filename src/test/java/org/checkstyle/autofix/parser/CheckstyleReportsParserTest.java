@@ -36,7 +36,7 @@ public class CheckstyleReportsParserTest {
     @Test
     public void testParseFromResource() throws Exception {
         final Path xmlPath = Path.of(getPath("checkstyle-report.xml"));
-        final List<CheckstyleViolation> records = CheckstyleReportsParser.parse(xmlPath);
+        final List<CheckstyleViolation> records = CheckstyleReportParser.parse(xmlPath);
 
         assertNotNull(records);
         assertEquals(1, records.size());
@@ -53,7 +53,7 @@ public class CheckstyleReportsParserTest {
     @Test
     public void testParseMultipleFilesReport() throws Exception {
         final Path xmlPath = Path.of(getPath("checkstyle-multiple-files.xml"));
-        final List<CheckstyleViolation> records = CheckstyleReportsParser.parse(xmlPath);
+        final List<CheckstyleViolation> records = CheckstyleReportParser.parse(xmlPath);
 
         assertNotNull(records);
         assertEquals(3, records.size());
