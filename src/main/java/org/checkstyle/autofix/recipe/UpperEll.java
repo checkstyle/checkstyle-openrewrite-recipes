@@ -18,7 +18,6 @@
 package org.checkstyle.autofix.recipe;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CancellationException;
 import java.util.function.Function;
@@ -41,10 +40,6 @@ import org.openrewrite.java.tree.JavaType;
 public class UpperEll extends Recipe {
 
     private final List<CheckstyleViolation> violations;
-
-    public UpperEll() {
-        this(new ArrayList<>());
-    }
 
     public UpperEll(List<CheckstyleViolation> violations) {
         this.violations = violations;
