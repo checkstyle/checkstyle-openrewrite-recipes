@@ -34,10 +34,11 @@ _No checks analyzed yet_
 
 ### Coding
 
-| Status | Check                                                                                                              | Recipe | Coverage Notes                                                                           |
-|--------|--------------------------------------------------------------------------------------------------------------------|--------|------------------------------------------------------------------------------------------|
-| 🟢     | [`FinalLocalVariable`](https://checkstyle.sourceforge.io/checks/coding/finallocalvariable.html#FinalLocalVariable) | `TBD`  |                                                                                          |
-| 🔴     | [`MagicNumber`](https://checkstyle.sourceforge.io/checks/coding/magicnumber.html#MagicNumber)                      |        | it requires contextual understanding to replace literals with meaningful named constants |
+| Status | Check                                                                                                                  | Recipe | Coverage Notes                                                                           |
+|--------|------------------------------------------------------------------------------------------------------------------------|--------|------------------------------------------------------------------------------------------|
+| 🟢     | [`FinalLocalVariable`](https://checkstyle.sourceforge.io/checks/coding/finallocalvariable.html#FinalLocalVariable)     | `TBD`  |                                                                                          |
+| 🔴     | [`MagicNumber`](https://checkstyle.sourceforge.io/checks/coding/magicnumber.html#MagicNumber)                          |        | it requires contextual understanding to replace literals with meaningful named constants |
+| 🟢     | [`UnusedLocalVariable `](https://checkstyle.sourceforge.io/checks/coding/unusedlocalvariable.html#UnusedLocalVariable) | `TBD`  |                                                                                          |
 
 
 ### Headers
@@ -81,7 +82,10 @@ _No checks analyzed yet_
 
 ### Naming Conventions
 
-_No checks analyzed yet_
+| Status | Check                                                                                                                                | Recipe  | Coverage Notes                                                                       |
+|--------|--------------------------------------------------------------------------------------------------------------------------------------|---------|--------------------------------------------------------------------------------------|
+| 🔴     | [`AbbreviationAsWordInName`](https://checkstyle.sourceforge.io/checks/naming/abbreviationaswordinname.html#AbbreviationAsWordInName) |         | Requires semantic understanding of abbreviations and context                         |
+| 🟡     | [`AbstractClassName`](https://checkstyle.sourceforge.io/checks/naming/abstractclassname.html#AbstractClassName)                      | `TBD`   | Partially covered by renaming abstract class names to match the configured pattern.  | 
 
 
 ### Regexp
