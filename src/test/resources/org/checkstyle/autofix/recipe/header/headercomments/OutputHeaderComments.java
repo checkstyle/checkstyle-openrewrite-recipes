@@ -1,0 +1,11 @@
+///////////////////////////////////////////////////////////////////////////////////////////////
+// Unit test for checkstyle-openrewrite-recipes.
+// Dated: 11.07.25
+// Copyright (C) 2025 Authors. Licensed under Apache 2.0.
+// This file is part of the Checkstyle OpenRewrite test suite.
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+package org.checkstyle.autofix.recipe.header.headercomments;
+
+public class OutputHeaderComments {
+}
