@@ -43,9 +43,9 @@ _No checks analyzed yet_
 
 ### Headers
 
-| Status | Check                                                                           | Recipe           | Coverage Notes |
-|--------|---------------------------------------------------------------------------------|------------------|----------------|
-| 🟢     | [`Header`](https://checkstyle.sourceforge.io/checks/header/header.html#Header ) | `TBD`            |                |
+| Status | Check                                                                           | Recipe           | Coverage Notes             |
+|--------|---------------------------------------------------------------------------------|------------------|----------------------------|
+| 🟡     | [`Header`](https://checkstyle.sourceforge.io/checks/header/header.html#Header ) | `TBD`            | only java files are fixed. |
 
 
 
