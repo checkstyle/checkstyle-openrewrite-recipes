@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="10.12.3">
+    <file name="org/checkstyle/autofix/recipe/header/headerblanklines/InputHeaderBlankLines.java">
+        <error line="1" severity="error"
+               message="Missing a header - not enough lines in file."
+               source="header"/>
+    </file>
+    <file name="InputHeaderComments.java">
+        <error line="3" severity="error"
+               message="Line does not match expected header line"
+               source="header"/>
+    </file>
+
+    <file name="InputHeaderIncorrect.java">
+        <error line="1" severity="error"
+               message="Line does not match expected header line"
+               source="header"/>
+    </file>
+</checkstyle>
