@@ -20,8 +20,10 @@ package org.checkstyle.autofix;
 import java.nio.file.Path;
 import java.util.List;
 
+import org.checkstyle.autofix.parser.CheckConfiguration;
 import org.checkstyle.autofix.parser.CheckstyleReportParser;
 import org.checkstyle.autofix.parser.CheckstyleViolation;
+import org.checkstyle.autofix.parser.ConfigurationLoader;
 import org.openrewrite.Option;
 import org.openrewrite.Recipe;
 
@@ -34,6 +36,11 @@ public class CheckstyleAutoFix extends Recipe {
             description = "Path to the checkstyle violation report XML file.",
             example = "target/checkstyle/checkstyle-report.xml")
     private String violationReportPath;
+
+    @Option(displayName = "Checkstyle config path",
+            description = "Path to the file containing Checkstyle configuration.",
+            example = "config/checkstyle.xml")
+    private String configurationPath;
 
     @Override
     public String getDisplayName() {
@@ -49,12 +56,19 @@ public class CheckstyleAutoFix extends Recipe {
         return violationReportPath;
     }
 
+    public String getConfigurationPath() {
+        return configurationPath;
+    }
+
     @Override
     public List<Recipe> getRecipeList() {
-
         final List<CheckstyleViolation> violations = CheckstyleReportParser
                 .parse(Path.of(getViolationReportPath()));
 
         return CheckstyleRecipeRegistry.getRecipes(violations);
+    }
+
+    private CheckConfiguration loadCheckstyleConfiguration() {
+        return ConfigurationLoader.loadConfiguration(getConfigurationPath());
     }
 }
