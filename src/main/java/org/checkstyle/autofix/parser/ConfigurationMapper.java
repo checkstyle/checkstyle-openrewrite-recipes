@@ -1,0 +1,56 @@
+///////////////////////////////////////////////////////////////////////////////////////////////
+// checkstyle-openrewrite-recipes: Automatically fix Checkstyle violations with OpenRewrite.
+// Copyright (C) 2025 The Checkstyle OpenRewrite Recipes Authors
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+package org.checkstyle.autofix.parser;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import com.puppycrawl.tools.checkstyle.api.CheckstyleException;
+import com.puppycrawl.tools.checkstyle.api.Configuration;
+
+public final class ConfigurationMapper {
+
+    private ConfigurationMapper() {
+        // utility class
+    }
+
+    public static CheckConfiguration mapConfiguration(Configuration config) {
+        final Map<String, String> properties = new HashMap<>();
+        final String[] propertyNames = config.getPropertyNames();
+        for (String propertyName : propertyNames) {
+            try {
+                final String value = config.getProperty(propertyName);
+                properties.put(propertyName, value);
+
+            }
+            catch (CheckstyleException exception) {
+                throw new IllegalArgumentException("Error getting property "
+                        + propertyName + ": " + exception.getMessage());
+            }
+        }
+
+        final Configuration[] checkstyleChildren = config.getChildren();
+        final CheckConfiguration[] simpleChildren =
+                new CheckConfiguration[checkstyleChildren.length];
+        for (int index = 0; index < checkstyleChildren.length; index++) {
+            simpleChildren[index] = mapConfiguration(checkstyleChildren[index]);
+        }
+
+        return new CheckConfiguration(properties, simpleChildren);
+    }
+}

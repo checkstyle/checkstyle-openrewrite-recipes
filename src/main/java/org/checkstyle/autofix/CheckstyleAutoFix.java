@@ -17,13 +17,23 @@
 
 package org.checkstyle.autofix;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Properties;
 
+import org.checkstyle.autofix.parser.CheckConfiguration;
 import org.checkstyle.autofix.parser.CheckstyleReportParser;
 import org.checkstyle.autofix.parser.CheckstyleViolation;
+import org.checkstyle.autofix.parser.ConfigurationMapper;
 import org.openrewrite.Option;
 import org.openrewrite.Recipe;
+
+import com.puppycrawl.tools.checkstyle.ConfigurationLoader;
+import com.puppycrawl.tools.checkstyle.PropertiesExpander;
+import com.puppycrawl.tools.checkstyle.api.CheckstyleException;
 
 /**
  * Main recipe that automatically fixes all supported Checkstyle violations.
@@ -34,6 +44,17 @@ public class CheckstyleAutoFix extends Recipe {
             description = "Path to the checkstyle violation report XML file.",
             example = "target/checkstyle/checkstyle-report.xml")
     private String violationReportPath;
+
+    @Option(displayName = "Checkstyle config path",
+            description = "Path to the file containing Checkstyle configuration.",
+            example = "config/checkstyle.xml")
+    private String configurationPath;
+
+    @Option(displayName = "Checkstyle properties file path",
+            description = "Path to the file containing the Checkstyle Properties.",
+            example = "config/checkstyle.properties",
+            required = false)
+    private String propertiesPath;
 
     @Override
     public String getDisplayName() {
@@ -49,12 +70,39 @@ public class CheckstyleAutoFix extends Recipe {
         return violationReportPath;
     }
 
+    public String getConfigurationPath() {
+        return configurationPath;
+    }
+
+    public String getPropertiesPath() {
+        return propertiesPath;
+    }
+
     @Override
     public List<Recipe> getRecipeList() {
-
         final List<CheckstyleViolation> violations = CheckstyleReportParser
                 .parse(Path.of(getViolationReportPath()));
 
         return CheckstyleRecipeRegistry.getRecipes(violations);
+    }
+
+    private CheckConfiguration loadCheckstyleConfiguration()
+            throws CheckstyleException, IOException {
+        Properties props = new Properties();
+        final String propFile = getPropertiesPath();
+
+        if (propFile == null) {
+            props = System.getProperties();
+        }
+        else {
+            try (FileInputStream input = new FileInputStream(propFile)) {
+                props.load(input);
+            }
+            catch (FileNotFoundException exception) {
+                throw new IllegalArgumentException("Failed to read: " + propFile, exception);
+            }
+        }
+        return ConfigurationMapper.mapConfiguration(ConfigurationLoader.loadConfiguration(
+                getConfigurationPath(), new PropertiesExpander(props)));
     }
 }
