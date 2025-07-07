@@ -15,3 +15,4 @@ tags:
 recipeList:
   - org.checkstyle.autofix.CheckstyleAutoFix:
       violationReportPath: "target/checkstyle/checkstyle-report.xml"
+      configurationPath: "https://raw.githubusercontent.com/checkstyle/checkstyle/checkstyle-${checkstyle.version}/config/checkstyle-checks.xml"
