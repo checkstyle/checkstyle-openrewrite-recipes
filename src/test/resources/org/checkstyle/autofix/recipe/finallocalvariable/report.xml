@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="10.12.3">
+    <file name="org/checkstyle/autofix/recipe/finallocalvariable/missingfinal/InputMissingFinal.java">
+        <error line="5" column="12" severity="error"
+               message="Use uppercase 'L' for long literals."
+               source="com.puppycrawl.tools.checkstyle.checks.coding.FinalLocalVariableCheck"/>
+        <error line="6" column="12" severity="error"
+               message="Use uppercase 'L' for long literals."
+               source="com.puppycrawl.tools.checkstyle.checks.coding.FinalLocalVariableCheck"/>
+        <error line="7" column="12" severity="error"
+               message="Use uppercase 'L' for long literals."
+               source="com.puppycrawl.tools.checkstyle.checks.coding.FinalLocalVariableCheck"/>
+    </file>
+</checkstyle>
