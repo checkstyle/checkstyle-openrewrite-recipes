@@ -41,11 +41,11 @@ public final class CheckstyleViolation {
         this.fileName = fileName;
     }
 
-    public int getLine() {
+    public Integer getLine() {
         return line;
     }
 
-    public int getColumn() {
+    public Integer getColumn() {
         return column;
     }
 

@@ -70,7 +70,7 @@ public class UpperEll extends Recipe {
 
         @Override
         public J.CompilationUnit visitCompilationUnit(J.CompilationUnit cu, ExecutionContext ctx) {
-            this.sourcePath = cu.getSourcePath();
+            this.sourcePath = cu.getSourcePath().toAbsolutePath();
             return super.visitCompilationUnit(cu, ctx);
         }
 
@@ -97,9 +97,10 @@ public class UpperEll extends Recipe {
             final int column = computeColumnPosition(cursor, literal, getCursor());
 
             return violations.stream().anyMatch(violation -> {
+                final Path absolutePath = Path.of(violation.getFileName()).toAbsolutePath();
                 return violation.getLine() == line
                         && violation.getColumn() == column
-                        && Path.of(violation.getFileName()).equals(sourcePath);
+                        && absolutePath.equals(sourcePath);
             });
         }
 

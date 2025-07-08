@@ -23,10 +23,14 @@ import static org.openrewrite.java.Assertions.java;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
 
 import org.checkstyle.autofix.InputClassRenamer;
 import org.openrewrite.Recipe;
 import org.openrewrite.test.RewriteTest;
+
+import com.puppycrawl.tools.checkstyle.api.CheckstyleException;
+import com.puppycrawl.tools.checkstyle.api.Configuration;
 
 public abstract class AbstractRecipeTest implements RewriteTest {
 
@@ -37,9 +41,10 @@ public abstract class AbstractRecipeTest implements RewriteTest {
         return new InputClassRenamer();
     }
 
-    protected abstract Recipe getRecipe();
+    protected abstract Recipe getRecipe() throws CheckstyleException;
 
-    protected void testRecipe(String recipePath, String testCaseName) throws IOException {
+    protected void testRecipe(String recipePath, String testCaseName) throws IOException,
+            CheckstyleException {
         final String testCaseDir = testCaseName.toLowerCase();
         final String inputFileName = "Input" + testCaseName + ".java";
         final String outputFileName = "Output" + testCaseName + ".java";
@@ -60,4 +65,16 @@ public abstract class AbstractRecipeTest implements RewriteTest {
             );
         });
     }
+
+    protected Configuration extractCheckConfiguration(Configuration config, String checkName) {
+
+        return Arrays.stream(config.getChildren())
+                .filter(child -> checkName.equals(child.getName()))
+                .findFirst()
+                .orElseThrow(() -> {
+                    return new IllegalArgumentException(checkName + "configuration not "
+                            + "found");
+                });
+    }
+
 }
