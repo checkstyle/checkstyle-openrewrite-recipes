@@ -17,13 +17,14 @@
 
 package org.checkstyle.autofix.parser;
 
+import java.util.List;
 import java.util.Map;
 
 public final class CheckConfiguration {
     private final Map<String, String> properties;
-    private final CheckConfiguration[] children;
+    private final List<CheckConfiguration> children;
 
-    public CheckConfiguration(Map<String, String> properties, CheckConfiguration[] children) {
+    public CheckConfiguration(Map<String, String> properties, List<CheckConfiguration> children) {
         this.properties = properties;
         this.children = children;
     }
@@ -32,7 +33,7 @@ public final class CheckConfiguration {
         return properties;
     }
 
-    public CheckConfiguration[] getChildren() {
+    public List<CheckConfiguration> getChildren() {
         return children;
     }
 

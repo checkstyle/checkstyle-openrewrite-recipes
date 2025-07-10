@@ -17,15 +17,20 @@
 
 package org.checkstyle.autofix.parser;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
+import com.puppycrawl.tools.checkstyle.PropertiesExpander;
 import com.puppycrawl.tools.checkstyle.api.CheckstyleException;
 import com.puppycrawl.tools.checkstyle.api.Configuration;
 
-public final class ConfigurationMapper {
+public final class ConfigurationLoader {
 
-    private ConfigurationMapper() {
+    private ConfigurationLoader() {
         // utility class
     }
 
@@ -39,8 +44,8 @@ public final class ConfigurationMapper {
 
             }
             catch (CheckstyleException exception) {
-                throw new IllegalArgumentException("Error getting property "
-                        + propertyName + ": " + exception.getMessage());
+                throw new IllegalStateException("Error getting property "
+                        + propertyName + ": " + exception);
             }
         }
 
@@ -51,6 +56,36 @@ public final class ConfigurationMapper {
             simpleChildren[index] = mapConfiguration(checkstyleChildren[index]);
         }
 
-        return new CheckConfiguration(properties, simpleChildren);
+        return new CheckConfiguration(properties, List.of(simpleChildren));
     }
+
+    public static CheckConfiguration loadConfiguration(String checkstyleConfigurationPath,
+                                                       String propFile) {
+        Properties props = new Properties();
+
+        if (propFile == null) {
+            props = System.getProperties();
+        }
+        else {
+            try (FileInputStream input = new FileInputStream(propFile)) {
+                props.load(input);
+            }
+            catch (IOException exception) {
+                throw new IllegalStateException("Failed to read: " + propFile, exception);
+            }
+        }
+
+        final Configuration checkstyleConfig;
+        try {
+            checkstyleConfig = com.puppycrawl.tools.checkstyle.ConfigurationLoader
+                    .loadConfiguration(checkstyleConfigurationPath, new PropertiesExpander(props));
+        }
+        catch (CheckstyleException exception) {
+            throw new IllegalStateException("Failed to load configuration:"
+                    + checkstyleConfigurationPath, exception);
+        }
+
+        return mapConfiguration(checkstyleConfig);
+    }
+
 }

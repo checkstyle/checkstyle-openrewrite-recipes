@@ -17,23 +17,15 @@
 
 package org.checkstyle.autofix;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
-import java.util.Properties;
 
 import org.checkstyle.autofix.parser.CheckConfiguration;
 import org.checkstyle.autofix.parser.CheckstyleReportParser;
 import org.checkstyle.autofix.parser.CheckstyleViolation;
-import org.checkstyle.autofix.parser.ConfigurationMapper;
+import org.checkstyle.autofix.parser.ConfigurationLoader;
 import org.openrewrite.Option;
 import org.openrewrite.Recipe;
-
-import com.puppycrawl.tools.checkstyle.ConfigurationLoader;
-import com.puppycrawl.tools.checkstyle.PropertiesExpander;
-import com.puppycrawl.tools.checkstyle.api.CheckstyleException;
 
 /**
  * Main recipe that automatically fixes all supported Checkstyle violations.
@@ -86,23 +78,7 @@ public class CheckstyleAutoFix extends Recipe {
         return CheckstyleRecipeRegistry.getRecipes(violations);
     }
 
-    private CheckConfiguration loadCheckstyleConfiguration()
-            throws CheckstyleException, IOException {
-        Properties props = new Properties();
-        final String propFile = getPropertiesPath();
-
-        if (propFile == null) {
-            props = System.getProperties();
-        }
-        else {
-            try (FileInputStream input = new FileInputStream(propFile)) {
-                props.load(input);
-            }
-            catch (FileNotFoundException exception) {
-                throw new IllegalArgumentException("Failed to read: " + propFile, exception);
-            }
-        }
-        return ConfigurationMapper.mapConfiguration(ConfigurationLoader.loadConfiguration(
-                getConfigurationPath(), new PropertiesExpander(props)));
+    private CheckConfiguration loadCheckstyleConfiguration() {
+        return ConfigurationLoader.loadConfiguration(getConfigurationPath(), getPropertiesPath());
     }
 }
