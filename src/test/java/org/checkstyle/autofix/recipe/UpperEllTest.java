@@ -36,7 +36,7 @@ public class UpperEllTest extends AbstractRecipeTest {
 
     @Override
     protected Recipe createRecipe(List<CheckstyleViolation> violations,
-                                  List<CheckConfiguration> checkConfigs) {
+                                  CheckConfiguration checkConfigs) {
 
         return new UpperEll(violations);
     }

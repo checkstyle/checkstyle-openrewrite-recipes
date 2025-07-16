@@ -1,5 +1,6 @@
 /*
-UpperEll
+com.puppycrawl.tools.checkstyle.checks.UpperEllCheck
+
 */
 
 

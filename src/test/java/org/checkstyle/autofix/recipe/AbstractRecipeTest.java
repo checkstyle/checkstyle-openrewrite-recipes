@@ -7,7 +7,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -40,7 +39,7 @@ public abstract class AbstractRecipeTest extends AbstractXmlTestSupport implemen
      * Creates the recipe with violations and configs.
      */
     protected abstract Recipe createRecipe(List<CheckstyleViolation> violations,
-                                           List<CheckConfiguration> checkConfigs);
+                                           CheckConfiguration checkConfigs);
 
     @Override
     protected String getPackageLocation() {
@@ -58,7 +57,7 @@ public abstract class AbstractRecipeTest extends AbstractXmlTestSupport implemen
 
         final List<CheckstyleViolation> violations = runCheckstyleAndGetViolations(inputPath);
 
-        final List<CheckConfiguration> checkConfigs = getAllCheckConfigurations(inputPath);
+        final CheckConfiguration checkConfigs = getAllCheckConfigurations(inputPath);
 
         final String beforeCode = readFile(getPath(inputPath));
         final String expectedAfterCode = readFile(getPath(outputPath));
@@ -94,28 +93,11 @@ public abstract class AbstractRecipeTest extends AbstractXmlTestSupport implemen
         }
     }
 
-    private List<CheckConfiguration> getAllCheckConfigurations(String inputPath) throws Exception {
+    private CheckConfiguration getAllCheckConfigurations(String inputPath) throws Exception {
         final String configFilePath = getPath(inputPath);
         final TestInputConfiguration testInputConfiguration =
                 InlineConfigParser.parse(configFilePath);
-        final Configuration parsedConfig = testInputConfiguration.createConfiguration();
-
-        final List<CheckConfiguration> checkConfigs = new ArrayList<>();
-
-        for (Configuration child : parsedConfig.getChildren()) {
-            if ("TreeWalker".equals(child.getName())) {
-                for (Configuration check : child.getChildren()) {
-                    final CheckConfiguration checkConfig = ConfigurationLoader.mapConfiguration(check);
-                    checkConfigs.add(checkConfig);
-                }
-            }
-        }
-
-        if (checkConfigs.isEmpty()) {
-            throw new IllegalStateException("No check configurations found");
-        }
-
-        return checkConfigs;
+        return ConfigurationLoader.mapConfiguration(testInputConfiguration.createConfiguration());
     }
 
     /**
