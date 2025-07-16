@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 
+import org.checkstyle.autofix.parser.CheckConfiguration;
 import org.checkstyle.autofix.parser.CheckstyleReportParser;
 import org.checkstyle.autofix.parser.CheckstyleViolation;
 import org.junit.jupiter.api.Test;
@@ -29,27 +30,29 @@ import org.openrewrite.Recipe;
 public class UpperEllTest extends AbstractRecipeTest {
 
     @Override
-    protected Recipe getRecipe() {
-        final String reportPath = "src/test/resources/org/checkstyle/autofix/recipe/upperell"
-                + "/report.xml";
+    protected String getSubpackage() {
+        return "upperell";
+    }
 
-        final List<CheckstyleViolation> violations =
-                CheckstyleReportParser.parse(Path.of(reportPath));
+    @Override
+    protected Recipe createRecipe(List<CheckstyleViolation> violations,
+                                  List<CheckConfiguration> checkConfigs) {
+
         return new UpperEll(violations);
     }
 
     @Test
-    void hexOctalLiteralTest() throws IOException {
-        testRecipe("upperell", "HexOctalLiteral");
+    void hexOctalLiteral() throws Exception {
+        verify("HexOctalLiteral");
     }
 
     @Test
-    void complexLongLiterals() throws IOException {
-        testRecipe("upperell", "ComplexLongLiterals");
+    void complexLongLiterals() throws Exception {
+        verify("ComplexLongLiterals");
     }
 
     @Test
-    void stringAndCommentTest() throws IOException {
-        testRecipe("upperell", "StringAndComments");
+    void stringAndComments() throws Exception {
+        verify("StringAndComments");
     }
 }
