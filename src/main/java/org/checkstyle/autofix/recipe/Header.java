@@ -46,6 +46,7 @@ public class Header extends Recipe {
     private static final String HEADER_FILE_PROPERTY = "headerFile";
     private static final String IGNORE_LINES_PROPERTY = "ignoreLines";
     private static final String CHARSET_PROPERTY = "charset";
+    private static final String LINE_SEPRATOR = "\n";
 
     private final List<CheckstyleViolation> violations;
     private final Configuration config;
@@ -148,12 +149,26 @@ public class Header extends Recipe {
                     final String fixedHeader = fixHeaderLines(licenseHeader,
                                                                 currentHeader, ignoreLines);
 
+                    System.out.println(escapeString(fixedHeader));
+
                     sourceFile = sourceFile.withPrefix(
-                            Space.format(fixedHeader + System.lineSeparator()));
+                            Space.format(fixedHeader + LINE_SEPRATOR));
                 }
                 result = super.visit(sourceFile, ctx);
             }
             return result;
+        }
+
+        public static String escapeString(String input) {
+            return input
+                    .replace("\\", "\\\\")
+                    .replace(LINE_SEPRATOR, "\\n")
+                    .replace("\t", "\\t")
+                    .replace("\r", "\\r")
+                    .replace("\b", "\\b")
+                    .replace("\f", "\\f")
+                    .replace("\"", "\\\"")
+                    .replace("\'", "\\'");
         }
 
         private String extractCurrentHeader(JavaSourceFile sourceFile) {
