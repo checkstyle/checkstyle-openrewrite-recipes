@@ -112,8 +112,8 @@ public final class CheckstyleReportParser {
     }
 
     private static CheckstyleViolation parseErrorTag(StartElement startElement, String filename) {
-        Integer line = null;
-        Integer column = null;
+        int line = -1;
+        int column = -1;
         String source = null;
         String message = null;
         String severity = null;
@@ -124,7 +124,7 @@ public final class CheckstyleReportParser {
             final String attrName = attribute.getName().getLocalPart();
             switch (attrName) {
                 case LINE_ATTR:
-                    line = Integer.valueOf(attribute.getValue());
+                    line = Integer.parseInt(attribute.getValue());
                     break;
                 case COLUMN_ATTR:
                     column = Integer.parseInt(attribute.getValue());
