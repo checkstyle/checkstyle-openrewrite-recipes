@@ -19,9 +19,9 @@ package org.checkstyle.autofix.parser;
 
 public final class CheckstyleViolation {
 
-    private final Integer line;
+    private final int line;
 
-    private final Integer column;
+    private final int column;
 
     private final String severity;
 
@@ -31,7 +31,7 @@ public final class CheckstyleViolation {
 
     private final String fileName;
 
-    public CheckstyleViolation(Integer line, Integer column,
+    public CheckstyleViolation(int line, int column,
                                String severity, String source, String message, String fileName) {
         this.line = line;
         this.column = column;
