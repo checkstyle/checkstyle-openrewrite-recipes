@@ -17,55 +17,61 @@
 
 package org.checkstyle.autofix.recipe;
 
-import java.io.IOException;
-import java.nio.file.Path;
 import java.util.List;
-import java.util.Properties;
 
-import org.checkstyle.autofix.parser.CheckstyleReportParser;
 import org.checkstyle.autofix.parser.CheckstyleViolation;
 import org.junit.jupiter.api.Test;
 import org.openrewrite.Recipe;
 
-import com.puppycrawl.tools.checkstyle.ConfigurationLoader;
-import com.puppycrawl.tools.checkstyle.PropertiesExpander;
-import com.puppycrawl.tools.checkstyle.api.CheckstyleException;
+import com.puppycrawl.tools.checkstyle.DefaultConfiguration;
 import com.puppycrawl.tools.checkstyle.api.Configuration;
+import com.puppycrawl.tools.checkstyle.checks.header.HeaderCheck;
 
 public class HeaderTest extends AbstractRecipeTest {
 
     @Override
-    protected Recipe getRecipe() throws CheckstyleException {
-        final String reportPath = "src/test/resources/org/checkstyle/autofix/recipe/header"
-                + "/report.xml";
+    protected String getSubpackage() {
+        return "header";
+    }
 
-        final String configPath = "src/test/resources/org/checkstyle/autofix/recipe/header"
-                + "/config.xml";
+    @Override
+    protected String getCheckName() {
+        return "Header";
+    }
 
-        final Configuration config = ConfigurationLoader.loadConfiguration(
-                configPath, new PropertiesExpander(new Properties())
-        );
+    @Override
+    protected Recipe createRecipe(List<CheckstyleViolation> violations, Configuration config) {
 
-        final List<CheckstyleViolation> violations =
-                CheckstyleReportParser.parse(Path.of(reportPath));
-
-        return new Header(violations,
-                extractCheckConfiguration(config, "Header"), getCharset(config));
+        return new Header(violations, config, getCharset(config));
     }
 
     @Test
-    void headerTest() throws IOException, CheckstyleException {
-        testRecipe("header", "HeaderBlankLines");
+    void headerTest() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(HeaderCheck.class);
+        final String headerPath = "src/test/resources/org/checkstyle/autofix/"
+                + "recipe/header/header.txt";
+        checkConfig.addProperty("headerFile", headerPath);
+        checkConfig.addProperty("ignoreLines", "3");
+        verify(checkConfig, "HeaderBlankLines");
     }
 
     @Test
-    void headerCommentTest() throws IOException, CheckstyleException {
-        testRecipe("header", "HeaderComments");
+    void headerCommentTest() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(HeaderCheck.class);
+        final String headerPath = "src/test/resources/org/checkstyle/autofix/"
+                + "recipe/header/header.txt";
+        checkConfig.addProperty("headerFile", headerPath);
+        checkConfig.addProperty("ignoreLines", "3");
+        verify(checkConfig, "HeaderComments");
     }
 
     @Test
-    void headerIncorrect() throws IOException, CheckstyleException {
-        testRecipe("header", "HeaderIncorrect");
+    void headerIncorrect() throws Exception {
+        final DefaultConfiguration checkConfig = createModuleConfig(HeaderCheck.class);
+        final String headerPath = "src/test/resources/org/checkstyle/"
+                + "autofix/recipe/header/header.txt";
+        checkConfig.addProperty("headerFile", headerPath);
+        checkConfig.addProperty("ignoreLines", "3");
+        verify(checkConfig, "HeaderIncorrect");
     }
-
 }
