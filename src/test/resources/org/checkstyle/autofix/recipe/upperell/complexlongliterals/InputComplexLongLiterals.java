@@ -5,11 +5,11 @@ public class InputComplexLongLiterals {
     private long multipleUnderscores = 1_234_567_890l;
 
     private long maxLong = 9223372036854775807l;
-    private long minLong = -9223372036854775808l;    //false negative
+    private long minLong = -9223372036854775808l;
 
     private Long nullLong = null;
     private Long simpleLong = 1234l;
-    private Long negativeLong = -5678l;    //false negative
+    private Long negativeLong = -5678l;
     private Long underscoreLong = 1_000_000l;
     Long maxLongObject = 9223372036854775807l;    //suppressed violation
     Long minLongObject = -9223372036854775808l;    //suppressed violation
