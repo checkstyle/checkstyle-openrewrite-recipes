@@ -17,6 +17,8 @@
 
 package org.checkstyle.autofix.parser;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,13 +59,26 @@ public final class ConfigurationLoader {
         return new CheckConfiguration(config.getName(), properties, List.of(simpleChildren));
     }
 
-    public static CheckConfiguration loadConfiguration(String checkstyleConfigurationPath) {
+    public static CheckConfiguration loadConfiguration(String checkstyleConfigurationPath,
+                                                       String propFile) {
+        Properties props = new Properties();
+        if (propFile == null) {
+            props = System.getProperties();
+        }
+        else {
+            try (FileInputStream input = new FileInputStream(propFile)) {
+                props.load(input);
+            }
+            catch (IOException exception) {
+                throw new IllegalStateException("Failed to read: " + propFile, exception);
+            }
+        }
 
         final Configuration checkstyleConfig;
         try {
             checkstyleConfig = com.puppycrawl.tools.checkstyle.ConfigurationLoader
                     .loadConfiguration(checkstyleConfigurationPath,
-                            new PropertiesExpander(new Properties()));
+                            new PropertiesExpander(props));
         }
         catch (CheckstyleException exception) {
             throw new IllegalStateException("Failed to load configuration:"
