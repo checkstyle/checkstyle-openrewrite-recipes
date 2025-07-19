@@ -53,6 +53,10 @@ public final class CheckConfiguration {
         return properties.get(key);
     }
 
+    public boolean hasProperty(String key) {
+        return properties.containsKey(key);
+    }
+
     public int[] getIntArray(String propertyName) {
         final String value = properties.get(propertyName);
         final int[] result;
