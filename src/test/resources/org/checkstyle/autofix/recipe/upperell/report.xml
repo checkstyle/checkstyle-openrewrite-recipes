@@ -107,4 +107,23 @@
                message="Use uppercase 'L' for long literals."
                source="com.puppycrawl.tools.checkstyle.checks.UpperEllCheck"/>
     </file>
+
+    <file name="org/checkstyle/autofix/recipe/upperell/symbolicliterals/InputSymbolicLiterals.java">
+        <error line="4" column="29" severity="error"
+               message="Use uppercase 'L' for long literals."
+               source="com.puppycrawl.tools.checkstyle.checks.UpperEllCheck"/>
+        <error line="5" column="34" severity="error"
+               message="Use uppercase 'L' for long literals."
+               source="com.puppycrawl.tools.checkstyle.checks.UpperEllCheck"/>
+        <error line="6" column="15" severity="error"
+               message="Use uppercase 'L' for long literals."
+               source="com.puppycrawl.tools.checkstyle.checks.UpperEllCheck"/>
+        <error line="7" column="16" severity="error"
+               message="Use uppercase 'L' for long literals."
+               source="com.puppycrawl.tools.checkstyle.checks.UpperEllCheck"/>
+        <error line="8" column="22" severity="error"
+               message="Use uppercase 'L' for long literals."
+               source="com.puppycrawl.tools.checkstyle.checks.UpperEllCheck"/>
+    </file>
+
 </checkstyle>

@@ -166,7 +166,13 @@ public class UpperEll extends Recipe {
         }
 
         private int computeColumnPosition(J tree, J targetElement, Cursor cursor) {
-            return computePosition(tree, targetElement, cursor, this::calculateColumnOffset);
+            return computePosition(tree, targetElement, cursor, out -> {
+                int column = calculateColumnOffset(out);
+                if (((J.Literal) targetElement).getValueSource().matches("^[+-].*")) {
+                    column++;
+                }
+                return column;
+            });
         }
 
         private int calculateColumnOffset(String out) {

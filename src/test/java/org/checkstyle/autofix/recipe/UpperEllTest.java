@@ -54,4 +54,9 @@ public class UpperEllTest extends AbstractRecipeTest {
     void stringAndCommentTest() throws IOException, CheckstyleException {
         testRecipe("upperell", "StringAndComments");
     }
+
+    @Test
+    void symbolicLiteralTest() throws IOException, CheckstyleException {
+        testRecipe("upperell", "SymbolicLiterals");
+    }
 }
