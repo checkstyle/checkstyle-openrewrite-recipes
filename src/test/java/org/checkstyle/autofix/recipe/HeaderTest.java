@@ -20,17 +20,15 @@ package org.checkstyle.autofix.recipe;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
-import java.util.Properties;
 
+import org.checkstyle.autofix.parser.CheckConfiguration;
 import org.checkstyle.autofix.parser.CheckstyleReportParser;
 import org.checkstyle.autofix.parser.CheckstyleViolation;
+import org.checkstyle.autofix.parser.ConfigurationLoader;
 import org.junit.jupiter.api.Test;
 import org.openrewrite.Recipe;
 
-import com.puppycrawl.tools.checkstyle.ConfigurationLoader;
-import com.puppycrawl.tools.checkstyle.PropertiesExpander;
 import com.puppycrawl.tools.checkstyle.api.CheckstyleException;
-import com.puppycrawl.tools.checkstyle.api.Configuration;
 
 public class HeaderTest extends AbstractRecipeTest {
 
@@ -42,15 +40,15 @@ public class HeaderTest extends AbstractRecipeTest {
         final String configPath = "src/test/resources/org/checkstyle/autofix/recipe/header"
                 + "/config.xml";
 
-        final Configuration config = ConfigurationLoader.loadConfiguration(
-                configPath, new PropertiesExpander(new Properties())
-        );
+        final CheckConfiguration config = ConfigurationLoader.loadConfiguration(configPath, null);
 
         final List<CheckstyleViolation> violations =
                 CheckstyleReportParser.parse(Path.of(reportPath));
 
-        return new Header(violations,
-                extractCheckConfiguration(config, "Header"), getCharset(config));
+        final CheckConfiguration checkConfig = config
+                .getChildConfig("Header");
+
+        return new Header(violations, checkConfig);
     }
 
     @Test

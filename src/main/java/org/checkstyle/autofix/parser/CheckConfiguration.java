@@ -41,16 +41,40 @@ public final class CheckConfiguration {
         return name;
     }
 
-    public Map<String, String> getProperties() {
-        return properties;
-    }
-
-    public List<CheckConfiguration> getChildren() {
-        return children;
+    private CheckConfiguration getParent() {
+        return parent;
     }
 
     public String getProperty(String key) {
-        return properties.get(key);
+        String value = null;
+
+        if (properties.containsKey(key)) {
+            value = properties.get(key);
+        }
+        else if (getParent() != null) {
+            value = getParent().getProperty(key);
+        }
+        return value;
+    }
+
+    public String getPropertyOrDefault(String key, String defaultValue) {
+        String result = getProperty(key);
+        if (result == null) {
+            result = defaultValue;
+        }
+        return result;
+    }
+
+    public boolean hasProperty(String key) {
+        boolean result = false;
+
+        if (properties.containsKey(key)) {
+            result = true;
+        }
+        else if (getParent() != null) {
+            result = getParent().hasProperty(key);
+        }
+        return result;
     }
 
     public int[] getIntArray(String propertyName) {
@@ -70,7 +94,7 @@ public final class CheckConfiguration {
         return result;
     }
 
-    public CheckConfiguration getChild(String childName) {
+    public CheckConfiguration getChildConfig(String childName) {
         CheckConfiguration result = null;
         for (CheckConfiguration child : children) {
             if (childName.equals(child.getName())) {
@@ -79,10 +103,6 @@ public final class CheckConfiguration {
             }
         }
         return result;
-    }
-
-    public CheckConfiguration getParent() {
-        return parent;
     }
 
     private void setParent(CheckConfiguration parent) {
