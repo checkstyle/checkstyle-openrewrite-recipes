@@ -176,10 +176,9 @@ public class UpperEll extends Recipe {
                 result = out.length();
             }
             else {
-                result = out.length() - lineBreakIndex - 1;
+                result = out.length() - lineBreakIndex;
             }
             return result;
         }
-
     }
 }
