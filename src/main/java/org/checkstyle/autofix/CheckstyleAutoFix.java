@@ -42,6 +42,12 @@ public class CheckstyleAutoFix extends Recipe {
             example = "config/checkstyle.xml")
     private String configurationPath;
 
+    @Option(displayName = "Checkstyle properties file path",
+            description = "Path to the file containing the Checkstyle Properties.",
+            example = "config/checkstyle.properties",
+            required = false)
+    private String propertiesPath;
+
     @Override
     public String getDisplayName() {
         return "Checkstyle autoFix";
@@ -60,6 +66,10 @@ public class CheckstyleAutoFix extends Recipe {
         return configurationPath;
     }
 
+    public String getPropertiesPath() {
+        return propertiesPath;
+    }
+
     @Override
     public List<Recipe> getRecipeList() {
         final List<CheckstyleViolation> violations = CheckstyleReportParser
@@ -69,6 +79,6 @@ public class CheckstyleAutoFix extends Recipe {
     }
 
     private CheckConfiguration loadCheckstyleConfiguration() {
-        return ConfigurationLoader.loadConfiguration(getConfigurationPath());
+        return ConfigurationLoader.loadConfiguration(getConfigurationPath(), getPropertiesPath());
     }
 }
