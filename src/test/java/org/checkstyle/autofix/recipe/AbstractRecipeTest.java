@@ -21,17 +21,14 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.openrewrite.java.Assertions.java;
 
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
 
 import org.checkstyle.autofix.InputClassRenamer;
 import org.openrewrite.Recipe;
 import org.openrewrite.test.RewriteTest;
 
 import com.puppycrawl.tools.checkstyle.api.CheckstyleException;
-import com.puppycrawl.tools.checkstyle.api.Configuration;
 
 public abstract class AbstractRecipeTest implements RewriteTest {
 
@@ -65,35 +62,6 @@ public abstract class AbstractRecipeTest implements RewriteTest {
                     java(beforeCode, afterCode)
             );
         });
-    }
-
-    protected Configuration extractCheckConfiguration(Configuration config, String checkName) {
-
-        return Arrays.stream(config.getChildren())
-                .filter(child -> checkName.equals(child.getName()))
-                .findFirst()
-                .orElseThrow(() -> {
-                    return new IllegalArgumentException(checkName + "configuration not "
-                            + "found");
-                });
-    }
-
-    protected Charset getCharset(Configuration config) {
-        try {
-            final String charsetName;
-
-            if (Arrays.asList(config.getPropertyNames()).contains("charset")) {
-                charsetName = config.getProperty("charset");
-            }
-            else {
-                charsetName = Charset.defaultCharset().name();
-            }
-
-            return Charset.forName(charsetName);
-        }
-        catch (CheckstyleException exception) {
-            throw new IllegalArgumentException("Failed to extract charset from config.", exception);
-        }
     }
 
 }

@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.checkstyle.autofix.parser.CheckConfiguration;
 import org.checkstyle.autofix.parser.CheckstyleViolation;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
@@ -38,9 +39,6 @@ import org.openrewrite.java.tree.J;
 import org.openrewrite.java.tree.JavaSourceFile;
 import org.openrewrite.java.tree.Space;
 
-import com.puppycrawl.tools.checkstyle.api.CheckstyleException;
-import com.puppycrawl.tools.checkstyle.api.Configuration;
-
 public class Header extends Recipe {
     private static final String HEADER_PROPERTY = "header";
     private static final String HEADER_FILE_PROPERTY = "headerFile";
@@ -48,13 +46,11 @@ public class Header extends Recipe {
     private static final String CHARSET_PROPERTY = "charset";
 
     private final List<CheckstyleViolation> violations;
-    private final Configuration config;
-    private final Charset charset;
+    private final CheckConfiguration config;
 
-    public Header(List<CheckstyleViolation> violations, Configuration config, Charset charset) {
+    public Header(List<CheckstyleViolation> violations, CheckConfiguration config) {
         this.violations = violations;
         this.config = config;
-        this.charset = charset;
     }
 
     @Override
@@ -69,58 +65,42 @@ public class Header extends Recipe {
 
     @Override
     public TreeVisitor<?, ExecutionContext> getVisitor() {
-        final String licenseHeader = extractLicenseHeader(config, charset);
+        final String licenseHeader = extractLicenseHeader(config);
         final List<Integer> ignoreLines = extractIgnoreLines(config);
         return new HeaderVisitor(violations, licenseHeader, ignoreLines);
     }
 
-    private static String extractLicenseHeader(Configuration config, Charset charset) {
+    private static String extractLicenseHeader(CheckConfiguration config) {
         final String header;
-        try {
-            if (hasProperty(config, HEADER_PROPERTY)) {
-                header = config.getProperty(HEADER_PROPERTY);
-            }
-            else {
-                final Charset charsetToUse;
-                if (hasProperty(config, CHARSET_PROPERTY)) {
-                    charsetToUse = Charset.forName(config.getProperty(CHARSET_PROPERTY));
-                }
-                else {
-                    charsetToUse = charset;
-                }
-                final String headerFilePath = config.getProperty(HEADER_FILE_PROPERTY);
+        if (config.hasProperty(HEADER_PROPERTY)) {
+            header = config.getProperty(HEADER_PROPERTY);
+        }
+        else {
+            final Charset charsetToUse = Charset.forName(config
+                    .getPropertyOrDefault(CHARSET_PROPERTY, Charset.defaultCharset().name()));
+            final String headerFilePath = config.getProperty(HEADER_FILE_PROPERTY);
+            try {
                 header = Files.readString(Path.of(headerFilePath), charsetToUse);
             }
-        }
-        catch (CheckstyleException | IOException exception) {
-            throw new IllegalArgumentException("Failed to extract header from config", exception);
+            catch (IOException exception) {
+                throw new IllegalArgumentException("Failed to extract header from config",
+                        exception);
+            }
         }
         return header;
     }
 
-    private static List<Integer> extractIgnoreLines(Configuration config) {
+    private static List<Integer> extractIgnoreLines(CheckConfiguration config) {
         final List<Integer> ignoreLinesList;
-        try {
-            if (!hasProperty(config, IGNORE_LINES_PROPERTY)) {
-                ignoreLinesList = new ArrayList<>();
-            }
-            else {
-                final String ignoreLines = config.getProperty(IGNORE_LINES_PROPERTY);
-                ignoreLinesList = Arrays.stream(ignoreLines.split(","))
-                        .map(String::trim)
-                        .map(Integer::parseInt)
-                        .collect(Collectors.toList());
-            }
+        if (config.hasProperty(IGNORE_LINES_PROPERTY)) {
+            ignoreLinesList = Arrays.stream(config.getIntArray(IGNORE_LINES_PROPERTY))
+                    .boxed()
+                    .toList();
         }
-        catch (CheckstyleException exception) {
-            throw new IllegalArgumentException(
-                    "Failed to extract ignore lines from config", exception);
+        else {
+            ignoreLinesList = new ArrayList<>();
         }
         return ignoreLinesList;
-    }
-
-    private static boolean hasProperty(Configuration config, String propertyName) {
-        return Arrays.asList(config.getPropertyNames()).contains(propertyName);
     }
 
     private static class HeaderVisitor extends JavaIsoVisitor<ExecutionContext> {
@@ -146,7 +126,7 @@ public class Header extends Recipe {
                 if (hasViolation(filePath)) {
                     final String currentHeader = extractCurrentHeader(sourceFile);
                     final String fixedHeader = fixHeaderLines(licenseHeader,
-                                                                currentHeader, ignoreLines);
+                            currentHeader, ignoreLines);
 
                     sourceFile = sourceFile.withPrefix(
                             Space.format(fixedHeader + System.lineSeparator()));
