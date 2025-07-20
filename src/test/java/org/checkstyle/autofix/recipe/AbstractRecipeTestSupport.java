@@ -28,6 +28,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.checkstyle.autofix.InputClassRenamer;
+import org.checkstyle.autofix.RemoveViolationComments;
 import org.checkstyle.autofix.parser.CheckstyleReportParser;
 import org.checkstyle.autofix.parser.CheckstyleViolation;
 import org.openrewrite.Recipe;
@@ -52,10 +53,6 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
         return "org/checkstyle/autofix/recipe/" + getSubpackage();
     }
 
-    private Recipe createPreprocessingRecipe() {
-        return new InputClassRenamer();
-    }
-
     protected void verify(String testCaseName) throws Exception {
         final String inputFileName = "Input" + testCaseName + ".java";
         final String outputFileName = "Output" + testCaseName + ".java";
@@ -71,7 +68,8 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
         final Recipe mainRecipe = createRecipe(violations);
 
         testRecipe(beforeCode, expectedAfterCode,
-                getPath(inputPath), createPreprocessingRecipe(), mainRecipe);
+                getPath(inputPath), new InputClassRenamer(),
+                new RemoveViolationComments(), mainRecipe);
     }
 
     private List<CheckstyleViolation> runCheckstyle(String inputPath,
