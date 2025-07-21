@@ -17,46 +17,43 @@
 
 package org.checkstyle.autofix.recipe;
 
-import java.io.IOException;
-import java.nio.file.Path;
 import java.util.List;
 
-import org.checkstyle.autofix.parser.CheckstyleReportParser;
 import org.checkstyle.autofix.parser.CheckstyleViolation;
 import org.junit.jupiter.api.Test;
 import org.openrewrite.Recipe;
 
-import com.puppycrawl.tools.checkstyle.api.CheckstyleException;
-
-public class UpperEllTest extends AbstractRecipeTest {
+public class UpperEllTest extends AbstractRecipeTestSupport {
 
     @Override
-    protected Recipe getRecipe() {
-        final String reportPath = "src/test/resources/org/checkstyle/autofix/recipe/upperell"
-                + "/report.xml";
+    protected String getSubpackage() {
+        return "upperell";
+    }
 
-        final List<CheckstyleViolation> violations =
-                CheckstyleReportParser.parse(Path.of(reportPath));
+    @Override
+    protected Recipe createRecipe(List<CheckstyleViolation> violations) {
+
         return new UpperEll(violations);
     }
 
     @Test
-    void hexOctalLiteralTest() throws IOException, CheckstyleException {
-        testRecipe("upperell", "HexOctalLiteral");
+    void hexOctalLiteral() throws Exception {
+        verify("HexOctalLiteral");
     }
 
     @Test
-    void complexLongLiterals() throws IOException, CheckstyleException {
-        testRecipe("upperell", "ComplexLongLiterals");
+    void complexLongLiterals() throws Exception {
+        verify("ComplexLongLiterals");
     }
 
     @Test
-    void stringAndCommentTest() throws IOException, CheckstyleException {
-        testRecipe("upperell", "StringAndComments");
+    void stringAndComments() throws Exception {
+        verify("StringAndComments");
     }
 
     @Test
-    void symbolicLiteralTest() throws IOException, CheckstyleException {
-        testRecipe("upperell", "SymbolicLiterals");
+    void symbolicLiteral() throws Exception {
+        verify("SymbolicLiterals");
     }
+
 }

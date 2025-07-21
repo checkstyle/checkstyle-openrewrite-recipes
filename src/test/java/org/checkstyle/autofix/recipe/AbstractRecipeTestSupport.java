@@ -45,8 +45,6 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
 
     protected abstract String getSubpackage();
 
-    protected abstract String getCheckName();
-
     protected abstract Recipe createRecipe(List<CheckstyleViolation> violations);
 
     @Override
