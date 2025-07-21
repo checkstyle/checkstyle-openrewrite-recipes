@@ -74,8 +74,9 @@ public class CheckstyleAutoFix extends Recipe {
     public List<Recipe> getRecipeList() {
         final List<CheckstyleViolation> violations = CheckstyleReportParser
                 .parse(Path.of(getViolationReportPath()));
+        final CheckConfiguration configuration = loadCheckstyleConfiguration();
 
-        return CheckstyleRecipeRegistry.getRecipes(violations);
+        return CheckstyleRecipeRegistry.getRecipes(violations, configuration);
     }
 
     private CheckConfiguration loadCheckstyleConfiguration() {
