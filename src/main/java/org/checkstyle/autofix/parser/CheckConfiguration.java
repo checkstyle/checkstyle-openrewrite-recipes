@@ -45,6 +45,10 @@ public final class CheckConfiguration {
         return parent;
     }
 
+    private List<CheckConfiguration> getChildren() {
+        return children;
+    }
+
     public String getProperty(String key) {
         String value = null;
 
@@ -94,12 +98,19 @@ public final class CheckConfiguration {
         return result;
     }
 
-    public CheckConfiguration getChildConfig(String childName) {
+    public CheckConfiguration getConfig(String childName) {
         CheckConfiguration result = null;
-        for (CheckConfiguration child : children) {
-            if (childName.equals(child.getName())) {
-                result = child;
-                break;
+        if (name.equals(childName)) {
+            result = this;
+        }
+        else {
+            final List<CheckConfiguration> childrenList = getChildren();
+            for (final CheckConfiguration current : childrenList) {
+                if (childName.equals(current.getName())) {
+                    result = current;
+                    break;
+                }
+                childrenList.addAll(current.getChildren());
             }
         }
         return result;
