@@ -17,24 +17,33 @@
 
 package org.checkstyle.autofix;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import org.checkstyle.autofix.parser.CheckConfiguration;
 import org.checkstyle.autofix.parser.CheckstyleViolation;
+import org.checkstyle.autofix.recipe.Header;
 import org.checkstyle.autofix.recipe.UpperEll;
 import org.openrewrite.Recipe;
 
 public final class CheckstyleRecipeRegistry {
 
-    private static final Map<String, Function<List<CheckstyleViolation>, Recipe>> RECIPE_MAP =
-            new HashMap<>();
+    private static final EnumMap<CheckstyleCheck, Function<List<CheckstyleViolation>,
+            Recipe>> RECIPE_MAP = new EnumMap<>(CheckstyleCheck.class);
+
+    private static final EnumMap<CheckstyleCheck, BiFunction<List<CheckstyleViolation>,
+            CheckConfiguration, Recipe>> RECIPE_MAP_WITH_CONFIG =
+            new EnumMap<>(CheckstyleCheck.class);
 
     static {
-        RECIPE_MAP.put("UpperEllCheck", UpperEll::new);
+        RECIPE_MAP.put(CheckstyleCheck.UPPERELL, UpperEll::new);
+        RECIPE_MAP_WITH_CONFIG.put(CheckstyleCheck.HEADER, Header::new);
     }
 
     private CheckstyleRecipeRegistry() {
@@ -47,28 +56,51 @@ public final class CheckstyleRecipeRegistry {
      * using the simple name of the check, and applies the factory to generate Recipe instances.
      *
      * @param violations the list of Checkstyle violations
+     * @param config the checkstyle configuration
      * @return a list of generated Recipe objects
      */
-    public static List<Recipe> getRecipes(List<CheckstyleViolation> violations) {
+    public static List<Recipe> getRecipes(List<CheckstyleViolation> violations,
+                                          CheckConfiguration config) {
+        return violations.stream()
+                .collect(Collectors.groupingBy(CheckstyleViolation::getSource))
+                .entrySet()
+                .stream()
+                .map(entry -> createRecipe(entry, config))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+    }
 
-        final Map<String, List<CheckstyleViolation>> violationsByCheck = violations.stream()
-                .collect(Collectors.groupingBy(CheckstyleViolation::getSource));
+    private static Recipe createRecipe(Map.Entry<String, List<CheckstyleViolation>> entry,
+                                       CheckConfiguration config) {
 
-        final List<Recipe> recipes = new ArrayList<>();
+        Recipe recipe = null;
 
-        for (Map.Entry<String, List<CheckstyleViolation>> entry : violationsByCheck.entrySet()) {
-            final String checkName = entry.getKey();
-            final String simpleCheckName = checkName
-                    .substring(checkName.lastIndexOf('.') + 1);
-            final List<CheckstyleViolation> checkViolations = entry.getValue();
+        final Optional<CheckstyleCheck> check = CheckstyleCheck.fromSource(entry.getKey());
 
-            final Function<List<CheckstyleViolation>, Recipe> recipeFactory =
-                    RECIPE_MAP.get(simpleCheckName);
-            if (recipeFactory != null) {
-                recipes.add(recipeFactory.apply(checkViolations));
+        if (check.isPresent()) {
+
+            final CheckstyleCheck checkstyleCheck = check.get();
+            final List<CheckstyleViolation> violations = entry.getValue();
+
+            final BiFunction<List<CheckstyleViolation>, CheckConfiguration,
+                    Recipe> configRecipeFactory = RECIPE_MAP_WITH_CONFIG.get(checkstyleCheck);
+
+            if (configRecipeFactory == null) {
+                final Function<List<CheckstyleViolation>, Recipe> simpleRecipeFactory =
+                        RECIPE_MAP.get(checkstyleCheck);
+                recipe = simpleRecipeFactory.apply(violations);
+            }
+            else {
+                final CheckConfiguration subConfig =
+                        extractCheckConfiguration(config, checkstyleCheck.name());
+                recipe = configRecipeFactory.apply(violations, subConfig);
             }
         }
+        return recipe;
+    }
 
-        return recipes;
+    private static CheckConfiguration extractCheckConfiguration(CheckConfiguration config,
+                                                                String checkName) {
+        return config.getConfig(checkName);
     }
 }

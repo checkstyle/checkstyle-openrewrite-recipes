@@ -21,6 +21,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 
@@ -56,7 +57,8 @@ public final class ConfigurationLoader {
             simpleChildren[index] = mapConfiguration(checkstyleChildren[index]);
         }
 
-        return new CheckConfiguration(config.getName(), properties, List.of(simpleChildren));
+        return new CheckConfiguration(config.getName().toUpperCase(Locale.ROOT),
+                properties, List.of(simpleChildren));
     }
 
     public static CheckConfiguration loadConfiguration(String checkstyleConfigurationPath,

@@ -1,0 +1,44 @@
+///////////////////////////////////////////////////////////////////////////////////////////////
+// checkstyle-openrewrite-recipes: Automatically fix Checkstyle violations with OpenRewrite.
+// Copyright (C) 2025 The Checkstyle OpenRewrite Recipes Authors
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+package org.checkstyle.autofix;
+
+import java.util.Arrays;
+import java.util.Optional;
+
+public enum CheckstyleCheck {
+    UPPERELL("com.puppycrawl.tools.checkstyle.checks.UpperEllCheck"),
+    HEADER("com.puppycrawl.tools.checkstyle.checks.header.HeaderCheck");
+
+    private final String id;
+
+    CheckstyleCheck(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public static Optional<CheckstyleCheck> fromSource(String source) {
+        return Arrays.stream(values())
+                .filter(check -> check.getId().equals(source))
+                .findFirst();
+
+    }
+
+}
