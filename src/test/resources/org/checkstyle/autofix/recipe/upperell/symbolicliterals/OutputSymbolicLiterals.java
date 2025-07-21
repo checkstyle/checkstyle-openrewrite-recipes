@@ -1,3 +1,12 @@
+/*xml
+<module name="Checker">
+  <module name="TreeWalker">
+    <module name="com.puppycrawl.tools.checkstyle.checks.UpperEllCheck"/>
+  </module>
+</module>
+
+*/
+
 package org.checkstyle.autofix.recipe.upperell.symbolicliterals;
 
 public class OutputSymbolicLiterals {
