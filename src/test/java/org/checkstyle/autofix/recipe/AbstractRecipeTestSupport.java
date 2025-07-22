@@ -59,6 +59,8 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
         final String inputPath = testCaseName.toLowerCase() + "/" + inputFileName;
         final String outputPath = testCaseName.toLowerCase() + "/" + outputFileName;
 
+        verifyOutputFile(outputPath);
+
         final Configuration config = getCheckConfigurations(inputPath);
         final List<CheckstyleViolation> violations = runCheckstyle(inputPath, config);
 
@@ -90,6 +92,28 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
         }
         finally {
             Files.deleteIfExists(tempXmlPath);
+        }
+    }
+
+    private void verifyOutputFile(String outputPath) throws Exception {
+
+        final Configuration config = getCheckConfigurations(outputPath);
+        final List<CheckstyleViolation> violations = runCheckstyle(outputPath, config);
+        if (!violations.isEmpty()) {
+            final StringBuilder violationMessage =
+                    new StringBuilder("Checkstyle violations found in the output file:\n");
+
+            violationMessage.append("outputFile: ").append(getPath(outputPath)).append("\n");
+
+            for (CheckstyleViolation violation : violations) {
+                violationMessage
+                        .append("line: ").append(violation.getLine())
+                        .append(", col: ").append(violation.getColumn())
+                        .append(", message: ").append(violation.getMessage())
+                        .append("\n");
+            }
+
+            throw new IllegalStateException(violationMessage.toString());
         }
     }
 
