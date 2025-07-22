@@ -34,7 +34,7 @@ public final class ConfigurationLoader {
         // utility class
     }
 
-    private static CheckConfiguration mapConfiguration(Configuration config) {
+    public static CheckConfiguration mapConfiguration(Configuration config) {
         final Map<String, String> properties = new HashMap<>();
         final String[] propertyNames = config.getPropertyNames();
         for (String propertyName : propertyNames) {
