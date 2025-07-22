@@ -44,6 +44,7 @@ public class Header extends Recipe {
     private static final String HEADER_FILE_PROPERTY = "headerFile";
     private static final String IGNORE_LINES_PROPERTY = "ignoreLines";
     private static final String CHARSET_PROPERTY = "charset";
+    private static final String LINE_SEPRATOR = "\n";
 
     private final List<CheckstyleViolation> violations;
     private final CheckConfiguration config;
@@ -129,7 +130,7 @@ public class Header extends Recipe {
                             currentHeader, ignoreLines);
 
                     sourceFile = sourceFile.withPrefix(
-                            Space.format(fixedHeader + System.lineSeparator()));
+                            Space.format(fixedHeader + LINE_SEPRATOR));
                 }
                 result = super.visit(sourceFile, ctx);
             }
@@ -166,7 +167,7 @@ public class Header extends Recipe {
                 }
             }
 
-            return String.join(System.lineSeparator(), currentLines);
+            return String.join(LINE_SEPRATOR, currentLines);
         }
 
         private boolean hasViolation(Path filePath) {
