@@ -64,6 +64,9 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
         final Configuration config = getCheckConfigurations(inputPath);
         final List<CheckstyleViolation> violations = runCheckstyle(inputPath, config);
 
+        String[] expectedMessages = convertToExpectedMessages(violations);
+        verifyWithInlineConfigParser(getPath(inputPath), expectedMessages);
+
         final String beforeCode = readFile(getPath(inputPath));
         final String expectedAfterCode = readFile(getPath(outputPath));
 
@@ -115,6 +118,18 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
 
             throw new IllegalStateException(violationMessage.toString());
         }
+    }
+
+    private String[] convertToExpectedMessages(List<CheckstyleViolation> violations) {
+        return violations.stream()
+                .map(v -> {
+                    if (v.getColumn() > 0) {
+                        return v.getLine() + ":" + v.getColumn() + ": " + v.getMessage();
+                    } else {
+                        return v.getLine() + ": " + v.getMessage();
+                    }
+                })
+                .toArray(String[]::new);
     }
 
     private Configuration getCheckConfigurations(String inputPath) throws Exception {
