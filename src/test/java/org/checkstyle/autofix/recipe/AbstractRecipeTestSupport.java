@@ -73,8 +73,7 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
         final Recipe mainRecipe = createRecipe(violations);
 
         testRecipe(beforeCode, expectedAfterCode,
-                getPath(inputPath), new InputClassRenamer(),
-                new RemoveViolationComments(), mainRecipe);
+                getPath(inputPath), new InputClassRenamer(), mainRecipe, new RemoveViolationComments());
     }
 
     private List<CheckstyleViolation> runCheckstyle(String inputPath,
