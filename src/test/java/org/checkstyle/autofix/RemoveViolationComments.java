@@ -73,7 +73,16 @@ public class RemoveViolationComments extends Recipe {
             else {
                 result = space.withComments(filteredComments);
                 if (!suffixAccumulator.isEmpty()) {
-                    result = result.withWhitespace(suffixAccumulator.toString());
+                    if (filteredComments.isEmpty()) {
+                        result = result.withWhitespace(suffixAccumulator.toString());
+                    }
+                    else {
+                        final Comment lastComment = filteredComments
+                                .get(filteredComments.size() - 1);
+                        filteredComments.set(filteredComments.size() - 1,
+                                lastComment.withSuffix(suffixAccumulator.toString()));
+                        result = space.withComments(filteredComments);
+                    }
                 }
             }
             return super.visitSpace(result, loc, ctx);
