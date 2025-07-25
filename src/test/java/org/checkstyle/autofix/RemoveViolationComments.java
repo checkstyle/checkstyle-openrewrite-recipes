@@ -17,9 +17,8 @@
 
 package org.checkstyle.autofix;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
@@ -49,21 +48,32 @@ public class RemoveViolationComments extends Recipe {
     private static final class ViolationCommentRemover extends JavaIsoVisitor<ExecutionContext> {
         @Override
         public Space visitSpace(Space space, Space.Location loc, ExecutionContext ctx) {
-            final StringBuilder suffixAccumulator = new StringBuilder();
+            String suffixAccumulator = null;
+            final List<Comment> filteredComments = new ArrayList<>();
 
-            final List<Comment> filteredComments = space.getComments().stream()
-                    .map(comment -> {
-                        Comment result = comment;
-                        if (!comment.isMultiline() && comment instanceof TextComment) {
-                            final TextComment textComment = (TextComment) comment;
-                            if (textComment.getText().startsWith("violation")) {
-                                suffixAccumulator.append(textComment.getSuffix());
-                                result = null;
-                            }
+            for (Comment comment : space.getComments()) {
+                if (!comment.isMultiline() && comment instanceof TextComment) {
+                    final TextComment textComment = (TextComment) comment;
+                    if (textComment.getText().matches("\\s*(\\d+\\s*)?violation.*")) {
+                        if (filteredComments.isEmpty()) {
+                            suffixAccumulator = textComment.getSuffix();
                         }
-                        return result; })
-                    .filter(Objects::nonNull)
-                    .collect(Collectors.toList());
+                        else {
+                            final int lastIndex = filteredComments.size() - 1;
+                            final Comment previousComment = filteredComments.get(lastIndex);
+                            filteredComments.set(lastIndex,
+                                    previousComment.withSuffix(textComment.getSuffix()));
+                        }
+                    }
+                    else {
+                        filteredComments.add(comment);
+                    }
+
+                }
+                else {
+                    filteredComments.add(comment);
+                }
+            }
 
             Space result;
 
@@ -72,17 +82,8 @@ public class RemoveViolationComments extends Recipe {
             }
             else {
                 result = space.withComments(filteredComments);
-                if (!suffixAccumulator.isEmpty()) {
-                    if (filteredComments.isEmpty()) {
-                        result = result.withWhitespace(suffixAccumulator.toString());
-                    }
-                    else {
-                        final Comment lastComment = filteredComments
-                                .get(filteredComments.size() - 1);
-                        filteredComments.set(filteredComments.size() - 1,
-                                lastComment.withSuffix(suffixAccumulator.toString()));
-                        result = space.withComments(filteredComments);
-                    }
+                if (suffixAccumulator != null) {
+                    result = result.withWhitespace(suffixAccumulator);
                 }
             }
             return super.visitSpace(result, loc, ctx);
