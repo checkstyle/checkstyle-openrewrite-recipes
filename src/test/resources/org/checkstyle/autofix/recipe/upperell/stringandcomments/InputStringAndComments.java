@@ -16,14 +16,13 @@ public class InputStringAndComments {
     private String message = "The value 456l should not change in strings";
     private String code = "long value = 789l;"; // This 789l in string should not change
 
-    // Only this actual long literal should change
-    private long actualLong = 999l;
+    private long actualLong = 999l;    // violation 'Should use uppercase 'L'.'
 
     /*
      * Multi-line comment with 111l should not change
      */
     public void method() {
         // Single line comment with 222l should not change
-        long value = 333l; // This should change
+        long value = 333l;    // violation 'Should use uppercase 'L'.'
     }
 }

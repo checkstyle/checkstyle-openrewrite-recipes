@@ -57,7 +57,23 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
     }
 
     protected void verify(String testCaseName) throws Exception {
-        verify(getCheckConfigurations(getInputFilePath(testCaseName)), testCaseName);
+
+        final String inputPath = getInputFilePath(testCaseName);
+        final String outputPath = getOutputFilePath(testCaseName);
+        final Configuration config = getCheckConfigurations(inputPath);
+        verifyOutputFile(outputPath, config);
+
+        final List<CheckstyleViolation> violations = runCheckstyle(inputPath, config);
+
+        verifyWithInlineConfigParser(getPath(inputPath), convertToExpectedMessages(violations));
+
+        final String beforeCode = readFile(getPath(inputPath));
+        final String expectedAfterCode = readFile(getPath(outputPath));
+        final CheckConfiguration checkConfig = ConfigurationLoader.mapConfiguration(config);
+        final Recipe mainRecipe = createRecipe(violations, checkConfig);
+        testRecipe(beforeCode, expectedAfterCode,
+                getPath(inputPath), new InputClassRenamer(),
+                mainRecipe, new RemoveViolationComments());
     }
 
     protected void verify(Configuration config, String testCaseName) throws Exception {
@@ -74,8 +90,7 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
         final CheckConfiguration checkConfig = ConfigurationLoader.mapConfiguration(config);
         final Recipe mainRecipe = createRecipe(violations, checkConfig);
         testRecipe(beforeCode, expectedAfterCode,
-                getPath(inputPath), new InputClassRenamer(),
-                new RemoveViolationComments(), mainRecipe);
+                getPath(inputPath), new InputClassRenamer(), mainRecipe);
     }
 
     private List<CheckstyleViolation> runCheckstyle(String inputPath,
@@ -118,6 +133,17 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
 
             throw new IllegalStateException(violationMessage.toString());
         }
+    }
+
+    private String[] convertToExpectedMessages(List<CheckstyleViolation> violations) {
+        return violations.stream()
+                .map(violation -> {
+                    final String message;
+                    message = violation.getLine() + ":"
+                            + violation.getColumn() + ": " + violation.getMessage();
+                    return message;
+                })
+                .toArray(String[]::new);
     }
 
     private Configuration getCheckConfigurations(String inputPath) throws Exception {
