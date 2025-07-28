@@ -21,11 +21,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.checkstyle.autofix.parser.CheckConfiguration;
@@ -42,7 +38,6 @@ import org.openrewrite.java.tree.Space;
 public class Header extends Recipe {
     private static final String HEADER_PROPERTY = "header";
     private static final String HEADER_FILE_PROPERTY = "headerFile";
-    private static final String IGNORE_LINES_PROPERTY = "ignoreLines";
     private static final String CHARSET_PROPERTY = "charset";
     private static final String LINE_SEPARATOR = "\n";
 
@@ -67,8 +62,7 @@ public class Header extends Recipe {
     @Override
     public TreeVisitor<?, ExecutionContext> getVisitor() {
         final String licenseHeader = extractLicenseHeader(config);
-        final List<Integer> ignoreLines = extractIgnoreLines(config);
-        return new HeaderVisitor(violations, licenseHeader, ignoreLines);
+        return new HeaderVisitor(violations, licenseHeader);
     }
 
     private static String extractLicenseHeader(CheckConfiguration config) {
@@ -81,7 +75,7 @@ public class Header extends Recipe {
                     .getPropertyOrDefault(CHARSET_PROPERTY, Charset.defaultCharset().name()));
             final String headerFilePath = config.getProperty(HEADER_FILE_PROPERTY);
             try {
-                header = Files.readString(Path.of(headerFilePath), charsetToUse);
+                header = toLfLineEnding(Files.readString(Path.of(headerFilePath), charsetToUse));
             }
             catch (IOException exception) {
                 throw new IllegalArgumentException("Failed to extract header from config",
@@ -91,29 +85,17 @@ public class Header extends Recipe {
         return header;
     }
 
-    private static List<Integer> extractIgnoreLines(CheckConfiguration config) {
-        final List<Integer> ignoreLinesList;
-        if (config.hasProperty(IGNORE_LINES_PROPERTY)) {
-            ignoreLinesList = Arrays.stream(config.getIntArray(IGNORE_LINES_PROPERTY))
-                    .boxed()
-                    .toList();
-        }
-        else {
-            ignoreLinesList = new ArrayList<>();
-        }
-        return ignoreLinesList;
+    private static String toLfLineEnding(String text) {
+        return text.replaceAll("(?x)\\\\r(?=\\\\n)|\\r(?=\\n)", "");
     }
 
     private static class HeaderVisitor extends JavaIsoVisitor<ExecutionContext> {
         private final List<CheckstyleViolation> violations;
         private final String licenseHeader;
-        private final List<Integer> ignoreLines;
 
-        HeaderVisitor(List<CheckstyleViolation> violations, String licenseHeader,
-                      List<Integer> ignoreLines) {
+        HeaderVisitor(List<CheckstyleViolation> violations, String licenseHeader) {
             this.violations = violations;
             this.licenseHeader = licenseHeader;
-            this.ignoreLines = ignoreLines;
         }
 
         @Override
@@ -126,11 +108,10 @@ public class Header extends Recipe {
 
                 if (hasViolation(filePath)) {
                     final String currentHeader = extractCurrentHeader(sourceFile);
-                    final String fixedHeader = fixHeaderLines(licenseHeader,
-                            currentHeader, ignoreLines);
+                    final String fixedHeader = licenseHeader + LINE_SEPARATOR + currentHeader;
 
                     sourceFile = sourceFile.withPrefix(
-                            Space.format(fixedHeader + LINE_SEPARATOR));
+                            Space.format(fixedHeader));
                 }
                 result = super.visit(sourceFile, ctx);
             }
@@ -139,35 +120,11 @@ public class Header extends Recipe {
 
         private String extractCurrentHeader(JavaSourceFile sourceFile) {
             return sourceFile.getComments().stream()
-                    .map(comment -> comment.printComment(getCursor()))
-                    .collect(Collectors.joining(System.lineSeparator()));
-        }
-
-        private static String fixHeaderLines(String licenseHeader,
-                                             String currentHeader, List<Integer> ignoreLines) {
-            final List<String> currentLines = Arrays
-                    .stream(currentHeader.split(System.lineSeparator()))
-                    .collect(Collectors.toList());
-            final List<String> licenseLines = Arrays.stream(licenseHeader.split(
-                    System.lineSeparator(), -1)).toList();
-
-            final Set<Integer> ignoredLineNumbers = new HashSet<>(ignoreLines);
-
-            for (int lineNumber = 1; lineNumber <= licenseLines.size(); lineNumber++) {
-                final String expectedLine = licenseLines.get(lineNumber - 1);
-
-                if (lineNumber <= currentLines.size()) {
-                    if (!ignoredLineNumbers.contains(lineNumber)
-                            && !expectedLine.equals(currentLines.get(lineNumber - 1))) {
-                        currentLines.set(lineNumber - 1, expectedLine);
-                    }
-                }
-                else {
-                    currentLines.add(expectedLine);
-                }
-            }
-
-            return String.join(LINE_SEPARATOR, currentLines);
+                    .map(comment -> {
+                        return comment.printComment(getCursor())
+                                + toLfLineEnding(comment.getSuffix());
+                    })
+                    .collect(Collectors.joining(""));
         }
 
         private boolean hasViolation(Path filePath) {
