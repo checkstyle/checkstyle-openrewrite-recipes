@@ -18,85 +18,93 @@
 package org.checkstyle.autofix.recipe;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.checkstyle.autofix.PositionHelper;
 import org.checkstyle.autofix.parser.CheckstyleViolation;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
+import org.openrewrite.Tree;
 import org.openrewrite.TreeVisitor;
 import org.openrewrite.java.JavaIsoVisitor;
 import org.openrewrite.java.tree.J;
-import org.openrewrite.java.tree.JavaType;
+import org.openrewrite.java.tree.Space;
+import org.openrewrite.marker.Markers;
 
 /**
- * Fixes Checkstyle UpperEll violations by replacing lowercase 'l' suffix
- * in long literals with uppercase 'L'.
+ * Fixes Checkstyle FinalLocalVariable violations by adding 'final' modifier to local variables
+ * that are never reassigned.
  */
-public class UpperEll extends Recipe {
+public class FinalLocalVariable extends Recipe {
 
     private final List<CheckstyleViolation> violations;
 
-    public UpperEll(List<CheckstyleViolation> violations) {
+    public FinalLocalVariable(List<CheckstyleViolation> violations) {
         this.violations = violations;
     }
 
     @Override
     public String getDisplayName() {
-        return "UpperEll recipe";
+        return "FinalLocalVariable recipe";
     }
 
     @Override
     public String getDescription() {
-        return "Replace lowercase 'l' suffix in long literals with uppercase 'L' "
-                + "to improve readability.";
+        return "Adds 'final' modifier to local variables that never have their values changed.";
     }
 
     @Override
     public TreeVisitor<?, ExecutionContext> getVisitor() {
-        return new UpperEllVisitor();
+        return new LocalVariableVisitor();
     }
 
-    private final class UpperEllVisitor extends JavaIsoVisitor<ExecutionContext> {
-
-        private static final String LOWERCASE_L = "l";
-        private static final String UPPERCASE_L = "L";
+    private final class LocalVariableVisitor extends JavaIsoVisitor<ExecutionContext> {
 
         private Path sourcePath;
 
         @Override
         public J.CompilationUnit visitCompilationUnit(J.CompilationUnit cu, ExecutionContext ctx) {
-            this.sourcePath = cu.getSourcePath().toAbsolutePath();
+            this.sourcePath = cu.getSourcePath();
             return super.visitCompilationUnit(cu, ctx);
         }
 
         @Override
-        public J.Literal visitLiteral(J.Literal literal, ExecutionContext ctx) {
-            J.Literal result = super.visitLiteral(literal, ctx);
-            final String valueSource = result.getValueSource();
+        public J.VariableDeclarations visitVariableDeclarations(
+                J.VariableDeclarations multiVariable, ExecutionContext ctx) {
 
-            if (valueSource != null && valueSource.endsWith(LOWERCASE_L)
-                    && result.getType() == JavaType.Primitive.Long
-                    && isAtViolationLocation(result)) {
+            J.VariableDeclarations declarations = super.visitVariableDeclarations(multiVariable,
+                    ctx);
 
-                final String numericPart = valueSource.substring(0, valueSource.length() - 1);
-                result = result.withValueSource(numericPart + UPPERCASE_L);
+            if (!(getCursor().getParentTreeCursor().getValue() instanceof J.ClassDeclaration)
+                    && declarations.getVariables().size() == 1
+                    && declarations.getTypeExpression() != null
+                    && !declarations.hasModifier(J.Modifier.Type.Final)) {
+                final J.VariableDeclarations.NamedVariable variable = declarations
+                        .getVariables().get(0);
+                if (isAtViolationLocation(variable)) {
+                    final List<J.Modifier> modifiers = new ArrayList<>();
+                    modifiers.add(new J.Modifier(Tree.randomId(), Space.EMPTY,
+                            Markers.EMPTY, null, J.Modifier.Type.Final, new ArrayList<>()));
+                    modifiers.addAll(declarations.getModifiers());
+                    declarations = declarations.withModifiers(modifiers)
+                            .withTypeExpression(declarations.getTypeExpression()
+                                    .withPrefix(Space.SINGLE_SPACE));
+                }
             }
-
-            return result;
+            return declarations;
         }
 
-        private boolean isAtViolationLocation(J.Literal literal) {
+        private boolean isAtViolationLocation(J.VariableDeclarations.NamedVariable literal) {
             final J.CompilationUnit cursor = getCursor().firstEnclosing(J.CompilationUnit.class);
 
             final int line = PositionHelper.computeLinePosition(cursor, literal, getCursor());
             final int column = PositionHelper.computeColumnPosition(cursor, literal, getCursor());
 
             return violations.stream().anyMatch(violation -> {
-                final Path absolutePath = Path.of(violation.getFileName()).toAbsolutePath();
                 return violation.getLine() == line
                         && violation.getColumn() == column
-                        && absolutePath.equals(sourcePath);
+                        && Path.of(violation.getFileName()).equals(sourcePath);
             });
         }
     }
