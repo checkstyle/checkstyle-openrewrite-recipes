@@ -29,23 +29,28 @@ _No checks analyzed yet_
 
 ### Class Design
 
-_No checks analyzed yet_
+| Status | Check                                                                                      | Recipe           | Coverage Notes |
+|--------|--------------------------------------------------------------------------------------------|------------------|----------------|
+| 🟢     | [`FinalClass`](https://checkstyle.sourceforge.io/checks/design/finalclass.html#FinalClass) | `TBD`            |                |
+
 
 
 ### Coding
 
-| Status | Check                                                                                                                  | Recipe | Coverage Notes                                                                           |
-|--------|------------------------------------------------------------------------------------------------------------------------|--------|------------------------------------------------------------------------------------------|
-| 🟢     | [`FinalLocalVariable`](https://checkstyle.sourceforge.io/checks/coding/finallocalvariable.html#FinalLocalVariable)     | `TBD`  |                                                                                          |
-| 🔴     | [`MagicNumber`](https://checkstyle.sourceforge.io/checks/coding/magicnumber.html#MagicNumber)                          |        | it requires contextual understanding to replace literals with meaningful named constants |
-| 🟢     | [`UnusedLocalVariable `](https://checkstyle.sourceforge.io/checks/coding/unusedlocalvariable.html#UnusedLocalVariable) | `TBD`  |                                                                                          |
+| Status | Check                                                                                                                            | Recipe | Coverage Notes                                                                           |
+|--------|----------------------------------------------------------------------------------------------------------------------------------|--------|------------------------------------------------------------------------------------------|
+| 🟢     | [`FinalLocalVariable`](https://checkstyle.sourceforge.io/checks/coding/finallocalvariable.html#FinalLocalVariable)               | `TBD`  |                                                                                          |
+| 🔴     | [`MagicNumber`](https://checkstyle.sourceforge.io/checks/coding/magicnumber.html#MagicNumber)                                    |        | it requires contextual understanding to replace literals with meaningful named constants |
+| 🟢     | [`UnusedLocalVariable `](https://checkstyle.sourceforge.io/checks/coding/unusedlocalvariable.html#UnusedLocalVariable)           | `TBD`  |                                                                                          |
+| 🟢     | [`UnnecessaryParentheses  `](https://checkstyle.sourceforge.io/checks/coding/unnecessaryparentheses.html#UnnecessaryParentheses) | `TBD`  |                                                                                          |
+
 
 
 ### Headers
 
-| Status | Check                                                                           | Recipe           | Coverage Notes             |
-|--------|---------------------------------------------------------------------------------|------------------|----------------------------|
-| 🟡     | [`Header`](https://checkstyle.sourceforge.io/checks/header/header.html#Header ) | `TBD`            | only java files are fixed. |
+| Status | Check                                                                           | Recipe                                                                                                                                      | Coverage Notes             |
+|--------|---------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|----------------------------|
+| 🟡     | [`Header`](https://checkstyle.sourceforge.io/checks/header/header.html#Header ) | [`Header`](https://github.com/checkstyle/checkstyle-openrewrite-recipes/blob/main/src/main/java/org/checkstyle/autofix/recipe/Header.java ) | only java files are fixed. |
 
 
 
