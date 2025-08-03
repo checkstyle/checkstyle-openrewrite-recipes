@@ -25,6 +25,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 
+import org.checkstyle.autofix.CheckstyleCheck;
+
 import com.puppycrawl.tools.checkstyle.PropertiesExpander;
 import com.puppycrawl.tools.checkstyle.api.CheckstyleException;
 import com.puppycrawl.tools.checkstyle.api.Configuration;
@@ -56,8 +58,12 @@ public final class ConfigurationLoader {
         for (int index = 0; index < checkstyleChildren.length; index++) {
             simpleChildren[index] = mapConfiguration(checkstyleChildren[index]);
         }
+        String moduleName = config.getName().toUpperCase(Locale.ROOT);
+        if (CheckstyleCheck.fromSource(config.getName()).isPresent()) {
+            moduleName = CheckstyleCheck.fromSource(config.getName()).get().name();
+        }
 
-        return new CheckConfiguration(config.getName().toUpperCase(Locale.ROOT),
+        return new CheckConfiguration(moduleName,
                 properties, List.of(simpleChildren));
     }
 

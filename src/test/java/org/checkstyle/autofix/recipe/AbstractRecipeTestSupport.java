@@ -20,13 +20,17 @@ package org.checkstyle.autofix.recipe;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.openrewrite.java.Assertions.java;
 
+import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collections;
 import java.util.List;
 
+import org.checkstyle.autofix.CheckstyleAutoFix;
 import org.checkstyle.autofix.InputClassRenamer;
 import org.checkstyle.autofix.RemoveViolationComments;
 import org.checkstyle.autofix.parser.CheckConfiguration;
@@ -48,9 +52,6 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
 
     protected abstract String getSubpackage();
 
-    protected abstract Recipe createRecipe(List<CheckstyleViolation> violations,
-                                           CheckConfiguration configuration);
-
     @Override
     protected String getPackageLocation() {
         return "org/checkstyle/autofix/recipe/" + getSubpackage();
@@ -63,38 +64,55 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
         final Configuration config = getCheckConfigurations(inputPath);
         verifyOutputFile(outputPath, config);
 
-        final List<CheckstyleViolation> violations = runCheckstyle(inputPath, config);
+        final Path violations = runCheckstyle(inputPath, config);
+        final Path configPath = createConfigFile(config);
 
-        verifyWithInlineConfigParser(getPath(inputPath), convertToExpectedMessages(violations));
+        verifyWithInlineConfigParser(getPath(inputPath),
+                convertToExpectedMessages(CheckstyleReportParser.parse(violations)));
 
         final String beforeCode = readFile(getPath(inputPath));
         final String expectedAfterCode = readFile(getPath(outputPath));
-        final CheckConfiguration checkConfig = ConfigurationLoader.mapConfiguration(config);
-        final Recipe mainRecipe = createRecipe(violations, checkConfig);
-        testRecipe(beforeCode, expectedAfterCode,
-                getPath(inputPath), new InputClassRenamer(),
-                mainRecipe, new RemoveViolationComments());
+
+        try {
+            final Recipe mainRecipe = new CheckstyleAutoFix(violations.toString(),
+                    configPath.toString());
+            testRecipe(beforeCode, expectedAfterCode,
+                    getPath(inputPath), new InputClassRenamer(),
+                    mainRecipe, new RemoveViolationComments());
+        }
+        finally {
+            Files.deleteIfExists(configPath);
+            Files.deleteIfExists(violations);
+        }
     }
 
     protected void verify(Configuration config, String testCaseName) throws Exception {
-
         final String inputPath = getInputFilePath(testCaseName);
         final String outputPath = getOutputFilePath(testCaseName);
 
         verifyOutputFile(outputPath, config);
 
-        final List<CheckstyleViolation> violations = runCheckstyle(inputPath, config);
+        final Path violationReportPath = runCheckstyle(inputPath, config);
 
         final String beforeCode = readFile(getPath(inputPath));
         final String expectedAfterCode = readFile(getPath(outputPath));
-        final CheckConfiguration checkConfig = ConfigurationLoader.mapConfiguration(config);
-        final Recipe mainRecipe = createRecipe(violations, checkConfig);
-        testRecipe(beforeCode, expectedAfterCode,
-                getPath(inputPath), new InputClassRenamer(), mainRecipe);
+
+        final Path configPath = createConfigFile(config);
+
+        try {
+            final Recipe mainRecipe = new CheckstyleAutoFix(violationReportPath.toString(),
+                    configPath.toString());
+            testRecipe(beforeCode, expectedAfterCode,
+                    getPath(inputPath), new InputClassRenamer(), mainRecipe);
+        }
+        finally {
+            Files.deleteIfExists(configPath);
+            Files.deleteIfExists(violationReportPath);
+        }
     }
 
-    private List<CheckstyleViolation> runCheckstyle(String inputPath,
-                                                    Configuration config) throws Exception {
+    private Path runCheckstyle(String inputPath,
+                               Configuration config) throws Exception {
 
         final Checker checker = createChecker(config);
         final ByteArrayOutputStream xmlOutput = new ByteArrayOutputStream();
@@ -105,34 +123,50 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
         checker.process(filesToCheck);
 
         final Path tempXmlPath = Files.createTempFile("checkstyle-report", ".xml");
-        try {
-            Files.write(tempXmlPath, xmlOutput.toByteArray());
-            return CheckstyleReportParser.parse(tempXmlPath);
-        }
-        finally {
-            Files.deleteIfExists(tempXmlPath);
+
+        Files.write(tempXmlPath, xmlOutput.toByteArray());
+        return tempXmlPath;
+    }
+
+    private Path createConfigFile(Configuration config) throws Exception {
+        final CheckConfiguration checkConfig = ConfigurationLoader.mapConfiguration(config);
+        final Path configPath = Files.createTempFile("checkstyle-config", ".xml");
+        writeConfigurationToXml(checkConfig, configPath.toString());
+        return configPath;
+    }
+
+    public static void writeConfigurationToXml(CheckConfiguration config, String filePath)
+            throws IOException {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            writer.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+            writer.write("<!DOCTYPE module PUBLIC \"-//Checkstyle//DTD Checkstyle "
+                    + "Configuration 1.3//EN\" \"configuration_1_3.dtd\">\n");
+            writeModule(config, writer);
         }
     }
 
-    private void verifyOutputFile(String outputPath, Configuration config) throws Exception {
+    private static void writeModule(CheckConfiguration config, BufferedWriter writer)
+            throws IOException {
 
-        final List<CheckstyleViolation> violations = runCheckstyle(outputPath, config);
-        if (!violations.isEmpty()) {
-            final StringBuilder violationMessage =
-                    new StringBuilder("Checkstyle violations found in the output file:\n");
+        writer.write("<module name=\"" + config.getName() + "\">\n");
 
-            violationMessage.append("outputFile: ").append(getPath(outputPath)).append("\n");
-
-            for (CheckstyleViolation violation : violations) {
-                violationMessage
-                        .append("line: ").append(violation.getLine())
-                        .append(", col: ").append(violation.getColumn())
-                        .append(", message: ").append(violation.getMessage())
-                        .append("\n");
-            }
-
-            throw new IllegalStateException(violationMessage.toString());
+        for (String propName : config.getPropertyNames()) {
+            writer.write("  <property name=\"" + propName + "\" value=\""
+                    + config.getProperty(propName) + "\"/>\n");
         }
+
+        for (CheckConfiguration child : config.getChildren()) {
+            writeModule(child, writer);
+        }
+
+        writer.write("</module>\n");
+    }
+
+    private Configuration getCheckConfigurations(String inputPath) throws Exception {
+        final String configFilePath = getPath(inputPath);
+        final TestInputConfiguration testInputConfiguration =
+                InlineConfigParser.parse(configFilePath);
+        return testInputConfiguration.createConfiguration();
     }
 
     private String[] convertToExpectedMessages(List<CheckstyleViolation> violations) {
@@ -144,13 +178,6 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
                     return message;
                 })
                 .toArray(String[]::new);
-    }
-
-    private Configuration getCheckConfigurations(String inputPath) throws Exception {
-        final String configFilePath = getPath(inputPath);
-        final TestInputConfiguration testInputConfiguration =
-                InlineConfigParser.parse(configFilePath);
-        return testInputConfiguration.createConfiguration();
     }
 
     private void testRecipe(String beforeCode, String expectedAfterCode,
@@ -171,6 +198,10 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
     private String getOutputFilePath(String testCaseName) {
         final String inputFileName = "Output" + testCaseName + ".java";
         return testCaseName.toLowerCase() + "/" + inputFileName;
+    }
+
+    private void verifyOutputFile(String outputPath, Configuration config) throws Exception {
+        verify(config, getPath(outputPath), new String[0]);
     }
 
 }

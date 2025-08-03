@@ -19,6 +19,7 @@ package org.checkstyle.autofix.parser;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public final class CheckConfiguration {
     private final String name;
@@ -45,7 +46,7 @@ public final class CheckConfiguration {
         return parent;
     }
 
-    private List<CheckConfiguration> getChildren() {
+    public List<CheckConfiguration> getChildren() {
         return children;
     }
 
@@ -114,6 +115,10 @@ public final class CheckConfiguration {
             }
         }
         return result;
+    }
+
+    public Set<String> getPropertyNames() {
+        return properties.keySet();
     }
 
     private void setParent(CheckConfiguration parent) {
