@@ -19,8 +19,10 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 
 ### Annotations
 
-_No checks analyzed yet_
-
+| Status | Check                                                                                                                        | Recipe           | Coverage Notes |
+|--------|------------------------------------------------------------------------------------------------------------------------------|------------------|----------------|
+| 🟢     | [`AnnotationLocation`](https://checkstyle.sourceforge.io/checks/annotation/annotationlocation.html#AnnotationLocation)       | `TBD`            |                |
+| 🟢     | [`AnnotationOnSameLine`](https://checkstyle.sourceforge.io/checks/annotation/annotationonsameline.html#AnnotationOnSameLine) | `TBD`            |                |
 
 ### Block Checks
 
