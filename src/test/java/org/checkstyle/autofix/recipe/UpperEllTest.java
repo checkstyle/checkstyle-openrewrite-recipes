@@ -17,24 +17,13 @@
 
 package org.checkstyle.autofix.recipe;
 
-import java.util.List;
-
-import org.checkstyle.autofix.parser.CheckConfiguration;
-import org.checkstyle.autofix.parser.CheckstyleViolation;
 import org.junit.jupiter.api.Test;
-import org.openrewrite.Recipe;
 
 public class UpperEllTest extends AbstractRecipeTestSupport {
 
     @Override
     protected String getSubpackage() {
         return "upperell";
-    }
-
-    @Override
-    protected Recipe createRecipe(List<CheckstyleViolation> violations, CheckConfiguration config) {
-
-        return new UpperEll(violations);
     }
 
     @Test

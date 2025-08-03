@@ -28,6 +28,7 @@ import java.util.stream.Collectors;
 
 import org.checkstyle.autofix.parser.CheckConfiguration;
 import org.checkstyle.autofix.parser.CheckstyleViolation;
+import org.checkstyle.autofix.recipe.FinalLocalVariable;
 import org.checkstyle.autofix.recipe.Header;
 import org.checkstyle.autofix.recipe.UpperEll;
 import org.openrewrite.Recipe;
@@ -43,6 +44,7 @@ public final class CheckstyleRecipeRegistry {
 
     static {
         RECIPE_MAP.put(CheckstyleCheck.UPPERELL, UpperEll::new);
+        RECIPE_MAP.put(CheckstyleCheck.FINALLOCALVARIABLE, FinalLocalVariable::new);
         RECIPE_MAP_WITH_CONFIG.put(CheckstyleCheck.HEADER, Header::new);
     }
 

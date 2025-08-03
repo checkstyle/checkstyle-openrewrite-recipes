@@ -17,12 +17,7 @@
 
 package org.checkstyle.autofix.recipe;
 
-import java.util.List;
-
-import org.checkstyle.autofix.parser.CheckConfiguration;
-import org.checkstyle.autofix.parser.CheckstyleViolation;
 import org.junit.jupiter.api.Test;
-import org.openrewrite.Recipe;
 
 import com.puppycrawl.tools.checkstyle.DefaultConfiguration;
 import com.puppycrawl.tools.checkstyle.checks.header.HeaderCheck;
@@ -32,13 +27,6 @@ public class HeaderTest extends AbstractRecipeTestSupport {
     @Override
     protected String getSubpackage() {
         return "header";
-    }
-
-    @Override
-    protected Recipe createRecipe(List<CheckstyleViolation> violations, CheckConfiguration config) {
-
-        return new Header(violations, config);
-
     }
 
     @Test

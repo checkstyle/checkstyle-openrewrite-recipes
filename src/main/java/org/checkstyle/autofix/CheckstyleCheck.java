@@ -22,7 +22,8 @@ import java.util.Optional;
 
 public enum CheckstyleCheck {
     UPPERELL("com.puppycrawl.tools.checkstyle.checks.UpperEllCheck"),
-    HEADER("com.puppycrawl.tools.checkstyle.checks.header.HeaderCheck");
+    HEADER("com.puppycrawl.tools.checkstyle.checks.header.HeaderCheck"),
+    FINALLOCALVARIABLE("com.puppycrawl.tools.checkstyle.checks.coding.FinalLocalVariableCheck");
 
     private final String id;
 

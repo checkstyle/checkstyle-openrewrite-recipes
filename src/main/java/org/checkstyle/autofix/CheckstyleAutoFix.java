@@ -48,6 +48,15 @@ public class CheckstyleAutoFix extends Recipe {
             required = false)
     private String propertiesPath;
 
+    public CheckstyleAutoFix() {
+        // default constructor
+    }
+
+    public CheckstyleAutoFix(String violationReportPath, String configurationPath) {
+        this.violationReportPath = violationReportPath;
+        this.configurationPath = configurationPath;
+    }
+
     @Override
     public String getDisplayName() {
         return "Checkstyle autoFix";

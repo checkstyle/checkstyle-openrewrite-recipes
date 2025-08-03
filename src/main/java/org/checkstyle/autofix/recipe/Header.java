@@ -105,10 +105,10 @@ public class Header extends Recipe {
             if (tree instanceof JavaSourceFile) {
                 JavaSourceFile sourceFile = (JavaSourceFile) tree;
                 final Path filePath = sourceFile.getSourcePath().toAbsolutePath();
+                final String currentHeader = extractCurrentHeader(sourceFile);
+                final String fixedHeader = licenseHeader + LINE_SEPARATOR + currentHeader;
 
-                if (hasViolation(filePath)) {
-                    final String currentHeader = extractCurrentHeader(sourceFile);
-                    final String fixedHeader = licenseHeader + LINE_SEPARATOR + currentHeader;
+                if (hasViolation(filePath) && !currentHeader.startsWith(licenseHeader)) {
 
                     sourceFile = sourceFile.withPrefix(
                             Space.format(fixedHeader));
