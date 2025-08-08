@@ -17,6 +17,7 @@
 
 package org.checkstyle.autofix;
 
+import java.util.List;
 import java.util.concurrent.CancellationException;
 import java.util.function.Function;
 
@@ -24,6 +25,7 @@ import org.openrewrite.Cursor;
 import org.openrewrite.PrintOutputCapture;
 import org.openrewrite.TreeVisitor;
 import org.openrewrite.internal.RecipeRunException;
+import org.openrewrite.java.tree.Comment;
 import org.openrewrite.java.tree.J;
 
 public final class PositionHelper {
@@ -65,6 +67,12 @@ public final class PositionHelper {
                     public PrintOutputCapture<TreeVisitor<?, ?>> append(String text) {
                         if (targetElement.isScope(getContext().getCursor().getValue())) {
                             super.append(targetElement.getPrefix().getWhitespace());
+
+                            final List<Comment> comments = targetElement.getPrefix().getComments();
+                            for (Comment comment : comments) {
+                                super.append(comment.printComment(cursor) + comment.getSuffix());
+                            }
+
                             throw new CancellationException();
                         }
                         return super.append(text);
