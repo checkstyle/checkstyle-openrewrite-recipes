@@ -26,7 +26,8 @@ public class InputSingleLocalTest {
         List<String> items = new ArrayList<>();            // violation, "should be declared final"
         StringBuilder builder = new StringBuilder();       // violation, "should be declared final"
         Date currentDate = new Date();                     // violation, "should be declared final"
-        File tempFile = new File("temp.txt");     // violation, "should be declared final"
+        File // prefix comment preceding target element
+        tempFile = new File("temp.txt");     // violation, "should be declared final"
     }
 
     public void methodWithCalculations() {

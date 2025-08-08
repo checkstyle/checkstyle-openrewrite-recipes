@@ -26,7 +26,8 @@ public class OutputSingleLocalTest {
         final List<String> items = new ArrayList<>();
         final StringBuilder builder = new StringBuilder();
         final Date currentDate = new Date();
-        final File tempFile = new File("temp.txt");
+        final File // prefix comment preceding target element
+        tempFile = new File("temp.txt");
     }
 
     public void methodWithCalculations() {
