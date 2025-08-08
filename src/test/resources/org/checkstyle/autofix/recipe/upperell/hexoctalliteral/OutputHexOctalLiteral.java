@@ -18,7 +18,8 @@ public class OutputHexOctalLiteral {
     private long hexUpper = 0X2DEFL;
     private long octal = 0777L;
     private long binary = 0b1010L;
-    private long decimal = 12345L;
+    private long decimal = // comment preceding a target element
+                           12345L;
 
     public void calculateValues() {
         long hexResult = 0xDEADBEEFL + 0xDEADBEFl; //suppressed violation for 0xDEADBEFl

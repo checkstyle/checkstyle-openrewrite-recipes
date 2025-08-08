@@ -18,7 +18,8 @@ public class InputHexOctalLiteral {
     private long hexUpper = 0X2DEFl;    // violation 'Should use uppercase 'L'.'
     private long octal = 0777l;         // violation 'Should use uppercase 'L'.'
     private long binary = 0b1010l;      // violation 'Should use uppercase 'L'.'
-    private long decimal = 12345l;      // violation 'Should use uppercase 'L'.'
+    private long decimal = // comment preceding a target element
+                           12345l;      // violation 'Should use uppercase 'L'.'
 
     public void calculateValues() {
         // violation below, 'Should use uppercase 'L'.'
