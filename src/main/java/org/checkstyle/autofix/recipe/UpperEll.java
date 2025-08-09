@@ -48,8 +48,8 @@ public class UpperEll extends Recipe {
 
     @Override
     public String getDescription() {
-        return "Replace lowercase 'l' suffix in long literals with uppercase 'L' " +
-                "to improve readability.";
+        return "Replace lowercase 'l' suffix in long literals with uppercase 'L' "
+                + "to improve readability.";
     }
 
     @Override
@@ -75,9 +75,9 @@ public class UpperEll extends Recipe {
             J.Literal result = super.visitLiteral(literal, ctx);
             final String valueSource = result.getValueSource();
 
-            if (valueSource != null && valueSource.endsWith(LOWERCASE_L) &&
-                    result.getType() == JavaType.Primitive.Long &&
-                    isAtViolationLocation(result)) {
+            if (valueSource != null && valueSource.endsWith(LOWERCASE_L)
+                    && result.getType() == JavaType.Primitive.Long
+                    && isAtViolationLocation(result)) {
 
                 final String numericPart = valueSource.substring(0, valueSource.length() - 1);
                 result = result.withValueSource(numericPart + UPPERCASE_L);
@@ -94,9 +94,9 @@ public class UpperEll extends Recipe {
 
             return violations.stream().anyMatch(violation -> {
                 final Path absolutePath = Path.of(violation.getFileName()).toAbsolutePath();
-                return violation.getLine() == line &&
-                        violation.getColumn() == column &&
-                        absolutePath.equals(sourcePath);
+                return violation.getLine() == line
+                        && violation.getColumn() == column
+                        && absolutePath.equals(sourcePath);
             });
         }
     }
