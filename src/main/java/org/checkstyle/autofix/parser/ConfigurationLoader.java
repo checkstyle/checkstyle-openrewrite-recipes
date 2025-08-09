@@ -28,8 +28,6 @@ import java.util.Properties;
 import org.checkstyle.autofix.CheckstyleCheck;
 
 import com.puppycrawl.tools.checkstyle.PropertiesExpander;
-
-import org.jspecify.annotations.Nullable;
 import com.puppycrawl.tools.checkstyle.api.CheckstyleException;
 import com.puppycrawl.tools.checkstyle.api.Configuration;
 
@@ -70,7 +68,7 @@ public final class ConfigurationLoader {
     }
 
     public static CheckConfiguration loadConfiguration(String checkstyleConfigurationPath,
-            @Nullable String propFile) {
+                                                       String propFile) {
         Properties props = new Properties();
         if (propFile == null) {
             props = System.getProperties();

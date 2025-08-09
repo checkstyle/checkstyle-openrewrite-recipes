@@ -17,9 +17,6 @@
 
 package org.checkstyle.autofix;
 
-import static java.util.stream.Collectors.groupingBy;
-import static java.util.stream.Collectors.toList;
-
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +24,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import org.checkstyle.autofix.parser.CheckConfiguration;
 import org.checkstyle.autofix.parser.CheckstyleViolation;
@@ -66,12 +64,12 @@ public final class CheckstyleRecipeRegistry {
     public static List<Recipe> getRecipes(List<CheckstyleViolation> violations,
                                           CheckConfiguration config) {
         return violations.stream()
-                .collect(groupingBy(CheckstyleViolation::getSource))
+                .collect(Collectors.groupingBy(CheckstyleViolation::getSource))
                 .entrySet()
                 .stream()
                 .map(entry -> createRecipe(entry, config))
                 .filter(Objects::nonNull)
-                .collect(toList());
+                .collect(Collectors.toList());
     }
 
     private static Recipe createRecipe(Map.Entry<String, List<CheckstyleViolation>> entry,

@@ -24,7 +24,7 @@ recipeList:
   - org.openrewrite.java.recipes.RecipeTestingBestPractices
   - org.openrewrite.java.recipes.RecipeNullabilityBestPractices
   - org.openrewrite.java.recipes.ExamplesExtractor
-  #- org.openrewrite.java.OrderImports
+#  - org.openrewrite.java.OrderImports
   - org.openrewrite.java.RemoveUnusedImports
   - org.openrewrite.java.SimplifySingleElementAnnotation
   - org.openrewrite.java.format.EmptyNewlineAtEndOfFile
@@ -32,10 +32,10 @@ recipeList:
   - org.openrewrite.staticanalysis.CompareEnumsWithEqualityOperator
   - org.openrewrite.staticanalysis.EqualsAvoidsNull
   - org.openrewrite.staticanalysis.InlineVariable
-  - org.openrewrite.staticanalysis.LambdaBlockToExpression
+#  - org.openrewrite.staticanalysis.LambdaBlockToExpression
   - org.openrewrite.staticanalysis.MissingOverrideAnnotation
   - org.openrewrite.staticanalysis.OperatorWrap:
-      wrapOption: NL
+      wrapOption: NL # Differs from the stock OpenRewrite recipe which uses EOL
   - org.openrewrite.staticanalysis.RemoveRedundantNullCheckBeforeInstanceof
   - org.openrewrite.staticanalysis.RemoveUnusedLocalVariables
   - org.openrewrite.staticanalysis.RemoveUnusedPrivateFields
@@ -43,7 +43,7 @@ recipeList:
   #- org.openrewrite.staticanalysis.UnnecessaryThrows
   - org.openrewrite.staticanalysis.UnwrapElseAfterReturn
   - org.openrewrite.staticanalysis.UseDiamondOperator
-  - org.openrewrite.java.UseStaticImport:
-      methodPattern: java.util.stream.Collectors *(..)
-  - org.openrewrite.java.UseStaticImport:
-      methodPattern: java.util.Collections *(..)
+#  - org.openrewrite.java.UseStaticImport:
+#      methodPattern: java.util.stream.Collectors *(..)
+#  - org.openrewrite.java.UseStaticImport:
+#      methodPattern: java.util.Collections *(..)
