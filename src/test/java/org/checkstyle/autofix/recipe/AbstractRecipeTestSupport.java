@@ -171,12 +171,8 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
 
     private String[] convertToExpectedMessages(List<CheckstyleViolation> violations) {
         return violations.stream()
-                .map(violation -> {
-                    final String message;
-                    message = violation.getLine() + ":"
-                            + violation.getColumn() + ": " + violation.getMessage();
-                    return message;
-                })
+                .map(violation -> violation.getLine() + ":" +
+                            violation.getColumn() + ": " + violation.getMessage())
                 .toArray(String[]::new);
     }
 

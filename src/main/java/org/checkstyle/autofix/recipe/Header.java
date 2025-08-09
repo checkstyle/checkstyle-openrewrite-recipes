@@ -120,17 +120,13 @@ public class Header extends Recipe {
 
         private String extractCurrentHeader(JavaSourceFile sourceFile) {
             return sourceFile.getComments().stream()
-                    .map(comment -> {
-                        return comment.printComment(getCursor())
-                                + toLfLineEnding(comment.getSuffix());
-                    })
+                    .map(comment -> comment.printComment(getCursor()) +
+                                toLfLineEnding(comment.getSuffix()))
                     .collect(Collectors.joining(""));
         }
 
         private boolean hasViolation(Path filePath) {
-            return violations.removeIf(violation -> {
-                return filePath.equals(Path.of(violation.getFileName()).toAbsolutePath());
-            });
+            return violations.removeIf(violation -> filePath.equals(Path.of(violation.getFileName()).toAbsolutePath()));
         }
     }
 }

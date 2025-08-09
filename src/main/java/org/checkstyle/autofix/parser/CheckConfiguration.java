@@ -92,8 +92,8 @@ public final class CheckConfiguration {
                 result[index] = Integer.parseInt(parts[index].trim());
             }
             catch (NumberFormatException exception) {
-                throw new IllegalArgumentException("Property '" + propertyName
-                        + "' has an invalid integer value: " + parts[index].trim(), exception);
+                throw new IllegalArgumentException("Property '" + propertyName +
+                        "' has an invalid integer value: " + parts[index].trim(), exception);
             }
         }
         return result;

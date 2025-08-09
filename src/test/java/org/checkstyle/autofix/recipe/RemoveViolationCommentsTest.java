@@ -28,7 +28,7 @@ import org.openrewrite.test.RewriteTest;
 
 import com.puppycrawl.tools.checkstyle.AbstractPathTestSupport;
 
-public class RemoveViolationCommentsTest extends AbstractPathTestSupport implements RewriteTest {
+class RemoveViolationCommentsTest extends AbstractPathTestSupport implements RewriteTest {
 
     @Override
     protected String getPackageLocation() {
