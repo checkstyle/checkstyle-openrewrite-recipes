@@ -91,8 +91,8 @@ public final class CheckstyleReportParser {
 
         }
         catch (IOException | XMLStreamException exception) {
-            throw new IllegalArgumentException("Failed to parse checkstyle XML report from: " +
-                    xmlPath, exception);
+            throw new IllegalArgumentException("Failed to parse checkstyle XML report from: "
+                    + xmlPath, exception);
         }
 
         return result;

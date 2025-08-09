@@ -46,8 +46,8 @@ class HeaderTest extends AbstractRecipeTestSupport {
 
     private DefaultConfiguration getHeaderConfig() {
         final DefaultConfiguration checkConfig = createModuleConfig(HeaderCheck.class);
-        final String headerPath = "src/test/resources/org/checkstyle/" +
-                "autofix/recipe/header/header.txt";
+        final String headerPath = "src/test/resources/org/checkstyle/"
+                + "autofix/recipe/header/header.txt";
         checkConfig.addProperty("headerFile", headerPath);
         checkConfig.addProperty("ignoreLines", "3");
         return checkConfig;

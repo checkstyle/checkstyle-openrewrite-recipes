@@ -17,12 +17,13 @@
 
 package org.checkstyle.autofix.recipe;
 
+import static java.util.stream.Collectors.joining;
+
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.checkstyle.autofix.parser.CheckConfiguration;
 import org.checkstyle.autofix.parser.CheckstyleViolation;
@@ -120,9 +121,9 @@ public class Header extends Recipe {
 
         private String extractCurrentHeader(JavaSourceFile sourceFile) {
             return sourceFile.getComments().stream()
-                    .map(comment -> comment.printComment(getCursor()) +
-                                toLfLineEnding(comment.getSuffix()))
-                    .collect(Collectors.joining(""));
+                    .map(comment -> comment.printComment(getCursor())
+                                + toLfLineEnding(comment.getSuffix()))
+                    .collect(joining(""));
         }
 
         private boolean hasViolation(Path filePath) {

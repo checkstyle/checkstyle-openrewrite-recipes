@@ -91,8 +91,8 @@ public final class ConfigurationLoader {
                             new PropertiesExpander(props));
         }
         catch (CheckstyleException exception) {
-            throw new IllegalStateException("Failed to load configuration:" +
-                    checkstyleConfigurationPath, exception);
+            throw new IllegalStateException("Failed to load configuration:"
+                    + checkstyleConfigurationPath, exception);
         }
 
         return mapConfiguration(checkstyleConfig);

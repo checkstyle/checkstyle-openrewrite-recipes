@@ -17,13 +17,13 @@
 
 package org.checkstyle.autofix.parser;
 
+import static java.util.stream.Collectors.groupingBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -59,7 +59,7 @@ public class CheckstyleReportsParserTest {
         assertEquals(3, records.size());
 
         final Map<String, List<CheckstyleViolation>> grouped = records.stream()
-                .collect(Collectors.groupingBy(CheckstyleViolation::getFileName));
+                .collect(groupingBy(CheckstyleViolation::getFileName));
 
         assertEquals(2, grouped.size());
 
