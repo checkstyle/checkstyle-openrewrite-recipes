@@ -122,7 +122,7 @@ public class Header extends Recipe {
             return sourceFile.getComments().stream()
                     .map(comment -> {
                         return comment.printComment(getCursor())
-                                    + toLfLineEnding(comment.getSuffix());
+                                + toLfLineEnding(comment.getSuffix());
                     })
                     .collect(Collectors.joining(""));
         }
