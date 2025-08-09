@@ -22,7 +22,7 @@ import org.junit.jupiter.api.Test;
 import com.puppycrawl.tools.checkstyle.DefaultConfiguration;
 import com.puppycrawl.tools.checkstyle.checks.header.HeaderCheck;
 
-public class HeaderTest extends AbstractRecipeTestSupport {
+class HeaderTest extends AbstractRecipeTestSupport {
 
     @Override
     protected String getSubpackage() {
