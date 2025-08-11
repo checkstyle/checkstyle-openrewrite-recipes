@@ -20,9 +20,8 @@ package org.checkstyle.autofix.parser;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Properties;
 
 import org.checkstyle.autofix.CheckstyleCheck;
@@ -37,38 +36,41 @@ public final class ConfigurationLoader {
         // utility class
     }
 
-    public static CheckConfiguration mapConfiguration(Configuration config) {
-        final Map<String, String> properties = new HashMap<>();
-        final String[] propertyNames = config.getPropertyNames();
-        for (String propertyName : propertyNames) {
-            try {
-                final String value = config.getProperty(propertyName);
-                properties.put(propertyName, value);
+    public static Map<CheckstyleCheck, CheckConfiguration> mapConfiguration(Configuration config) {
+        final Map<CheckstyleCheck, CheckConfiguration> result = new HashMap<>();
+        final Map<String, String> inherited = getProperties(config);
 
-            }
-            catch (CheckstyleException exception) {
-                throw new IllegalStateException("Error getting property " + propertyName,
-                        exception);
-            }
+        final Optional<CheckstyleCheck> module = CheckstyleCheck.fromSource(config.getName());
+        module.ifPresent(checkstyleCheck -> {
+            result.put(checkstyleCheck, new CheckConfiguration(checkstyleCheck, new HashMap<>(),
+                    getProperties(config)));
+        });
+
+        for (Configuration child : config.getChildren()) {
+            mapConfiguration(child).forEach((childModule, childConfig) -> {
+                inherited.forEach(childConfig::setGlobalProperty);
+                result.put(childModule, childConfig);
+            });
         }
 
-        final Configuration[] checkstyleChildren = config.getChildren();
-        final CheckConfiguration[] simpleChildren =
-                new CheckConfiguration[checkstyleChildren.length];
-        for (int index = 0; index < checkstyleChildren.length; index++) {
-            simpleChildren[index] = mapConfiguration(checkstyleChildren[index]);
-        }
-        String moduleName = config.getName().toUpperCase(Locale.ROOT);
-        if (CheckstyleCheck.fromSource(config.getName()).isPresent()) {
-            moduleName = CheckstyleCheck.fromSource(config.getName()).get().name();
-        }
-
-        return new CheckConfiguration(moduleName,
-                properties, List.of(simpleChildren));
+        return result;
     }
 
-    public static CheckConfiguration loadConfiguration(String checkstyleConfigurationPath,
-                                                       String propFile) {
+    private static Map<String, String> getProperties(Configuration config) {
+        final Map<String, String> props = new HashMap<>();
+        for (String prop : config.getPropertyNames()) {
+            try {
+                props.put(prop, config.getProperty(prop));
+            }
+            catch (CheckstyleException exception) {
+                throw new IllegalStateException("Failed to get property: " + prop, exception);
+            }
+        }
+        return props;
+    }
+
+    public static Map<CheckstyleCheck, CheckConfiguration> loadConfiguration(
+            String checkstyleConfigurationPath, String propFile) {
         Properties props = new Properties();
         if (propFile == null) {
             props = System.getProperties();

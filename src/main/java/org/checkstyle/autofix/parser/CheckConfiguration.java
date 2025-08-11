@@ -17,49 +17,37 @@
 
 package org.checkstyle.autofix.parser;
 
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
+
+import org.checkstyle.autofix.CheckstyleCheck;
 
 public final class CheckConfiguration {
-    private final String name;
+    private final CheckstyleCheck check;
+    private final Map<String, String> globalProperties;
     private final Map<String, String> properties;
-    private final List<CheckConfiguration> children;
-    private CheckConfiguration parent;
 
-    public CheckConfiguration(String name,
-                              Map<String, String> properties, List<CheckConfiguration> children) {
-        this.name = name;
-        this.properties = properties;
-        this.children = children;
-
-        for (CheckConfiguration child : children) {
-            child.setParent(this);
-        }
+    public CheckConfiguration(CheckstyleCheck name,
+                              Map<String, String> globalProperties,
+                              Map<String, String> properties) {
+        this.check = name;
+        this.globalProperties = new HashMap<>(globalProperties);
+        this.properties = new HashMap<>(properties);
     }
 
-    public String getName() {
-        return name;
-    }
-
-    private CheckConfiguration getParent() {
-        return parent;
-    }
-
-    public List<CheckConfiguration> getChildren() {
-        return children;
+    public CheckstyleCheck getCheck() {
+        return check;
     }
 
     public String getProperty(String key) {
-        String value = null;
-
+        final String result;
         if (properties.containsKey(key)) {
-            value = properties.get(key);
+            result = properties.get(key);
         }
-        else if (getParent() != null) {
-            value = getParent().getProperty(key);
+        else {
+            result = globalProperties.get(key);
         }
-        return value;
+        return result;
     }
 
     public String getPropertyOrDefault(String key, String defaultValue) {
@@ -71,57 +59,10 @@ public final class CheckConfiguration {
     }
 
     public boolean hasProperty(String key) {
-        boolean result = false;
-
-        if (properties.containsKey(key)) {
-            result = true;
-        }
-        else if (getParent() != null) {
-            result = getParent().hasProperty(key);
-        }
-        return result;
+        return properties.containsKey(key) || globalProperties.containsKey(key);
     }
 
-    public int[] getIntArray(String propertyName) {
-        final String value = properties.get(propertyName);
-        final int[] result;
-        final String[] parts = value.split(",");
-        result = new int[parts.length];
-        for (int index = 0; index < parts.length; index++) {
-            try {
-                result[index] = Integer.parseInt(parts[index].trim());
-            }
-            catch (NumberFormatException exception) {
-                throw new IllegalArgumentException("Property '" + propertyName
-                        + "' has an invalid integer value: " + parts[index].trim(), exception);
-            }
-        }
-        return result;
-    }
-
-    public CheckConfiguration getConfig(String childName) {
-        CheckConfiguration result = null;
-        if (name.equals(childName)) {
-            result = this;
-        }
-        else {
-            final List<CheckConfiguration> childrenList = getChildren();
-            for (final CheckConfiguration current : childrenList) {
-                if (childName.equals(current.getName())) {
-                    result = current;
-                    break;
-                }
-                childrenList.addAll(current.getChildren());
-            }
-        }
-        return result;
-    }
-
-    public Set<String> getPropertyNames() {
-        return properties.keySet();
-    }
-
-    private void setParent(CheckConfiguration parent) {
-        this.parent = parent;
+    public void setGlobalProperty(String key, String value) {
+        globalProperties.put(key, value);
     }
 }
