@@ -17,6 +17,8 @@
 
 package org.checkstyle.autofix.parser;
 
+import org.checkstyle.autofix.CheckstyleCheck;
+
 public final class CheckstyleViolation {
 
     private final int line;
@@ -25,14 +27,14 @@ public final class CheckstyleViolation {
 
     private final String severity;
 
-    private final String source;
+    private final CheckstyleCheck source;
 
     private final String message;
 
     private final String fileName;
 
-    public CheckstyleViolation(int line, int column,
-                               String severity, String source, String message, String fileName) {
+    public CheckstyleViolation(int line, int column, String severity,
+                               CheckstyleCheck source, String message, String fileName) {
         this.line = line;
         this.column = column;
         this.severity = severity;
@@ -49,7 +51,7 @@ public final class CheckstyleViolation {
         return column;
     }
 
-    public String getSource() {
+    public CheckstyleCheck getSource() {
         return source;
     }
 

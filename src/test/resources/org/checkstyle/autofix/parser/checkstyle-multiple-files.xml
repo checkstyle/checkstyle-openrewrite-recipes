@@ -1,9 +1,9 @@
 <checkstyle>
     <file name="Main.java">
-        <error line="10" column="5" severity="error" message="Missing javadoc" source="com.puppycrawl.Check"/>
-        <error line="20" column="2" severity="error" message="Indentation" source="com.puppycrawl.Indent"/>
+        <error line="10" column="5" severity="error" message="Missing javadoc" source="com.puppycrawl.tools.checkstyle.checks.coding.FinalLocalVariableCheck"/>
+        <error line="20" column="2" severity="error" message="Indentation" source="com.puppycrawl.tools.checkstyle.checks.header.HeaderCheck"/>
     </file>
     <file name="Utils.java">
-        <error line="15" column="1" severity="warning" message="Unused import" source="com.puppycrawl.Import"/>
+        <error line="15" column="1" severity="warning" message="Unused import" source="com.puppycrawl.tools.checkstyle.checks.header.HeaderCheck"/>
     </file>
 </checkstyle>

@@ -21,7 +21,6 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -44,10 +43,10 @@ public final class CheckstyleRecipeRegistry {
             new EnumMap<>(CheckstyleCheck.class);
 
     static {
-        RECIPE_MAP.put(CheckstyleCheck.UPPERELL, UpperEll::new);
-        RECIPE_MAP.put(CheckstyleCheck.FINALLOCALVARIABLE, FinalLocalVariable::new);
-        RECIPE_MAP.put(CheckstyleCheck.REDUNDANTIMPORT, RedundantImport::new);
+        RECIPE_MAP.put(CheckstyleCheck.UPPER_ELL, UpperEll::new);
+        RECIPE_MAP.put(CheckstyleCheck.FINAL_LOCAL_VARIABLE, FinalLocalVariable::new);
         RECIPE_MAP_WITH_CONFIG.put(CheckstyleCheck.HEADER, Header::new);
+        RECIPE_MAP.put(CheckstyleCheck.REDUNDANT_IMPORT, RedundantImport::new);
     }
 
     private CheckstyleRecipeRegistry() {
@@ -64,47 +63,36 @@ public final class CheckstyleRecipeRegistry {
      * @return a list of generated Recipe objects
      */
     public static List<Recipe> getRecipes(List<CheckstyleViolation> violations,
-                                          CheckConfiguration config) {
+                                          Map<CheckstyleCheck, CheckConfiguration> config) {
         return violations.stream()
                 .collect(Collectors.groupingBy(CheckstyleViolation::getSource))
                 .entrySet()
                 .stream()
-                .map(entry -> createRecipe(entry, config))
+                .map(entry -> {
+                    return createRecipe(entry.getValue(), config.get(entry.getKey()));
+                })
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
     }
 
-    private static Recipe createRecipe(Map.Entry<String, List<CheckstyleViolation>> entry,
-                                       CheckConfiguration config) {
+    private static Recipe createRecipe(List<CheckstyleViolation> violations,
+                                       CheckConfiguration checkConfig) {
+        Recipe result = null;
+        if (checkConfig != null) {
 
-        Recipe recipe = null;
-
-        final Optional<CheckstyleCheck> check = CheckstyleCheck.fromSource(entry.getKey());
-
-        if (check.isPresent()) {
-
-            final CheckstyleCheck checkstyleCheck = check.get();
-            final List<CheckstyleViolation> violations = entry.getValue();
+            final CheckstyleCheck check = checkConfig.getCheck();
 
             final BiFunction<List<CheckstyleViolation>, CheckConfiguration,
-                    Recipe> configRecipeFactory = RECIPE_MAP_WITH_CONFIG.get(checkstyleCheck);
+                    Recipe> configRecipeFactory = RECIPE_MAP_WITH_CONFIG.get(check);
 
-            if (configRecipeFactory == null) {
-                final Function<List<CheckstyleViolation>, Recipe> simpleRecipeFactory =
-                        RECIPE_MAP.get(checkstyleCheck);
-                recipe = simpleRecipeFactory.apply(violations);
+            if (configRecipeFactory != null) {
+                result = configRecipeFactory.apply(violations, checkConfig);
             }
             else {
-                final CheckConfiguration subConfig =
-                        extractCheckConfiguration(config, checkstyleCheck.name());
-                recipe = configRecipeFactory.apply(violations, subConfig);
+                result = RECIPE_MAP.get(check).apply(violations);
             }
         }
-        return recipe;
+        return result;
     }
 
-    private static CheckConfiguration extractCheckConfiguration(CheckConfiguration config,
-                                                                String checkName) {
-        return config.getConfig(checkName);
-    }
 }

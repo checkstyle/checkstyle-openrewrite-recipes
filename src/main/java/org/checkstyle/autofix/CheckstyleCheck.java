@@ -21,10 +21,10 @@ import java.util.Arrays;
 import java.util.Optional;
 
 public enum CheckstyleCheck {
-    FINALLOCALVARIABLE("com.puppycrawl.tools.checkstyle.checks.coding.FinalLocalVariableCheck"),
+    FINAL_LOCAL_VARIABLE("com.puppycrawl.tools.checkstyle.checks.coding.FinalLocalVariableCheck"),
     HEADER("com.puppycrawl.tools.checkstyle.checks.header.HeaderCheck"),
-    REDUNDANTIMPORT("com.puppycrawl.tools.checkstyle.checks.imports.RedundantImportCheck"),
-    UPPERELL("com.puppycrawl.tools.checkstyle.checks.UpperEllCheck");
+    UPPER_ELL("com.puppycrawl.tools.checkstyle.checks.UpperEllCheck"),
+    REDUNDANT_IMPORT("com.puppycrawl.tools.checkstyle.checks.imports.RedundantImportCheck");
 
     private final String id;
 
@@ -38,9 +38,7 @@ public enum CheckstyleCheck {
 
     public static Optional<CheckstyleCheck> fromSource(String source) {
         return Arrays.stream(values())
-                .filter(check -> check.getId().equals(source))
+                .filter(check -> check.getId().contains(source))
                 .findFirst();
-
     }
-
 }
