@@ -1,0 +1,21 @@
+diff --git src/test/resources/org/checkstyle/autofix/recipe/upperell/symbolicliterals/InputSymbolicLiterals.java src/test/resources/org/checkstyle/autofix/recipe/upperell/symbolicliterals/OutputSymbolicLiterals.java
+index c4280c1..a19b233 100644
+--- src/test/resources/org/checkstyle/autofix/recipe/upperell/symbolicliterals/InputSymbolicLiterals.java
++++ src/test/resources/org/checkstyle/autofix/recipe/upperell/symbolicliterals/OutputSymbolicLiterals.java
+@@ -9,10 +9,10 @@
+ 
+ package org.checkstyle.autofix.recipe.upperell.symbolicliterals;
+ 
+-public class InputSymbolicLiterals {
+-    private long minLong = -9223372036854775808l;    // violation 'Should use uppercase 'L'.'
+-    private Long negativeLong = -5678l;              // violation 'Should use uppercase 'L'.'
+-    long a = -0xAl;                                  // violation 'Should use uppercase 'L'.'
+-    long b = +-12l;                                  // violation 'Should use uppercase 'L'.'
+-    long c = +-(-(-(-4l)));;                         // violation 'Should use uppercase 'L'.'
++public class OutputSymbolicLiterals {
++    private long minLong = -9223372036854775808L;
++    private Long negativeLong = -5678L;
++    long a = -0xAL;
++    long b = +-12L;
++    long c = +-(-(-(-4L)));;
+ }

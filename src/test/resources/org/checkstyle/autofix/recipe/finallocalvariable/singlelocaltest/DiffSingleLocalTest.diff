@@ -1,0 +1,63 @@
+diff --git src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/singlelocaltest/InputSingleLocalTest.java src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/singlelocaltest/OutputSingleLocalTest.java
+index 357b8f9..163d0a6 100644
+--- src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/singlelocaltest/InputSingleLocalTest.java
++++ src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/singlelocaltest/OutputSingleLocalTest.java
+@@ -15,36 +15,35 @@ import java.util.Date;
+ import java.util.HashMap;
+ import java.util.List;
+ 
+-public class InputSingleLocalTest {
++public class OutputSingleLocalTest {
+     public void basicLocalVariables() {
+-        String name = "John Doe";                          // violation, "should be declared final"
+-        int age = 25;                                      // violation, "should be declared final"
+-        double salary = 50000.0;                           // violation, "should be declared final"
+-        boolean isActive = true;                           // violation, "should be declared final"
+-        char grade = 'A';                                  // violation, "should be declared final"
+-        Object data = new HashMap<>();                     // violation, "should be declared final"
+-        List<String> items = new ArrayList<>();            // violation, "should be declared final"
+-        StringBuilder builder = new StringBuilder();       // violation, "should be declared final"
+-        Date currentDate = new Date();                     // violation, "should be declared final"
+-        File // prefix comment preceding target element
+-        tempFile = new File("temp.txt");     // violation, "should be declared final"
++        final String name = "John Doe";
++        final int age = 25;
++        final double salary = 50000.0;
++        final boolean isActive = true;
++        final char grade = 'A';
++        final Object data = new HashMap<>();
++        final List<String> items = new ArrayList<>();
++        final StringBuilder builder = new StringBuilder();
++        final Date currentDate = new Date();
++        final File // prefix comment preceding target element
++        tempFile = new File("temp.txt");
+     }
+ 
+     public void methodWithCalculations() {
+-        int x = 10;                                        // violation, "should be declared final"
+-        int y = 20;                                        // violation, "should be declared final"
+-        int sum = x + y;                                   // violation, "should be declared final"
+-        int product = x * y;                               // violation, "should be declared final"
+-        double average = (x + y) / 2.0;                    // violation, "should be declared final"
+-        // violation below, "should be declared final"
+-        String result = "Sum: " + sum + ", Product: " + product;
+-        boolean isPositive = sum > 0;                      // violation, "should be declared final"
++        final int x = 10;
++        final int y = 20;
++        final int sum = x + y;
++        final int product = x * y;
++        final double average = (x + y) / 2.0;
++        final String result = "Sum: " + sum + ", Product: " + product;
++        final boolean isPositive = sum > 0;
+     }
+ 
+     public String processResult(String input) {
+-        String trimmed = input.trim();                     // violation, "should be declared final"
+-        String upperCase = trimmed.toUpperCase();          // violation, "should be declared final"
+-        String formatted = "[" + upperCase + "]";          // violation, "should be declared final"
++        final String trimmed = input.trim();
++        final String upperCase = trimmed.toUpperCase();
++        final String formatted = "[" + upperCase + "]";
+         return formatted;
+     }
+ 

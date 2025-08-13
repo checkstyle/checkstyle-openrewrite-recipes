@@ -1,0 +1,18 @@
+diff --git src/test/resources/org/checkstyle/autofix/recipe/redundantimport/duplicateimport/InputDuplicateImport.java src/test/resources/org/checkstyle/autofix/recipe/redundantimport/duplicateimport/OutputDuplicateImport.java
+index d5aa6e9..1d4c481 100644
+--- src/test/resources/org/checkstyle/autofix/recipe/redundantimport/duplicateimport/InputDuplicateImport.java
++++ src/test/resources/org/checkstyle/autofix/recipe/redundantimport/duplicateimport/OutputDuplicateImport.java
+@@ -10,10 +10,8 @@
+ package org.checkstyle.autofix.recipe.redundantimport.duplicateimport;
+ 
+ import static java.util.Arrays.asList;
+-import static java.util.Arrays.asList; // violation 'Duplicate import'
+ 
+ import java.util.List;
+-import java.util.List; // violation 'Duplicate import'
+ import java.util.Set;
+ 
+-public class InputDuplicateImport {}
+\ No newline at end of file
++public class OutputDuplicateImport {}
+\ No newline at end of file
