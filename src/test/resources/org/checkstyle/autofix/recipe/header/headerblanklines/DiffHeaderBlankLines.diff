@@ -1,0 +1,17 @@
+diff --git src/test/resources/org/checkstyle/autofix/recipe/header/headerblanklines/InputHeaderBlankLines.java src/test/resources/org/checkstyle/autofix/recipe/header/headerblanklines/OutputHeaderBlankLines.java
+index c095e1d..4ebba0c 100644
+--- src/test/resources/org/checkstyle/autofix/recipe/header/headerblanklines/InputHeaderBlankLines.java
++++ src/test/resources/org/checkstyle/autofix/recipe/header/headerblanklines/OutputHeaderBlankLines.java
+@@ -1,4 +1,11 @@
++///////////////////////////////////////////////////////////////////////////////////////////////
++// Unit test for checkstyle-openrewrite-recipes.
++// Dated: XX.XX.XX
++// Copyright (C) 2025 Authors. Licensed under Apache 2.0.
++// This file is part of the Checkstyle OpenRewrite test suite.
++///////////////////////////////////////////////////////////////////////////////////////////////
++
+ package org.checkstyle.autofix.recipe.header.headerblanklines;
+ 
+-public class InputHeaderBlankLines {
++public class OutputHeaderBlankLines {
+ }

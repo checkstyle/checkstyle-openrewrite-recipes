@@ -1,0 +1,93 @@
+diff --git src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/edgecasetest/InputEdgeCaseTest.java src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/edgecasetest/OutputEdgeCaseTest.java
+index bb10884..651244a 100644
+--- src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/edgecasetest/InputEdgeCaseTest.java
++++ src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/edgecasetest/OutputEdgeCaseTest.java
+@@ -17,67 +17,64 @@ import java.util.Arrays;
+ import java.util.HashMap;
+ import java.util.List;
+ 
+-public class InputEdgeCaseTest {
++public class OutputEdgeCaseTest {
+     public void varDeclarations() {
+-        var autoString = "inferred string";                 // violation, "should be declared final"
+-        var autoNumber = 42;                                // violation, "should be declared final"
+-        var autoList = new ArrayList<String>();             // violation, "should be declared final"
+-        var autoMap = new HashMap<String, Integer>();       // violation, "should be declared final"
+-
+-        String regularString = "explicit type";             // violation, "should be declared final"
+-        var anotherAuto = "mixed with regular";             // violation, "should be declared final"
+-        int regularInt = 100;                               // violation, "should be declared final"
++        final var autoString = "inferred string";
++        final var autoNumber = 42;
++        final var autoList = new ArrayList<String>();
++        final var autoMap = new HashMap<String, Integer>();
++
++        final String regularString = "explicit type";
++        final var anotherAuto = "mixed with regular";
++        final int regularInt = 100;
+     }
+ 
+     public void loopVariables() {
+-        List<String> items = Arrays.asList("a", "b", "c");  // violation, "should be declared final"
++        final List<String> items = Arrays.asList("a", "b", "c");
+ 
+         for (String item : items) {
+             System.out.println(item);
+-            String processed = item.toUpperCase();          // violation, "should be declared final"
++            final String processed = item.toUpperCase();
+         }
+ 
+         for (int i = 0; i < 10; i++) {
+-            String loopVar = "iteration " + i;              // violation, "should be declared final"
+-            int doubled = i * 2;                            // violation, "should be declared final"
++            final String loopVar = "iteration " + i;
++            final int doubled = i * 2;
+         }
+ 
+         int counter = 0;
+         while (counter < 5) {
+-            String message = "Count: " + counter;           // violation, "should be declared final"
++            final String message = "Count: " + counter;
+             counter++;
+         }
+     }
+ 
+     public void lambdaExpressions() {
+-        // violation below, "should be declared final"
+-        List<String> items = Arrays.asList("one", "two", "three");
++        final List<String> items = Arrays.asList("one", "two", "three");
+ 
+         items.forEach(item -> System.out.println(item));
+         items.stream().map(item -> item.toUpperCase()).forEach(System.out::println);
+ 
+         items.forEach((String item) -> {
+-            String processed = item.trim();  // violation, "should be declared final"
++            final String processed = item.trim();
+             System.out.println(processed);
+         });
+ 
+-        String prefix = "Item: ";            // violation, "should be declared final"
++        final String prefix = "Item: ";
+         items.forEach(item -> System.out.println(prefix + item));
+     }
+ 
+     public void tryWithResourcesAndExceptions() {
+-        String filename = "test.txt";        // violation, "should be declared final"
++        final String filename = "test.txt";
+ 
+         try (FileReader reader = new FileReader(filename);
+              BufferedReader buffered = new BufferedReader(reader)) {
+ 
+-            String line = buffered.readLine();   // violation, "should be declared final"
+-            // violation below, "should be declared final"
+-            String processed = line != null ? line.trim() : "";
++            final String line = buffered.readLine();
++            final String processed = line != null ? line.trim() : "";
+ 
+         } catch (IOException e) {
+-            // violation below, "should be declared final"
+-            String errorMsg = "Error reading file: " + e.getMessage();
++            final String errorMsg = "Error reading file: " + e.getMessage();
+             System.err.println(errorMsg);
+ 
+         }

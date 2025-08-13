@@ -1,0 +1,34 @@
+diff --git src/test/resources/org/checkstyle/autofix/recipe/redundantimport/complexcase/InputComplexCase.java src/test/resources/org/checkstyle/autofix/recipe/redundantimport/complexcase/OutputComplexCase.java
+index 5871f90..bf7c544 100644
+--- src/test/resources/org/checkstyle/autofix/recipe/redundantimport/complexcase/InputComplexCase.java
++++ src/test/resources/org/checkstyle/autofix/recipe/redundantimport/complexcase/OutputComplexCase.java
+@@ -8,13 +8,9 @@
+ */
+ 
+ package org.checkstyle.autofix.recipe.redundantimport.complexcase;
+-
+-import org.checkstyle.autofix.recipe.redundantimport.complexcase.*; // violation 'Redundant import from the same package'
+ import java.io.*;
+-    import java.lang.*; // violation 'Redundant import from the java.lang package'
+ 
+ import java.util.List;
+-import java.util.List; // violation 'Duplicate import'
+ import java.util.Iterator;
+ import java.util.Enumeration;
+ import java.util.Arrays;
+@@ -26,7 +22,6 @@ import javax.swing.BorderFactory;
+ 
+ import static java.io.File.listRoots;
+ import static javax.swing.WindowConstants.*;
+-import static javax.swing.WindowConstants.*; // violation 'Duplicate import'
+ import static java.io.File.createTempFile;
+ import static java.io.File.pathSeparator;
+ import static org.checkstyle.autofix.recipe.redundantimport.complexcase.InputComplexCase.myStaticMethod;
+@@ -41,6 +36,6 @@ import java.util.BitSet;
+ 
+ import static java.lang.Math.PI;
+ 
+-class InputComplexCase {
++class OutputComplexCase {
+     public static void myStaticMethod() {}
+ }
