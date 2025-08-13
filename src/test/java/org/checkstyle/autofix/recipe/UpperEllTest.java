@@ -19,7 +19,7 @@ package org.checkstyle.autofix.recipe;
 
 import org.junit.jupiter.api.Test;
 
-public class UpperEllTest extends AbstractRecipeTestSupport {
+class UpperEllTest extends AbstractRecipeTestSupport {
 
     @Override
     protected String getSubpackage() {

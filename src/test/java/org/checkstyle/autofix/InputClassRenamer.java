@@ -51,7 +51,7 @@ public class InputClassRenamer extends Recipe {
 
         @Override
         public J.ClassDeclaration visitClassDeclaration(J.ClassDeclaration classDecl,
-                                                        ExecutionContext executionContext) {
+                                                        ExecutionContext ctx) {
             final String newName = renameIfMatch(classDecl.getSimpleName());
             final J.ClassDeclaration result;
             if (newName != null) {
@@ -65,7 +65,7 @@ public class InputClassRenamer extends Recipe {
 
         @Override
         public J.NewClass visitNewClass(J.NewClass constructorNode,
-                                        ExecutionContext executionContext) {
+                                        ExecutionContext ctx) {
             J.NewClass result = constructorNode;
             if (constructorNode.getClazz() instanceof J.Identifier) {
                 final J.Identifier clazz = (J.Identifier) constructorNode.getClazz();
