@@ -1,5 +1,3 @@
-diff --git src/test/resources/org/checkstyle/autofix/recipe/header/headerblanklines/InputHeaderBlankLines.java src/test/resources/org/checkstyle/autofix/recipe/header/headerblanklines/OutputHeaderBlankLines.java
-index c095e1d..4ebba0c 100644
 --- src/test/resources/org/checkstyle/autofix/recipe/header/headerblanklines/InputHeaderBlankLines.java
 +++ src/test/resources/org/checkstyle/autofix/recipe/header/headerblanklines/OutputHeaderBlankLines.java
 @@ -1,4 +1,11 @@
