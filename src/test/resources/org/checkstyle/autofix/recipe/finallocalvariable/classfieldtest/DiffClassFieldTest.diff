@@ -1,8 +1,6 @@
-diff --git src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/classfieldtest/InputClassFieldTest.java src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/classfieldtest/OutputClassFieldTest.java
-index ac06187..74b379e 100644
 --- src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/classfieldtest/InputClassFieldTest.java
 +++ src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/classfieldtest/OutputClassFieldTest.java
-@@ -14,7 +14,7 @@ import java.util.HashMap;
+@@ -14,7 +14,7 @@
  import java.util.List;
  import java.util.Map;
  
@@ -11,7 +9,7 @@ index ac06187..74b379e 100644
      private String instanceField = "instance";
      private int counter = 0;
      private List<String> dataList = new ArrayList<>();
-@@ -25,10 +25,9 @@ public class InputClassFieldTest {
+@@ -25,10 +25,9 @@
      private static int globalCounter = 0;
  
      public void FieldsParametersLocalsTest(String name, int initialValue, boolean autoStart) {
@@ -25,7 +23,7 @@ index ac06187..74b379e 100644
  
          this.instanceField = normalizedName;
          this.counter = validatedValue;
-@@ -37,14 +36,11 @@ public class InputClassFieldTest {
+@@ -37,14 +36,11 @@
  
      public void complexMethod(String param1, int param2, List<String> param3,
                                Map<String, Object> param4, boolean param5) {

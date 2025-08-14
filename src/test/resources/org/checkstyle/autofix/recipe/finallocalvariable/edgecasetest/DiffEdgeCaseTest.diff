@@ -1,8 +1,6 @@
-diff --git src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/edgecasetest/InputEdgeCaseTest.java src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/edgecasetest/OutputEdgeCaseTest.java
-index bb10884..651244a 100644
 --- src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/edgecasetest/InputEdgeCaseTest.java
 +++ src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/edgecasetest/OutputEdgeCaseTest.java
-@@ -17,67 +17,64 @@ import java.util.Arrays;
+@@ -17,67 +17,64 @@
  import java.util.HashMap;
  import java.util.List;
  
@@ -13,15 +11,14 @@ index bb10884..651244a 100644
 -        var autoNumber = 42;                                // violation, "should be declared final"
 -        var autoList = new ArrayList<String>();             // violation, "should be declared final"
 -        var autoMap = new HashMap<String, Integer>();       // violation, "should be declared final"
--
--        String regularString = "explicit type";             // violation, "should be declared final"
--        var anotherAuto = "mixed with regular";             // violation, "should be declared final"
--        int regularInt = 100;                               // violation, "should be declared final"
 +        final var autoString = "inferred string";
 +        final var autoNumber = 42;
 +        final var autoList = new ArrayList<String>();
 +        final var autoMap = new HashMap<String, Integer>();
-+
+ 
+-        String regularString = "explicit type";             // violation, "should be declared final"
+-        var anotherAuto = "mixed with regular";             // violation, "should be declared final"
+-        int regularInt = 100;                               // violation, "should be declared final"
 +        final String regularString = "explicit type";
 +        final var anotherAuto = "mixed with regular";
 +        final int regularInt = 100;
