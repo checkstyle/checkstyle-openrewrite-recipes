@@ -33,16 +33,15 @@ import java.util.List;
 import org.checkstyle.autofix.CheckstyleAutoFix;
 import org.checkstyle.autofix.InputClassRenamer;
 import org.checkstyle.autofix.RemoveViolationComments;
-import org.checkstyle.autofix.parser.CheckConfiguration;
 import org.checkstyle.autofix.parser.CheckstyleReportParser;
 import org.checkstyle.autofix.parser.CheckstyleViolation;
-import org.checkstyle.autofix.parser.ConfigurationLoader;
 import org.openrewrite.Recipe;
 import org.openrewrite.test.RewriteTest;
 
 import com.puppycrawl.tools.checkstyle.AbstractXmlTestSupport;
 import com.puppycrawl.tools.checkstyle.Checker;
 import com.puppycrawl.tools.checkstyle.XMLLogger;
+import com.puppycrawl.tools.checkstyle.api.CheckstyleException;
 import com.puppycrawl.tools.checkstyle.api.Configuration;
 import com.puppycrawl.tools.checkstyle.bdd.InlineConfigParser;
 import com.puppycrawl.tools.checkstyle.bdd.TestInputConfiguration;
@@ -129,13 +128,12 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
     }
 
     private Path createConfigFile(Configuration config) throws Exception {
-        final CheckConfiguration checkConfig = ConfigurationLoader.mapConfiguration(config);
         final Path configPath = Files.createTempFile("checkstyle-config", ".xml");
-        writeConfigurationToXml(checkConfig, configPath.toString());
+        writeConfigurationToXml(config, configPath.toString());
         return configPath;
     }
 
-    public static void writeConfigurationToXml(CheckConfiguration config, String filePath)
+    public static void writeConfigurationToXml(Configuration config, String filePath)
             throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             writer.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
@@ -145,17 +143,22 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
         }
     }
 
-    private static void writeModule(CheckConfiguration config, BufferedWriter writer)
+    private static void writeModule(Configuration config, BufferedWriter writer)
             throws IOException {
 
-        writer.write("<module name=\"" + config.getName() + "\">\n");
+        writer.write("<module name=\"" + (config.getName()) + "\">\n");
 
         for (String propName : config.getPropertyNames()) {
-            writer.write("  <property name=\"" + propName + "\" value=\""
-                    + config.getProperty(propName) + "\"/>\n");
+            try {
+                final String propValue = config.getProperty(propName);
+                writer.write("  <property name=\"" + propName + "\" value=\""
+                        + propValue + "\"/>\n");
+            }
+            catch (CheckstyleException exception) {
+                throw new IOException("Failed to get property: " + propName, exception);
+            }
         }
-
-        for (CheckConfiguration child : config.getChildren()) {
+        for (Configuration child : config.getChildren()) {
             writeModule(child, writer);
         }
 

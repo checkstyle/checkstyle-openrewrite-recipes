@@ -19,6 +19,7 @@ package org.checkstyle.autofix;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Map;
 
 import org.checkstyle.autofix.parser.CheckConfiguration;
 import org.checkstyle.autofix.parser.CheckstyleReportParser;
@@ -83,12 +84,13 @@ public class CheckstyleAutoFix extends Recipe {
     public List<Recipe> getRecipeList() {
         final List<CheckstyleViolation> violations = CheckstyleReportParser
                 .parse(Path.of(getViolationReportPath()));
-        final CheckConfiguration configuration = loadCheckstyleConfiguration();
+        final Map<CheckstyleCheck,
+                CheckConfiguration> configuration = loadCheckstyleConfiguration();
 
         return CheckstyleRecipeRegistry.getRecipes(violations, configuration);
     }
 
-    private CheckConfiguration loadCheckstyleConfiguration() {
+    private Map<CheckstyleCheck, CheckConfiguration> loadCheckstyleConfiguration() {
         return ConfigurationLoader.loadConfiguration(getConfigurationPath(), getPropertiesPath());
     }
 }
