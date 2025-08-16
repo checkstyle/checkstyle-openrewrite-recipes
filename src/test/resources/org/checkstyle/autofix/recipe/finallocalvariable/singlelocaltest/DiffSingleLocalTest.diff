@@ -1,8 +1,6 @@
-diff --git src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/singlelocaltest/InputSingleLocalTest.java src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/singlelocaltest/OutputSingleLocalTest.java
-index 357b8f9..163d0a6 100644
 --- src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/singlelocaltest/InputSingleLocalTest.java
 +++ src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/singlelocaltest/OutputSingleLocalTest.java
-@@ -15,36 +15,35 @@ import java.util.Date;
+@@ -15,36 +15,35 @@
  import java.util.HashMap;
  import java.util.List;
  

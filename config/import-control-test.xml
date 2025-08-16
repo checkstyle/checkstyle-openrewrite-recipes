@@ -12,5 +12,6 @@
     <allow pkg="java.nio"/>
     <allow pkg="java.lang"/>
     <allow pkg="javax.xml.stream"/>
+    <allow pkg="org.eclipse.jgit.diff"/>
     <allow pkg="com.puppycrawl.tools.checkstyle"/>
 </import-control>

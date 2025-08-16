@@ -1,5 +1,3 @@
-diff --git src/test/resources/org/checkstyle/autofix/recipe/upperell/stringandcomments/InputStringAndComments.java src/test/resources/org/checkstyle/autofix/recipe/upperell/stringandcomments/OutputStringAndComments.java
-index 66c21df..fd6e161 100644
 --- src/test/resources/org/checkstyle/autofix/recipe/upperell/stringandcomments/InputStringAndComments.java
 +++ src/test/resources/org/checkstyle/autofix/recipe/upperell/stringandcomments/OutputStringAndComments.java
 @@ -9,20 +9,20 @@

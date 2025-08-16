@@ -7,29 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  diff-check:
-    strategy:
-      matrix:
-        platform: [ubuntu-latest, macos-latest, windows-latest]
-    runs-on: ${{ matrix.platform }}
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Generate diffs
-        shell: bash
-        run: ./scripts/generate-diffs.sh
-
-      - name: Check diff validity
-        shell: bash
-        run: |
-          git diff --exit-code || (
-            echo "::error::Generated diffs are not valid - please regenerate"
-            exit 1
-          )
-
   build:
-    needs: diff-check
     strategy:
       matrix:
         platform: [ubuntu-latest, macos-latest, windows-latest]
