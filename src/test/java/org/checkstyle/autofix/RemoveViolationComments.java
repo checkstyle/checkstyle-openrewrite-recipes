@@ -47,7 +47,8 @@ public class RemoveViolationComments extends Recipe {
 
     private static final class ViolationCommentRemover extends JavaIsoVisitor<ExecutionContext> {
         @Override
-        public Space visitSpace(Space space, Space.Location loc, ExecutionContext ctx) {
+        public Space visitSpace(
+                Space space, Space.Location loc, ExecutionContext executionContext) {
             String suffixAccumulator = null;
             final List<Comment> filteredComments = new ArrayList<>();
 
@@ -86,7 +87,7 @@ public class RemoveViolationComments extends Recipe {
                     result = result.withWhitespace(suffixAccumulator);
                 }
             }
-            return super.visitSpace(result, loc, ctx);
+            return super.visitSpace(result, loc, executionContext);
         }
     }
 }

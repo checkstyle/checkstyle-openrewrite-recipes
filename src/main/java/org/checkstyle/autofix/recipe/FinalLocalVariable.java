@@ -64,17 +64,18 @@ public class FinalLocalVariable extends Recipe {
         private Path sourcePath;
 
         @Override
-        public J.CompilationUnit visitCompilationUnit(J.CompilationUnit cu, ExecutionContext ctx) {
+        public J.CompilationUnit visitCompilationUnit(
+                J.CompilationUnit cu, ExecutionContext executionContext) {
             this.sourcePath = cu.getSourcePath();
-            return super.visitCompilationUnit(cu, ctx);
+            return super.visitCompilationUnit(cu, executionContext);
         }
 
         @Override
         public J.VariableDeclarations visitVariableDeclarations(
-                J.VariableDeclarations multiVariable, ExecutionContext ctx) {
+                J.VariableDeclarations multiVariable, ExecutionContext executionContext) {
 
             J.VariableDeclarations declarations = super.visitVariableDeclarations(multiVariable,
-                    ctx);
+                    executionContext);
 
             if (!(getCursor().getParentTreeCursor().getValue() instanceof J.ClassDeclaration)
                     && declarations.getVariables().size() == 1

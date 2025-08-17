@@ -65,14 +65,15 @@ public class UpperEll extends Recipe {
         private Path sourcePath;
 
         @Override
-        public J.CompilationUnit visitCompilationUnit(J.CompilationUnit cu, ExecutionContext ctx) {
+        public J.CompilationUnit visitCompilationUnit(
+                J.CompilationUnit cu, ExecutionContext executionContext) {
             this.sourcePath = cu.getSourcePath().toAbsolutePath();
-            return super.visitCompilationUnit(cu, ctx);
+            return super.visitCompilationUnit(cu, executionContext);
         }
 
         @Override
-        public J.Literal visitLiteral(J.Literal literal, ExecutionContext ctx) {
-            J.Literal result = super.visitLiteral(literal, ctx);
+        public J.Literal visitLiteral(J.Literal literal, ExecutionContext executionContext) {
+            J.Literal result = super.visitLiteral(literal, executionContext);
             final String valueSource = result.getValueSource();
 
             if (valueSource != null && valueSource.endsWith(LOWERCASE_L)

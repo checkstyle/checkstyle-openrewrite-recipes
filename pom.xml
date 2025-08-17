@@ -20,11 +20,10 @@
         <maven.compiler.plugin>3.11.0</maven.compiler.plugin>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <rewrite.version>8.54.0</rewrite.version>
-        <rewrite.maven.plugin>6.11.0</rewrite.maven.plugin>
-        <recipe.bom.version>3.9.0</recipe.bom.version>
-        <junit.version>5.13.0</junit.version>
-        <assertj.version>3.24.2</assertj.version>
+        <rewrite.maven.plugin>6.16.0</rewrite.maven.plugin>
+        <recipe.bom.version>3.13.0</recipe.bom.version>
+        <junit.version>5.13.4</junit.version>
+        <assertj.version>3.27.4</assertj.version>
 
         <!-- Checkstyle properties -->
         <maven.checkstyle.plugin.version>3.6.0</maven.checkstyle.plugin.version>
@@ -56,12 +55,10 @@
         <dependency>
             <groupId>org.openrewrite</groupId>
             <artifactId>rewrite-java</artifactId>
-            <version>${rewrite.version}</version>
         </dependency>
         <dependency>
             <groupId>org.openrewrite</groupId>
             <artifactId>rewrite-java-17</artifactId>
-            <version>${rewrite.version}</version>
         </dependency>
 
         <!-- JGit for generating diffs without external Git dependency -->
@@ -88,7 +85,6 @@
         <dependency>
             <groupId>org.openrewrite</groupId>
             <artifactId>rewrite-test</artifactId>
-            <version>${rewrite.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -182,10 +178,19 @@
                     <exclusions>
                         <exclusion>src/test/resources/**</exclusion>
                     </exclusions>
-                    <recipeArtifactCoordinates>
-                        <coordinate>org.checkstyle.autofix:checkstyle-openrewrite-recipes:1.0.0</coordinate>
-                    </recipeArtifactCoordinates>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.checkstyle.autofix</groupId>
+                        <artifactId>checkstyle-openrewrite-recipes</artifactId>
+                        <version>${project.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.openrewrite.recipe</groupId>
+                        <artifactId>rewrite-rewrite</artifactId>
+                        <version>RELEASE</version>
+                    </dependency>
+                </dependencies>
                 <executions>
                     <execution>
                         <id>checkstyle-autofix</id>
