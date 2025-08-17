@@ -99,8 +99,8 @@ public class Header extends Recipe {
         }
 
         @Override
-        public J visit(Tree tree, ExecutionContext ctx) {
-            J result = super.visit(tree, ctx);
+        public J visit(Tree tree, ExecutionContext executionContext) {
+            J result = super.visit(tree, executionContext);
 
             if (tree instanceof JavaSourceFile) {
                 JavaSourceFile sourceFile = (JavaSourceFile) tree;
@@ -113,7 +113,7 @@ public class Header extends Recipe {
                     sourceFile = sourceFile.withPrefix(
                             Space.format(fixedHeader));
                 }
-                result = super.visit(sourceFile, ctx);
+                result = super.visit(sourceFile, executionContext);
             }
             return result;
         }
