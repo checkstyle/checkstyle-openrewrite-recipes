@@ -45,6 +45,10 @@ public class InputSingleLocalTest {
         String trimmed = input.trim();                     // violation, "should be declared final"
         String upperCase = trimmed.toUpperCase();          // violation, "should be declared final"
         String formatted = "[" + upperCase + "]";          // violation, "should be declared final"
+        int a,b;                                           // violation, "should be declared final"
+        a = upperCase.indexOf(formatted);
+        b = upperCase.indexOf(formatted);
+        a = a + formatted.length();
         return formatted;
     }
 

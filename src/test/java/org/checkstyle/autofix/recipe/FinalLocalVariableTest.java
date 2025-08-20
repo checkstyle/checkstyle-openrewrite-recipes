@@ -46,4 +46,9 @@ public class FinalLocalVariableTest extends AbstractRecipeTestSupport {
         verify("EnhancedForLoop");
     }
 
+    @Test
+    void multiple() throws Exception {
+        verify("MultipleVariable");
+    }
+
 }

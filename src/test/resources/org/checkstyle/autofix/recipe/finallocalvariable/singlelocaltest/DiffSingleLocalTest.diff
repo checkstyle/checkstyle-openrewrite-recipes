@@ -1,6 +1,6 @@
 --- src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/singlelocaltest/InputSingleLocalTest.java
 +++ src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/singlelocaltest/OutputSingleLocalTest.java
-@@ -15,36 +15,35 @@
+@@ -15,37 +15,37 @@
  import java.util.HashMap;
  import java.util.List;
  
@@ -53,9 +53,12 @@
 -        String trimmed = input.trim();                     // violation, "should be declared final"
 -        String upperCase = trimmed.toUpperCase();          // violation, "should be declared final"
 -        String formatted = "[" + upperCase + "]";          // violation, "should be declared final"
+-        int a,b;                                           // violation, "should be declared final"
 +        final String trimmed = input.trim();
 +        final String upperCase = trimmed.toUpperCase();
 +        final String formatted = "[" + upperCase + "]";
-         return formatted;
-     }
- 
++        int a;
++        final int b;
+         a = upperCase.indexOf(formatted);
+         b = upperCase.indexOf(formatted);
+         a = a + formatted.length();
