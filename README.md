@@ -59,9 +59,9 @@ _No checks analyzed yet_
 ### Imports
 
 
-| Status | Check                                                                                                       | Recipe           | Coverage Notes |
-|--------|-------------------------------------------------------------------------------------------------------------|------------------|----------------|
-| 🟢     | [`RedundantImport`](https://checkstyle.sourceforge.io/checks/imports/redundantimport.html#RedundantImport ) | `TBD`            |                |
+| Status | Check                                                                                                       | Recipe                                                                                                                                                       | Coverage Notes |
+|--------|-------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|
+| 🟢     | [`RedundantImport`](https://checkstyle.sourceforge.io/checks/imports/redundantimport.html#RedundantImport ) | [`RedundantImport`](https://github.com/checkstyle/checkstyle-openrewrite-recipes/blob/main/src/main/java/org/checkstyle/autofix/recipe/RedundantImport.java) |                |
 
 
 
