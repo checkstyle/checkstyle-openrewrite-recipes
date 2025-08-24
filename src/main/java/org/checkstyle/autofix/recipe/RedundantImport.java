@@ -118,7 +118,7 @@ public class RedundantImport extends Recipe {
                 final Path absolutePath = Path.of(violation.getFileName()).toAbsolutePath();
                 return violation.getLine() == line
                         && violation.getColumn() == column
-                        && absolutePath.equals(sourcePath);
+                        && absolutePath.endsWith(sourcePath);
             });
         }
 

@@ -105,7 +105,7 @@ public class FinalLocalVariable extends Recipe {
             return violations.stream().anyMatch(violation -> {
                 return violation.getLine() == line
                         && violation.getColumn() == column
-                        && Path.of(violation.getFileName()).equals(sourcePath);
+                        && Path.of(violation.getFileName()).endsWith(sourcePath);
             });
         }
     }
