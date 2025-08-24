@@ -21,6 +21,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 import org.checkstyle.autofix.PositionHelper;
 import org.checkstyle.autofix.parser.CheckstyleViolation;
@@ -32,6 +33,7 @@ import org.openrewrite.java.JavaIsoVisitor;
 import org.openrewrite.java.tree.J;
 import org.openrewrite.java.tree.Space;
 import org.openrewrite.java.tree.Statement;
+import org.openrewrite.marker.Marker;
 import org.openrewrite.marker.Markers;
 
 /**
@@ -44,6 +46,7 @@ public class FinalLocalVariable extends Recipe {
 
     public FinalLocalVariable(List<CheckstyleViolation> violations) {
         this.violations = violations;
+        System.out.println("Created FinalLocalVariable");
     }
 
     @Override
@@ -58,16 +61,90 @@ public class FinalLocalVariable extends Recipe {
 
     @Override
     public TreeVisitor<?, ExecutionContext> getVisitor() {
-        return new FinalLocalVariableVisitor();
+        return new JavaIsoVisitor<>() {
+            @Override
+            public J.CompilationUnit visitCompilationUnit(J.CompilationUnit cu, ExecutionContext ctx) {
+                cu = new MarkViolationVisitor().visitCompilationUnit(cu, ctx);
+
+                cu = new FinalLocalVariableVisitor().visitCompilationUnit(cu, ctx);
+
+                return cu;
+            }
+        };
     }
 
-    private final class FinalLocalVariableVisitor extends JavaIsoVisitor<ExecutionContext> {
+    public static class FinalLocalVariableMarker implements Marker {
+        private final UUID id;
+
+        public FinalLocalVariableMarker(UUID id) {
+            this.id = id;
+        }
+
+        @Override
+        public UUID getId() {
+            return id;
+        }
+
+        @Override
+        public <M extends Marker> M withId(UUID id) {
+            return (M) new FinalLocalVariableMarker(id);
+        }
+
+    }
+
+    private class MarkViolationVisitor extends JavaIsoVisitor<ExecutionContext> {
 
         private Path sourcePath;
+        private J.CompilationUnit currentCompilationUnit;
 
         @Override
         public J.CompilationUnit visitCompilationUnit(J.CompilationUnit cu, ExecutionContext ctx) {
             this.sourcePath = cu.getSourcePath().toAbsolutePath();
+            this.currentCompilationUnit = cu;
+            return super.visitCompilationUnit(cu, ctx);
+        }
+
+        @Override
+        public J.VariableDeclarations.NamedVariable visitVariable(J.VariableDeclarations.NamedVariable variable,
+                                                                  ExecutionContext ctx) {
+
+
+            if (isAtViolationLocation(variable)) {
+                return variable.withMarkers(
+                        variable.getMarkers().add(new FinalLocalVariableMarker(UUID.randomUUID()))
+                );
+            }
+            return variable;
+        }
+
+        private boolean isAtViolationLocation(J.VariableDeclarations.NamedVariable variable) {
+
+            final int line = PositionHelper.computeLinePosition(currentCompilationUnit, variable, getCursor());
+            final int column = PositionHelper.computeColumnPosition(currentCompilationUnit, variable, getCursor());
+
+            System.out.println("Variable: " + variable.getSimpleName() +
+                    " at " + line + ":" + column);
+
+            violations.forEach(v -> {
+                if (v.getFileName().contains("InputSingleLocalTest")) {
+                    System.out.println("  Looking for violation at " + v.getLine() + ":" + v.getColumn());
+                }
+            });
+
+            return violations.removeIf(violation -> {
+                final Path absolutePath = Path.of(violation.getFileName()).toAbsolutePath();
+                return violation.getLine() == line
+                        && violation.getColumn() == column
+                        && absolutePath.equals(sourcePath);
+            });
+        }
+    }
+
+    private final class FinalLocalVariableVisitor extends JavaIsoVisitor<ExecutionContext> {
+
+
+        @Override
+        public J.CompilationUnit visitCompilationUnit(J.CompilationUnit cu, ExecutionContext ctx) {
             return super.visitCompilationUnit(cu, ctx);
         }
 
@@ -85,7 +162,7 @@ public class FinalLocalVariable extends Recipe {
 
                 boolean hasViolation = false;
                 for (J.VariableDeclarations.NamedVariable variable : declarations.getVariables()) {
-                    if (isAtViolationLocation(variable)) {
+                    if (variable.getMarkers().findFirst(FinalLocalVariableMarker.class).isPresent()) {
                         hasViolation = true;
                         break;
                     }
@@ -142,7 +219,7 @@ public class FinalLocalVariable extends Recipe {
             final List<J.VariableDeclarations.NamedVariable> nonViolations = new ArrayList<>();
 
             for (J.VariableDeclarations.NamedVariable variable : varDecl.getVariables()) {
-                if (isAtViolationLocation(variable)) {
+                if (variable.getMarkers().findFirst(FinalLocalVariableMarker.class).isPresent()) {
                     violationsList.add(variable.withPrefix(Space.SINGLE_SPACE));
                 }
                 else {
@@ -185,19 +262,6 @@ public class FinalLocalVariable extends Recipe {
             }
 
             return result;
-        }
-
-        private boolean isAtViolationLocation(J.VariableDeclarations.NamedVariable variable) {
-            final J.CompilationUnit cu = getCursor().firstEnclosing(J.CompilationUnit.class);
-
-            final int line = PositionHelper.computeLinePosition(cu, variable, getCursor());
-            final int column = PositionHelper.computeColumnPosition(cu, variable, getCursor());
-
-            return violations.stream().anyMatch(violation -> {
-                return violation.getLine() == line
-                        && violation.getColumn() == column
-                        && Path.of(violation.getFileName()).equals(sourcePath);
-            });
         }
     }
 }

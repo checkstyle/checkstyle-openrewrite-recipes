@@ -16,8 +16,9 @@ public class InputMultipleVariable {
 
         String name = "John", city = "NYC";   // 2 violations
 
-        double price = 19.99, tax = 0.08;     // 2 violations
+        double price = 19.99, tax = 0.08;     // violation, "should be declared final"
 
+        tax = 50;
         System.out.println("Sum: " + (x + y + z));
         System.out.println(name + " lives in " + city);
         System.out.println("Total: " + (price + (price * tax)));
