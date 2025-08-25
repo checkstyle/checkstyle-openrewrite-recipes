@@ -1,0 +1,21 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/annotationdeclaration/InputAnnotationDeclaration.java
++++ src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/annotationdeclaration/OutputAnnotationDeclaration.java
+@@ -11,14 +11,14 @@
+ 
+ import javax.annotation.Nonnull;
+ 
+-public class InputAnnotationDeclaration {
++public class OutputAnnotationDeclaration {
+     public void basicLocalVariables() {
+-        @Nonnull String name = "John Doe";         // violation, "should be declared final"
++        @Nonnull final String name = "John Doe";
+ 
+         @Nonnull
+-        @Deprecated String gender = "Male";         // violation, "should be declared final"
++        @Deprecated final String gender = "Male";
+ 
+         @Nonnull @Deprecated
+-        String text = "Hello";         // violation, "should be declared final"
++        final String text = "Hello";
+     }
+ }

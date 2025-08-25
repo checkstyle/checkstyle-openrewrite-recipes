@@ -46,4 +46,9 @@ public class FinalLocalVariableTest extends AbstractRecipeTestSupport {
         verify("EnhancedForLoop");
     }
 
+    @Test
+    void annotationDeclaration() throws Exception {
+        verify("AnnotationDeclaration");
+    }
+
 }
