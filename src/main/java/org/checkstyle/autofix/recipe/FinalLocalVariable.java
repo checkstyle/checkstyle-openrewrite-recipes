@@ -85,7 +85,10 @@ public class FinalLocalVariable extends Recipe {
                         .getVariables().get(0);
                 if (isAtViolationLocation(variable)) {
                     final List<J.Modifier> modifiers = new ArrayList<>();
-                    modifiers.add(new J.Modifier(Tree.randomId(), Space.EMPTY,
+
+                    final Space finalPrefix = declarations.getTypeExpression().getPrefix();
+
+                    modifiers.add(new J.Modifier(Tree.randomId(), finalPrefix,
                             Markers.EMPTY, null, J.Modifier.Type.Final, new ArrayList<>()));
                     modifiers.addAll(declarations.getModifiers());
                     declarations = declarations.withModifiers(modifiers)
