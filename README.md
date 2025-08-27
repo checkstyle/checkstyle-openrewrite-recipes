@@ -1,4 +1,59 @@
 # checkstyle-openrewrite-recipes
+This OpenRewrite recipe automatically fixes Checkstyle violations in your Java project by analyzing the Checkstyle report and applying code transformations to resolve common issues.
+
+## Prerequisites
+You need a Java project that already has the Checkstyle plugin configured and running.
+
+## Setup
+First, add the OpenRewrite plugin and our autofix recipe dependency to your build configuration.
+
+### Example:
+```xml
+<plugin>
+  <groupId>org.openrewrite.maven</groupId>
+  <artifactId>rewrite-maven-plugin</artifactId>
+  <version>${rewrite.maven.plugin}</version>
+  <configuration>
+    <activeRecipes>
+      <recipe>CheckstyleAutoFix</recipe>
+    </activeRecipes>
+  </configuration>
+  <dependencies>
+    <dependency>
+      <groupId>org.checkstyle.autofix</groupId>
+      <artifactId>checkstyle-openrewrite-recipes</artifactId>
+      <version>1.0.0</version>
+    </dependency>
+  </dependencies>
+</plugin>
+```
+## Configuration
+Create a `rewrite.yml` file in your project root:
+
+```yml
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: CheckstyleAutoFix
+displayName: Checkstyle Auto Fix
+description: Automatically fix Checkstyle violations
+recipeList:
+  - org.checkstyle.autofix.CheckstyleAutoFix:
+      violationReportPath: "target/checkstyle/checkstyle-report.xml"
+      configurationPath: "config/checkstyle.xml"
+      propertiesPath: "config/checkstyle.properties"
+```
+
+Parameters:
+- `violationReportPath`: Path to Checkstyle XML report (required)
+- `configurationPath`: Path to Checkstyle configuration file (required)
+- `propertiesPath`: Path to Checkstyle properties file (optional)
+
+## How to use it
+The autofix process works in two steps: first generate a Checkstyle report, then run the autofix recipe.
+```
+mvn checkstyle:check    # Generate the violation report
+mvn rewrite:run         # Apply the fixes
+```
 ## OpenRewrite Recipe Coverage for Checkstyle Checks
 
 This table tracks the auto-fix support status of OpenRewrite recipes for each Checkstyle check. Organized by Checkstyle categories, it helps contributors identify which checks are:
