@@ -27,7 +27,7 @@ public class InputSingleLocalTest {
         StringBuilder builder = new StringBuilder();       // violation, "should be declared final"
         Date currentDate = new Date();                     // violation, "should be declared final"
         File // prefix comment preceding target element
-        tempFile = new File("temp.txt");     // violation, "should be declared final"
+                tempFile = new File("temp.txt");     // violation, "should be declared final"
     }
 
     public void methodWithCalculations() {
@@ -45,6 +45,10 @@ public class InputSingleLocalTest {
         String trimmed = input.trim();                     // violation, "should be declared final"
         String upperCase = trimmed.toUpperCase();          // violation, "should be declared final"
         String formatted = "[" + upperCase + "]";          // violation, "should be declared final"
+        int a,b;                                           // violation, "should be declared final"
+        a = upperCase.indexOf(formatted);
+        b = upperCase.indexOf(formatted);
+        a = a + formatted.length();
         return formatted;
     }
 

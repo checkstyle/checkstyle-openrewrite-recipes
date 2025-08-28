@@ -19,7 +19,9 @@ package org.checkstyle.autofix.recipe;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 import org.checkstyle.autofix.PositionHelper;
 import org.checkstyle.autofix.parser.CheckstyleViolation;
@@ -30,6 +32,8 @@ import org.openrewrite.TreeVisitor;
 import org.openrewrite.java.JavaIsoVisitor;
 import org.openrewrite.java.tree.J;
 import org.openrewrite.java.tree.Space;
+import org.openrewrite.java.tree.Statement;
+import org.openrewrite.marker.Marker;
 import org.openrewrite.marker.Markers;
 
 /**
@@ -56,17 +60,89 @@ public class FinalLocalVariable extends Recipe {
 
     @Override
     public TreeVisitor<?, ExecutionContext> getVisitor() {
-        return new LocalVariableVisitor();
+        return new JavaIsoVisitor<>() {
+            @Override
+            public J.CompilationUnit visitCompilationUnit(J.CompilationUnit cu,
+                                                          ExecutionContext ctx) {
+                J.CompilationUnit compilationUnit = cu;
+                compilationUnit = new MarkViolationVisitor()
+                        .visitCompilationUnit(compilationUnit, ctx);
+
+                compilationUnit = new LocalVariableVisitor()
+                        .visitCompilationUnit(compilationUnit, ctx);
+
+                return compilationUnit;
+            }
+        };
+    }
+
+    private final class MarkViolationVisitor extends JavaIsoVisitor<ExecutionContext> {
+
+        private Path sourcePath;
+        private J.CompilationUnit currentCompilationUnit;
+
+        @Override
+        public J.CompilationUnit visitCompilationUnit(J.CompilationUnit cu, ExecutionContext ctx) {
+            this.sourcePath = cu.getSourcePath().toAbsolutePath();
+            this.currentCompilationUnit = cu;
+            return super.visitCompilationUnit(cu, ctx);
+        }
+
+        @Override
+        public J.VariableDeclarations visitVariableDeclarations(
+                J.VariableDeclarations multiVariable, ExecutionContext executionContext) {
+
+            final J.VariableDeclarations variableDeclarations;
+
+            final J.VariableDeclarations declarations = super
+                    .visitVariableDeclarations(multiVariable, executionContext);
+
+            if (!(getCursor().getParentTreeCursor().getValue() instanceof J.ClassDeclaration)
+                    && !declarations.hasModifier(J.Modifier.Type.Final)) {
+
+                final List<J.VariableDeclarations.NamedVariable> variables = declarations
+                        .getVariables();
+                final List<J.VariableDeclarations.NamedVariable> marked = new ArrayList<>();
+                for (J.VariableDeclarations.NamedVariable variable : variables) {
+                    if (isAtViolationLocation(variable)) {
+                        marked.add(variable.withMarkers(
+                                variable.getMarkers()
+                                        .add(new FinalLocalVariableMarker(UUID.randomUUID()))));
+                    }
+                    else {
+                        marked.add(variable);
+                    }
+                }
+                variableDeclarations = declarations.withVariables(marked);
+            }
+            else {
+                variableDeclarations = declarations;
+            }
+            return variableDeclarations;
+        }
+
+        private boolean isAtViolationLocation(J.VariableDeclarations.NamedVariable variable) {
+
+            final int line = PositionHelper
+                    .computeLinePosition(currentCompilationUnit, variable, getCursor());
+            final int column = PositionHelper
+                    .computeColumnPosition(currentCompilationUnit, variable, getCursor());
+
+            return violations.removeIf(violation -> {
+                final Path absolutePath = Path.of(violation.getFileName()).toAbsolutePath();
+                return violation.getLine() == line
+                        && violation.getColumn() == column
+                        && absolutePath.endsWith(sourcePath)
+                        && violation.getMessage().contains(variable.getSimpleName());
+            });
+        }
     }
 
     private final class LocalVariableVisitor extends JavaIsoVisitor<ExecutionContext> {
 
-        private Path sourcePath;
-
         @Override
         public J.CompilationUnit visitCompilationUnit(
                 J.CompilationUnit cu, ExecutionContext executionContext) {
-            this.sourcePath = cu.getSourcePath();
             return super.visitCompilationUnit(cu, executionContext);
         }
 
@@ -83,7 +159,7 @@ public class FinalLocalVariable extends Recipe {
                     && !declarations.hasModifier(J.Modifier.Type.Final)) {
                 final J.VariableDeclarations.NamedVariable variable = declarations
                         .getVariables().get(0);
-                if (isAtViolationLocation(variable)) {
+                if (variable.getMarkers().findFirst(FinalLocalVariableMarker.class).isPresent()) {
                     final List<J.Modifier> modifiers = new ArrayList<>();
 
                     final Space finalPrefix = declarations.getTypeExpression().getPrefix();
@@ -99,17 +175,119 @@ public class FinalLocalVariable extends Recipe {
             return declarations;
         }
 
-        private boolean isAtViolationLocation(J.VariableDeclarations.NamedVariable literal) {
-            final J.CompilationUnit cursor = getCursor().firstEnclosing(J.CompilationUnit.class);
+        @Override
+        public J.Block visitBlock(J.Block block, ExecutionContext executionContext) {
+            J.Block visited = super.visitBlock(block, executionContext);
 
-            final int line = PositionHelper.computeLinePosition(cursor, literal, getCursor());
-            final int column = PositionHelper.computeColumnPosition(cursor, literal, getCursor());
+            final List<Statement> newStatements = new ArrayList<>();
+            boolean changed = false;
 
-            return violations.stream().anyMatch(violation -> {
-                return violation.getLine() == line
-                        && violation.getColumn() == column
-                        && Path.of(violation.getFileName()).endsWith(sourcePath);
-            });
+            for (Statement stmt : visited.getStatements()) {
+                if (!(stmt instanceof J.VariableDeclarations)) {
+                    newStatements.add(stmt);
+                    continue;
+                }
+
+                final J.VariableDeclarations varDecl = (J.VariableDeclarations) stmt;
+
+                if (varDecl.hasModifier(J.Modifier.Type.Final) || getCursor().getParentTreeCursor()
+                        .getValue() instanceof J.ClassDeclaration) {
+                    newStatements.add(stmt);
+                    continue;
+                }
+
+                if (varDecl.getVariables().size() > 1) {
+                    changed |= handleMultiVariableDeclaration(varDecl, newStatements);
+                }
+                else {
+                    newStatements.add(stmt);
+                }
+            }
+
+            if (changed) {
+                visited = visited.withStatements(newStatements);
+            }
+
+            return visited;
+        }
+
+        private boolean handleMultiVariableDeclaration(J.VariableDeclarations varDecl,
+                                                       List<Statement> newStatements) {
+            final List<J.VariableDeclarations.NamedVariable> violationsList = new ArrayList<>();
+            final List<J.VariableDeclarations.NamedVariable> nonViolations = new ArrayList<>();
+
+            for (J.VariableDeclarations.NamedVariable variable : varDecl.getVariables()) {
+                if (variable.getMarkers().findFirst(FinalLocalVariableMarker.class).isPresent()) {
+                    violationsList.add(variable.withPrefix(Space.SINGLE_SPACE));
+                }
+                else {
+                    nonViolations.add(variable.withPrefix(Space.SINGLE_SPACE));
+                }
+            }
+
+            boolean changed = false;
+
+            if (violationsList.isEmpty()) {
+                newStatements.add(varDecl);
+            }
+            else if (nonViolations.isEmpty()) {
+                newStatements.add(addFinalModifier(varDecl));
+                changed = true;
+            }
+            else {
+                newStatements.add(varDecl.withVariables(nonViolations));
+                for (J.VariableDeclarations.NamedVariable variable : violationsList) {
+                    newStatements.add(addFinalModifier(varDecl
+                            .withVariables(Collections.singletonList(variable))));
+                }
+                changed = true;
+            }
+
+            return changed;
+        }
+
+        private J.VariableDeclarations addFinalModifier(J.VariableDeclarations varDecl) {
+            final List<J.Modifier> modifiers = new ArrayList<>();
+            final Space finalPrefix;
+            if (varDecl.getTypeExpression() != null) {
+                finalPrefix = varDecl.getTypeExpression().getPrefix();
+            }
+            else {
+                finalPrefix = Space.EMPTY;
+            }
+
+            modifiers.add(new J.Modifier(Tree.randomId(), finalPrefix,
+                    Markers.EMPTY, null, J.Modifier.Type.Final, new ArrayList<>()));
+            modifiers.addAll(varDecl.getModifiers());
+
+            J.VariableDeclarations result = varDecl.withModifiers(modifiers);
+
+            if (result.getTypeExpression() != null) {
+                result = result.withTypeExpression(
+                        result.getTypeExpression().withPrefix(Space.SINGLE_SPACE));
+            }
+
+            return result;
         }
     }
+
+    public static class FinalLocalVariableMarker implements Marker {
+        private final UUID id;
+
+        public FinalLocalVariableMarker(UUID uuid) {
+            this.id = uuid;
+        }
+
+        @Override
+        public UUID getId() {
+            return id;
+        }
+
+        @Override
+        public <M extends Marker> M withId(UUID uuid) {
+            return (M) new FinalLocalVariableMarker(uuid);
+        }
+
+    }
+
 }
