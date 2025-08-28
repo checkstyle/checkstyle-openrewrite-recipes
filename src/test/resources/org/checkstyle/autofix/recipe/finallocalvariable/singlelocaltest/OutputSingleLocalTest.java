@@ -27,7 +27,7 @@ public class OutputSingleLocalTest {
         final StringBuilder builder = new StringBuilder();
         final Date currentDate = new Date();
         final File // prefix comment preceding target element
-        tempFile = new File("temp.txt");
+                tempFile = new File("temp.txt");
     }
 
     public void methodWithCalculations() {
@@ -44,6 +44,11 @@ public class OutputSingleLocalTest {
         final String trimmed = input.trim();
         final String upperCase = trimmed.toUpperCase();
         final String formatted = "[" + upperCase + "]";
+        int a;
+        final int b;
+        a = upperCase.indexOf(formatted);
+        b = upperCase.indexOf(formatted);
+        a = a + formatted.length();
         return formatted;
     }
 

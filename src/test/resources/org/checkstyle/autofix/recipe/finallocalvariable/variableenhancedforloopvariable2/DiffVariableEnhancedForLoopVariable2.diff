@@ -1,0 +1,39 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/variableenhancedforloopvariable2/InputVariableEnhancedForLoopVariable2.java
++++ src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/variableenhancedforloopvariable2/OutputVariableEnhancedForLoopVariable2.java
+@@ -10,7 +10,7 @@
+ */
+ package org.checkstyle.autofix.recipe.finallocalvariable.variableenhancedforloopvariable2;
+ 
+-public class InputVariableEnhancedForLoopVariable2 {
++public class OutputVariableEnhancedForLoopVariable2 {
+     public void method1()
+     {
+         final java.util.List<Object> list = new java.util.ArrayList<>();
+@@ -22,15 +22,13 @@
+     public void method2()
+     {
+         final int[] squares = {0, 1, 4, 9, 16, 25};
+-        int x; // violation, "Variable 'x' should be declared final"
++        final int x;
+         for (final int i : squares) {
+         }
+ 
+     }
+-    // violation below "Variable 'snippets' should be declared final"
+-    public java.util.List<String> method3(java.util.List<String> snippets) {
+-        // violation below "Variable 'filteredSnippets' should be declared final"
+-        java.util.List<String> filteredSnippets = new java.util.ArrayList<>();
++    public java.util.List<String> method3(final java.util.List<String> snippets) {
++        final java.util.List<String> filteredSnippets = new java.util.ArrayList<>();
+         for (String snippet : snippets) {
+             filteredSnippets.add(snippet);
+         }
+@@ -49,7 +47,7 @@
+         for(Object a : list) {
+         }
+ 
+-        Object a; // violation, "Variable 'a' should be declared final"
++        final Object a;
+         if (list.isEmpty())
+         {
+             a = new String("empty");

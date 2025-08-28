@@ -1,0 +1,24 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/multiplevariable/InputMultipleVariable.java
++++ src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/multiplevariable/OutputMultipleVariable.java
+@@ -8,15 +8,17 @@
+ 
+ package org.checkstyle.autofix.recipe.finallocalvariable.multiplevariable;
+ 
+-public class InputMultipleVariable {
++public class OutputMultipleVariable {
+ 
+     public void multipleDeclarations() {
+ 
+-        int x = 10, y = 20, z = 30;           // 3 violations
++        final int x = 10, y = 20, z = 30;
+ 
+-        String name = "John", city = "NYC";   // 2 violations
++        final String name = "John", city = "NYC";
+ 
+-        double price = 19.99, tax = 0.08;     // violation, "should be declared final"
++        double tax = 0.08;
++
++        final double price = 19.99;
+ 
+         tax = 50;
+         System.out.println("Sum: " + (x + y + z));
