@@ -1,0 +1,59 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/localvariableassignedmultipletimes/InputLocalVariableAssignedMultipleTimes.java
++++ src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/localvariableassignedmultipletimes/OutputLocalVariableAssignedMultipleTimes.java
+@@ -12,7 +12,7 @@
+ import java.util.HashMap;
+ import java.util.Locale;
+ 
+-public class InputLocalVariableAssignedMultipleTimes {
++public class OutputLocalVariableAssignedMultipleTimes {
+     void foo1() {
+         final boolean some_condition = true;
+         int i;
+@@ -52,7 +52,7 @@
+ 
+     void foo4() {
+         final boolean some_condition = true;
+-        int i; // violation, "Variable 'i' should be declared final"
++        final int i;
+         if (some_condition) {
+             if (true) {
+             }
+@@ -125,12 +125,11 @@
+ 
+     // Taken from findbugs
+     public static String foo9(String filePath, String project) {
+-        String path = new String(filePath); // violation, "Variable 'path' should be declared final"
++        final String path = new String(filePath);
+         String commonPath;
+         if (project != null) {
+             commonPath = "";
+-            // violation below "Variable 'relativePath' should be declared final"
+-            String relativePath = "";
++            final String relativePath = "";
+             if (!relativePath.equals(path)) {
+                 return relativePath;
+             }
+@@ -206,12 +205,12 @@
+         try {
+ 
+             String className;
+-            int kind; // violation, "Variable 'kind' should be declared final"
++            final int kind;
+             boolean isParameterToInitMethodofAnonymousInnerClass = false;
+             boolean isSyntheticMethod = false;
+             if (o instanceof String || o instanceof Integer) {
+ 
+-                String m; // violation, "Variable 'm' should be declared final"
++                final String m;
+                 if (o instanceof String) {
+                     m = (String) o;
+                     isSyntheticMethod = m.equals("");
+@@ -413,7 +412,7 @@
+          * signum is 1 if p and q are both nonnegative or both negative, and -1 otherwise.
+          */
+         final int signum = 1 | ((p ^ q) >> (Integer.SIZE - 1));
+-        boolean increment; // violation, "Variable 'increment' should be declared final"
++        final boolean increment;
+         switch (mode) {
+             case 1:
+                 String.CASE_INSENSITIVE_ORDER.equals(rem == 0);

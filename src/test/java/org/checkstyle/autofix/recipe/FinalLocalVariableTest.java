@@ -51,4 +51,69 @@ public class FinalLocalVariableTest extends AbstractRecipeTestSupport {
         verify("AnnotationDeclaration");
     }
 
+    @Test
+    void multiple() throws Exception {
+        verify("MultipleVariable");
+    }
+
+    @Test
+    void localVariable() throws Exception {
+        verify("LocalVariableOne");
+    }
+
+    @Test
+    void localVariableTwo() throws Exception {
+        verify("LocalVariableTwo");
+    }
+
+    @Test
+    void localVariableThree() throws Exception {
+        verify("LocalVariableThree");
+    }
+
+    @Test
+    void localVariableFour() throws Exception {
+        verify("LocalVariableFour");
+    }
+
+    @Test
+    void localVariableFive() throws Exception {
+        verify("LocalVariableFive");
+    }
+
+    @Test
+    void localVariableCheckRecord() throws Exception {
+        verify("LocalVariableCheckRecord");
+    }
+
+    @Test
+    void finalLocalVariable2One() throws Exception {
+        verify("FinalLocalVariable2One");
+    }
+
+    @Test
+    void finalLocalForLoop() throws Exception {
+        verify("VariableEnhancedForLoopVariable");
+    }
+
+    @Test
+    void finalLocalForLoop2() throws Exception {
+        verify("VariableEnhancedForLoopVariable2");
+    }
+
+    @Test
+    void localVariableAssignedMultipleTimes() throws Exception {
+        verify("LocalVariableAssignedMultipleTimes");
+    }
+
+    @Test
+    void localVariableCheckSwitchExpressions() throws Exception {
+        verify("LocalVariableCheckSwitchExpressions");
+    }
+
+    @Test
+    void localVariableCheckSwitchAssignment() throws Exception {
+        verify("LocalVariableCheckSwitchAssignment");
+    }
+
 }

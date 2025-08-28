@@ -1,0 +1,39 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/localvariablefive/InputLocalVariableFive.java
++++ src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/localvariablefive/OutputLocalVariableFive.java
+@@ -9,11 +9,11 @@
+ */
+ package org.checkstyle.autofix.recipe.finallocalvariable.localvariablefive;
+ 
+-public class InputLocalVariableFive {
++public class OutputLocalVariableFive {
+     class class5 {
+         public void test1(){
+             final boolean b = false;
+-            int shouldBeFinal; // violation, "Variable 'shouldBeFinal' should be declared final"
++            final int shouldBeFinal;
+             if(b){
+                 if(b){
+                     shouldBeFinal = 1;
+@@ -24,7 +24,7 @@
+         }
+         public void test2() {
+             final int b = 10;
+-            int shouldBeFinal; // violation, "Variable 'shouldBeFinal' should be declared final"
++            final int shouldBeFinal;
+ 
+             switch (b) {
+                 case 0:
+@@ -56,11 +56,10 @@
+             }
+         }
+         public void test4() {
+-            int shouldBeFinal; // violation, "Variable 'shouldBeFinal' should be declared final"
++            final int shouldBeFinal;
+             class Bar {
+                 void bar () {
+-                    // violation below "Variable 'shouldBeFinal' should be declared final"
+-                    int shouldBeFinal;
++                    final int shouldBeFinal;
+                     final boolean b = false;
+                     if (b) {
+                         if (b) {

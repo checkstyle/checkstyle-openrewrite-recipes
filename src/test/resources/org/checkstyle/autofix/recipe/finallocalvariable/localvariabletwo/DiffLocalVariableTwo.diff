@@ -1,0 +1,24 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/localvariabletwo/InputLocalVariableTwo.java
++++ src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/localvariabletwo/OutputLocalVariableTwo.java
+@@ -9,7 +9,7 @@
+ */
+ package org.checkstyle.autofix.recipe.finallocalvariable.localvariabletwo;
+ 
+-public class InputLocalVariableTwo {
++public class OutputLocalVariableTwo {
+     public void anotherMethod()
+     {
+         boolean aBool = true;
+@@ -21,9 +21,9 @@
+ 
+         int l = 0;
+         {
+-            int weird = 0; // violation, "Variable 'weird' should be declared final"
+-            int j = 0; // violation, "Variable 'j' should be declared final"
+-            int k = 0; // violation, "Variable 'k' should be declared final"
++            final int weird = 0;
++            final int j = 0;
++            final int k = 0;
+             {
+                 l++;
+             }

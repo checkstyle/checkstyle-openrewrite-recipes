@@ -1,0 +1,88 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/localvariableone/InputLocalVariableOne.java
++++ src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/localvariableone/OutputLocalVariableOne.java
+@@ -10,14 +10,13 @@
+ 
+ package org.checkstyle.autofix.recipe.finallocalvariable.localvariableone;
+ 
+-public class InputLocalVariableOne {
++public class OutputLocalVariableOne {
+     private int m_ClassVariable = 0;
+     //static block
+     static
+     {
+-        int i, j = 0; // 2 violations
+-        // violation below "Variable 'runnable' should be declared final"
+-        Runnable runnable = new Runnable()
++        final int i, j = 0;
++        final Runnable runnable = new Runnable()
+         {
+             public void run()
+             {
+@@ -27,27 +26,26 @@
+     /** constructor */
+     public void InputVariableOne()
+     {
+-        int i = 0; // violation, "Variable 'i' should be declared final"
++        final int i = 0;
+         // final variable
+         final int j = 2;
+ 
+-        int z; // violation, "Variable 'z' should be declared final"
++        final int z;
+ 
+-        Object obj = new Object(); // violation, "Variable 'obj' should be declared final"
++        final Object obj = new Object();
+ 
+         int k = 0;
+ 
+-        String x = obj.toString(); // violation, "Variable 'x' should be declared final"
++        final String x = obj.toString();
+ 
+         k++;
+ 
+         k = 2;
+-        // violation below "Variable 'runnable' should be declared final"
+-        Runnable runnable = new Runnable()
++        final Runnable runnable = new Runnable()
+         {
+             public void run()
+             {
+-                int q = 0; // violation, "Variable 'q' should be declared final"
++                final int q = 0;
+             }
+         };
+     }
+@@ -63,17 +61,17 @@
+ 
+     public void aMethod()
+     {
+-        int i = 0; // violation, "Variable 'i' should be declared final"
++        final int i = 0;
+ 
+         final int j = 2;
+ 
+-        int z; // violation, "Variable 'z' should be declared final"
++        final int z;
+ 
+-        Object obj = new Object(); // violation, "Variable 'obj' should be declared final"
++        final Object obj = new Object();
+ 
+         int k = 0;
+ 
+-        String x = obj.toString(); // violation, "Variable 'x' should be declared final"
++        final String x = obj.toString();
+ 
+         k++;
+ 
+@@ -81,9 +79,8 @@
+         {
+             public Inner()
+             {
+-                int w = 0; // violation, "Variable 'w' should be declared final"
+-                // violation below  "Variable 'runnable' should be declared final"
+-                Runnable runnable = new Runnable()
++                final int w = 0;
++                final Runnable runnable = new Runnable()
+                 {
+                     public void run()
+                     {

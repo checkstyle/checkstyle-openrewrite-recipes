@@ -1,0 +1,48 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/localvariablefour/InputLocalVariableFour.java
++++ src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/localvariablefour/OutputLocalVariableFour.java
+@@ -9,11 +9,11 @@
+ */
+ package org.checkstyle.autofix.recipe.finallocalvariable.localvariablefour;
+ 
+-public class InputLocalVariableFour {
++public class OutputLocalVariableFour {
+     class Class3 {
+         public void test1() {
+             final boolean b = true;
+-            int shouldBeFinal; // violation, "Variable 'shouldBeFinal' should be declared final"
++            final int shouldBeFinal;
+ 
+             if (b) {
+                 shouldBeFinal = 1;
+@@ -25,7 +25,7 @@
+ 
+         public void test2() {
+             final int b = 10;
+-            int shouldBeFinal; // violation, "Variable 'shouldBeFinal' should be declared final"
++            final int shouldBeFinal;
+ 
+             switch (b) {
+                 case 0:
+@@ -69,7 +69,7 @@
+ 
+         public void test5() {
+             final boolean b = false;
+-            int shouldBeFinal;    // violation, "Variable 'shouldBeFinal' should be declared final"
++            final int shouldBeFinal;
+             if(b) {
+             }
+             if (b) {
+@@ -82,11 +82,10 @@
+ 
+     class class4 {
+         public void foo() {
+-            int shouldBeFinal;    // violation, "Variable 'shouldBeFinal' should be declared final"
++            final int shouldBeFinal;
+             class Bar {
+                 void bar () {
+-                    // violation below "Variable 'shouldBeFinal' should be declared final"
+-                    int shouldBeFinal;
++                    final int shouldBeFinal;
+                     final boolean b = false;
+                     if (b) {
+                         shouldBeFinal = 1;

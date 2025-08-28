@@ -1,0 +1,22 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/finallocalvariable2one/InputFinalLocalVariable2One.java
++++ src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/finallocalvariable2one/OutputFinalLocalVariable2One.java
+@@ -10,7 +10,7 @@
+ */
+ package org.checkstyle.autofix.recipe.finallocalvariable.finallocalvariable2one;
+ 
+-public class InputFinalLocalVariable2One {
++public class OutputFinalLocalVariable2One {
+     private int m_ClassVariable = 0;
+     //static block
+     static
+@@ -49,9 +49,7 @@
+             }
+         };
+     }
+-
+-    // violation below "Variable 'aArg' should be declared final"
+-    public void method(int aArg, final int aFinal, int aArg2)
++    public void method(final int aArg, final int aFinal, int aArg2)
+     {
+         int z = 0;
+ 
