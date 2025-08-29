@@ -51,4 +51,9 @@ public class FinalLocalVariableTest extends AbstractRecipeTestSupport {
         verify("AnnotationDeclaration");
     }
 
+    @Test
+    void multiple() throws Exception {
+        verify("MultipleVariable");
+    }
+
 }
