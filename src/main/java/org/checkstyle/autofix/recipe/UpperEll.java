@@ -94,7 +94,7 @@ public class UpperEll extends Recipe {
             final int column = PositionHelper.computeColumnPosition(cursor, literal, getCursor());
 
             return violations.stream().anyMatch(violation -> {
-                final Path absolutePath = Path.of(violation.getFileName()).toAbsolutePath();
+                final Path absolutePath = violation.getFilePath().toAbsolutePath();
                 return violation.getLine() == line
                         && violation.getColumn() == column
                         && absolutePath.endsWith(sourcePath);

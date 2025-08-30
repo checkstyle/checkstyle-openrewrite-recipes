@@ -30,6 +30,8 @@ import org.junit.jupiter.api.Test;
 
 public class CheckstyleReportsParserTest {
 
+    private final ReportParser reportParser = new XmlReportParser();
+
     private static String getPath(String path) {
         return "src/test/resources/org/checkstyle/autofix/parser/" + path;
     }
@@ -37,7 +39,7 @@ public class CheckstyleReportsParserTest {
     @Test
     public void testParseFromResource() throws Exception {
         final Path xmlPath = Path.of(getPath("checkstyle-report.xml"));
-        final List<CheckstyleViolation> records = CheckstyleReportParser.parse(xmlPath);
+        final List<CheckstyleViolation> records = reportParser.parse(xmlPath);
 
         assertNotNull(records);
         assertEquals(1, records.size());
@@ -48,29 +50,29 @@ public class CheckstyleReportsParserTest {
         assertEquals("error", record.getSeverity());
         assertEquals("Example message", record.getMessage());
         assertEquals(CheckstyleCheck.UPPER_ELL, record.getSource());
-        assertEquals("Example.java", record.getFileName());
+        assertEquals(Path.of("Example.java"), record.getFilePath());
     }
 
     @Test
     public void testParseMultipleFilesReport() throws Exception {
         final Path xmlPath = Path.of(getPath("checkstyle-multiple-files.xml"));
-        final List<CheckstyleViolation> records = CheckstyleReportParser.parse(xmlPath);
+        final List<CheckstyleViolation> records = reportParser.parse(xmlPath);
 
         assertNotNull(records);
         assertEquals(3, records.size());
 
-        final Map<String, List<CheckstyleViolation>> grouped = records.stream()
-                .collect(Collectors.groupingBy(CheckstyleViolation::getFileName));
+        final Map<Path, List<CheckstyleViolation>> grouped = records.stream()
+                .collect(Collectors.groupingBy(CheckstyleViolation::getFilePath));
 
         assertEquals(2, grouped.size());
 
-        assertEquals(2, grouped.get("Main.java").size());
-        assertEquals(1, grouped.get("Utils.java").size());
+        assertEquals(2, grouped.get(Path.of("Main.java")).size());
+        assertEquals(1, grouped.get(Path.of("Utils.java")).size());
 
-        CheckstyleViolation record = grouped.get("Main.java").get(0);
+        CheckstyleViolation record = grouped.get(Path.of("Main.java")).get(0);
         assertEquals("error", record.getSeverity());
 
-        record = grouped.get("Utils.java").get(0);
+        record = grouped.get(Path.of("Utils.java")).get(0);
         assertEquals("warning", record.getSeverity());
     }
 }

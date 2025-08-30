@@ -36,7 +36,7 @@ import javax.xml.stream.events.XMLEvent;
 
 import org.checkstyle.autofix.CheckstyleCheck;
 
-public final class CheckstyleReportParser {
+public class XmlReportParser implements ReportParser {
 
     private static final String FILE_TAG = "file";
 
@@ -54,11 +54,8 @@ public final class CheckstyleReportParser {
 
     private static final String SOURCE_ATTR = "source";
 
-    private CheckstyleReportParser() {
-
-    }
-
-    public static List<CheckstyleViolation> parse(Path xmlPath) {
+    @Override
+    public List<CheckstyleViolation> parse(Path xmlPath) {
 
         final List<CheckstyleViolation> result = new ArrayList<>();
 
@@ -101,7 +98,7 @@ public final class CheckstyleReportParser {
         return result;
     }
 
-    private static String parseFileTag(StartElement startElement) {
+    private String parseFileTag(StartElement startElement) {
         String fileName = null;
         final Iterator<Attribute> attributes = startElement.getAttributes();
         while (attributes.hasNext()) {
@@ -114,7 +111,7 @@ public final class CheckstyleReportParser {
         return fileName;
     }
 
-    private static Optional<CheckstyleViolation> parseErrorTag(StartElement startElement,
+    private Optional<CheckstyleViolation> parseErrorTag(StartElement startElement,
                                                                String filename) {
         int line = -1;
         int column = -1;
@@ -149,7 +146,7 @@ public final class CheckstyleReportParser {
         }
         if (source.isPresent()) {
             violation = new CheckstyleViolation(line, column, severity,
-                    source.get(), message, filename);
+                    source.get(), message, Path.of(filename));
         }
         return Optional.ofNullable(violation);
 

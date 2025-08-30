@@ -22,9 +22,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.checkstyle.autofix.parser.CheckConfiguration;
-import org.checkstyle.autofix.parser.CheckstyleReportParser;
 import org.checkstyle.autofix.parser.CheckstyleViolation;
 import org.checkstyle.autofix.parser.ConfigurationLoader;
+import org.checkstyle.autofix.parser.ReportParser;
+import org.checkstyle.autofix.parser.SarifReportParser;
+import org.checkstyle.autofix.parser.XmlReportParser;
 import org.openrewrite.Option;
 import org.openrewrite.Recipe;
 
@@ -34,7 +36,8 @@ import org.openrewrite.Recipe;
 public class CheckstyleAutoFix extends Recipe {
 
     @Option(displayName = "Violation report path",
-            description = "Path to the checkstyle violation report XML file.",
+            description = "Path to the checkstyle violation report file."
+                    + " Supported formats: XML, SARIF.",
             example = "target/checkstyle/checkstyle-report.xml")
     private String violationReportPath;
 
@@ -82,12 +85,27 @@ public class CheckstyleAutoFix extends Recipe {
 
     @Override
     public List<Recipe> getRecipeList() {
-        final List<CheckstyleViolation> violations = CheckstyleReportParser
+        final ReportParser reportParser = createReportParser(getViolationReportPath());
+        final List<CheckstyleViolation> violations = reportParser
                 .parse(Path.of(getViolationReportPath()));
         final Map<CheckstyleCheck,
                 CheckConfiguration> configuration = loadCheckstyleConfiguration();
 
         return CheckstyleRecipeRegistry.getRecipes(violations, configuration);
+    }
+
+    private ReportParser createReportParser(String path) {
+        final ReportParser result;
+        if (path.endsWith(".xml")) {
+            result = new XmlReportParser();
+        }
+        else if (path.endsWith(".sarif") || path.endsWith(".sarif.json")) {
+            result = new SarifReportParser();
+        }
+        else {
+            throw new IllegalArgumentException("Unsupported report format: " + path);
+        }
+        return result;
     }
 
     private Map<CheckstyleCheck, CheckConfiguration> loadCheckstyleConfiguration() {

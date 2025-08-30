@@ -17,7 +17,7 @@
 
 package org.checkstyle.autofix.recipe;
 
-import org.junit.jupiter.api.Test;
+import org.checkstyle.autofix.parser.ReportParser;
 
 import com.puppycrawl.tools.checkstyle.DefaultConfiguration;
 import com.puppycrawl.tools.checkstyle.checks.header.HeaderCheck;
@@ -29,19 +29,19 @@ public class HeaderTest extends AbstractRecipeTestSupport {
         return "header";
     }
 
-    @Test
-    void headerTest() throws Exception {
-        verify(getHeaderConfig(), "HeaderBlankLines");
+    @RecipeTest
+    void headerTest(ReportParser parser) throws Exception {
+        verify(parser, getHeaderConfig(), "HeaderBlankLines");
     }
 
-    @Test
-    void headerCommentTest() throws Exception {
-        verify(getHeaderConfig(), "HeaderComments");
+    @RecipeTest
+    void headerCommentTest(ReportParser parser) throws Exception {
+        verify(parser, getHeaderConfig(), "HeaderComments");
     }
 
-    @Test
-    void headerIncorrect() throws Exception {
-        verify(getHeaderConfig(), "HeaderIncorrect");
+    @RecipeTest
+    void headerIncorrect(ReportParser parser) throws Exception {
+        verify(parser, getHeaderConfig(), "HeaderIncorrect");
     }
 
     private DefaultConfiguration getHeaderConfig() {

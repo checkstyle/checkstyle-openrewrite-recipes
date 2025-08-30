@@ -12,4 +12,5 @@
     <allow pkg="org.checkstyle"/>
     <allow pkg="java.util"/>
     <allow pkg="com.puppycrawl.tools.checkstyle"/>
+    <allow pkg="de.jcup.sarif_2_1_0"/>
 </import-control>

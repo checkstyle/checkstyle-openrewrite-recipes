@@ -116,7 +116,7 @@ public class RedundantImport extends Recipe {
             final int line = PositionHelper.computeLinePosition(cursor, literal, getCursor());
             final int column = PositionHelper.computeColumnPosition(cursor, literal, getCursor());
             return violations.removeIf(violation -> {
-                final Path absolutePath = Path.of(violation.getFileName()).toAbsolutePath();
+                final Path absolutePath = violation.getFilePath().toAbsolutePath();
                 return violation.getLine() == line
                         && violation.getColumn() == column
                         && absolutePath.endsWith(sourcePath);

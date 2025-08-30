@@ -129,7 +129,7 @@ public class Header extends Recipe {
 
         private boolean hasViolation(Path filePath) {
             return violations.removeIf(violation -> {
-                return Path.of(violation.getFileName()).endsWith(filePath);
+                return violation.getFilePath().endsWith(filePath);
             });
         }
     }

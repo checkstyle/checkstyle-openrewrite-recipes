@@ -17,7 +17,7 @@
 
 package org.checkstyle.autofix.recipe;
 
-import org.junit.jupiter.api.Test;
+import org.checkstyle.autofix.parser.ReportParser;
 
 public class UpperEllTest extends AbstractRecipeTestSupport {
 
@@ -26,24 +26,24 @@ public class UpperEllTest extends AbstractRecipeTestSupport {
         return "upperell";
     }
 
-    @Test
-    void hexOctalLiteral() throws Exception {
-        verify("HexOctalLiteral");
+    @RecipeTest
+    void hexOctalLiteral(ReportParser parser) throws Exception {
+        verify(parser, "HexOctalLiteral");
     }
 
-    @Test
-    void complexLongLiterals() throws Exception {
-        verify("ComplexLongLiterals");
+    @RecipeTest
+    void complexLongLiterals(ReportParser parser) throws Exception {
+        verify(parser, "ComplexLongLiterals");
     }
 
-    @Test
-    void stringAndComments() throws Exception {
-        verify("StringAndComments");
+    @RecipeTest
+    void stringAndComments(ReportParser parser) throws Exception {
+        verify(parser, "StringAndComments");
     }
 
-    @Test
-    void symbolicLiteral() throws Exception {
-        verify("SymbolicLiterals");
+    @RecipeTest
+    void symbolicLiteral(ReportParser parser) throws Exception {
+        verify(parser, "SymbolicLiterals");
     }
 
 }
