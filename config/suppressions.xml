@@ -9,8 +9,9 @@
     <suppress checks="MissingJavadocType" files=".*"/>
     <suppress checks="JavadocVariable" files=".*"/>
     <suppress checks="MissingJavadocMethod" files=".*"/>
-    <suppress checks="DesignForExtension" files="[\\/]src[\\/]test[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]AbstractRecipeTest\.java"/>
-    <suppress checks="DesignForExtension" files="[\\/]src[\\/]test[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]AbstractRecipeTestSupport\.java"/>
-    <suppress checks="DesignForExtension" files="[\\/]src[\\/]main[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]CheckstyleAutoFix\.java"/>
+
+    <!-- This project is not a library, so there is no benefit in using this check -->
+    <suppress checks="DesignForExtension" files=".*"/>
+
     <suppress checks="ClassDataAbstractionCoupling" files="[\\/]src[\\/]test[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]AbstractRecipeTestSupport\.java"/>
 </suppressions>

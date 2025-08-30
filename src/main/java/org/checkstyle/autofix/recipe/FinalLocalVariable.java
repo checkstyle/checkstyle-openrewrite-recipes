@@ -130,7 +130,7 @@ public class FinalLocalVariable extends Recipe {
                     .computeColumnPosition(currentCompilationUnit, variable, getCursor());
 
             return violations.removeIf(violation -> {
-                final Path absolutePath = Path.of(violation.getFileName()).toAbsolutePath();
+                final Path absolutePath = violation.getFilePath().toAbsolutePath();
                 return violation.getLine() == line
                         && violation.getColumn() == column
                         && absolutePath.endsWith(sourcePath)

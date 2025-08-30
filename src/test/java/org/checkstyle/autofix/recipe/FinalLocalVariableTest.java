@@ -17,7 +17,7 @@
 
 package org.checkstyle.autofix.recipe;
 
-import org.junit.jupiter.api.Test;
+import org.checkstyle.autofix.parser.ReportParser;
 
 public class FinalLocalVariableTest extends AbstractRecipeTestSupport {
 
@@ -26,94 +26,94 @@ public class FinalLocalVariableTest extends AbstractRecipeTestSupport {
         return "finallocalvariable";
     }
 
-    @Test
-    void singleLocalTest() throws Exception {
-        verify("SingleLocalTest");
+    @RecipeTest
+    void singleLocalTest(ReportParser parser) throws Exception {
+        verify(parser, "SingleLocalTest");
     }
 
-    @Test
-    void classFieldTest() throws Exception {
-        verify("ClassFieldTest");
+    @RecipeTest
+    void classFieldTest(ReportParser parser) throws Exception {
+        verify(parser, "ClassFieldTest");
     }
 
-    @Test
-    void edgeCaseTest() throws Exception {
-        verify("EdgeCaseTest");
+    @RecipeTest
+    void edgeCaseTest(ReportParser parser) throws Exception {
+        verify(parser, "EdgeCaseTest");
     }
 
-    @Test
-    void enhancedForLoop() throws Exception {
-        verify("EnhancedForLoop");
+    @RecipeTest
+    void enhancedForLoop(ReportParser parser) throws Exception {
+        verify(parser, "EnhancedForLoop");
     }
 
-    @Test
-    void annotationDeclaration() throws Exception {
-        verify("AnnotationDeclaration");
+    @RecipeTest
+    void annotationDeclaration(ReportParser parser) throws Exception {
+        verify(parser, "AnnotationDeclaration");
     }
 
-    @Test
-    void multiple() throws Exception {
-        verify("MultipleVariable");
+    @RecipeTest
+    void multiple(ReportParser parser) throws Exception {
+        verify(parser, "MultipleVariable");
     }
 
-    @Test
-    void localVariable() throws Exception {
-        verify("LocalVariableOne");
+    @RecipeTest
+    void localVariable(ReportParser parser) throws Exception {
+        verify(parser, "LocalVariableOne");
     }
 
-    @Test
-    void localVariableTwo() throws Exception {
-        verify("LocalVariableTwo");
+    @RecipeTest
+    void localVariableTwo(ReportParser parser) throws Exception {
+        verify(parser, "LocalVariableTwo");
     }
 
-    @Test
-    void localVariableThree() throws Exception {
-        verify("LocalVariableThree");
+    @RecipeTest
+    void localVariableThree(ReportParser parser) throws Exception {
+        verify(parser, "LocalVariableThree");
     }
 
-    @Test
-    void localVariableFour() throws Exception {
-        verify("LocalVariableFour");
+    @RecipeTest
+    void localVariableFour(ReportParser parser) throws Exception {
+        verify(parser, "LocalVariableFour");
     }
 
-    @Test
-    void localVariableFive() throws Exception {
-        verify("LocalVariableFive");
+    @RecipeTest
+    void localVariableFive(ReportParser parser) throws Exception {
+        verify(parser, "LocalVariableFive");
     }
 
-    @Test
-    void localVariableCheckRecord() throws Exception {
-        verify("LocalVariableCheckRecord");
+    @RecipeTest
+    void localVariableCheckRecord(ReportParser parser) throws Exception {
+        verify(parser, "LocalVariableCheckRecord");
     }
 
-    @Test
-    void finalLocalVariable2One() throws Exception {
-        verify("FinalLocalVariable2One");
+    @RecipeTest
+    void finalLocalVariable2One(ReportParser parser) throws Exception {
+        verify(parser, "FinalLocalVariable2One");
     }
 
-    @Test
-    void finalLocalForLoop() throws Exception {
-        verify("VariableEnhancedForLoopVariable");
+    @RecipeTest
+    void finalLocalForLoop(ReportParser parser) throws Exception {
+        verify(parser, "VariableEnhancedForLoopVariable");
     }
 
-    @Test
-    void finalLocalForLoop2() throws Exception {
-        verify("VariableEnhancedForLoopVariable2");
+    @RecipeTest
+    void finalLocalForLoop2(ReportParser parser) throws Exception {
+        verify(parser, "VariableEnhancedForLoopVariable2");
     }
 
-    @Test
-    void localVariableAssignedMultipleTimes() throws Exception {
-        verify("LocalVariableAssignedMultipleTimes");
+    @RecipeTest
+    void localVariableAssignedMultipleTimes(ReportParser parser) throws Exception {
+        verify(parser, "LocalVariableAssignedMultipleTimes");
     }
 
-    @Test
-    void localVariableCheckSwitchExpressions() throws Exception {
-        verify("LocalVariableCheckSwitchExpressions");
+    @RecipeTest
+    void localVariableCheckSwitchExpressions(ReportParser parser) throws Exception {
+        verify(parser, "LocalVariableCheckSwitchExpressions");
     }
 
-    @Test
-    void localVariableCheckSwitchAssignment() throws Exception {
-        verify("LocalVariableCheckSwitchAssignment");
+    @RecipeTest
+    void localVariableCheckSwitchAssignment(ReportParser parser) throws Exception {
+        verify(parser, "LocalVariableCheckSwitchAssignment");
     }
 
 }

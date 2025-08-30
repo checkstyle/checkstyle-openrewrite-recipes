@@ -17,6 +17,8 @@
 
 package org.checkstyle.autofix.parser;
 
+import java.nio.file.Path;
+
 import org.checkstyle.autofix.CheckstyleCheck;
 
 public final class CheckstyleViolation {
@@ -31,16 +33,21 @@ public final class CheckstyleViolation {
 
     private final String message;
 
-    private final String fileName;
+    private final Path filePath;
 
     public CheckstyleViolation(int line, int column, String severity,
-                               CheckstyleCheck source, String message, String fileName) {
+                               CheckstyleCheck source, String message, Path filePath) {
         this.line = line;
         this.column = column;
         this.severity = severity;
         this.source = source;
         this.message = message;
-        this.fileName = fileName;
+        this.filePath = filePath;
+    }
+
+    public CheckstyleViolation(int line, String severity,
+                               CheckstyleCheck source, String message, Path filePath) {
+        this(line, -1, severity, source, message, filePath);
     }
 
     public Integer getLine() {
@@ -59,8 +66,8 @@ public final class CheckstyleViolation {
         return message;
     }
 
-    public String getFileName() {
-        return fileName;
+    public Path getFilePath() {
+        return filePath;
     }
 
     public String getSeverity() {

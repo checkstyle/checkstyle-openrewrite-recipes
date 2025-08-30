@@ -15,25 +15,12 @@
 // limitations under the License.
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
-package org.checkstyle.autofix.recipe;
+package org.checkstyle.autofix.parser;
 
-import org.checkstyle.autofix.parser.ReportParser;
+import java.nio.file.Path;
+import java.util.List;
 
-public class RedundantImportTest extends AbstractRecipeTestSupport {
+public interface ReportParser {
 
-    @Override
-    protected String getSubpackage() {
-        return "redundantimport";
-    }
-
-    @RecipeTest
-    void duplicateImport(ReportParser parser) throws Exception {
-        verify(parser, "DuplicateImport");
-    }
-
-    @RecipeTest
-    void complexCase(ReportParser parser) throws Exception {
-        verify(parser, "ComplexCase");
-    }
-
+    List<CheckstyleViolation> parse(Path reportPath);
 }

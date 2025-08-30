@@ -27,20 +27,27 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.checkstyle.autofix.CheckstyleAutoFix;
 import org.checkstyle.autofix.InputClassRenamer;
 import org.checkstyle.autofix.RemoveViolationComments;
-import org.checkstyle.autofix.parser.CheckstyleReportParser;
 import org.checkstyle.autofix.parser.CheckstyleViolation;
+import org.checkstyle.autofix.parser.ReportParser;
+import org.checkstyle.autofix.parser.SarifReportParser;
+import org.checkstyle.autofix.parser.XmlReportParser;
+import org.junit.jupiter.api.Named;
+import org.junit.jupiter.params.provider.Arguments;
 import org.openrewrite.Recipe;
 import org.openrewrite.test.RewriteTest;
 
 import com.puppycrawl.tools.checkstyle.AbstractXmlTestSupport;
 import com.puppycrawl.tools.checkstyle.Checker;
+import com.puppycrawl.tools.checkstyle.SarifLogger;
 import com.puppycrawl.tools.checkstyle.XMLLogger;
+import com.puppycrawl.tools.checkstyle.api.AuditListener;
 import com.puppycrawl.tools.checkstyle.api.CheckstyleException;
 import com.puppycrawl.tools.checkstyle.api.Configuration;
 import com.puppycrawl.tools.checkstyle.bdd.InlineConfigParser;
@@ -56,75 +63,87 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
         return "org/checkstyle/autofix/recipe/" + getSubpackage();
     }
 
-    protected void verify(String testCaseName) throws Exception {
+    protected static Stream<Arguments> reportParsers() {
+        return Arrays.stream(ReportType.values()).map(reportType -> {
+            return Arguments.of(Named.of(reportType.name(), reportType.parser()));
+        });
+    }
 
+    protected void verify(ReportParser parser, String testCaseName) throws Exception {
         final String inputPath = getInputFilePath(testCaseName);
         final String outputPath = getOutputFilePath(testCaseName);
         final Configuration config = getCheckConfigurations(inputPath);
         verifyOutputFile(outputPath, config);
 
-        final Path violations = runCheckstyle(inputPath, config);
+        final ReportType reportType = ReportType.fromParser(parser);
+        final Path reportPath = runCheckstyle(inputPath, config, reportType);
+        verifyWithInlineConfigParser(getPath(inputPath),
+                convertToExpectedMessages(parser.parse(reportPath)));
+        verify(config, reportPath, inputPath, outputPath);
+    }
+
+    protected void verify(ReportParser parser, Configuration config, String testCaseName)
+            throws Exception {
+        final String inputPath = getInputFilePath(testCaseName);
+        final String outputPath = getOutputFilePath(testCaseName);
+        verifyOutputFile(outputPath, config);
+
+        final ReportType reportType = ReportType.fromParser(parser);
+        final Path reportPath = runCheckstyle(inputPath, config, reportType);
+        verify(config, reportPath, inputPath, outputPath);
+    }
+
+    private void verify(Configuration config, Path reportPath, String inputPath, String outputPath)
+            throws Exception {
         final Path configPath = createConfigFile(config);
 
-        verifyWithInlineConfigParser(getPath(inputPath),
-                convertToExpectedMessages(CheckstyleReportParser.parse(violations)));
-
-        final String beforeCode = readFile(getPath(inputPath));
-        final String expectedAfterCode = readFile(getPath(outputPath));
-
         try {
-            final Recipe mainRecipe = new CheckstyleAutoFix(violations.toString(),
+            final Recipe mainRecipe = new CheckstyleAutoFix(reportPath.toString(),
                     configPath.toString());
+            final String beforeCode = readFile(getPath(inputPath));
+            final String expectedAfterCode = readFile(getPath(outputPath));
             testRecipe(beforeCode, expectedAfterCode,
                     getPath(inputPath), new InputClassRenamer(),
                     mainRecipe, new RemoveViolationComments());
         }
         finally {
             Files.deleteIfExists(configPath);
-            Files.deleteIfExists(violations);
+            Files.deleteIfExists(reportPath);
         }
     }
 
-    protected void verify(Configuration config, String testCaseName) throws Exception {
-        final String inputPath = getInputFilePath(testCaseName);
-        final String outputPath = getOutputFilePath(testCaseName);
-
-        verifyOutputFile(outputPath, config);
-
-        final Path violationReportPath = runCheckstyle(inputPath, config);
-
-        final String beforeCode = readFile(getPath(inputPath));
-        final String expectedAfterCode = readFile(getPath(outputPath));
-
-        final Path configPath = createConfigFile(config);
-
-        try {
-            final Recipe mainRecipe = new CheckstyleAutoFix(violationReportPath.toString(),
-                    configPath.toString());
-            testRecipe(beforeCode, expectedAfterCode,
-                    getPath(inputPath), new InputClassRenamer(), mainRecipe);
-        }
-        finally {
-            Files.deleteIfExists(configPath);
-            Files.deleteIfExists(violationReportPath);
-        }
-    }
-
-    private Path runCheckstyle(String inputPath,
-                               Configuration config) throws Exception {
+    private Path runCheckstyle(String inputPath, Configuration config,
+                               ReportType reportType) throws Exception {
 
         final Checker checker = createChecker(config);
-        final ByteArrayOutputStream xmlOutput = new ByteArrayOutputStream();
-        final XMLLogger logger = new XMLLogger(xmlOutput, XMLLogger.OutputStreamOptions.CLOSE);
-        checker.addListener(logger);
+        try (ByteArrayOutputStream reportOutStream = new ByteArrayOutputStream()) {
+            final AuditListener reportListener = createReportListener(reportType, reportOutStream);
+            checker.addListener(reportListener);
 
-        final List<File> filesToCheck = Collections.singletonList(new File(getPath(inputPath)));
-        checker.process(filesToCheck);
+            final List<File> filesToCheck = List.of(new File(getPath(inputPath)));
+            checker.process(filesToCheck);
 
-        final Path tempXmlPath = Files.createTempFile("checkstyle-report", ".xml");
+            final Path reportPath = Files.createTempFile("checkstyle-report",
+                    reportType.extension());
+            Files.write(reportPath, reportOutStream.toByteArray());
+            return reportPath;
+        }
+    }
 
-        Files.write(tempXmlPath, xmlOutput.toByteArray());
-        return tempXmlPath;
+    private AuditListener createReportListener(ReportType reportType,
+                                               ByteArrayOutputStream outputStream)
+            throws IOException {
+        final AuditListener result;
+        if (reportType == ReportType.XML) {
+            result = new XMLLogger(outputStream, XMLLogger.OutputStreamOptions.CLOSE);
+        }
+        else if (reportType == ReportType.SARIF) {
+            result = new SarifLogger(outputStream, SarifLogger.OutputStreamOptions.CLOSE);
+        }
+        else {
+            throw new IllegalStateException("Unsupported report type: " + reportType);
+        }
+        return result;
     }
 
     private Path createConfigFile(Configuration config) throws Exception {
@@ -202,7 +221,42 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
     }
 
     private void verifyOutputFile(String outputPath, Configuration config) throws Exception {
-        verify(config, getPath(outputPath), new String[0]);
+        verify(config, getPath(outputPath));
     }
 
+    private enum ReportType {
+        XML(new XmlReportParser(), ".xml"),
+        SARIF(new SarifReportParser(), ".sarif");
+
+        private final ReportParser parser;
+        private final String extension;
+
+        ReportType(ReportParser parser, String extension) {
+            this.parser = parser;
+            this.extension = extension;
+        }
+
+        private ReportParser parser() {
+            return parser;
+        }
+
+        private String extension() {
+            return extension;
+        }
+
+        private static ReportType fromParser(ReportParser parser) {
+            final ReportType result;
+            if (parser instanceof XmlReportParser) {
+                result = XML;
+            }
+            else if (parser instanceof SarifReportParser) {
+                result = SARIF;
+            }
+            else {
+                throw new IllegalArgumentException("No report type for parser: "
+                        + parser.getClass());
+            }
+            return result;
+        }
+    }
 }

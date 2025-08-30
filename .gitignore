@@ -49,3 +49,6 @@ replay_pid*
 
 # OpenRewrite-generated impl files
 *.iml
+
+.cache
+

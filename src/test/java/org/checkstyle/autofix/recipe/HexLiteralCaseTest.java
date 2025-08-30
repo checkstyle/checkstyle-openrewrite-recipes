@@ -17,7 +17,7 @@
 
 package org.checkstyle.autofix.recipe;
 
-import org.junit.jupiter.api.Test;
+import org.checkstyle.autofix.parser.ReportParser;
 
 public class HexLiteralCaseTest extends AbstractRecipeTestSupport {
 
@@ -26,8 +26,8 @@ public class HexLiteralCaseTest extends AbstractRecipeTestSupport {
         return "hexliterialcase";
     }
 
-    @Test
-    void hexLiteral() throws Exception {
-        verify("HexLiteralCase");
+    @RecipeTest
+    void hexLiteral(ReportParser parser) throws Exception {
+        verify(parser, "HexLiteralCase");
     }
 }
