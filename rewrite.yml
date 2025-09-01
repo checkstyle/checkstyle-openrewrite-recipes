@@ -44,13 +44,14 @@ preconditions:
 recipeList:
   - org.openrewrite.java.recipes.BlankLinesAroundFieldsWithAnnotations
   - org.openrewrite.java.recipes.CorrectlySpacedDescriptions
-#  - org.openrewrite.java.recipes.ExecutionContextParameterName
+  - org.openrewrite.java.recipes.ExecutionContextParameterName:
+      parameterName: executionContext
   - org.openrewrite.java.recipes.IsLiteralNullRecipe
   - org.openrewrite.java.recipes.MissingOptionExample
   - org.openrewrite.java.recipes.NoMutableStaticFieldsInRecipes
   - org.openrewrite.java.recipes.RecipeEqualsAndHashCodeCallSuper
   - org.openrewrite.java.recipes.UseTreeRandomId
-  - org.openrewrite.java.recipes.migrate.RemoveTraitsUsageRecipes
+  - org.openrewrite.java.InlineMethodCalls
   - org.openrewrite.staticanalysis.NeedBraces
   - org.openrewrite.staticanalysis.RemoveSystemOutPrintln
   - org.openrewrite.java.RemoveAnnotation:
