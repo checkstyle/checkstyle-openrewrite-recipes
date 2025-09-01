@@ -60,7 +60,8 @@ public class RedundantImport extends Recipe {
         private Path sourcePath;
 
         @Override
-        public J.CompilationUnit visitCompilationUnit(J.CompilationUnit cu, ExecutionContext ctx) {
+        public J.CompilationUnit visitCompilationUnit(J.CompilationUnit cu,
+                                                      ExecutionContext executionContext) {
 
             this.sourcePath = cu.getSourcePath().toAbsolutePath();
 
