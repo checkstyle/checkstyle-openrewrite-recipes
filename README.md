@@ -20,7 +20,7 @@ First, add the OpenRewrite plugin and our autofix recipe dependency to your buil
   </configuration>
   <dependencies>
     <dependency>
-      <groupId>org.checkstyle.autofix</groupId>
+      <groupId>com.puppycrawl.tools</groupId>
       <artifactId>checkstyle-openrewrite-recipes</artifactId>
       <version>1.0.0</version>
     </dependency>
