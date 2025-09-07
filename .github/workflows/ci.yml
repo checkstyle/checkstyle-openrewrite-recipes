@@ -31,12 +31,12 @@ jobs:
           distribution: 'corretto'
 
       - name: Build with Maven
-        run: mvn -e --no-transfer-progress clean install
+        run: ./mvnw -e --no-transfer-progress clean install
 
       - name: Check for changes
         shell: bash
         run: |
           git diff --exit-code || (
-            echo "::error::Code changes detected - run 'mvn clean verify' locally"
+            echo "::error::Code changes detected - run './mvnw clean verify' locally"
             exit 1
           )
