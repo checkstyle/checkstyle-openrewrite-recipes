@@ -78,29 +78,81 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 |--------|------------------------------------------------------------------------------------------------------------------------------|------------------|----------------|
 | 🟢     | [`AnnotationLocation`](https://checkstyle.sourceforge.io/checks/annotation/annotationlocation.html#AnnotationLocation)       | `TBD`            |                |
 | 🟢     | [`AnnotationOnSameLine`](https://checkstyle.sourceforge.io/checks/annotation/annotationonsameline.html#AnnotationOnSameLine) | `TBD`            |                |
+| 🔴     | [`AnnotationUseStyle`](https://checkstyle.sourceforge.io/checks/annotation/annotationusestyle.html#AnnotationUseStyle)       | `TBD`            | Standardize annotation syntax |
+| 🟢     | [`MissingDeprecated`](https://checkstyle.sourceforge.io/checks/annotation/missingdeprecated.html#MissingDeprecated)         | `TBD`            |                |
+| 🟢     | [`MissingOverride`](https://checkstyle.sourceforge.io/checks/annotation/missingoverride.html#MissingOverride)               | `TBD`            |                |
+| 🟢     | [`PackageAnnotation`](https://checkstyle.sourceforge.io/checks/annotation/packageannotation.html#PackageAnnotation)         | `TBD`            |                |
+| 🔴     | [`SuppressWarnings`](https://checkstyle.sourceforge.io/checks/annotation/suppresswarnings.html#SuppressWarnings)           | `TBD`            | Remove inappropriate suppressions |
 
 ### Block Checks
 
-_No checks analyzed yet_
+| Status | Check                                                                                                                        | Recipe           | Coverage Notes |
+|--------|------------------------------------------------------------------------------------------------------------------------------|------------------|----------------|
+| 🔴     | [`AvoidNestedBlocks`](https://checkstyle.sourceforge.io/checks/blocks/avoidnestedblocks.html#AvoidNestedBlocks)             | `TBD`            | Requires code restructuring |
+| 🟢     | [`EmptyBlock`](https://checkstyle.sourceforge.io/checks/blocks/emptyblock.html#EmptyBlock)                                  | `TBD`            |                |
+| 🟢     | [`EmptyCatchBlock`](https://checkstyle.sourceforge.io/checks/blocks/emptycatchblock.html#EmptyCatchBlock)                   | `TBD`            |                |
+| 🟢     | [`LeftCurly`](https://checkstyle.sourceforge.io/checks/blocks/leftcurly.html#LeftCurly)                                     | `TBD`            |                |
+| 🟢     | [`NeedBraces`](https://checkstyle.sourceforge.io/checks/blocks/needbraces.html#NeedBraces)                                  | `TBD`            |                |
+| 🟢     | [`RightCurly`](https://checkstyle.sourceforge.io/checks/blocks/rightcurly.html#RightCurly)                                  | `TBD`            |                |
 
 
 ### Class Design
 
-| Status | Check                                                                                      | Recipe           | Coverage Notes |
-|--------|--------------------------------------------------------------------------------------------|------------------|----------------|
-| 🟢     | [`FinalClass`](https://checkstyle.sourceforge.io/checks/design/finalclass.html#FinalClass) | `TBD`            |                |
-
+| Status | Check                                                                                                                        | Recipe           | Coverage Notes |
+|--------|------------------------------------------------------------------------------------------------------------------------------|------------------|----------------|
+| 🔴     | [`DesignForExtension`](https://checkstyle.sourceforge.io/checks/design/designforextension.html#DesignForExtension)         | `TBD`            | Requires design decisions (final/abstract) |
+| 🟢     | [`FinalClass`](https://checkstyle.sourceforge.io/checks/design/finalclass.html#FinalClass)                                 | `TBD`            |                |
+| 🟢     | [`HideUtilityClassConstructor`](https://checkstyle.sourceforge.io/checks/design/hideutilityclassconstructor.html#HideUtilityClassConstructor) | `TBD`            |                |
+| 🟢     | [`InnerTypeLast`](https://checkstyle.sourceforge.io/checks/design/innertypelast.html#InnerTypeLast)                        | `TBD`            |                |
+| 🔴     | [`InterfaceIsType`](https://checkstyle.sourceforge.io/checks/design/interfaceistype.html#InterfaceIsType)                  | `TBD`            | Remove non-type interface members |
+| 🔴     | [`MutableException`](https://checkstyle.sourceforge.io/checks/design/mutableexception.html#MutableException)               | `TBD`            | Make exception fields final |
+| 🔴     | [`OneTopLevelClass`](https://checkstyle.sourceforge.io/checks/design/onetoplevelclass.html#OneTopLevelClass)               | `TBD`            | Split into separate files |
+| 🟢     | [`SealedShouldHavePermitsList`](https://checkstyle.sourceforge.io/checks/design/sealedshoulddhavepermitslist.html#SealedShouldHavePermitsList) | `TBD`            |                |
+| 🔴     | [`ThrowsCount`](https://checkstyle.sourceforge.io/checks/design/throwscount.html#ThrowsCount)                              | `TBD`            | Reduce throws declarations |
+| 🔴     | [`VisibilityModifier`](https://checkstyle.sourceforge.io/checks/design/visibilitymodifier.html#VisibilityModifier)         | `TBD`            | Change visibility modifiers |
 
 
 ### Coding
 
-| Status | Check                                                                                                                            | Recipe | Coverage Notes                                                                           |
-|--------|----------------------------------------------------------------------------------------------------------------------------------|--------|------------------------------------------------------------------------------------------|
-| 🟢     | [`FinalLocalVariable`](https://checkstyle.sourceforge.io/checks/coding/finallocalvariable.html#FinalLocalVariable)               | `TBD`  |                                                                                          |
-| 🔴     | [`MagicNumber`](https://checkstyle.sourceforge.io/checks/coding/magicnumber.html#MagicNumber)                                    |        | it requires contextual understanding to replace literals with meaningful named constants |
-| 🟢     | [`UnusedLocalVariable `](https://checkstyle.sourceforge.io/checks/coding/unusedlocalvariable.html#UnusedLocalVariable)           | `TBD`  |                                                                                          |
-| 🟢     | [`UnnecessaryParentheses  `](https://checkstyle.sourceforge.io/checks/coding/unnecessaryparentheses.html#UnnecessaryParentheses) | `TBD`  |                                                                                          |
-
+| Status | Check                                                                                                                        | Recipe           | Coverage Notes |
+|--------|------------------------------------------------------------------------------------------------------------------------------|------------------|----------------|
+| 🟢     | [`ArrayTrailingComma`](https://checkstyle.sourceforge.io/checks/coding/arraytrailingcomma.html#ArrayTrailingComma)         | `TBD`            |                |
+| 🔴     | [`AvoidDoubleBraceInitialization`](https://checkstyle.sourceforge.io/checks/coding/avoiddoublebraceinitialization.html#AvoidDoubleBraceInitialization) | `TBD`            | Requires refactoring initialization logic |
+| 🔴     | [`AvoidInlineConditionals`](https://checkstyle.sourceforge.io/checks/coding/avoidinlineconditionals.html#AvoidInlineConditionals) | `TBD`            | Requires extracting to if-else statements |
+| 🟢     | [`AvoidNoArgumentSuperConstructorCall`](https://checkstyle.sourceforge.io/checks/coding/avoidnoargumentsuperconstructorcall.html#AvoidNoArgumentSuperConstructorCall) | `TBD`            |                |
+| 🟢     | [`ConstructorsDeclarationGrouping`](https://checkstyle.sourceforge.io/checks/coding/constructorsdeclarationgrouping.html#ConstructorsDeclarationGrouping) | `TBD`            |                |
+| 🔴     | [`CovariantEquals`](https://checkstyle.sourceforge.io/checks/coding/covariantequals.html#CovariantEquals)                   | `TBD`            | Requires implementing proper equals(Object) |
+| 🟢     | [`DeclarationOrder`](https://checkstyle.sourceforge.io/checks/coding/declarationorder.html#DeclarationOrder)               | `TBD`            |                |
+| 🟢     | [`DefaultComesLast`](https://checkstyle.sourceforge.io/checks/coding/defaultcomeslast.html#DefaultComesLast)               | `TBD`            |                |
+| 🟢     | [`EmptyStatement`](https://checkstyle.sourceforge.io/checks/coding/emptystatement.html#EmptyStatement)                     | `TBD`            |                |
+| 🟢     | [`EqualsAvoidNull`](https://checkstyle.sourceforge.io/checks/coding/equalsavoidnull.html#EqualsAvoidNull)                 | `TBD`            |                |
+| 🔴     | [`EqualsHashCode`](https://checkstyle.sourceforge.io/checks/coding/equalshashcode.html#EqualsHashCode)                     | `TBD`            | Implement proper equals/hashCode pair |
+| 🟢     | [`ExplicitInitialization`](https://checkstyle.sourceforge.io/checks/coding/explicitinitialization.html#ExplicitInitialization) | `TBD`            |                |
+| 🔴     | [`FallThrough`](https://checkstyle.sourceforge.io/checks/coding/fallthrough.html#FallThrough)                             | `TBD`            | Add break statements or intentional comments |
+| 🟢     | [`FinalLocalVariable`](https://checkstyle.sourceforge.io/checks/coding/finallocalvariable.html#FinalLocalVariable)         | `TBD`            |                |
+| 🔴     | [`HiddenField`](https://checkstyle.sourceforge.io/checks/coding/hiddenfield.html#HiddenField)                             | `TBD`            | Rename variables or use this. prefix |
+| 🔴     | [`IllegalCatch`](https://checkstyle.sourceforge.io/checks/coding/illegalcatch.html#IllegalCatch)                           | `TBD`            | Change catch block exception types |
+| 🔴     | [`IllegalInstantiation`](https://checkstyle.sourceforge.io/checks/coding/illegalinstantiation.html#IllegalInstantiation)   | `TBD`            | Replace with factory methods |
+| 🔴     | [`IllegalThrows`](https://checkstyle.sourceforge.io/checks/coding/illegalthrows.html#IllegalThrows)                       | `TBD`            | Change throws declarations |
+| 🔴     | [`IllegalToken`](https://checkstyle.sourceforge.io/checks/coding/illegaltoken.html#IllegalToken)                         | `TBD`            | Replace illegal tokens |
+| 🔴     | [`IllegalTokenText`](https://checkstyle.sourceforge.io/checks/coding/illegaltokentext.html#IllegalTokenText)               | `TBD`            | Change token text |
+| 🔴     | [`IllegalType`](https://checkstyle.sourceforge.io/checks/coding/illegaltype.html#IllegalType)                             | `TBD`            | Replace with allowed types |
+| 🔴     | [`InnerAssignment`](https://checkstyle.sourceforge.io/checks/coding/innerassignment.html#InnerAssignment)                 | `TBD`            | Extract assignments to separate statements |
+| 🔴     | [`MagicNumber`](https://checkstyle.sourceforge.io/checks/coding/magicnumber.html#MagicNumber)                             | `TBD`            | Extract to named constants |
+| 🔴     | [`MatchXpath`](https://checkstyle.sourceforge.io/checks/coding/matchxpath.html#MatchXpath)                               | `TBD`            | Context-dependent XPath violations |
+| 🔴     | [`MissingCtor`](https://checkstyle.sourceforge.io/checks/coding/missingctor.html#MissingCtor)                             | `TBD`            | Add explicit constructor |
+| 🟢     | [`MissingNullCaseInSwitch`](https://checkstyle.sourceforge.io/checks/coding/missingnullcaseinswitch.html#MissingNullCaseInSwitch) | `TBD`            |                |
+| 🟢     | [`MissingSwitchDefault`](https://checkstyle.sourceforge.io/checks/coding/missingswitchdefault.html#MissingSwitchDefault)   | `TBD`            |                |
+| 🔴     | [`ModifiedControlVariable`](https://checkstyle.sourceforge.io/checks/coding/modifiedcontrolvariable.html#ModifiedControlVariable) | `TBD`            | Restructure loop logic |
+| 🔴     | [`MultipleStringLiterals`](https://checkstyle.sourceforge.io/checks/coding/multiplestringliterals.html#MultipleStringLiterals) | `TBD`            | Extract to constants |
+| 🟢     | [`MultipleVariableDeclarations`](https://checkstyle.sourceforge.io/checks/coding/multiplevariabledeclarations.html#MultipleVariableDeclarations) | `TBD`            |                |
+| 🔴     | [`NestedForDepth`](https://checkstyle.sourceforge.io/checks/coding/nestedfordepth.html#NestedForDepth)                   | `TBD`            | Requires loop restructuring |
+| 🔴     | [`NestedIfDepth`](https://checkstyle.sourceforge.io/checks/coding/nestedifdepth.html#NestedIfDepth)                       | `TBD`            | Requires conditional restructuring |
+| 🔴     | [`NestedTryDepth`](https://checkstyle.sourceforge.io/checks/coding/nestedtrydepth.html#NestedTryDepth)                   | `TBD`            | Requires exception handling restructuring |
+| 🟢     | [`NoArrayTrailingComma`](https://checkstyle.sourceforge.io/checks/coding/noarraytrailingcomma.html#NoArrayTrailingComma) | `TBD`            |                |
+| 🔴     | [`NoClone`](https://checkstyle.sourceforge.io/checks/coding/noclone.html#NoClone)                                       | `TBD`            | Remove clone() method |
+| 🟢     | [`NoEnumTrailingComma`](https://checkstyle.sourceforge.io/checks/coding/noenumtrailingcomma.html#NoEnumTrailingComma)     | `TBD`            |                |
+| 🔴     | [`NoFinalizer`](https://checkstyle.sourceforge.io/checks/coding/nofinalizer.html#NoFinalizer)
 
 
 ### Headers
