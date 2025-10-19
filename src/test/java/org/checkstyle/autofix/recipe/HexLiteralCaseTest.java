@@ -15,31 +15,19 @@
 // limitations under the License.
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
-package org.checkstyle.autofix;
+package org.checkstyle.autofix.recipe;
 
-import java.util.Arrays;
-import java.util.Optional;
+import org.junit.jupiter.api.Test;
 
-public enum CheckstyleCheck {
-    FINAL_LOCAL_VARIABLE("com.puppycrawl.tools.checkstyle.checks.coding.FinalLocalVariableCheck"),
-    HEADER("com.puppycrawl.tools.checkstyle.checks.header.HeaderCheck"),
-    UPPER_ELL("com.puppycrawl.tools.checkstyle.checks.UpperEllCheck"),
-    HEX_LITERAL_CASE("com.puppycrawl.tools.checkstyle.checks.HexLiteralCaseCheck"),
-    REDUNDANT_IMPORT("com.puppycrawl.tools.checkstyle.checks.imports.RedundantImportCheck");
+public class HexLiteralCaseTest extends AbstractRecipeTestSupport {
 
-    private final String id;
-
-    CheckstyleCheck(String id) {
-        this.id = id;
+    @Override
+    protected String getSubpackage() {
+        return "hexliterialcase";
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public static Optional<CheckstyleCheck> fromSource(String source) {
-        return Arrays.stream(values())
-                .filter(check -> check.getId().contains(source))
-                .findFirst();
+    @Test
+    void hexLiteral() throws Exception {
+        verify("HexLiteralCase");
     }
 }
