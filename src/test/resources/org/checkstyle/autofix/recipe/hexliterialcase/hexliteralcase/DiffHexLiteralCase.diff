@@ -1,0 +1,38 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/hexliterialcase/hexliteralcase/InputHexLiteralCase.java
++++ src/test/resources/org/checkstyle/autofix/recipe/hexliterialcase/hexliteralcase/OutputHexLiteralCase.java
+@@ -9,24 +9,21 @@
+ 
+ package org.checkstyle.autofix.recipe.hexliterialcase.hexliteralcase;
+ 
+-public class InputHexLiteralCase {
+-    int h = 0xb;                       // violation  'Should use uppercase hexadecimal letters.'
++public class OutputHexLiteralCase {
++    int h = 0xB;
+     int w = 0xB;
+-    long d = 0Xf123L;                  // violation  'Should use uppercase hexadecimal letters.'
+-    byte b1  = 0x1b;                   // violation  'Should use uppercase hexadecimal letters.'
++    long d = 0XF123L;
++    byte b1  = 0x1B;
+     byte b2  = 0x1B;
+-    short s2 = 0xF5f;                  // violation  'Should use uppercase hexadecimal letters.'
+-    int i1 = 0x11 + 0xabc;             // violation  'Should use uppercase hexadecimal letters.'
+-    long l1 = 0x7fff_ffff_ffff_ffffL;
+-    // violation above 'Should use uppercase hexadecimal letters.'
+-    long l2 = 0x7FFF_AAA_bBB_DDDL; // violation 'Should use uppercase hexadecimal letters.'
+-    // violation below 'Should use uppercase hexadecimal letters.'
+-    int val = 0x1b, sum = 0xff;    // violation 'Should use uppercase hexadecimal letters.'
+-    int x1 = 223, x2 = 0xa1;       // violation 'Should use uppercase hexadecimal letters.'
++    short s2 = 0xF5F;
++    int i1 = 0x11 + 0xABC;
++    long l1 = 0x7FFF_FFFF_FFFF_FFFFL;
++    long l2 = 0x7FFF_AAA_BBB_DDDL;
++    int val = 0x1B, sum = 0xFF;
++    int x1 = 223, x2 = 0xA1;
+ 
+     private static void functionCall() {
+-        // violation below 'Should use uppercase hexadecimal letters.'
+-        functionCall2(0x7fff, 0xab); // violation 'Should use uppercase hexadecimal letters.'
++        functionCall2(0x7FFF, 0xAB);
+     }
+     private static void functionCall2(int first, int second) {
+         System.out.println("First: " + first);
