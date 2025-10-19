@@ -45,7 +45,7 @@
 
         <!-- Checkstyle properties -->
         <maven.checkstyle.plugin.version>3.6.0</maven.checkstyle.plugin.version>
-        <checkstyle.version>10.26.1</checkstyle.version>
+        <checkstyle.version>12.1.0</checkstyle.version>
     </properties>
 
     <dependencyManagement>
