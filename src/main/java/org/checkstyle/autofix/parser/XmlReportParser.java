@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
@@ -33,8 +32,6 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
-
-import org.checkstyle.autofix.CheckstyleCheck;
 
 public class XmlReportParser implements ReportParser {
 
@@ -78,7 +75,7 @@ public class XmlReportParser implements ReportParser {
                         }
                         else if (ERROR_TAG.equals(startElementName)) {
                             Objects.requireNonNull(filename, "File name can not be null");
-                            parseErrorTag(startElement, filename).ifPresent(result::add);
+                            result.add(parseErrorTag(startElement, filename));
                         }
                     }
                 }
@@ -111,14 +108,13 @@ public class XmlReportParser implements ReportParser {
         return fileName;
     }
 
-    private Optional<CheckstyleViolation> parseErrorTag(StartElement startElement,
+    private CheckstyleViolation parseErrorTag(StartElement startElement,
                                                                String filename) {
         int line = -1;
         int column = -1;
         String message = null;
         String severity = null;
-        CheckstyleViolation violation = null;
-        Optional<CheckstyleCheck> source = Optional.empty();
+        String source = null;
 
         final Iterator<Attribute> attributes = startElement.getAttributes();
         while (attributes.hasNext()) {
@@ -138,17 +134,14 @@ public class XmlReportParser implements ReportParser {
                     message = attribute.getValue();
                     break;
                 case SOURCE_ATTR:
-                    source = CheckstyleCheck.fromSource(attribute.getValue());
+                    source = attribute.getValue();
                     break;
                 default:
                     break;
             }
         }
-        if (source.isPresent()) {
-            violation = new CheckstyleViolation(line, column, severity,
-                    source.get(), message, Path.of(filename));
-        }
-        return Optional.ofNullable(violation);
+        return new CheckstyleViolation(line, column, severity,
+                source, message, Path.of(filename));
 
     }
 }

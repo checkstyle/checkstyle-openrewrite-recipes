@@ -17,35 +17,22 @@
 
 package org.checkstyle.autofix;
 
-import java.util.Arrays;
-import java.util.Optional;
-
-public enum CheckstyleCheck {
-    FINAL_LOCAL_VARIABLE("com.puppycrawl.tools.checkstyle.checks.coding.FinalLocalVariableCheck"),
-    HEADER("com.puppycrawl.tools.checkstyle.checks.header.HeaderCheck"),
-    UPPER_ELL("com.puppycrawl.tools.checkstyle.checks.UpperEllCheck"),
-    HEX_LITERAL_CASE("com.puppycrawl.tools.checkstyle.checks.HexLiteralCaseCheck"),
-    REDUNDANT_IMPORT("com.puppycrawl.tools.checkstyle.checks.imports.RedundantImportCheck");
-
+public class CheckstyleConfigModule {
+    private final CheckstyleCheck check;
     private final String id;
 
-    CheckstyleCheck(String id) {
+    public CheckstyleConfigModule(CheckstyleCheck check, String id) {
+        this.check = check;
         this.id = id;
     }
 
-    public String getId() {
-        return id;
+    public boolean matchesId(String input) {
+        return id != null && id.equals(input);
     }
 
-    public static Optional<CheckstyleCheck> fromSource(String checkId) {
-        return Arrays.stream(values())
-                .filter(check -> check.getId().contains(checkId))
-                .findFirst();
-    }
-
-    public static Optional<CheckstyleCheck> fromSourceExact(String checkId) {
-        return Arrays.stream(values())
-                .filter(check -> check.getId().equals(checkId))
-                .findFirst();
+    public boolean matchesCheck(String input) {
+        return CheckstyleCheck.fromSourceExact(input)
+                .map(checkFromInput -> checkFromInput == check)
+                .orElse(false);
     }
 }

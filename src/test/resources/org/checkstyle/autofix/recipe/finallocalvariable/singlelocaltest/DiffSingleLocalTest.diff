@@ -1,6 +1,6 @@
 --- src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/singlelocaltest/InputSingleLocalTest.java
 +++ src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/singlelocaltest/OutputSingleLocalTest.java
-@@ -15,37 +15,37 @@
+@@ -17,37 +17,37 @@
  import java.util.HashMap;
  import java.util.List;
  

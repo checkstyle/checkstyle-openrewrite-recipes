@@ -43,6 +43,8 @@ public final class CheckstyleRecipeRegistry {
             CheckConfiguration, Recipe>> RECIPE_MAP_WITH_CONFIG =
             new EnumMap<>(CheckstyleCheck.class);
 
+    private static final String HASH_SEPARATOR = "#";
+
     static {
         RECIPE_MAP.put(CheckstyleCheck.UPPER_ELL, UpperEll::new);
         RECIPE_MAP.put(CheckstyleCheck.HEX_LITERAL_CASE, HexLiteralCase::new);
@@ -65,16 +67,47 @@ public final class CheckstyleRecipeRegistry {
      * @return a list of generated Recipe objects
      */
     public static List<Recipe> getRecipes(List<CheckstyleViolation> violations,
-                                          Map<CheckstyleCheck, CheckConfiguration> config) {
+                                          Map<CheckstyleConfigModule, CheckConfiguration> config) {
         return violations.stream()
-                .collect(Collectors.groupingBy(CheckstyleViolation::getSource))
+                .collect(Collectors.groupingBy(CheckstyleViolation::getCheckId))
                 .entrySet()
                 .stream()
                 .map(entry -> {
-                    return createRecipe(entry.getValue(), config.get(entry.getKey()));
+                    final CheckConfiguration configuration =
+                            findMatchingConfiguration(entry.getKey(), config);
+                    return createRecipe(entry.getValue(), configuration);
                 })
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
+    }
+
+    private static CheckConfiguration findMatchingConfiguration(String source,
+                                           Map<CheckstyleConfigModule, CheckConfiguration> config) {
+        return config.entrySet().stream()
+                .filter(configEntry -> matchesSource(configEntry.getKey(), source))
+                .map(Map.Entry::getValue)
+                .findFirst()
+                .orElse(null);
+    }
+
+    private static boolean matchesSource(CheckstyleConfigModule module, String source) {
+        final boolean matches;
+        if (source.contains(HASH_SEPARATOR)) {
+            matches = matchesWithHashSeparator(module, source);
+        }
+        else {
+            matches = module.matchesId(source) || module.matchesCheck(source);
+        }
+        return matches;
+    }
+
+    private static boolean matchesWithHashSeparator(CheckstyleConfigModule module, String source) {
+        final String[] parts = source.split(HASH_SEPARATOR, 2);
+        final String checkPart = parts[0];
+        final String idPart = parts[1];
+        final boolean exactMatch = module.matchesCheck(checkPart) && module.matchesId(idPart);
+        final boolean individualMatch = module.matchesId(source) || module.matchesCheck(source);
+        return exactMatch || individualMatch;
     }
 
     private static Recipe createRecipe(List<CheckstyleViolation> violations,

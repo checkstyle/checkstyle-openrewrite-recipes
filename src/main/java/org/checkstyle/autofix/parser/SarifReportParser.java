@@ -25,8 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.checkstyle.autofix.CheckstyleCheck;
-
 import de.jcup.sarif_2_1_0.SarifSchema210ImportExportSupport;
 import de.jcup.sarif_2_1_0.model.PhysicalLocation;
 import de.jcup.sarif_2_1_0.model.Region;
@@ -57,17 +55,14 @@ public class SarifReportParser implements ReportParser {
         for (final Run run: report.getRuns()) {
             if (run.getResults() != null) {
                 run.getResults().forEach(resultEntry -> {
-                    CheckstyleCheck.fromSource(resultEntry.getRuleId()).ifPresent(check -> {
-                        final CheckstyleViolation violation = createViolation(check, resultEntry);
-                        result.add(violation);
-                    });
+                    result.add(createViolation(resultEntry.getRuleId(), resultEntry));
                 });
             }
         }
         return result;
     }
 
-    private CheckstyleViolation createViolation(CheckstyleCheck check, Result result) {
+    private CheckstyleViolation createViolation(String checkId, Result result) {
         final String severity = result.getLevel().name();
         final String message = result.getMessage().getText();
         final PhysicalLocation location = result.getLocations().get(0).getPhysicalLocation();
@@ -76,8 +71,8 @@ public class SarifReportParser implements ReportParser {
         final int line = region.getStartLine();
         final Optional<Integer> columnMaybe = Optional.ofNullable(region.getStartColumn());
         return columnMaybe.map(column -> {
-            return new CheckstyleViolation(line, column, severity, check, message, filePath);
-        }).orElse(new CheckstyleViolation(line, severity, check, message, filePath));
+            return new CheckstyleViolation(line, column, severity, checkId, message, filePath);
+        }).orElse(new CheckstyleViolation(line, severity, checkId, message, filePath));
     }
 
     private Path getFilePath(PhysicalLocation location) {
