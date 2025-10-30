@@ -1,0 +1,14 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/newlineatendoffile/newlineatendoffilecrlf/InputNewlineAtEndOfFileCrlf.java
++++ src/test/resources/org/checkstyle/autofix/recipe/newlineatendoffile/newlineatendoffilecrlf/OutputNewlineAtEndOfFileCrlf.java
+@@ -4,9 +4,8 @@
+ fileExtensions = (default)""
+ 
+ */
+-// violation 6 lines above 'Expected line ending for file is LF(\\n), but CRLF(\\r\\n) is detected.'
+ 
+ package org.checkstyle.autofix.recipe.newlineatendoffile.newlineatendoffilecrlf;
+ 
+-public class InputNewlineAtEndOfFileCrlf {
+-}
++public class OutputNewlineAtEndOfFileCrlf {
++}

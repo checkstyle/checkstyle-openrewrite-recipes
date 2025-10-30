@@ -1,0 +1,5 @@
+# Test resources that need specific eol
+src/test/resources/org/checkstyle/autofix/recipe/newlineatendoffile/** -text
+
+# Force LF line endings for diff test files
+*.diff text eol=lf
