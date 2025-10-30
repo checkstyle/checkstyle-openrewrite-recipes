@@ -100,8 +100,9 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
         try {
             final Recipe mainRecipe = new CheckstyleAutoFix(reportPath.toString(),
                     configPath.toString());
-            final String beforeCode = readFile(getPath(inputPath));
-            final String expectedAfterCode = readFile(getPath(outputPath));
+            final String beforeCode = Files.readString(Path.of(getPath(inputPath)));
+            final String expectedAfterCode = Files.readString(Path.of(getPath(outputPath)));
+
             testRecipe(beforeCode, expectedAfterCode,
                     getPath(inputPath), new InputClassRenamer(),
                     mainRecipe, new RemoveViolationComments());
@@ -194,8 +195,14 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
     private String[] convertToExpectedMessages(List<CheckstyleViolation> violations) {
         return violations.stream()
                 .map(violation -> {
-                    return violation.getLine() + ":"
-                                + violation.getColumn() + ": " + violation.getMessage();
+                    String message = violation.getLine() + ":";
+                    if (violation.getColumn() != -1) {
+                        message += violation.getColumn() + ": ";
+                    }
+                    else {
+                        message += " ";
+                    }
+                    return message + violation.getMessage();
                 })
                 .toArray(String[]::new);
     }
@@ -205,7 +212,7 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
         assertDoesNotThrow(() -> {
             rewriteRun(
                     spec -> spec.recipes(recipes),
-                    java(beforeCode, expectedAfterCode, spec -> spec.path(filePath))
+                    java(beforeCode, expectedAfterCode, spec -> spec.path(filePath).noTrim())
             );
         });
     }

@@ -23,6 +23,7 @@ import java.util.Optional;
 public enum CheckstyleCheck {
     FINAL_LOCAL_VARIABLE("com.puppycrawl.tools.checkstyle.checks.coding.FinalLocalVariableCheck"),
     HEADER("com.puppycrawl.tools.checkstyle.checks.header.HeaderCheck"),
+    NEWLINE_AT_END_OF_FILE("com.puppycrawl.tools.checkstyle.checks.NewlineAtEndOfFileCheck"),
     UPPER_ELL("com.puppycrawl.tools.checkstyle.checks.UpperEllCheck"),
     HEX_LITERAL_CASE("com.puppycrawl.tools.checkstyle.checks.HexLiteralCaseCheck"),
     REDUNDANT_IMPORT("com.puppycrawl.tools.checkstyle.checks.imports.RedundantImportCheck");

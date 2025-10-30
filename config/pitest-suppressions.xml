@@ -464,15 +464,6 @@
     <sourceFile>Header.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.recipe.Header</mutatedClass>
     <mutatedMethod>extractLicenseHeader</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.ArgumentPropagationMutator</mutator>
-    <description>replaced call to org/checkstyle/autofix/recipe/Header::toLfLineEnding with argument</description>
-    <lineContent>header = toLfLineEnding(Files.readString(Path.of(headerFilePath), charsetToUse));</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>Header.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.Header</mutatedClass>
-    <mutatedMethod>extractLicenseHeader</mutatedMethod>
     <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
     <description>removed call to org/checkstyle/autofix/parser/CheckConfiguration::hasProperty</description>
     <lineContent>if (config.hasProperty(HEADER_PROPERTY)) {</lineContent>
@@ -507,15 +498,6 @@
 
   <mutation unstable="false">
     <sourceFile>Header.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.Header</mutatedClass>
-    <mutatedMethod>toLfLineEnding</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.NakedReceiverMutator</mutator>
-    <description>replaced call to java/lang/String::replaceAll with receiver</description>
-    <lineContent>return text.replaceAll(&quot;(?x)\\\\r(?=\\\\n)|\\r(?=\\n)&quot;, &quot;&quot;);</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>Header.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.recipe.Header$HeaderVisitor</mutatedClass>
     <mutatedMethod>hasViolation</mutatedMethod>
     <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.BooleanTrueReturnValsMutator</mutator>
@@ -527,18 +509,9 @@
     <sourceFile>Header.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.recipe.Header$HeaderVisitor</mutatedClass>
     <mutatedMethod>lambda$extractCurrentHeader$0</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.ArgumentPropagationMutator</mutator>
-    <description>replaced call to org/checkstyle/autofix/recipe/Header::toLfLineEnding with argument</description>
-    <lineContent>+ toLfLineEnding(comment.getSuffix());</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>Header.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.Header$HeaderVisitor</mutatedClass>
-    <mutatedMethod>lambda$extractCurrentHeader$0</mutatedMethod>
     <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
     <description>removed call to org/checkstyle/autofix/recipe/Header$HeaderVisitor::getCursor</description>
-    <lineContent>return comment.printComment(getCursor())</lineContent>
+    <lineContent>return comment.printComment(getCursor()) + comment.getSuffix();</lineContent>
   </mutation>
 
   <mutation unstable="false">
@@ -728,6 +701,213 @@
     <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.ArgumentPropagationMutator</mutator>
     <description>replaced call to org/openrewrite/java/JavaIsoVisitor::visitLiteral with argument</description>
     <lineContent>J.Literal result = super.visitLiteral(literal, executionContext);</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile</mutatedClass>
+    <mutatedMethod>getDescription</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.EmptyObjectReturnValsMutator</mutator>
+    <description>replaced return value with &quot;&quot; for org/checkstyle/autofix/recipe/NewlineAtEndOfFile::getDescription</description>
+    <lineContent>return &quot;Some tools work better when files end with an empty line.&quot;;</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile</mutatedClass>
+    <mutatedMethod>getDisplayName</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.EmptyObjectReturnValsMutator</mutator>
+    <description>replaced return value with &quot;&quot; for org/checkstyle/autofix/recipe/NewlineAtEndOfFile::getDisplayName</description>
+    <lineContent>return &quot;End files with a single newline&quot;;</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
+    <mutatedMethod>determineLineEnding</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to org/checkstyle/autofix/recipe/NewlineAtEndOfFile$NewLineAtEndOfFileVisitor::getAutodetectedLineEnding</description>
+    <lineContent>case &quot;lf_cr_crlf&quot; -&gt; getAutodetectedLineEnding(sourceFile);</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
+    <mutatedMethod>determineLineEnding</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to java/lang/System::lineSeparator</description>
+    <lineContent>case &quot;system&quot; -&gt; System.lineSeparator();</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
+    <mutatedMethod>determineLineEnding</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.RemoveSwitchMutator_2</mutator>
+    <description>RemoveSwitch 2 (case value 2)</description>
+    <lineContent>return switch (lineSeparatorConfig) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
+    <mutatedMethod>determineLineEnding</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.RemoveSwitchMutator_3</mutator>
+    <description>RemoveSwitch 3 (case value 3)</description>
+    <lineContent>return switch (lineSeparatorConfig) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
+    <mutatedMethod>determineLineEnding</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.RemoveSwitchMutator_4</mutator>
+    <description>RemoveSwitch 4 (case value 4)</description>
+    <lineContent>return switch (lineSeparatorConfig) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
+    <mutatedMethod>getAutodetectedLineEnding</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to org/openrewrite/style/Style::from</description>
+    <lineContent>Style.from(GeneralFormatStyle.class, sourceFile, () -&gt; {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
+    <mutatedMethod>getAutodetectedLineEnding</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to org/openrewrite/style/GeneralFormatStyle::newLine</description>
+    <lineContent>return generalFormatStyle.newLine();</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
+    <mutatedMethod>getAutodetectedLineEnding</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.EmptyObjectReturnValsMutator</mutator>
+    <description>replaced return value with &quot;&quot; for org/checkstyle/autofix/recipe/NewlineAtEndOfFile$NewLineAtEndOfFileVisitor::getAutodetectedLineEnding</description>
+    <lineContent>return generalFormatStyle.newLine();</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
+    <mutatedMethod>hasViolation</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.BooleanTrueReturnValsMutator</mutator>
+    <description>replaced boolean return with true for org/checkstyle/autofix/recipe/NewlineAtEndOfFile$NewLineAtEndOfFileVisitor::hasViolation</description>
+    <lineContent>return violations.stream()</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
+    <mutatedMethod>lambda$getAutodetectedLineEnding$1</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to org/openrewrite/java/format/AutodetectGeneralFormatStyle::autodetectGeneralFormatStyle</description>
+    <lineContent>.autodetectGeneralFormatStyle(sourceFile);</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
+    <mutatedMethod>lambda$getAutodetectedLineEnding$1</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.NullReturnValsMutator</mutator>
+    <description>replaced return value with null for org/checkstyle/autofix/recipe/NewlineAtEndOfFile$NewLineAtEndOfFileVisitor::lambda$getAutodetectedLineEnding$1</description>
+    <lineContent>return AutodetectGeneralFormatStyle</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
+    <mutatedMethod>lambda$hasViolation$2</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.BooleanTrueReturnValsMutator</mutator>
+    <description>replaced boolean return with true for org/checkstyle/autofix/recipe/NewlineAtEndOfFile$NewLineAtEndOfFileVisitor::lambda$hasViolation$2</description>
+    <lineContent>.anyMatch(violation -&gt; violation.getFilePath().endsWith(filePath));</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
+    <mutatedMethod>mapLast</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to java/util/List::isEmpty</description>
+    <lineContent>if (comments != null &amp;&amp; !comments.isEmpty()) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
+    <mutatedMethod>mapLast</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>if (comments != null &amp;&amp; !comments.isEmpty()) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
+    <mutatedMethod>mapLast</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>if (last != newLast) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
+    <mutatedMethod>visit</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.NakedReceiverMutator</mutator>
+    <description>replaced call to java/nio/file/Path::toAbsolutePath with receiver</description>
+    <lineContent>final Path filePath = sourceFile.getSourcePath().toAbsolutePath();</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
+    <mutatedMethod>visit</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to org/openrewrite/java/tree/Space::getLastWhitespace</description>
+    <lineContent>final String lastWhitespace = eof.getLastWhitespace();</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
+    <mutatedMethod>visit</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to java/lang/String::equals</description>
+    <lineContent>if (!expectedLineEnding.equals(lastWhitespace)) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
+    <mutatedMethod>visit</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>if (!expectedLineEnding.equals(lastWhitespace)) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
+    <mutatedMethod>visit</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>if (hasViolation(filePath)) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
+    <mutatedMethod>visit</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>if (tree instanceof JavaSourceFile sourceFile) {</lineContent>
   </mutation>
 
   <mutation unstable="false">

@@ -39,7 +39,7 @@ public class Header extends Recipe {
     private static final String HEADER_PROPERTY = "header";
     private static final String HEADER_FILE_PROPERTY = "headerFile";
     private static final String CHARSET_PROPERTY = "charset";
-    private static final String LINE_SEPARATOR = "\n";
+    private static final String LINE_SEPARATOR = System.lineSeparator();
 
     private final List<CheckstyleViolation> violations;
     private final CheckConfiguration config;
@@ -75,7 +75,7 @@ public class Header extends Recipe {
                     .getPropertyOrDefault(CHARSET_PROPERTY, Charset.defaultCharset().name()));
             final String headerFilePath = config.getProperty(HEADER_FILE_PROPERTY);
             try {
-                header = toLfLineEnding(Files.readString(Path.of(headerFilePath), charsetToUse));
+                header = Files.readString(Path.of(headerFilePath), charsetToUse);
             }
             catch (IOException exception) {
                 throw new IllegalArgumentException("Failed to extract header from config",
@@ -83,10 +83,6 @@ public class Header extends Recipe {
             }
         }
         return header;
-    }
-
-    private static String toLfLineEnding(String text) {
-        return text.replaceAll("(?x)\\\\r(?=\\\\n)|\\r(?=\\n)", "");
     }
 
     private static class HeaderVisitor extends JavaIsoVisitor<ExecutionContext> {
@@ -121,8 +117,7 @@ public class Header extends Recipe {
         private String extractCurrentHeader(JavaSourceFile sourceFile) {
             return sourceFile.getComments().stream()
                     .map(comment -> {
-                        return comment.printComment(getCursor())
-                                + toLfLineEnding(comment.getSuffix());
+                        return comment.printComment(getCursor()) + comment.getSuffix();
                     })
                     .collect(Collectors.joining(""));
         }
