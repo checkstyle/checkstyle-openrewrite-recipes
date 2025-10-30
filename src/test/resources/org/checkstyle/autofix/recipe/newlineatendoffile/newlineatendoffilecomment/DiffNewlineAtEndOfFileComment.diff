@@ -1,0 +1,15 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/newlineatendoffile/newlineatendoffilecomment/InputNewlineAtEndOfFileComment.java
++++ src/test/resources/org/checkstyle/autofix/recipe/newlineatendoffile/newlineatendoffilecomment/OutputNewlineAtEndOfFileComment.java
+@@ -4,9 +4,8 @@
+ fileExtensions = (default)""
+ 
+ */
+-// violation 6 lines above 'File does not end with a newline.'
+ 
+ package org.checkstyle.autofix.recipe.newlineatendoffile.newlineatendoffilecomment;
+ 
+-public class InputNewlineAtEndOfFileComment {
+-}     // trailing comment
+\ No newline at end of file
++public class OutputNewlineAtEndOfFileComment {
++}     // trailing comment
