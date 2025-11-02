@@ -85,6 +85,7 @@ public class CheckstyleAutoFix extends Recipe {
 
     @Override
     public List<Recipe> getRecipeList() {
+        validateInputs();
         final ReportParser reportParser = createReportParser(getViolationReportPath());
         final List<CheckstyleViolation> violations = reportParser
                 .parse(Path.of(getViolationReportPath()));
@@ -92,6 +93,17 @@ public class CheckstyleAutoFix extends Recipe {
                 CheckConfiguration> configuration = loadCheckstyleConfiguration();
 
         return CheckstyleRecipeRegistry.getRecipes(violations, configuration);
+    }
+
+    private void validateInputs() {
+        if (violationReportPath == null || violationReportPath.trim().isEmpty()) {
+            throw new IllegalArgumentException(
+                    "Violation report path cannot be null or empty");
+        }
+        if (configurationPath == null || configurationPath.trim().isEmpty()) {
+            throw new IllegalArgumentException(
+                    "Configuration path cannot be null or empty");
+        }
     }
 
     private ReportParser createReportParser(String path) {

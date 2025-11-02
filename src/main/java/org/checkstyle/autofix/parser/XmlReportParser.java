@@ -56,6 +56,12 @@ public class XmlReportParser implements ReportParser {
 
     @Override
     public List<CheckstyleViolation> parse(Path xmlPath) {
+        if (xmlPath == null) {
+            throw new IllegalArgumentException("XML path cannot be null");
+        }
+        if (!xmlPath.toFile().exists()) {
+            throw new IllegalArgumentException("XML file does not exist: " + xmlPath);
+        }
 
         final List<CheckstyleViolation> result = new ArrayList<>();
 
@@ -107,6 +113,9 @@ public class XmlReportParser implements ReportParser {
                 fileName = attribute.getValue();
                 break;
             }
+        }
+        if (fileName == null || fileName.trim().isEmpty()) {
+            throw new IllegalStateException("File name attribute is missing or empty");
         }
         return fileName;
     }

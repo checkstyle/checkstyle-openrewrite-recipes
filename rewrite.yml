@@ -1,4 +1,6 @@
-# mvn rewrite:run -Drewrite.activeRecipes=org.checkstyle.recipes.OpenRewriteRecipeBestPractices
+# OpenRewrite Configuration for Checkstyle Auto-Fix
+# Usage: mvn rewrite:run -Drewrite.activeRecipes=org.checkstyle.recipes.OpenRewriteRecipeBestPractices
+# This file defines recipes for automatically fixing Checkstyle violations and applying best practices.
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: org.checkstyle.recipes.OpenRewriteRecipeBestPractices
@@ -101,6 +103,11 @@ tags:
   - code-quality
 recipeList:
   - org.checkstyle.autofix.CheckstyleAutoFix:
+      # Path to Checkstyle violation report (XML or SARIF format)
+      # Ensure this file exists before running the recipe
       violationReportPath: "target/checkstyle/checkstyle-report.xml"
+      # Path or URL to Checkstyle configuration file
+      # Must be accessible and valid XML format
       configurationPath: "https://raw.githubusercontent.com/checkstyle/checkstyle/checkstyle-${checkstyle.version}/config/checkstyle-checks.xml"
+      # Optional: Path to properties file for Checkstyle configuration
       propertiesPath: "config/checkstyle.properties"

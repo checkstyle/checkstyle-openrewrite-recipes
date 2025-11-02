@@ -46,12 +46,22 @@ public class SarifReportParser implements ReportParser {
 
     @Override
     public List<CheckstyleViolation> parse(Path reportPath) {
+        if (reportPath == null) {
+            throw new IllegalArgumentException("Report path cannot be null");
+        }
+        if (!reportPath.toFile().exists()) {
+            throw new IllegalArgumentException("Report file does not exist: " + reportPath);
+        }
+
         final SarifSchema210 report;
         try {
             report = parser.fromFile(reportPath);
         }
         catch (IOException exception) {
             throw new IllegalArgumentException("Failed to parse report: " + reportPath, exception);
+        }
+        if (report == null || report.getRuns() == null || report.getRuns().isEmpty()) {
+            throw new IllegalArgumentException("SARIF report is empty or invalid: " + reportPath);
         }
         final List<CheckstyleViolation> result = new ArrayList<>();
         for (final Run run: report.getRuns()) {
@@ -68,11 +78,24 @@ public class SarifReportParser implements ReportParser {
     }
 
     private CheckstyleViolation createViolation(CheckstyleCheck check, Result result) {
+        if (result.getLevel() == null) {
+            throw new IllegalStateException("Result level is missing");
+        }
+        if (result.getMessage() == null || result.getMessage().getText() == null) {
+            throw new IllegalStateException("Result message is missing");
+        }
+        if (result.getLocations() == null || result.getLocations().isEmpty()) {
+            throw new IllegalStateException("Result locations are missing");
+        }
+
         final String severity = result.getLevel().name();
         final String message = result.getMessage().getText();
         final PhysicalLocation location = result.getLocations().get(0).getPhysicalLocation();
         final Path filePath = getFilePath(location);
         final Region region = location.getRegion();
+        if (region == null || region.getStartLine() == null) {
+            throw new IllegalStateException("Region or start line is missing");
+        }
         final int line = region.getStartLine();
         final Optional<Integer> columnMaybe = Optional.ofNullable(region.getStartColumn());
         return columnMaybe.map(column -> {

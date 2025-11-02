@@ -71,16 +71,25 @@ public final class ConfigurationLoader {
 
     public static Map<CheckstyleCheck, CheckConfiguration> loadConfiguration(
             String checkstyleConfigurationPath, String propFile) {
+        if (checkstyleConfigurationPath == null || checkstyleConfigurationPath.trim().isEmpty()) {
+            throw new IllegalArgumentException(
+                    "Checkstyle configuration path cannot be null or empty");
+        }
+
         Properties props = new Properties();
         if (propFile == null) {
             props = System.getProperties();
         }
         else {
+            if (propFile.trim().isEmpty()) {
+                throw new IllegalArgumentException("Properties file path cannot be empty");
+            }
             try (FileInputStream input = new FileInputStream(propFile)) {
                 props.load(input);
             }
             catch (IOException exception) {
-                throw new IllegalStateException("Failed to read: " + propFile, exception);
+                throw new IllegalStateException("Failed to read properties file: "
+                        + propFile, exception);
             }
         }
 

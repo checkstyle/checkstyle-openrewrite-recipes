@@ -32,11 +32,14 @@ jobs:
 
       - name: Build with Maven
         run: ./mvnw -e --no-transfer-progress clean install
+        continue-on-error: false
 
       - name: Check for changes
         shell: bash
         run: |
-          git diff --exit-code || (
+          if ! git diff --exit-code; then
             echo "::error::Code changes detected - run './mvnw clean verify' locally"
+            echo "::error::Modified files:"
+            git diff --name-only
             exit 1
-          )
+          fi
