@@ -1,0 +1,43 @@
+name: Pitest
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  pitest:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'corretto'
+
+      - name: Install Groovy
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y groovy
+
+      - name: Setup Maven cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+
+      - name: Run Pitest with suppression check
+        run: ./.ci/pitest.sh
+
+      - name: Upload Pitest Report on Failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pitest-report
+          path: target/pit-reports/
+          retention-days: 7
