@@ -20,11 +20,13 @@ package org.checkstyle.autofix.parser;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Properties;
 
 import org.checkstyle.autofix.CheckstyleCheck;
+import org.checkstyle.autofix.CheckstyleConfigModule;
 
 import com.puppycrawl.tools.checkstyle.PropertiesExpander;
 import com.puppycrawl.tools.checkstyle.api.CheckstyleException;
@@ -36,14 +38,19 @@ public final class ConfigurationLoader {
         // utility class
     }
 
-    public static Map<CheckstyleCheck, CheckConfiguration> mapConfiguration(Configuration config) {
-        final Map<CheckstyleCheck, CheckConfiguration> result = new HashMap<>();
+    public static Map<CheckstyleConfigModule,
+            CheckConfiguration> mapConfiguration(Configuration config) {
+
+        final Map<CheckstyleConfigModule, CheckConfiguration> result = new LinkedHashMap<>();
         final Map<String, String> inherited = getProperties(config);
 
         final Optional<CheckstyleCheck> module = CheckstyleCheck.fromSource(config.getName());
         module.ifPresent(checkstyleCheck -> {
-            result.put(checkstyleCheck, new CheckConfiguration(checkstyleCheck, new HashMap<>(),
-                    getProperties(config)));
+            final Map<String, String> properties = getProperties(config);
+            final CheckstyleConfigModule configModule = new CheckstyleConfigModule(
+                    checkstyleCheck, properties.get("id"));
+            result.put(configModule,
+                    new CheckConfiguration(checkstyleCheck, new HashMap<>(), properties));
         });
 
         for (Configuration child : config.getChildren()) {
@@ -69,7 +76,7 @@ public final class ConfigurationLoader {
         return props;
     }
 
-    public static Map<CheckstyleCheck, CheckConfiguration> loadConfiguration(
+    public static Map<CheckstyleConfigModule, CheckConfiguration> loadConfiguration(
             String checkstyleConfigurationPath, String propFile) {
         Properties props = new Properties();
         if (propFile == null) {

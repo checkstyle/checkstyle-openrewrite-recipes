@@ -1,7 +1,9 @@
 /*xml
 <module name="Checker">
   <module name="TreeWalker">
-    <module name="com.puppycrawl.tools.checkstyle.checks.coding.FinalLocalVariableCheck"/>
+    <module name="com.puppycrawl.tools.checkstyle.checks.coding.FinalLocalVariableCheck">
+      <property name="id" value="UpperEll"/>
+    </module>
   </module>
 </module>
 
