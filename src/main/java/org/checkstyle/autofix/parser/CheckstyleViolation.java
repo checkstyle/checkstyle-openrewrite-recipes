@@ -19,7 +19,7 @@ package org.checkstyle.autofix.parser;
 
 import java.nio.file.Path;
 
-import org.checkstyle.autofix.CheckstyleCheck;
+import org.checkstyle.autofix.CheckstyleCheckInstance;
 
 public final class CheckstyleViolation {
 
@@ -29,14 +29,14 @@ public final class CheckstyleViolation {
 
     private final String severity;
 
-    private final CheckstyleCheck source;
+    private final CheckstyleCheckInstance source;
 
     private final String message;
 
     private final Path filePath;
 
     public CheckstyleViolation(int line, int column, String severity,
-                               CheckstyleCheck source, String message, Path filePath) {
+                               CheckstyleCheckInstance source, String message, Path filePath) {
         this.line = line;
         this.column = column;
         this.severity = severity;
@@ -46,7 +46,7 @@ public final class CheckstyleViolation {
     }
 
     public CheckstyleViolation(int line, String severity,
-                               CheckstyleCheck source, String message, Path filePath) {
+                               CheckstyleCheckInstance source, String message, Path filePath) {
         this(line, -1, severity, source, message, filePath);
     }
 
@@ -58,7 +58,7 @@ public final class CheckstyleViolation {
         return column;
     }
 
-    public CheckstyleCheck getSource() {
+    public CheckstyleCheckInstance getSource() {
         return source;
     }
 

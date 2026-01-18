@@ -1,6 +1,6 @@
 --- src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/finallocalvariable2one/InputFinalLocalVariable2One.java
 +++ src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/finallocalvariable2one/OutputFinalLocalVariable2One.java
-@@ -10,7 +10,7 @@
+@@ -11,7 +11,7 @@
  */
  package org.checkstyle.autofix.recipe.finallocalvariable.finallocalvariable2one;
  
@@ -9,7 +9,7 @@
      private int m_ClassVariable = 0;
      //static block
      static
-@@ -49,9 +49,7 @@
+@@ -50,9 +50,7 @@
              }
          };
      }
