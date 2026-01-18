@@ -237,6 +237,7 @@
                     </activeRecipes>
                     <exclusions>
                         <exclusion>src/test/resources/**</exclusion>
+                        <exclusion>**/*.groovy</exclusion>
                     </exclusions>
                 </configuration>
                 <dependencies>

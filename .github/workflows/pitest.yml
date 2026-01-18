@@ -34,6 +34,11 @@ jobs:
       - name: Run Pitest with suppression check
         run: ./.ci/pitest.sh
 
+      - name: Patch command for Pitest
+        if: failure()
+        run: |
+          ./.ci/print-diff-as-patch.sh target/pitest.patch
+
       - name: Upload Pitest Report on Failure
         if: failure()
         uses: actions/upload-artifact@v4
