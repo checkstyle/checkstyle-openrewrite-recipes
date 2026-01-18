@@ -40,7 +40,7 @@ public enum CheckstyleCheck {
 
     public static Optional<CheckstyleCheck> fromSource(String source) {
         return Arrays.stream(values())
-                .filter(check -> check.getId().contains(source))
+                .filter(check -> check.getId().contains(source.split("#")[0]))
                 .findFirst();
     }
 }

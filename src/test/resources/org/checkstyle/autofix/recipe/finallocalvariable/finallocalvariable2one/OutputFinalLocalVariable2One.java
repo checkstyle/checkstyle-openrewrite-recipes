@@ -2,6 +2,7 @@
 <module name="Checker">
   <module name="TreeWalker">
     <module name="com.puppycrawl.tools.checkstyle.checks.coding.FinalLocalVariableCheck">
+      <property name="id" value="strict"/>
       <property name="tokens" value="PARAMETER_DEF"/>
     </module>
   </module>

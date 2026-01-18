@@ -67,7 +67,7 @@ public final class CheckstyleRecipeRegistry {
      * @return a list of generated Recipe objects
      */
     public static List<Recipe> getRecipes(List<CheckstyleViolation> violations,
-                                          Map<CheckstyleCheck, CheckConfiguration> config) {
+                                          Map<CheckstyleCheckInstance, CheckConfiguration> config) {
         return violations.stream()
                 .collect(Collectors.groupingBy(CheckstyleViolation::getSource))
                 .entrySet()

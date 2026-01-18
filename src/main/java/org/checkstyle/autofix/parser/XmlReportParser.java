@@ -35,6 +35,7 @@ import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
 import org.checkstyle.autofix.CheckstyleCheck;
+import org.checkstyle.autofix.CheckstyleCheckInstance;
 
 public class XmlReportParser implements ReportParser {
 
@@ -118,7 +119,8 @@ public class XmlReportParser implements ReportParser {
         String message = null;
         String severity = null;
         CheckstyleViolation violation = null;
-        Optional<CheckstyleCheck> source = Optional.empty();
+        Optional<CheckstyleCheck> check = Optional.empty();
+        String id = null;
 
         final Iterator<Attribute> attributes = startElement.getAttributes();
         while (attributes.hasNext()) {
@@ -138,15 +140,20 @@ public class XmlReportParser implements ReportParser {
                     message = attribute.getValue();
                     break;
                 case SOURCE_ATTR:
-                    source = CheckstyleCheck.fromSource(attribute.getValue());
+                    final String attrValue = attribute.getValue();
+                    check = CheckstyleCheck.fromSource(attrValue);
+                    final int index = attrValue.indexOf('#');
+                    if (index >= 0) {
+                        id = attrValue.substring(index + 1);
+                    }
                     break;
                 default:
                     break;
             }
         }
-        if (source.isPresent()) {
+        if (check.isPresent()) {
             violation = new CheckstyleViolation(line, column, severity,
-                    source.get(), message, Path.of(filename));
+                    new CheckstyleCheckInstance(check.get(), id), message, Path.of(filename));
         }
         return Optional.ofNullable(violation);
 
