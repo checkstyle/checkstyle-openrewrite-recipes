@@ -499,19 +499,19 @@
   <mutation unstable="false">
     <sourceFile>Header.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.recipe.Header</mutatedClass>
-    <mutatedMethod>toLfLineEnding</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.NakedReceiverMutator</mutator>
-    <description>replaced call to java/lang/String::replaceAll with receiver</description>
-    <lineContent>return text.replaceAll(&quot;(?x)\\\\r(?=\\\\n)|\\r(?=\\n)&quot;, &quot;&quot;);</lineContent>
+    <mutatedMethod>getDisplayName</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.EmptyObjectReturnValsMutator</mutator>
+    <description>replaced return value with &quot;&quot; for org/checkstyle/autofix/recipe/Header::getDisplayName</description>
+    <lineContent>return &quot;Header recipe&quot;;</lineContent>
   </mutation>
 
   <mutation unstable="false">
     <sourceFile>Header.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.recipe.Header</mutatedClass>
-    <mutatedMethod>getDisplayName</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.EmptyObjectReturnValsMutator</mutator>
-    <description>replaced return value with &quot;&quot; for org/checkstyle/autofix/recipe/Header::getDisplayName</description>
-    <lineContent>return &quot;Header recipe&quot;;</lineContent>
+    <mutatedMethod>toLfLineEnding</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.NakedReceiverMutator</mutator>
+    <description>replaced call to java/lang/String::replaceAll with receiver</description>
+    <lineContent>return text.replaceAll(&quot;(?x)\\\\r(?=\\\\n)|\\r(?=\\n)&quot;, &quot;&quot;);</lineContent>
   </mutation>
 
   <mutation unstable="false">
@@ -1330,7 +1330,7 @@
     <mutatedMethod>parseErrorTag</mutatedMethod>
     <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
     <description>removed call to java/util/Optional::empty</description>
-    <lineContent>Optional&lt;CheckstyleCheck&gt; check = Optional.empty();</lineContent>
+    <lineContent>Optional&lt;CheckFullName&gt; checkName = Optional.empty();</lineContent>
   </mutation>
 
   <mutation unstable="false">
@@ -1339,7 +1339,7 @@
     <mutatedMethod>parseErrorTag</mutatedMethod>
     <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
     <description>removed conditional - replaced equality check with true</description>
-    <lineContent>if (check.isPresent()) {</lineContent>
+    <lineContent>if (checkName.isPresent()) {</lineContent>
   </mutation>
 
   <mutation unstable="false">

@@ -20,23 +20,23 @@ package org.checkstyle.autofix.parser;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.checkstyle.autofix.CheckstyleCheck;
+import org.checkstyle.autofix.CheckFullName;
 
 public final class CheckConfiguration {
-    private final CheckstyleCheck check;
+    private final CheckFullName checkName;
     private final Map<String, String> globalProperties;
     private final Map<String, String> properties;
 
-    public CheckConfiguration(CheckstyleCheck name,
+    public CheckConfiguration(CheckFullName checkName,
                               Map<String, String> globalProperties,
                               Map<String, String> properties) {
-        this.check = name;
+        this.checkName = checkName;
         this.globalProperties = new HashMap<>(globalProperties);
         this.properties = new HashMap<>(properties);
     }
 
-    public CheckstyleCheck getCheck() {
-        return check;
+    public CheckFullName getCheckName() {
+        return checkName;
     }
 
     public String getProperty(String key) {
