@@ -25,8 +25,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.checkstyle.autofix.CheckFullName;
 import org.checkstyle.autofix.CheckstyleCheck;
-import org.checkstyle.autofix.CheckstyleCheckInstance;
 
 import de.jcup.sarif_2_1_0.SarifSchema210ImportExportSupport;
 import de.jcup.sarif_2_1_0.model.PhysicalLocation;
@@ -58,14 +58,14 @@ public class SarifReportParser implements ReportParser {
         for (final Run run: report.getRuns()) {
             if (run.getResults() != null) {
                 run.getResults().forEach(resultEntry -> {
-                    CheckstyleCheck.fromSource(resultEntry.getRuleId()).ifPresent(
-                            check -> {
+                    CheckFullName.fromSource(resultEntry.getRuleId()).ifPresent(
+                            checkName -> {
                                 final String id = Optional.of(resultEntry.getRuleId())
                                         .filter(src -> src.contains("#"))
                                         .map(src -> src.substring(src.indexOf('#') + 1))
                                         .orElse(null);
                                 result.add(createViolation(new
-                                        CheckstyleCheckInstance(check, id), resultEntry));
+                                        CheckstyleCheck(checkName, id), resultEntry));
                             }); }
                 );
             }
@@ -73,7 +73,7 @@ public class SarifReportParser implements ReportParser {
         return result;
     }
 
-    private CheckstyleViolation createViolation(CheckstyleCheckInstance check, Result result) {
+    private CheckstyleViolation createViolation(CheckstyleCheck check, Result result) {
         final String severity = result.getLevel().name();
         final String message = result.getMessage().getText();
         final PhysicalLocation location = result.getLocations().get(0).getPhysicalLocation();

@@ -17,30 +17,8 @@
 
 package org.checkstyle.autofix;
 
-import java.util.Arrays;
-import java.util.Optional;
-
-public enum CheckstyleCheck {
-    FINAL_LOCAL_VARIABLE("com.puppycrawl.tools.checkstyle.checks.coding.FinalLocalVariableCheck"),
-    HEADER("com.puppycrawl.tools.checkstyle.checks.header.HeaderCheck"),
-    NEWLINE_AT_END_OF_FILE("com.puppycrawl.tools.checkstyle.checks.NewlineAtEndOfFileCheck"),
-    UPPER_ELL("com.puppycrawl.tools.checkstyle.checks.UpperEllCheck"),
-    HEX_LITERAL_CASE("com.puppycrawl.tools.checkstyle.checks.HexLiteralCaseCheck"),
-    REDUNDANT_IMPORT("com.puppycrawl.tools.checkstyle.checks.imports.RedundantImportCheck");
-
-    private final String id;
-
-    CheckstyleCheck(String id) {
-        this.id = id;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public static Optional<CheckstyleCheck> fromSource(String source) {
-        return Arrays.stream(values())
-                .filter(check -> check.getId().contains(source.split("#")[0]))
-                .findFirst();
-    }
+public record CheckstyleCheck(
+        CheckFullName checkName,
+        String id
+) {
 }

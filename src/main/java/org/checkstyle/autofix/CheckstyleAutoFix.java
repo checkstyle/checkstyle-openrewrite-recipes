@@ -88,7 +88,7 @@ public class CheckstyleAutoFix extends Recipe {
         final ReportParser reportParser = createReportParser(getViolationReportPath());
         final List<CheckstyleViolation> violations = reportParser
                 .parse(Path.of(getViolationReportPath()));
-        final Map<CheckstyleCheckInstance,
+        final Map<CheckstyleCheck,
                 CheckConfiguration> configuration = loadCheckstyleConfiguration();
 
         return CheckstyleRecipeRegistry.getRecipes(violations, configuration);
@@ -108,7 +108,7 @@ public class CheckstyleAutoFix extends Recipe {
         return result;
     }
 
-    private Map<CheckstyleCheckInstance, CheckConfiguration> loadCheckstyleConfiguration() {
+    private Map<CheckstyleCheck, CheckConfiguration> loadCheckstyleConfiguration() {
         return ConfigurationLoader.loadConfiguration(getConfigurationPath(), getPropertiesPath());
     }
 }

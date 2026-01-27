@@ -37,20 +37,20 @@ import org.openrewrite.Recipe;
 
 public final class CheckstyleRecipeRegistry {
 
-    private static final EnumMap<CheckstyleCheck, Function<List<CheckstyleViolation>,
-            Recipe>> RECIPE_MAP = new EnumMap<>(CheckstyleCheck.class);
+    private static final EnumMap<CheckFullName, Function<List<CheckstyleViolation>,
+            Recipe>> RECIPE_MAP = new EnumMap<>(CheckFullName.class);
 
-    private static final EnumMap<CheckstyleCheck, BiFunction<List<CheckstyleViolation>,
+    private static final EnumMap<CheckFullName, BiFunction<List<CheckstyleViolation>,
             CheckConfiguration, Recipe>> RECIPE_MAP_WITH_CONFIG =
-            new EnumMap<>(CheckstyleCheck.class);
+            new EnumMap<>(CheckFullName.class);
 
     static {
-        RECIPE_MAP.put(CheckstyleCheck.UPPER_ELL, UpperEll::new);
-        RECIPE_MAP.put(CheckstyleCheck.HEX_LITERAL_CASE, HexLiteralCase::new);
-        RECIPE_MAP.put(CheckstyleCheck.FINAL_LOCAL_VARIABLE, FinalLocalVariable::new);
-        RECIPE_MAP_WITH_CONFIG.put(CheckstyleCheck.HEADER, Header::new);
-        RECIPE_MAP_WITH_CONFIG.put(CheckstyleCheck.NEWLINE_AT_END_OF_FILE, NewlineAtEndOfFile::new);
-        RECIPE_MAP.put(CheckstyleCheck.REDUNDANT_IMPORT, RedundantImport::new);
+        RECIPE_MAP.put(CheckFullName.UPPER_ELL, UpperEll::new);
+        RECIPE_MAP.put(CheckFullName.HEX_LITERAL_CASE, HexLiteralCase::new);
+        RECIPE_MAP.put(CheckFullName.FINAL_LOCAL_VARIABLE, FinalLocalVariable::new);
+        RECIPE_MAP_WITH_CONFIG.put(CheckFullName.HEADER, Header::new);
+        RECIPE_MAP_WITH_CONFIG.put(CheckFullName.NEWLINE_AT_END_OF_FILE, NewlineAtEndOfFile::new);
+        RECIPE_MAP.put(CheckFullName.REDUNDANT_IMPORT, RedundantImport::new);
     }
 
     private CheckstyleRecipeRegistry() {
@@ -67,7 +67,7 @@ public final class CheckstyleRecipeRegistry {
      * @return a list of generated Recipe objects
      */
     public static List<Recipe> getRecipes(List<CheckstyleViolation> violations,
-                                          Map<CheckstyleCheckInstance, CheckConfiguration> config) {
+                                          Map<CheckstyleCheck, CheckConfiguration> config) {
         return violations.stream()
                 .collect(Collectors.groupingBy(CheckstyleViolation::getSource))
                 .entrySet()
@@ -84,16 +84,16 @@ public final class CheckstyleRecipeRegistry {
         Recipe result = null;
         if (checkConfig != null) {
 
-            final CheckstyleCheck check = checkConfig.getCheck();
+            final CheckFullName checkName = checkConfig.getCheckName();
 
             final BiFunction<List<CheckstyleViolation>, CheckConfiguration,
-                    Recipe> configRecipeFactory = RECIPE_MAP_WITH_CONFIG.get(check);
+                    Recipe> configRecipeFactory = RECIPE_MAP_WITH_CONFIG.get(checkName);
 
             if (configRecipeFactory != null) {
                 result = configRecipeFactory.apply(violations, checkConfig);
             }
             else {
-                result = RECIPE_MAP.get(check).apply(violations);
+                result = RECIPE_MAP.get(checkName).apply(violations);
             }
         }
         return result;

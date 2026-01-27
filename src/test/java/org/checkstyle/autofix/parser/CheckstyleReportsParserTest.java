@@ -25,8 +25,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.checkstyle.autofix.CheckFullName;
 import org.checkstyle.autofix.CheckstyleCheck;
-import org.checkstyle.autofix.CheckstyleCheckInstance;
 import org.junit.jupiter.api.Test;
 
 public class CheckstyleReportsParserTest {
@@ -50,7 +50,7 @@ public class CheckstyleReportsParserTest {
         assertEquals(13, record.getColumn());
         assertEquals("error", record.getSeverity());
         assertEquals("Example message", record.getMessage());
-        assertEquals(new CheckstyleCheckInstance(CheckstyleCheck.UPPER_ELL, null),
+        assertEquals(new CheckstyleCheck(CheckFullName.UPPER_ELL, null),
                 record.getSource());
         assertEquals(Path.of("Example.java"), record.getFilePath());
     }

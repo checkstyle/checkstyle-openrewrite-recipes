@@ -24,8 +24,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Properties;
 
+import org.checkstyle.autofix.CheckFullName;
 import org.checkstyle.autofix.CheckstyleCheck;
-import org.checkstyle.autofix.CheckstyleCheckInstance;
 
 import com.puppycrawl.tools.checkstyle.PropertiesExpander;
 import com.puppycrawl.tools.checkstyle.api.CheckstyleException;
@@ -37,15 +37,15 @@ public final class ConfigurationLoader {
         // utility class
     }
 
-    public static Map<CheckstyleCheckInstance,
+    public static Map<CheckstyleCheck,
             CheckConfiguration> mapConfiguration(Configuration config) {
 
-        final Map<CheckstyleCheckInstance, CheckConfiguration> result = new HashMap<>();
+        final Map<CheckstyleCheck, CheckConfiguration> result = new HashMap<>();
         final Map<String, String> inherited = getProperties(config);
-        final Optional<CheckstyleCheck> module = CheckstyleCheck.fromSource(config.getName());
+        final Optional<CheckFullName> checkName = CheckFullName.fromSource(config.getName());
 
-        module.ifPresent(checkstyleCheck -> {
-            result.put(new CheckstyleCheckInstance(checkstyleCheck, inherited.get("id")),
+        checkName.ifPresent(checkstyleCheck -> {
+            result.put(new CheckstyleCheck(checkstyleCheck, inherited.get("id")),
                     new CheckConfiguration(checkstyleCheck, new HashMap<>(), inherited));
         });
 
@@ -72,7 +72,7 @@ public final class ConfigurationLoader {
         return props;
     }
 
-    public static Map<CheckstyleCheckInstance, CheckConfiguration> loadConfiguration(
+    public static Map<CheckstyleCheck, CheckConfiguration> loadConfiguration(
             String checkstyleConfigurationPath, String propFile) {
         Properties props = new Properties();
         if (propFile == null) {
