@@ -26,6 +26,9 @@ public enum CheckstyleCheck {
     NEWLINE_AT_END_OF_FILE("com.puppycrawl.tools.checkstyle.checks.NewlineAtEndOfFileCheck"),
     UPPER_ELL("com.puppycrawl.tools.checkstyle.checks.UpperEllCheck"),
     HEX_LITERAL_CASE("com.puppycrawl.tools.checkstyle.checks.HexLiteralCaseCheck"),
+    ANNOTATION_ON_SAME_LINE(
+        "com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"
+    ),
     REDUNDANT_IMPORT("com.puppycrawl.tools.checkstyle.checks.imports.RedundantImportCheck");
 
     private final String id;
