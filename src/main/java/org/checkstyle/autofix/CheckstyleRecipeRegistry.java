@@ -27,6 +27,7 @@ import java.util.stream.Collectors;
 
 import org.checkstyle.autofix.parser.CheckConfiguration;
 import org.checkstyle.autofix.parser.CheckstyleViolation;
+import org.checkstyle.autofix.recipe.EmptyStatement;
 import org.checkstyle.autofix.recipe.FinalLocalVariable;
 import org.checkstyle.autofix.recipe.Header;
 import org.checkstyle.autofix.recipe.HexLiteralCase;
@@ -45,6 +46,7 @@ public final class CheckstyleRecipeRegistry {
             new EnumMap<>(CheckFullName.class);
 
     static {
+        RECIPE_MAP.put(CheckFullName.EMPTY_STATEMENT, violations -> new EmptyStatement());
         RECIPE_MAP.put(CheckFullName.UPPER_ELL, UpperEll::new);
         RECIPE_MAP.put(CheckFullName.HEX_LITERAL_CASE, HexLiteralCase::new);
         RECIPE_MAP.put(CheckFullName.FINAL_LOCAL_VARIABLE, FinalLocalVariable::new);

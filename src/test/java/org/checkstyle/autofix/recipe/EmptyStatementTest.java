@@ -1,103 +1,71 @@
+///////////////////////////////////////////////////////////////////////////////////////////////
+// checkstyle-openrewrite-recipes: Automatically fix Checkstyle violations with OpenRewrite.
+// Copyright (C) 2025 The Checkstyle OpenRewrite Recipes Authors
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+///////////////////////////////////////////////////////////////////////////////////////////////
+
 package org.checkstyle.autofix.recipe;
 
-import org.junit.jupiter.api.Test;
-import org.openrewrite.test.RecipeSpec;
-import org.openrewrite.test.RewriteTest;
-
-import static org.openrewrite.java.Assertions.java;
+import org.checkstyle.autofix.parser.ReportParser;
 
 /**
  * Test cases for EmptyStatement recipe.
  */
-class EmptyStatementTest implements RewriteTest {
+public class EmptyStatementTest extends AbstractRecipeTestSupport {
 
     @Override
-    public void defaults(RecipeSpec spec) {
-        spec.recipe(new EmptyStatement());
+    protected String getSubpackage() {
+        return "emptystatement";
     }
 
-    @Test
-    void removeDoubleSermicolon() {
-        rewriteRun(
-            java(
-                """
-                class Test {
-                    void method() {
-                        int x = 5;;
-                    }
-                }
-                """,
-                """
-                class Test {
-                    void method() {
-                        int x = 5;
-                    }
-                }
-                """
-            )
-        );
+    @RecipeTest
+    void removeDoubleSermicolon(ReportParser parser) throws Exception {
+        verify(parser, "DoubleSermicolon");
     }
 
-    @Test
-    void removeEmptyStatementInBlock() {
-        rewriteRun(
-            java(
-                """
-                class Test {
-                    void method() {
-                        int x = 1;
-                        ;
-                        int y = 2;
-                    }
-                }
-                """,
-                """
-                class Test {
-                    void method() {
-                        int x = 1;
-                        int y = 2;
-                    }
-                }
-                """
-            )
-        );
+    @RecipeTest
+    void removeEmptyStatementInBlock(ReportParser parser) throws Exception {
+        verify(parser, "EmptyStatementInBlock");
     }
 
-    @Test
-    void multipleEmptyStatements() {
-        rewriteRun(
-            java(
-                """
-                class Test {
-                    void method() {
-                        int x = 5;;;
-                    }
-                }
-                """,
-                """
-                class Test {
-                    void method() {
-                        int x = 5;
-                    }
-                }
-                """
-            )
-        );
+    @RecipeTest
+    void multipleEmptyStatements(ReportParser parser) throws Exception {
+        verify(parser, "MultipleEmptyStatements");
     }
 
-    @Test
-    void noChangeWhenNoViolation() {
-        rewriteRun(
-            java(
-                """
-                class Test {
-                    void method() {
-                        int x = 5;
-                        int y = 10;
-                    }
-                }
-                """
-            )
-        );
+    @RecipeTest
+    void nestedEmptyStatements(ReportParser parser) throws Exception {
+        verify(parser, "NestedEmptyStatements");
+    }
+
+    @RecipeTest
+    void emptyIfStatement(ReportParser parser) throws Exception {
+        verify(parser, "EmptyIfStatement");
+    }
+
+    @RecipeTest
+    void emptyWhileLoop(ReportParser parser) throws Exception {
+        verify(parser, "EmptyWhileLoop");
+    }
+
+    @RecipeTest
+    void emptyForLoop(ReportParser parser) throws Exception {
+        verify(parser, "EmptyForLoop");
+    }
+
+    @RecipeTest
+    void emptyDoWhileLoop(ReportParser parser) throws Exception {
+        verify(parser, "EmptyDoWhileLoop");
     }
 }

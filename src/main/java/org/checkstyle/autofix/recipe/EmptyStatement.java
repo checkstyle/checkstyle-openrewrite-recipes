@@ -1,14 +1,19 @@
 package org.checkstyle.autofix.recipe;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
+import org.openrewrite.Tree;
 import org.openrewrite.TreeVisitor;
 import org.openrewrite.java.JavaIsoVisitor;
 import org.openrewrite.java.tree.J;
+import org.openrewrite.java.tree.JRightPadded;
+import org.openrewrite.java.tree.Space;
 import org.openrewrite.java.tree.Statement;
+import org.openrewrite.marker.Markers;
 
 /**
  * OpenRewrite recipe to fix Checkstyle EmptyStatement violations.
@@ -39,25 +44,95 @@ public class EmptyStatement extends Recipe {
 
     @Override
     public TreeVisitor<?, ExecutionContext> getVisitor() {
-        return new JavaIsoVisitor<ExecutionContext>() {
+        return new EmptyStatementVisitor();
+    }
 
-            @Override
-            public J.Block visitBlock(J.Block block, ExecutionContext ctx) {
-                final J.Block visited = super.visitBlock(block, ctx);
+    /**
+     * Creates an empty block to replace an empty statement.
+     *
+     * @param prefix the prefix space to use for the block
+     * @return a new empty J.Block
+     */
+    private static J.Block createEmptyBlock(Space prefix) {
+        return new J.Block(
+                Tree.randomId(),
+                prefix,
+                Markers.EMPTY,
+                JRightPadded.build(false),
+                Collections.emptyList(),
+                Space.EMPTY
+        );
+    }
 
-                final List<Statement> filtered = new ArrayList<>();
-                for (Statement stmt : visited.getStatements()) {
-                    if (!(stmt instanceof J.Empty)) {
-                        filtered.add(stmt);
-                    }
+    /**
+     * Visitor that removes empty statements from blocks and replaces empty
+     * control flow bodies with empty blocks.
+     */
+    private static class EmptyStatementVisitor extends JavaIsoVisitor<ExecutionContext> {
+
+        @Override
+        public J.Block visitBlock(J.Block block, ExecutionContext ctx) {
+            final J.Block visited = super.visitBlock(block, ctx);
+
+            final List<Statement> filtered = new ArrayList<>();
+            for (Statement stmt : visited.getStatements()) {
+                if (!(stmt instanceof J.Empty)) {
+                    filtered.add(stmt);
                 }
-
-                if (filtered.size() != visited.getStatements().size()) {
-                    return visited.withStatements(filtered);
-                }
-                return visited;
             }
 
-        };
+            if (filtered.size() != visited.getStatements().size()) {
+                return visited.withStatements(filtered);
+            }
+            return visited;
+        }
+
+        @Override
+        public J.If visitIf(J.If iff, ExecutionContext ctx) {
+            J.If visited = super.visitIf(iff, ctx);
+
+            if (visited.getThenPart() instanceof J.Empty) {
+                visited = visited.withThenPart(
+                        createEmptyBlock(Space.build(" ", Collections.emptyList())));
+            }
+
+            return visited;
+        }
+
+        @Override
+        public J.WhileLoop visitWhileLoop(J.WhileLoop whileLoop, ExecutionContext ctx) {
+            J.WhileLoop visited = super.visitWhileLoop(whileLoop, ctx);
+
+            if (visited.getBody() instanceof J.Empty) {
+                visited = visited.withBody(
+                        createEmptyBlock(Space.build(" ", Collections.emptyList())));
+            }
+
+            return visited;
+        }
+
+        @Override
+        public J.ForLoop visitForLoop(J.ForLoop forLoop, ExecutionContext ctx) {
+            J.ForLoop visited = super.visitForLoop(forLoop, ctx);
+
+            if (visited.getBody() instanceof J.Empty) {
+                visited = visited.withBody(
+                        createEmptyBlock(Space.build(" ", Collections.emptyList())));
+            }
+
+            return visited;
+        }
+
+        @Override
+        public J.DoWhileLoop visitDoWhileLoop(J.DoWhileLoop doWhileLoop, ExecutionContext ctx) {
+            J.DoWhileLoop visited = super.visitDoWhileLoop(doWhileLoop, ctx);
+
+            if (visited.getBody() instanceof J.Empty) {
+                visited = visited.withBody(
+                        createEmptyBlock(Space.build(" ", Collections.emptyList())));
+            }
+
+            return visited;
+        }
     }
 }
