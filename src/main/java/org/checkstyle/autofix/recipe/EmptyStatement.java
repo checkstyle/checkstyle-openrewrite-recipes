@@ -44,7 +44,7 @@ import org.openrewrite.marker.Markers;
  *   <li>Empty while/for loops: while(true);</li>
  * </ul>
  *
- * @see <a href="https://checkstyle.sourceforge.io/checks/coding/emptystatement.html">
+ * @see <a href="https://checkstyle.org/checks/coding/emptystatement.html">
  *     EmptyStatement Check</a>
  */
 public class EmptyStatement extends Recipe {
@@ -81,11 +81,14 @@ public class EmptyStatement extends Recipe {
         );
     }
 
+    /** Single space for empty block prefix. */
+    private static final Space SINGLE_SPACE = Space.build(" ", Collections.emptyList());
+
     /**
      * Visitor that removes empty statements from blocks and replaces empty
      * control flow bodies with empty blocks.
      */
-    private static class EmptyStatementVisitor extends JavaIsoVisitor<ExecutionContext> {
+    private static final class EmptyStatementVisitor extends JavaIsoVisitor<ExecutionContext> {
 
         @Override
         public J.Block visitBlock(J.Block block, ExecutionContext ctx) {
@@ -98,10 +101,14 @@ public class EmptyStatement extends Recipe {
                 }
             }
 
+            final J.Block result;
             if (filtered.size() != visited.getStatements().size()) {
-                return visited.withStatements(filtered);
+                result = visited.withStatements(filtered);
             }
-            return visited;
+            else {
+                result = visited;
+            }
+            return result;
         }
 
         @Override
@@ -109,8 +116,7 @@ public class EmptyStatement extends Recipe {
             J.If visited = super.visitIf(iff, ctx);
 
             if (visited.getThenPart() instanceof J.Empty) {
-                visited = visited.withThenPart(
-                        createEmptyBlock(Space.build(" ", Collections.emptyList())));
+                visited = visited.withThenPart(createEmptyBlock(SINGLE_SPACE));
             }
 
             return visited;
@@ -121,8 +127,7 @@ public class EmptyStatement extends Recipe {
             J.WhileLoop visited = super.visitWhileLoop(whileLoop, ctx);
 
             if (visited.getBody() instanceof J.Empty) {
-                visited = visited.withBody(
-                        createEmptyBlock(Space.build(" ", Collections.emptyList())));
+                visited = visited.withBody(createEmptyBlock(SINGLE_SPACE));
             }
 
             return visited;
@@ -133,8 +138,7 @@ public class EmptyStatement extends Recipe {
             J.ForLoop visited = super.visitForLoop(forLoop, ctx);
 
             if (visited.getBody() instanceof J.Empty) {
-                visited = visited.withBody(
-                        createEmptyBlock(Space.build(" ", Collections.emptyList())));
+                visited = visited.withBody(createEmptyBlock(SINGLE_SPACE));
             }
 
             return visited;
@@ -145,8 +149,7 @@ public class EmptyStatement extends Recipe {
             J.DoWhileLoop visited = super.visitDoWhileLoop(doWhileLoop, ctx);
 
             if (visited.getBody() instanceof J.Empty) {
-                visited = visited.withBody(
-                        createEmptyBlock(Space.build(" ", Collections.emptyList())));
+                visited = visited.withBody(createEmptyBlock(SINGLE_SPACE));
             }
 
             return visited;

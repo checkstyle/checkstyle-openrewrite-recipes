@@ -36,6 +36,7 @@ import org.checkstyle.autofix.recipe.RedundantImport;
 import org.checkstyle.autofix.recipe.UpperEll;
 import org.openrewrite.Recipe;
 
+@SuppressWarnings("checkstyle:ClassDataAbstractionCoupling")
 public final class CheckstyleRecipeRegistry {
 
     private static final EnumMap<CheckFullName, Function<List<CheckstyleViolation>,

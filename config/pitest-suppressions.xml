@@ -191,6 +191,78 @@
   </mutation>
 
   <mutation unstable="false">
+    <sourceFile>EmptyStatement.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.EmptyStatement</mutatedClass>
+    <mutatedMethod>createEmptyBlock</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to org/openrewrite/Tree::randomId</description>
+    <lineContent>Tree.randomId(),</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>EmptyStatement.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.EmptyStatement</mutatedClass>
+    <mutatedMethod>getDescription</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.EmptyObjectReturnValsMutator</mutator>
+    <description>replaced return value with &quot;&quot; for org/checkstyle/autofix/recipe/EmptyStatement::getDescription</description>
+    <lineContent>return &quot;Detects and removes empty statements (standalone semicolons).&quot;;</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>EmptyStatement.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.EmptyStatement</mutatedClass>
+    <mutatedMethod>getDisplayName</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.EmptyObjectReturnValsMutator</mutator>
+    <description>replaced return value with &quot;&quot; for org/checkstyle/autofix/recipe/EmptyStatement::getDisplayName</description>
+    <lineContent>return &quot;EmptyStatement - Remove empty statements&quot;;</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>EmptyStatement.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.EmptyStatement$EmptyStatementVisitor</mutatedClass>
+    <mutatedMethod>visitBlock</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to java/util/List::size</description>
+    <lineContent>if (filtered.size() != visited.getStatements().size()) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>EmptyStatement.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.EmptyStatement$EmptyStatementVisitor</mutatedClass>
+    <mutatedMethod>visitBlock</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>if (filtered.size() != visited.getStatements().size()) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>EmptyStatement.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.EmptyStatement$EmptyStatementVisitor</mutatedClass>
+    <mutatedMethod>visitDoWhileLoop</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.ArgumentPropagationMutator</mutator>
+    <description>replaced call to org/openrewrite/java/JavaIsoVisitor::visitDoWhileLoop with argument</description>
+    <lineContent>J.DoWhileLoop visited = super.visitDoWhileLoop(doWhileLoop, ctx);</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>EmptyStatement.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.EmptyStatement$EmptyStatementVisitor</mutatedClass>
+    <mutatedMethod>visitForLoop</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.ArgumentPropagationMutator</mutator>
+    <description>replaced call to org/openrewrite/java/JavaIsoVisitor::visitForLoop with argument</description>
+    <lineContent>J.ForLoop visited = super.visitForLoop(forLoop, ctx);</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>EmptyStatement.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.EmptyStatement$EmptyStatementVisitor</mutatedClass>
+    <mutatedMethod>visitWhileLoop</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.ArgumentPropagationMutator</mutator>
+    <description>replaced call to org/openrewrite/java/JavaIsoVisitor::visitWhileLoop with argument</description>
+    <lineContent>J.WhileLoop visited = super.visitWhileLoop(whileLoop, ctx);</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
     <sourceFile>FinalLocalVariable.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.recipe.FinalLocalVariable</mutatedClass>
     <mutatedMethod>getDescription</mutatedMethod>
@@ -890,15 +962,6 @@
     <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.NakedReceiverMutator</mutator>
     <description>replaced call to java/nio/file/Path::toAbsolutePath with receiver</description>
     <lineContent>final Path filePath = sourceFile.getSourcePath().toAbsolutePath();</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
-    <mutatedMethod>visit</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
-    <description>removed call to org/openrewrite/java/tree/Space::getLastWhitespace</description>
-    <lineContent>final String lastWhitespace = eof.getLastWhitespace();</lineContent>
   </mutation>
 
   <mutation unstable="false">
