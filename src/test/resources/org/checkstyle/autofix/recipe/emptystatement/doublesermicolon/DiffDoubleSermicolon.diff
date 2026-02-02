@@ -1,0 +1,13 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/emptystatement/doublesermicolon/InputDoubleSermicolon.java
++++ src/test/resources/org/checkstyle/autofix/recipe/emptystatement/doublesermicolon/OutputDoubleSermicolon.java
+@@ -9,8 +9,8 @@
+ 
+ package org.checkstyle.autofix.recipe.emptystatement.doublesermicolon;
+ 
+-public class InputDoubleSermicolon {
++public class OutputDoubleSermicolon {
+     void method() {
+-        int x = 5;; // violation 'Empty statement.'
++        int x = 5;
+     }
+ }

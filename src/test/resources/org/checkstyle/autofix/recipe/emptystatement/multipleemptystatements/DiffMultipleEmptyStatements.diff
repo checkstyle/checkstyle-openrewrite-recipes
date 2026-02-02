@@ -1,0 +1,14 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/emptystatement/multipleemptystatements/InputMultipleEmptyStatements.java
++++ src/test/resources/org/checkstyle/autofix/recipe/emptystatement/multipleemptystatements/OutputMultipleEmptyStatements.java
+@@ -9,9 +9,8 @@
+ 
+ package org.checkstyle.autofix.recipe.emptystatement.multipleemptystatements;
+ 
+-public class InputMultipleEmptyStatements {
++public class OutputMultipleEmptyStatements {
+     void method() {
+-        int x = 5;; // violation 'Empty statement.'
+-        ; // violation 'Empty statement.'
++        int x = 5;
+     }
+ }

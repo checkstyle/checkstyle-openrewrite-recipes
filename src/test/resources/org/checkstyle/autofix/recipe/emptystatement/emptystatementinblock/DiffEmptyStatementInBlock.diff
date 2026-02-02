@@ -1,0 +1,14 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/emptystatement/emptystatementinblock/InputEmptyStatementInBlock.java
++++ src/test/resources/org/checkstyle/autofix/recipe/emptystatement/emptystatementinblock/OutputEmptyStatementInBlock.java
+@@ -9,10 +9,9 @@
+ 
+ package org.checkstyle.autofix.recipe.emptystatement.emptystatementinblock;
+ 
+-public class InputEmptyStatementInBlock {
++public class OutputEmptyStatementInBlock {
+     void method() {
+         int x = 1;
+-        ; // violation 'Empty statement.'
+         int y = 2;
+     }
+ }
