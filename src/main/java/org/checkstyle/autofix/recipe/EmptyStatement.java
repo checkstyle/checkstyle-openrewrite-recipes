@@ -94,20 +94,26 @@ public class EmptyStatement extends Recipe {
         public J.Block visitBlock(J.Block block, ExecutionContext executionContext) {
             final J.Block visited = super.visitBlock(block, executionContext);
 
-            final List<Statement> filtered = new ArrayList<>();
+            boolean hasEmpty = false;
             for (Statement stmt : visited.getStatements()) {
-                if (!(stmt instanceof J.Empty)) {
-                    filtered.add(stmt);
+                if (stmt instanceof J.Empty) {
+                    hasEmpty = true;
+                    break;
                 }
             }
 
-            final J.Block result;
-            if (filtered.size() != visited.getStatements().size()) {
+            J.Block result = visited;
+            if (hasEmpty) {
+                final List<Statement> filtered =
+                        new ArrayList<>(visited.getStatements().size());
+                for (Statement stmt : visited.getStatements()) {
+                    if (!(stmt instanceof J.Empty)) {
+                        filtered.add(stmt);
+                    }
+                }
                 result = visited.withStatements(filtered);
             }
-            else {
-                result = visited;
-            }
+
             return result;
         }
 
@@ -123,7 +129,9 @@ public class EmptyStatement extends Recipe {
         }
 
         @Override
-        public J.WhileLoop visitWhileLoop(J.WhileLoop whileLoop, ExecutionContext executionContext) {
+        public J.WhileLoop visitWhileLoop(
+                J.WhileLoop whileLoop,
+                ExecutionContext executionContext) {
             J.WhileLoop visited = super.visitWhileLoop(whileLoop, executionContext);
 
             if (visited.getBody() instanceof J.Empty) {
@@ -134,7 +142,9 @@ public class EmptyStatement extends Recipe {
         }
 
         @Override
-        public J.ForLoop visitForLoop(J.ForLoop forLoop, ExecutionContext executionContext) {
+        public J.ForLoop visitForLoop(
+                J.ForLoop forLoop,
+                ExecutionContext executionContext) {
             J.ForLoop visited = super.visitForLoop(forLoop, executionContext);
 
             if (visited.getBody() instanceof J.Empty) {
@@ -145,7 +155,9 @@ public class EmptyStatement extends Recipe {
         }
 
         @Override
-        public J.DoWhileLoop visitDoWhileLoop(J.DoWhileLoop doWhileLoop, ExecutionContext executionContext) {
+        public J.DoWhileLoop visitDoWhileLoop(
+                J.DoWhileLoop doWhileLoop,
+                ExecutionContext executionContext) {
             J.DoWhileLoop visited = super.visitDoWhileLoop(doWhileLoop, executionContext);
 
             if (visited.getBody() instanceof J.Empty) {

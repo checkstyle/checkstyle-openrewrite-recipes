@@ -47,7 +47,7 @@ public class InputComplexLongLiterals {
         Long a = null;
         Long b = 1234l;                                   // violation 'Should use uppercase 'L'.'
         Long c = Long.valueOf(5678l);                   // violation 'Should use uppercase 'L'.'
-        Long d = new Long(9999l);                   // violation 'Should use uppercase 'L'.'
+        Long d = Long.valueOf(9999l);                   // violation 'Should use uppercase 'L'.'
 
         Long conditional = (a != null) ? a : 0l;          // violation 'Should use uppercase 'L'.'
         long primitive = b != null ? b : 0l;              // violation 'Should use uppercase 'L'.'

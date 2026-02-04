@@ -17,12 +17,25 @@
 
 package org.checkstyle.autofix.recipe;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.checkstyle.autofix.parser.ReportParser;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test cases for EmptyStatement recipe.
  */
 public class EmptyStatementTest extends AbstractRecipeTestSupport {
+
+    @Test
+    void metadata() {
+        final EmptyStatement recipe = new EmptyStatement();
+
+        assertEquals("EmptyStatement - Remove empty statements",
+                recipe.getDisplayName());
+        assertEquals("Detects and removes empty statements (standalone semicolons).",
+                recipe.getDescription());
+    }
 
     @Override
     protected String getSubpackage() {
@@ -67,5 +80,20 @@ public class EmptyStatementTest extends AbstractRecipeTestSupport {
     @RecipeTest
     void emptyDoWhileLoop(ReportParser parser) throws Exception {
         verify(parser, "EmptyDoWhileLoop");
+    }
+
+    @RecipeTest
+    void nestedWhileLoop(ReportParser parser) throws Exception {
+        verify(parser, "NestedWhileLoop");
+    }
+
+    @RecipeTest
+    void nestedForLoop(ReportParser parser) throws Exception {
+        verify(parser, "NestedForLoop");
+    }
+
+    @RecipeTest
+    void nestedDoWhileLoop(ReportParser parser) throws Exception {
+        verify(parser, "NestedDoWhileLoop");
     }
 }
