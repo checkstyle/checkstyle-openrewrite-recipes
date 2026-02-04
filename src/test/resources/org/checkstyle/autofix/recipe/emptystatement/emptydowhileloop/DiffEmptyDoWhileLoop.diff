@@ -1,0 +1,18 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/emptystatement/emptydowhileloop/InputEmptyDoWhileLoop.java
++++ src/test/resources/org/checkstyle/autofix/recipe/emptystatement/emptydowhileloop/OutputEmptyDoWhileLoop.java
+@@ -9,12 +9,12 @@
+ 
+ package org.checkstyle.autofix.recipe.emptystatement.emptydowhileloop;
+ 
+-public class InputEmptyDoWhileLoop {
++public class OutputEmptyDoWhileLoop {
+     void method() {
+-        do; while (true); // violation 'Empty statement.'
++        do {} while (true);
+     }
+ 
+     void conditionLoop(boolean condition) {
+-        do; while (condition); // violation 'Empty statement.'
++        do {} while (condition);
+     }
+ }

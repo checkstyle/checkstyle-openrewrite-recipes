@@ -1,0 +1,19 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/emptystatement/emptyifstatement/InputEmptyIfStatement.java
++++ src/test/resources/org/checkstyle/autofix/recipe/emptystatement/emptyifstatement/OutputEmptyIfStatement.java
+@@ -9,13 +9,13 @@
+ 
+ package org.checkstyle.autofix.recipe.emptystatement.emptyifstatement;
+ 
+-public class InputEmptyIfStatement {
++public class OutputEmptyIfStatement {
+     void method(boolean condition) {
+-        if (condition); // violation 'Empty statement.'
++        if (condition) {}
+     }
+ 
+     void methodWithElse(boolean condition) {
+-        if (condition); // violation 'Empty statement.'
++        if (condition) {}
+         else {
+             System.out.println("else");
+         }

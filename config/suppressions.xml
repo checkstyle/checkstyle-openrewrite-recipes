@@ -14,4 +14,7 @@
     <suppress checks="DesignForExtension" files=".*"/>
 
     <suppress checks="ClassDataAbstractionCoupling" files="[\\/]src[\\/]test[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]AbstractRecipeTestSupport\.java"/>
+
+    <!-- Registry naturally grows with new recipes, so coupling increases -->
+    <suppress checks="ClassDataAbstractionCoupling" files="CheckstyleRecipeRegistry\.java"/>
 </suppressions>

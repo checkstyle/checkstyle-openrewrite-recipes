@@ -45,7 +45,7 @@ public class OutputComplexLongLiterals {
         Long a = null;
         Long b = 1234L;
         Long c = Long.valueOf(5678L);
-        Long d = new Long(9999L);
+        Long d = Long.valueOf(9999L);
 
         Long conditional = (a != null) ? a : 0L;
         long primitive = b != null ? b : 0L;

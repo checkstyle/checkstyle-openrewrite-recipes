@@ -190,6 +190,7 @@
     <lineContent>props.load(input);</lineContent>
   </mutation>
 
+
   <mutation unstable="false">
     <sourceFile>FinalLocalVariable.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.recipe.FinalLocalVariable</mutatedClass>
@@ -890,15 +891,6 @@
     <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.NakedReceiverMutator</mutator>
     <description>replaced call to java/nio/file/Path::toAbsolutePath with receiver</description>
     <lineContent>final Path filePath = sourceFile.getSourcePath().toAbsolutePath();</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
-    <mutatedMethod>visit</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
-    <description>removed call to org/openrewrite/java/tree/Space::getLastWhitespace</description>
-    <lineContent>final String lastWhitespace = eof.getLastWhitespace();</lineContent>
   </mutation>
 
   <mutation unstable="false">

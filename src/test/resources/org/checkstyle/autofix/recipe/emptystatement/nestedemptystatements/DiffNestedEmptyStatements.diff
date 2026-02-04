@@ -1,0 +1,17 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/emptystatement/nestedemptystatements/InputNestedEmptyStatements.java
++++ src/test/resources/org/checkstyle/autofix/recipe/emptystatement/nestedemptystatements/OutputNestedEmptyStatements.java
+@@ -9,12 +9,10 @@
+ 
+ package org.checkstyle.autofix.recipe.emptystatement.nestedemptystatements;
+ 
+-public class InputNestedEmptyStatements {
++public class OutputNestedEmptyStatements {
+     void method(boolean condition) {
+         if (condition) {
+-            ; // violation 'Empty statement.'
+-            int x = 5;; // violation 'Empty statement.'
+-            ; // violation 'Empty statement.'
++            int x = 5;
+         }
+     }
+ }
