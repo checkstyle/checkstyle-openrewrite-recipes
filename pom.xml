@@ -33,8 +33,8 @@
     </scm>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
         <maven.compiler.plugin>3.11.0</maven.compiler.plugin>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
@@ -45,7 +45,7 @@
 
         <!-- Checkstyle properties -->
         <maven.checkstyle.plugin.version>3.6.0</maven.checkstyle.plugin.version>
-        <checkstyle.version>12.2.0</checkstyle.version>
+        <checkstyle.version>13.2.0</checkstyle.version>
 
         <!-- Pitest properties -->
         <pitest.version>1.22.0</pitest.version>
@@ -80,7 +80,7 @@
         </dependency>
         <dependency>
             <groupId>org.openrewrite</groupId>
-            <artifactId>rewrite-java-17</artifactId>
+            <artifactId>rewrite-java-21</artifactId>
         </dependency>
 
         <!-- JGit for generating diffs without external Git dependency -->

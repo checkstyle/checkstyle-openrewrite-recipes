@@ -59,7 +59,7 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
     protected abstract String getSubpackage();
 
     @Override
-    protected String getPackageLocation() {
+    public String getPackageLocation() {
         return "org/checkstyle/autofix/recipe/" + getSubpackage();
     }
 
