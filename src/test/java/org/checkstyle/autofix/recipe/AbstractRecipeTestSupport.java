@@ -27,6 +27,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
@@ -42,6 +43,7 @@ import org.junit.jupiter.api.Named;
 import org.junit.jupiter.params.provider.Arguments;
 import org.openrewrite.Recipe;
 import org.openrewrite.test.RewriteTest;
+import org.openrewrite.test.SourceSpecs;
 
 import com.puppycrawl.tools.checkstyle.AbstractXmlTestSupport;
 import com.puppycrawl.tools.checkstyle.Checker;
@@ -82,6 +84,38 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
         verify(config, reportPath, inputPath, outputPath);
     }
 
+    protected void verify(ReportParser parser, String... testNames) throws Exception {
+        final List<String> testCaseNames = Arrays.asList(testNames);
+        final Configuration config = getCheckConfigurations(getInputFilePath(testCaseNames.get(0)));
+
+        final List<String> inputPaths = new ArrayList<>();
+        final List<String> outputPaths = new ArrayList<>();
+
+        for (String testCaseName : testCaseNames) {
+            inputPaths.add(getInputFilePath(testCaseName));
+            outputPaths.add(getOutputFilePath(testCaseName));
+        }
+
+        for (String outputPath : outputPaths) {
+            verifyOutputFile(outputPath, config);
+        }
+
+        final ReportType reportType = ReportType.fromParser(parser);
+        final Path reportPath = runCheckstyleOnMultipleFiles(inputPaths, config, reportType);
+
+        final List<CheckstyleViolation> allViolations = parser.parse(reportPath);
+        for (String inputPath : inputPaths) {
+            final String fullPath = getPath(inputPath);
+            final List<CheckstyleViolation> fileViolations = allViolations.stream()
+                    .filter(violation -> violation.getFilePath().endsWith(fullPath))
+                    .toList();
+            verifyWithInlineConfigParser(fullPath,
+                    convertToExpectedMessages(fileViolations));
+        }
+
+        verify(config, reportPath, inputPaths, outputPaths);
+    }
+
     protected void verify(ReportParser parser, Configuration config, String testCaseName)
             throws Exception {
         final String inputPath = getInputFilePath(testCaseName);
@@ -113,6 +147,35 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
         }
     }
 
+    private void verify(Configuration config, Path reportPath, List<String> inputPaths,
+                        List<String> outputPaths) throws Exception {
+        final Path configPath = createConfigFile(config);
+
+        try {
+            final Recipe mainRecipe = new CheckstyleAutoFix(reportPath.toString(),
+                    configPath.toString());
+            final List<SourceSpecs> sources = new ArrayList<>();
+
+            for (int index = 0; index < inputPaths.size(); index++) {
+                final String inputPath = getPath(inputPaths.get(index));
+                final String outputPath = getPath(outputPaths.get(index));
+
+                final String beforeCode = Files.readString(Path.of(inputPath));
+                final String expectedAfterCode = Files.readString(Path.of(outputPath));
+
+                sources.add(java(beforeCode, expectedAfterCode,
+                        spec -> spec.path(inputPath).noTrim()));
+            }
+
+            testRecipeOnMultipleFiles(sources, new InputClassRenamer(),
+                    mainRecipe, new RemoveViolationComments());
+        }
+        finally {
+            Files.deleteIfExists(configPath);
+            Files.deleteIfExists(reportPath);
+        }
+    }
+
     private Path runCheckstyle(String inputPath, Configuration config,
                                ReportType reportType) throws Exception {
 
@@ -122,6 +185,27 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
             checker.addListener(reportListener);
 
             final List<File> filesToCheck = List.of(new File(getPath(inputPath)));
+            checker.process(filesToCheck);
+
+            final Path reportPath = Files.createTempFile("checkstyle-report",
+                    reportType.extension());
+            Files.write(reportPath, reportOutStream.toByteArray());
+            return reportPath;
+        }
+    }
+
+    private Path runCheckstyleOnMultipleFiles(List<String> inputPaths, Configuration config,
+                               ReportType reportType) throws Exception {
+
+        final Checker checker = createChecker(config);
+        try (ByteArrayOutputStream reportOutStream = new ByteArrayOutputStream()) {
+            final AuditListener reportListener = createReportListener(reportType, reportOutStream);
+            checker.addListener(reportListener);
+
+            final List<File> filesToCheck = new ArrayList<>();
+            for (String inputPath : inputPaths) {
+                filesToCheck.add(new File(getPath(inputPath)));
+            }
             checker.process(filesToCheck);
 
             final Path reportPath = Files.createTempFile("checkstyle-report",
@@ -213,6 +297,16 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
             rewriteRun(
                     spec -> spec.recipes(recipes),
                     java(beforeCode, expectedAfterCode, spec -> spec.path(filePath).noTrim())
+            );
+        });
+    }
+
+    private void testRecipeOnMultipleFiles(List<SourceSpecs> sources, Recipe... recipes) {
+
+        assertDoesNotThrow(() -> {
+            rewriteRun(
+                    spec -> spec.recipes(recipes),
+                    sources.toArray(SourceSpecs[]::new)
             );
         });
     }

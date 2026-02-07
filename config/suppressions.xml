@@ -14,6 +14,9 @@
     <suppress checks="DesignForExtension" files=".*"/>
 
     <suppress checks="ClassDataAbstractionCoupling" files="[\\/]src[\\/]test[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]AbstractRecipeTestSupport\.java"/>
+    <suppress checks="ClassDataAbstractionCoupling" files="[\\/]src[\\/]main[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]CheckstyleRecipeRegistry\.java"/>
 
     <suppress checks="MissingNullCaseInSwitch" files="[\\/]src[\\/]main[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]NewlineAtEndOfFile\.java"/>
+
+    <suppress checks="ImportControlCheck" files="[\\/]src[\\/]test[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]NumericalPrefixesInfixesSuffixesCharacterCaseTest\.java"/>
 </suppressions>
