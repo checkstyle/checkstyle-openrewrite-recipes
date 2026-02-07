@@ -1,0 +1,11 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/numericalprefixesinfixessuffixescharactercase/numericalcharactercasefour/InputNumericalCharacterCaseFour.java
++++ src/test/resources/org/checkstyle/autofix/recipe/numericalprefixesinfixessuffixescharactercase/numericalcharactercasefour/OutputNumericalCharacterCaseFour.java
+@@ -9,7 +9,7 @@
+ 
+ package org.checkstyle.autofix.recipe.numericalprefixesinfixessuffixescharactercase.numericalcharactercasefour;
+ 
+-public class InputNumericalCharacterCaseFour {
++public class OutputNumericalCharacterCaseFour {
+ 
+     int temp = 123;
+ }

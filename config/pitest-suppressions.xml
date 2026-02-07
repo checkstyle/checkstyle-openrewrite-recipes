@@ -929,6 +929,15 @@
   </mutation>
 
   <mutation unstable="false">
+    <sourceFile>NumericalPrefixesInfixesSuffixesCharacterCase.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.NumericalPrefixesInfixesSuffixesCharacterCase$NumericalPrefixesInfixesSuffixesCharacterCaseVisitor</mutatedClass>
+    <mutatedMethod>visitLiteral</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.ArgumentPropagationMutator</mutator>
+    <description>replaced call to org/openrewrite/java/JavaIsoVisitor::visitLiteral with argument</description>
+    <lineContent>J.Literal result = super.visitLiteral(literal, executionContext);</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
     <sourceFile>PositionHelper.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.PositionHelper</mutatedClass>
     <mutatedMethod>calculateColumnOffset</mutatedMethod>

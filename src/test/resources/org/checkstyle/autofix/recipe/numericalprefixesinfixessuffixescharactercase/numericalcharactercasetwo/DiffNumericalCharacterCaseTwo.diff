@@ -1,0 +1,18 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/numericalprefixesinfixessuffixescharactercase/numericalcharactercasetwo/InputNumericalCharacterCaseTwo.java
++++ src/test/resources/org/checkstyle/autofix/recipe/numericalprefixesinfixessuffixescharactercase/numericalcharactercasetwo/OutputNumericalCharacterCaseTwo.java
+@@ -13,12 +13,10 @@
+ 
+ package org.checkstyle.autofix.recipe.numericalprefixesinfixessuffixescharactercase.numericalcharactercasetwo;
+ 
+-public class InputNumericalCharacterCaseTwo {
++public class OutputNumericalCharacterCaseTwo {
+ 
+     public void calculateValues() {
+-        // violation below, 'Numerical prefix should be in lowercase.'
+-        long hexResult = 0XDEADBEEFl + 0XDEADBEFl; //suppressed violation for 0XDEADBEFl
+-        // violation below, 'Numerical prefix should be in lowercase.'
+-        long octalResult = 0X12l + 0XDEADBEEFl;   //suppressed violation for 0X12l
++        long hexResult = 0xDEADBEEFl + 0XDEADBEFl; //suppressed violation for 0XDEADBEFl
++        long octalResult = 0X12l + 0xDEADBEEFl;   //suppressed violation for 0X12l
+     }
+ }
