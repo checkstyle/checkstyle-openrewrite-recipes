@@ -31,6 +31,7 @@ import org.checkstyle.autofix.recipe.FinalLocalVariable;
 import org.checkstyle.autofix.recipe.Header;
 import org.checkstyle.autofix.recipe.HexLiteralCase;
 import org.checkstyle.autofix.recipe.NewlineAtEndOfFile;
+import org.checkstyle.autofix.recipe.NumericalPrefixesInfixesSuffixesCharacterCase;
 import org.checkstyle.autofix.recipe.RedundantImport;
 import org.checkstyle.autofix.recipe.UpperEll;
 import org.openrewrite.Recipe;
@@ -50,6 +51,8 @@ public final class CheckstyleRecipeRegistry {
         RECIPE_MAP.put(CheckFullName.FINAL_LOCAL_VARIABLE, FinalLocalVariable::new);
         RECIPE_MAP_WITH_CONFIG.put(CheckFullName.HEADER, Header::new);
         RECIPE_MAP_WITH_CONFIG.put(CheckFullName.NEWLINE_AT_END_OF_FILE, NewlineAtEndOfFile::new);
+        RECIPE_MAP.put(CheckFullName.NUMERICAL_PREFIXES_INF_SUF_CASE,
+            NumericalPrefixesInfixesSuffixesCharacterCase::new);
         RECIPE_MAP.put(CheckFullName.REDUNDANT_IMPORT, RedundantImport::new);
     }
 
