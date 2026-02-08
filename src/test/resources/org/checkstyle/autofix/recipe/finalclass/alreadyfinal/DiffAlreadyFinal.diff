@@ -1,0 +1,12 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/finalclass/alreadyfinal/InputAlreadyFinal.java
++++ src/test/resources/org/checkstyle/autofix/recipe/finalclass/alreadyfinal/OutputAlreadyFinal.java
+@@ -8,7 +8,7 @@
+ 
+ package org.checkstyle.autofix.recipe.finalclass.alreadyfinal;
+ 
+-public final class InputAlreadyFinal {
+-    private InputAlreadyFinal() {
++public final class OutputAlreadyFinal {
++    private OutputAlreadyFinal() {
+     }
+ }

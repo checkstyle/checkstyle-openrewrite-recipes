@@ -1,0 +1,12 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/finalclass/privateconstructorwithmethod/InputPrivateConstructorWithMethod.java
++++ src/test/resources/org/checkstyle/autofix/recipe/finalclass/privateconstructorwithmethod/OutputPrivateConstructorWithMethod.java
+@@ -8,7 +8,7 @@
+ 
+ package org.checkstyle.autofix.recipe.finalclass.privateconstructorwithmethod;
+ 
+-class InputPrivateConstructorWithMethod { // violation 'Class InputPrivateConstructorWithMethod should be declared as final.'
+-    private InputPrivateConstructorWithMethod() {}
++final class OutputPrivateConstructorWithMethod {
++    private OutputPrivateConstructorWithMethod() {}
+     void someMethod() {}
+ }

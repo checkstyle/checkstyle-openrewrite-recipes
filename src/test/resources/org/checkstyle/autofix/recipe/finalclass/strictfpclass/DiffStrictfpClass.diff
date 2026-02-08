@@ -1,0 +1,12 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/finalclass/strictfpclass/InputStrictfpClass.java
++++ src/test/resources/org/checkstyle/autofix/recipe/finalclass/strictfpclass/OutputStrictfpClass.java
+@@ -8,7 +8,7 @@
+ 
+ package org.checkstyle.autofix.recipe.finalclass.strictfpclass;
+ 
+-strictfp class InputStrictfpClass { // violation 'Class InputStrictfpClass should be declared as final.'
+-    private InputStrictfpClass() {
++final strictfp class OutputStrictfpClass {
++    private OutputStrictfpClass() {
+     }
+ }

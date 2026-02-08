@@ -19,4 +19,5 @@
     <suppress checks="MissingNullCaseInSwitch" files="[\\/]src[\\/]main[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]NewlineAtEndOfFile\.java"/>
 
     <suppress checks="ImportControlCheck" files="[\\/]src[\\/]test[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]NumericalPrefixesInfixesSuffixesCharacterCaseTest\.java"/>
+    <suppress checks="ImportControlCheck" files="[\\/]src[\\/]test[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]FinalClassTest\.java"/>
 </suppressions>

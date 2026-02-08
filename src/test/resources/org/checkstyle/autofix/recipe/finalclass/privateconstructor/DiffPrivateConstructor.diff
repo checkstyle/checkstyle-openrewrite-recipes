@@ -1,0 +1,12 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/finalclass/privateconstructor/InputPrivateConstructor.java
++++ src/test/resources/org/checkstyle/autofix/recipe/finalclass/privateconstructor/OutputPrivateConstructor.java
+@@ -8,7 +8,7 @@
+ 
+ package org.checkstyle.autofix.recipe.finalclass.privateconstructor;
+ 
+-public class InputPrivateConstructor { // violation 'Class InputPrivateConstructor should be declared as final.'
+-    private InputPrivateConstructor() {
++public final class OutputPrivateConstructor {
++    private OutputPrivateConstructor() {
+     }
+ }

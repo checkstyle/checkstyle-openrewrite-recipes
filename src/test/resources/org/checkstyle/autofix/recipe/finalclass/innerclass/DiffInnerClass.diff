@@ -1,0 +1,22 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/finalclass/innerclass/InputInnerClass.java
++++ src/test/resources/org/checkstyle/autofix/recipe/finalclass/innerclass/OutputInnerClass.java
+@@ -8,15 +8,15 @@
+ 
+ package org.checkstyle.autofix.recipe.finalclass.innerclass;
+ 
+-class InputInnerClass {
++class OutputInnerClass {
+ 
+-    public InputInnerClass() {}
++    public OutputInnerClass() {}
+ 
+-    class InnerWithPrivateCtor { // violation 'Class InnerWithPrivateCtor should be declared as final.'
++    final class InnerWithPrivateCtor {
+         private InnerWithPrivateCtor() {}
+     }
+ 
+-    private class PrivateInner { // violation 'Class PrivateInner should be declared as final.'
++    private final class PrivateInner {
+         private PrivateInner() {}
+     }
+ }
