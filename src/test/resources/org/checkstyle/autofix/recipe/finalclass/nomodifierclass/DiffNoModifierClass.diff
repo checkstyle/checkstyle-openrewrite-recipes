@@ -1,0 +1,12 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/finalclass/nomodifierclass/InputNoModifierClass.java
++++ src/test/resources/org/checkstyle/autofix/recipe/finalclass/nomodifierclass/OutputNoModifierClass.java
+@@ -8,7 +8,7 @@
+ 
+ package org.checkstyle.autofix.recipe.finalclass.nomodifierclass;
+ 
+-class InputNoModifierClass { // violation 'Class InputNoModifierClass should be declared as final.'
+-    private InputNoModifierClass() {
++final class OutputNoModifierClass {
++    private OutputNoModifierClass() {
+     }
+ }

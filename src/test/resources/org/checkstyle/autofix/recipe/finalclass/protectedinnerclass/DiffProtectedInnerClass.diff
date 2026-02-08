@@ -1,0 +1,17 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/finalclass/protectedinnerclass/InputProtectedInnerClass.java
++++ src/test/resources/org/checkstyle/autofix/recipe/finalclass/protectedinnerclass/OutputProtectedInnerClass.java
+@@ -8,11 +8,11 @@
+ 
+ package org.checkstyle.autofix.recipe.finalclass.protectedinnerclass;
+ 
+-class InputProtectedInnerClass {
++class OutputProtectedInnerClass {
+ 
+-    InputProtectedInnerClass() {}
++    OutputProtectedInnerClass() {}
+ 
+-    protected class Inner { // violation 'Class Inner should be declared as final.'
++    protected final class Inner {
+         private Inner() {
+         }
+     }

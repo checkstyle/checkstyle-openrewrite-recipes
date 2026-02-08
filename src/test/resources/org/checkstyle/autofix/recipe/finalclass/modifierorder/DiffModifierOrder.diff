@@ -1,0 +1,17 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/finalclass/modifierorder/InputModifierOrder.java
++++ src/test/resources/org/checkstyle/autofix/recipe/finalclass/modifierorder/OutputModifierOrder.java
+@@ -8,11 +8,11 @@
+ 
+ package org.checkstyle.autofix.recipe.finalclass.modifierorder;
+ 
+-public class InputModifierOrder { // violation 'Class InputModifierOrder should be declared as final.'
+-    private InputModifierOrder() {
++public final class OutputModifierOrder {
++    private OutputModifierOrder() {
+     }
+ 
+-    public static class StaticInnerClass { // violation 'Class StaticInnerClass should be declared as final.'
++    public static final class StaticInnerClass {
+         private StaticInnerClass() {
+         }
+     }

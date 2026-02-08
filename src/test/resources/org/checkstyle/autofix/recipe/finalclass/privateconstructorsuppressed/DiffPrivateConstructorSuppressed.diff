@@ -1,0 +1,12 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/finalclass/privateconstructorsuppressed/InputPrivateConstructorSuppressed.java
++++ src/test/resources/org/checkstyle/autofix/recipe/finalclass/privateconstructorsuppressed/OutputPrivateConstructorSuppressed.java
+@@ -11,7 +11,7 @@
+ package org.checkstyle.autofix.recipe.finalclass.privateconstructorsuppressed;
+ 
+ @SuppressWarnings("checkstyle:FinalClass")
+-public class InputPrivateConstructorSuppressed {
+-    private InputPrivateConstructorSuppressed() {
++public class OutputPrivateConstructorSuppressed {
++    private OutputPrivateConstructorSuppressed() {
+     }
+ }

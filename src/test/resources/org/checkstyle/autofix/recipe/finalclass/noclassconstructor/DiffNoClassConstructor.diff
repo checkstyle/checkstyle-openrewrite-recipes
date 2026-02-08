@@ -1,0 +1,9 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/finalclass/noclassconstructor/InputNoClassConstructor.java
++++ src/test/resources/org/checkstyle/autofix/recipe/finalclass/noclassconstructor/OutputNoClassConstructor.java
+@@ -8,5 +8,5 @@
+ 
+ package org.checkstyle.autofix.recipe.finalclass.noclassconstructor;
+ 
+-public class InputNoClassConstructor {
++public class OutputNoClassConstructor {
+ }

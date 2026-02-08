@@ -1,0 +1,11 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/finalclass/multifileb/InputMultiFileB.java
++++ src/test/resources/org/checkstyle/autofix/recipe/finalclass/multifileb/OutputMultiFileB.java
+@@ -8,6 +8,6 @@
+ 
+ package org.checkstyle.autofix.recipe.finalclass.multifileb;
+ 
+-class InputMultiFileB {
+-    public InputMultiFileB() {}
++class OutputMultiFileB {
++    public OutputMultiFileB() {}
+ }
