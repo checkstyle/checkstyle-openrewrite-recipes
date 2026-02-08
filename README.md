@@ -101,7 +101,7 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 | Status | Check                                                                                                                        | Recipe           | Coverage Notes |
 |--------|------------------------------------------------------------------------------------------------------------------------------|------------------|----------------|
 | 🔴     | [`DesignForExtension`](https://checkstyle.sourceforge.io/checks/design/designforextension.html#DesignForExtension)         |            | Requires design decisions (final/abstract) |
-| 🟢     | [`FinalClass`](https://checkstyle.sourceforge.io/checks/design/finalclass.html#FinalClass)                                 | `TBD`            |                |
+| 🟢     | [`FinalClass`](https://checkstyle.sourceforge.io/checks/design/finalclass.html#FinalClass)                                 | [`FinalClass`](https://github.com/checkstyle/checkstyle-openrewrite-recipes/blob/main/src/main/java/org/checkstyle/autofix/recipe/FinalClass.java) |                |
 | 🟢     | [`HideUtilityClassConstructor`](https://checkstyle.sourceforge.io/checks/design/hideutilityclassconstructor.html#HideUtilityClassConstructor) | `TBD`            |                |
 | 🟢     | [`InnerTypeLast`](https://checkstyle.sourceforge.io/checks/design/innertypelast.html#InnerTypeLast)                        | `TBD`            |                |
 | 🔴     | [`InterfaceIsType`](https://checkstyle.sourceforge.io/checks/design/interfaceistype.html#InterfaceIsType)                  |            | Remove non-type interface members |

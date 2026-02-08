@@ -1,0 +1,15 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/finalclass/enuminnerclass/InputEnumInnerClass.java
++++ src/test/resources/org/checkstyle/autofix/recipe/finalclass/enuminnerclass/OutputEnumInnerClass.java
+@@ -8,10 +8,10 @@
+ 
+ package org.checkstyle.autofix.recipe.finalclass.enuminnerclass;
+ 
+-enum InputEnumInnerClass {
++enum OutputEnumInnerClass {
+     A, B;
+ 
+-    public static class SomeInnerClass { // violation 'Class SomeInnerClass should be declared as final.'
++    public static final class SomeInnerClass {
+         private SomeInnerClass() {}
+     }
+ }

@@ -1,0 +1,17 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/finalclass/staticinnerclass/InputStaticInnerClass.java
++++ src/test/resources/org/checkstyle/autofix/recipe/finalclass/staticinnerclass/OutputStaticInnerClass.java
+@@ -8,11 +8,11 @@
+ 
+ package org.checkstyle.autofix.recipe.finalclass.staticinnerclass;
+ 
+-class InputStaticInnerClass {
++class OutputStaticInnerClass {
+ 
+-    InputStaticInnerClass() {}
++    OutputStaticInnerClass() {}
+ 
+-    static class StaticInner { // violation 'Class StaticInner should be declared as final.'
++    static final class StaticInner {
+         private StaticInner() {}
+     }
+ }

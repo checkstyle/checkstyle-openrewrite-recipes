@@ -1,0 +1,14 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/finalclass/interfaceinnerclass/InputInterfaceInnerClass.java
++++ src/test/resources/org/checkstyle/autofix/recipe/finalclass/interfaceinnerclass/OutputInterfaceInnerClass.java
+@@ -8,9 +8,9 @@
+ 
+ package org.checkstyle.autofix.recipe.finalclass.interfaceinnerclass;
+ 
+-interface InputInterfaceInnerClass {
++interface OutputInterfaceInnerClass {
+ 
+-    class SomeClass { // violation 'Class SomeClass should be declared as final.'
++    final class SomeClass {
+         private SomeClass() {}
+     }
+ }

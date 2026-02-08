@@ -1,0 +1,14 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/finalclass/publicconstructor/InputPublicConstructor.java
++++ src/test/resources/org/checkstyle/autofix/recipe/finalclass/publicconstructor/OutputPublicConstructor.java
+@@ -8,9 +8,9 @@
+ 
+ package org.checkstyle.autofix.recipe.finalclass.publicconstructor;
+ 
+-public class InputPublicConstructor {
++public class OutputPublicConstructor {
+ 
+-    public InputPublicConstructor() {
++    public OutputPublicConstructor() {
+     }
+ 
+     void someMethod() {
