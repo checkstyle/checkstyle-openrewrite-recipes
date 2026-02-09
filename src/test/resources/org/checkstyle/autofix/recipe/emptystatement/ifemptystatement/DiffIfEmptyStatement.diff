@@ -1,0 +1,17 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/emptystatement/ifemptystatement/InputIfEmptyStatement.java
++++ src/test/resources/org/checkstyle/autofix/recipe/emptystatement/ifemptystatement/OutputIfEmptyStatement.java
+@@ -8,11 +8,11 @@
+ 
+ package org.checkstyle.autofix.recipe.emptystatement.ifemptystatement;
+ 
+-public class InputIfEmptyStatement {
++public class OutputIfEmptyStatement {
+ 
+     public void test(boolean condition, boolean other) {
+-        if (condition)
+-            ; // violation 'Empty statement.'
++        if (condition) {
++        }
+ 
+         if (other) {
+             int x = 1;

@@ -1,0 +1,25 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/emptystatement/switchmixedcase/InputSwitchMixedCase.java
++++ src/test/resources/org/checkstyle/autofix/recipe/emptystatement/switchmixedcase/OutputSwitchMixedCase.java
+@@ -8,13 +8,12 @@
+ 
+ package org.checkstyle.autofix.recipe.emptystatement.switchmixedcase;
+ 
+-public class InputSwitchMixedCase {
++public class OutputSwitchMixedCase {
+ 
+     public void test(int value) {
+         switch (value) {
+ 
+             case 1:
+-                ; // violation 'Empty statement.'
+                 break;
+ 
+             case 2:
+@@ -22,7 +21,6 @@
+                 break;
+ 
+             case 3:
+-                ; // violation 'Empty statement.'
+             default:
+                 System.out.println("done");
+         }

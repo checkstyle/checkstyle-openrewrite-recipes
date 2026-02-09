@@ -1,0 +1,11 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/emptystatement/switchcasenoviolation/InputSwitchCaseNoViolation.java
++++ src/test/resources/org/checkstyle/autofix/recipe/emptystatement/switchcasenoviolation/OutputSwitchCaseNoViolation.java
+@@ -8,7 +8,7 @@
+ 
+ package org.checkstyle.autofix.recipe.emptystatement.switchcasenoviolation;
+ 
+-public class InputSwitchCaseNoViolation {
++public class OutputSwitchCaseNoViolation {
+     public void normalSwitch(int value) {
+         switch (value) {
+             case 1:

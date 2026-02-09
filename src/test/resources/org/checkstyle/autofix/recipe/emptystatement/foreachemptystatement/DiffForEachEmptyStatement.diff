@@ -1,0 +1,21 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/emptystatement/foreachemptystatement/InputForEachEmptyStatement.java
++++ src/test/resources/org/checkstyle/autofix/recipe/emptystatement/foreachemptystatement/OutputForEachEmptyStatement.java
+@@ -10,15 +10,14 @@
+ 
+ import java.util.List;
+ 
+-public class InputForEachEmptyStatement {
++public class OutputForEachEmptyStatement {
+     public void method(List<String> items) {
+-        for (String item : items)
+-            ; // violation 'Empty statement.'
++        for (String item : items) {
++        }
+     }
+ 
+     public void methodWithBlock(List<String> items) {
+         for (String item : items) {
+-            ; // violation 'Empty statement.'
+         }
+     }
+ }
