@@ -124,7 +124,7 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 | 🔴     | [`CovariantEquals`](https://checkstyle.sourceforge.io/checks/coding/covariantequals.html#CovariantEquals)                   |           | Requires implementing proper equals(Object) |
 | 🟢     | [`DeclarationOrder`](https://checkstyle.sourceforge.io/checks/coding/declarationorder.html#DeclarationOrder)               | `TBD`           |                |
 | 🟢     | [`DefaultComesLast`](https://checkstyle.sourceforge.io/checks/coding/defaultcomeslast.html#DefaultComesLast)               | `TBD`           |                |
-| 🟢     | [`EmptyStatement`](https://checkstyle.sourceforge.io/checks/coding/emptystatement.html#EmptyStatement)                     | `TBD`           |                |
+| 🟢     | [`EmptyStatement`](https://checkstyle.sourceforge.io/checks/coding/emptystatement.html#EmptyStatement)                     | [`EmptyStatement`](https://github.com/checkstyle/checkstyle-openrewrite-recipes/blob/main/src/main/java/org/checkstyle/autofix/recipe/EmptyStatement.java)           |                |
 | 🟢     | [`EqualsAvoidNull`](https://checkstyle.sourceforge.io/checks/coding/equalsavoidnull.html#EqualsAvoidNull)                 | `TBD`           |                |
 | 🔴     | [`EqualsHashCode`](https://checkstyle.sourceforge.io/checks/coding/equalshashcode.html#EqualsHashCode)                     |           | Implement proper equals/hashCode pair |
 | 🟢     | [`ExplicitInitialization`](https://checkstyle.sourceforge.io/checks/coding/explicitinitialization.html#ExplicitInitialization) | `TBD`           |                |
