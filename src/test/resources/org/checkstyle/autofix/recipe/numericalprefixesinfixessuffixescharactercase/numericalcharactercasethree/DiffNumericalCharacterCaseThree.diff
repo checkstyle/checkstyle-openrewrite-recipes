@@ -1,0 +1,18 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/numericalprefixesinfixessuffixescharactercase/numericalcharactercasethree/InputNumericalCharacterCaseThree.java
++++ src/test/resources/org/checkstyle/autofix/recipe/numericalprefixesinfixessuffixescharactercase/numericalcharactercasethree/OutputNumericalCharacterCaseThree.java
+@@ -13,12 +13,10 @@
+ 
+ package org.checkstyle.autofix.recipe.numericalprefixesinfixessuffixescharactercase.numericalcharactercasethree;
+ 
+-public class InputNumericalCharacterCaseThree {
++public class OutputNumericalCharacterCaseThree {
+     int temp = 123;
+     public void calculateValues() {
+-        // violation below, 'Numerical prefix should be in lowercase.'
+-        float hexResult = 0XABC.p1F + 0XABCD.1p1F; //suppressed violation for 0XABCD.1p1F
+-        // violation below, 'Numerical prefix should be in lowercase.'
+-        float octalResult = 0X.1p2f + 0X.12P1F;   //suppressed violation for 0X.1p2f
++        float hexResult = 0xABC.p1f + 0XABCD.1p1F; //suppressed violation for 0XABCD.1p1F
++        float octalResult = 0X.1p2f + 0x.12p1f;   //suppressed violation for 0X.1p2f
+     }
+ }
