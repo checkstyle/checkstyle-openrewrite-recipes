@@ -52,13 +52,10 @@ public class InputClassRenamer extends Recipe {
         @Override
         public J.ClassDeclaration visitClassDeclaration(J.ClassDeclaration classDecl,
                                                         ExecutionContext executionContext) {
-            final String newName = renameIfMatch(classDecl.getSimpleName());
-            final J.ClassDeclaration result;
+            J.ClassDeclaration result = super.visitClassDeclaration(classDecl, executionContext);
+            final String newName = renameIfMatch(result.getSimpleName());
             if (newName != null) {
-                result = classDecl.withName(classDecl.getName().withSimpleName(newName));
-            }
-            else {
-                result = classDecl;
+                result = result.withName(result.getName().withSimpleName(newName));
             }
             return result;
         }
@@ -66,12 +63,25 @@ public class InputClassRenamer extends Recipe {
         @Override
         public J.NewClass visitNewClass(J.NewClass constructorNode,
                                         ExecutionContext executionContext) {
-            J.NewClass result = constructorNode;
-            if (constructorNode.getClazz() instanceof J.Identifier) {
-                final J.Identifier clazz = (J.Identifier) constructorNode.getClazz();
+            J.NewClass result = super.visitNewClass(constructorNode, executionContext);
+            if (result.getClazz() instanceof J.Identifier) {
+                final J.Identifier clazz = (J.Identifier) result.getClazz();
                 final String newName = renameIfMatch(clazz.getSimpleName());
                 if (newName != null) {
-                    result = constructorNode.withClazz(clazz.withSimpleName(newName));
+                    result = result.withClazz(clazz.withSimpleName(newName));
+                }
+            }
+            return result;
+        }
+
+        @Override
+        public J.MethodDeclaration visitMethodDeclaration(J.MethodDeclaration method,
+                                                          ExecutionContext executionContext) {
+            J.MethodDeclaration result = super.visitMethodDeclaration(method, executionContext);
+            if (result.getReturnTypeExpression() == null) {
+                final String newName = renameIfMatch(result.getSimpleName());
+                if (newName != null) {
+                    result = result.withName(result.getName().withSimpleName(newName));
                 }
             }
             return result;

@@ -1,0 +1,14 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/finalclass/annotationinnerclass/InputAnnotationInnerClass.java
++++ src/test/resources/org/checkstyle/autofix/recipe/finalclass/annotationinnerclass/OutputAnnotationInnerClass.java
+@@ -8,9 +8,9 @@
+ 
+ package org.checkstyle.autofix.recipe.finalclass.annotationinnerclass;
+ 
+-@interface InputAnnotationInnerClass {
++@interface OutputAnnotationInnerClass {
+ 
+-    class SomeClass { // violation 'Class SomeClass should be declared as final.'
++    final class SomeClass {
+         private SomeClass() {}
+     }
+ }
