@@ -30,4 +30,14 @@ public class HexLiteralCaseTest extends AbstractRecipeTestSupport {
     void hexLiteral(ReportParser parser) throws Exception {
         verify(parser, "HexLiteralCase");
     }
+
+    @RecipeTest
+    void hexLiteralTwo(ReportParser parser) throws Exception {
+        verify(parser, "HexLiteralCaseTwo");
+    }
+
+    @RecipeTest
+    void hexLiteralThree(ReportParser parser) throws Exception {
+        verify(parser, "HexLiteralCaseThree");
+    }
 }

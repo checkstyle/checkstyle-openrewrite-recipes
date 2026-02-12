@@ -76,47 +76,75 @@ public class HexLiteralCase extends Recipe {
             J.Literal result = super.visitLiteral(literal, executionContext);
             final String valueSource = result.getValueSource();
 
-            if (shouldProcessLiteral(result, valueSource)) {
-                final String newValueSource = convertLowercaseHexToUppercase(valueSource);
+            if (shouldProcessLongAndIntLiteral(result)) {
+                final String newValueSource =
+                        convertLowercaseHexToUppercaseForLongAndInt(valueSource);
+                result = result.withValueSource(newValueSource);
+            }
+
+            if (shouldProcessFloatAndDoubleLiteral(result)) {
+                final String newValueSource =
+                        convertLowercaseHexToUppercaseForFloatAndDouble(valueSource);
                 result = result.withValueSource(newValueSource);
             }
 
             return result;
         }
 
-        /**
-         * Determines whether the given literal should be processed based on its type and format.
-         *
-         * @param literal the {@link J.Literal} node to check
-         * @param valueSource the source value of the literal as a string
-         * @return {@code true} if the literal meets the criteria for processing,
-         *     {@code false} otherwise
-         */
-        private boolean shouldProcessLiteral(J.Literal literal, String valueSource) {
-            return valueSource != null
-                    && (valueSource.startsWith(HEX_PREFIX)
-                        || valueSource.startsWith(HEX_PREFIX.toUpperCase(Locale.ROOT)))
-                    && (literal.getType() == JavaType.Primitive.Long
+        private boolean shouldProcessLongAndIntLiteral(J.Literal literal) {
+            return (literal.getType() == JavaType.Primitive.Long
                         || literal.getType() == JavaType.Primitive.Int)
                     && isAtViolationLocation(literal);
         }
 
-        /**
-         * Converts any lowercase hexadecimal letters (a-f) to uppercase (A-F).
-         *
-         * @param valueSource the original literal source
-         * @return a new uppercase version if modified, or {@code null} if no changes were made
-         */
-        private String convertLowercaseHexToUppercase(String valueSource) {
-            final String prefix = valueSource.substring(0, HEX_PREFIX.length());
-            String result = prefix
-                    + valueSource.substring(prefix.length()).toUpperCase(Locale.ROOT);
+        private boolean shouldProcessFloatAndDoubleLiteral(J.Literal literal) {
+            return (literal.getType() == JavaType.Primitive.Float
+                        || literal.getType() == JavaType.Primitive.Double)
+                    && isAtViolationLocation(literal);
+        }
+
+        private String convertLowercaseHexToUppercaseForLongAndInt(String valueSource) {
+            final int lIndex = valueSource.indexOf("l");
+            final StringBuilder result = new StringBuilder();
+
+            result.append(valueSource.substring(0, HEX_PREFIX.length()));
+
+            if (lIndex != -1) {
+                result.append(valueSource.substring(HEX_PREFIX.length(), lIndex)
+                                        .toUpperCase(Locale.ROOT));
+                result.append(valueSource.substring(lIndex));
+            }
+            else {
+                result.append(valueSource.substring(HEX_PREFIX.length())
+                                        .toUpperCase(Locale.ROOT));
+            }
+
+            String finalResult = result.toString();
 
             // Avoid extra cycle by skipping identical replacements
-            if (result.equals(valueSource)) {
-                result = valueSource;
+            if (finalResult.equals(valueSource)) {
+                finalResult = valueSource;
             }
-            return result;
+            return finalResult;
+        }
+
+        private String convertLowercaseHexToUppercaseForFloatAndDouble(String valueSource) {
+            final String lowercaseValueSource = valueSource.toLowerCase(Locale.ROOT);
+            final int pIndex = lowercaseValueSource.indexOf("p");
+            final StringBuilder result = new StringBuilder();
+
+            result.append(valueSource.substring(0, HEX_PREFIX.length()));
+            result.append(valueSource.substring(HEX_PREFIX.length(), pIndex)
+                                    .toUpperCase(Locale.ROOT));
+            result.append(valueSource.substring(pIndex));
+
+            String finalResult = result.toString();
+
+            // Avoid extra cycle by skipping identical replacements
+            if (finalResult.equals(valueSource)) {
+                finalResult = valueSource;
+            }
+            return finalResult;
         }
 
         private boolean isAtViolationLocation(J.Literal literal) {

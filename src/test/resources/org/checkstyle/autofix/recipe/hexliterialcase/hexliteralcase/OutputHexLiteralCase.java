@@ -30,4 +30,5 @@ public class OutputHexLiteralCase {
         System.out.println("Second: " + second);
     }
 
+    long l3 = 0xABCl;
 }
