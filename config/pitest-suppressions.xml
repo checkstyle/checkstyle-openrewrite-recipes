@@ -598,15 +598,6 @@
   <mutation unstable="false">
     <sourceFile>HexLiteralCase.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.recipe.HexLiteralCase$HexLiteralCaseVisitor</mutatedClass>
-    <mutatedMethod>isAtViolationLocation</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.BooleanTrueReturnValsMutator</mutator>
-    <description>replaced boolean return with true for org/checkstyle/autofix/recipe/HexLiteralCase$HexLiteralCaseVisitor::isAtViolationLocation</description>
-    <lineContent>return violations.stream().anyMatch(violation -&gt; {</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>HexLiteralCase.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.HexLiteralCase$HexLiteralCaseVisitor</mutatedClass>
     <mutatedMethod>lambda$isAtViolationLocation$0</mutatedMethod>
     <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
     <description>removed conditional - replaced equality check with true</description>
@@ -617,90 +608,9 @@
     <sourceFile>HexLiteralCase.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.recipe.HexLiteralCase$HexLiteralCaseVisitor</mutatedClass>
     <mutatedMethod>lambda$isAtViolationLocation$0</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
-    <description>removed conditional - replaced equality check with true</description>
-    <lineContent>&amp;&amp; violation.getColumn() == column</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>HexLiteralCase.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.HexLiteralCase$HexLiteralCaseVisitor</mutatedClass>
-    <mutatedMethod>lambda$isAtViolationLocation$0</mutatedMethod>
     <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.NakedReceiverMutator</mutator>
     <description>replaced call to java/nio/file/Path::toAbsolutePath with receiver</description>
     <lineContent>final Path absolutePath = violation.getFilePath().toAbsolutePath();</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>HexLiteralCase.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.HexLiteralCase$HexLiteralCaseVisitor</mutatedClass>
-    <mutatedMethod>lambda$isAtViolationLocation$0</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
-    <description>removed conditional - replaced equality check with true</description>
-    <lineContent>return violation.getLine() == line</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>HexLiteralCase.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.HexLiteralCase$HexLiteralCaseVisitor</mutatedClass>
-    <mutatedMethod>lambda$isAtViolationLocation$0</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.BooleanTrueReturnValsMutator</mutator>
-    <description>replaced boolean return with true for org/checkstyle/autofix/recipe/HexLiteralCase$HexLiteralCaseVisitor::lambda$isAtViolationLocation$0</description>
-    <lineContent>return violation.getLine() == line</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>HexLiteralCase.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.HexLiteralCase$HexLiteralCaseVisitor</mutatedClass>
-    <mutatedMethod>shouldProcessLiteral</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_ELSE</mutator>
-    <description>removed conditional - replaced equality check with false</description>
-    <lineContent>&amp;&amp; (literal.getType() == JavaType.Primitive.Long</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>HexLiteralCase.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.HexLiteralCase$HexLiteralCaseVisitor</mutatedClass>
-    <mutatedMethod>shouldProcessLiteral</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_ELSE</mutator>
-    <description>removed conditional - replaced equality check with false</description>
-    <lineContent>&amp;&amp; (valueSource.startsWith(HEX_PREFIX)</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>HexLiteralCase.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.HexLiteralCase$HexLiteralCaseVisitor</mutatedClass>
-    <mutatedMethod>shouldProcessLiteral</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
-    <description>removed conditional - replaced equality check with true</description>
-    <lineContent>&amp;&amp; isAtViolationLocation(literal);</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>HexLiteralCase.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.HexLiteralCase$HexLiteralCaseVisitor</mutatedClass>
-    <mutatedMethod>shouldProcessLiteral</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
-    <description>removed conditional - replaced equality check with true</description>
-    <lineContent>return valueSource != null</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>HexLiteralCase.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.HexLiteralCase$HexLiteralCaseVisitor</mutatedClass>
-    <mutatedMethod>shouldProcessLiteral</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
-    <description>removed conditional - replaced equality check with true</description>
-    <lineContent>|| literal.getType() == JavaType.Primitive.Int)</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>HexLiteralCase.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.HexLiteralCase$HexLiteralCaseVisitor</mutatedClass>
-    <mutatedMethod>shouldProcessLiteral</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
-    <description>removed conditional - replaced equality check with true</description>
-    <lineContent>|| valueSource.startsWith(HEX_PREFIX.toUpperCase(Locale.ROOT)))</lineContent>
   </mutation>
 
   <mutation unstable="false">
