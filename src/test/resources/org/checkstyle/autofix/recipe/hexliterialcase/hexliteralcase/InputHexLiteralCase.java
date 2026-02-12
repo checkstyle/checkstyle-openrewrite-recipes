@@ -33,4 +33,5 @@ public class InputHexLiteralCase {
         System.out.println("Second: " + second);
     }
 
+    long l3 = 0xABcl; // violation 'Should use uppercase hexadecimal letters.'
 }

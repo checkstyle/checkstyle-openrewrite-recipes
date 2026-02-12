@@ -1,6 +1,6 @@
 --- src/test/resources/org/checkstyle/autofix/recipe/hexliterialcase/hexliteralcase/InputHexLiteralCase.java
 +++ src/test/resources/org/checkstyle/autofix/recipe/hexliterialcase/hexliteralcase/OutputHexLiteralCase.java
-@@ -9,24 +9,21 @@
+@@ -9,29 +9,26 @@
  
  package org.checkstyle.autofix.recipe.hexliterialcase.hexliteralcase;
  
@@ -36,3 +36,9 @@
      }
      private static void functionCall2(int first, int second) {
          System.out.println("First: " + first);
+         System.out.println("Second: " + second);
+     }
+ 
+-    long l3 = 0xABcl; // violation 'Should use uppercase hexadecimal letters.'
++    long l3 = 0xABCl;
+ }
