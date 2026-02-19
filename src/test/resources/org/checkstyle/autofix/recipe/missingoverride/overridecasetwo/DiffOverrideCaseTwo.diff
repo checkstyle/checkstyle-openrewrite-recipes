@@ -1,0 +1,47 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/missingoverride/overridecasetwo/InputOverrideCaseTwo.java
++++ src/test/resources/org/checkstyle/autofix/recipe/missingoverride/overridecasetwo/OutputOverrideCaseTwo.java
+@@ -11,21 +11,23 @@
+ 
+ import javax.annotation.Nullable;
+ 
+-public class InputOverrideCaseTwo {
++public class OutputOverrideCaseTwo {
+     Runnable r = new Runnable() {
+ 
+ 
+         /**
+          * {@inheritDoc}
+          */
+-        @Nullable// violation 'include.*@java.lang.Override.*when.*'@inheritDoc''
++        @Nullable
++        @Override
+         public void run() {
+             Throwable t = new Throwable() {
+ 
+                 /**
+                  * {@inheritDoc}
+                  */
+-                public String toString() {// violation 'include.*@java.lang.Override.*when.*'@inheritDoc''
++                @Override
++                public String toString() {
+                     return "junk";
+                 }
+             };
+@@ -38,13 +40,15 @@
+         /**
+          * {@inheritDoc}
+          */
+-        public void run() {// violation 'include.*@java.lang.Override.*when.*'@inheritDoc''
++        @Override
++        public void run() {
+             Throwable t = new Throwable() {
+ 
+             /**
+              * {@inheritDoc}
+              */
+-            public String toString() {// violation 'include.*@java.lang.Override.*when.*'@inheritDoc''
++            @Override
++            public String toString() {
+                 return "junk";
+             }
+             };

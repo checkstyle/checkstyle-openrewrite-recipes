@@ -80,7 +80,7 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 | 🟢     | [`AnnotationOnSameLine`](https://checkstyle.sourceforge.io/checks/annotation/annotationonsameline.html#AnnotationOnSameLine) | `TBD`            |                |
 | 🔴     | [`AnnotationUseStyle`](https://checkstyle.sourceforge.io/checks/annotation/annotationusestyle.html#AnnotationUseStyle)       |            | Standardize annotation syntax |
 | 🟢     | [`MissingDeprecated`](https://checkstyle.sourceforge.io/checks/annotation/missingdeprecated.html#MissingDeprecated)         | `TBD`            |                |
-| 🟢     | [`MissingOverride`](https://checkstyle.sourceforge.io/checks/annotation/missingoverride.html#MissingOverride)               | `TBD`            |                |
+| 🟢     | [`MissingOverride`](https://checkstyle.sourceforge.io/checks/annotation/missingoverride.html#MissingOverride)               |[`MissingOverride`](https://github.com/checkstyle/checkstyle-openrewrite-recipes/blob/main/src/main/java/org/checkstyle/autofix/recipe/MissingOverride.java)           |                |
 | 🟢     | [`PackageAnnotation`](https://checkstyle.sourceforge.io/checks/annotation/packageannotation.html#PackageAnnotation)         | `TBD`            |                |
 | 🔴     | [`SuppressWarnings`](https://checkstyle.sourceforge.io/checks/annotation/suppresswarnings.html#SuppressWarnings)           |            | Remove inappropriate suppressions |
 

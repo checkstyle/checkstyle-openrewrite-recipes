@@ -1,0 +1,18 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/missingoverride/overridecasefive/InputOverrideCaseFive.java
++++ src/test/resources/org/checkstyle/autofix/recipe/missingoverride/overridecasefive/OutputOverrideCaseFive.java
+@@ -13,12 +13,13 @@
+ 
+ package org.checkstyle.autofix.recipe.missingoverride.overridecasefive;
+ 
+-public class InputOverrideCaseFive {
++public class OutputOverrideCaseFive {
+ 
+     /**
+      * {@inheritDoc}
+      */
+-    public boolean equals(Object obj) {// violation 'include.*@java.lang.Override.*when.*'@inheritDoc''
++    @Override
++    public boolean equals(Object obj) {
+         return super.equals(obj);
+     }
+ }

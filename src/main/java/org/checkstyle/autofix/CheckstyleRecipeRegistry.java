@@ -32,6 +32,7 @@ import org.checkstyle.autofix.recipe.FinalClass;
 import org.checkstyle.autofix.recipe.FinalLocalVariable;
 import org.checkstyle.autofix.recipe.Header;
 import org.checkstyle.autofix.recipe.HexLiteralCase;
+import org.checkstyle.autofix.recipe.MissingOverride;
 import org.checkstyle.autofix.recipe.NewlineAtEndOfFile;
 import org.checkstyle.autofix.recipe.NumericalPrefixesInfixesSuffixesCharacterCase;
 import org.checkstyle.autofix.recipe.RedundantImport;
@@ -60,6 +61,7 @@ public final class CheckstyleRecipeRegistry {
             NumericalPrefixesInfixesSuffixesCharacterCase::new);
         RECIPE_MAP.put(CheckFullName.REDUNDANT_IMPORT, RedundantImport::new);
         RECIPE_MAP.put(CheckFullName.USE_ENHANCED_SWITCH, UseEnhancedSwitch::new);
+        RECIPE_MAP.put(CheckFullName.MISSING_OVERRIDE, MissingOverride::new);
     }
 
     private CheckstyleRecipeRegistry() {
