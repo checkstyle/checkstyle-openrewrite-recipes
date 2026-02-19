@@ -1,0 +1,22 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/missingoverride/overridecase/InputOverrideCase.java
++++ src/test/resources/org/checkstyle/autofix/recipe/missingoverride/overridecase/OutputOverrideCase.java
+@@ -9,14 +9,16 @@
+ 
+ package org.checkstyle.autofix.recipe.missingoverride.overridecase;
+ 
+-public class InputOverrideCase implements TestInterface {
++public class OutputOverrideCase implements TestInterface {
+     /**
+      * {@inheritDoc}
+      */
+-    public void doSomething() {} // violation 'include @java.lang.Override annotation when '@inheritDoc''
++    @Override
++    public void doSomething() {}
+ 
+     /**
+      * {@inheritDoc}
+      */
+-    public void doFoo2() {} // violation 'include @java.lang.Override annotation when '@inheritDoc''
++    @Override
++    public void doFoo2() {}
+ }

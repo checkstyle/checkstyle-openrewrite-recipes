@@ -1,0 +1,38 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/missingoverride/overridecasethree/InputOverrideCaseThree.java
++++ src/test/resources/org/checkstyle/autofix/recipe/missingoverride/overridecasethree/OutputOverrideCaseThree.java
+@@ -11,13 +11,14 @@
+ 
+ import javax.annotation.Nullable;
+ 
+-public class InputOverrideCaseThree extends TestClass {
++public class OutputOverrideCaseThree extends TestClass {
+ 
+     /**
+      * {@inheritDoc}
+      */
+     // hello
+-    void doFoo() {// violation 'include.*@java.lang.Override.*when.*'@inheritDoc''
++    @Override
++    void doFoo() {
+         int a  = 20;
+     }
+ 
+@@ -27,14 +28,16 @@
+         /**
+          * {@inheritDoc}
+          */
+-        @Nullable// violation 'include.*@java.lang.Override.*when.*'@inheritDoc''
++        @Nullable
++        @Override
+         public void run() {
+             Throwable t = new Throwable() {
+ 
+                 /**
+                  * {@inheritDoc}
+                  */
+-                public String// violation 'include.*@java.lang.Override.*when.*'@inheritDoc''
++                @Override
++                public String
+                 toString() {
+                     return "junk";
+                 }

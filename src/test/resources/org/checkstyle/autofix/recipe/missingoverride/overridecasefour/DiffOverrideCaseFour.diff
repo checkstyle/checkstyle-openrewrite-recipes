@@ -1,0 +1,21 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/missingoverride/overridecasefour/InputOverrideCaseFour.java
++++ src/test/resources/org/checkstyle/autofix/recipe/missingoverride/overridecasefour/OutputOverrideCaseFour.java
+@@ -13,7 +13,7 @@
+ 
+ package org.checkstyle.autofix.recipe.missingoverride.overridecasefour;
+ 
+-public class InputOverrideCaseFour {
++public class OutputOverrideCaseFour {
+     
+     /**
+      * {@inheritDoc}
+@@ -25,7 +25,8 @@
+     /**
+      * {@inheritDoc}
+      */
+-    public boolean equals(Object obj) {// violation 'include.*@java.lang.Override.*when.*'@inheritDoc''
++    @Override
++    public boolean equals(Object obj) {
+         return super.equals(obj);
+     }
+ }
