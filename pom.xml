@@ -413,6 +413,7 @@
                                 <param>org.checkstyle.autofix.recipe.UseEnhancedSwitch*</param>
                                 <param>org.checkstyle.autofix.recipe.AnnotationOnSameLine*</param>
                                 <param>org.checkstyle.autofix.recipe.ConstructorsDeclarationGrouping*</param>
+                                <param>org.checkstyle.autofix.recipe.UnusedImports*</param>
                             </targetClasses>
                             <targetTests>
                                 <param>org.checkstyle.autofix.recipe.NewLineAtEndOfFileTest</param>
@@ -422,6 +423,7 @@
                                 <param>org.checkstyle.autofix.recipe.UseEnhancedSwitchTest</param>
                                 <param>org.checkstyle.autofix.recipe.AnnotationOnSameLineTest</param>
                                 <param>org.checkstyle.autofix.recipe.ConstructorsDeclarationGroupingTest</param>
+                                <param>org.checkstyle.autofix.recipe.UnusedImportsTest</param>
                             </targetTests>
 
                             <mutators>

@@ -39,6 +39,7 @@ import org.checkstyle.autofix.recipe.MissingOverride;
 import org.checkstyle.autofix.recipe.NewlineAtEndOfFile;
 import org.checkstyle.autofix.recipe.NumericalPrefixesInfixesSuffixesCharacterCase;
 import org.checkstyle.autofix.recipe.RedundantImport;
+import org.checkstyle.autofix.recipe.UnusedImports;
 import org.checkstyle.autofix.recipe.UpperEll;
 import org.checkstyle.autofix.recipe.UseEnhancedSwitch;
 import org.openrewrite.Recipe;
@@ -69,6 +70,7 @@ public final class CheckstyleRecipeRegistry {
         RECIPE_MAP.put(CheckFullName.ANNOTATION_ON_SAME_LINE, AnnotationOnSameLine::new);
         RECIPE_MAP.put(CheckFullName.USE_ENHANCED_SWITCH, UseEnhancedSwitch::new);
         RECIPE_MAP.put(CheckFullName.MISSING_OVERRIDE, MissingOverride::new);
+        RECIPE_MAP.put(CheckFullName.UNUSED_IMPORT, UnusedImports::new);
     }
 
     private CheckstyleRecipeRegistry() {

@@ -37,7 +37,8 @@ public enum CheckFullName {
     USE_ENHANCED_SWITCH("com.puppycrawl.tools.checkstyle.checks.coding.UseEnhancedSwitchCheck"),
     MISSING_OVERRIDE("com.puppycrawl.tools.checkstyle.checks.annotation.MissingOverrideCheck"),
     CONSTRUCTORS_DECLARATION_GROUPING(
-        "com.puppycrawl.tools.checkstyle.checks.coding.ConstructorsDeclarationGroupingCheck");
+        "com.puppycrawl.tools.checkstyle.checks.coding.ConstructorsDeclarationGroupingCheck"),
+    UNUSED_IMPORT("com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck");
 
     private final String id;
 
