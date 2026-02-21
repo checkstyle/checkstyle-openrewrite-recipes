@@ -176,7 +176,7 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 | 🔴     | [`ImportControl`](https://checkstyle.sourceforge.io/checks/imports/importcontrol.html#ImportControl)                       |                                                                                                                                                | Restructure imports per rules |
 | 🟢     | [`ImportOrder`](https://checkstyle.sourceforge.io/checks/imports/importorder.html#ImportOrder)                             | `TBD`                                                                                                                                                |                |
 | 🟢     | [`RedundantImport`](https://checkstyle.sourceforge.io/checks/imports/redundantimport.html#RedundantImport)                 | [`RedundantImport`](https://github.com/checkstyle/checkstyle-openrewrite-recipes/blob/main/src/main/java/org/checkstyle/autofix/recipe/RedundantImport.java) |                |
-| 🟢     | [`UnusedImports`](https://checkstyle.sourceforge.io/checks/imports/unusedimports.html#UnusedImports)                       | `TBD`                                                                                                                                                |                |
+| 🟢     | [`UnusedImports`](https://checkstyle.sourceforge.io/checks/imports/unusedimports.html#UnusedImports)                       | [`UnusedImports`](https://github.com/checkstyle/checkstyle-openrewrite-recipes/blob/main/src/main/java/org/checkstyle/autofix/recipe/UnusedImports.java) |                |
 
 
 ### Javadoc Comments

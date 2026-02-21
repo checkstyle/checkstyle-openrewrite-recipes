@@ -1,0 +1,16 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/unusedimports/unusedcasetwo/InputUnusedCaseTwo.java
++++ src/test/resources/org/checkstyle/autofix/recipe/unusedimports/unusedcasetwo/OutputUnusedCaseTwo.java
+@@ -11,12 +11,11 @@
+ 
+ import java.io.*;
+ import java.lang.*;
+-import java.lang.String; // violation 'Unused import - java.lang.String.'
+ 
+ import java.util.List;
+ import java.lang.*;
+ 
+-public class InputUnusedCaseTwo {
++public class OutputUnusedCaseTwo {
+   File[] files;
+   List<Integer> list;
+ }
