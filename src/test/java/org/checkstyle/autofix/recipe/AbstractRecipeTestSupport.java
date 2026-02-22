@@ -71,19 +71,6 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
         });
     }
 
-    protected void verify(ReportParser parser, String testCaseName) throws Exception {
-        final String inputPath = getInputFilePath(testCaseName);
-        final String outputPath = getOutputFilePath(testCaseName);
-        final Configuration config = getCheckConfigurations(inputPath);
-        verifyOutputFile(outputPath, config);
-
-        final ReportType reportType = ReportType.fromParser(parser);
-        final Path reportPath = runCheckstyle(inputPath, config, reportType);
-        verifyWithInlineConfigParser(getPath(inputPath),
-                convertToExpectedMessages(parser.parse(reportPath)));
-        verify(config, reportPath, inputPath, outputPath);
-    }
-
     protected void verify(ReportParser parser, String... testNames) throws Exception {
         final List<String> testCaseNames = Arrays.asList(testNames);
         final Configuration config = getCheckConfigurations(getInputFilePath(testCaseNames.get(0)));
@@ -116,35 +103,25 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
         verify(config, reportPath, inputPaths, outputPaths);
     }
 
-    protected void verify(ReportParser parser, Configuration config, String testCaseName)
+    protected void verify(ReportParser parser, Configuration config, String... testNames)
             throws Exception {
-        final String inputPath = getInputFilePath(testCaseName);
-        final String outputPath = getOutputFilePath(testCaseName);
-        verifyOutputFile(outputPath, config);
+        final List<String> testCaseNames = Arrays.asList(testNames);
+
+        final List<String> inputPaths = new ArrayList<>();
+        final List<String> outputPaths = new ArrayList<>();
+
+        for (String testCaseName : testCaseNames) {
+            inputPaths.add(getInputFilePath(testCaseName));
+            outputPaths.add(getOutputFilePath(testCaseName));
+        }
+
+        for (String outputPath : outputPaths) {
+            verifyOutputFile(outputPath, config);
+        }
 
         final ReportType reportType = ReportType.fromParser(parser);
-        final Path reportPath = runCheckstyle(inputPath, config, reportType);
-        verify(config, reportPath, inputPath, outputPath);
-    }
-
-    private void verify(Configuration config, Path reportPath, String inputPath, String outputPath)
-            throws Exception {
-        final Path configPath = createConfigFile(config);
-
-        try {
-            final Recipe mainRecipe = new CheckstyleAutoFix(reportPath.toString(),
-                    configPath.toString());
-            final String beforeCode = Files.readString(Path.of(getPath(inputPath)));
-            final String expectedAfterCode = Files.readString(Path.of(getPath(outputPath)));
-
-            testRecipe(beforeCode, expectedAfterCode,
-                    getPath(inputPath), new InputClassRenamer(),
-                    mainRecipe, new RemoveViolationComments());
-        }
-        finally {
-            Files.deleteIfExists(configPath);
-            Files.deleteIfExists(reportPath);
-        }
+        final Path reportPath = runCheckstyleOnMultipleFiles(inputPaths, config, reportType);
+        verify(config, reportPath, inputPaths, outputPaths);
     }
 
     private void verify(Configuration config, Path reportPath, List<String> inputPaths,
@@ -173,24 +150,6 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
         finally {
             Files.deleteIfExists(configPath);
             Files.deleteIfExists(reportPath);
-        }
-    }
-
-    private Path runCheckstyle(String inputPath, Configuration config,
-                               ReportType reportType) throws Exception {
-
-        final Checker checker = createChecker(config);
-        try (ByteArrayOutputStream reportOutStream = new ByteArrayOutputStream()) {
-            final AuditListener reportListener = createReportListener(reportType, reportOutStream);
-            checker.addListener(reportListener);
-
-            final List<File> filesToCheck = List.of(new File(getPath(inputPath)));
-            checker.process(filesToCheck);
-
-            final Path reportPath = Files.createTempFile("checkstyle-report",
-                    reportType.extension());
-            Files.write(reportPath, reportOutStream.toByteArray());
-            return reportPath;
         }
     }
 
@@ -289,16 +248,6 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
                     return message + violation.getMessage();
                 })
                 .toArray(String[]::new);
-    }
-
-    private void testRecipe(String beforeCode, String expectedAfterCode,
-                            String filePath, Recipe... recipes) {
-        assertDoesNotThrow(() -> {
-            rewriteRun(
-                    spec -> spec.recipes(recipes),
-                    java(beforeCode, expectedAfterCode, spec -> spec.path(filePath).noTrim())
-            );
-        });
     }
 
     private void testRecipeOnMultipleFiles(List<SourceSpecs> sources, Recipe... recipes) {
