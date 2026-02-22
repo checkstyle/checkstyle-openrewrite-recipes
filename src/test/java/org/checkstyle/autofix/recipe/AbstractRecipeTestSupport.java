@@ -18,6 +18,7 @@
 package org.checkstyle.autofix.recipe;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.openrewrite.java.Assertions.java;
 
 import java.io.BufferedWriter;
@@ -41,7 +42,11 @@ import org.checkstyle.autofix.parser.SarifReportParser;
 import org.checkstyle.autofix.parser.XmlReportParser;
 import org.junit.jupiter.api.Named;
 import org.junit.jupiter.params.provider.Arguments;
+import org.openrewrite.ExecutionContext;
+import org.openrewrite.InMemoryExecutionContext;
 import org.openrewrite.Recipe;
+import org.openrewrite.java.JavaIsoVisitor;
+import org.openrewrite.java.tree.J;
 import org.openrewrite.test.RewriteTest;
 import org.openrewrite.test.SourceSpecs;
 
@@ -253,11 +258,28 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
     private void testRecipeOnMultipleFiles(List<SourceSpecs> sources, Recipe... recipes) {
 
         assertDoesNotThrow(() -> {
-            rewriteRun(
-                    spec -> spec.recipes(recipes),
-                    sources.toArray(SourceSpecs[]::new)
-            );
+            runMultiFileRecipe(sources, recipes);
         });
+    }
+
+    private void runMultiFileRecipe(List<SourceSpecs> sources,
+                                    Recipe... recipes) {
+
+        rewriteRun(
+                spec -> spec.recipes(recipes).afterRecipe(this::validateRecipeRun),
+                sources.toArray(SourceSpecs[]::new));
+    }
+
+    private void validateRecipeRun(org.openrewrite.RecipeRun run) {
+        run.getChangeset()
+                .getAllResults()
+                .forEach(this::validateResult);
+    }
+
+    private void validateResult(org.openrewrite.Result result) {
+        if (result.getAfter() instanceof J tree) {
+            assertAllNodesHaveId(tree);
+        }
     }
 
     private String getInputFilePath(String testCaseName) {
@@ -309,4 +331,32 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
             return result;
         }
     }
+
+    /**
+     * Verifies that all J nodes in the AST have a non-null ID.
+     * This helps kill mutations like removal of Tree.randomId().
+     *
+     * @param tree the root AST node to validate
+     */
+    protected void assertAllNodesHaveId(J tree) {
+        tree.accept(new JavaIsoVisitor<ExecutionContext>() {
+
+            @Override
+            public J preVisit(J tree, ExecutionContext executionContext) {
+                assertNotNull(
+                        tree.getId(),
+                        () -> {
+                            return "AST node "
+                                    + tree.getClass().getSimpleName()
+                                    + " has null ID";
+                        }
+                );
+                return super.preVisit(tree, executionContext);
+            }
+
+        }, new InMemoryExecutionContext(throwable -> {
+            throwable.printStackTrace();
+        }));
+    }
+
 }

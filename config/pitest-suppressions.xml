@@ -240,15 +240,6 @@
     <mutatedClass>org.checkstyle.autofix.recipe.FinalLocalVariable$LocalVariableVisitor</mutatedClass>
     <mutatedMethod>addFinalModifier</mutatedMethod>
     <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
-    <description>removed call to org/openrewrite/Tree::randomId</description>
-    <lineContent>modifiers.add(new J.Modifier(Tree.randomId(), finalPrefix,</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>FinalLocalVariable.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.FinalLocalVariable$LocalVariableVisitor</mutatedClass>
-    <mutatedMethod>addFinalModifier</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
     <description>removed call to java/util/List::addAll</description>
     <lineContent>modifiers.addAll(varDecl.getModifiers());</lineContent>
   </mutation>
