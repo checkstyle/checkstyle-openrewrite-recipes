@@ -1,0 +1,11 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/emptystatement/noviolationemptystatement/InputNoViolationEmptyStatement.java
++++ src/test/resources/org/checkstyle/autofix/recipe/emptystatement/noviolationemptystatement/OutputNoViolationEmptyStatement.java
+@@ -12,7 +12,7 @@
+ 
+ package org.checkstyle.autofix.recipe.emptystatement.noviolationemptystatement;
+ 
+-public class InputNoViolationEmptyStatement {
++public class OutputNoViolationEmptyStatement {
+     public void emptyMethod() {
+         ;
+     }

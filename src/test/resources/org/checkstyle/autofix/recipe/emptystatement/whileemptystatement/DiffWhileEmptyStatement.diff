@@ -1,0 +1,22 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/emptystatement/whileemptystatement/InputWhileEmptyStatement.java
++++ src/test/resources/org/checkstyle/autofix/recipe/emptystatement/whileemptystatement/OutputWhileEmptyStatement.java
+@@ -8,14 +8,14 @@
+ 
+ package org.checkstyle.autofix.recipe.emptystatement.whileemptystatement;
+ 
+-public class InputWhileEmptyStatement {
++public class OutputWhileEmptyStatement {
+ 
+     public void test(boolean condition) {
+-        while (condition)
+-            ; // violation 'Empty statement.'
++        while (condition) {
++        }
+ 
+-        do
+-            ; // violation 'Empty statement.'
++        do {
++        }
+         while (condition);
+ 
+         while (!condition) {

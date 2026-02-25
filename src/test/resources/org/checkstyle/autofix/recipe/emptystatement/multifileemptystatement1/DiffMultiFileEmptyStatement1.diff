@@ -1,0 +1,12 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/emptystatement/multifileemptystatement1/InputMultiFileEmptyStatement1.java
++++ src/test/resources/org/checkstyle/autofix/recipe/emptystatement/multifileemptystatement1/OutputMultiFileEmptyStatement1.java
+@@ -12,8 +12,7 @@
+ 
+ package org.checkstyle.autofix.recipe.emptystatement.multifileemptystatement1;
+ 
+-public class InputMultiFileEmptyStatement1 {
++public class OutputMultiFileEmptyStatement1 {
+     public void method() {
+-        ; // violation 'Empty statement.'
+     }
+ }

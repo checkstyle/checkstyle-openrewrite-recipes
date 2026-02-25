@@ -1,0 +1,25 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/emptystatement/foreachmixedcase/InputForEachMixedCase.java
++++ src/test/resources/org/checkstyle/autofix/recipe/emptystatement/foreachmixedcase/OutputForEachMixedCase.java
+@@ -10,19 +10,18 @@
+ 
+ import java.util.List;
+ 
+-public class InputForEachMixedCase {
++public class OutputForEachMixedCase {
+ 
+     public void test(List<String> items) {
+ 
+-        for (String item : items)
+-            ; // violation 'Empty statement.'
++        for (String item : items) {
++        }
+ 
+         for (String item : items) {
+             System.out.println(item);
+         }
+ 
+         for (String item : items) {
+-            ; // violation 'Empty statement.'
+         }
+     }
+ }

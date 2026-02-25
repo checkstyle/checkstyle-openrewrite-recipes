@@ -1,0 +1,20 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/emptystatement/blockmixedcase/InputBlockMixedCase.java
++++ src/test/resources/org/checkstyle/autofix/recipe/emptystatement/blockmixedcase/OutputBlockMixedCase.java
+@@ -8,16 +8,12 @@
+ 
+ package org.checkstyle.autofix.recipe.emptystatement.blockmixedcase;
+ 
+-public class InputBlockMixedCase {
++public class OutputBlockMixedCase {
+ 
+     public void test() {
+ 
+-        ; // violation 'Empty statement.'
+-
+         int x = 10;
+ 
+-        ; // violation 'Empty statement.'
+-
+         {
+             int y = 20;
+         }

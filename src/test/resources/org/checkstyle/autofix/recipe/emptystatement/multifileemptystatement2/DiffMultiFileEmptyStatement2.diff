@@ -1,0 +1,11 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/emptystatement/multifileemptystatement2/InputMultiFileEmptyStatement2.java
++++ src/test/resources/org/checkstyle/autofix/recipe/emptystatement/multifileemptystatement2/OutputMultiFileEmptyStatement2.java
+@@ -12,7 +12,7 @@
+ 
+ package org.checkstyle.autofix.recipe.emptystatement.multifileemptystatement2;
+ 
+-public class InputMultiFileEmptyStatement2 {
++public class OutputMultiFileEmptyStatement2 {
+     public void method() {
+         ; // ok
+     }

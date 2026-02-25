@@ -1,0 +1,18 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/emptystatement/switchcasenestedviolation/InputSwitchCaseNestedViolation.java
++++ src/test/resources/org/checkstyle/autofix/recipe/emptystatement/switchcasenestedviolation/OutputSwitchCaseNestedViolation.java
+@@ -8,14 +8,13 @@
+ 
+ package org.checkstyle.autofix.recipe.emptystatement.switchcasenestedviolation;
+ 
+-public class InputSwitchCaseNestedViolation {
++public class OutputSwitchCaseNestedViolation {
+ 
+     public void test(int x) {
+         switch (x) {
+             case 1:
+                 System.out.println("one");
+                 if (true) {
+-                    ; // violation 'Empty statement.'
+                 }
+                 break;
+             case 2:
