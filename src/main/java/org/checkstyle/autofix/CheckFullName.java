@@ -28,6 +28,7 @@ public enum CheckFullName {
     HEX_LITERAL_CASE("com.puppycrawl.tools.checkstyle.checks.HexLiteralCaseCheck"),
     NUMERICAL_PREFIXES_INF_SUF_CASE(
       "com.puppycrawl.tools.checkstyle.checks.NumericalPrefixesInfixesSuffixesCharacterCaseCheck"),
+    UNUSED_IMPORT("com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck"),
     REDUNDANT_IMPORT("com.puppycrawl.tools.checkstyle.checks.imports.RedundantImportCheck");
 
     private final String id;

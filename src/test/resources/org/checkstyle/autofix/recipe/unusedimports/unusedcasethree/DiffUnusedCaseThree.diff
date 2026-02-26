@@ -1,0 +1,11 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/unusedimports/unusedcasethree/InputUnusedCaseThree.java
++++ src/test/resources/org/checkstyle/autofix/recipe/unusedimports/unusedcasethree/OutputUnusedCaseThree.java
+@@ -14,7 +14,6 @@
+ package org.checkstyle.autofix.recipe.unusedimports.unusedcasethree;
+ 
+ import java.util.List;
+-import java.util.Map; // violation 'Unused import - java.util.Map'
+ 
+-public class InputUnusedCaseThree {
++public class OutputUnusedCaseThree {
+ }
