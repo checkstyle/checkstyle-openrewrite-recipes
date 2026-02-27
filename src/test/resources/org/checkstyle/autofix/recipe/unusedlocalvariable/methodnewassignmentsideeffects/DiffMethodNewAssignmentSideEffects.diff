@@ -1,0 +1,26 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/methodnewassignmentsideeffects/InputMethodNewAssignmentSideEffects.java
++++ src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/methodnewassignmentsideeffects/OutputMethodNewAssignmentSideEffects.java
+@@ -8,17 +8,17 @@
+ 
+ package org.checkstyle.autofix.recipe.unusedlocalvariable.methodnewassignmentsideeffects;
+ 
+-public class InputMethodNewAssignmentSideEffects {
++public class OutputMethodNewAssignmentSideEffects {
+ 
+     public int b;
+ 
+     public void method() {
+         int a = 0;
+-        int unusedAssignment = (a = 5); // violation 'Unused named local variable'
+-        Object unusedNew = new Object(); // violation 'Unused named local variable'
+-        int unusedMethod = Math.abs(a); // violation 'Unused named local variable'
+-        int unusedFieldUnary = this.b++; // violation 'Unused named local variable'
+-        int unusedFieldAssignment = (this.b = 5); // violation 'Unused named local variable'
++        a = 5;
++        new Object();
++        Math.abs(a);
++        this.b++;
++        this.b = 5;
+         System.out.println(a);
+     }
+ }

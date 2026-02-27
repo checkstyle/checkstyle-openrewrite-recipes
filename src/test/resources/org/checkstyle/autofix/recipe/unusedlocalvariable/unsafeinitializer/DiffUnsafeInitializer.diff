@@ -1,0 +1,25 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/unsafeinitializer/InputUnsafeInitializer.java
++++ src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/unsafeinitializer/OutputUnsafeInitializer.java
+@@ -8,10 +8,10 @@
+ 
+ package org.checkstyle.autofix.recipe.unusedlocalvariable.unsafeinitializer;
+ 
+-public class InputUnsafeInitializer {
++public class OutputUnsafeInitializer {
+ 
+     public void method() {
+-        int unused = sideEffect(); // violation 'Unused named local variable'
++        sideEffect();
+     }
+ 
+     public int sideEffect() {
+@@ -20,7 +20,8 @@
+     }
+ 
+     public void anotherMethod() {
+-        int a = 1, b = sideEffect(), c = 2; // violation 'Unused named local variable'
++        int a = 1, c = 2;
++        sideEffect();
+         System.out.println(a + c);
+     }
+ 

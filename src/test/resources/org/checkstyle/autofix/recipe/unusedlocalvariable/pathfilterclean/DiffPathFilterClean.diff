@@ -1,0 +1,11 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/pathfilterclean/InputPathFilterClean.java
++++ src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/pathfilterclean/OutputPathFilterClean.java
+@@ -11,7 +11,7 @@
+ */
+ package org.checkstyle.autofix.recipe.unusedlocalvariable.pathfilterclean;
+ 
+-public class InputPathFilterClean {
++public class OutputPathFilterClean {
+     public void method() {
+         int used = 10;
+         int unused = 20; // suppressed violation

@@ -1,0 +1,26 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/sideeffect/InputSideEffect.java
++++ src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/sideeffect/OutputSideEffect.java
+@@ -11,12 +11,12 @@
+ import java.util.concurrent.atomic.AtomicInteger;
+ import java.util.function.Consumer;
+ 
+-public class InputSideEffect {
++public class OutputSideEffect {
+ 
+     public void method() {
+         final AtomicInteger reportedSize = new AtomicInteger(200);
+ 
+-        final var ignored = new BoundedCommandCache(reportedSize::set); // violation 'Unused named local variable'
++        new BoundedCommandCache(reportedSize::set);
+ 
+         if (reportedSize.get() != 0) {
+             throw new RuntimeException("Side effect failed! Value is " + reportedSize.get());
+@@ -30,7 +30,7 @@
+     }
+ 
+     public void test() {
+-        int result = sideEffect(); // violation 'Unused named local variable'
++        sideEffect();
+     }
+ 
+     public int sideEffect() {

@@ -1,0 +1,23 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/nestedblocks/InputNestedBlocks.java
++++ src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/nestedblocks/OutputNestedBlocks.java
+@@ -9,11 +9,10 @@
+ 
+ package org.checkstyle.autofix.recipe.unusedlocalvariable.nestedblocks;
+ 
+-public class InputNestedBlocks {
++public class OutputNestedBlocks {
+ 
+     public void method(boolean flag) {
+         if (flag) {
+-            int unused = 10; // violation 'Unused named local variable'
+             int used = 20;
+             System.out.println(used);
+         }
+@@ -21,7 +20,6 @@
+ 
+     public void methodTwo() {
+         for (int i = 0; i < 5; i++) {
+-            int unused = i * 2; // violation 'Unused named local variable'
+             int used = i + 1;
+             System.out.println(used);
+         }

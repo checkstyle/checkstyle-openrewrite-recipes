@@ -1,0 +1,73 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/killtransfercommentmutations/InputKillTransferCommentMutations.java
++++ src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/killtransfercommentmutations/OutputKillTransferCommentMutations.java
+@@ -8,46 +8,39 @@
+ 
+ package org.checkstyle.autofix.recipe.unusedlocalvariable.killtransfercommentmutations;
+ 
+-public class InputKillTransferCommentMutations {
++public class OutputKillTransferCommentMutations {
+ 
+     public void leadingCommentBeforeOrphaned() {
+-        int a = 1; // violation 'Unused named local variable'
+         int b = 2;
+         // comment before orphaned
+-        a = 10;
+         System.out.println(b);
+     }
+ 
+     public void trailingCommentBeforeOrphaned() {
+-        int a = 1; // violation 'Unused named local variable'
+-        int b = 2; /* same line comment */ a = 10;
++        int b = 2; /* same line comment */
+         System.out.println(b);
+     }
+ 
+     public void multipleCommentsFlipTrailing() {
+-        int a = 1; // violation 'Unused named local variable'
+         int b = 2; /* trailing c1 */
+-        /* leading c2 */ a = 10;
++        /* leading c2 */
+         System.out.println(b);
+     }
+ 
+     public void commentBeforeOrphanedUnary() {
+-        int a = 1; // violation 'Unused named local variable'
+         int b = 2;
+         // comment before unary
+-        a++;
+         System.out.println(b);
+     }
+ 
+     public void orphanedFirstWithComment() {
+-        int a = 1; // violation 'Unused named local variable'
+         // comment before orphaned first
+-        a = 10;
+         System.out.println("done");
+     }
+ 
+     public void commentSameLineAsBlockStart() {
+-        { /* same line */ int a = 1; // violation 'Unused named local variable'
++        {
++          /* same line */
+           System.out.println("after");
+         }
+     }
+@@ -56,16 +49,14 @@
+         int keep = 1;
+         // First comment
+             // Second comment
+-        int a = 1; // violation 'Unused named local variable'
+         System.out.println(keep);
+     }
+ 
+     public void blockCommentOnSameLine() {
+-        /* comment */ int a = 1; System.out.println("no newline"); // violation 'Unused named local variable'
++        /* comment */ System.out.println("no newline");
+     }
+ 
+     public void multipleBlankLinesBeforeKept() {
+-
+-        /* comment */ int a = 1; System.out.println("done"); // violation 'Unused named local variable'
++        /* comment */ System.out.println("done");
+     }
+ }

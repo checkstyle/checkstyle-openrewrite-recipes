@@ -1,0 +1,14 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/nonincrementunary/InputNonIncrementUnary.java
++++ src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/nonincrementunary/OutputNonIncrementUnary.java
+@@ -9,10 +9,8 @@
+ 
+ package org.checkstyle.autofix.recipe.unusedlocalvariable.nonincrementunary;
+ 
+-public class InputNonIncrementUnary {
++public class OutputNonIncrementUnary {
+     public void method() {
+-        int x = -5; // violation 'Unused named local variable 'x'.'
+-        boolean b = !true; // violation 'Unused named local variable 'b'.'
+         System.out.println("done");
+     }
+ }

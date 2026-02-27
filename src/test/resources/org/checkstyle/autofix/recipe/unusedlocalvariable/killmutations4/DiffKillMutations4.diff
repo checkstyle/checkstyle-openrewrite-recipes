@@ -1,0 +1,110 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/killmutations4/InputKillMutations4.java
++++ src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/killmutations4/OutputKillMutations4.java
+@@ -8,92 +8,84 @@
+ 
+ package org.checkstyle.autofix.recipe.unusedlocalvariable.killmutations4;
+ 
+-public class InputKillMutations4 {
++public class OutputKillMutations4 {
+ 
+     public void singleLineBlock() {
+-        int unused = 1; // violation 'Unused named local variable'
+         int keep = 2;
+         System.out.println(keep);
+     }
+ 
+     public void statementExpressionTest() {
+         boolean flag = true;
+-        boolean unused = !flag; // violation 'Unused named local variable'
+ 
+-        int keep = 1, u2 = +5; // violation 'Unused named local variable'
++        int keep = 1;
+         System.out.println(keep);
+         System.out.println(flag);
+     }
+ 
+     public void trailingCommentBeforeExtractedWithStatements() {
+-        int unused = 1; /* trailing */ // violation 'Unused named local variable'
+-        int unused2 = getString().length(); // violation 'Unused named local variable'
++        /* trailing */
++        getString().length();
+         System.out.println("Wait");
+     }
+ 
+     public void orphanedAssignmentStripTest() {
+-        int orphaned = 10; // violation 'Unused named local variable'
+-        orphaned = 20;
+-
+         System.out.println("Wait");
+     }
+ 
+     public void trailingCommentWithMultipleStatements() {
+-        int unused = 1; /* trailing */ // violation 'Unused named local variable'
++        /* trailing */
+         System.out.println("stmt1");
+         System.out.println("stmt2");
+     }
+ 
+     public void precedingStatementWithTrailingComment() {
+-        System.out.println("keep"); /* trail */ int unused = 1; // violation 'Unused named local variable'
++        System.out.println("keep"); /* trail */
+         System.out.println("first");
+         System.out.println("second");
+     }
+ 
+     public void precedingStatementWithTrailingCommentAndExtracted() {
+-        System.out.println("keep"); /* trail */ int unused1 = 1; // violation 'Unused named local variable'
+-        int unused2 = getString().length(); // violation 'Unused named local variable'
++        System.out.println("keep"); /* trail */
++        getString().length();
+         System.out.println("end");
+     }
+ 
+     public void inlineTrailingCommentSingleLineBlock() {
+-        int unused = 1; // violation 'Unused named local variable'
+         /* c */ System.out.println("test");
+     }
+ 
+     public void consecutiveUnusedSameLineTrailing() {
+-        int u1 = 1; // violation 'Unused named local variable'
+-        u1 = 2;
+-        /* trail */ int u2 = 3; // violation 'Unused named local variable'
++        /* trail */
+         System.out.println("after");
+     }
+ 
+     public void entirelyRemovedWithComment() {
+         // pending comment
+-        int u1 = 1; // violation 'Unused named local variable'
+         System.out.println("after");
+     }
+ 
+     public void partialDeclarationNoNewline() {
+         System.out.print("");
+-        String keep = "1", u = getString(); // violation 'Unused named local variable'
++        String keep = "1";
++        getString();
+         System.out.println(keep);
+     }
+ 
+     public void partialDeclarationCommentNoNewline() {
+         System.out.print(""); /* c */
+-        String keep = "1", u = getString(); // violation 'Unused named local variable'
++        String keep = "1";
++        getString();
+         System.out.println(keep);
+     }
+ 
+     public void extractMultipleInitializers() {
+-        int u1 = getString().length(), /* c */ u2 = getString().length(); // 2 violations
++        getString().length(); /* c */ getString().length();
+     }
+ 
+     public void trailingCommentWithSameLineNextStatement() {
+         System.out.println("first");
+-        int u1 = 1; // violation 'Unused named local variable'
+-        u1 = 2; /* trail */ int u2 = 3; System.out.println("kept"); // violation 'Unused named local variable'
++        /* trail */ System.out.println("kept");
+     }
+ 
+     private String getString() {

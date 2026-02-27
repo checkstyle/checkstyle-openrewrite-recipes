@@ -1,0 +1,20 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/simpleunused/InputSimpleUnused.java
++++ src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/simpleunused/OutputSimpleUnused.java
+@@ -9,16 +9,14 @@
+ 
+ package org.checkstyle.autofix.recipe.unusedlocalvariable.simpleunused;
+ 
+-public class InputSimpleUnused {
++public class OutputSimpleUnused {
+ 
+     public void method() {
+         int used = 10;
+-        int unused = 20; // violation 'Unused named local variable'
+         System.out.println(used);
+     }
+ 
+     public void methodTwo() {
+-        String unusedStr = "hello"; // violation 'Unused named local variable'
+         String usedStr = "world";
+         System.out.println(usedStr);
+     }

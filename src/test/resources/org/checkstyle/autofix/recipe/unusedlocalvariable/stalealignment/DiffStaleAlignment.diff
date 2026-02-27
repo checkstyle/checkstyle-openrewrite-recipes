@@ -1,0 +1,13 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/stalealignment/InputStaleAlignment.java
++++ src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/stalealignment/OutputStaleAlignment.java
+@@ -8,9 +8,8 @@
+ 
+ package org.checkstyle.autofix.recipe.unusedlocalvariable.stalealignment;
+ 
+-public class InputStaleAlignment {
++public class OutputStaleAlignment {
+   public void method1() {
+-    int dummy = 1; // violation 'Unused named local variable'
+   }
+ 
+   public void method2() {

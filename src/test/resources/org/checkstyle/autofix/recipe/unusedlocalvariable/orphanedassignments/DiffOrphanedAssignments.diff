@@ -1,0 +1,19 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/orphanedassignments/InputOrphanedAssignments.java
++++ src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/orphanedassignments/OutputOrphanedAssignments.java
+@@ -9,15 +9,11 @@
+ 
+ package org.checkstyle.autofix.recipe.unusedlocalvariable.orphanedassignments;
+ 
+-public class InputOrphanedAssignments {
++public class OutputOrphanedAssignments {
+     public void method() {
+-        int a = 1; // violation 'Unused named local variable 'a'.'
+         int b = 2;
+-        int c = 3; // violation 'Unused named local variable 'c'.'
+-        a = 10;
+         b = 5;
+         b += 5;
+-        c++;
+         System.out.println(b);
+     }
+ }

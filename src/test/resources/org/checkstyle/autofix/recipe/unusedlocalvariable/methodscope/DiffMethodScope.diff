@@ -1,0 +1,14 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/methodscope/InputMethodScope.java
++++ src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/methodscope/OutputMethodScope.java
+@@ -9,10 +9,9 @@
+ 
+ package org.checkstyle.autofix.recipe.unusedlocalvariable.methodscope;
+ 
+-public class InputMethodScope {
++public class OutputMethodScope {
+ 
+     public void methodOne() {
+-        int x = 1; // violation 'Unused named local variable'
+         System.out.println("one");
+     }
+ 

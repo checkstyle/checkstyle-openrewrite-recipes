@@ -1,0 +1,15 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/partialremoval/InputPartialRemoval.java
++++ src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/partialremoval/OutputPartialRemoval.java
+@@ -9,10 +9,10 @@
+ 
+ package org.checkstyle.autofix.recipe.unusedlocalvariable.partialremoval;
+ 
+-public class InputPartialRemoval {
++public class OutputPartialRemoval {
+ 
+     public void method() {
+-        int used = 1, unused = 2; // violation 'Unused named local variable'
++        int used = 1;
+         used = used + 1;
+         int other = 5;
+         other = 6;

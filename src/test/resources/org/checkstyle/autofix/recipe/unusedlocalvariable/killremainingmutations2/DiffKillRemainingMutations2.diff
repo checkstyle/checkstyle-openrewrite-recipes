@@ -1,0 +1,108 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/killremainingmutations2/InputKillRemainingMutations2.java
++++ src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/killremainingmutations2/OutputKillRemainingMutations2.java
+@@ -8,94 +8,71 @@
+ 
+ package org.checkstyle.autofix.recipe.unusedlocalvariable.killremainingmutations2;
+ 
+-public class InputKillRemainingMutations2 {
++public class OutputKillRemainingMutations2 {
+ 
+     public void orphanedAssignmentFirstStatement() {
+-        int unused = 0; // violation 'Unused named local variable'
+         if (true) {
+-            /* comment */ unused = 1;
++            /* comment */
+             System.out.println("next");
+         }
+     }
+ 
+     public void multipleKeptStatements() {
+-        int unused = 0; // violation 'Unused named local variable'
+-        /* c1 */ unused = 1;
++        /* c1 */
+         System.out.println("A");
+         System.out.println("B");
+     }
+ 
+     public void firstStatementPendingCommentSpacing() {
+-
+         // comment for first statement
+-        int unused = 1; // violation 'Unused named local variable'
+-
+-
+         System.out.println("first");
+     }
+ 
+     public void orphanedAssignmentFirstStatementSpacing() {
+-
+-        int unused = 0; // violation 'Unused named local variable'
+-
+-
+-        unused = getString().length();
++        getString().length();
+         System.out.println("after");
+     }
+ 
+     public void pendingWhitespaceResetForPartialDeclaration() {
+-
+         // comment before kept declaration
+-        int unused = 1; // violation 'Unused named local variable'
+-        int keep = 2, drop = 3; // violation 'Unused named local variable'
++        int keep = 2;
+         System.out.println(keep);
+         // comment before final statement
+-        int unused2 = 4; // violation 'Unused named local variable'
+         System.out.println("done");
+     }
+ 
+     public void pendingWhitespaceResetForExtractedInitializer() {
+-
+         // comment before extracted initializer
+-        int unused = 1; // violation 'Unused named local variable'
+-        int unused2 = getString().length(); // violation 'Unused named local variable'
++        getString().length();
+         System.out.println("middle");
+         // comment before final statement
+-        int unused3 = 2; // violation 'Unused named local variable'
+         System.out.println("done");
+     }
+ 
+     public void pendingWhitespaceResetForOrphanedAssignment() {
+-
+         // comment before orphaned assignment
+-        int unused = 0; /* trailing */ // violation 'Unused named local variable'
+-        unused = getString().length();
++        /* trailing */
++        getString().length();
+         System.out.println("middle");
+         // comment before final statement
+-        int unused2 = 1; // violation 'Unused named local variable'
+         System.out.println("done");
+     }
+ 
+     public void orphanedAssignmentAfterEmptyRemoval() {
+-        int unused = 0; // violation 'Unused named local variable'
+-
+-
+-        unused = getString().length();
++        getString().length();
+         System.out.println("after");
+     }
+ 
+     public void orphanedAssignmentWithTrailingTransfer() {
+-        System.out.println("keep"); /* trail */ int unused = 0; // violation 'Unused named local variable'
+-        unused = getString().length();
++        System.out.println("keep"); /* trail */
++        getString().length();
+         System.out.println("after");
+     }
+ 
+     public void preserveFirstPendingWhitespaceAcrossRemovals() {
+         int keep = 1;
+         // first comment
+-        int unused1 = 1; // violation 'Unused named local variable'
+         // second comment
+-        int unused2 = 2; // violation 'Unused named local variable'
+         System.out.println("after");
+         System.out.println(keep);
+     }

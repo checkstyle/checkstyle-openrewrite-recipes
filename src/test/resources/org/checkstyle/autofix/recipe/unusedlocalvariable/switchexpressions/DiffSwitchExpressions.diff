@@ -1,0 +1,31 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/switchexpressions/InputSwitchExpressions.java
++++ src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/switchexpressions/OutputSwitchExpressions.java
+@@ -8,7 +8,7 @@
+ 
+ package org.checkstyle.autofix.recipe.unusedlocalvariable.switchexpressions;
+ 
+-public class InputSwitchExpressions {
++public class OutputSwitchExpressions {
+ 
+     public void testSwitchExpression(int x) {
+         int y = switch (x) {
+@@ -19,19 +19,11 @@
+             default -> 0;
+         };
+         System.out.println(y);
+-
+-        int z = 1; // violation 'Unused named local variable'
+-        z = switch (x) {
+-            case 1 -> 2;
+-            default -> 3;
+-        };
+     }
+ 
+     public void testSwitchStatement(int x) {
+         switch (x) {
+             case 1:
+-                int a = 12; // violation 'Unused named local variable'
+-                a = 13;
+                 break;
+             default:
+                 break;

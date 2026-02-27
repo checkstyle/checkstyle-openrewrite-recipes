@@ -1,0 +1,13 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/multiplefilesb/InputMultipleFilesB.java
++++ src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/multiplefilesb/OutputMultipleFilesB.java
+@@ -9,9 +9,8 @@
+ 
+ package org.checkstyle.autofix.recipe.unusedlocalvariable.multiplefilesb;
+ 
+-public class InputMultipleFilesB {
++public class OutputMultipleFilesB {
+     public void method() {
+-        int x = 20; // violation 'Unused named local variable 'x'.'
+         System.out.println("done");
+     }
+ }
