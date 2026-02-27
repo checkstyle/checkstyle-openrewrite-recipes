@@ -152,7 +152,8 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 | 🟢     | [`NoArrayTrailingComma`](https://checkstyle.sourceforge.io/checks/coding/noarraytrailingcomma.html#NoArrayTrailingComma) | `TBD`           |                |
 | 🔴     | [`NoClone`](https://checkstyle.sourceforge.io/checks/coding/noclone.html#NoClone)                                       |           | Remove clone() method |
 | 🟢     | [`NoEnumTrailingComma`](https://checkstyle.sourceforge.io/checks/coding/noenumtrailingcomma.html#NoEnumTrailingComma)     | `TBD`           |                |
-| 🔴     | [`NoFinalizer`](https://checkstyle.sourceforge.io/checks/coding/nofinalizer.html#NoFinalizer)
+| 🔴     | [`NoFinalizer`](https://checkstyle.sourceforge.io/checks/coding/nofinalizer.html#NoFinalizer)                             |           | Remove finalize() method |
+| 🟢     | [`UnusedLocalVariable`](https://checkstyle.sourceforge.io/checks/coding/unusedlocalvariable.html#UnusedLocalVariable)   | [`UnusedLocalVariable`](https://github.com/checkstyle/checkstyle-openrewrite-recipes/blob/main/src/main/java/org/checkstyle/autofix/recipe/UnusedLocalVariable.java)           |                |
 
 
 ### Headers

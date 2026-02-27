@@ -33,6 +33,7 @@ import org.checkstyle.autofix.recipe.HexLiteralCase;
 import org.checkstyle.autofix.recipe.NewlineAtEndOfFile;
 import org.checkstyle.autofix.recipe.NumericalPrefixesInfixesSuffixesCharacterCase;
 import org.checkstyle.autofix.recipe.RedundantImport;
+import org.checkstyle.autofix.recipe.UnusedLocalVariable;
 import org.checkstyle.autofix.recipe.UpperEll;
 import org.openrewrite.Recipe;
 
@@ -54,6 +55,7 @@ public final class CheckstyleRecipeRegistry {
         RECIPE_MAP.put(CheckFullName.NUMERICAL_PREFIXES_INF_SUF_CASE,
             NumericalPrefixesInfixesSuffixesCharacterCase::new);
         RECIPE_MAP.put(CheckFullName.REDUNDANT_IMPORT, RedundantImport::new);
+        RECIPE_MAP.put(CheckFullName.UNUSED_LOCAL_VARIABLE, UnusedLocalVariable::new);
     }
 
     private CheckstyleRecipeRegistry() {

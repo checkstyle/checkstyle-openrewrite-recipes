@@ -1,0 +1,22 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/classfields/InputClassFields.java
++++ src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/classfields/OutputClassFields.java
+@@ -9,18 +9,16 @@
+ 
+ package org.checkstyle.autofix.recipe.unusedlocalvariable.classfields;
+ 
+-public class InputClassFields {
++public class OutputClassFields {
+ 
+     private int classField = 10;
+     private String classString = "hello";
+ 
+     public void method() {
+-        int unused = 20; // violation 'Unused named local variable'
+         System.out.println(classField);
+     }
+ 
+     public void methodTwo() {
+-        String unused = "world"; // violation 'Unused named local variable'
+         System.out.println(classString);
+     }
+ }

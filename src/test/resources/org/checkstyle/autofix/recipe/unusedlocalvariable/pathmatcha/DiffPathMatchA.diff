@@ -1,0 +1,17 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/pathmatcha/InputPathMatchA.java
++++ src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/pathmatcha/OutputPathMatchA.java
+@@ -9,13 +9,10 @@
+ 
+ package org.checkstyle.autofix.recipe.unusedlocalvariable.pathmatcha;
+ 
+-public class InputPathMatchA {
++public class OutputPathMatchA {
+ 
+     public void method() {
+         int used = 10;
+-
+-
+-        int unused = 20; // violation 'Unused named local variable'
+         System.out.println(used);
+     }
+ }
