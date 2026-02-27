@@ -1,0 +1,20 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/compoundassignment/InputCompoundAssignment.java
++++ src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/compoundassignment/OutputCompoundAssignment.java
+@@ -8,13 +8,13 @@
+ 
+ package org.checkstyle.autofix.recipe.unusedlocalvariable.compoundassignment;
+ 
+-public class InputCompoundAssignment {
++public class OutputCompoundAssignment {
+ 
+     public void compoundOnUnused() {
+         int a = 1;
+-        int b = (a += 5); // violation 'Unused named local variable'
+-        int c = (a -= 3); // violation 'Unused named local variable'
+-        int d = (a *= 2); // violation 'Unused named local variable'
++        a += 5;
++        a -= 3;
++        a *= 2;
+         System.out.println(a);
+     }
+ 

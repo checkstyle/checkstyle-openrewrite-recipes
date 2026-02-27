@@ -1,0 +1,22 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/unarysideeffect/InputUnarySideEffect.java
++++ src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/unarysideeffect/OutputUnarySideEffect.java
+@@ -8,14 +8,14 @@
+ 
+ package org.checkstyle.autofix.recipe.unusedlocalvariable.unarysideeffect;
+ 
+-public class InputUnarySideEffect {
++public class OutputUnarySideEffect {
+ 
+     public void method() {
+         int i = 0;
+-        int unused1 = ++i; // violation 'Unused named local variable'
+-        int unused2 = i++; // violation 'Unused named local variable'
+-        int unused3 = --i; // violation 'Unused named local variable'
+-        int unused4 = i--; // violation 'Unused named local variable'
++        ++i;
++        i++;
++        --i;
++        i--;
+         System.out.println(i);
+     }
+ }

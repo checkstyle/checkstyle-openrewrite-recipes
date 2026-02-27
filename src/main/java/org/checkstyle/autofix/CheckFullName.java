@@ -33,6 +33,8 @@ public enum CheckFullName {
     HEX_LITERAL_CASE("com.puppycrawl.tools.checkstyle.checks.HexLiteralCaseCheck"),
     NUMERICAL_PREFIXES_INF_SUF_CASE(
       "com.puppycrawl.tools.checkstyle.checks.NumericalPrefixesInfixesSuffixesCharacterCaseCheck"),
+    UNUSED_LOCAL_VARIABLE(
+        "com.puppycrawl.tools.checkstyle.checks.coding.UnusedLocalVariableCheck"),
     REDUNDANT_IMPORT("com.puppycrawl.tools.checkstyle.checks.imports.RedundantImportCheck"),
     USE_ENHANCED_SWITCH("com.puppycrawl.tools.checkstyle.checks.coding.UseEnhancedSwitchCheck"),
     MISSING_OVERRIDE("com.puppycrawl.tools.checkstyle.checks.annotation.MissingOverrideCheck"),

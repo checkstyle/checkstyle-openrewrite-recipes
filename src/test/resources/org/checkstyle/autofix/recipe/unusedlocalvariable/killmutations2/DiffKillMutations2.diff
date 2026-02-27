@@ -1,0 +1,109 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/killmutations2/InputKillMutations2.java
++++ src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/killmutations2/OutputKillMutations2.java
+@@ -8,93 +8,85 @@
+ 
+ package org.checkstyle.autofix.recipe.unusedlocalvariable.killmutations2;
+ 
+-public class InputKillMutations2 {
++public class OutputKillMutations2 {
+ 
+     public void isolatedPreIncrement() {
+         int dummy = 10;
+-        int unused = ++dummy; // violation 'Unused named local variable'
++        ++dummy;
+         System.out.println(dummy);
+     }
+ 
+     public void isolatedPreDecrement() {
+         int dummy = 10;
+-        int unused = --dummy; // violation 'Unused named local variable'
++        --dummy;
+         System.out.println(dummy);
+     }
+ 
+     public void isolatedPostIncrement() {
+         int dummy = 10;
+-        int unused = dummy++; // violation 'Unused named local variable'
++        dummy++;
+         System.out.println(dummy);
+     }
+ 
+     public void isolatedPostDecrement() {
+         int dummy = 10;
+-        int unused = dummy--; // violation 'Unused named local variable'
++        dummy--;
+         System.out.println(dummy);
+     }
+ 
+     public void partialNonStatementExpression() {
+         boolean a = true;
+-        boolean u = (a = false); // violation 'Unused named local variable'
++        a = false;
+         System.out.println(a);
+     }
+ 
+     public void complexCommentTransfer() {
+-        /* lead */ int unused = getString().length(); // violation 'Unused named local variable'
++        /* lead */ getString().length();
+         // trail
+         System.out.println("done");
+     }
+ 
+     public void commentTransferToExtracted() {
+-        /* lead */ int unused = getString().length(); // violation 'Unused named local variable'
++        /* lead */ getString().length();
+     }
+ 
+     public void trailingTransferToExtracted() {
+-        int unused = getString().length(); /* trail */ // violation 'Unused named local variable'
++        getString().length(); /* trail */
+         getString().length();
+     }
+ 
+     public void multipleStatementsAfterTrailingComment() {
+-        int unused = 1; /* trail */ // violation 'Unused named local variable'
++        /* trail */
+         System.out.println("first");
+         System.out.println("second");
+     }
+ 
+     public void multipleStatementsAfterTrailingCommentExtracted() {
+-        int unused = getString().length(); /* trail */ // violation 'Unused named local variable'
++        getString().length(); /* trail */
+         System.out.println("first");
+     }
+ 
+     public void newStatementsEmptyKeepsBlankLine() {
+-        int a = 1; // violation 'Unused named local variable'
+-
+         int b = 2;
+-        int unused = 3; // violation 'Unused named local variable'
+ 
+         System.out.println(b);
+     }
+ 
+     public void extractedInitializerKeepsBlankLine() {
+-        int a = 1; // violation 'Unused named local variable'
+-
+-        int unused = getString().length(); // violation 'Unused named local variable'
++        getString().length();
+         System.out.println("Wait");
+     }
+ 
+     public void stripLeadingBlankLinesTest() {
+-        int unused = 1; // violation 'Unused named local variable'
+-
+         System.out.println("Second");
+     }
+ 
+     public void commentMoveTest() {
+-        /* lead */ int unused = 2; // violation 'Unused named local variable'
++        /* lead */
+         System.out.println("First");
+     }
+ 
+     public void leakingRemovedNames1() {
+-        int sharedName = 1; // violation 'Unused named local variable'
+     }
+ 
+     public void leakingRemovedNames2() {

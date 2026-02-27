@@ -1,0 +1,21 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/multipleunused/InputMultipleUnused.java
++++ src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/multipleunused/OutputMultipleUnused.java
+@@ -9,17 +9,14 @@
+ 
+ package org.checkstyle.autofix.recipe.unusedlocalvariable.multipleunused;
+ 
+-public class InputMultipleUnused {
++public class OutputMultipleUnused {
+ 
+     public void method() {
+-        int unusedOne = 1; // violation 'Unused named local variable'
+-        int unusedTwo = 2; // violation 'Unused named local variable'
+         int used = 3;
+         System.out.println(used);
+     }
+ 
+     public int calculate() {
+-        int unusedTemp = 100; // violation 'Unused named local variable'
+         int result = 42;
+         return result;
+     }

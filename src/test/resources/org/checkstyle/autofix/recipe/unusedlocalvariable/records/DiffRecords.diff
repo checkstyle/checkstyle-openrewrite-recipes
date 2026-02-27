@@ -1,0 +1,29 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/records/InputRecords.java
++++ src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/records/OutputRecords.java
+@@ -8,25 +8,19 @@
+ 
+ package org.checkstyle.autofix.recipe.unusedlocalvariable.records;
+ 
+-public class InputRecords {
++public class OutputRecords {
+ 
+     record MyRecord(int x) {
+         MyRecord {
+-            int a = 12; // violation 'Unused named local variable'
+-            a = x;
+         }
+ 
+         public void test() {
+-            int b = 13; // violation 'Unused named local variable'
+-            b = x;
+         }
+     }
+ 
+     public void testRecordLocal() {
+         record LocalRecord(int y) {
+             void method() {
+-                int c = 14; // violation 'Unused named local variable'
+-                c = y;
+             }
+         }
+         LocalRecord lr = new LocalRecord(1);

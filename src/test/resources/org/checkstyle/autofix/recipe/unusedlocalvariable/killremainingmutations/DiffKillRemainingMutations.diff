@@ -1,0 +1,93 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/killremainingmutations/InputKillRemainingMutations.java
++++ src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/killremainingmutations/OutputKillRemainingMutations.java
+@@ -8,13 +8,12 @@
+ 
+ package org.checkstyle.autofix.recipe.unusedlocalvariable.killremainingmutations;
+ 
+-public class InputKillRemainingMutations {
++public class OutputKillRemainingMutations {
+ 
+     public void partialMultiVarWithTrailingComment() {
+         int used = 1;
+         System.out.println(used); /* trailing */
+-        int unused = 2; // violation 'Unused named local variable'
+-        int a = 1, b = 2; // violation 'Unused named local variable'
++        int b = 2;
+         System.out.println(b);
+     }
+ 
+@@ -27,8 +26,6 @@
+ 
+     public void mergeIntoExistingComments() {
+         // comment on unused
+-        int unused = 1; // violation 'Unused named local variable'
+-        int unused2 = 2; // violation 'Unused named local variable'
+         // existing comment
+         int used = 3;
+         System.out.println(used);
+@@ -37,28 +34,23 @@
+     public void multipleCommentsOnRemoved() {
+         int used = 1;
+         System.out.println(used); /* c1 */ /* c2 */
+-        int unused = 2; // violation 'Unused named local variable'
+         System.out.println("done");
+     }
+ 
+     public void noCommentSameLine() {
+         int used = 1;
+-        int unused = 2; // violation 'Unused named local variable'
+         System.out.println(used);
+     }
+ 
+     public void commentOnNewLine() {
+         int used = 1;
+         // comment on unused
+-        int unused = 2; // violation 'Unused named local variable'
+         System.out.println(used);
+     }
+ 
+     public void commentWithBlankLine() {
+         int used = 1;
+         /* block comment */
+-
+-        int unused = 2; // violation 'Unused named local variable'
+         System.out.println(used);
+     }
+ 
+@@ -66,14 +58,13 @@
+         int used = 1;
+         // comment 1
+         // comment 2
+-        int unused = 2; // violation 'Unused named local variable'
+         System.out.println(used);
+     }
+ 
+     public void trailingCommentOnExtractedSideEffect() {
+         int a = 1;
+-        int unused1 = 2; /* trailing */ // violation 'Unused named local variable'
+-        int unused2 = ++a; // violation 'Unused named local variable'
++        /* trailing */
++        ++a;
+         int next = 3;
+         System.out.println(next);
+         System.out.println(a);
+@@ -82,8 +73,8 @@
+     public void sideEffectWithTrailingComment() {
+         int a = 0;
+         System.out.println("First");
+-        /* trailing */ int unused = 1; // violation 'Unused named local variable'
+-        int unused2 = ++a; // violation 'Unused named local variable'
++        /* trailing */
++        ++a;
+         int next = 2;
+         System.out.println(next);
+         System.out.println(a);
+@@ -91,7 +82,7 @@
+ 
+     public void methodCallWithTrailingComment() {
+         System.out.println("First");
+-        /* trailing */ int unused = 1; // violation 'Unused named local variable'
++        /* trailing */
+         System.out.println("Second");
+         System.out.println("Third");
+     }

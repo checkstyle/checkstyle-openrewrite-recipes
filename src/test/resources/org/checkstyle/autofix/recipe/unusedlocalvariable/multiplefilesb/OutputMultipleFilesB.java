@@ -1,0 +1,16 @@
+/*xml
+<module name="Checker">
+  <module name="TreeWalker">
+    <module name="com.puppycrawl.tools.checkstyle.checks.coding.UnusedLocalVariableCheck"/>
+  </module>
+</module>
+
+*/
+
+package org.checkstyle.autofix.recipe.unusedlocalvariable.multiplefilesb;
+
+public class OutputMultipleFilesB {
+    public void method() {
+        System.out.println("done");
+    }
+}

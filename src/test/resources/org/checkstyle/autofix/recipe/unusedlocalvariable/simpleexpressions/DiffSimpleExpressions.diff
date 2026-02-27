@@ -1,0 +1,19 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/simpleexpressions/InputSimpleExpressions.java
++++ src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/simpleexpressions/OutputSimpleExpressions.java
+@@ -9,15 +9,10 @@
+ 
+ package org.checkstyle.autofix.recipe.unusedlocalvariable.simpleexpressions;
+ 
+-public class InputSimpleExpressions {
++public class OutputSimpleExpressions {
+ 
+     public void method() {
+         int used = 1;
+-        int unusedBinary = used + 2; // violation 'Unused named local variable'
+-        int unusedUnary = -used; // violation 'Unused named local variable'
+-        int unusedParen = (used + 1); // violation 'Unused named local variable'
+-        int unusedIdCopy = used; // violation 'Unused named local variable'
+-        String unusedCast = (String) null; // violation 'Unused named local variable'
+         System.out.println(used);
+     }
+ }

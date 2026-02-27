@@ -1,0 +1,17 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/pathfilter/InputPathFilter.java
++++ src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/pathfilter/OutputPathFilter.java
+@@ -9,13 +9,10 @@
+ 
+ package org.checkstyle.autofix.recipe.unusedlocalvariable.pathfilter;
+ 
+-public class InputPathFilter {
++public class OutputPathFilter {
+ 
+     public void method() {
+         int used = 10;
+-
+-
+-        int unused = 20; // violation 'Unused named local variable'
+         System.out.println(used);
+     }
+ }

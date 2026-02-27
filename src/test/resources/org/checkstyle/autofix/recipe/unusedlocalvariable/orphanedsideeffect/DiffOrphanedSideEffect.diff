@@ -1,0 +1,40 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/orphanedsideeffect/InputOrphanedSideEffect.java
++++ src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/orphanedsideeffect/OutputOrphanedSideEffect.java
+@@ -8,31 +8,26 @@
+ 
+ package org.checkstyle.autofix.recipe.unusedlocalvariable.orphanedsideeffect;
+ 
+-public class InputOrphanedSideEffect {
++public class OutputOrphanedSideEffect {
+     public void test() {
+-        int a; // violation 'Unused named local variable'
+-        a = sideEffect();
++        sideEffect();
+     }
+ 
+     public void withComment() {
+         // important comment
+-        int b; // violation 'Unused named local variable'
+-        b = sideEffect();
++        sideEffect();
+     }
+ 
+     public void withTrailingComment() {
+-        System.out.println("before"); /* trailing */ int c; // violation 'Unused named local variable'
+-        c = sideEffect();
++        System.out.println("before"); /* trailing */
++        sideEffect();
+     }
+ 
+     public void withLiteralRhs() {
+-        int d; // violation 'Unused named local variable'
+-        d = 42;
+     }
+ 
+     public void withParenthesizedRhs() {
+-        int e; // violation 'Unused named local variable'
+-        e = (sideEffect());
++        sideEffect();
+     }
+ 
+     public int sideEffect() {

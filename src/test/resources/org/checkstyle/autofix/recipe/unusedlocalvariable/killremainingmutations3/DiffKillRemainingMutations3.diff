@@ -1,0 +1,110 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/killremainingmutations3/InputKillRemainingMutations3.java
++++ src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/killremainingmutations3/OutputKillRemainingMutations3.java
+@@ -8,35 +8,29 @@
+ 
+ package org.checkstyle.autofix.recipe.unusedlocalvariable.killremainingmutations3;
+ 
+-public class InputKillRemainingMutations3 {
++public class OutputKillRemainingMutations3 {
+ 
+     public void attachPendingWithoutStrippingBlankLines() {
+         int keep = 1;
+ 
+         // comment for kept declaration
+-        int unused = 1; // violation 'Unused named local variable'
+ 
+-        int kept = 2, drop = 3; // violation 'Unused named local variable'
++        int kept = 2;
+         System.out.println(keep);
+         System.out.println(kept);
+     }
+ 
+     public void stalePendingWhitespaceDoesNotLeakIntoOrphanedAssignment() {
+-
+         // comment before kept declaration
+-        int unused = 1; // violation 'Unused named local variable'
+-        int keep = 2, drop = 3; // violation 'Unused named local variable'
+-        int orphan = 0; // violation 'Unused named local variable'
+-        orphan = getString().length();
++        int keep = 2;
++        getString().length();
+         System.out.println(keep);
+     }
+ 
+     public void stalePendingWhitespaceDoesNotLeakIntoExtractedInitializer() {
+-
+         // comment before kept declaration
+-        int unused = 1; // violation 'Unused named local variable'
+-        int keep = 2, drop = 3; // violation 'Unused named local variable'
+-        int unused2 = getString().length(); // violation 'Unused named local variable'
++        int keep = 2;
++        getString().length();
+         System.out.println(keep);
+     }
+ 
+@@ -44,7 +38,6 @@
+         int keep = 1;
+ 
+         // comment for plain statement
+-        int unused = 2; // violation 'Unused named local variable'
+ 
+         System.out.println(keep);
+         System.out.println("after");
+@@ -52,24 +45,24 @@
+ 
+     public void inlineCommentToKeptDeclarationUsesIndent() {
+         if (true) {
+-            /* lead */ int unused = 1; // violation 'Unused named local variable'
+-            int keep = 2, drop = 3; // violation 'Unused named local variable'
++            /* lead */
++            int keep = 2;
+             System.out.println(keep);
+         }
+     }
+ 
+     public void inlineCommentToExtractedInitializerUsesIndent() {
+         if (true) {
+-            /* lead */ int unused = 1; // violation 'Unused named local variable'
+-            int unused2 = getString().length(); // violation 'Unused named local variable'
++            /* lead */
++            getString().length();
+             System.out.println("after");
+         }
+     }
+ 
+     public void inlineCommentToOrphanedAssignmentUsesIndent() {
+         if (true) {
+-            /* lead */ int orphan = 0; // violation 'Unused named local variable'
+-            orphan = getString().length();
++            /* lead */
++            getString().length();
+             System.out.println("after");
+         }
+     }
+@@ -77,22 +70,17 @@
+     public void consecutiveExtractedInitializersWithPendingWhitespace() {
+         int a = 0;
+         // comment before completely removed
+-        int unused = 1; // violation 'Unused named local variable'
+-        int unused2 = ++a; // violation 'Unused named local variable'
+-        int unused3 = ++a; // violation 'Unused named local variable'
++        ++a;
++        ++a;
+         System.out.println("done");
+         System.out.println(a);
+     }
+ 
+     public void consecutiveOrphanedAssignmentsWithPendingWhitespace() {
+         int a = 0;
+-        int orphan1 = 0; // violation 'Unused named local variable'
+-        int orphan2 = 0; // violation 'Unused named local variable'
+-
+         // comment before completely removed
+-        int unused = 1; // violation 'Unused named local variable'
+-        orphan1 = ++a;
+-        orphan2 = ++a;
++        ++a;
++        ++a;
+         System.out.println("done");
+         System.out.println(a);
+     }

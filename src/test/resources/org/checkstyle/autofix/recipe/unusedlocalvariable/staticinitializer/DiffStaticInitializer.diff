@@ -1,0 +1,17 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/staticinitializer/InputStaticInitializer.java
++++ src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/staticinitializer/OutputStaticInitializer.java
+@@ -8,13 +8,11 @@
+ 
+ package org.checkstyle.autofix.recipe.unusedlocalvariable.staticinitializer;
+ 
+-public class InputStaticInitializer {
++public class OutputStaticInitializer {
+ 
+     static {
+-        int unused = 0; // violation 'Unused named local variable'
+     }
+ 
+     public void method() {
+-        int unused = 0; // violation 'Unused named local variable'
+     }
+ }

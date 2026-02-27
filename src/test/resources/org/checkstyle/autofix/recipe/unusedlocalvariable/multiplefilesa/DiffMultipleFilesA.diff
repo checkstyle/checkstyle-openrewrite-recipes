@@ -1,0 +1,11 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/multiplefilesa/InputMultipleFilesA.java
++++ src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/multiplefilesa/OutputMultipleFilesA.java
+@@ -9,7 +9,7 @@
+ 
+ package org.checkstyle.autofix.recipe.unusedlocalvariable.multiplefilesa;
+ 
+-public class InputMultipleFilesA {
++public class OutputMultipleFilesA {
+     public void method() {
+         int x = 10;
+         System.out.println(x);
