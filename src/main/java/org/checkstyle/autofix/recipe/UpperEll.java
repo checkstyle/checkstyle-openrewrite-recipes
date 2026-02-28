@@ -18,12 +18,12 @@
 package org.checkstyle.autofix.recipe;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.checkstyle.autofix.PositionHelper;
 import org.checkstyle.autofix.parser.CheckstyleViolation;
 import org.openrewrite.ExecutionContext;
-import org.openrewrite.Recipe;
 import org.openrewrite.TreeVisitor;
 import org.openrewrite.java.JavaIsoVisitor;
 import org.openrewrite.java.tree.J;
@@ -33,12 +33,13 @@ import org.openrewrite.java.tree.JavaType;
  * Fixes Checkstyle UpperEll violations by replacing lowercase 'l' suffix
  * in long literals with uppercase 'L'.
  */
-public class UpperEll extends Recipe {
+public class UpperEll extends AbstractScanningRecipe {
 
-    private final List<CheckstyleViolation> violations;
+    private static final String LOWERCASE_L = "l";
+    private static final String UPPERCASE_L = "L";
 
     public UpperEll(List<CheckstyleViolation> violations) {
-        this.violations = violations;
+        super(violations);
     }
 
     @Override
@@ -53,16 +54,23 @@ public class UpperEll extends Recipe {
     }
 
     @Override
-    public TreeVisitor<?, ExecutionContext> getVisitor() {
-        return new UpperEllVisitor();
+    public TreeVisitor<?, ExecutionContext> getScanner(ViolationAccumulator acc) {
+        return new ScannerVisitor(acc);
     }
 
-    private final class UpperEllVisitor extends JavaIsoVisitor<ExecutionContext> {
+    @Override
+    public TreeVisitor<?, ExecutionContext> getVisitor(ViolationAccumulator acc) {
+        return new FixerVisitor(acc);
+    }
 
-        private static final String LOWERCASE_L = "l";
-        private static final String UPPERCASE_L = "L";
+    private final class ScannerVisitor extends JavaIsoVisitor<ExecutionContext> {
 
+        private final ViolationAccumulator acc;
         private Path sourcePath;
+
+        private ScannerVisitor(ViolationAccumulator acc) {
+            this.acc = acc;
+        }
 
         @Override
         public J.CompilationUnit visitCompilationUnit(
@@ -73,32 +81,58 @@ public class UpperEll extends Recipe {
 
         @Override
         public J.Literal visitLiteral(J.Literal literal, ExecutionContext executionContext) {
-            J.Literal result = super.visitLiteral(literal, executionContext);
+            final J.Literal result = super.visitLiteral(literal, executionContext);
             final String valueSource = result.getValueSource();
 
             if (valueSource != null && valueSource.endsWith(LOWERCASE_L)
-                    && result.getType() == JavaType.Primitive.Long
-                    && isAtViolationLocation(result)) {
+                    && result.getType() == JavaType.Primitive.Long) {
 
-                final String numericPart = valueSource.substring(0, valueSource.length() - 1);
-                result = result.withValueSource(numericPart + UPPERCASE_L);
+                final J.CompilationUnit cursor =
+                        getCursor().firstEnclosing(J.CompilationUnit.class);
+                final int line = PositionHelper.computeLinePosition(
+                        cursor, result, getCursor());
+                final int column = PositionHelper.computeColumnPosition(
+                        cursor, result, getCursor());
+
+                for (CheckstyleViolation violation : getViolations()) {
+                    final Path absolutePath = violation.getFilePath().toAbsolutePath();
+                    if (violation.getLine() == line
+                            && violation.getColumn() == column
+                            && absolutePath.endsWith(sourcePath)) {
+                        acc.getMatched().computeIfAbsent(result.getId(),
+                                key -> new ArrayList<>()).add(violation);
+                        break;
+                    }
+                }
             }
 
             return result;
         }
+    }
 
-        private boolean isAtViolationLocation(J.Literal literal) {
-            final J.CompilationUnit cursor = getCursor().firstEnclosing(J.CompilationUnit.class);
+    private static final class FixerVisitor extends JavaIsoVisitor<ExecutionContext> {
 
-            final int line = PositionHelper.computeLinePosition(cursor, literal, getCursor());
-            final int column = PositionHelper.computeColumnPosition(cursor, literal, getCursor());
+        private final ViolationAccumulator acc;
 
-            return violations.stream().anyMatch(violation -> {
-                final Path absolutePath = violation.getFilePath().toAbsolutePath();
-                return violation.getLine() == line
-                        && violation.getColumn() == column
-                        && absolutePath.endsWith(sourcePath);
-            });
+        private FixerVisitor(ViolationAccumulator acc) {
+            this.acc = acc;
+        }
+
+        @Override
+        public J.Literal visitLiteral(J.Literal literal, ExecutionContext executionContext) {
+            J.Literal result = super.visitLiteral(literal, executionContext);
+            final String valueSource = result.getValueSource();
+
+            if (acc.getMatched().containsKey(result.getId())
+                    && valueSource != null && valueSource.endsWith(LOWERCASE_L)
+                    && result.getType() == JavaType.Primitive.Long) {
+
+                final String numericPart =
+                        valueSource.substring(0, valueSource.length() - 1);
+                result = result.withValueSource(numericPart + UPPERCASE_L);
+            }
+
+            return result;
         }
     }
 }
