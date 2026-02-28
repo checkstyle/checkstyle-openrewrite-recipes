@@ -18,13 +18,13 @@
 package org.checkstyle.autofix.recipe;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 import org.checkstyle.autofix.PositionHelper;
 import org.checkstyle.autofix.parser.CheckstyleViolation;
 import org.openrewrite.ExecutionContext;
-import org.openrewrite.Recipe;
 import org.openrewrite.TreeVisitor;
 import org.openrewrite.java.JavaIsoVisitor;
 import org.openrewrite.java.tree.J;
@@ -35,12 +35,11 @@ import org.openrewrite.java.tree.JavaType;
  * uppercase prefixes : {@code 0x, 0b}, infixes : {@code e, p}, and suffixes : {@code f, d}
  * with lowercase literals.
  */
-public class NumericalPrefixesInfixesSuffixesCharacterCase extends Recipe {
+public class NumericalPrefixesInfixesSuffixesCharacterCase extends AbstractScanningRecipe {
 
-    private final List<CheckstyleViolation> violations;
-
-    public NumericalPrefixesInfixesSuffixesCharacterCase(List<CheckstyleViolation> violations) {
-        this.violations = violations;
+    public NumericalPrefixesInfixesSuffixesCharacterCase(
+            List<CheckstyleViolation> violations) {
+        super(violations);
     }
 
     @Override
@@ -55,20 +54,23 @@ public class NumericalPrefixesInfixesSuffixesCharacterCase extends Recipe {
     }
 
     @Override
-    public TreeVisitor<?, ExecutionContext> getVisitor() {
-        return new NumericalPrefixesInfixesSuffixesCharacterCase
-            .NumericalPrefixesInfixesSuffixesCharacterCaseVisitor();
+    public TreeVisitor<?, ExecutionContext> getScanner(ViolationAccumulator acc) {
+        return new ScannerVisitor(acc);
     }
 
-    private final class NumericalPrefixesInfixesSuffixesCharacterCaseVisitor
-            extends JavaIsoVisitor<ExecutionContext> {
+    @Override
+    public TreeVisitor<?, ExecutionContext> getVisitor(ViolationAccumulator acc) {
+        return new FixerVisitor(acc);
+    }
 
-        private static final String HEX_PREFIX = "0x";
-        private static final String BYTE_PREFIX = "0b";
+    private final class ScannerVisitor extends JavaIsoVisitor<ExecutionContext> {
 
-        private static final String EXPONENT_P = "p";
-
+        private final ViolationAccumulator acc;
         private Path sourcePath;
+
+        private ScannerVisitor(ViolationAccumulator acc) {
+            this.acc = acc;
+        }
 
         @Override
         public J.CompilationUnit visitCompilationUnit(J.CompilationUnit cu,
@@ -79,33 +81,84 @@ public class NumericalPrefixesInfixesSuffixesCharacterCase extends Recipe {
 
         @Override
         public J.Literal visitLiteral(J.Literal literal, ExecutionContext executionContext) {
+            final J.Literal result = super.visitLiteral(literal, executionContext);
+
+            if (isLongOrInt(result) || isFloatOrDouble(result)) {
+                final J.CompilationUnit cursor =
+                        getCursor().firstEnclosing(J.CompilationUnit.class);
+                final int line = PositionHelper.computeLinePosition(
+                        cursor, result, getCursor());
+                final int column = PositionHelper.computeColumnPosition(
+                        cursor, result, getCursor());
+
+                for (CheckstyleViolation violation : getViolations()) {
+                    final Path absolutePath = violation.getFilePath();
+                    if (violation.getLine() == line
+                            && violation.getColumn() == column
+                            && absolutePath.endsWith(sourcePath)) {
+                        acc.getMatched().computeIfAbsent(result.getId(),
+                                key -> new ArrayList<>()).add(violation);
+                        break;
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        private boolean isLongOrInt(J.Literal literal) {
+            return literal.getType() == JavaType.Primitive.Long
+                    || literal.getType() == JavaType.Primitive.Int;
+        }
+
+        private boolean isFloatOrDouble(J.Literal literal) {
+            return literal.getType() == JavaType.Primitive.Float
+                    || literal.getType() == JavaType.Primitive.Double;
+        }
+    }
+
+    private static final class FixerVisitor extends JavaIsoVisitor<ExecutionContext> {
+
+        private static final String HEX_PREFIX = "0x";
+        private static final String BYTE_PREFIX = "0b";
+        private static final String EXPONENT_P = "p";
+
+        private final ViolationAccumulator acc;
+
+        private FixerVisitor(ViolationAccumulator acc) {
+            this.acc = acc;
+        }
+
+        @Override
+        public J.Literal visitLiteral(J.Literal literal, ExecutionContext executionContext) {
             J.Literal result = literal;
             final String valueSource = result.getValueSource();
 
-            if (shouldProcessLongAndIntLiteral(result)) {
-                final String newValueSource = convertToLowerCaseForLongAndIntLiterals(valueSource);
-                result = result.withValueSource(newValueSource);
-            }
+            if (acc.getMatched().containsKey(result.getId())) {
+                if (shouldProcessLongAndIntLiteral(result)) {
+                    final String newValueSource =
+                            convertToLowerCaseForLongAndIntLiterals(valueSource);
+                    result = result.withValueSource(newValueSource);
+                }
 
-            if (shouldProcessFloatAndDoubleLiteral(result)) {
-                final String newValueSource =
-                    convertToLowerCaseForFloatAndDoubleLiterals(valueSource);
-                result = result.withValueSource(newValueSource);
+                if (shouldProcessFloatAndDoubleLiteral(result)) {
+                    final String newValueSource =
+                        convertToLowerCaseForFloatAndDoubleLiterals(valueSource);
+                    result = result.withValueSource(newValueSource);
+                }
             }
 
             return result;
         }
 
         private boolean shouldProcessLongAndIntLiteral(J.Literal literal) {
-            return (literal.getType() == JavaType.Primitive.Long
-                            || literal.getType() == JavaType.Primitive.Int)
-                    && isAtViolationLocation(literal);
+            return literal.getType() == JavaType.Primitive.Long
+                    || literal.getType() == JavaType.Primitive.Int;
         }
 
         private boolean shouldProcessFloatAndDoubleLiteral(J.Literal literal) {
-            return (literal.getType() == JavaType.Primitive.Float
-                            || literal.getType() == JavaType.Primitive.Double)
-                    && isAtViolationLocation(literal);
+            return literal.getType() == JavaType.Primitive.Float
+                    || literal.getType() == JavaType.Primitive.Double;
         }
 
         private String convertToLowerCaseForFloatAndDoubleLiterals(String valueSource) {
@@ -152,20 +205,6 @@ public class NumericalPrefixesInfixesSuffixesCharacterCase extends Recipe {
             }
 
             return finalResult;
-        }
-
-        private boolean isAtViolationLocation(J.Literal literal) {
-            final J.CompilationUnit cursor = getCursor().firstEnclosing(J.CompilationUnit.class);
-
-            final int line = PositionHelper.computeLinePosition(cursor, literal, getCursor());
-            final int column = PositionHelper.computeColumnPosition(cursor, literal, getCursor());
-
-            return violations.stream().anyMatch(violation -> {
-                final Path absolutePath = violation.getFilePath();
-                return violation.getLine() == line
-                        && violation.getColumn() == column
-                        && absolutePath.endsWith(sourcePath);
-            });
         }
     }
 }

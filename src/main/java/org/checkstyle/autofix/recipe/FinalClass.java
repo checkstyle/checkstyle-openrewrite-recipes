@@ -24,7 +24,6 @@ import java.util.List;
 import org.checkstyle.autofix.PositionHelper;
 import org.checkstyle.autofix.parser.CheckstyleViolation;
 import org.openrewrite.ExecutionContext;
-import org.openrewrite.Recipe;
 import org.openrewrite.TreeVisitor;
 import org.openrewrite.java.JavaIsoVisitor;
 import org.openrewrite.java.tree.J;
@@ -36,12 +35,10 @@ import org.openrewrite.marker.Markers;
  * Fixes Checkstyle FinalClass violations by adding 'final' modifier
  * to classes that have only private constructors or no constructors.
  */
-public class FinalClass extends Recipe {
-
-    private final List<CheckstyleViolation> violations;
+public class FinalClass extends AbstractScanningRecipe {
 
     public FinalClass(final List<CheckstyleViolation> violations) {
-        this.violations = violations;
+        super(violations);
     }
 
     @Override
@@ -55,14 +52,23 @@ public class FinalClass extends Recipe {
     }
 
     @Override
-    public TreeVisitor<?, ExecutionContext> getVisitor() {
-        return new FinalClassVisitor();
+    public TreeVisitor<?, ExecutionContext> getScanner(ViolationAccumulator acc) {
+        return new ScannerVisitor(acc);
     }
 
-    private final class FinalClassVisitor
-            extends JavaIsoVisitor<ExecutionContext> {
+    @Override
+    public TreeVisitor<?, ExecutionContext> getVisitor(ViolationAccumulator acc) {
+        return new FixerVisitor(acc);
+    }
 
+    private final class ScannerVisitor extends JavaIsoVisitor<ExecutionContext> {
+
+        private final ViolationAccumulator acc;
         private Path sourcePath;
+
+        private ScannerVisitor(ViolationAccumulator acc) {
+            this.acc = acc;
+        }
 
         @Override
         public J.CompilationUnit visitCompilationUnit(
@@ -76,10 +82,45 @@ public class FinalClass extends Recipe {
                 final J.ClassDeclaration classDeclaration,
                 final ExecutionContext executionContext) {
 
+            final J.ClassDeclaration result =
+                    super.visitClassDeclaration(classDeclaration, executionContext);
+
+            final J.CompilationUnit cursor =
+                    getCursor().firstEnclosing(J.CompilationUnit.class);
+
+            final int line = PositionHelper.computeLinePosition(
+                    cursor, classDeclaration, getCursor());
+
+            for (CheckstyleViolation violation : getViolations()) {
+                if (violation.getLine() == line
+                        && violation.getFilePath().endsWith(sourcePath)) {
+                    acc.getMatched().computeIfAbsent(classDeclaration.getId(),
+                            key -> new ArrayList<>()).add(violation);
+                    break;
+                }
+            }
+
+            return result;
+        }
+    }
+
+    private static final class FixerVisitor extends JavaIsoVisitor<ExecutionContext> {
+
+        private final ViolationAccumulator acc;
+
+        private FixerVisitor(ViolationAccumulator acc) {
+            this.acc = acc;
+        }
+
+        @Override
+        public J.ClassDeclaration visitClassDeclaration(
+                final J.ClassDeclaration classDeclaration,
+                final ExecutionContext executionContext) {
+
             J.ClassDeclaration result =
                     super.visitClassDeclaration(classDeclaration, executionContext);
 
-            if (isAtViolationLocation(classDeclaration) && !hasFinalModifier(result)) {
+            if (acc.getMatched().containsKey(result.getId()) && !hasFinalModifier(result)) {
                 result = addFinalModifier(result);
             }
 
@@ -163,26 +204,6 @@ public class FinalClass extends Recipe {
             }
 
             return foundFinal;
-        }
-
-        private boolean isAtViolationLocation(J.ClassDeclaration classDeclaration) {
-            final J.CompilationUnit cursor =
-                    getCursor().firstEnclosing(J.CompilationUnit.class);
-
-            final int line = PositionHelper.computeLinePosition(
-                    cursor, classDeclaration, getCursor());
-
-            boolean matches = false;
-
-            for (CheckstyleViolation violation : violations) {
-                if (violation.getLine() == line
-                        && violation.getFilePath().endsWith(sourcePath)) {
-                    matches = true;
-                    break;
-                }
-            }
-
-            return matches;
         }
     }
 }

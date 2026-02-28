@@ -18,6 +18,7 @@
 package org.checkstyle.autofix.recipe;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -25,19 +26,16 @@ import java.util.Set;
 import org.checkstyle.autofix.PositionHelper;
 import org.checkstyle.autofix.parser.CheckstyleViolation;
 import org.openrewrite.ExecutionContext;
-import org.openrewrite.Recipe;
 import org.openrewrite.TreeVisitor;
 import org.openrewrite.java.JavaIsoVisitor;
 import org.openrewrite.java.tree.J;
 
-public class RedundantImport extends Recipe {
+public class RedundantImport extends AbstractScanningRecipe {
 
     private static final String JAVA_LANG_PREFIX = "java.lang.";
 
-    private final List<CheckstyleViolation> violations;
-
     public RedundantImport(List<CheckstyleViolation> violations) {
-        this.violations = violations;
+        super(violations);
     }
 
     @Override
@@ -51,19 +49,68 @@ public class RedundantImport extends Recipe {
     }
 
     @Override
-    public TreeVisitor<?, ExecutionContext> getVisitor() {
-        return new RemoveRedundantImportsVisitor();
+    public TreeVisitor<?, ExecutionContext> getScanner(ViolationAccumulator acc) {
+        return new ScannerVisitor(acc);
     }
 
-    private final class RemoveRedundantImportsVisitor extends JavaIsoVisitor<ExecutionContext> {
+    @Override
+    public TreeVisitor<?, ExecutionContext> getVisitor(ViolationAccumulator acc) {
+        return new FixerVisitor(acc);
+    }
 
+    private final class ScannerVisitor extends JavaIsoVisitor<ExecutionContext> {
+
+        private final ViolationAccumulator acc;
         private Path sourcePath;
+
+        private ScannerVisitor(ViolationAccumulator acc) {
+            this.acc = acc;
+        }
 
         @Override
         public J.CompilationUnit visitCompilationUnit(J.CompilationUnit cu,
-                                                      ExecutionContext executionContext) {
-
+                                                       ExecutionContext executionContext) {
             this.sourcePath = cu.getSourcePath().toAbsolutePath();
+            return super.visitCompilationUnit(cu, executionContext);
+        }
+
+        @Override
+        public J.Import visitImport(J.Import importStmt, ExecutionContext executionContext) {
+            final J.Import result = super.visitImport(importStmt, executionContext);
+
+            final J.CompilationUnit cursor =
+                    getCursor().firstEnclosing(J.CompilationUnit.class);
+            final int line = PositionHelper.computeLinePosition(
+                    cursor, result, getCursor());
+            final int column = PositionHelper.computeColumnPosition(
+                    cursor, result, getCursor());
+
+            for (CheckstyleViolation violation : getViolations()) {
+                final Path absolutePath = violation.getFilePath().toAbsolutePath();
+                if (violation.getLine() == line
+                        && violation.getColumn() == column
+                        && absolutePath.endsWith(sourcePath)) {
+                    acc.getMatched().computeIfAbsent(result.getId(),
+                            key -> new ArrayList<>()).add(violation);
+                    break;
+                }
+            }
+
+            return result;
+        }
+    }
+
+    private static final class FixerVisitor extends JavaIsoVisitor<ExecutionContext> {
+
+        private final ViolationAccumulator acc;
+
+        private FixerVisitor(ViolationAccumulator acc) {
+            this.acc = acc;
+        }
+
+        @Override
+        public J.CompilationUnit visitCompilationUnit(J.CompilationUnit cu,
+                                                       ExecutionContext executionContext) {
 
             final Set<String> seenImports = new HashSet<>();
             final String currentPackage = getCurrentPackage(cu);
@@ -72,7 +119,8 @@ public class RedundantImport extends Recipe {
                     cu.getImports().stream()
                             .filter(importStmt -> {
                                 return !isRedundant(importStmt, seenImports,
-                                    currentPackage) || !isAtViolationLocation(importStmt); })
+                                    currentPackage)
+                                    || !acc.getMatched().containsKey(importStmt.getId()); })
                             .toList()
             );
         }
@@ -109,19 +157,5 @@ public class RedundantImport extends Recipe {
             }
             return currentPackage;
         }
-
-        private boolean isAtViolationLocation(J.Import literal) {
-            final J.CompilationUnit cursor = getCursor().firstEnclosing(J.CompilationUnit.class);
-
-            final int line = PositionHelper.computeLinePosition(cursor, literal, getCursor());
-            final int column = PositionHelper.computeColumnPosition(cursor, literal, getCursor());
-            return violations.removeIf(violation -> {
-                final Path absolutePath = violation.getFilePath().toAbsolutePath();
-                return violation.getLine() == line
-                        && violation.getColumn() == column
-                        && absolutePath.endsWith(sourcePath);
-            });
-        }
-
     }
 }

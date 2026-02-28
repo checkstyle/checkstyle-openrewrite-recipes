@@ -21,31 +21,26 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
 
 import org.checkstyle.autofix.PositionHelper;
 import org.checkstyle.autofix.parser.CheckstyleViolation;
 import org.openrewrite.ExecutionContext;
-import org.openrewrite.Recipe;
 import org.openrewrite.Tree;
 import org.openrewrite.TreeVisitor;
 import org.openrewrite.java.JavaIsoVisitor;
 import org.openrewrite.java.tree.J;
 import org.openrewrite.java.tree.Space;
 import org.openrewrite.java.tree.Statement;
-import org.openrewrite.marker.Marker;
 import org.openrewrite.marker.Markers;
 
 /**
  * Fixes Checkstyle FinalLocalVariable violations by adding 'final' modifier to local variables
  * that are never reassigned.
  */
-public class FinalLocalVariable extends Recipe {
-
-    private final List<CheckstyleViolation> violations;
+public class FinalLocalVariable extends AbstractScanningRecipe {
 
     public FinalLocalVariable(List<CheckstyleViolation> violations) {
-        this.violations = violations;
+        super(violations);
     }
 
     @Override
@@ -59,27 +54,28 @@ public class FinalLocalVariable extends Recipe {
     }
 
     @Override
-    public TreeVisitor<?, ExecutionContext> getVisitor() {
-        return new JavaIsoVisitor<>() {
-            @Override
-            public J.CompilationUnit visitCompilationUnit(J.CompilationUnit cu,
-                                                          ExecutionContext executionContext) {
-                return new LocalVariableVisitor()
-                        .visitCompilationUnit(new MarkViolationVisitor()
-                                .visitCompilationUnit(cu, executionContext), executionContext);
-            }
-        };
+    public TreeVisitor<?, ExecutionContext> getScanner(ViolationAccumulator acc) {
+        return new ScannerVisitor(acc);
+    }
+
+    @Override
+    public TreeVisitor<?, ExecutionContext> getVisitor(ViolationAccumulator acc) {
+        return new LocalVariableVisitor(acc);
     }
 
     /**
-     * Visitor that identifies and marks variable declarations at violation locations.
-     * This visitor traverses the AST and adds markers to variables that match
-     * the checkstyle violation locations, preparing them for the final modifier addition.
+     * Scanner that identifies variable declarations at violation locations
+     * and records their UUIDs in the accumulator.
      */
-    private final class MarkViolationVisitor extends JavaIsoVisitor<ExecutionContext> {
+    private final class ScannerVisitor extends JavaIsoVisitor<ExecutionContext> {
 
+        private final ViolationAccumulator acc;
         private Path sourcePath;
         private J.CompilationUnit currentCompilationUnit;
+
+        private ScannerVisitor(ViolationAccumulator acc) {
+            this.acc = acc;
+        }
 
         @Override
         public J.CompilationUnit visitCompilationUnit(J.CompilationUnit cu,
@@ -93,8 +89,6 @@ public class FinalLocalVariable extends Recipe {
         public J.VariableDeclarations visitVariableDeclarations(
                 J.VariableDeclarations multiVariable, ExecutionContext executionContext) {
 
-            final J.VariableDeclarations variableDeclarations;
-
             final J.VariableDeclarations declarations = super
                     .visitVariableDeclarations(multiVariable, executionContext);
 
@@ -103,23 +97,14 @@ public class FinalLocalVariable extends Recipe {
 
                 final List<J.VariableDeclarations.NamedVariable> variables = declarations
                         .getVariables();
-                final List<J.VariableDeclarations.NamedVariable> marked = new ArrayList<>();
                 for (J.VariableDeclarations.NamedVariable variable : variables) {
                     if (isAtViolationLocation(variable)) {
-                        marked.add(variable.withMarkers(
-                                variable.getMarkers().add(
-                                        new FinalLocalVariableMarker(UUID.randomUUID()))));
-                    }
-                    else {
-                        marked.add(variable);
+                        acc.getMatched().computeIfAbsent(variable.getId(),
+                                key -> new ArrayList<>());
                     }
                 }
-                variableDeclarations = declarations.withVariables(marked);
             }
-            else {
-                variableDeclarations = declarations;
-            }
-            return variableDeclarations;
+            return declarations;
         }
 
         private boolean isAtViolationLocation(J.VariableDeclarations.NamedVariable variable) {
@@ -129,7 +114,7 @@ public class FinalLocalVariable extends Recipe {
             final int column = PositionHelper
                     .computeColumnPosition(currentCompilationUnit, variable, getCursor());
 
-            return violations.removeIf(violation -> {
+            return getViolations().removeIf(violation -> {
                 final Path absolutePath = violation.getFilePath().toAbsolutePath();
                 return violation.getLine() == line
                         && violation.getColumn() == column
@@ -143,7 +128,13 @@ public class FinalLocalVariable extends Recipe {
      * Visitor that processes marked variable declarations and applies the final modifier.
      * This visitor handles both single and multi-variable declarations.
      */
-    private final class LocalVariableVisitor extends JavaIsoVisitor<ExecutionContext> {
+    private static final class LocalVariableVisitor extends JavaIsoVisitor<ExecutionContext> {
+
+        private final ViolationAccumulator acc;
+
+        private LocalVariableVisitor(ViolationAccumulator acc) {
+            this.acc = acc;
+        }
 
         @Override
         public J.CompilationUnit visitCompilationUnit(
@@ -164,7 +155,7 @@ public class FinalLocalVariable extends Recipe {
                     && !declarations.hasModifier(J.Modifier.Type.Final)) {
                 final J.VariableDeclarations.NamedVariable variable = declarations
                         .getVariables().get(0);
-                if (variable.getMarkers().findFirst(FinalLocalVariableMarker.class).isPresent()) {
+                if (acc.getMatched().containsKey(variable.getId())) {
                     declarations = addFinalModifier(declarations);
                 }
             }
@@ -195,7 +186,7 @@ public class FinalLocalVariable extends Recipe {
             final List<J.VariableDeclarations.NamedVariable> nonViolations = new ArrayList<>();
 
             for (J.VariableDeclarations.NamedVariable variable : varDecl.getVariables()) {
-                if (variable.getMarkers().findFirst(FinalLocalVariableMarker.class).isPresent()) {
+                if (acc.getMatched().containsKey(variable.getId())) {
                     violationsList.add(variable.withPrefix(Space.SINGLE_SPACE));
                 }
                 else {
@@ -236,25 +227,6 @@ public class FinalLocalVariable extends Recipe {
                     && varDecl.getTypeExpression() != null
                     && !(getCursor().getParentTreeCursor()
                     .getValue() instanceof J.ClassDeclaration);
-        }
-    }
-
-    private static final class FinalLocalVariableMarker implements Marker {
-
-        private final UUID id;
-
-        private FinalLocalVariableMarker(UUID uuid) {
-            this.id = uuid;
-        }
-
-        @Override
-        public UUID getId() {
-            return id;
-        }
-
-        @Override
-        public <M extends Marker> M withId(UUID uuid) {
-            return (M) new FinalLocalVariableMarker(uuid);
         }
     }
 }
