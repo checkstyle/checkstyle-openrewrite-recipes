@@ -1,0 +1,62 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/mutationtests7/InputMutationTests7.java
++++ src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/mutationtests7/OutputMutationTests7.java
+@@ -8,48 +8,40 @@
+ 
+ package org.checkstyle.autofix.recipe.useenhancedswitch.mutationtests7;
+ 
+-public class InputMutationTests7 {
++public class OutputMutationTests7 {
+ 
+     int missingDefaultReturn(int x) {
+-        // violation below, 'Switch can be replaced with enhanced switch'
+         switch (x) {
+-            case 1:
++            case 1 -> {
+                 return 1;
++            }
+         }
+         return 0;
+     }
+ 
+     void notAllCasesReturn(int x) {
+-        // violation below, 'Switch can be replaced with enhanced switch'
+         switch (x) {
+-            case 1:
+-                System.out.println("1");
+-                break;
+-            default:
+-                break;
++            case 1 -> System.out.println("1");
++            default -> {}
+         }
+     }
+ 
+     int emptyBlockReturn(int x) {
+-        // violation below, 'Switch can be replaced with enhanced switch'
+         switch (x) {
+-            case 1:
++            case 1 -> {
+                 {}
+-                break;
+-            default:
++            }
++            default -> {
+                 return 0;
++            }
+         }
+         return -1;
+     }
+ 
+     void tabIndentedSwitch(int x) {
+-    	// violation below, 'Switch can be replaced with enhanced switch'
+     	switch (x) {
+-    		case 1:
+-    			System.out.println("1");
+-    			break;
+-    		default:
+-    			break;
++    		case 1 -> System.out.println("1");
++    		default -> {}
+     	}
+     }
+ }

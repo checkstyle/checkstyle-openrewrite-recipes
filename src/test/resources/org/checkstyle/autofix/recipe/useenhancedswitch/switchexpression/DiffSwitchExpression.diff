@@ -1,0 +1,23 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/switchexpression/InputSwitchExpression.java
++++ src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/switchexpression/OutputSwitchExpression.java
+@@ -9,15 +9,14 @@
+ 
+ package org.checkstyle.autofix.recipe.useenhancedswitch.switchexpression;
+ 
+-public class InputSwitchExpression {
++public class OutputSwitchExpression {
+ 
+     int switchExpressions(int x) {
+-        // violation below, 'Switch can be replaced with enhanced switch'
+         int y = switch (x) {
+-            case 1 : yield 1;
+-            case 2 : yield 2;
+-            case 3 : yield 3;
+-            default: yield 0;
++            case 1 -> 1;
++            case 2 -> 2;
++            case 3 -> 3;
++            default -> 0;
+         };
+         return y;
+     }

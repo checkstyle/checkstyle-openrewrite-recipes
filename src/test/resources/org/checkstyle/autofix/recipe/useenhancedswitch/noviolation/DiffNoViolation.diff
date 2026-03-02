@@ -1,0 +1,11 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/noviolation/InputNoViolation.java
++++ src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/noviolation/OutputNoViolation.java
+@@ -9,7 +9,7 @@
+ 
+ package org.checkstyle.autofix.recipe.useenhancedswitch.noviolation;
+ 
+-public class InputNoViolation {
++public class OutputNoViolation {
+ 
+     void doSomething(String param) {
+     }

@@ -1,0 +1,111 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/mutationtests3/InputMutationTests3.java
++++ src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/mutationtests3/OutputMutationTests3.java
+@@ -8,84 +8,61 @@
+ 
+ package org.checkstyle.autofix.recipe.useenhancedswitch.mutationtests3;
+ 
+-public class InputMutationTests3 {
++public class OutputMutationTests3 {
+ 
+     enum Day { MON, TUE, WED }
+ 
+     int enumExhaustive(Day d) {
+-        // violation below, 'Switch can be replaced with enhanced switch'
+-        switch (d) {
+-            case MON: return 1;
+-            case TUE: return 2;
+-            case WED: return 3;
+-            default: return 0;
+-        }
++        return switch (d) {
++            case MON -> 1;
++            case TUE -> 2;
++            case WED -> 3;
++        };
+     }
+ 
+     void assignmentWithInitializer(int x) {
+         String s = "initial";
+-        // violation below, 'Switch can be replaced with enhanced switch'
+         switch (x) {
+-            case 1:
+-                s = "one";
+-                break;
+-            default:
+-                s = "default";
+-                break;
++            case 1 -> s = "one";
++            default -> s = "default";
+         }
+         System.out.println(s);
+     }
+ 
+     void assignmentWithoutInitializer(int x) {
+-        String s;
+-        // violation below, 'Switch can be replaced with enhanced switch'
+-        switch (x) {
+-            case 1:
+-                s = "one";
+-                break;
+-            default:
+-                s = "default";
+-                break;
+-        }
++        String s = switch (x) {
++            case 1 -> "one";
++            default -> "default";
++        };
+         System.out.println(s);
+     }
+ 
+     void trailingComment(int x) {
+-        // violation below, 'Switch can be replaced with enhanced switch'
+         switch (x) {
+-            case 1:
+-                System.out.println("one");
+-                break; // trailing comment
+-            default:
+-                System.out.println("default");
+-                break;
++            case 1 -> System.out.println("one"); // trailing comment
++            default -> System.out.println("default");
+         }
+     }
+ 
+     int yieldInBlock(int x) {
+-        // violation below, 'Switch can be replaced with enhanced switch'
+         return switch (x) {
+-            case 1:
+-                {
+-                    System.out.println("one");
+-                    yield 1;
+-                }
+-            default:
+-                yield 0;
++            case 1 -> {
++                System.out.println("one");
++                yield 1;
++            }
++            default -> 0;
+         };
+     }
+ 
+     void nestedSwitches(int x, int y) {
+-        // violation below, 'Switch can be replaced with enhanced switch'
+         switch (x) {
+-            case 1:
+-                // violation below, 'Switch can be replaced with enhanced switch'
++            case 1 -> {
+                 switch (y) {
+-                    case 1: break;
+-                    default: break;
++                    case 1 -> {}
++                    default -> {}
+                 }
+-                break;
+-            default: break;
++            }
++            default -> {}
+         }
+     }
+ }

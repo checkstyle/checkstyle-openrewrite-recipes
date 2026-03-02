@@ -1,0 +1,95 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/blockwithbreak/InputBlockWithBreak.java
++++ src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/blockwithbreak/OutputBlockWithBreak.java
+@@ -9,71 +9,42 @@
+ 
+ package org.checkstyle.autofix.recipe.useenhancedswitch.blockwithbreak;
+ 
+-public class InputBlockWithBreak {
++public class OutputBlockWithBreak {
+ 
+     void doSomething(String param) {
+     }
+ 
+     void blockCasesWithBreak(int x) {
+-        // violation below, 'Switch can be replaced with enhanced switch'
+         switch (x) {
+-            case 1:
+-                {
+-                    doSomething("one");
+-                    break;
+-                }
+-            case 2:
+-                {
+-                    doSomething("start");
+-                    doSomething("end");
+-                    break;
+-                }
+-            default:
+-                {
+-                    doSomething("default");
+-                    break;
+-                }
++            case 1 -> doSomething("one");
++            case 2 -> {
++                doSomething("start");
++                doSomething("end");
++            }
++            default -> doSomething("default");
+         }
+     }
+ 
+     String multiStatementBlockCases(int x) {
+-        String result;
+-        // violation below, 'Switch can be replaced with enhanced switch'
+-        switch (x) {
+-            case 1:
+-                {
+-                    doSomething("first");
+-                    result = "one";
+-                    break;
+-                }
+-            case 2:
+-                {
+-                    result = "two";
+-                    break;
+-                }
+-            default:
+-                {
+-                    doSomething("last");
+-                    result = "other";
+-                    break;
+-                }
+-        }
++        String result = switch (x) {
++            case 1 -> {
++                doSomething("first");
++                yield "one";
++            }
++            case 2 -> "two";
++            default -> {
++                doSomething("last");
++                yield "other";
++            }
++        };
+         return result;
+     }
+ 
+     void mixedBlockAndPlainCases(int x) {
+-        // violation below, 'Switch can be replaced with enhanced switch'
+         switch (x) {
+-            case 1:
+-                doSomething("plain");
+-                break;
+-            case 2:
+-                {
+-                    doSomething("blocked");
+-                    break;
+-                }
+-            default:
+-                break;
++            case 1 -> doSomething("plain");
++            case 2 -> doSomething("blocked");
++            default -> {}
+         }
+     }
+ }

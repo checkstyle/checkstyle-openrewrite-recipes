@@ -133,21 +133,10 @@ public class FinalClass extends Recipe {
         }
 
         private boolean isAccessOrStatic(Modifier.Type type) {
-            final boolean result;
-
-            switch (type) {
-                case Public:
-                case Protected:
-                case Private:
-                case Static:
-                    result = true;
-                    break;
-                default:
-                    result = false;
-                    break;
-            }
-
-            return result;
+            return switch (type) {
+                case Public, Protected, Private, Static -> true;
+                default -> false;
+            };
         }
 
         private static boolean hasFinalModifier(

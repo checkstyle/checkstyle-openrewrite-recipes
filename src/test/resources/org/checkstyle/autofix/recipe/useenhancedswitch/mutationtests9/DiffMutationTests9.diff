@@ -1,0 +1,86 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/mutationtests9/InputMutationTests9.java
++++ src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/mutationtests9/OutputMutationTests9.java
+@@ -10,67 +10,46 @@
+ 
+ import java.util.Collections;
+ 
+-public class InputMutationTests9 {
++public class OutputMutationTests9 {
+     public enum Day { MON, TUE, WED }
+ 
+     public int testNestedReturn(int x) {
+         int res;
+-        // violation below, 'Switch can be replaced with enhanced switch'
+         switch (x) {
+-            case 1:
++            case 1 -> {
+                 if (x > 0) return 0; // nested return
+                 res = 1;
+-                break;
+-            default:
+-                res = 2;
+-                break;
++            }
++            default -> res = 2;
+         }
+         return res;
+     }
+ 
+     public int testExhaustiveEnumWithDefault(Day day) {
+-        int res;
+-        // violation below, 'Switch can be replaced with enhanced switch'
+-        switch (day) {
+-            case MON:
+-                res = 1;
+-                break;
+-            case TUE:
+-                res = 2;
+-                break;
+-            case WED:
+-                res = 3;
+-                break;
+-            default:
+-                res = 0;
+-                break;
+-        }
++        int res = switch (day) {
++            case MON -> 1;
++            case TUE -> 2;
++            case WED -> 3;
++            default -> 0;
++        };
+         return res;
+     }
+ 
+     public int testNonEnumSwitch(String s) {
+-        int res;
+-        // violation below, 'Switch can be replaced with enhanced switch'
+-        switch (s) {
+-            case "A":
+-                res = 1;
+-                break;
+-            default:
+-                res = 0;
+-                break;
+-        }
++        int res = switch (s) {
++            case "A" -> 1;
++            default -> 0;
++        };
+         return res;
+     }
+ 
+     public int testMergeAdjacent(int x) {
+         int res = 0;
+-        // violation below, 'Switch can be replaced with enhanced switch'
+         switch (x) {
+-            case 1: res = 1; break;
++            case 1 -> res = 1;
+         }
+-        // violation below, 'Switch can be replaced with enhanced switch'
+         switch (x) {
+-            case 2: res = 2; break;
++            case 2 -> res = 2;
+         }
+         return res;
+     }

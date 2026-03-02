@@ -1,0 +1,32 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/selectiveswitch/InputSelectiveSwitch.java
++++ src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/selectiveswitch/OutputSelectiveSwitch.java
+@@ -9,7 +9,7 @@
+ 
+ package org.checkstyle.autofix.recipe.useenhancedswitch.selectiveswitch;
+ 
+-public class InputSelectiveSwitch {
++public class OutputSelectiveSwitch {
+ 
+     void doSomething(String param) {
+     }
+@@ -23,17 +23,10 @@
+     }
+ 
+     void needsConversion(int x) {
+-        // violation below, 'Switch can be replaced with enhanced switch'
+         switch (x) {
+-            case 1:
+-                doSomething("one");
+-                break;
+-            case 2:
+-                doSomething("two");
+-                break;
+-            default:
+-                doSomething("default");
+-                break;
++            case 1 -> doSomething("one");
++            case 2 -> doSomething("two");
++            default -> doSomething("default");
+         }
+     }
+ }

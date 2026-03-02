@@ -1,0 +1,133 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/survivingmutations/InputSurvivingMutations.java
++++ src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/survivingmutations/OutputSurvivingMutations.java
+@@ -13,13 +13,12 @@
+ 
+ package org.checkstyle.autofix.recipe.useenhancedswitch.survivingmutations;
+ 
+-public class InputSurvivingMutations {
++public class OutputSurvivingMutations {
+   
+     void m1(int x) {
+-        // violation below, 'Switch can be replaced with enhanced switch'
+         switch (x) {
+-            case 1: break;
+-            default: break;
++            case 1 -> {}
++            default -> {}
+         }
+     }
+ 
+@@ -38,10 +37,9 @@
+     }
+ 
+     int m2(int x) {
+-               // violation below, 'Switch can be replaced with enhanced switch'
+                return switch (x) {
+-            case 1: yield 1;
+-            default: yield 0;
++            case 1 -> 1;
++            default -> 0;
+         };
+     }
+ 
+@@ -60,24 +58,21 @@
+     }
+ 
+     void m3(int x, int y) {
+-        // violation below, 'Switch can be replaced with enhanced switch'
+         switch (x) {
+-            case 1:
+-                // violation below, 'Switch can be replaced with enhanced switch'
++            case 1 -> {
+                 switch (y) {
+-                    case 2: break;
+-                    default: break;
++                    case 2 -> {}
++                    default -> {}
+                 }
+-                break;
+-            default: break;
++            }
++            default -> {}
+         }
+     }
+ 
+     void m4(int x) {
+-    // violation below, 'Switch can be replaced with enhanced switch'
+     switch (x) {
+-    case 1: break;
+-    default: break;
++    case 1 -> {}
++    default -> {}
+     }
+ 
+                                
+@@ -90,55 +85,49 @@
+     int m5(int x, int y) {
+         return switch (x) { // (suppressed violation)
+             case 1: // (suppressed violation)
+-                // violation below, 'Switch can be replaced with enhanced switch'
+                 yield switch (y) {
+-                    case 2: yield 2;
+-                    default: yield 0;
++                    case 2 -> 2;
++                    default -> 0;
+                 };
+             default: yield 0;
+         };
+     }
+     
+     void m6(int x) {
+-          // violation below, 'Switch can be replaced with enhanced switch'
+           switch (x) {
+-            case 1: break;
+-            default: break;
++            case 1 -> {}
++            default -> {}
+           }
+     }
+ 
+     void m7(int x) {
+-        // violation below, 'Switch can be replaced with enhanced switch'
+         switch (x) {
+-case 1:
++case 1 -> {
+ System.out.println("0");
+ System.out.println("0b");
+-break;
+-  default:
++}
++  default -> {
+   System.out.println("2");
+   System.out.println("2b");
+-  break;
++  }
+         }
+     }
+ 
+     void m8(int x, int y) {
+-        // violation below, 'Switch can be replaced with enhanced switch'
+-        switch (x) { case 1: switch (y) { case 1: System.out.println("1"); case 2: break; default: break; } break;
+-            default: break;
++        switch (x) { case 1 -> { switch (y) { case 1 -> System.out.println("1"); case 2 -> {} default -> {} }}
++            default -> {}
+         }
+     }
+ 
+     int m9(int x, int y) {
+-        // violation below, 'Switch can be replaced with enhanced switch'
+-        return switch (x) { case 1 -> switch (y) { case 1: System.out.println("1"); yield 1; case 2: yield 2; default: yield 0; };
++        return switch (x) { case 1 -> switch (y) { case 1 -> { System.out.println("1"); yield 1;} case 2 -> 2; default -> 0; };
+             default -> 0;
+         };
+     }
+ 
+     void m10(int x) {
+-        // violation below, 'Switch can be replaced with enhanced switch'
+-        switch (x) { case 1:      System.out.println("1"); System.out.println("1b"); break;
+-            default: break;
++        switch (x) { case 1 -> {      System.out.println("1"); System.out.println("1b");}
++            default -> {}
+         }
+     }
+ 

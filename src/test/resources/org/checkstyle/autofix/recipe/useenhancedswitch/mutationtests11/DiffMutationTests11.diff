@@ -1,0 +1,34 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/mutationtests11/InputMutationTests11.java
++++ src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/mutationtests11/OutputMutationTests11.java
+@@ -7,26 +7,20 @@
+ */
+ package org.checkstyle.autofix.recipe.useenhancedswitch.mutationtests11;
+ 
+-public class InputMutationTests11 {
++public class OutputMutationTests11 {
+ 	public void testTabs(int i) {
+ 		int x = 0;
+-		// violation below, 'Switch can be replaced with enhanced switch'
+ 		switch(i) {
+-			case 1:
+-				x = 1;
+-				break;
+-			default:
+-				x = 2;
+-				break;
++			case 1 -> x = 1;
++			default -> x = 2;
+ 		}
+ 	}
+ 
+     public void testSingleLineBlock(int i) {
+         int x = 0;
+-        // violation below, 'Switch can be replaced with enhanced switch'
+         switch(i) {
+-            case 1: { x = 1; break; }
+-            default: { x = 2; break; }
++            case 1 -> x = 1;
++            default -> x = 2;
+         }
+     }
+ }

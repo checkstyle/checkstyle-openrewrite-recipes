@@ -1,0 +1,82 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/genericenumexhaustiveness/InputGenericEnumExhaustiveness.java
++++ src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/genericenumexhaustiveness/OutputGenericEnumExhaustiveness.java
+@@ -7,58 +7,39 @@
+ */
+ package org.checkstyle.autofix.recipe.useenhancedswitch.genericenumexhaustiveness;
+ 
+-public class InputGenericEnumExhaustiveness {
++public class OutputGenericEnumExhaustiveness {
+ 
+     public enum Color { RED, GREEN, BLUE }
+ 
+     public String evaluateColor(Color currentColor) {
+-        switch (currentColor) { // violation 'Switch can be replaced with enhanced switch'
+-            case RED:
+-                return "R";
+-            case GREEN:
+-                return "G";
+-            case BLUE:
+-                return "B";
+-            default:
+-                throw new AssertionError();
+-        }
++        return switch (currentColor) {
++            case RED -> "R";
++            case GREEN -> "G";
++            case BLUE -> "B";
++        };
+     }
+ 
+     public String evaluateColorDynamic(Color currentColor) {
+-        switch (currentColor) { // violation 'Switch can be replaced with enhanced switch'
+-            case RED:
+-                return "R";
+-            case GREEN:
+-                return "G";
+-            case BLUE:
+-                return "B";
+-            default:
+-                throw new IllegalStateException("Unknown: " + currentColor);
+-        }
++        return switch (currentColor) {
++            case RED -> "R";
++            case GREEN -> "G";
++            case BLUE -> "B";
++        };
+     }
+ 
+     public String evaluateColorSideEffect(Color currentColor) {
+-        switch (currentColor) { // violation 'Switch can be replaced with enhanced switch'
+-            case RED:
+-                return "R";
+-            case GREEN:
+-                return "G";
+-            case BLUE:
+-                return "B";
+-            default:
+-                System.out.println("Logging: " + currentColor);
+-                return "U";
+-        }
++        return switch (currentColor) {
++            case RED -> "R";
++            case GREEN -> "G";
++            case BLUE -> "B";
++        };
+     }
+ 
+     public String evaluateColorInexhaustive(Color currentColor) {
+-        switch (currentColor) { // violation 'Switch can be replaced with enhanced switch'
+-            case RED:
+-                return "R";
+-            case GREEN:
+-                return "G";
+-            default:
+-                throw new AssertionError();
+-        }
++        return switch (currentColor) {
++            case RED -> "R";
++            case GREEN -> "G";
++            default -> throw new AssertionError();
++        };
+     }
+ }

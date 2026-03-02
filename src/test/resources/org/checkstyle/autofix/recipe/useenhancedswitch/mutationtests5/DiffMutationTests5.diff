@@ -1,0 +1,49 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/mutationtests5/InputMutationTests5.java
++++ src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/mutationtests5/OutputMutationTests5.java
+@@ -7,31 +7,24 @@
+ */
+ package org.checkstyle.autofix.recipe.useenhancedswitch.mutationtests5;
+ 
+-public class InputMutationTests5 {
++public class OutputMutationTests5 {
+     void testAssignmentSwitch(int e) {
+-        int x;
+-        // violation below, 'Switch can be replaced with enhanced switch'
+-        switch(e) {
+-            case 1:
+-                System.out.println();
+-                x = 5;
+-                break;
+-            case 2:
+-                x = 6;
+-                break;
+-            default:
+-                x = 7;
+-                break;
+-        }
+-
+-        int y;
+-        switch(e) {
++        int x = switch(e) {
+             case 1 -> {
+                 System.out.println();
+-                y = 5;
++                yield 5;
+             }
+-            case 2 -> y = 6;
+-            default -> y = 7;
+-        }
++            case 2 -> 6;
++            default -> 7;
++        };
++
++        int y = switch(e) {
++            case 1 -> {
++                System.out.println();
++                yield 5;
++            }
++            case 2 -> 6;
++            default -> 7;
++        };
+     }
+ }

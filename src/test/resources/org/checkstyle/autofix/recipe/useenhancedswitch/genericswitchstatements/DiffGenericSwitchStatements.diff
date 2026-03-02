@@ -1,0 +1,45 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/genericswitchstatements/InputGenericSwitchStatements.java
++++ src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/genericswitchstatements/OutputGenericSwitchStatements.java
+@@ -7,33 +7,22 @@
+ */
+ package org.checkstyle.autofix.recipe.useenhancedswitch.genericswitchstatements;
+ 
+-public class InputGenericSwitchStatements {
++public class OutputGenericSwitchStatements {
+ 
+     public enum Status { ONE, TWO, THREE, FOUR }
+ 
+     public void processState(Status s) {
+-        switch (s) { // violation 'Switch can be replaced with enhanced switch'
+-            case ONE:
+-                System.out.println("One");
+-                break;
+-            case TWO:
+-            case THREE:
+-            case FOUR:
+-            default:
+-                System.out.println("Rest");
+-                break;
++        switch (s) {
++            case ONE -> System.out.println("One");
++            default -> System.out.println("Rest");
+         }
+     }
+ 
+     public String computeResult(Status s) {
+-        switch (s) { // violation 'Switch can be replaced with enhanced switch'
+-            case ONE:
+-                return "1";
+-            case TWO:
+-                return "2";
+-            case THREE:
+-            default:
+-                return "3";
+-        }
++        return switch (s) {
++            case ONE -> "1";
++            case TWO -> "2";
++            default -> "3";
++        };
+     }
+ }

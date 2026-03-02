@@ -1,0 +1,30 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/switchexpressionblock/InputSwitchExpressionBlock.java
++++ src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/switchexpressionblock/OutputSwitchExpressionBlock.java
+@@ -9,22 +9,19 @@
+ 
+ package org.checkstyle.autofix.recipe.useenhancedswitch.switchexpressionblock;
+ 
+-public class InputSwitchExpressionBlock {
++public class OutputSwitchExpressionBlock {
+ 
+     void doSomething(String param) {
+     }
+ 
+     int multiStatementYield(int x) {
+-        // violation below, 'Switch can be replaced with enhanced switch'
+         int result = switch (x) {
+-            case 1:
++            case 1 -> {
+                 doSomething("processing");
+                 yield 10;
+-            case 2:
+-            case 3:
+-                yield 20;
+-            default:
+-                yield 0;
++            }
++            case 2, 3 -> 20;
++            default -> 0;
+         };
+         return result;
+     }

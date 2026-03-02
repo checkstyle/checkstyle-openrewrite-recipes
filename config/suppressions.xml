@@ -22,4 +22,10 @@
     <suppress checks="ImportControlCheck" files="[\\/]src[\\/]test[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]EmptyStatementTest\.java"/>
     <suppress checks="ImportControlCheck" files="[\\/]src[\\/]test[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]FinalClassTest\.java"/>
     <suppress checks="ImportControlCheck" files="[\\/]src[\\/]test[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]FinalLocalVariableTest\.java"/>
+    <suppress checks="ImportControlCheck" files="[\\/]src[\\/]test[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]UseEnhancedSwitchTest\.java"/>
+
+    <suppress checks="ClassFanOutComplexity" files="[\\/]src[\\/]main[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]UseEnhancedSwitch\.java"/>
+    <suppress checks="CyclomaticComplexity" files="[\\/]src[\\/]main[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]UseEnhancedSwitch\.java"/>
+    <suppress checks="MethodCount" files="[\\/]src[\\/]main[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]UseEnhancedSwitch\.java"/>
+    <suppress checks="ClassDataAbstractionCoupling" files="[\\/]src[\\/]main[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]UseEnhancedSwitch\.java"/>
 </suppressions>

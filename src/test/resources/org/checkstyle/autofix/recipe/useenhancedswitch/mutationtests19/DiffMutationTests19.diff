@@ -1,0 +1,19 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/mutationtests19/InputMutationTests19.java
++++ src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/mutationtests19/OutputMutationTests19.java
+@@ -9,13 +9,11 @@
+ 
+ package org.checkstyle.autofix.recipe.useenhancedswitch.mutationtests19;
+ 
+-public class InputMutationTests19 {
++public class OutputMutationTests19 {
+     void oneLiner(int x) {
+-        // violation below, 'Switch can be replaced with enhanced switch'
+-        switch (x) { case 1:        {
++        switch (x) { case 1 -> {
+             System.out.println("one");
+             System.out.println("two");
+-            break;
+-        } default: break; }
++        } default -> {} }
+     }
+ }
