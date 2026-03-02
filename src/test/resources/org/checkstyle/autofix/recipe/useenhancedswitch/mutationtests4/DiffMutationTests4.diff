@@ -1,0 +1,209 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/mutationtests4/InputMutationTests4.java
++++ src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/mutationtests4/OutputMutationTests4.java
+@@ -8,153 +8,113 @@
+ 
+ package org.checkstyle.autofix.recipe.useenhancedswitch.mutationtests4;
+ 
+-public class InputMutationTests4 {
++public class OutputMutationTests4 {
+ 
+     enum Color { RED, GREEN, BLUE }
+ 
+     void enumExhaustiveNoDefault(Color color) {
+         int x = 0;
+-        // violation below, 'Switch can be replaced with enhanced switch'
+         switch (color) {
+-            case RED: x = 1; break;
+-            case GREEN: x = 2; break;
+-            case BLUE: x = 3; break;
++            case RED -> x = 1;
++            case GREEN -> x = 2;
++            case BLUE -> x = 3;
+         }
+         System.out.println(x);
+     }
+ 
+     void assignmentBlockMultiStmt(Color color) {
+-        int val;
+-        // violation below, 'Switch can be replaced with enhanced switch'
+-        switch (color) {
+-            case RED:
++        int val = switch (color) {
++            case RED -> {
+                 System.out.println("red");
+-                val = 1;
+-                break;
+-            case GREEN:
++                yield 1;
++            }
++            case GREEN -> {
+                 System.out.println("green");
+-                val = 2;
+-                break;
+-            default:
+-                val = 0;
+-                break;
+-        }
++                yield 2;
++            }
++            default -> 0;
++        };
+         System.out.println(val);
+     }
+ 
+     void assignmentFallthrough(int x) {
+-        String val;
+-        // violation below, 'Switch can be replaced with enhanced switch'
+-        switch (x) {
+-            case 1:
+-            case 2:
+-                val = "one or two";
+-                break;
+-            case 3:
+-                val = "three";
+-                break;
+-            default:
+-                val = "other";
+-                break;
+-        }
++        String val = switch (x) {
++            case 1, 2 -> "one or two";
++            case 3 -> "three";
++            default -> "other";
++        };
+         System.out.println(val);
+     }
+ 
+     int returnWithThrow(int x) {
+-        // violation below, 'Switch can be replaced with enhanced switch'
+-        switch (x) {
+-            case 1: return 10;
+-            case 2: return 20;
+-            default: throw new IllegalArgumentException("bad");
+-        }
++        return switch (x) {
++            case 1 -> 10;
++            case 2 -> 20;
++            default -> throw new IllegalArgumentException("bad");
++        };
+     }
+ 
+     void blockSingleStmt(int x) {
+-        // violation below, 'Switch can be replaced with enhanced switch'
+         switch (x) {
+-            case 1: {
+-                System.out.println("one");
+-                break;
+-            }
+-            default: {
+-                System.out.println("default");
+-                break;
+-            }
++            case 1 -> System.out.println("one");
++            default -> System.out.println("default");
+         }
+     }
+ 
+     int returnBlockMultiStmt(int x) {
+-        // violation below, 'Switch can be replaced with enhanced switch'
+-        switch (x) {
+-            case 1: {
++        return switch (x) {
++            case 1 -> {
+                 System.out.println("processing");
+-                return 100;
++                yield 100;
+             }
+-            default: {
++            default -> {
+                 System.out.println("default processing");
+-                return 0;
++                yield 0;
+             }
+-        }
++        };
+     }
+ 
+     void assignmentArrowBlock(int x) {
+-        int val;
+-        // violation below, 'Switch can be replaced with enhanced switch'
+-        switch (x) {
+-            case 1: {
+-                val = 10;
+-                break;
+-            }
+-            case 2: {
++        int val = switch (x) {
++            case 1 -> 10;
++            case 2 -> {
+                 System.out.println("two");
+-                val = 20;
+-                break;
++                yield 20;
+             }
+-            default: {
+-                val = 0;
+-                break;
+-            }
+-        }
++            default -> 0;
++        };
+         System.out.println(val);
+     }
+ 
+     int blockReturnExpr(int x) {
+-        // violation below, 'Switch can be replaced with enhanced switch'
+-        switch (x) {
+-            case 1:
++        return switch (x) {
++            case 1 -> {
+                 System.out.println("case1");
+-                return 1;
+-            case 2:
+-                return 2;
+-            default:
++                yield 1;
++            }
++            case 2 -> 2;
++            default -> {
+                 System.out.println("default");
+-                return 0;
+-        }
++                yield 0;
++            }
++        };
+     }
+ 
+     void assignmentWithThrow(int x) {
+-        String val;
+-        // violation below, 'Switch can be replaced with enhanced switch'
+-        switch (x) {
+-            case 1:
+-                val = "one";
+-                break;
+-            default:
+-                throw new RuntimeException("error");
+-        }
++        String val = switch (x) {
++            case 1 -> "one";
++            default -> throw new RuntimeException("error");
++        };
+         System.out.println(val);
+     }
+ 
+     void multiStatement(int x) {
+-        // violation below, 'Switch can be replaced with enhanced switch'
+         switch (x) {
+-            case 1:
++            case 1 -> {
+                 System.out.println("a");
+                 System.out.println("b");
+-                break;
+-            default:
+-                System.out.println("default");
+-                break;
++            }
++            default -> System.out.println("default");
+         }
+     }
+ }

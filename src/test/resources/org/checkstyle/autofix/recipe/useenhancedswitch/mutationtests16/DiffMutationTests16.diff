@@ -1,0 +1,122 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/mutationtests16/InputMutationTests16.java
++++ src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/mutationtests16/OutputMutationTests16.java
+@@ -7,88 +7,71 @@
+ */
+ package org.checkstyle.autofix.recipe.useenhancedswitch.mutationtests16;
+ 
+-public class InputMutationTests16 {
++public class OutputMutationTests16 {
+ 
+     void testDifferentIdentifiers(int x) {
+         int y;
+         int z;
+-        switch (x) { // violation 'Switch can be replaced with enhanced switch.'
+-            case 1:
+-                y = 1;
+-                break;
+-            case 2:
+-                z = 2;
+-                break;
+-            default:
+-                y = 0;
+-                break;
++        switch (x) {
++            case 1 -> y = 1;
++            case 2 -> z = 2;
++            default -> y = 0;
+         }
+     }
+ 
+     int testPartialReturnDrop(int x) {
+-        switch (x) { // violation 'Switch can be replaced with enhanced switch.'
+-            case 1:
+-                return 1;
+-            case 2:
+-                System.out.println("Wait!");
+-                break;
+-            default:
++        switch (x) {
++            case 1 -> {
++                return 1;}
++            case 2 -> System.out.println("Wait!");
++            default -> {
+                 return 0;
++            }
+         }
+         return -1;
+     }
+ 
+     void testMeaningfulStatementsBreakLabel(int x) {
+         outer:
+-        switch (x) { // violation 'Switch can be replaced with enhanced switch.'
+-            case 1:
++        switch (x) {
++            case 1 -> {
+                 System.out.println(1);
+-                break outer;
+-            default:
+-                System.out.println(0);
+-                break;
++                break outer;}
++            default -> System.out.println(0);
+         }
+     }
+ 
+     int testIntSwitchNoDefault(int x) {
+-        switch (x) { // violation 'Switch can be replaced with enhanced switch.'
+-            case 1:
+-                return 1;
+-            case 2:
++        switch (x) {
++            case 1 -> {
++                return 1;}
++            case 2 -> {
+                 return 2;
++            }
+         }
+         return 0;
+     }
+ 
+     void testCollectHandledLiteral(String str) {
+-        switch (str) { // violation 'Switch can be replaced with enhanced switch.'
+-            case "A":
+-                System.out.println("A");
+-                break;
+-            case "B":
+-                System.out.println("B");
+-                break;
+-            default:
+-                break;
++        switch (str) {
++            case "A" -> System.out.println("A");
++            case "B" -> System.out.println("B");
++            default -> {}
+         }
+     }
+ 
+     void testBlockEndSpacePaddingEdge(int x) {
+-        switch (x) { // violation 'Switch can be replaced with enhanced switch.'
+-            case 1: {
+-                int y = 1; break; /* pad */ }
+-            default:
+-                System.out.println(0);
+-                break;
++        switch (x) {
++            case 1 -> {
++                int y = 1; /* pad */ }
++            default -> System.out.println(0);
+         }
+     }
+ 
+     void testAdjustSpaceEdge(int x) {
+-        switch (x) { // violation 'Switch can be replaced with enhanced switch.'
+-            case 1: 
+-                { int y = 1; break; }
+-            default: 
+-                break;
++        switch (x) {
++            case 1 -> { int y = 1; }
++            default -> {}
+         }
+     }
+ }

@@ -1,0 +1,89 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/mutationtests12/InputMutationTests12.java
++++ src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/mutationtests12/OutputMutationTests12.java
+@@ -7,71 +7,52 @@
+ */
+ package org.checkstyle.autofix.recipe.useenhancedswitch.mutationtests12;
+ 
+-public class InputMutationTests12 {
++public class OutputMutationTests12 {
+ 
+     enum Color { RED, GREEN, BLUE }
+ 
+     public int testFallthroughAssignment(int i) {
+         int x = 0;
+-        // violation below, 'Switch can be replaced with enhanced switch'
+         switch (i) {
+-            case 1:
+-            case 2:
+-                x = 1;
+-                break;
+-            default:
+-                x = 2;
+-                break;
++            case 1, 2 -> x = 1;
++            default -> x = 2;
+         }
+         return x;
+     }
+ 
+     public int testFallthroughReturn(int i) {
+-        // violation below, 'Switch can be replaced with enhanced switch'
+-        switch (i) {
+-            case 1:
+-            case 2:
+-                return 1;
+-            default:
+-                return 2;
+-        }
++        return switch (i) {
++            case 1, 2 -> 1;
++            default -> 2;
++        };
+     }
+ 
+     public void testNonIdentifierAssignment(int i) {
+         this.field = 0;
+-        // violation below, 'Switch can be replaced with enhanced switch'
+         switch (i) {
+-            case 1:
+-                this.field = 1;
+-                break;
+-            default:
+-                this.field = 2;
+-                break;
++            case 1 -> this.field = 1;
++            default -> this.field = 2;
+         }
+     }
+ 
+     private int field;
+ 
+     public int testInexhaustiveEnum(Color c) {
+-        // violation below, 'Switch can be replaced with enhanced switch'
+         switch (c) {
+-            case RED:
++            case RED -> {
+                 return 1;
+-            case GREEN:
++            }
++            case GREEN -> {
+                 return 2;
++            }
+         }
+         return 0;
+     }
+ 
+     public void testNoSpaceIndent(int i) {
+-// violation below, 'Switch can be replaced with enhanced switch'
+ switch(i) {
+-case 1:
+-System.out.println("1");
+-break;
+-default:
+-System.out.println("2");
+-break;
++case 1 -> System.out.println("1");
++default -> System.out.println("2");
+ }
+     }
+ }

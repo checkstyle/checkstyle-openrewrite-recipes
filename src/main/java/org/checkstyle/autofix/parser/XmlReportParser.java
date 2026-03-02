@@ -127,28 +127,21 @@ public class XmlReportParser implements ReportParser {
             final Attribute attribute = attributes.next();
             final String attrName = attribute.getName().getLocalPart();
             switch (attrName) {
-                case LINE_ATTR:
-                    line = Integer.parseInt(attribute.getValue());
-                    break;
-                case COLUMN_ATTR:
-                    column = Integer.parseInt(attribute.getValue());
-                    break;
-                case SEVERITY_ATTR:
-                    severity = attribute.getValue();
-                    break;
-                case MESSAGE_ATTR:
-                    message = attribute.getValue();
-                    break;
-                case SOURCE_ATTR:
+                case LINE_ATTR -> line = Integer.parseInt(attribute.getValue());
+                case COLUMN_ATTR -> column = Integer.parseInt(attribute.getValue());
+                case SEVERITY_ATTR -> severity = attribute.getValue();
+                case MESSAGE_ATTR -> message = attribute.getValue();
+                case SOURCE_ATTR -> {
                     final String attrValue = attribute.getValue();
                     checkName = CheckFullName.fromSource(attrValue);
                     final int index = attrValue.indexOf('#');
                     if (index >= 0) {
                         id = attrValue.substring(index + 1);
                     }
-                    break;
-                default:
-                    break;
+                }
+                default -> {
+                    // no action needed for other attributes
+                }
             }
         }
         if (checkName.isPresent()) {

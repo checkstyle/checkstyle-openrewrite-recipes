@@ -1,0 +1,25 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/mutationtests17/InputMutationTests17.java
++++ src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/mutationtests17/OutputMutationTests17.java
+@@ -7,17 +7,11 @@
+ */
+ package org.checkstyle.autofix.recipe.useenhancedswitch.mutationtests17;
+ 
+-public class InputMutationTests17 {
++public class OutputMutationTests17 {
+     public void test(int x) {
+-        int y;
+-        switch (x) { // violation 'Switch can be replaced with enhanced switch.'
+-            case 1:
+-            case 2:
+-                y = 10;
+-                break;
+-            default:
+-                y = 0;
+-                break;
+-        }
++        int y = switch (x) {
++            case 1, 2 -> 10;
++            default -> 0;
++        };
+     }
+ }

@@ -1,0 +1,132 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/mutationtests10/InputMutationTests10.java
++++ src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/mutationtests10/OutputMutationTests10.java
+@@ -7,40 +7,30 @@
+ */
+ package org.checkstyle.autofix.recipe.useenhancedswitch.mutationtests10;
+ 
+-public class InputMutationTests10 {
++public class OutputMutationTests10 {
+ 
+     enum Direction { UP, DOWN, LEFT, RIGHT }
+ 
+     public void testEmptyAssignment() {
+         int x = 0;
+         int i = 1;
+-        // violation below, 'Switch can be replaced with enhanced switch'
+         switch(i) {
+-            case 1:
+-            case 2:
+-                x = 1;
+-                break;
+-            case 3:
+-                // Nothing happening
+-                break;
+-            default:
+-                x = 2;
+-                break;
++            case 1, 2 -> x = 1;
++            case 3 -> {}
++            default -> x = 2;
+         }
+     }
+ 
+     public int testEmptyReturn() {
+         int i = 1;
+-        // violation below, 'Switch can be replaced with enhanced switch'
+         switch(i) {
+-            case 1:
+-            case 2:
++            case 1, 2 -> {
+                 return 1;
+-            case 3:
+-                // Nothing here
+-                break;
+-            default:
++            }
++            case 3 -> {}
++            default -> {
+                 return 2;
++            }
+         }
+         return 0;
+     }
+@@ -48,16 +38,12 @@
+     public void testBreakInBlock() {
+         int x = 0;
+         int i = 1;
+-        // violation below, 'Switch can be replaced with enhanced switch'
+         switch(i) {
+-            case 1: {
++            case 1 -> {
+                 if (true) break;
+                 x = 1;
+-                break;
+             }
+-            default:
+-                x = 2;
+-                break;
++            default -> x = 2;
+         }
+     }
+ 
+@@ -65,47 +51,33 @@
+         int x = 0;
+         int y = 0;
+         int i = 1;
+-        // violation below, 'Switch can be replaced with enhanced switch'
+         switch(i) {
+-            case 1:
+-                x = 1;
+-                break;
+-            case 2:
+-                y = 1;
+-                break;
+-            default:
+-                x = 2;
+-                break;
++            case 1 -> x = 1;
++            case 2 -> y = 1;
++            default -> x = 2;
+         }
+     }
+ 
+     public int testEnumExhaustiveMissing() {
+         Direction d = Direction.UP;
+-        // violation below, 'Switch can be replaced with enhanced switch'
+         switch (d) {
+-            case UP:
++            case UP -> {
+                 return 1;
+-            case DOWN:
+-            case LEFT:
++            }
++            case DOWN, LEFT -> {
+                 return 2;
++            }
+         }
+         return 0;
+     }
+ 
+     public int testEnumExhaustiveComplete() {
+         Direction d = Direction.UP;
+-        // violation below, 'Switch can be replaced with enhanced switch'
+-        switch (d) {
+-            case UP:
+-                return 1;
+-            case DOWN:
+-                return 2;
+-            case LEFT:
+-                return 3;
+-            case RIGHT:
+-                return 4;
+-            default:
+-                return 0;
+-        }
++        return switch (d) {
++            case UP -> 1;
++            case DOWN -> 2;
++            case LEFT -> 3;
++            case RIGHT -> 4;
++        };
+     }
+ }

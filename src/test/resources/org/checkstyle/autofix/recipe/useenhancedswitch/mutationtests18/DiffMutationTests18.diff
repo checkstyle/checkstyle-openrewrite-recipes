@@ -1,0 +1,74 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/mutationtests18/InputMutationTests18.java
++++ src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/mutationtests18/OutputMutationTests18.java
+@@ -7,55 +7,37 @@
+ */
+ package org.checkstyle.autofix.recipe.useenhancedswitch.mutationtests18;
+ 
+-public class InputMutationTests18 {
++public class OutputMutationTests18 {
+ 
+     int testReturnSwitchExpressionDeadCode(int x) {
+-        int y;
+-        switch (x) { // violation 'Switch can be replaced with enhanced switch.'
+-            case 1:
+-                y = 10;
+-                break;
+-            default:
+-                y = 0;
+-                break;
+-        }
++        int y = switch (x) {
++            case 1 -> 10;
++            default -> 0;
++        };
+         return y;
+     }
+ 
+     void testBreakRemoval(int x) {
+-        switch (x) { // violation 'Switch can be replaced with enhanced switch.'
+-            case 1: {
+-                System.out.println("one");
+-                break;
+-            }
+-            default:
+-                System.out.println("other");
+-                break;
++        switch (x) {
++            case 1 -> System.out.println("one");
++            default -> System.out.println("other");
+         }
+     }
+ 
+     void testBlockEndSpaceSubstring(int x) {
+-        switch (x) { // violation 'Switch can be replaced with enhanced switch.'
+-            case 1:
++        switch (x) {
++            case 1 -> {
+                 System.out.println("a");
+-                System.out.println("b");
+-                break;
+-            default:
+-                break;
++                System.out.println("b");}
++            default -> {}
+         }
+     }
+ 
+     void testFallthroughControlFlow(int x) {
+-        switch (x) { // violation 'Switch can be replaced with enhanced switch.'
+-            case 1:
+-            case 2:
+-                System.out.println("one or two");
+-                break;
+-            case 3:
+-                System.out.println("three");
+-                break;
+-            default:
+-                break;
++        switch (x) {
++            case 1, 2 -> System.out.println("one or two");
++            case 3 -> System.out.println("three");
++            default -> {}
+         }
+     }
+ }

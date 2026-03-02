@@ -1,0 +1,80 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/genericswitchexpressions/InputGenericSwitchExpressions.java
++++ src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/genericswitchexpressions/OutputGenericSwitchExpressions.java
+@@ -10,57 +10,43 @@
+ import java.util.Optional;
+ import java.util.function.Supplier;
+ 
+-public class InputGenericSwitchExpressions {
++public class OutputGenericSwitchExpressions {
+ 
+     public enum State { A, B }
+ 
+     public Supplier<String> supplyStringDependingOn(int score) {
+         return () -> {
+-            switch (score) { // violation 'Switch can be replaced with enhanced switch'
+-                case 1:
+-                    return "one";
+-                case 2:
+-                    return "two";
+-                default:
+-                    return "many";
+-            }
++            return switch (score) {
++                case 1 -> "one";
++                case 2 -> "two";
++                default -> "many";
++            };
+         };
+     }
+ 
+     public Optional<String> evaluateItemState(State itemState) {
+         final Optional<String> result;
+-        switch (itemState) { // violation 'Switch can be replaced with enhanced switch'
+-            case A:
+-                result = Optional.of("A");
+-                break;
+-            case B:
+-                result = Optional.of("B");
+-                break;
+-            default:
++        switch (itemState) {
++            case A -> result = Optional.of("A");
++            case B -> result = Optional.of("B");
++            default -> {
+                 return Optional.empty();
++            }
+         }
+         return result;
+     }
+ 
+     public void executeComplexLogic(int category, State itemState) {
+-        switch (category) { // violation 'Switch can be replaced with enhanced switch'
+-            case 1:
+-                System.out.println("1");
+-                break;
+-            case 2:
+-                switch (itemState) { // violation 'Switch can be replaced with enhanced switch'
+-                    case A:
+-                        System.out.println("A");
+-                        break;
+-                    case B:
+-                        System.out.println("B");
+-                        break;
+-                    default:
+-                        throw new RuntimeException("Unknown");
++        switch (category) {
++            case 1 -> System.out.println("1");
++            case 2 -> {
++                switch (itemState) {
++                    case A -> System.out.println("A");
++                    case B -> System.out.println("B");
++                    default -> throw new RuntimeException("Unknown");
+                 }
+-                break;
+-            default:
+-                throw new IllegalArgumentException();
++            }
++            default -> throw new IllegalArgumentException();
+         }
+     }
+ }

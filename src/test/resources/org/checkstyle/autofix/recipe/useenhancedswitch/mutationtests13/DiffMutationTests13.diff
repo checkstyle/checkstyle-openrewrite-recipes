@@ -1,0 +1,56 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/mutationtests13/InputMutationTests13.java
++++ src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/mutationtests13/OutputMutationTests13.java
+@@ -7,7 +7,7 @@
+ */
+ package org.checkstyle.autofix.recipe.useenhancedswitch.mutationtests13;
+ 
+-public class InputMutationTests13 {
++public class OutputMutationTests13 {
+ 
+     enum Color { RED, GREEN, BLUE }
+     enum Direction { NORTH, SOUTH }
+@@ -15,36 +15,28 @@
+     void differentVariableAssignment(int i) {
+         int x = 0;
+         int y = 0;
+-        // violation below, 'Switch can be replaced with enhanced switch'
+         switch (i) {
+-            case 1:
+-                x = 1;
+-                break;
+-            default:
+-                y = 2;
+-                break;
++            case 1 -> x = 1;
++            default -> y = 2;
+         }
+     }
+ 
+     void emptyCaseInAssignmentSwitch(int i) {
+         int x = 0;
+-        // violation below, 'Switch can be replaced with enhanced switch'
+         switch (i) {
+-            case 1:
+-                break;
+-            default:
+-                x = 2;
+-                break;
++            case 1 -> {}
++            default -> x = 2;
+         }
+     }
+ 
+     int inexhaustiveEnumDifferentType(Color c) {
+-        // violation below, 'Switch can be replaced with enhanced switch'
+         switch (c) {
+-            case RED:
++            case RED -> {
+                 return 1;
+-            case GREEN:
++            }
++            case GREEN -> {
+                 return 2;
++            }
+         }
+         return 0;
+     }

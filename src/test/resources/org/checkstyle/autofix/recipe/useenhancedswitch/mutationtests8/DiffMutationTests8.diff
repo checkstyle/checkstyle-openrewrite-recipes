@@ -1,0 +1,80 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/mutationtests8/InputMutationTests8.java
++++ src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/mutationtests8/OutputMutationTests8.java
+@@ -8,58 +8,52 @@
+ 
+ package org.checkstyle.autofix.recipe.useenhancedswitch.mutationtests8;
+ 
+-public class InputMutationTests8 {
++public class OutputMutationTests8 {
+ 
+     enum Day { MON, TUE, WED }
+ 
+     void missingDefaultAssignment(int x) {
+         String s;
+-        // violation below, 'Switch can be replaced with enhanced switch'
+         switch (x) {
+-            case 1:
+-                s = "one";
+-                break;
++            case 1 -> s = "one";
+         }
+     }
+ 
+     int nonExhaustiveEnumReturn(Day d) {
+-        // violation below, 'Switch can be replaced with enhanced switch'
+         switch (d) {
+-            case MON: return 1;
+-            case TUE: return 2;
++            case MON -> { return 1;
++            }
++            case TUE -> { return 2;
++            }
+         }
+         return 0;
+     }
+ 
+     void multipleVariables(int x) {
+         int a, b;
+-        // violation below, 'Switch can be replaced with enhanced switch'
+         switch (x) {
+-            case 1: a = 1; b = 2; break;
+-            default: a = 0; b = 0; break;
++            case 1 -> { a = 1; b = 2;
++            }
++            default -> { a = 0; b = 0;
++            }
+         }
+     }
+ 
+     void initializedVariable(int x) {
+         int a = 0;
+-        // violation below, 'Switch can be replaced with enhanced switch'
+         switch (x) {
+-            case 1: a = 1; break;
+-            default: a = 2; break;
++            case 1 -> a = 1;
++            default -> a = 2;
+         }
+     }
+ 
+     int nestedReturnSwitch(int x, int y) {
+-        // violation below, 'Switch can be replaced with enhanced switch'
+-        switch (x) {
+-            case 1:
+-                // violation below, 'Switch can be replaced with enhanced switch'
+-                switch (y) {
+-                    case 1: return 1;
+-                    default: return 0;
+-                }
+-            default:
+-                return -1;
+-        }
++        return switch (x) {
++            case 1 -> switch (y) {
++                    case 1 -> 1;
++                    default -> 0;
++                };
++            default -> -1;
++        };
+     }
+ }

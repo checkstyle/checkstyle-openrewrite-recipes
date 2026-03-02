@@ -1,0 +1,47 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/survivingmutations2/InputSurvivingMutations2.java
++++ src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/survivingmutations2/OutputSurvivingMutations2.java
+@@ -13,7 +13,7 @@
+ 
+ package org.checkstyle.autofix.recipe.useenhancedswitch.survivingmutations2;
+ 
+-public class InputSurvivingMutations2 {
++public class OutputSurvivingMutations2 {
+   
+     void m1(int x) {
+                  
+@@ -167,27 +167,16 @@
+     }
+ 
+     int fallThrough(int x) {
+-        // violation below, 'Switch can be replaced with enhanced switch'
+-        switch (x) {
+-            case 1:
+-            case 2:
+-                return 1;
+-            default:
+-                return 0;
+-        }
++        return switch (x) {
++            case 1, 2 -> 1;
++            default -> 0;
++        };
+     }
+ 
+     void fallThroughAssignment(int x) {
+-        int y;
+-        // violation below, 'Switch can be replaced with enhanced switch'
+-        switch (x) {
+-            case 1:
+-            case 2:
+-                y = 1;
+-                break;
+-            default:
+-                y = 0;
+-                break;
+-        }
++        int y = switch (x) {
++            case 1, 2 -> 1;
++            default -> 0;
++        };
+     }
+ }
