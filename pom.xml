@@ -333,6 +333,9 @@
                                 <param>org.checkstyle.autofix.recipe.Header*</param>
                                 <param>org.checkstyle.autofix.recipe.HexLiteralCase*</param>
                                 <param>org.checkstyle.autofix.recipe.MissingOverride*</param>
+                                <param>org.checkstyle.autofix.marker.CheckstyleViolationMarker*</param>
+                                <param>org.checkstyle.autofix.marker.ViolationMarkerRecipe*</param>
+                                <param>org.checkstyle.autofix.marker.Accumulator*</param>
                                 <param>org.checkstyle.autofix.recipe.AvoidStarImport*</param>
                             </targetClasses>
                             <targetTests>
@@ -346,6 +349,8 @@
                                 <param>org.checkstyle.autofix.recipe.AvoidStarImportTest</param>
                                 <param>org.checkstyle.autofix.recipe.RecipeTest</param>
                                 <param>org.checkstyle.autofix.recipe.RemoveViolationCommentsTest</param>
+                                <param>org.checkstyle.autofix.marker.CheckstyleViolationMarkerTest</param>
+                                <param>org.checkstyle.autofix.marker.ViolationMarkerRecipeTest</param>
                             </targetTests>
 
                             <mutators>

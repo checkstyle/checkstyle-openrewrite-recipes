@@ -49,6 +49,7 @@ import org.openrewrite.RecipeRun;
 import org.openrewrite.Result;
 import org.openrewrite.java.JavaIsoVisitor;
 import org.openrewrite.java.tree.J;
+import org.openrewrite.marker.Marker;
 import org.openrewrite.test.RewriteTest;
 import org.openrewrite.test.SourceSpecs;
 
@@ -281,6 +282,7 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
     private void validateResult(Result result) {
         if (result.getAfter() instanceof J tree) {
             assertAllNodesHaveId(tree);
+            assertAllMarkersHaveId(tree);
         }
     }
 
@@ -357,7 +359,37 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
             }
 
         }, new InMemoryExecutionContext(throwable -> {
-            throwable.printStackTrace();
+            throw new IllegalStateException(throwable);
+        }));
+    }
+
+    /**
+     * Verifies that all Marker objects on all AST nodes have a non-null ID.
+     * This helps kill mutations like getId() returning null.
+     *
+     * @param tree the root AST node to validate
+     */
+    protected void assertAllMarkersHaveId(J tree) {
+        tree.accept(new JavaIsoVisitor<ExecutionContext>() {
+
+            @Override
+            public J preVisit(J tree, ExecutionContext executionContext) {
+                for (Marker marker : tree.getMarkers().getMarkers()) {
+                    assertNotNull(
+                            marker.getId(),
+                            () -> {
+                                return "Marker "
+                                        + marker.getClass().getSimpleName()
+                                        + " has null ID on "
+                                        + tree.getClass().getSimpleName();
+                            }
+                    );
+                }
+                return super.preVisit(tree, executionContext);
+            }
+
+        }, new InMemoryExecutionContext(throwable -> {
+            throw new IllegalStateException(throwable);
         }));
     }
 
