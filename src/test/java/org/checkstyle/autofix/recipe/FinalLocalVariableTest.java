@@ -19,8 +19,6 @@ package org.checkstyle.autofix.recipe;
 
 import static com.google.common.truth.Truth.assertWithMessage;
 
-import java.util.List;
-
 import org.checkstyle.autofix.parser.ReportParser;
 import org.junit.jupiter.api.Test;
 
@@ -28,8 +26,7 @@ public class FinalLocalVariableTest extends AbstractRecipeTestSupport {
 
     @Test
     public void checkDisplayName() {
-        final FinalLocalVariable recipe =
-                new FinalLocalVariable(List.of());
+        final FinalLocalVariable recipe = new FinalLocalVariable();
 
         final String expectedDisplayName =
                 "FinalLocalVariable recipe";
@@ -41,8 +38,7 @@ public class FinalLocalVariableTest extends AbstractRecipeTestSupport {
 
     @Test
     public void checkDescription() {
-        final FinalLocalVariable recipe =
-                new FinalLocalVariable(List.of());
+        final FinalLocalVariable recipe = new FinalLocalVariable();
 
         final String expectedDescription =
                 "Adds 'final' modifier to local variables that never have their values changed.";
@@ -180,6 +176,11 @@ public class FinalLocalVariableTest extends AbstractRecipeTestSupport {
     @RecipeTest
     void localVariableCheckSwitchAssignment(ReportParser parser) throws Exception {
         verify(parser, "LocalVariableCheckSwitchAssignment");
+    }
+
+    @RecipeTest
+    void shifting(ReportParser parser) throws Exception {
+        verify(parser, "Shifting");
     }
 
     @RecipeTest

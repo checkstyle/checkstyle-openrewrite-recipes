@@ -1,0 +1,11 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/shifting/InputShifting.java
++++ src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/shifting/OutputShifting.java
+@@ -9,6 +9,6 @@
+ 
+ package org.checkstyle.autofix.recipe.finallocalvariable.shifting;
+ 
+-class InputShifting {
+-    class Inner { void m() { int x = 1; } private Inner() {} } // 2 violations
++class OutputShifting {
++    final class Inner { void m() { final int x = 1; } private Inner() {} }
+ }

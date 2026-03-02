@@ -17,12 +17,11 @@
 
 package org.checkstyle.autofix.recipe;
 
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.checkstyle.autofix.PositionHelper;
-import org.checkstyle.autofix.parser.CheckstyleViolation;
+import org.checkstyle.autofix.CheckFullName;
+import org.checkstyle.autofix.marker.CheckstyleViolationMarker;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
 import org.openrewrite.Tree;
@@ -39,12 +38,6 @@ import org.openrewrite.marker.Markers;
  */
 public class FinalClass extends Recipe {
 
-    private final List<CheckstyleViolation> violations;
-
-    public FinalClass(final List<CheckstyleViolation> violations) {
-        this.violations = violations;
-    }
-
     @Override
     public String getDisplayName() {
         return "FinalClass recipe";
@@ -60,17 +53,7 @@ public class FinalClass extends Recipe {
         return new FinalClassVisitor();
     }
 
-    private final class FinalClassVisitor
-            extends JavaIsoVisitor<ExecutionContext> {
-
-        private Path sourcePath;
-
-        @Override
-        public J.CompilationUnit visitCompilationUnit(
-                J.CompilationUnit cu, ExecutionContext executionContext) {
-            this.sourcePath = cu.getSourcePath();
-            return super.visitCompilationUnit(cu, executionContext);
-        }
+    private static final class FinalClassVisitor extends JavaIsoVisitor<ExecutionContext> {
 
         @Override
         public J.ClassDeclaration visitClassDeclaration(
@@ -80,7 +63,11 @@ public class FinalClass extends Recipe {
             J.ClassDeclaration result =
                     super.visitClassDeclaration(classDeclaration, executionContext);
 
-            if (isAtViolationLocation(classDeclaration) && !hasFinalModifier(result)) {
+            final boolean hasMarker = result.getMarkers()
+                    .findAll(CheckstyleViolationMarker.class).stream()
+                    .anyMatch(marker -> marker.isFor(CheckFullName.FINAL_CLASS));
+
+            if (hasMarker && !hasFinalModifier(result)) {
                 result = addFinalModifier(result);
             }
 
@@ -153,26 +140,6 @@ public class FinalClass extends Recipe {
             }
 
             return foundFinal;
-        }
-
-        private boolean isAtViolationLocation(J.ClassDeclaration classDeclaration) {
-            final J.CompilationUnit cursor =
-                    getCursor().firstEnclosing(J.CompilationUnit.class);
-
-            final int line = PositionHelper.computeLinePosition(
-                    cursor, classDeclaration, getCursor());
-
-            boolean matches = false;
-
-            for (CheckstyleViolation violation : violations) {
-                if (violation.getLine() == line
-                        && violation.getFilePath().endsWith(sourcePath)) {
-                    matches = true;
-                    break;
-                }
-            }
-
-            return matches;
         }
     }
 }

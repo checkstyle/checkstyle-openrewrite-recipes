@@ -145,24 +145,6 @@
   </mutation>
 
   <mutation unstable="false">
-    <sourceFile>CheckstyleRecipeRegistry.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.CheckstyleRecipeRegistry</mutatedClass>
-    <mutatedMethod>createRecipe</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
-    <description>removed conditional - replaced equality check with true</description>
-    <lineContent>if (checkConfig != null) {</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>CheckstyleRecipeRegistry.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.CheckstyleRecipeRegistry</mutatedClass>
-    <mutatedMethod>getRecipes</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.NakedReceiverMutator</mutator>
-    <description>replaced call to java/util/stream/Stream::filter with receiver</description>
-    <lineContent>.filter(Objects::nonNull)</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
     <sourceFile>ConfigurationLoader.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.parser.ConfigurationLoader</mutatedClass>
     <mutatedMethod>lambda$mapConfiguration$1</mutatedMethod>
@@ -189,31 +171,23 @@
     <lineContent>props.load(input);</lineContent>
   </mutation>
 
+  <!-- Cannot be killed by integration tests until a second recipe lands a marker on this node type. See issue #236 -->
   <mutation unstable="false">
-    <sourceFile>FinalLocalVariable.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.FinalLocalVariable$FinalLocalVariableMarker</mutatedClass>
-    <mutatedMethod>&lt;init&gt;</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.MemberVariableMutator</mutator>
-    <description>Removed assignment to member variable id</description>
-    <lineContent>this.id = uuid;</lineContent>
+    <sourceFile>FinalClass.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.FinalClass$FinalClassVisitor</mutatedClass>
+    <mutatedMethod>lambda$visitClassDeclaration$0</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.BooleanTrueReturnValsMutator</mutator>
+    <description>replaced boolean return with true for org/checkstyle/autofix/recipe/FinalClass$FinalClassVisitor::lambda$visitClassDeclaration$0</description>
+    <lineContent>.anyMatch(marker -&gt; marker.isFor(CheckFullName.FINAL_CLASS));</lineContent>
   </mutation>
 
   <mutation unstable="false">
     <sourceFile>FinalLocalVariable.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.FinalLocalVariable$FinalLocalVariableMarker</mutatedClass>
-    <mutatedMethod>getId</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.NullReturnValsMutator</mutator>
-    <description>replaced return value with null for org/checkstyle/autofix/recipe/FinalLocalVariable$FinalLocalVariableMarker::getId</description>
-    <lineContent>return id;</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>FinalLocalVariable.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.FinalLocalVariable$FinalLocalVariableMarker</mutatedClass>
-    <mutatedMethod>withId</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.NullReturnValsMutator</mutator>
-    <description>replaced return value with null for org/checkstyle/autofix/recipe/FinalLocalVariable$FinalLocalVariableMarker::withId</description>
-    <lineContent>return (M) new FinalLocalVariableMarker(uuid);</lineContent>
+    <mutatedClass>org.checkstyle.autofix.recipe.FinalLocalVariable$LocalVariableVisitor</mutatedClass>
+    <mutatedMethod>lambda$isViolationMarked$0</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.BooleanTrueReturnValsMutator</mutator>
+    <description>replaced boolean return with true for org/checkstyle/autofix/recipe/FinalLocalVariable$LocalVariableVisitor::lambda$isViolationMarked$0</description>
+    <lineContent>.anyMatch(marker -&gt; marker.isFor(CheckFullName.FINAL_LOCAL_VARIABLE));</lineContent>
   </mutation>
 
   <mutation unstable="false">
@@ -241,15 +215,6 @@
     <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_ORDER_IF</mutator>
     <description>removed conditional - replaced comparison check with true</description>
     <lineContent>&amp;&amp; varDecl.getVariables().size() &gt; 1</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>FinalLocalVariable.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.FinalLocalVariable$MarkViolationVisitor</mutatedClass>
-    <mutatedMethod>visitVariableDeclarations</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
-    <description>removed call to org/openrewrite/Tree::randomId</description>
-    <lineContent>new FinalLocalVariableMarker(Tree.randomId()))));</lineContent>
   </mutation>
 
   <mutation unstable="false">
