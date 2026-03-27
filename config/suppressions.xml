@@ -25,6 +25,7 @@
     <suppress checks="ImportControlCheck" files="[\\/]src[\\/]test[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]UseEnhancedSwitchTest\.java"/>
     <suppress checks="ImportControlCheck" files="[\\/]src[\\/]test[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]NewLineAtEndOfFileTest\.java"/>
     <suppress checks="ImportControlCheck" files="[\\/]src[\\/]test[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]MissingOverrideTest\.java"/>
+    <suppress checks="ImportControlCheck" files="[\\/]src[\\/]test[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]ConstructorsDeclarationGroupingTest\.java"/>
 
     <suppress checks="ClassFanOutComplexity" files="[\\/]src[\\/]main[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]UseEnhancedSwitch\.java"/>
     <suppress checks="CyclomaticComplexity" files="[\\/]src[\\/]main[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]UseEnhancedSwitch\.java"/>

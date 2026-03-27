@@ -1,0 +1,21 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/onlyoneviolation/InputOnlyOneViolation.java
++++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/onlyoneviolation/OutputOnlyOneViolation.java
+@@ -9,14 +9,14 @@
+ package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.onlyoneviolation;
+ 
+ /** Class with exactly one constructor that is separated from the group. */
+-public class InputOnlyOneViolation {
++public class OutputOnlyOneViolation {
+ 
+-    InputOnlyOneViolation() {}
++    OutputOnlyOneViolation() {}
++
++    OutputOnlyOneViolation(int x) {}
+ 
+     void foo() {}
+ 
+-    InputOnlyOneViolation(int x) {} // violation 'Constructors should be grouped together'
+-
+     void bar() {}
+ 
+ }

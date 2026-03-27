@@ -1,0 +1,27 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/suppressedviolations/InputSuppressedViolations.java
++++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/suppressedviolations/OutputSuppressedViolations.java
+@@ -13,18 +13,17 @@
+ 
+ package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.suppressedviolations;
+ 
+-public class InputSuppressedViolations {
++public class OutputSuppressedViolations {
+ 
+     int x;
+ 
+-    InputSuppressedViolations() {}
++    OutputSuppressedViolations() {}
+ 
+-    InputSuppressedViolations(String s) {}
++    OutputSuppressedViolations(String s) {}
++
++    OutputSuppressedViolations(String s, int x) {}
+ 
+     void foo() {}
+ 
+-    InputSuppressedViolations(String s, int x) {}
+-    // violation above 'Constructors should be grouped together.*'
+-
+-    InputSuppressedViolations(int x) {}
++    OutputSuppressedViolations(int x) {}
+ }

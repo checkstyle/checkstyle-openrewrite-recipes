@@ -1,0 +1,24 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/simple/InputSimple.java
++++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/simple/OutputSimple.java
+@@ -9,16 +9,15 @@
+ 
+ package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.simple;
+ 
+-public class InputSimple {
++public class OutputSimple {
+ 
+     int x;
+ 
+-    InputSimple() {}
++    OutputSimple() {}
+ 
+-    InputSimple(String s) {}
++    OutputSimple(String s) {}
++
++    OutputSimple(int x) {}
+ 
+     void foo() {}
+-
+-    InputSimple(int x) {}
+-    // violation above 'Constructors should be grouped together.*'
+ }

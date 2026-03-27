@@ -1,0 +1,21 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/separatedbycomment/InputSeparatedByComment.java
++++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/separatedbycomment/OutputSeparatedByComment.java
+@@ -12,14 +12,14 @@
+  * Class where constructors are separated only by comments.
+  * Comments between constructors are allowed, so no violations should occur.
+  */
+-public class InputSeparatedByComment {
++public class OutputSeparatedByComment {
+ 
+-    InputSeparatedByComment() {}
++    OutputSeparatedByComment() {}
+ 
+     // Default constructor above, parameterized below.
+-    InputSeparatedByComment(String s) {}
++    OutputSeparatedByComment(String s) {}
+ 
+     /* Another comment block. */
+-    InputSeparatedByComment(int x) {}
++    OutputSeparatedByComment(int x) {}
+ 
+ }

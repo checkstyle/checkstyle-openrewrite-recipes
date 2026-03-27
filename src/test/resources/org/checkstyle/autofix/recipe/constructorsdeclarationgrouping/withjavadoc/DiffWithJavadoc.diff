@@ -1,0 +1,51 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/withjavadoc/InputWithJavadoc.java
++++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/withjavadoc/OutputWithJavadoc.java
+@@ -13,38 +13,36 @@
+  * Class where all methods have Javadoc.
+  * Javadoc of moved constructors should be moved together.
+  */
+-public class InputWithJavadoc {
++public class OutputWithJavadoc {
+ 
+     int x;
+ 
+     /**
+      * Constructor with no parameters.
+      */
+-    InputWithJavadoc() {}
++    OutputWithJavadoc() {}
+ 
+     /**
+      * Constructor with one parameter of type {@code String}.
+      * @param s A {@code String}.
+      */
+-    InputWithJavadoc(String s) {}
+-
+-    /**
+-     * A method.
+-     */
+-    void foo() {}
++    OutputWithJavadoc(String s) {}
+ 
+     /**
+      * Constructor with one parameter of type {@code int}.
+      * @param s An {@code int}.
+      */
+-    InputWithJavadoc(int x) {}
+-    // violation above 'Constructors should be grouped together.*'
++    OutputWithJavadoc(int x) {}
+ 
+     /**
+      * Constructor with two parameters of types {@code String} and {@code int}.
+      * @param s A {@code String}.
+      * @param x An {@code int}.
+      */
+-    InputWithJavadoc(String s, int x) {}
+-    // violation above 'Constructors should be grouped together.*'
++    OutputWithJavadoc(String s, int x) {}
++
++    /**
++     * A method.
++     */
++    void foo() {}
+ }

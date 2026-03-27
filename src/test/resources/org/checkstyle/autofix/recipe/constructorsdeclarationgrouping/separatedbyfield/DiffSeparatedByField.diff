@@ -1,0 +1,19 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/separatedbyfield/InputSeparatedByField.java
++++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/separatedbyfield/OutputSeparatedByField.java
+@@ -9,12 +9,12 @@
+ package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.separatedbyfield;
+ 
+ /** Class where constructors are separated by a field declaration. */
+-public class InputSeparatedByField {
++public class OutputSeparatedByField {
+ 
+-    InputSeparatedByField() {}
++    OutputSeparatedByField() {}
++
++    OutputSeparatedByField(int x) {}
+ 
+     int x;
+ 
+-    InputSeparatedByField(int x) {} // violation 'Constructors should be grouped together'
+-
+ }

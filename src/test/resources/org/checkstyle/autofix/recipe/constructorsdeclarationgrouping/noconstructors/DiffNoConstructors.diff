@@ -1,0 +1,11 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/noconstructors/InputNoConstructors.java
++++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/noconstructors/OutputNoConstructors.java
+@@ -12,7 +12,7 @@
+ /**
+  * Class without any constructors.
+  */
+-public class InputNoConstructors {
++public class OutputNoConstructors {
+ 
+     private void doNothing() {}
+ 

@@ -1,0 +1,26 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/innerclass/InputInnerClass.java
++++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/innerclass/OutputInnerClass.java
+@@ -9,9 +9,9 @@
+ package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.innerclass;
+ 
+ /** Outer class with an inner class that has ungrouped constructors. */
+-public class InputInnerClass {
++public class OutputInnerClass {
+ 
+-    InputInnerClass() {}
++    OutputInnerClass() {}
+ 
+     private static class Inner {
+ 
+@@ -19,9 +19,9 @@
+ 
+         Inner(String s) {}
+ 
+-        int x;
++        Inner(int x) {}
+ 
+-        Inner(int x) {} // violation 'Constructors should be grouped together'
++        int x;
+ 
+     }
+ 
