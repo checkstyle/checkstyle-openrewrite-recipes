@@ -1,0 +1,25 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/annotations/InputAnnotations.java
++++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/annotations/OutputAnnotations.java
+@@ -9,16 +9,16 @@
+ package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.annotations;
+ 
+ /** Class with annotated constructors that are not grouped together. */
+-public class InputAnnotations {
++public class OutputAnnotations {
+ 
+     @SuppressWarnings("unused")
+-    InputAnnotations() {}
++    OutputAnnotations() {}
+ 
+-    InputAnnotations(String s) {}
++    OutputAnnotations(String s) {}
++
++    @Deprecated
++    OutputAnnotations(int x) {}
+ 
+     void helper() {}
+ 
+-    @Deprecated  // violation 'Constructors should be grouped together'
+-    InputAnnotations(int x) {}
+-
+ }

@@ -1,0 +1,22 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/noviolation/InputNoViolation.java
++++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/noviolation/OutputNoViolation.java
+@@ -9,15 +9,15 @@
+ package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.noviolation;
+ 
+ /** Class where all constructors are already properly grouped together. */
+-public class InputNoViolation {
++public class OutputNoViolation {
+ 
+     int x;
+ 
+-    InputNoViolation() {}
++    OutputNoViolation() {}
+ 
+-    InputNoViolation(String s) {}
++    OutputNoViolation(String s) {}
+ 
+-    InputNoViolation(int x) {}
++    OutputNoViolation(int x) {}
+ 
+     void foo() {}
+ 

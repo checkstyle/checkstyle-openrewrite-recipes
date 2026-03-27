@@ -1,0 +1,22 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/modifiers/InputModifiers.java
++++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/modifiers/OutputModifiers.java
+@@ -9,14 +9,14 @@
+ package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.modifiers;
+ 
+ /** Class with constructors of different access modifiers that are ungrouped. */
+-public class InputModifiers {
++public class OutputModifiers {
+ 
+-    public InputModifiers() {}
++    public OutputModifiers() {}
+ 
+-    protected InputModifiers(String s) {}
++    protected OutputModifiers(String s) {}
++
++    private OutputModifiers(int x) {}
+ 
+     private int value;
+ 
+-    private InputModifiers(int x) {} // violation 'Constructors should be grouped together'
+-
+ }

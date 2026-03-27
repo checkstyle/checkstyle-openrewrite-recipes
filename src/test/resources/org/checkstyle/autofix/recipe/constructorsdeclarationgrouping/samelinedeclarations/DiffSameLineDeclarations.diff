@@ -1,0 +1,22 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/samelinedeclarations/InputSameLineDeclarations.java
++++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/samelinedeclarations/OutputSameLineDeclarations.java
+@@ -9,15 +9,13 @@
+ 
+ package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.samelinedeclarations;
+ 
+-public class InputSameLineDeclarations {
++public class OutputSameLineDeclarations {
+ 
+     int x;
+ 
+-    InputSameLineDeclarations() {} InputSameLineDeclarations(String s) {}
++    OutputSameLineDeclarations() {} OutputSameLineDeclarations(String s) {}    OutputSameLineDeclarations(int x) {}
+ 
+-    void foo() {}    InputSameLineDeclarations(int x) {}
+-    // violation above 'Constructors should be grouped together.*'
++    OutputSameLineDeclarations(String s, int x) {}
+ 
+-    InputSameLineDeclarations(String s, int x) {}
+-    // violation above 'Constructors should be grouped together.*'
++    void foo() {}
+ }

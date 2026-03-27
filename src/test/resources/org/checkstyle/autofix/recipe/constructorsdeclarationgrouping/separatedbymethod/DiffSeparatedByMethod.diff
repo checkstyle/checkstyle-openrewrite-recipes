@@ -1,0 +1,22 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/separatedbymethod/InputSeparatedByMethod.java
++++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/separatedbymethod/OutputSeparatedByMethod.java
+@@ -9,14 +9,14 @@
+ package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.separatedbymethod;
+ 
+ /** Class where constructors are separated by a method. */
+-public class InputSeparatedByMethod {
++public class OutputSeparatedByMethod {
+ 
+-    InputSeparatedByMethod() {}
++    OutputSeparatedByMethod() {}
+ 
+-    InputSeparatedByMethod(String s) {}
++    OutputSeparatedByMethod(String s) {}
++
++    OutputSeparatedByMethod(int x) {}
+ 
+     void helper() {}
+ 
+-    InputSeparatedByMethod(int x) {} // violation 'Constructors should be grouped together'
+-
+ }

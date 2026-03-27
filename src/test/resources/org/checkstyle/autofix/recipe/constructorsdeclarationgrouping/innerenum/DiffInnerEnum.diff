@@ -1,0 +1,26 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/innerenum/InputInnerEnum.java
++++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/innerenum/OutputInnerEnum.java
+@@ -9,9 +9,9 @@
+ package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.innerenum;
+ 
+ /** Class containing an enum with ungrouped constructors. */
+-public class InputInnerEnum {
++public class OutputInnerEnum {
+ 
+-    InputInnerEnum() {}
++    OutputInnerEnum() {}
+ 
+     private enum Status {
+ 
+@@ -21,9 +21,9 @@
+ 
+         Status(String label) {}
+ 
+-        final int code = 0;
++        Status(int code) {}
+ 
+-        Status(int code) {} // violation 'Constructors should be grouped together'
++        final int code = 0;
+ 
+         void display() {}
+ 

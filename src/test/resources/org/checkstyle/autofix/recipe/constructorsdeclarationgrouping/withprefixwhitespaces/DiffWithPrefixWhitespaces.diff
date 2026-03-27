@@ -1,0 +1,30 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/withprefixwhitespaces/InputWithPrefixWhitespaces.java
++++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/withprefixwhitespaces/OutputWithPrefixWhitespaces.java
+@@ -9,19 +9,17 @@
+ 
+ package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.withprefixwhitespaces;
+ 
+-public class InputWithPrefixWhitespaces {
++public class OutputWithPrefixWhitespaces {
+ 
+     int x;
+-InputWithPrefixWhitespaces() {}
++OutputWithPrefixWhitespaces() {}
+ 
+-    InputWithPrefixWhitespaces(String s) {}
++    OutputWithPrefixWhitespaces(String s) {}
++
++        OutputWithPrefixWhitespaces(int x) {}
++
++
++    OutputWithPrefixWhitespaces(String s, int x) {}
+ 
+             void foo() {}
+-
+-        InputWithPrefixWhitespaces(int x) {}
+-    // violation above 'Constructors should be grouped together.*'
+-
+-
+-    InputWithPrefixWhitespaces(String s, int x) {}
+-    // violation above 'Constructors should be grouped together.*'
+ }

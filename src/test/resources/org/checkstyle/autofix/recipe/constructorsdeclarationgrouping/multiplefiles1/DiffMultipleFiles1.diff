@@ -1,0 +1,24 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/multiplefiles1/InputMultipleFiles1.java
++++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/multiplefiles1/OutputMultipleFiles1.java
+@@ -13,16 +13,15 @@
+ 
+ package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.multiplefiles1;
+ 
+-public class InputMultipleFiles1 {
++public class OutputMultipleFiles1 {
+ 
+     int x;
+ 
+-    InputMultipleFiles1() {}
++    OutputMultipleFiles1() {}
+ 
+-    InputMultipleFiles1(String s) {}
++    OutputMultipleFiles1(String s) {}
++
++    OutputMultipleFiles1(int x) {}
+ 
+     void foo() {}
+-
+-    InputMultipleFiles1(int x) {}
+-    // violation above 'Constructors should be grouped together.*'
+ }

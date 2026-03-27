@@ -1,0 +1,22 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/separatedbyinnerclass/InputSeparatedByInnerClass.java
++++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/separatedbyinnerclass/OutputSeparatedByInnerClass.java
+@@ -9,14 +9,14 @@
+ package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.separatedbyinnerclass;
+ 
+ /** Class where constructors are separated by an inner class declaration. */
+-public class InputSeparatedByInnerClass {
++public class OutputSeparatedByInnerClass {
+ 
+-    InputSeparatedByInnerClass() {}
++    OutputSeparatedByInnerClass() {}
+ 
+-    InputSeparatedByInnerClass(String s) {}
++    OutputSeparatedByInnerClass(String s) {}
++
++    OutputSeparatedByInnerClass(int x) {}
+ 
+     private static class Helper {}
+ 
+-    InputSeparatedByInnerClass(int x) {} // violation 'Constructors should be grouped together'
+-
+ }

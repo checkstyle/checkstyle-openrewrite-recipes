@@ -32,7 +32,9 @@ public enum CheckFullName {
       "com.puppycrawl.tools.checkstyle.checks.NumericalPrefixesInfixesSuffixesCharacterCaseCheck"),
     REDUNDANT_IMPORT("com.puppycrawl.tools.checkstyle.checks.imports.RedundantImportCheck"),
     USE_ENHANCED_SWITCH("com.puppycrawl.tools.checkstyle.checks.coding.UseEnhancedSwitchCheck"),
-    MISSING_OVERRIDE("com.puppycrawl.tools.checkstyle.checks.annotation.MissingOverrideCheck");
+    MISSING_OVERRIDE("com.puppycrawl.tools.checkstyle.checks.annotation.MissingOverrideCheck"),
+    CONSTRUCTORS_DECLARATION_GROUPING(
+        "com.puppycrawl.tools.checkstyle.checks.coding.ConstructorsDeclarationGroupingCheck");
 
     private final String id;
 

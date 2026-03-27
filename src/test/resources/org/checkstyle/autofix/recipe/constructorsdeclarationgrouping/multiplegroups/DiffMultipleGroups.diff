@@ -1,0 +1,30 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/multiplegroups/InputMultipleGroups.java
++++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/multiplegroups/OutputMultipleGroups.java
+@@ -9,21 +9,21 @@
+ package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.multiplegroups;
+ 
+ /** Class where both the outer class and an inner class have ungrouped constructors. */
+-public class InputMultipleGroups {
++public class OutputMultipleGroups {
+ 
+-    InputMultipleGroups() {}
++    OutputMultipleGroups() {}
++
++    OutputMultipleGroups(int x) {}
+ 
+     void outerMethod() {}
+ 
+-    InputMultipleGroups(int x) {} // violation 'Constructors should be grouped together'
+-
+     private static class Helper {
+ 
+         Helper() {}
+ 
+-        String name;
++        Helper(String name) {}
+ 
+-        Helper(String name) {} // violation 'Constructors should be grouped together'
++        String name;
+ 
+         void helperMethod() {}
+ 

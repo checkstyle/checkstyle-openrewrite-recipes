@@ -1,0 +1,55 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/withcomments/InputWithComments.java
++++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/withcomments/OutputWithComments.java
+@@ -13,20 +13,31 @@
+  * Class where all methods have Javadoc.
+  * Javadoc of moved constructors should be moved together.
+  */
+-public class InputWithComments {
++public class OutputWithComments {
+ 
+     int x;
+ 
+     /**
+      * Constructor with no parameters.
+      */
+-    InputWithComments() {}
++    OutputWithComments() {}
+ 
+     /**
+      * Constructor with one parameter of type {@code String}.
+      * @param s A {@code String}.
+      */
+-    InputWithComments(String s) {}
++    OutputWithComments(String s) {}
++
++    // This method will be removed since issue #12345.
++    /**
++     * Constructor with one parameter of type {@code int}.
++     * @param s An {@code int}.
++     */
++    OutputWithComments(int x) {}
++
++    /* This method will be removed in a future version. */
++
++    OutputWithComments(String s, int x) {}
+ 
+     /**
+      * A method.
+@@ -35,17 +46,4 @@
+ 
+     /* Name of the class. */
+     private static String NAME = "InputWithComments";
+-
+-    // This method will be removed since issue #12345.
+-    /**
+-     * Constructor with one parameter of type {@code int}.
+-     * @param s An {@code int}.
+-     */
+-    InputWithComments(int x) {}
+-    // violation above 'Constructors should be grouped together.*'
+-
+-    /* This method will be removed in a future version. */
+-
+-    InputWithComments(String s, int x) {}
+-    // violation above 'Constructors should be grouped together.*'
+ }

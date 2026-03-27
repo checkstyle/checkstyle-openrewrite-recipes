@@ -1,0 +1,27 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/multipleviolations/InputMultipleViolations.java
++++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/multipleviolations/OutputMultipleViolations.java
+@@ -9,18 +9,18 @@
+ package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.multipleviolations;
+ 
+ /** Class where multiple constructors are scattered across the class body. */
+-public class InputMultipleViolations {
++public class OutputMultipleViolations {
+ 
+-    InputMultipleViolations() {}
++    OutputMultipleViolations() {}
++
++    OutputMultipleViolations(String b) {}
++
++    OutputMultipleViolations(int a, String b) {}
+ 
+     int a;
+ 
+     String b;
+ 
+-    InputMultipleViolations(String b) {} // violation 'Constructors should be grouped together'
+-
+     void foo() {}
+ 
+-    InputMultipleViolations(int a, String b) {} // violation 'Constructors should be grouped together'
+-
+ }
