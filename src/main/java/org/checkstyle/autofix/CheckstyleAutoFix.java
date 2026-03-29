@@ -85,16 +85,16 @@ public class CheckstyleAutoFix extends Recipe {
 
     @Override
     public List<Recipe> getRecipeList() {
-        final ReportParser reportParser = createReportParser(getViolationReportPath());
+        final ReportParser reportParser = createReportParser(violationReportPath);
         final List<CheckstyleViolation> violations = reportParser
-                .parse(Path.of(getViolationReportPath()));
+                .parse(Path.of(violationReportPath));
         final Map<CheckstyleCheck,
                 CheckConfiguration> configuration = loadCheckstyleConfiguration();
 
         return CheckstyleRecipeRegistry.getRecipes(violations, configuration);
     }
 
-    private ReportParser createReportParser(String path) {
+    private static ReportParser createReportParser(String path) {
         final ReportParser result;
         if (path.endsWith(".xml")) {
             result = new XmlReportParser();
@@ -109,6 +109,6 @@ public class CheckstyleAutoFix extends Recipe {
     }
 
     private Map<CheckstyleCheck, CheckConfiguration> loadCheckstyleConfiguration() {
-        return ConfigurationLoader.loadConfiguration(getConfigurationPath(), getPropertiesPath());
+        return ConfigurationLoader.loadConfiguration(configurationPath, propertiesPath);
     }
 }

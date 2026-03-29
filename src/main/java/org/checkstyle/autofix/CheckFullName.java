@@ -44,7 +44,7 @@ public enum CheckFullName {
 
     public static Optional<CheckFullName> fromSource(String source) {
         return Arrays.stream(values())
-                .filter(check -> check.getId().contains(source.split("#")[0]))
+                .filter(check -> check.id.contains(source.split("#")[0]))
                 .findFirst();
     }
 }
