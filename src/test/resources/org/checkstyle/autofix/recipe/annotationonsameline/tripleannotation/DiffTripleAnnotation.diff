@@ -1,0 +1,22 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/annotationonsameline/tripleannotation/InputTripleAnnotation.java
++++ src/test/resources/org/checkstyle/autofix/recipe/annotationonsameline/tripleannotation/OutputTripleAnnotation.java
+@@ -8,17 +8,11 @@
+ 
+ package org.checkstyle.autofix.recipe.annotationonsameline.tripleannotation;
+ 
+-public class InputTripleAnnotation {
++public class OutputTripleAnnotation {
+     @interface A1 {}
+     @interface A2 {}
+     @interface A3 {}
+ 
+-    // violation below 'Annotation 'A1' should be on the same line with its target.'
+-    @A1
+-    // violation below 'Annotation 'A2' should be on the same line with its target.'
+-    @A2
+-    // violation below 'Annotation 'A3' should be on the same line with its target.'
+-    @A3
+-    class Target {
++    @A1 @A2 @A3 class Target {
+     }
+ }

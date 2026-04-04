@@ -1,0 +1,13 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/annotationonsameline/fieldannotation/InputFieldAnnotation.java
++++ src/test/resources/org/checkstyle/autofix/recipe/annotationonsameline/fieldannotation/OutputFieldAnnotation.java
+@@ -8,8 +8,7 @@
+ 
+ package org.checkstyle.autofix.recipe.annotationonsameline.fieldannotation;
+ 
+-public class InputFieldAnnotation {
++public class OutputFieldAnnotation {
+ 
+-    @Deprecated // violation, "should be on the same line with its target."
+-    private String field;
++    @Deprecated private String field;
+ }

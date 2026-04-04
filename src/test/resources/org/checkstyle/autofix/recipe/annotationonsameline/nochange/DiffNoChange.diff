@@ -1,0 +1,11 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/annotationonsameline/nochange/InputNoChange.java
++++ src/test/resources/org/checkstyle/autofix/recipe/annotationonsameline/nochange/OutputNoChange.java
+@@ -11,7 +11,7 @@
+ import java.lang.annotation.ElementType;
+ import java.lang.annotation.Target;
+ 
+-public class InputNoChange {
++public class OutputNoChange {
+ 
+     @Target({ElementType.METHOD, ElementType.TYPE, ElementType.FIELD, ElementType.TYPE_PARAMETER})
+     @interface Ann {}

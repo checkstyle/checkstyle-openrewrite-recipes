@@ -54,7 +54,7 @@ public class RemoveViolationComments extends Recipe {
             final List<Comment> filteredComments = new ArrayList<>();
 
             for (Comment comment : space.getComments()) {
-                if (!comment.isMultiline() && comment instanceof TextComment) {
+                if (comment instanceof TextComment) {
                     final TextComment textComment = (TextComment) comment;
                     if (textComment.getText().matches("\\s*(\\d+\\s*)?violation.*")) {
                         if (filteredComments.isEmpty()) {

@@ -1,0 +1,36 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/annotationonsameline/multiannotation/InputMultiAnnotation.java
++++ src/test/resources/org/checkstyle/autofix/recipe/annotationonsameline/multiannotation/OutputMultiAnnotation.java
+@@ -11,7 +11,7 @@
+ import java.lang.annotation.ElementType;
+ import java.lang.annotation.Target;
+ 
+-public class InputMultiAnnotation {
++public class OutputMultiAnnotation {
+ 
+     @Target({ElementType.METHOD, ElementType.TYPE, ElementType.FIELD})
+     @interface Ann1 {}
+@@ -22,20 +22,13 @@
+     @Target({ElementType.METHOD, ElementType.TYPE, ElementType.FIELD})
+     @interface Ann3 {}
+ 
+-    // violation below 'Annotation 'Ann1' should be on the same line with its target.'
+-    @Ann1
+-    @Ann2 public void twoAnnMethod() {}
++    @Ann1 @Ann2 public void twoAnnMethod() {}
+ 
+-    // violation below 'Annotation 'Ann1' should be on the same line with its target.'
+-    @Ann1
+-    @Ann2 public int twoAnnField;
++    @Ann1 @Ann2 public int twoAnnField;
+ 
+-    // violation below 'Annotation 'Ann1' should be on the same line with its target.'
+-    @Ann1
+-    @Ann2 public class TwoAnnClass {}
++    @Ann1 @Ann2 public class TwoAnnClass {}
+ 
+-    @Ann1 @Ann2 // 2 violations
+-    @Ann3 public void threeAnnMethod() {}
++    @Ann1 @Ann2 @Ann3 public void threeAnnMethod() {}
+ 
+     @Ann1  @Ann2 public void noViolationCase() {}
+ }

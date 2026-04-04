@@ -1,0 +1,17 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/annotationonsameline/fieldnomodifiers/InputFieldNoModifiers.java
++++ src/test/resources/org/checkstyle/autofix/recipe/annotationonsameline/fieldnomodifiers/OutputFieldNoModifiers.java
+@@ -8,12 +8,10 @@
+ 
+ package org.checkstyle.autofix.recipe.annotationonsameline.fieldnomodifiers;
+ 
+-public class InputFieldNoModifiers {
++public class OutputFieldNoModifiers {
+     @interface Ann {}
+ 
+     class A {
+-        // violation below 'Annotation 'Ann' should be on the same line with its target.'
+-        @Ann
+-        int x;
++        @Ann int x;
+     }
+ }

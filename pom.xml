@@ -409,6 +409,7 @@
                                 <param>org.checkstyle.autofix.recipe.RedundantImport*</param>
                                 <param>org.checkstyle.autofix.recipe.UpperEll*</param>
                                 <param>org.checkstyle.autofix.recipe.UseEnhancedSwitch*</param>
+                                <param>org.checkstyle.autofix.recipe.AnnotationOnSameLine*</param>
                                 <param>org.checkstyle.autofix.recipe.ConstructorsDeclarationGrouping*</param>
                             </targetClasses>
                             <targetTests>
@@ -417,6 +418,7 @@
                                 <param>org.checkstyle.autofix.recipe.RedundantImportTest</param>
                                 <param>org.checkstyle.autofix.recipe.UpperEllTest</param>
                                 <param>org.checkstyle.autofix.recipe.UseEnhancedSwitchTest</param>
+                                <param>org.checkstyle.autofix.recipe.AnnotationOnSameLineTest</param>
                                 <param>org.checkstyle.autofix.recipe.ConstructorsDeclarationGroupingTest</param>
                             </targetTests>
 

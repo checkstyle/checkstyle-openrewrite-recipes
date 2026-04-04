@@ -1,0 +1,18 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/annotationonsameline/nestedvariable/InputNestedVariable.java
++++ src/test/resources/org/checkstyle/autofix/recipe/annotationonsameline/nestedvariable/OutputNestedVariable.java
+@@ -8,13 +8,11 @@
+ 
+ package org.checkstyle.autofix.recipe.annotationonsameline.nestedvariable;
+ 
+-public class InputNestedVariable {
++public class OutputNestedVariable {
+ 
+     @interface Ann {}
+ 
+     Object obj = new Object() {
+-        // violation below 'Annotation 'Ann' should be on the same line with its target.'
+-        @Ann
+-        public void innerMethod() {}
++        @Ann public void innerMethod() {}
+     };
+ }

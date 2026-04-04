@@ -1,0 +1,11 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/annotationonsameline/singlelinecomment/InputSingleLineComment.java
++++ src/test/resources/org/checkstyle/autofix/recipe/annotationonsameline/singlelinecomment/OutputSingleLineComment.java
+@@ -8,7 +8,5 @@
+ 
+ package org.checkstyle.autofix.recipe.annotationonsameline.singlelinecomment;
+ 
+-    // violation below 'Annotation 'Deprecated' should be on the same line with its target.'
+-    @Deprecated // some comment
+-    class InputSingleLineComment {
++    @Deprecated /* some comment */ class OutputSingleLineComment {
+     }
