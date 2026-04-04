@@ -1,0 +1,22 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/annotationonsameline/classnomodifiers/InputClassNoModifiers.java
++++ src/test/resources/org/checkstyle/autofix/recipe/annotationonsameline/classnomodifiers/OutputClassNoModifiers.java
+@@ -11,16 +11,12 @@
+ import java.lang.annotation.ElementType;
+ import java.lang.annotation.Target;
+ 
+-public class InputClassNoModifiers {
++public class OutputClassNoModifiers {
+ 
+     @Target(ElementType.TYPE)
+     @interface Ann {}
+ 
+-    // violation below 'Annotation 'Ann' should be on the same line with its target.'
+-    @Ann
+-    class InnerNoModifiers {}
++    @Ann class InnerNoModifiers {}
+ 
+-    // violation below 'Annotation 'Deprecated' should be on the same line with its target.'
+-    @Deprecated
+-    public    class InnerWithModifiers {}
++    @Deprecated public    class InnerWithModifiers {}
+ }

@@ -1,0 +1,21 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/annotationonsameline/variablewithvar/InputVariableWithVar.java
++++ src/test/resources/org/checkstyle/autofix/recipe/annotationonsameline/variablewithvar/OutputVariableWithVar.java
+@@ -8,16 +8,12 @@
+ 
+ package org.checkstyle.autofix.recipe.annotationonsameline.variablewithvar;
+ 
+-public class InputVariableWithVar {
++public class OutputVariableWithVar {
+     @interface Ann {}
+ 
+     class A {
+         void m() {
+-            // violation below 'Annotation 'Ann' should be on the same line with its target.'
+-            @Ann
+-            // violation below 'Annotation 'SuppressWarnings' should be on the same line with its target.'
+-            @SuppressWarnings("unused")
+-            var x = 1;
++            @Ann @SuppressWarnings("unused") var x = 1;
+         }
+     }
+ }

@@ -1,0 +1,27 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/annotationonsameline/variablewithmodifier/InputVariableWithModifier.java
++++ src/test/resources/org/checkstyle/autofix/recipe/annotationonsameline/variablewithmodifier/OutputVariableWithModifier.java
+@@ -11,20 +11,14 @@
+ import java.lang.annotation.ElementType;
+ import java.lang.annotation.Target;
+ 
+-public class InputVariableWithModifier {
++public class OutputVariableWithModifier {
+ 
+     @Target(ElementType.FIELD)
+     @interface Ann {}
+ 
+-    // violation below 'Annotation 'Ann' should be on the same line with its target.'
+-    @Ann
+-    private    int fieldWithPrivateModifier;
++    @Ann private    int fieldWithPrivateModifier;
+ 
+-    // violation below 'Annotation 'Ann' should be on the same line with its target.'
+-    @Ann
+-    protected    String fieldWithProtectedModifier;
++    @Ann protected    String fieldWithProtectedModifier;
+ 
+-    // violation below 'Annotation 'Ann' should be on the same line with its target.'
+-    @Ann
+-    final    int fieldWithFinalModifier = 0;
++    @Ann final    int fieldWithFinalModifier = 0;
+ }

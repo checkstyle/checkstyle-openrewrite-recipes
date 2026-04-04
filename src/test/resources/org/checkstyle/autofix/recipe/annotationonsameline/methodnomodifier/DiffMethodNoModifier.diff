@@ -1,0 +1,31 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/annotationonsameline/methodnomodifier/InputMethodNoModifier.java
++++ src/test/resources/org/checkstyle/autofix/recipe/annotationonsameline/methodnomodifier/OutputMethodNoModifier.java
+@@ -11,24 +11,18 @@
+ import java.lang.annotation.ElementType;
+ import java.lang.annotation.Target;
+ 
+-public class InputMethodNoModifier {
++public class OutputMethodNoModifier {
+ 
+     @Target(ElementType.METHOD)
+     @interface Ann {}
+ 
+-    // violation below 'Annotation 'Ann' should be on the same line with its target.'
+-    @Ann
+-    void methodNoModifierWithReturnType() {}
++    @Ann void methodNoModifierWithReturnType() {}
+ 
+-    // violation below 'Annotation 'Ann' should be on the same line with its target.'
+-    @Ann
+-    int methodNoModifierReturnsInt() {
++    @Ann int methodNoModifierReturnsInt() {
+         return 0;
+     }
+ 
+-    // violation below 'Annotation 'Ann' should be on the same line with its target.'
+-    @Ann
+-    String methodNoModifierReturnsString() {
++    @Ann String methodNoModifierReturnsString() {
+         return "";
+     }
+ }

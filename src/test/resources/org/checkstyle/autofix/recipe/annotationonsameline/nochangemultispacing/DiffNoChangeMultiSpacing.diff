@@ -1,0 +1,11 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/annotationonsameline/nochangemultispacing/InputNoChangeMultiSpacing.java
++++ src/test/resources/org/checkstyle/autofix/recipe/annotationonsameline/nochangemultispacing/OutputNoChangeMultiSpacing.java
+@@ -8,7 +8,7 @@
+ 
+ package org.checkstyle.autofix.recipe.annotationonsameline.nochangemultispacing;
+ 
+-public class InputNoChangeMultiSpacing {
++public class OutputNoChangeMultiSpacing {
+     @interface Ann1 {}
+     @interface Ann2 {}
+ 

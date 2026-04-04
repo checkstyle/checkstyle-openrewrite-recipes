@@ -1,0 +1,22 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/annotationonsameline/commentnewline/InputCommentNewline.java
++++ src/test/resources/org/checkstyle/autofix/recipe/annotationonsameline/commentnewline/OutputCommentNewline.java
+@@ -11,16 +11,12 @@
+ import java.lang.annotation.ElementType;
+ import java.lang.annotation.Target;
+ 
+-public class InputCommentNewline {
++public class OutputCommentNewline {
+ 
+     @Target({ElementType.METHOD, ElementType.FIELD})
+     @interface Ann {}
+ 
+-    // violation below 'Annotation 'Ann' should be on the same line with its target.'
+-    @Ann /* c1 */
+-    /* c2 */ void methodWithMultiLineComment() {}
++    @Ann /* c1 */ /* c2 */ void methodWithMultiLineComment() {}
+ 
+-    // violation below 'Annotation 'Ann' should be on the same line with its target.'
+-    @Ann /* c3 */
+-    /* c4 */ int fieldWithBlockComment;
++    @Ann /* c3 */ /* c4 */ int fieldWithBlockComment;
+ }

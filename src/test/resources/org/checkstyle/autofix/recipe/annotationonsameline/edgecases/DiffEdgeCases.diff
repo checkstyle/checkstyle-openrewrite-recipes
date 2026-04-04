@@ -1,0 +1,49 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/annotationonsameline/edgecases/InputEdgeCases.java
++++ src/test/resources/org/checkstyle/autofix/recipe/annotationonsameline/edgecases/OutputEdgeCases.java
+@@ -10,38 +10,22 @@
+ import java.lang.annotation.ElementType;
+ import java.lang.annotation.Target;
+ 
+-public class InputEdgeCases {
++public class OutputEdgeCases {
+ 
+     @Target({ElementType.METHOD, ElementType.TYPE, ElementType.FIELD, ElementType.CONSTRUCTOR, ElementType.LOCAL_VARIABLE})
+     @interface Ann {}
+ 
+-    // violation below 'Annotation 'Ann' should be on the same line with its target.'
+-    @Ann
+-    @Deprecated // violation 'Annotation 'Deprecated' should be on the same line with its target.'
+-    void method1() {
+-        // violation below 'Annotation 'Ann' should be on the same line with its target.'
+-        @Ann
+-        int localVariable;
++    @Ann @Deprecated void method1() {
++        @Ann int localVariable;
+     }
+ 
+-    // violation below 'Annotation 'Ann' should be on the same line with its target.'
+-    @Ann
+-    /* multi-line comment */
+-    void method2() {}
++    @Ann /* multi-line comment */ void method2() {}
+ 
+-    // violation below 'Annotation 'Ann' should be on the same line with its target.'
+-    @Ann
+-    InputEdgeCases() {}
++    @Ann OutputEdgeCases() {}
+ 
+-    // violation below 'Annotation 'Ann' should be on the same line with its target.'
+-    @Ann
+-    int fieldWithoutModifier;
++    @Ann int fieldWithoutModifier;
+ 
+-    // violation below 'Annotation 'Ann' should be on the same line with its target.'
+-    @Ann /* comment */
+-    void methodWithNewlineInComment() {}
++    @Ann /* comment */ void methodWithNewlineInComment() {}
+ 
+-    // violation below 'Annotation 'Ann' should be on the same line with its target.'
+-    @Ann
+-    static class InnerClassWithoutModifier {}
++    @Ann static class InnerClassWithoutModifier {}
+ }

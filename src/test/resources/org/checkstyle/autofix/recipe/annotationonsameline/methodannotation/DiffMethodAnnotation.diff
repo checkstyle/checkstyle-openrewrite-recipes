@@ -1,0 +1,14 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/annotationonsameline/methodannotation/InputMethodAnnotation.java
++++ src/test/resources/org/checkstyle/autofix/recipe/annotationonsameline/methodannotation/OutputMethodAnnotation.java
+@@ -8,9 +8,8 @@
+ 
+ package org.checkstyle.autofix.recipe.annotationonsameline.methodannotation;
+ 
+-public class InputMethodAnnotation {
++public class OutputMethodAnnotation {
+ 
+-    @SuppressWarnings("unchecked") // violation, "should be on the same line with its target."
+-    public    void foo() {
++    @SuppressWarnings("unchecked") public    void foo() {
+     }
+ }

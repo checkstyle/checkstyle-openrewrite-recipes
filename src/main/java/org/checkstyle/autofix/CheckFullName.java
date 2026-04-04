@@ -22,6 +22,8 @@ import java.util.Optional;
 
 public enum CheckFullName {
     EMPTY_STATEMENT("com.puppycrawl.tools.checkstyle.checks.coding.EmptyStatementCheck"),
+    ANNOTATION_ON_SAME_LINE(
+      "com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"),
     FINAL_CLASS("com.puppycrawl.tools.checkstyle.checks.design.FinalClassCheck"),
     FINAL_LOCAL_VARIABLE("com.puppycrawl.tools.checkstyle.checks.coding.FinalLocalVariableCheck"),
     HEADER("com.puppycrawl.tools.checkstyle.checks.header.HeaderCheck"),
