@@ -9,11 +9,10 @@
      private int m_ClassVariable = 0;
      //static block
      static
-@@ -50,9 +50,7 @@
-             }
+@@ -51,8 +51,7 @@
          };
      }
--
+ 
 -    // violation below "Variable 'aArg' should be declared final"
 -    public void method(int aArg, final int aFinal, int aArg2)
 +    public void method(final int aArg, final int aFinal, int aArg2)

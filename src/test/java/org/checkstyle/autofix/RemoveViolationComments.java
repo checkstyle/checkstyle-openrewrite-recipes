@@ -46,6 +46,7 @@ public class RemoveViolationComments extends Recipe {
     }
 
     private static final class ViolationCommentRemover extends JavaIsoVisitor<ExecutionContext> {
+
         @Override
         public Space visitSpace(
                 Space space, Space.Location loc, ExecutionContext executionContext) {
@@ -84,10 +85,29 @@ public class RemoveViolationComments extends Recipe {
             else {
                 result = space.withComments(filteredComments);
                 if (suffixAccumulator != null) {
-                    result = result.withWhitespace(suffixAccumulator);
+                    result = result.withWhitespace(
+                            mergeWhitespace(result.getWhitespace(), suffixAccumulator));
                 }
             }
             return super.visitSpace(result, loc, executionContext);
+        }
+
+        private String mergeWhitespace(String original, String suffix) {
+            final char newline = '\n';
+            final long originalNewlines = original.chars().filter(chr -> chr == newline).count();
+            final long suffixNewlines = suffix.chars().filter(chr -> chr == newline).count();
+            final long maxNewlines = Math.max(originalNewlines, suffixNewlines);
+
+            final int lastNewlineIndex = suffix.lastIndexOf(newline);
+            final String indent;
+            if (lastNewlineIndex >= 0) {
+                indent = suffix.substring(lastNewlineIndex + 1);
+            }
+            else {
+                indent = suffix;
+            }
+
+            return String.valueOf(newline).repeat((int) maxNewlines) + indent;
         }
     }
 }

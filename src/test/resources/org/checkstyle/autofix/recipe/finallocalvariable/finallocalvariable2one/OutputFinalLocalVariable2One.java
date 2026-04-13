@@ -50,6 +50,7 @@ public class OutputFinalLocalVariable2One {
             }
         };
     }
+
     public void method(final int aArg, final int aFinal, int aArg2)
     {
         int z = 0;
