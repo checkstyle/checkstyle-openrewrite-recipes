@@ -1,0 +1,13 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/avoidstarimport/multifile1/InputMultiFile1.java
++++ src/test/resources/org/checkstyle/autofix/recipe/avoidstarimport/multifile1/OutputMultiFile1.java
+@@ -9,8 +9,8 @@
+ 
+ package org.checkstyle.autofix.recipe.avoidstarimport.multifile1;
+ 
+-import java.io.*; // violation 'Using the .* form of import should be avoided'
++import java.io.File;
+ 
+-public class InputMultiFile1 {
++public class OutputMultiFile1 {
+     File file;
+ }

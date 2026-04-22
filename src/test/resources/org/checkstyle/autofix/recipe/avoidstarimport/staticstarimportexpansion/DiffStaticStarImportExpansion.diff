@@ -1,0 +1,16 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/avoidstarimport/staticstarimportexpansion/InputStaticStarImportExpansion.java
++++ src/test/resources/org/checkstyle/autofix/recipe/avoidstarimport/staticstarimportexpansion/OutputStaticStarImportExpansion.java
+@@ -14,10 +14,10 @@
+ import java.util.Calendar;
+ 
+ import static java.lang.Math.*;
+-import static java.util.Collections.*; // violation 'Using the .* form of import should be avoided'
+-import static java.util.Calendar.*; // violation 'Using the .* form of import should be avoided'
++import static java.util.Calendar.getInstance;
++import static java.util.Collections.emptyList;
+ 
+-public class InputStaticStarImportExpansion {
++public class OutputStaticStarImportExpansion {
+     boolean b = emptyList().isEmpty();
+     double d = abs(-1.0);
+     long time = System.currentTimeMillis();

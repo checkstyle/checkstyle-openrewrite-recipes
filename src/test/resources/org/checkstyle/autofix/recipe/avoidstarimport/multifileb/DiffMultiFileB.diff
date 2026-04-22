@@ -1,0 +1,10 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/avoidstarimport/multifileb/InputMultiFileB.java
++++ src/test/resources/org/checkstyle/autofix/recipe/avoidstarimport/multifileb/OutputMultiFileB.java
+@@ -12,6 +12,6 @@
+ 
+ import java.util.concurrent.*;
+ 
+-public class InputMultiFileB {
++public class OutputMultiFileB {
+     java.util.concurrent.TimeUnit unit;
+ }

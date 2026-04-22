@@ -1,0 +1,10 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/avoidstarimport/multifile2/InputMultiFile2.java
++++ src/test/resources/org/checkstyle/autofix/recipe/avoidstarimport/multifile2/OutputMultiFile2.java
+@@ -12,6 +12,6 @@
+ 
+ import java.util.*;
+ 
+-public class InputMultiFile2 {
++public class OutputMultiFile2 {
+     List<String> list = new ArrayList<>();
+ }
