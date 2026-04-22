@@ -1,0 +1,15 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/avoidstarimport/starimportexpansion/InputStarImportExpansion.java
++++ src/test/resources/org/checkstyle/autofix/recipe/avoidstarimport/starimportexpansion/OutputStarImportExpansion.java
+@@ -11,9 +11,10 @@
+ package org.checkstyle.autofix.recipe.avoidstarimport.starimportexpansion;
+ 
+ import java.io.*;
+-import java.util.*; // violation 'Using the .* form of import should be avoided'
++import java.util.ArrayList;
++import java.util.List;
+ 
+-public class InputStarImportExpansion {
++public class OutputStarImportExpansion {
+     List<String> list = new ArrayList<>();
+     File file;
+     Thread thread;

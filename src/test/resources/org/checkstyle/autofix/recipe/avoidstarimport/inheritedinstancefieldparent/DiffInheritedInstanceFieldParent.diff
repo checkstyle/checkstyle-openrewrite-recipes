@@ -1,0 +1,10 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/avoidstarimport/inheritedinstancefieldparent/InputInheritedInstanceFieldParent.java
++++ src/test/resources/org/checkstyle/autofix/recipe/avoidstarimport/inheritedinstancefieldparent/OutputInheritedInstanceFieldParent.java
+@@ -9,6 +9,6 @@
+ 
+ package org.checkstyle.autofix.recipe.avoidstarimport.inheritedinstancefieldparent;
+ 
+-public class InputInheritedInstanceFieldParent {
++public class OutputInheritedInstanceFieldParent {
+     protected int value;
+ }
