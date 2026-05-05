@@ -48,7 +48,7 @@
         <checkstyle.version>13.2.0</checkstyle.version>
 
         <!-- Pitest properties -->
-        <pitest.version>1.22.0</pitest.version>
+        <pitest.version>1.23.1</pitest.version>
         <pitest.junit5.version>1.2.3</pitest.junit5.version>
     </properties>
 
