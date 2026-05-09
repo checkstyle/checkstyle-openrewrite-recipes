@@ -22,8 +22,11 @@ jobs:
 
       - name: Install Groovy
         run: |
-          sudo apt-get update
-          sudo apt-get install -y groovy
+          curl --fail-with-body -s "https://get.sdkman.io" | bash
+          source "$HOME/.sdkman/bin/sdkman-init.sh"
+          sdk install groovy
+          echo "$HOME/.sdkman/candidates/groovy/current/bin" >> "$GITHUB_PATH"
+          groovy --version
 
       - name: Setup Maven cache
         uses: actions/cache@v4
