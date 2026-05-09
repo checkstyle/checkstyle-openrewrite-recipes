@@ -21,6 +21,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 import org.checkstyle.autofix.PositionHelper;
@@ -84,7 +85,7 @@ public class FinalLocalVariable extends Recipe {
         @Override
         public J.CompilationUnit visitCompilationUnit(J.CompilationUnit cu,
                                                       ExecutionContext executionContext) {
-            this.sourcePath = cu.getSourcePath().toAbsolutePath();
+            this.sourcePath = cu.getSourcePath();
             this.currentCompilationUnit = cu;
             return super.visitCompilationUnit(cu, executionContext);
         }
@@ -98,8 +99,7 @@ public class FinalLocalVariable extends Recipe {
             final J.VariableDeclarations declarations = super
                     .visitVariableDeclarations(multiVariable, executionContext);
 
-            if (!(getCursor().getParentTreeCursor().getValue() instanceof J.ClassDeclaration)
-                    && !declarations.hasModifier(J.Modifier.Type.Final)) {
+            if (!declarations.hasModifier(J.Modifier.Type.Final)) {
 
                 final List<J.VariableDeclarations.NamedVariable> variables = declarations
                         .getVariables();
@@ -108,7 +108,7 @@ public class FinalLocalVariable extends Recipe {
                     if (isAtViolationLocation(variable)) {
                         marked.add(variable.withMarkers(
                                 variable.getMarkers().add(
-                                        new FinalLocalVariableMarker(UUID.randomUUID()))));
+                                        new FinalLocalVariableMarker(Tree.randomId()))));
                     }
                     else {
                         marked.add(variable);
@@ -130,10 +130,9 @@ public class FinalLocalVariable extends Recipe {
                     .computeColumnPosition(currentCompilationUnit, variable, getCursor());
 
             return violations.removeIf(violation -> {
-                final Path absolutePath = violation.getFilePath().toAbsolutePath();
                 return violation.getLine() == line
                         && violation.getColumn() == column
-                        && absolutePath.endsWith(sourcePath)
+                        && Objects.equals(violation.getFilePath(), sourcePath)
                         && violation.getMessage().contains(variable.getSimpleName());
             });
         }
@@ -158,9 +157,7 @@ public class FinalLocalVariable extends Recipe {
             J.VariableDeclarations declarations = super.visitVariableDeclarations(multiVariable,
                     executionContext);
 
-            if (!(getCursor().getParentTreeCursor().getValue() instanceof J.ClassDeclaration)
-                    && declarations.getVariables().size() == 1
-                    && declarations.getTypeExpression() != null
+            if (declarations.getVariables().size() == 1
                     && !declarations.hasModifier(J.Modifier.Type.Final)) {
                 final J.VariableDeclarations.NamedVariable variable = declarations
                         .getVariables().get(0);
@@ -178,8 +175,10 @@ public class FinalLocalVariable extends Recipe {
             final List<Statement> newStatements = new ArrayList<>();
 
             for (Statement stmt : visited.getStatements()) {
-                if (isVariableDeclaration(stmt)) {
-                    handleMultiVariableDeclaration((J.VariableDeclarations) stmt, newStatements);
+                if (stmt instanceof J.VariableDeclarations varDecl
+                        && varDecl.getVariables().size() > 1
+                        && !varDecl.hasModifier(J.Modifier.Type.Final)) {
+                    handleMultiVariableDeclaration(varDecl, newStatements);
                 }
                 else {
                     newStatements.add(stmt);
@@ -199,7 +198,7 @@ public class FinalLocalVariable extends Recipe {
                     violationsList.add(variable.withPrefix(Space.SINGLE_SPACE));
                 }
                 else {
-                    nonViolations.add(variable.withPrefix(Space.SINGLE_SPACE));
+                    nonViolations.add(variable);
                 }
             }
             if (violationsList.isEmpty()) {
@@ -223,19 +222,8 @@ public class FinalLocalVariable extends Recipe {
             modifiers.add(new J.Modifier(Tree.randomId(), finalPrefix,
                     Markers.EMPTY, null, J.Modifier.Type.Final, new ArrayList<>()));
 
-            modifiers.addAll(varDecl.getModifiers());
-
             return varDecl.withModifiers(modifiers)
                     .withTypeExpression(varDecl.getTypeExpression().withPrefix(Space.SINGLE_SPACE));
-        }
-
-        private boolean isVariableDeclaration(Statement stmt) {
-            return stmt instanceof J.VariableDeclarations varDecl
-                    && varDecl.getVariables().size() > 1
-                    && !varDecl.hasModifier(J.Modifier.Type.Final)
-                    && varDecl.getTypeExpression() != null
-                    && !(getCursor().getParentTreeCursor()
-                    .getValue() instanceof J.ClassDeclaration);
         }
     }
 

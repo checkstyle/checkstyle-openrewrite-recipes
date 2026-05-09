@@ -191,33 +191,6 @@
 
   <mutation unstable="false">
     <sourceFile>FinalLocalVariable.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.FinalLocalVariable</mutatedClass>
-    <mutatedMethod>getDescription</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.EmptyObjectReturnValsMutator</mutator>
-    <description>replaced return value with &quot;&quot; for org/checkstyle/autofix/recipe/FinalLocalVariable::getDescription</description>
-    <lineContent>return &quot;Adds &apos;final&apos; modifier to local variables that never have their values changed.&quot;;</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>FinalLocalVariable.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.FinalLocalVariable</mutatedClass>
-    <mutatedMethod>getDisplayName</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.EmptyObjectReturnValsMutator</mutator>
-    <description>replaced return value with &quot;&quot; for org/checkstyle/autofix/recipe/FinalLocalVariable::getDisplayName</description>
-    <lineContent>return &quot;FinalLocalVariable recipe&quot;;</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>FinalLocalVariable.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.FinalLocalVariable$FinalLocalVariableMarker</mutatedClass>
-    <mutatedMethod>&lt;init&gt;</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.MemberVariableMutator</mutator>
-    <description>Removed assignment to member variable id</description>
-    <lineContent>this.id = uuid;</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>FinalLocalVariable.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.recipe.FinalLocalVariable$FinalLocalVariableMarker</mutatedClass>
     <mutatedMethod>getId</mutatedMethod>
     <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.NullReturnValsMutator</mutator>
@@ -232,15 +205,6 @@
     <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.NullReturnValsMutator</mutator>
     <description>replaced return value with null for org/checkstyle/autofix/recipe/FinalLocalVariable$FinalLocalVariableMarker::withId</description>
     <lineContent>return (M) new FinalLocalVariableMarker(uuid);</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>FinalLocalVariable.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.FinalLocalVariable$LocalVariableVisitor</mutatedClass>
-    <mutatedMethod>addFinalModifier</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
-    <description>removed call to java/util/List::addAll</description>
-    <lineContent>modifiers.addAll(varDecl.getModifiers());</lineContent>
   </mutation>
 
   <mutation unstable="false">
@@ -263,35 +227,17 @@
 
   <mutation unstable="false">
     <sourceFile>FinalLocalVariable.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.FinalLocalVariable$LocalVariableVisitor</mutatedClass>
-    <mutatedMethod>handleMultiVariableDeclaration</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.NakedReceiverMutator</mutator>
-    <description>replaced call to org/openrewrite/java/tree/J$VariableDeclarations$NamedVariable::withPrefix with receiver</description>
-    <lineContent>nonViolations.add(variable.withPrefix(Space.SINGLE_SPACE));</lineContent>
+    <mutatedClass>org.checkstyle.autofix.recipe.FinalLocalVariable$FinalLocalVariableMarker</mutatedClass>
+    <mutatedMethod>&lt;init&gt;</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.MemberVariableMutator</mutator>
+    <description>Removed assignment to member variable id</description>
+    <lineContent>this.id = uuid;</lineContent>
   </mutation>
 
   <mutation unstable="false">
     <sourceFile>FinalLocalVariable.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.recipe.FinalLocalVariable$LocalVariableVisitor</mutatedClass>
-    <mutatedMethod>isVariableDeclaration</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.NakedReceiverMutator</mutator>
-    <description>replaced call to org/openrewrite/Cursor::getParentTreeCursor with receiver</description>
-    <lineContent>&amp;&amp; !(getCursor().getParentTreeCursor()</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>FinalLocalVariable.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.FinalLocalVariable$LocalVariableVisitor</mutatedClass>
-    <mutatedMethod>isVariableDeclaration</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
-    <description>removed conditional - replaced equality check with true</description>
-    <lineContent>&amp;&amp; varDecl.getTypeExpression() != null</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>FinalLocalVariable.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.FinalLocalVariable$LocalVariableVisitor</mutatedClass>
-    <mutatedMethod>isVariableDeclaration</mutatedMethod>
+    <mutatedMethod>visitBlock</mutatedMethod>
     <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_ORDER_IF</mutator>
     <description>removed conditional - replaced comparison check with true</description>
     <lineContent>&amp;&amp; varDecl.getVariables().size() &gt; 1</lineContent>
@@ -299,119 +245,11 @@
 
   <mutation unstable="false">
     <sourceFile>FinalLocalVariable.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.FinalLocalVariable$LocalVariableVisitor</mutatedClass>
-    <mutatedMethod>isVariableDeclaration</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
-    <description>removed call to org/openrewrite/Cursor::getValue</description>
-    <lineContent>.getValue() instanceof J.ClassDeclaration);</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>FinalLocalVariable.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.FinalLocalVariable$LocalVariableVisitor</mutatedClass>
-    <mutatedMethod>isVariableDeclaration</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
-    <description>removed conditional - replaced equality check with true</description>
-    <lineContent>.getValue() instanceof J.ClassDeclaration);</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>FinalLocalVariable.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.FinalLocalVariable$LocalVariableVisitor</mutatedClass>
-    <mutatedMethod>visitVariableDeclarations</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
-    <description>removed conditional - replaced equality check with true</description>
-    <lineContent>&amp;&amp; declarations.getTypeExpression() != null</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>FinalLocalVariable.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.FinalLocalVariable$LocalVariableVisitor</mutatedClass>
-    <mutatedMethod>visitVariableDeclarations</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
-    <description>removed call to org/openrewrite/Cursor::getValue</description>
-    <lineContent>if (!(getCursor().getParentTreeCursor().getValue() instanceof J.ClassDeclaration)</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>FinalLocalVariable.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.FinalLocalVariable$LocalVariableVisitor</mutatedClass>
-    <mutatedMethod>visitVariableDeclarations</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
-    <description>removed conditional - replaced equality check with true</description>
-    <lineContent>if (!(getCursor().getParentTreeCursor().getValue() instanceof J.ClassDeclaration)</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>FinalLocalVariable.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.FinalLocalVariable$LocalVariableVisitor</mutatedClass>
-    <mutatedMethod>visitVariableDeclarations</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.NakedReceiverMutator</mutator>
-    <description>replaced call to org/openrewrite/Cursor::getParentTreeCursor with receiver</description>
-    <lineContent>if (!(getCursor().getParentTreeCursor().getValue() instanceof J.ClassDeclaration)</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>FinalLocalVariable.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.FinalLocalVariable$MarkViolationVisitor</mutatedClass>
-    <mutatedMethod>lambda$isAtViolationLocation$0</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
-    <description>removed conditional - replaced equality check with true</description>
-    <lineContent>&amp;&amp; absolutePath.endsWith(sourcePath)</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>FinalLocalVariable.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.FinalLocalVariable$MarkViolationVisitor</mutatedClass>
-    <mutatedMethod>lambda$isAtViolationLocation$0</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.NakedReceiverMutator</mutator>
-    <description>replaced call to java/nio/file/Path::toAbsolutePath with receiver</description>
-    <lineContent>final Path absolutePath = violation.getFilePath().toAbsolutePath();</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>FinalLocalVariable.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.FinalLocalVariable$MarkViolationVisitor</mutatedClass>
-    <mutatedMethod>visitCompilationUnit</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.NakedReceiverMutator</mutator>
-    <description>replaced call to java/nio/file/Path::toAbsolutePath with receiver</description>
-    <lineContent>this.sourcePath = cu.getSourcePath().toAbsolutePath();</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>FinalLocalVariable.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.recipe.FinalLocalVariable$MarkViolationVisitor</mutatedClass>
     <mutatedMethod>visitVariableDeclarations</mutatedMethod>
     <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
-    <description>removed call to org/openrewrite/Cursor::getValue</description>
-    <lineContent>if (!(getCursor().getParentTreeCursor().getValue() instanceof J.ClassDeclaration)</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>FinalLocalVariable.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.FinalLocalVariable$MarkViolationVisitor</mutatedClass>
-    <mutatedMethod>visitVariableDeclarations</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
-    <description>removed conditional - replaced equality check with true</description>
-    <lineContent>if (!(getCursor().getParentTreeCursor().getValue() instanceof J.ClassDeclaration)</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>FinalLocalVariable.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.FinalLocalVariable$MarkViolationVisitor</mutatedClass>
-    <mutatedMethod>visitVariableDeclarations</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.NakedReceiverMutator</mutator>
-    <description>replaced call to org/openrewrite/Cursor::getParentTreeCursor with receiver</description>
-    <lineContent>if (!(getCursor().getParentTreeCursor().getValue() instanceof J.ClassDeclaration)</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>FinalLocalVariable.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.FinalLocalVariable$MarkViolationVisitor</mutatedClass>
-    <mutatedMethod>visitVariableDeclarations</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
-    <description>removed call to java/util/UUID::randomUUID</description>
-    <lineContent>new FinalLocalVariableMarker(UUID.randomUUID()))));</lineContent>
+    <description>removed call to org/openrewrite/Tree::randomId</description>
+    <lineContent>new FinalLocalVariableMarker(Tree.randomId()))));</lineContent>
   </mutation>
 
   <mutation unstable="false">

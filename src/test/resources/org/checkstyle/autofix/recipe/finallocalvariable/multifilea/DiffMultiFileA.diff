@@ -1,0 +1,13 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/multifilea/InputMultiFileA.java
++++ src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/multifilea/OutputMultiFileA.java
+@@ -8,8 +8,8 @@
+ 
+ package org.checkstyle.autofix.recipe.finallocalvariable.multifilea;
+ 
+-public class InputMultiFileA {
++public class OutputMultiFileA {
+     public void test() {
+-        int a = 1; // violation, "should be declared final"
++        final int a = 1;
+     }
+ }
