@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suppressedMutations>
-
   <mutation unstable="false">
     <sourceFile>CheckConfiguration.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.parser.CheckConfiguration</mutatedClass>

@@ -1,7 +1,10 @@
 import groovy.io.FileType
 import groovy.transform.EqualsAndHashCode
 import groovy.transform.Immutable
+import groovy.xml.XmlParser
+import groovy.xml.XmlSlurper
 import groovy.xml.XmlUtil
+import groovy.xml.slurpersupport.GPathResult
 
 int exitCode = checkPitestReport()
 System.exit(exitCode)
@@ -49,7 +52,7 @@ private static int checkPitestReport() {
     else {
         final StringBuilder suppressionFileContent = new StringBuilder(1024)
         suppressionFileContent.append(
-                '<?xml version="1.0" encoding="UTF-8"?>\n<suppressedMutations>\n')
+                '<?xml version="1.0" encoding="UTF-8"?>\n<suppressedMutations>')
 
         survivingMutations.each {
             suppressionFileContent.append(it.toXmlString())
@@ -78,7 +81,7 @@ private static Set<Mutation> getSurvivingMutations(Node mainNode) {
     final Set<Mutation> survivingMutations = new TreeSet<>()
 
     children.each { node ->
-        final Node mutationNode = node as Node
+        final Node mutationNode = node
 
         final String mutationStatus = mutationNode.attribute("status")
 
@@ -101,7 +104,7 @@ private static Set<Mutation> getSuppressedMutations(Node mainNode) {
     final Set<Mutation> suppressedMutations = new TreeSet<>()
 
     children.each { node ->
-        final Node mutationNode = node as Node
+        final Node mutationNode = node
         suppressedMutations.add(getMutation(mutationNode))
     }
     return suppressedMutations
@@ -115,7 +118,7 @@ private static Set<Mutation> getSuppressedMutations(Node mainNode) {
  * @return {@link Mutation} object represented by the {@code mutation} XML node
  */
 private static Mutation getMutation(Node mutationNode) {
-    final List childNodes = mutationNode.children()
+    final List<Node> childNodes = mutationNode.children()
 
     String sourceFile = null
     String mutatedClass = null
@@ -126,7 +129,7 @@ private static Mutation getMutation(Node mutationNode) {
     String mutationClassPackage = null
     int lineNumber = 0
     childNodes.each {
-        final Node childNode = it as Node
+        final Node childNode = it
         final String text = childNode.name()
 
         final String childNodeText = XmlUtil.escapeXml(childNode.text())
