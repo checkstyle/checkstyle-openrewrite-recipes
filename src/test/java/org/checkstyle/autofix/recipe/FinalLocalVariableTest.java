@@ -17,9 +17,40 @@
 
 package org.checkstyle.autofix.recipe;
 
+import static com.google.common.truth.Truth.assertWithMessage;
+
+import java.util.List;
+
 import org.checkstyle.autofix.parser.ReportParser;
+import org.junit.jupiter.api.Test;
 
 public class FinalLocalVariableTest extends AbstractRecipeTestSupport {
+
+    @Test
+    public void checkDisplayName() {
+        final FinalLocalVariable recipe =
+                new FinalLocalVariable(List.of());
+
+        final String expectedDisplayName =
+                "FinalLocalVariable recipe";
+
+        assertWithMessage("Invalid display name")
+                .that(recipe.getDisplayName())
+                .isEqualTo(expectedDisplayName);
+    }
+
+    @Test
+    public void checkDescription() {
+        final FinalLocalVariable recipe =
+                new FinalLocalVariable(List.of());
+
+        final String expectedDescription =
+                "Adds 'final' modifier to local variables that never have their values changed.";
+
+        assertWithMessage("Invalid description")
+                .that(recipe.getDescription())
+                .isEqualTo(expectedDescription);
+    }
 
     @Override
     protected String getSubpackage() {
@@ -114,6 +145,16 @@ public class FinalLocalVariableTest extends AbstractRecipeTestSupport {
     @RecipeTest
     void localVariableCheckSwitchAssignment(ReportParser parser) throws Exception {
         verify(parser, "LocalVariableCheckSwitchAssignment");
+    }
+
+    @RecipeTest
+    void multiVarNoViolation(ReportParser parser) throws Exception {
+        verify(parser, "MultiVarNoVio");
+    }
+
+    @RecipeTest
+    void multiFileTest(ReportParser parser) throws Exception {
+        verify(parser, "MultiFileA", "MultiFileB");
     }
 
 }

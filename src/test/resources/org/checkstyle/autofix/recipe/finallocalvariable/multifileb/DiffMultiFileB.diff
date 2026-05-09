@@ -1,0 +1,11 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/multifileb/InputMultiFileB.java
++++ src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/multifileb/OutputMultiFileB.java
+@@ -8,7 +8,7 @@
+ 
+ package org.checkstyle.autofix.recipe.finallocalvariable.multifileb;
+ 
+-public class InputMultiFileB {
++public class OutputMultiFileB {
+     public void test() {
+         int a = 1;
+         a = 2;

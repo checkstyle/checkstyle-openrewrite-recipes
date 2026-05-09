@@ -1,0 +1,11 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/multivarnovio/InputMultiVarNoVio.java
++++ src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/multivarnovio/OutputMultiVarNoVio.java
+@@ -8,7 +8,7 @@
+ 
+ package org.checkstyle.autofix.recipe.finallocalvariable.multivarnovio;
+ 
+-public class InputMultiVarNoVio {
++public class OutputMultiVarNoVio {
+ 
+     public void method() {
+ 
