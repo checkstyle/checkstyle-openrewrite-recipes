@@ -20,13 +20,11 @@ package org.checkstyle.autofix.recipe;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.UnaryOperator;
 
 import org.checkstyle.autofix.parser.CheckConfiguration;
 import org.checkstyle.autofix.parser.CheckstyleViolation;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
-import org.openrewrite.Tree;
 import org.openrewrite.TreeVisitor;
 import org.openrewrite.java.JavaIsoVisitor;
 import org.openrewrite.java.format.AutodetectGeneralFormatStyle;
@@ -41,6 +39,10 @@ public class NewlineAtEndOfFile extends Recipe {
 
     private final List<CheckstyleViolation> violations;
     private final CheckConfiguration config;
+
+    public NewlineAtEndOfFile(List<CheckstyleViolation> violations) {
+        this(violations, null);
+    }
 
     public NewlineAtEndOfFile(List<CheckstyleViolation> violations, CheckConfiguration config) {
         this.violations = violations;
@@ -74,32 +76,41 @@ public class NewlineAtEndOfFile extends Recipe {
         }
 
         @Override
-        public J visit(Tree tree, ExecutionContext executionContext) {
-            J result = (J) tree;
+        public J.CompilationUnit visitCompilationUnit(
+                J.CompilationUnit compUnit, ExecutionContext executionContext) {
+            J.CompilationUnit result = super.visitCompilationUnit(compUnit, executionContext);
 
-            if (tree instanceof JavaSourceFile sourceFile) {
+            final Path filePath = compUnit.getSourcePath();
 
-                final Path filePath = sourceFile.getSourcePath().toAbsolutePath();
-
-                if (hasViolation(filePath)) {
-                    final String expectedLineEnding = determineLineEnding(sourceFile);
-
-                    final Space eof = sourceFile.getEof();
-                    final String lastWhitespace = eof.getLastWhitespace();
-
-                    if (!expectedLineEnding.equals(lastWhitespace)) {
-                        final List<Comment> comments = eof.getComments();
-                        if (comments.isEmpty()) {
-                            result = sourceFile.withEof(Space.format(expectedLineEnding));
-                        }
-                        else {
-                            result = sourceFile.withEof(sourceFile.getEof().withComments(mapLast(
-                                    comments, comment -> comment.withSuffix(expectedLineEnding))));
-                        }
-                    }
-                }
+            if (hasViolation(filePath)) {
+                final String expectedLineEnding = determineLineEnding(result);
+                result = result.withEof(
+                        buildNewEof(result.getEof(), expectedLineEnding));
             }
 
+            return result;
+        }
+
+        private static Space buildNewEof(Space eof,
+                String expectedLineEnding) {
+            final Space result;
+            final List<Comment> comments = eof.getComments();
+            if (comments.isEmpty()) {
+                result = eof.withWhitespace(expectedLineEnding);
+            }
+            else {
+                final int lastIndex = comments.size() - 1;
+                final Comment last = comments.get(lastIndex);
+                final Comment newLast = last.withSuffix(expectedLineEnding);
+                if (last == newLast) {
+                    result = eof;
+                }
+                else {
+                    final List<Comment> updated = new ArrayList<>(comments);
+                    updated.set(lastIndex, newLast);
+                    result = eof.withComments(updated);
+                }
+            }
             return result;
         }
 
@@ -123,24 +134,6 @@ public class NewlineAtEndOfFile extends Recipe {
                                 .autodetectGeneralFormatStyle(sourceFile);
                     });
             return generalFormatStyle.newLine();
-        }
-
-        private static List<Comment> mapLast(List<Comment> comments,
-                                             UnaryOperator<Comment> mapper) {
-            List<Comment> result = comments;
-
-            if (comments != null && !comments.isEmpty()) {
-                final int lastIndex = comments.size() - 1;
-                final Comment last = comments.get(lastIndex);
-                final Comment newLast = mapper.apply(last);
-
-                if (last != newLast) {
-                    result = new ArrayList<>(comments);
-                    result.set(lastIndex, newLast);
-                }
-            }
-
-            return result;
         }
 
         private boolean hasViolation(Path filePath) {

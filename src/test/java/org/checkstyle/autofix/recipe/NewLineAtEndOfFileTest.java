@@ -17,12 +17,45 @@
 
 package org.checkstyle.autofix.recipe;
 
+import static com.google.common.truth.Truth.assertWithMessage;
+
+import java.util.List;
+
 import org.checkstyle.autofix.parser.ReportParser;
+import org.junit.jupiter.api.Test;
 
 public class NewLineAtEndOfFileTest extends AbstractRecipeTestSupport {
     @Override
     protected String getSubpackage() {
         return "newlineatendoffile";
+    }
+
+    @Test
+    public void checkDisplayName() {
+        final NewlineAtEndOfFile recipe = new NewlineAtEndOfFile(List.of());
+
+        final String expectedDisplayName = "End files with a single newline";
+
+        assertWithMessage("Invalid display name")
+                .that(recipe.getDisplayName())
+                .isEqualTo(expectedDisplayName);
+    }
+
+    @Test
+    public void checkDescription() {
+        final NewlineAtEndOfFile recipe = new NewlineAtEndOfFile(List.of());
+
+        final String expectedDescription =
+                "Some tools work better when files end with an empty line.";
+
+        assertWithMessage("Invalid description")
+                .that(recipe.getDescription())
+                .isEqualTo(expectedDescription);
+    }
+
+    @RecipeTest
+    void newLineCr(ReportParser parser) throws Exception {
+        verify(parser, "NewlineAtEndOfFileCr");
     }
 
     @RecipeTest
