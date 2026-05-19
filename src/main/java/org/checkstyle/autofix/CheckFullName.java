@@ -21,6 +21,8 @@ import java.util.Arrays;
 import java.util.Optional;
 
 public enum CheckFullName {
+    ANNOTATION_LOCATION(
+            "com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationLocationCheck"),
     EMPTY_STATEMENT("com.puppycrawl.tools.checkstyle.checks.coding.EmptyStatementCheck"),
     FINAL_CLASS("com.puppycrawl.tools.checkstyle.checks.design.FinalClassCheck"),
     FINAL_LOCAL_VARIABLE("com.puppycrawl.tools.checkstyle.checks.coding.FinalLocalVariableCheck"),

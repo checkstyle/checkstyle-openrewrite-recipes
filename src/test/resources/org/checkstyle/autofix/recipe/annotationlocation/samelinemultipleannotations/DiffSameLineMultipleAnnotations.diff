@@ -1,0 +1,15 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/annotationlocation/samelinemultipleannotations/InputSameLineMultipleAnnotations.java
++++ src/test/resources/org/checkstyle/autofix/recipe/annotationlocation/samelinemultipleannotations/OutputSameLineMultipleAnnotations.java
+@@ -8,8 +8,10 @@
+ 
+ package org.checkstyle.autofix.recipe.annotationlocation.samelinemultipleannotations;
+ 
+-public class InputSameLineMultipleAnnotations {
+-    @Deprecated @Override public int hashCode() { // violation 'Annotation 'Override' should be alone on line.'
++public class OutputSameLineMultipleAnnotations {
++    @Deprecated
++    @Override
++    public int hashCode() {
+         return 1;
+     }
+ }

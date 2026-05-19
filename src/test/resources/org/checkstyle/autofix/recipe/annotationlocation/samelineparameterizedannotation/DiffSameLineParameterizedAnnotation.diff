@@ -1,0 +1,12 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/annotationlocation/samelineparameterizedannotation/InputSameLineParameterizedAnnotation.java
++++ src/test/resources/org/checkstyle/autofix/recipe/annotationlocation/samelineparameterizedannotation/OutputSameLineParameterizedAnnotation.java
+@@ -8,6 +8,7 @@
+ 
+ package org.checkstyle.autofix.recipe.annotationlocation.samelineparameterizedannotation;
+ 
+-public class InputSameLineParameterizedAnnotation {
+-    @Deprecated(since = "1.0") Object loader; // violation 'Annotation 'Deprecated' should be alone on line.'
++public class OutputSameLineParameterizedAnnotation {
++    @Deprecated(since = "1.0")
++    Object loader;
+ }

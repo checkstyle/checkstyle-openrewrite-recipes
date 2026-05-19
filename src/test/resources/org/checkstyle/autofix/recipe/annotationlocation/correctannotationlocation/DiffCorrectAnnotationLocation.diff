@@ -1,0 +1,11 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/annotationlocation/correctannotationlocation/InputCorrectAnnotationLocation.java
++++ src/test/resources/org/checkstyle/autofix/recipe/annotationlocation/correctannotationlocation/OutputCorrectAnnotationLocation.java
+@@ -8,7 +8,7 @@
+ 
+ package org.checkstyle.autofix.recipe.annotationlocation.correctannotationlocation;
+ 
+-public class InputCorrectAnnotationLocation {
++public class OutputCorrectAnnotationLocation {
+     @Deprecated
+     private boolean field1; // ok
+ 

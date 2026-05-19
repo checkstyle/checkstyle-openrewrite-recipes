@@ -1,0 +1,10 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/annotationlocation/classannotation/InputClassAnnotation.java
++++ src/test/resources/org/checkstyle/autofix/recipe/annotationlocation/classannotation/OutputClassAnnotation.java
+@@ -8,5 +8,6 @@
+ 
+ package org.checkstyle.autofix.recipe.annotationlocation.classannotation;
+ 
+-@Deprecated(since = "1.0") class InputClassAnnotation { // violation 'Annotation 'Deprecated' should be alone on line.'
++@Deprecated(since = "1.0")
++class OutputClassAnnotation {
+ }

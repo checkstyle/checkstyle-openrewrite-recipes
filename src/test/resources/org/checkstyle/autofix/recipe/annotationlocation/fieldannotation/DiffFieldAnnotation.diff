@@ -1,0 +1,12 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/annotationlocation/fieldannotation/InputFieldAnnotation.java
++++ src/test/resources/org/checkstyle/autofix/recipe/annotationlocation/fieldannotation/OutputFieldAnnotation.java
+@@ -8,6 +8,7 @@
+ 
+ package org.checkstyle.autofix.recipe.annotationlocation.fieldannotation;
+ 
+-public class InputFieldAnnotation {
+-    @Deprecated(since = "1.0") private boolean field; // violation 'Annotation 'Deprecated' should be alone on line.'
++public class OutputFieldAnnotation {
++    @Deprecated(since = "1.0")
++    private boolean field;
+ }

@@ -76,7 +76,7 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 
 | Status | Check                                                                                                                        | Recipe           | Coverage Notes |
 |--------|------------------------------------------------------------------------------------------------------------------------------|------------------|----------------|
-| 🟢     | [`AnnotationLocation`](https://checkstyle.sourceforge.io/checks/annotation/annotationlocation.html#AnnotationLocation)       | `TBD`            |                |
+| 🟢     | [`AnnotationLocation`](https://checkstyle.sourceforge.io/checks/annotation/annotationlocation.html#AnnotationLocation)       | [`AnnotationLocation`](https://github.com/checkstyle/checkstyle-openrewrite-recipes/blob/main/src/main/java/org/checkstyle/autofix/recipe/AnnotationLocation.java)            |                |
 | 🟢     | [`AnnotationOnSameLine`](https://checkstyle.sourceforge.io/checks/annotation/annotationonsameline.html#AnnotationOnSameLine) | `TBD`            |                |
 | 🔴     | [`AnnotationUseStyle`](https://checkstyle.sourceforge.io/checks/annotation/annotationusestyle.html#AnnotationUseStyle)       |            | Standardize annotation syntax |
 | 🟢     | [`MissingDeprecated`](https://checkstyle.sourceforge.io/checks/annotation/missingdeprecated.html#MissingDeprecated)         | `TBD`            |                |
