@@ -45,6 +45,8 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.InMemoryExecutionContext;
 import org.openrewrite.Recipe;
+import org.openrewrite.RecipeRun;
+import org.openrewrite.Result;
 import org.openrewrite.java.JavaIsoVisitor;
 import org.openrewrite.java.tree.J;
 import org.openrewrite.test.RewriteTest;
@@ -270,13 +272,13 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
                 sources.toArray(SourceSpecs[]::new));
     }
 
-    private void validateRecipeRun(org.openrewrite.RecipeRun run) {
+    private void validateRecipeRun(RecipeRun run) {
         run.getChangeset()
                 .getAllResults()
                 .forEach(this::validateResult);
     }
 
-    private void validateResult(org.openrewrite.Result result) {
+    private void validateResult(Result result) {
         if (result.getAfter() instanceof J tree) {
             assertAllNodesHaveId(tree);
         }
