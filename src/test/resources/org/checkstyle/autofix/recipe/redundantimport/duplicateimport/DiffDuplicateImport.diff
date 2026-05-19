@@ -11,6 +11,4 @@
  import java.util.Set;
  
 -public class InputDuplicateImport {}
-\ No newline at end of file
 +public class OutputDuplicateImport {}
-\ No newline at end of file

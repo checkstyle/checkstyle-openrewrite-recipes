@@ -19,6 +19,8 @@ package org.checkstyle.autofix.recipe;
 
 import static com.google.common.truth.Truth.assertWithMessage;
 
+import java.util.Collections;
+
 import org.checkstyle.autofix.parser.ReportParser;
 import org.junit.jupiter.api.Test;
 
@@ -31,7 +33,7 @@ public class FinalClassTest extends AbstractRecipeTestSupport {
 
     @Test
     public void checkDisplayName() {
-        final FinalClass recipe = new FinalClass(java.util.Collections.emptyList());
+        final FinalClass recipe = new FinalClass(Collections.emptyList());
         final String expectedDisplayName = "FinalClass recipe";
 
         assertWithMessage("Invalid display name")
@@ -41,7 +43,7 @@ public class FinalClassTest extends AbstractRecipeTestSupport {
 
     @Test
     public void checkDescription() {
-        final FinalClass recipe = new FinalClass(java.util.Collections.emptyList());
+        final FinalClass recipe = new FinalClass(Collections.emptyList());
         final String expectedDescription =
                 "Add 'final' modifier to classes that have only private constructors.";
 

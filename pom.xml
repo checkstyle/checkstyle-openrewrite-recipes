@@ -234,6 +234,7 @@
                         <recipe>org.checkstyle.recipes.JavaRecipeBestPractices</recipe>
                         <recipe>org.checkstyle.recipes.RecipeTestingBestPracticesSubset</recipe>
                         <recipe>CheckstyleAutoFixConfigured</recipe>
+                        <recipe>org.openrewrite.java.ShortenFullyQualifiedTypeReferences</recipe>
                     </activeRecipes>
                     <exclusions>
                         <exclusion>src/test/resources/**</exclusion>

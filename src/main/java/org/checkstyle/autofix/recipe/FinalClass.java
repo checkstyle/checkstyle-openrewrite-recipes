@@ -25,6 +25,7 @@ import org.checkstyle.autofix.PositionHelper;
 import org.checkstyle.autofix.parser.CheckstyleViolation;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
+import org.openrewrite.Tree;
 import org.openrewrite.TreeVisitor;
 import org.openrewrite.java.JavaIsoVisitor;
 import org.openrewrite.java.tree.J;
@@ -108,7 +109,7 @@ public class FinalClass extends Recipe {
             modifiers.add(
                     insertPosition,
                     new J.Modifier(
-                            org.openrewrite.Tree.randomId(),
+                            Tree.randomId(),
                             prefixForFinal,
                             Markers.EMPTY,
                             null,
