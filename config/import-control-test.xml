@@ -5,6 +5,7 @@
 
 <import-control pkg="org.checkstyle.autofix">
     <allow pkg="org.junit"/>
+    <disallow pkg="org.openrewrite.internal"/>
     <allow pkg="org.openrewrite"/>
     <allow pkg="org.checkstyle"/>
     <allow pkg="java.io"/>

@@ -30,4 +30,8 @@
     <suppress checks="CyclomaticComplexity" files="[\\/]src[\\/]main[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]UseEnhancedSwitch\.java"/>
     <suppress checks="MethodCount" files="[\\/]src[\\/]main[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]UseEnhancedSwitch\.java"/>
     <suppress checks="ClassDataAbstractionCoupling" files="[\\/]src[\\/]main[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]UseEnhancedSwitch\.java"/>
+
+    <!-- Until https://github.com/checkstyle/checkstyle-openrewrite-recipes/issues/198 -->
+    <suppress checks="ImportControlCheck" files="[\\/]src[\\/]main[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]PositionHelper\.java"/>
+    <suppress checks="ImportControlCheck" files="[\\/]src[\\/]main[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]UseEnhancedSwitch\.java"/>
 </suppressions>
