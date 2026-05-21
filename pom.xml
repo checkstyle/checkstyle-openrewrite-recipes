@@ -286,7 +286,7 @@
 
     <profiles>
         <profile>
-            <id>pitest</id>
+            <id>pitest-coding-1</id>
             <build>
                 <plugins>
                     <plugin>
@@ -302,10 +302,101 @@
                         </dependencies>
                         <configuration>
                             <targetClasses>
-                                <param>org.checkstyle.*</param>
+                                <param>org.checkstyle.autofix.CheckFullName*</param>
+                                <param>org.checkstyle.autofix.CheckstyleAutoFix*</param>
+                                <param>org.checkstyle.autofix.CheckstyleCheck*</param>
+                                <param>org.checkstyle.autofix.CheckstyleRecipeRegistry*</param>
+                                <param>org.checkstyle.autofix.PositionHelper*</param>
+                                <param>org.checkstyle.autofix.parser.*</param>
+                                <param>org.checkstyle.autofix.recipe.EmptyStatement*</param>
+                                <param>org.checkstyle.autofix.recipe.FinalClass*</param>
+                                <param>org.checkstyle.autofix.recipe.FinalLocalVariable*</param>
+                                <param>org.checkstyle.autofix.recipe.Header*</param>
+                                <param>org.checkstyle.autofix.recipe.HexLiteralCase*</param>
+                                <param>org.checkstyle.autofix.recipe.MissingOverride*</param>
                             </targetClasses>
                             <targetTests>
-                                <param>org.checkstyle.*</param>
+                                <param>org.checkstyle.autofix.parser.*</param>
+                                <param>org.checkstyle.autofix.recipe.EmptyStatementTest</param>
+                                <param>org.checkstyle.autofix.recipe.FinalClassTest</param>
+                                <param>org.checkstyle.autofix.recipe.FinalLocalVariableTest</param>
+                                <param>org.checkstyle.autofix.recipe.HeaderTest</param>
+                                <param>org.checkstyle.autofix.recipe.HexLiteralCaseTest</param>
+                                <param>org.checkstyle.autofix.recipe.MissingOverrideTest</param>
+                                <param>org.checkstyle.autofix.recipe.RecipeTest</param>
+                                <param>org.checkstyle.autofix.recipe.RemoveViolationCommentsTest</param>
+                            </targetTests>
+
+                            <mutators>
+                                <mutator>INVERT_NEGS</mutator>
+                                <mutator>MATH</mutator>
+                                <mutator>NEGATE_CONDITIONALS</mutator>
+                                <mutator>NON_VOID_METHOD_CALLS</mutator>
+                                <mutator>REMOVE_CONDITIONALS_EQUAL_ELSE</mutator>
+                                <mutator>REMOVE_CONDITIONALS_EQUAL_IF</mutator>
+                                <mutator>REMOVE_CONDITIONALS_ORDER_ELSE</mutator>
+                                <mutator>REMOVE_CONDITIONALS_ORDER_IF</mutator>
+                                <mutator>VOID_METHOD_CALLS</mutator>
+                                <mutator>EXPERIMENTAL_ARGUMENT_PROPAGATION</mutator>
+                                <mutator>EXPERIMENTAL_BIG_DECIMAL</mutator>
+                                <mutator>EXPERIMENTAL_BIG_INTEGER</mutator>
+                                <mutator>EXPERIMENTAL_MEMBER_VARIABLE</mutator>
+                                <mutator>EXPERIMENTAL_NAKED_RECEIVER</mutator>
+                                <mutator>REMOVE_INCREMENTS</mutator>
+                                <mutator>EXPERIMENTAL_SWITCH</mutator>
+                                <mutator>REMOVE_SWITCH</mutator>
+                                <mutator>FALSE_RETURNS</mutator>
+                                <mutator>TRUE_RETURNS</mutator>
+                                <mutator>EMPTY_RETURNS</mutator>
+                                <mutator>NULL_RETURNS</mutator>
+                                <mutator>PRIMITIVE_RETURNS</mutator>
+                            </mutators>
+
+                            <outputFormats>
+                                <outputFormat>XML</outputFormat>
+                                <outputFormat>HTML</outputFormat>
+                            </outputFormats>
+
+                            <threads>4</threads>
+                            <timeoutFactor>10</timeoutFactor>
+                            <timeoutConstant>50000</timeoutConstant>
+
+                            <mutationThreshold>84</mutationThreshold>
+                            <coverageThreshold>89</coverageThreshold>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>pitest-coding-2</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.pitest</groupId>
+                        <artifactId>pitest-maven</artifactId>
+                        <version>${pitest.version}</version>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.pitest</groupId>
+                                <artifactId>pitest-junit5-plugin</artifactId>
+                                <version>${pitest.junit5.version}</version>
+                            </dependency>
+                        </dependencies>
+                        <configuration>
+                            <targetClasses>
+                                <param>org.checkstyle.autofix.recipe.NewlineAtEndOfFile*</param>
+                                <param>org.checkstyle.autofix.recipe.NumericalPrefixesInfixesSuffixesCharacterCase*</param>
+                                <param>org.checkstyle.autofix.recipe.RedundantImport*</param>
+                                <param>org.checkstyle.autofix.recipe.UpperEll*</param>
+                                <param>org.checkstyle.autofix.recipe.UseEnhancedSwitch*</param>
+                            </targetClasses>
+                            <targetTests>
+                                <param>org.checkstyle.autofix.recipe.NewLineAtEndOfFileTest</param>
+                                <param>org.checkstyle.autofix.recipe.NumericalPrefixesInfixesSuffixesCharacterCaseTest</param>
+                                <param>org.checkstyle.autofix.recipe.RedundantImportTest</param>
+                                <param>org.checkstyle.autofix.recipe.UpperEllTest</param>
+                                <param>org.checkstyle.autofix.recipe.UseEnhancedSwitchTest</param>
                             </targetTests>
 
                             <mutators>
