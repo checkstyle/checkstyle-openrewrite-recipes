@@ -7,8 +7,25 @@ on:
     branches: [ main ]
 
 jobs:
+  check-missing-pitests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install xmlstarlet
+        run: sudo apt-get update && sudo apt-get install -y xmlstarlet
+
+      - name: Check missing pitests
+        run: ./.ci/validation.sh check-missing-pitests
+
   pitest:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        profile:
+          - coding-1
+          - coding-2
 
     steps:
       - name: Checkout code
@@ -34,18 +51,18 @@ jobs:
           path: ~/.m2/repository
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
 
-      - name: Run Pitest with suppression check
-        run: ./.ci/pitest.sh
+      - name: Run Pitest pitest-${{ matrix.profile }} with suppression check
+        run: ./.ci/pitest.sh "pitest-${{ matrix.profile }}"
 
-      - name: Patch command for Pitest
+      - name: Patch command for pitest-${{ matrix.profile }}
         if: failure()
         run: |
-          ./.ci/print-diff-as-patch.sh target/pitest.patch
+          ./.ci/print-diff-as-patch.sh target/pitest-${{ matrix.profile }}.patch
 
       - name: Upload Pitest Report on Failure
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: pitest-report
+          name: pitest-${{ matrix.profile }}-report
           path: target/pit-reports/
           retention-days: 7

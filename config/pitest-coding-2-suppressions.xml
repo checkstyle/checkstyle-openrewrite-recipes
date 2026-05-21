@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suppressedMutations>
+  <mutation unstable="false">
+    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
+    <mutatedMethod>determineLineEnding</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to org/checkstyle/autofix/recipe/NewlineAtEndOfFile$NewLineAtEndOfFileVisitor::getAutodetectedLineEnding</description>
+    <lineContent>case &quot;lf_cr_crlf&quot; -&gt; getAutodetectedLineEnding(sourceFile);</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
+    <mutatedMethod>determineLineEnding</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to java/lang/System::lineSeparator</description>
+    <lineContent>case &quot;system&quot; -&gt; System.lineSeparator();</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
+    <mutatedMethod>determineLineEnding</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.RemoveSwitchMutator_3</mutator>
+    <description>RemoveSwitch 3 (case value 3)</description>
+    <lineContent>return switch (lineSeparatorConfig) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
+    <mutatedMethod>determineLineEnding</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.RemoveSwitchMutator_4</mutator>
+    <description>RemoveSwitch 4 (case value 4)</description>
+    <lineContent>return switch (lineSeparatorConfig) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
+    <mutatedMethod>getAutodetectedLineEnding</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to org/openrewrite/style/Style::from</description>
+    <lineContent>Style.from(GeneralFormatStyle.class, sourceFile, () -&gt; {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
+    <mutatedMethod>getAutodetectedLineEnding</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to org/openrewrite/style/GeneralFormatStyle::newLine</description>
+    <lineContent>return generalFormatStyle.newLine();</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
+    <mutatedMethod>getAutodetectedLineEnding</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.EmptyObjectReturnValsMutator</mutator>
+    <description>replaced return value with &quot;&quot; for org/checkstyle/autofix/recipe/NewlineAtEndOfFile$NewLineAtEndOfFileVisitor::getAutodetectedLineEnding</description>
+    <lineContent>return generalFormatStyle.newLine();</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
+    <mutatedMethod>hasViolation</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.BooleanTrueReturnValsMutator</mutator>
+    <description>replaced boolean return with true for org/checkstyle/autofix/recipe/NewlineAtEndOfFile$NewLineAtEndOfFileVisitor::hasViolation</description>
+    <lineContent>return violations.stream()</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
+    <mutatedMethod>lambda$getAutodetectedLineEnding$0</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to org/openrewrite/java/format/AutodetectGeneralFormatStyle::autodetectGeneralFormatStyle</description>
+    <lineContent>.autodetectGeneralFormatStyle(sourceFile);</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
+    <mutatedMethod>lambda$getAutodetectedLineEnding$0</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.NullReturnValsMutator</mutator>
+    <description>replaced return value with null for org/checkstyle/autofix/recipe/NewlineAtEndOfFile$NewLineAtEndOfFileVisitor::lambda$getAutodetectedLineEnding$0</description>
+    <lineContent>return AutodetectGeneralFormatStyle</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
+    <mutatedMethod>lambda$hasViolation$1</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.BooleanTrueReturnValsMutator</mutator>
+    <description>replaced boolean return with true for org/checkstyle/autofix/recipe/NewlineAtEndOfFile$NewLineAtEndOfFileVisitor::lambda$hasViolation$1</description>
+    <lineContent>.anyMatch(violation -&gt; violation.getFilePath().endsWith(filePath));</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
+    <mutatedMethod>visitCompilationUnit</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.ArgumentPropagationMutator</mutator>
+    <description>replaced call to org/openrewrite/java/JavaIsoVisitor::visitCompilationUnit with argument</description>
+    <lineContent>J.CompilationUnit result = super.visitCompilationUnit(compUnit, executionContext);</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
+    <mutatedMethod>visitCompilationUnit</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>if (hasViolation(filePath)) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RedundantImport.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RedundantImport</mutatedClass>
+    <mutatedMethod>getDescription</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.EmptyObjectReturnValsMutator</mutator>
+    <description>replaced return value with &quot;&quot; for org/checkstyle/autofix/recipe/RedundantImport::getDescription</description>
+    <lineContent>return &quot;Remove duplicate imports, java.lang imports, and same package imports&quot;;</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RedundantImport.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RedundantImport</mutatedClass>
+    <mutatedMethod>getDisplayName</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.EmptyObjectReturnValsMutator</mutator>
+    <description>replaced return value with &quot;&quot; for org/checkstyle/autofix/recipe/RedundantImport::getDisplayName</description>
+    <lineContent>return &quot;Remove redundant imports&quot;;</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RedundantImport.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RedundantImport$RemoveRedundantImportsVisitor</mutatedClass>
+    <mutatedMethod>getCurrentPackage</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>if (compilationUnit.getPackageDeclaration() != null) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RedundantImport.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RedundantImport$RemoveRedundantImportsVisitor</mutatedClass>
+    <mutatedMethod>isAtViolationLocation</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.BooleanTrueReturnValsMutator</mutator>
+    <description>replaced boolean return with true for org/checkstyle/autofix/recipe/RedundantImport$RemoveRedundantImportsVisitor::isAtViolationLocation</description>
+    <lineContent>return violations.removeIf(violation -&gt; {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RedundantImport.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RedundantImport$RemoveRedundantImportsVisitor</mutatedClass>
+    <mutatedMethod>isRedundant</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to org/openrewrite/java/tree/J$Import::isStatic</description>
+    <lineContent>else if (currentPackage != null &amp;&amp; !importStmt.isStatic()</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RedundantImport.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RedundantImport$RemoveRedundantImportsVisitor</mutatedClass>
+    <mutatedMethod>isRedundant</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>else if (currentPackage != null &amp;&amp; !importStmt.isStatic()</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RedundantImport.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RedundantImport$RemoveRedundantImportsVisitor</mutatedClass>
+    <mutatedMethod>isRedundant</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to org/openrewrite/java/tree/J$Import::isStatic</description>
+    <lineContent>if (!importStmt.isStatic() &amp;&amp; importName.startsWith(JAVA_LANG_PREFIX)) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RedundantImport.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RedundantImport$RemoveRedundantImportsVisitor</mutatedClass>
+    <mutatedMethod>isRedundant</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>if (!importStmt.isStatic() &amp;&amp; importName.startsWith(JAVA_LANG_PREFIX)) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RedundantImport.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RedundantImport$RemoveRedundantImportsVisitor</mutatedClass>
+    <mutatedMethod>lambda$isAtViolationLocation$1</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>&amp;&amp; absolutePath.endsWith(sourcePath);</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RedundantImport.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RedundantImport$RemoveRedundantImportsVisitor</mutatedClass>
+    <mutatedMethod>lambda$isAtViolationLocation$1</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>&amp;&amp; violation.getColumn() == column</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RedundantImport.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RedundantImport$RemoveRedundantImportsVisitor</mutatedClass>
+    <mutatedMethod>lambda$isAtViolationLocation$1</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.NakedReceiverMutator</mutator>
+    <description>replaced call to java/nio/file/Path::toAbsolutePath with receiver</description>
+    <lineContent>final Path absolutePath = violation.getFilePath().toAbsolutePath();</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RedundantImport.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RedundantImport$RemoveRedundantImportsVisitor</mutatedClass>
+    <mutatedMethod>lambda$visitCompilationUnit$0</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_ELSE</mutator>
+    <description>removed conditional - replaced equality check with false</description>
+    <lineContent>currentPackage) || !isAtViolationLocation(importStmt); })</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RedundantImport.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RedundantImport$RemoveRedundantImportsVisitor</mutatedClass>
+    <mutatedMethod>visitCompilationUnit</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.NakedReceiverMutator</mutator>
+    <description>replaced call to java/nio/file/Path::toAbsolutePath with receiver</description>
+    <lineContent>this.sourcePath = cu.getSourcePath().toAbsolutePath();</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>UpperEll.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.UpperEll</mutatedClass>
+    <mutatedMethod>getDescription</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.EmptyObjectReturnValsMutator</mutator>
+    <description>replaced return value with &quot;&quot; for org/checkstyle/autofix/recipe/UpperEll::getDescription</description>
+    <lineContent>return &quot;Replace lowercase &apos;l&apos; suffix in long literals with uppercase &apos;L&apos; &quot;</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>UpperEll.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.UpperEll</mutatedClass>
+    <mutatedMethod>getDisplayName</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.EmptyObjectReturnValsMutator</mutator>
+    <description>replaced return value with &quot;&quot; for org/checkstyle/autofix/recipe/UpperEll::getDisplayName</description>
+    <lineContent>return &quot;UpperEll recipe&quot;;</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>UpperEll.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.UpperEll$UpperEllVisitor</mutatedClass>
+    <mutatedMethod>lambda$isAtViolationLocation$0</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>&amp;&amp; absolutePath.endsWith(sourcePath);</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>UpperEll.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.UpperEll$UpperEllVisitor</mutatedClass>
+    <mutatedMethod>lambda$isAtViolationLocation$0</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.NakedReceiverMutator</mutator>
+    <description>replaced call to java/nio/file/Path::toAbsolutePath with receiver</description>
+    <lineContent>final Path absolutePath = violation.getFilePath().toAbsolutePath();</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>UpperEll.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.UpperEll$UpperEllVisitor</mutatedClass>
+    <mutatedMethod>visitCompilationUnit</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.NakedReceiverMutator</mutator>
+    <description>replaced call to java/nio/file/Path::toAbsolutePath with receiver</description>
+    <lineContent>this.sourcePath = cu.getSourcePath().toAbsolutePath();</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>UpperEll.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.UpperEll$UpperEllVisitor</mutatedClass>
+    <mutatedMethod>visitLiteral</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>&amp;&amp; result.getType() == JavaType.Primitive.Long</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>UpperEll.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.UpperEll$UpperEllVisitor</mutatedClass>
+    <mutatedMethod>visitLiteral</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.ArgumentPropagationMutator</mutator>
+    <description>replaced call to org/openrewrite/java/JavaIsoVisitor::visitLiteral with argument</description>
+    <lineContent>J.Literal result = super.visitLiteral(literal, executionContext);</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>UpperEll.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.UpperEll$UpperEllVisitor</mutatedClass>
+    <mutatedMethod>visitLiteral</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>if (valueSource != null &amp;&amp; valueSource.endsWith(LOWERCASE_L)</lineContent>
+  </mutation>
+
+</suppressedMutations>

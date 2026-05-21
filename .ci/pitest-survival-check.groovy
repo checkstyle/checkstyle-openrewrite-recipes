@@ -6,20 +6,22 @@ import groovy.xml.XmlSlurper
 import groovy.xml.XmlUtil
 import groovy.xml.slurpersupport.GPathResult
 
-int exitCode = checkPitestReport()
+int exitCode = checkPitestReport(args)
 System.exit(exitCode)
 
 /**
  * Check the generated pitest report. Parse the surviving and suppressed mutations and compare
  * them.
  *
+ * @param args command-line arguments; the first argument is the profile name
  * @return {@code 0} if pitest report is as expected, {@code 1} otherwise
  */
-private static int checkPitestReport() {
+private static int checkPitestReport(String[] args) {
     final XmlParser xmlParser = new XmlParser()
     File mutationReportFile = null
+    final String profile = args[0]
     final String suppressedMutationFileUri = ".${File.separator}config${File.separator}" +
-            "pitest-suppressions.xml"
+            "${profile}-suppressions.xml"
 
     final File pitReports =
             new File(".${File.separator}target${File.separator}pit-reports")
