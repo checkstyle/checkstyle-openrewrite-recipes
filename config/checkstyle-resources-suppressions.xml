@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE suppressions PUBLIC
+        "-//Checkstyle//DTD SuppressionFilter Configuration 1.1//EN"
+        "https://checkstyle.org/dtds/suppressions_1_1.dtd">
+
+<suppressions>
+    <!-- Remove these as the resource input fixtures are split below 120 lines. -->
+    <suppress checks="FileLength"
+              files="[\\/]src[\\/]test[\\/]resources[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]finallocalvariable[\\/]localvariableassignedmultipletimes[\\/]InputLocalVariableAssignedMultipleTimes\.java"/>
+    <suppress checks="FileLength"
+              files="[\\/]src[\\/]test[\\/]resources[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]finallocalvariable[\\/]localvariablecheckswitchexpressions[\\/]InputLocalVariableCheckSwitchExpressions\.java"/>
+    <suppress checks="FileLength"
+              files="[\\/]src[\\/]test[\\/]resources[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]useenhancedswitch[\\/]mutationtests[\\/]InputMutationTests\.java"/>
+    <suppress checks="FileLength"
+              files="[\\/]src[\\/]test[\\/]resources[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]useenhancedswitch[\\/]mutationtests14[\\/]InputMutationTests14\.java"/>
+    <suppress checks="FileLength"
+              files="[\\/]src[\\/]test[\\/]resources[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]useenhancedswitch[\\/]mutationtests15[\\/]InputMutationTests15\.java"/>
+    <suppress checks="FileLength"
+              files="[\\/]src[\\/]test[\\/]resources[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]useenhancedswitch[\\/]mutationtests4[\\/]InputMutationTests4\.java"/>
+    <suppress checks="FileLength"
+              files="[\\/]src[\\/]test[\\/]resources[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]useenhancedswitch[\\/]mutationtests6[\\/]InputMutationTests6\.java"/>
+    <suppress checks="FileLength"
+              files="[\\/]src[\\/]test[\\/]resources[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]useenhancedswitch[\\/]survivingmutations[\\/]InputSurvivingMutations\.java"/>
+    <suppress checks="FileLength"
+              files="[\\/]src[\\/]test[\\/]resources[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]useenhancedswitch[\\/]survivingmutations2[\\/]InputSurvivingMutations2\.java"/>
+</suppressions>
