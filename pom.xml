@@ -221,6 +221,25 @@
                             <goal>check</goal>
                         </goals>
                     </execution>
+                    <execution>
+                        <id>check-resources-inputs</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <configuration>
+                            <configLocation>config/checkstyle-resources-checks.xml</configLocation>
+                            <includeResources>false</includeResources>
+                            <includeTestResources>false</includeTestResources>
+                            <includeTestSourceDirectory>false</includeTestSourceDirectory>
+                            <sourceDirectories>
+                                <sourceDirectory>src/test/resources</sourceDirectory>
+                            </sourceDirectories>
+                            <includes>**/Input*.java</includes>
+                            <outputFile>
+                                ${project.build.directory}/checkstyle/checkstyle-resources-report.xml
+                            </outputFile>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
 
