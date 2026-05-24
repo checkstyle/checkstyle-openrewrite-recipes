@@ -4,6 +4,9 @@
         "http://checkstyle.sourceforge.net/dtds/import_control_1_2.dtd">
 
 <import-control pkg="org.checkstyle.autofix" regex="true">
+    <!-- Temporary allowance until https://github.com/openrewrite/rewrite/issues/7775 -->
+    <allow class="org.openrewrite.internal.RecipeRunException"/>
+
     <disallow pkg="org.openrewrite.internal"/>
     <allow pkg="org.openrewrite"/>
     <allow pkg="org.openrewrite.java"/>
