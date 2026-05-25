@@ -309,24 +309,6 @@
   <mutation unstable="false">
     <sourceFile>Header.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.recipe.Header</mutatedClass>
-    <mutatedMethod>getDescription</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.EmptyObjectReturnValsMutator</mutator>
-    <description>replaced return value with &quot;&quot; for org/checkstyle/autofix/recipe/Header::getDescription</description>
-    <lineContent>return &quot;Adds headers to Java source files when missing.&quot;;</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>Header.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.Header</mutatedClass>
-    <mutatedMethod>getDisplayName</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.EmptyObjectReturnValsMutator</mutator>
-    <description>replaced return value with &quot;&quot; for org/checkstyle/autofix/recipe/Header::getDisplayName</description>
-    <lineContent>return &quot;Header recipe&quot;;</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>Header.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.Header</mutatedClass>
     <mutatedMethod>toLfLineEnding</mutatedMethod>
     <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.NakedReceiverMutator</mutator>
     <description>replaced call to java/lang/String::replaceAll with receiver</description>

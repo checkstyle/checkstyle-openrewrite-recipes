@@ -17,7 +17,12 @@
 
 package org.checkstyle.autofix.recipe;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.Collections;
+
 import org.checkstyle.autofix.parser.ReportParser;
+import org.junit.jupiter.api.Test;
 
 import com.puppycrawl.tools.checkstyle.DefaultConfiguration;
 import com.puppycrawl.tools.checkstyle.checks.header.HeaderCheck;
@@ -27,6 +32,15 @@ public class HeaderTest extends AbstractRecipeTestSupport {
     @Override
     protected String getSubpackage() {
         return "header";
+    }
+
+    @Test
+    void metadata() {
+        final Header recipe = new Header(Collections.emptyList(), null);
+        assertEquals("Header recipe",
+                recipe.getDisplayName());
+        assertEquals("Adds headers to Java source files when missing.",
+                recipe.getDescription());
     }
 
     @RecipeTest
@@ -42,6 +56,11 @@ public class HeaderTest extends AbstractRecipeTestSupport {
     @RecipeTest
     void headerIncorrect(ReportParser parser) throws Exception {
         verify(parser, getHeaderConfig(), "HeaderIncorrect");
+    }
+
+    @RecipeTest
+    void headerValid(ReportParser parser) throws Exception {
+        verify(parser, getHeaderConfig(), "HeaderValid");
     }
 
     private DefaultConfiguration getHeaderConfig() {
