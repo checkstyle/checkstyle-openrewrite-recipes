@@ -1,0 +1,9 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/header/headervalid/InputHeaderValid.java
++++ src/test/resources/org/checkstyle/autofix/recipe/header/headervalid/OutputHeaderValid.java
+@@ -7,5 +7,5 @@
+ 
+ package org.checkstyle.autofix.recipe.header.headervalid;
+ 
+-public class InputHeaderValid {
++public class OutputHeaderValid {
+ }
