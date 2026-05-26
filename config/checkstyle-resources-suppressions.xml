@@ -5,9 +5,7 @@
         "https://checkstyle.org/dtds/suppressions_1_1.dtd">
 
 <suppressions>
-    <!-- Remove these as the resource input fixtures are split below 120 lines. -->
-    <suppress checks="FileLength"
-              files="[\\/]src[\\/]test[\\/]resources[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]finallocalvariable[\\/]localvariableassignedmultipletimes[\\/]InputLocalVariableAssignedMultipleTimes\.java"/>
+    <!-- Until https://github.com/checkstyle/checkstyle-openrewrite-recipes/issues/202 -->
     <suppress checks="FileLength"
               files="[\\/]src[\\/]test[\\/]resources[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]finallocalvariable[\\/]localvariablecheckswitchexpressions[\\/]InputLocalVariableCheckSwitchExpressions\.java"/>
     <suppress checks="FileLength"

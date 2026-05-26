@@ -10,11 +10,6 @@
                   value="config/checkstyle-resources-suppressions.xml"/>
     </module>
 
-    <module name="BeforeExecutionExclusionFileFilter">
-        <property name="fileNamePattern"
-                  value="^(?!.*[\\/]Input\w+\.java$).*"/>
-    </module>
-
     <module name="FileLength">
         <property name="max" value="120"/>
         <property name="fileExtensions" value="java"/>

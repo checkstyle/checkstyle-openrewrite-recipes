@@ -1,0 +1,11 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/localvariableassignedmultipletimespart4/InputLocalVariableAssignedMultipleTimesPart4.java
++++ src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/localvariableassignedmultipletimespart4/OutputLocalVariableAssignedMultipleTimesPart4.java
+@@ -9,7 +9,7 @@
+ */
+ package org.checkstyle.autofix.recipe.finallocalvariable.localvariableassignedmultipletimespart4;
+ 
+-public class InputLocalVariableAssignedMultipleTimesPart4 {
++public class OutputLocalVariableAssignedMultipleTimesPart4 {
+     public String foo11(final Object o, boolean getMinimal) {
+ 
+         String n = System.lineSeparator();

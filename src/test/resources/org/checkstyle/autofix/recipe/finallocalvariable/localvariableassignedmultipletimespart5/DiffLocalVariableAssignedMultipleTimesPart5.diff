@@ -1,0 +1,20 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/localvariableassignedmultipletimespart5/InputLocalVariableAssignedMultipleTimesPart5.java
++++ src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/localvariableassignedmultipletimespart5/OutputLocalVariableAssignedMultipleTimesPart5.java
+@@ -11,7 +11,7 @@
+ 
+ import java.util.HashMap;
+ 
+-public class InputLocalVariableAssignedMultipleTimesPart5 {
++public class OutputLocalVariableAssignedMultipleTimesPart5 {
+     // Taken from findbugs
+     private void foo12(Long start, Long end) {
+         HashMap<Object, Object> headMap;
+@@ -64,7 +64,7 @@
+          * signum is 1 if p and q are both nonnegative or both negative, and -1 otherwise.
+          */
+         final int signum = 1 | ((p ^ q) >> (Integer.SIZE - 1));
+-        boolean increment; // violation, "Variable 'increment' should be declared final"
++        final boolean increment;
+         switch (mode) {
+             case 1:
+                 String.CASE_INSENSITIVE_ORDER.equals(rem == 0);

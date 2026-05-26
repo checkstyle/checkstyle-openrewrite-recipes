@@ -1,0 +1,11 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/localvariableassignedmultipletimespart6/InputLocalVariableAssignedMultipleTimesPart6.java
++++ src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/localvariableassignedmultipletimespart6/OutputLocalVariableAssignedMultipleTimesPart6.java
+@@ -11,7 +11,7 @@
+ 
+ import java.util.Locale;
+ 
+-public class InputLocalVariableAssignedMultipleTimesPart6 {
++public class OutputLocalVariableAssignedMultipleTimesPart6 {
+     public String foo11(final Object o, boolean getMinimal) {
+ 
+         String n = System.lineSeparator();

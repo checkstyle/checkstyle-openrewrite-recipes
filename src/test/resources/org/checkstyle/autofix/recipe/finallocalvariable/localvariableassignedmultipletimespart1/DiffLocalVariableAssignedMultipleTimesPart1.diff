@@ -1,0 +1,20 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/localvariableassignedmultipletimespart1/InputLocalVariableAssignedMultipleTimesPart1.java
++++ src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/localvariableassignedmultipletimespart1/OutputLocalVariableAssignedMultipleTimesPart1.java
+@@ -9,7 +9,7 @@
+ */
+ package org.checkstyle.autofix.recipe.finallocalvariable.localvariableassignedmultipletimespart1;
+ 
+-public class InputLocalVariableAssignedMultipleTimesPart1 {
++public class OutputLocalVariableAssignedMultipleTimesPart1 {
+     void foo1() {
+         final boolean some_condition = true;
+         int i;
+@@ -49,7 +49,7 @@
+ 
+     void foo4() {
+         final boolean some_condition = true;
+-        int i; // violation, "Variable 'i' should be declared final"
++        final int i;
+         if (some_condition) {
+             if (true) {
+             }

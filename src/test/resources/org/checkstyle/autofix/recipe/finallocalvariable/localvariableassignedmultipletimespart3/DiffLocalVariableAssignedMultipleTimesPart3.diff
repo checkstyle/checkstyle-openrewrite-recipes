@@ -1,0 +1,26 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/localvariableassignedmultipletimespart3/InputLocalVariableAssignedMultipleTimesPart3.java
++++ src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/localvariableassignedmultipletimespart3/OutputLocalVariableAssignedMultipleTimesPart3.java
+@@ -11,7 +11,7 @@
+ 
+ import java.util.Locale;
+ 
+-public class InputLocalVariableAssignedMultipleTimesPart3 {
++public class OutputLocalVariableAssignedMultipleTimesPart3 {
+     public String foo11(final Object o, boolean getMinimal) {
+         String n = System.lineSeparator();
+         if (n != null) {
+@@ -20,12 +20,12 @@
+ 
+         try {
+             String className;
+-            int kind; // violation, "Variable 'kind' should be declared final"
++            final int kind;
+             boolean isParameterToInitMethodofAnonymousInnerClass = false;
+             boolean isSyntheticMethod = false;
+             if (o instanceof String || o instanceof Integer) {
+ 
+-                String m; // violation, "Variable 'm' should be declared final"
++                final String m;
+                 if (o instanceof String) {
+                     m = (String) o;
+                     isSyntheticMethod = m.equals("");
