@@ -1,0 +1,26 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/localvariableassignedmultipletimespart2/InputLocalVariableAssignedMultipleTimesPart2.java
++++ src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/localvariableassignedmultipletimespart2/OutputLocalVariableAssignedMultipleTimesPart2.java
+@@ -9,7 +9,7 @@
+ */
+ package org.checkstyle.autofix.recipe.finallocalvariable.localvariableassignedmultipletimespart2;
+ 
+-public class InputLocalVariableAssignedMultipleTimesPart2 {
++public class OutputLocalVariableAssignedMultipleTimesPart2 {
+     void foo7() {
+         final boolean some_condition = true;
+         int i;
+@@ -35,12 +35,11 @@
+ 
+     // Taken from findbugs
+     public static String foo9(String filePath, String project) {
+-        String path = new String(filePath); // violation, "Variable 'path' should be declared final"
++        final String path = new String(filePath);
+         String commonPath;
+         if (project != null) {
+             commonPath = "";
+-            // violation below "Variable 'relativePath' should be declared final"
+-            String relativePath = "";
++            final String relativePath = "";
+             if (!relativePath.equals(path)) {
+                 return relativePath;
+             }

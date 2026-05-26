@@ -133,8 +133,33 @@ public class FinalLocalVariableTest extends AbstractRecipeTestSupport {
     }
 
     @RecipeTest
-    void localVariableAssignedMultipleTimes(ReportParser parser) throws Exception {
-        verify(parser, "LocalVariableAssignedMultipleTimes");
+    void localVariableAssignedMultipleTimesPart1(ReportParser parser) throws Exception {
+        verify(parser, "LocalVariableAssignedMultipleTimesPart1");
+    }
+
+    @RecipeTest
+    void localVariableAssignedMultipleTimesPart2(ReportParser parser) throws Exception {
+        verify(parser, "LocalVariableAssignedMultipleTimesPart2");
+    }
+
+    @RecipeTest
+    void localVariableAssignedMultipleTimesPart3(ReportParser parser) throws Exception {
+        verify(parser, "LocalVariableAssignedMultipleTimesPart3");
+    }
+
+    @RecipeTest
+    void localVariableAssignedMultipleTimesPart4(ReportParser parser) throws Exception {
+        verify(parser, "LocalVariableAssignedMultipleTimesPart4");
+    }
+
+    @RecipeTest
+    void localVariableAssignedMultipleTimesPart5(ReportParser parser) throws Exception {
+        verify(parser, "LocalVariableAssignedMultipleTimesPart5");
+    }
+
+    @RecipeTest
+    void localVariableAssignedMultipleTimesPart6(ReportParser parser) throws Exception {
+        verify(parser, "LocalVariableAssignedMultipleTimesPart6");
     }
 
     @RecipeTest
