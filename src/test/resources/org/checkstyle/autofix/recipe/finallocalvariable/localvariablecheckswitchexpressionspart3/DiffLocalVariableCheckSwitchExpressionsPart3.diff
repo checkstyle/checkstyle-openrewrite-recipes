@@ -1,0 +1,11 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/localvariablecheckswitchexpressionspart3/InputLocalVariableCheckSwitchExpressionsPart3.java
++++ src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/localvariablecheckswitchexpressionspart3/OutputLocalVariableCheckSwitchExpressionsPart3.java
+@@ -9,7 +9,7 @@
+ */
+ package org.checkstyle.autofix.recipe.finallocalvariable.localvariablecheckswitchexpressionspart3;
+ 
+-public class InputLocalVariableCheckSwitchExpressionsPart3 {
++public class OutputLocalVariableCheckSwitchExpressionsPart3 {
+     enum T {
+         A, B, C;
+     }

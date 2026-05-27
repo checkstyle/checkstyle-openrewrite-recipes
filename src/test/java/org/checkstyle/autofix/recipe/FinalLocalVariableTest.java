@@ -168,6 +168,16 @@ public class FinalLocalVariableTest extends AbstractRecipeTestSupport {
     }
 
     @RecipeTest
+    void localVariableCheckSwitchExpressionsPart2(ReportParser parser) throws Exception {
+        verify(parser, "LocalVariableCheckSwitchExpressionsPart2");
+    }
+
+    @RecipeTest
+    void localVariableCheckSwitchExpressionsPart3(ReportParser parser) throws Exception {
+        verify(parser, "LocalVariableCheckSwitchExpressionsPart3");
+    }
+
+    @RecipeTest
     void localVariableCheckSwitchAssignment(ReportParser parser) throws Exception {
         verify(parser, "LocalVariableCheckSwitchAssignment");
     }

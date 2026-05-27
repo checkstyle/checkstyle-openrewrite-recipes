@@ -1,0 +1,24 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/localvariablecheckswitchexpressionspart2/InputLocalVariableCheckSwitchExpressionsPart2.java
++++ src/test/resources/org/checkstyle/autofix/recipe/finallocalvariable/localvariablecheckswitchexpressionspart2/OutputLocalVariableCheckSwitchExpressionsPart2.java
+@@ -9,10 +9,10 @@
+ */
+ package org.checkstyle.autofix.recipe.finallocalvariable.localvariablecheckswitchexpressionspart2;
+ 
+-public class InputLocalVariableCheckSwitchExpressionsPart2 {
++public class OutputLocalVariableCheckSwitchExpressionsPart2 {
+     void foo3() throws Exception {
+ 
+-        Exception e; // violation, "Variable 'e' should be declared final"
++        final Exception e;
+ 
+         final int a = (int) Math.random();
+         final int b = (int) Math.random();
+@@ -46,7 +46,7 @@
+ 
+     void foo4() throws Exception {
+ 
+-        Exception e; // violation, "Variable 'e' should be declared final"
++        final Exception e;
+ 
+         final int a = (int) Math.random();
+         final int b = (int) Math.random();
