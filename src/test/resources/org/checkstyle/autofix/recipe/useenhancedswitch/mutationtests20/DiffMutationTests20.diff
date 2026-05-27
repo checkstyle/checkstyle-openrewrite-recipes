@@ -1,0 +1,72 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/mutationtests20/InputMutationTests20.java
++++ src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/mutationtests20/OutputMutationTests20.java
+@@ -9,55 +9,35 @@
+ 
+ package org.checkstyle.autofix.recipe.useenhancedswitch.mutationtests20;
+ 
+-public class InputMutationTests20 {
++public class OutputMutationTests20 {
+ 
+     void assignmentSwitchBlock(int x) {
+-        String s;
+-        // violation below, 'Switch can be replaced with enhanced switch'
+-        switch (x) {
+-            case 1: {
+-                s = "one";
+-                break;
+-            }
+-            case 2: {
++        String s = switch (x) {
++            case 1 -> "one";
++            case 2 -> {
+                 System.out.println("two");
+-                s = "two";
+-                break;
++                yield "two";
+             }
+-            default: {
+-                s = "default";
+-                break;
+-            }
+-        }
++            default -> "default";
++        };
+     }
+ 
+     void assignmentSwitchBlockMulti(int x) {
+-        String s;
+-        // violation below, 'Switch can be replaced with enhanced switch'
+-        switch (x) {
+-            case 1: {
++        String s = switch (x) {
++            case 1 -> {
+                 System.out.println("log1");
+                 System.out.println("log2");
+-                s = "one";
+-                break;
++                yield "one";
+             }
+-            default: {
+-                s = "default";
+-                break;
+-            }
+-        }
++            default -> "default";
++        };
+     }
+ 
+     void assignmentSwitchInitialized(int x) {
+         String s = "init";
+-        // violation below, 'Switch can be replaced with enhanced switch'
+         switch (x) {
+-            case 1:
+-                s = "one";
+-                break;
+-            default:
+-                s = "default";
+-                break;
++            case 1 -> s = "one";
++            default -> s = "default";
+         }
+     }
+ 

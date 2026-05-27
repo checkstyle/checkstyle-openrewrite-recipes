@@ -9,8 +9,6 @@
     <suppress checks="FileLength"
               files="[\\/]src[\\/]test[\\/]resources[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]finallocalvariable[\\/]localvariablecheckswitchexpressions[\\/]InputLocalVariableCheckSwitchExpressions\.java"/>
     <suppress checks="FileLength"
-              files="[\\/]src[\\/]test[\\/]resources[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]useenhancedswitch[\\/]mutationtests[\\/]InputMutationTests\.java"/>
-    <suppress checks="FileLength"
               files="[\\/]src[\\/]test[\\/]resources[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]useenhancedswitch[\\/]mutationtests14[\\/]InputMutationTests14\.java"/>
     <suppress checks="FileLength"
               files="[\\/]src[\\/]test[\\/]resources[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]useenhancedswitch[\\/]mutationtests15[\\/]InputMutationTests15\.java"/>
