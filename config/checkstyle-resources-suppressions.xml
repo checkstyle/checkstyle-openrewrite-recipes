@@ -5,9 +5,4 @@
         "https://checkstyle.org/dtds/suppressions_1_1.dtd">
 
 <suppressions>
-    <!-- Until https://github.com/checkstyle/checkstyle-openrewrite-recipes/issues/202 -->
-    <suppress checks="FileLength"
-              files="[\\/]src[\\/]test[\\/]resources[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]useenhancedswitch[\\/]survivingmutations[\\/]InputSurvivingMutations\.java"/>
-    <suppress checks="FileLength"
-              files="[\\/]src[\\/]test[\\/]resources[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]useenhancedswitch[\\/]survivingmutations2[\\/]InputSurvivingMutations2\.java"/>
 </suppressions>

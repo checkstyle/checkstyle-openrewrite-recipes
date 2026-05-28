@@ -9,39 +9,3 @@
    
      void m1(int x) {
                   
-@@ -167,27 +167,16 @@
-     }
- 
-     int fallThrough(int x) {
--        // violation below, 'Switch can be replaced with enhanced switch'
--        switch (x) {
--            case 1:
--            case 2:
--                return 1;
--            default:
--                return 0;
--        }
-+        return switch (x) {
-+            case 1, 2 -> 1;
-+            default -> 0;
-+        };
-     }
- 
-     void fallThroughAssignment(int x) {
--        int y;
--        // violation below, 'Switch can be replaced with enhanced switch'
--        switch (x) {
--            case 1:
--            case 2:
--                y = 1;
--                break;
--            default:
--                y = 0;
--                break;
--        }
-+        int y = switch (x) {
-+            case 1, 2 -> 1;
-+            default -> 0;
-+        };
-     }
- }

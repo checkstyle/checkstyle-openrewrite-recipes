@@ -82,7 +82,8 @@ public class UseEnhancedSwitchTest extends AbstractRecipeTestSupport {
 
     @RecipeTest
     void survivingMutations(ReportParser parser) throws Exception {
-        verify(parser, "SurvivingMutations", "SurvivingMutations2");
+        verify(parser, "SurvivingMutations", "SurvivingMutations2",
+            "SurvivingMutations3", "SurvivingMutations4");
     }
 
     @RecipeTest
