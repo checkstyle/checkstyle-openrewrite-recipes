@@ -7,8 +7,6 @@
 <suppressions>
     <!-- Until https://github.com/checkstyle/checkstyle-openrewrite-recipes/issues/202 -->
     <suppress checks="FileLength"
-              files="[\\/]src[\\/]test[\\/]resources[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]useenhancedswitch[\\/]mutationtests4[\\/]InputMutationTests4\.java"/>
-    <suppress checks="FileLength"
               files="[\\/]src[\\/]test[\\/]resources[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]useenhancedswitch[\\/]mutationtests6[\\/]InputMutationTests6\.java"/>
     <suppress checks="FileLength"
               files="[\\/]src[\\/]test[\\/]resources[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]useenhancedswitch[\\/]survivingmutations[\\/]InputSurvivingMutations\.java"/>

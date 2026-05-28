@@ -230,4 +230,9 @@ public class UseEnhancedSwitchTest extends AbstractRecipeTestSupport {
         verify(parser, "MutationTests25");
     }
 
+    @RecipeTest
+    void mutationTests26(ReportParser parser) throws Exception {
+        verify(parser, "MutationTests26");
+    }
+
 }
