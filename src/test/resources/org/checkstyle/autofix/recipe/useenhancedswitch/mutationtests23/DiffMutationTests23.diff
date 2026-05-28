@@ -1,0 +1,121 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/mutationtests23/InputMutationTests23.java
++++ src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/mutationtests23/OutputMutationTests23.java
+@@ -7,87 +7,63 @@
+ */
+ package org.checkstyle.autofix.recipe.useenhancedswitch.mutationtests23;
+ 
+-public class InputMutationTests23 {
++public class OutputMutationTests23 {
+     enum Color { RED, GREEN, BLUE }
+     enum SmallEnum { A, B }
+ 
+     void testExhaustiveEnumNoDefault(Color e) {
+-        int x;
+-        switch (e) { // violation 'Switch can be replaced with enhanced switch.'
+-            case RED:
+-                x = 1;
+-                break;
+-            case GREEN:
+-                x = 2;
+-                break;
+-            case BLUE:
+-                x = 3;
+-                break;
+-        }
++        int x = switch (e) {
++            case RED -> 1;
++            case GREEN -> 2;
++            case BLUE -> 3;
++        };
+     }
+ 
+     void testIndentNoNewline(int x) {
+-        int y;
+-        switch (x) { // violation 'Switch can be replaced with enhanced switch.'
+-            case 1:
+-                y = 1;
+-                break;
+-            default:
+-                y = 0;
+-                break;
+-        }
++        int y = switch (x) {
++            case 1 -> 1;
++            default -> 0;
++        };
+     }
+ 
+     int testExhaustiveWithDefault(Color e) {
+-        switch (e) { // violation 'Switch can be replaced with enhanced switch.'
+-            case RED:
+-                return 1;
+-            case GREEN:
+-                return 2;
+-            case BLUE:
+-                return 3;
+-            default:
+-                return 0;
+-        }
++        return switch (e) {
++            case RED -> 1;
++            case GREEN -> 2;
++            case BLUE -> 3;
++        };
+     }
+ 
+     int testNonExhaustiveEnumNoDefault(SmallEnum e) {
+-        switch (e) { // violation 'Switch can be replaced with enhanced switch.'
+-            case A:
+-                return 1;
++        switch (e) {
++            case A -> {
++                return 1;}
+         }
+         return 0;
+     }
+ 
+     int testExhaustiveEnumReturnNoDefault(Color e) {
+-        switch (e) { // violation 'Switch can be replaced with enhanced switch.'
+-            case RED:
+-                return 1;
+-            case GREEN:
+-                return 2;
+-            case BLUE:
+-                return 3;
+-        }
+-        return 0;
++        return switch (e) {
++            case RED -> 1;
++            case GREEN -> 2;
++            case BLUE -> 3;
++        };
+     }
+ 
+     void testEnumDefaultOnly(Color e) {
+-        int x;
+-        switch (e) { // violation 'Switch can be replaced with enhanced switch.'
+-            default:
+-                x = 1;
+-                break;
+-        }
++        int x = switch (e) {
++            default -> 1;
++        };
+     }
+ 
+     void testContinueInSwitch() {
+         for (int i = 0; i < 5; i++) {
+-            switch (i) { // violation 'Switch can be replaced with enhanced switch.'
+-                case 1:
+-                    continue;
+-                default:
++            switch (i) {
++                case 1 -> {
++                    continue;}
++                default -> {
+                     int x = i;
+-                    break;
++                }
+             }
+         }
+     }
