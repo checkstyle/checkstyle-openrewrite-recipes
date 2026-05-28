@@ -1,0 +1,39 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/mutationtests25/InputMutationTests25.java
++++ src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/mutationtests25/OutputMutationTests25.java
+@@ -7,28 +7,20 @@
+ */
+ package org.checkstyle.autofix.recipe.useenhancedswitch.mutationtests25;
+ 
+-public class InputMutationTests25 {
++public class OutputMutationTests25 {
+     enum Color { RED, GREEN, BLUE }
+ 
+     int testCollectHandled(Color c) {
+-        switch (c) { // violation 'Switch can be replaced with enhanced switch.'
+-            case RED:
+-            case GREEN:
+-                return 1;
+-            case BLUE:
+-                return 2;
+-            default:
+-                return 0;
+-        }
++        return switch (c) {
++            case RED, GREEN -> 1;
++            case BLUE -> 2;
++        };
+     }
+ 
+     void testEmptyDefault(int x) {
+-        switch (x) { // violation 'Switch can be replaced with enhanced switch.'
+-            case 1:
+-                System.out.println("one");
+-                break;
+-            default:
+-                break;
++        switch (x) {
++            case 1 -> System.out.println("one");
++            default -> {}
+         }
+     }
+ }
