@@ -1,0 +1,94 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/mutationtests28/InputMutationTests28.java
++++ src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/mutationtests28/OutputMutationTests28.java
+@@ -8,72 +8,53 @@
+ 
+ package org.checkstyle.autofix.recipe.useenhancedswitch.mutationtests28;
+ 
+-public class InputMutationTests28 {
++public class OutputMutationTests28 {
+ 
+     enum Season { SPRING, SUMMER, FALL, WINTER; int id = 0; }
+ 
+     void exhaustiveNoDefaultAssignment(Season s) {
+         int val = 0;
+-        // violation below, 'Switch can be replaced with enhanced switch'
+         switch (s) {
+-            case SPRING: val = 1; break;
+-            case SUMMER: val = 2; break;
+-            case FALL: val = 3; break;
+-            case WINTER: val = 4; break;
++            case SPRING -> val = 1;
++            case SUMMER -> val = 2;
++            case FALL -> val = 3;
++            case WINTER -> val = 4;
+         }
+         System.out.println(val);
+     }
+ 
+     void assignmentWithBlock(int x) {
+-        int val;
+-        // violation below, 'Switch can be replaced with enhanced switch'
+-        switch (x) {
+-            case 1: {
++        int val = switch (x) {
++            case 1 -> {
+                 System.out.println("block");
+-                val = 1;
+-                break;
++                yield 1;
+             }
+-            default:
+-                val = 0;
+-        }
++            default -> 0;
++        };
+         System.out.println(val);
+     }
+ 
+     void assignmentWithSingleStatementBlock(int x) {
+-        int val;
+-        // violation below, 'Switch can be replaced with enhanced switch'
+-        switch (x) {
+-            case 1: {
+-                val = 1;
+-                break;
+-            }
+-            default:
+-                val = 0;
+-        }
++        int val = switch (x) {
++            case 1 -> 1;
++            default -> 0;
++        };
+         System.out.println(val);
+     }
+ 
+     enum EmptyEnum {}
+ 
+     void emptyEnumExhaustive(EmptyEnum e) {
+-        // violation below, 'Switch can be replaced with enhanced switch'
+         switch (e) {
+-            default:
+-                System.out.println("default");
++            default -> System.out.println("default");
+         }
+     }
+ 
+     void mixedLabelsAssignment(Season s) {
+-        int val;
+-        // violation below, 'Switch can be replaced with enhanced switch'
+-        switch (s) {
+-            case SPRING:
+-            case SUMMER:
+-                val = 1;
+-                break;
+-            default:
+-                val = 0;
+-        }
++        int val = switch (s) {
++            case SPRING, SUMMER -> 1;
++            default -> 0;
++        };
+         System.out.println(val);
+     }
+ }
