@@ -30,7 +30,6 @@ import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
 import org.openrewrite.Tree;
 import org.openrewrite.TreeVisitor;
-import org.openrewrite.internal.RecipeRunException;
 import org.openrewrite.java.JavaVisitor;
 import org.openrewrite.java.tree.Expression;
 import org.openrewrite.java.tree.Flag;
@@ -333,20 +332,11 @@ public class UseEnhancedSwitch extends Recipe {
         }
 
         private boolean hasDisallowedControlFlow(final List<Statement> stmts) {
-            boolean hasFlow = false;
             final ControlFlowVisitor visitor = new ControlFlowVisitor();
-            try {
-                for (int index = 0; index < stmts.size() - 1; index++) {
-                    visitor.visit(stmts.get(index), null);
-                }
+            for (int index = 0; index < stmts.size() - 1; index++) {
+                visitor.visit(stmts.get(index), null);
             }
-            catch (ControlFlowException exception) {
-                hasFlow = true;
-            }
-            catch (RecipeRunException exception) {
-                hasFlow = true;
-            }
-            return hasFlow;
+            return visitor.hasDisallowedFlow();
         }
 
         private List<Statement> getMeaningfulStatements(final J.Case caseStmt) {
@@ -653,24 +643,29 @@ public class UseEnhancedSwitch extends Recipe {
             return result;
         }
 
-        private static final class ControlFlowException extends RuntimeException {
-            private static final long serialVersionUID = 1L;
-        }
-
         private static final class ControlFlowVisitor extends JavaVisitor<Void> {
+            private boolean hasDisallowedFlow;
+
+            public boolean hasDisallowedFlow() {
+                return hasDisallowedFlow;
+            }
+
             @Override
             public J.Return visitReturn(J.Return returnObj, Void voidObj) {
-                throw new ControlFlowException();
+                hasDisallowedFlow = true;
+                return returnObj;
             }
 
             @Override
             public J.Break visitBreak(J.Break breakObj, Void voidObj) {
-                throw new ControlFlowException();
+                hasDisallowedFlow = true;
+                return breakObj;
             }
 
             @Override
             public J.Continue visitContinue(J.Continue continueObj, Void voidObj) {
-                throw new ControlFlowException();
+                hasDisallowedFlow = true;
+                return continueObj;
             }
         }
 
