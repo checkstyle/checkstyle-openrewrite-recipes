@@ -126,4 +126,31 @@
     <description>replaced boolean return with true for org/checkstyle/autofix/recipe/RedundantImport$RemoveRedundantImportsVisitor::lambda$hasRedundantImportMarker$1</description>
     <lineContent>.anyMatch(marker -&gt; marker.isFor(CheckFullName.REDUNDANT_IMPORT));</lineContent>
   </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>UseEnhancedSwitch.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.UseEnhancedSwitch$UseEnhancedSwitchVisitor$ControlFlowVisitor</mutatedClass>
+    <mutatedMethod>visitBreak</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.NullReturnValsMutator</mutator>
+    <description>replaced return value with null for org/checkstyle/autofix/recipe/UseEnhancedSwitch$UseEnhancedSwitchVisitor$ControlFlowVisitor::visitBreak</description>
+    <lineContent>return breakObj;</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>UseEnhancedSwitch.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.UseEnhancedSwitch$UseEnhancedSwitchVisitor$ControlFlowVisitor</mutatedClass>
+    <mutatedMethod>visitContinue</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.NullReturnValsMutator</mutator>
+    <description>replaced return value with null for org/checkstyle/autofix/recipe/UseEnhancedSwitch$UseEnhancedSwitchVisitor$ControlFlowVisitor::visitContinue</description>
+    <lineContent>return continueObj;</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>UseEnhancedSwitch.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.UseEnhancedSwitch$UseEnhancedSwitchVisitor$ControlFlowVisitor</mutatedClass>
+    <mutatedMethod>visitReturn</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.NullReturnValsMutator</mutator>
+    <description>replaced return value with null for org/checkstyle/autofix/recipe/UseEnhancedSwitch$UseEnhancedSwitchVisitor$ControlFlowVisitor::visitReturn</description>
+    <lineContent>return returnObj;</lineContent>
+  </mutation>
 </suppressedMutations>
