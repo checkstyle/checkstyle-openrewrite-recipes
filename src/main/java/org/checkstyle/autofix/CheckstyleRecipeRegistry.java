@@ -35,6 +35,7 @@ import org.checkstyle.autofix.recipe.FinalClass;
 import org.checkstyle.autofix.recipe.FinalLocalVariable;
 import org.checkstyle.autofix.recipe.Header;
 import org.checkstyle.autofix.recipe.HexLiteralCase;
+import org.checkstyle.autofix.recipe.MissingDeprecated;
 import org.checkstyle.autofix.recipe.MissingOverride;
 import org.checkstyle.autofix.recipe.NewlineAtEndOfFile;
 import org.checkstyle.autofix.recipe.NumericalPrefixesInfixesSuffixesCharacterCase;
@@ -72,6 +73,7 @@ public final class CheckstyleRecipeRegistry {
         RECIPE_MAP.put(CheckFullName.ANNOTATION_ON_SAME_LINE, AnnotationOnSameLine::new);
         RECIPE_MAP.put(CheckFullName.USE_ENHANCED_SWITCH, UseEnhancedSwitch::new);
         RECIPE_MAP.put(CheckFullName.MISSING_OVERRIDE, MissingOverride::new);
+        RECIPE_MAP.put(CheckFullName.MISSING_DEPRECATED, MissingDeprecated::new);
         RECIPE_MAP.put(CheckFullName.UNUSED_IMPORT, UnusedImports::new);
     }
 

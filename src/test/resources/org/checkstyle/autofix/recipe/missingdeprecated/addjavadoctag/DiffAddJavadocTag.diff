@@ -1,0 +1,127 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/missingdeprecated/addjavadoctag/InputAddJavadocTag.java
++++ src/test/resources/org/checkstyle/autofix/recipe/missingdeprecated/addjavadoctag/OutputAddJavadocTag.java
+@@ -11,34 +11,40 @@
+ 
+ /**
+  * Class Javadoc without deprecated tag.
++ * @deprecated
+  */
+-@Deprecated // violation 'Must include both @java.lang.Deprecated annotation and @deprecated Javadoc tag with description.'
+-public class InputAddJavadocTag {
++@Deprecated
++public class OutputAddJavadocTag {
+ 
+     /**
+     * Field Javadoc without deprecated tag.
++    * @deprecated
+     */
+-    @Deprecated // violation 'Must include both @java.lang.Deprecated annotation and @deprecated Javadoc tag with description.'
++    @Deprecated
+     private int myField;
+ 
+     /* non-javadoc */
+     /**
+      * Existing Javadoc without deprecated tag.
++     * @deprecated
+      */
+-    @Deprecated // violation 'Must include both @java.lang.Deprecated annotation and @deprecated Javadoc tag with description.'
++    @Deprecated
+     public void doFoo() {
+     }
+ 
+-    /** Single line javadoc. */
+-    @Deprecated // violation 'Must include both @java.lang.Deprecated annotation and @deprecated Javadoc tag with description.'
++    /** Single line javadoc. 
++     * @deprecated
++     */
++    @Deprecated
+     public void singleLine() {
+     }
+ 
+     /**
+      * Multi-line javadoc
+      * that ends here
++     * @deprecated
+      */
+-    @Deprecated // violation 'Must include both @java.lang.Deprecated annotation and @deprecated Javadoc tag with description.'
++    @Deprecated
+     public void multiLineEnding() {
+     }
+ 
+@@ -47,54 +53,65 @@
+      *
+      * @deprecated
+      */
+-    @SuppressWarnings("deprecation") // violation 'Must include both @java.lang.Deprecated annotation and @deprecated Javadoc tag with description.'
++    @SuppressWarnings("deprecation")
++    @Deprecated
+     public void methodWithAnnotation() {
+     }
+ 
+     /**
+      * Weirdly indented javadoc
++     * @deprecated
+      */
+-    @Deprecated // violation 'Must include both @java.lang.Deprecated annotation and @deprecated Javadoc tag with description.'
++    @Deprecated
+     public void weirdlyIndentedMethod() {
+     }
+ 
+-    /** Single line field. */
+-    @Deprecated // violation 'Must include both @java.lang.Deprecated annotation and @deprecated Javadoc tag with description.'
++    /** Single line field. 
++     * @deprecated
++     */
++    @Deprecated
+     public int singleLineField;
+ 
+     // This is a non-javadoc comment
+-    /** Single line class. */
+-    @Deprecated // violation 'Must include both @java.lang.Deprecated annotation and @deprecated Javadoc tag with description.'
++    /** Single line class. 
++     * @deprecated
++     */
++    @Deprecated
+     class SingleLineClass {
+     }
+ 
+     // Line comment is not javadoc
+     /**
+      * Javadoc after a line comment.
++     * @deprecated
+      */
+-    @Deprecated // violation 'Must include both @java.lang.Deprecated annotation and @deprecated Javadoc tag with description.'
++    @Deprecated
+     public void lineCommentBeforeJavadoc() {
+     }
+ 
+     /* block comment is not javadoc */
+     /**
+      * Javadoc after a block comment.
++     * @deprecated
+      */
+-    @Deprecated // violation 'Must include both @java.lang.Deprecated annotation and @deprecated Javadoc tag with description.'
++    @Deprecated
+     public void blockCommentBeforeJavadoc() {
+     }
+ 
+     /**
+      * Describes the method.
+-     * Last line has content with no trailing blank line.*/
+-    @Deprecated // violation 'Must include both @java.lang.Deprecated annotation and @deprecated Javadoc tag with description.'
++     * Last line has content with no trailing blank line.
++     * @deprecated
++     */
++    @Deprecated
+     public void lastLineWithContent() {
+     }
+ 
+     /**
+      Continuation line without a leading asterisk.
++     * @deprecated
+      */
+-    @Deprecated // violation 'Must include both @java.lang.Deprecated annotation and @deprecated Javadoc tag with description.'
++    @Deprecated
+     public void indentWithoutAsterisk() {
+     }
+ }

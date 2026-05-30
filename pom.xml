@@ -414,6 +414,7 @@
                                 <param>org.checkstyle.autofix.recipe.AnnotationOnSameLine*</param>
                                 <param>org.checkstyle.autofix.recipe.ConstructorsDeclarationGrouping*</param>
                                 <param>org.checkstyle.autofix.recipe.UnusedImports*</param>
+                                <param>org.checkstyle.autofix.recipe.MissingDeprecated*</param>
                                 <param>org.checkstyle.autofix.recipe.UnusedLocalVariable*</param>
                             </targetClasses>
                             <targetTests>
@@ -426,6 +427,7 @@
                                 <param>org.checkstyle.autofix.recipe.UnusedLocalVariableTest</param>
                                 <param>org.checkstyle.autofix.recipe.ConstructorsDeclarationGroupingTest</param>
                                 <param>org.checkstyle.autofix.recipe.UnusedImportsTest</param>
+                                <param>org.checkstyle.autofix.recipe.MissingDeprecatedTest</param>
                             </targetTests>
 
                             <mutators>

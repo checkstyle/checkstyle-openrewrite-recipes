@@ -1,0 +1,83 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/missingdeprecated/multipledeclarations/InputMultipleDeclarations.java
++++ src/test/resources/org/checkstyle/autofix/recipe/missingdeprecated/multipledeclarations/OutputMultipleDeclarations.java
+@@ -12,37 +12,44 @@
+ /**
+  * @deprecated Use something else.
+  */
+-public class InputMultipleDeclarations { // violation 'Must include both @java.lang.Deprecated annotation and @deprecated Javadoc tag with description.'
++@Deprecated
++public class OutputMultipleDeclarations {
+ 
+     /**
+      * @deprecated
+      */
+-    private int fieldWithoutAnnotation; // violation 'Must include both @java.lang.Deprecated annotation and @deprecated Javadoc tag with description.'
++    @Deprecated
++    private int fieldWithoutAnnotation;
+ 
+     /**
+      * @deprecated
+      */
+-    int packagePrivateField; // violation 'Must include both @java.lang.Deprecated annotation and @deprecated Javadoc tag with description.'
++    @Deprecated
++    int packagePrivateField;
+ 
+     /**
+      * @deprecated
+      */
+-    public InputMultipleDeclarations() {} // violation 'Must include both @java.lang.Deprecated annotation and @deprecated Javadoc tag with description.'
++    @Deprecated
++    public OutputMultipleDeclarations() {}
+ 
+     /**
+      * @deprecated
+      */
+-    InputMultipleDeclarations(int x) {} // violation 'Must include both @java.lang.Deprecated annotation and @deprecated Javadoc tag with description.'
++    @Deprecated
++    OutputMultipleDeclarations(int x) {}
+ 
+     /**
+      * @deprecated
+      */
+-    void packagePrivateMethod() {} // violation 'Must include both @java.lang.Deprecated annotation and @deprecated Javadoc tag with description.'
++    @Deprecated
++    void packagePrivateMethod() {}
+ 
+     /**
+      * @deprecated
+      */
+-    class NestedClass {} // violation 'Must include both @java.lang.Deprecated annotation and @deprecated Javadoc tag with description.'
++    @Deprecated
++    class NestedClass {}
+ 
+     /**
+      * Existing Javadoc without deprecated tag.
+@@ -58,20 +65,24 @@
+     /**
+      * @deprecated
+      */
+-    public void methodWithLocalClass() { // violation 'Must include both @java.lang.Deprecated annotation and @deprecated Javadoc tag with description.'
++    @Deprecated
++    public void methodWithLocalClass() {
+         /**
+          * @deprecated
+          */
+-        class LocalClass {} // violation 'Must include both @java.lang.Deprecated annotation and @deprecated Javadoc tag with description.'
++        @Deprecated
++        class LocalClass {}
+     }
+ 
+     /**
+      * @deprecated
+      */
+-    Runnable r = new Runnable() { // violation 'Must include both @java.lang.Deprecated annotation and @deprecated Javadoc tag with description.'
++    @Deprecated
++    Runnable r = new Runnable() {
+         /**
+          * @deprecated
+          */
+-        public void run() {} // violation 'Must include both @java.lang.Deprecated annotation and @deprecated Javadoc tag with description.'
++        @Deprecated
++        public void run() {}
+     };
+ }

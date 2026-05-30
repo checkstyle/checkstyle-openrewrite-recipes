@@ -38,6 +38,7 @@ public enum CheckFullName {
     REDUNDANT_IMPORT("com.puppycrawl.tools.checkstyle.checks.imports.RedundantImportCheck"),
     USE_ENHANCED_SWITCH("com.puppycrawl.tools.checkstyle.checks.coding.UseEnhancedSwitchCheck"),
     MISSING_OVERRIDE("com.puppycrawl.tools.checkstyle.checks.annotation.MissingOverrideCheck"),
+    MISSING_DEPRECATED("com.puppycrawl.tools.checkstyle.checks.annotation.MissingDeprecatedCheck"),
     CONSTRUCTORS_DECLARATION_GROUPING(
         "com.puppycrawl.tools.checkstyle.checks.coding.ConstructorsDeclarationGroupingCheck"),
     UNUSED_IMPORT("com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck");
