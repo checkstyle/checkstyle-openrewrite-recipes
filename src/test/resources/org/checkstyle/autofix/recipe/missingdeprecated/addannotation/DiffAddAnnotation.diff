@@ -1,0 +1,32 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/missingdeprecated/addannotation/InputAddAnnotation.java
++++ src/test/resources/org/checkstyle/autofix/recipe/missingdeprecated/addannotation/OutputAddAnnotation.java
+@@ -9,22 +9,25 @@
+ 
+ package org.checkstyle.autofix.recipe.missingdeprecated.addannotation;
+ 
+-public class InputAddAnnotation {
++public class OutputAddAnnotation {
+     /**
+      * @deprecated Use something else.
+      */
+-    @SuppressWarnings("deprecation") // violation 'Must include both @java.lang.Deprecated annotation and @deprecated Javadoc tag with description.'
++    @SuppressWarnings("deprecation")
++    @Deprecated
+     public void doSomething() {}
+ 
+     /**
+      * @deprecated
+      */
+-    @SuppressWarnings("deprecation") // violation 'Must include both @java.lang.Deprecated annotation and @deprecated Javadoc tag with description.'
++    @SuppressWarnings("deprecation")
++    @Deprecated
+     public class InnerClass {
+         /**
+          * @deprecated
+          */
+-        @SuppressWarnings("deprecation") // violation 'Must include both @java.lang.Deprecated annotation and @deprecated Javadoc tag with description.'
++        @SuppressWarnings("deprecation")
++        @Deprecated
+         public int field;
+     }
+ }

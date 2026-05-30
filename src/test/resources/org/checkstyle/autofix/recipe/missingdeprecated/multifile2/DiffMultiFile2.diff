@@ -1,0 +1,11 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/missingdeprecated/multifile2/InputMultiFile2.java
++++ src/test/resources/org/checkstyle/autofix/recipe/missingdeprecated/multifile2/OutputMultiFile2.java
+@@ -9,7 +9,7 @@
+ 
+ package org.checkstyle.autofix.recipe.missingdeprecated.multifile2;
+ 
+-public class InputMultiFile2 {
++public class OutputMultiFile2 {
+     /**
+      * Existing Javadoc without deprecated tag.
+      */
