@@ -1,0 +1,11 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/arraytrailingcomma/noviolationarraytrailingcomma/InputNoViolationArrayTrailingComma.java
++++ src/test/resources/org/checkstyle/autofix/recipe/arraytrailingcomma/noviolationarraytrailingcomma/OutputNoViolationArrayTrailingComma.java
+@@ -8,7 +8,7 @@
+ 
+ package org.checkstyle.autofix.recipe.arraytrailingcomma.noviolationarraytrailingcomma;
+ 
+-public class InputNoViolationArrayTrailingComma {
++public class OutputNoViolationArrayTrailingComma {
+ 
+     int[] alreadyHasComma = new int[] {
+         1,
