@@ -1,0 +1,40 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/arraytrailingcomma/simplearraytrailingcomma/InputSimpleArrayTrailingComma.java
++++ src/test/resources/org/checkstyle/autofix/recipe/arraytrailingcomma/simplearraytrailingcomma/OutputSimpleArrayTrailingComma.java
+@@ -8,21 +8,21 @@
+ 
+ package org.checkstyle.autofix.recipe.arraytrailingcomma.simplearraytrailingcomma;
+ 
+-public class InputSimpleArrayTrailingComma {
++public class OutputSimpleArrayTrailingComma {
+ 
+     int[] singleElementMultiLine = new int[] {
+-        1 // violation 'Array should contain trailing comma.'
++        1,
+     };
+ 
+     int[] multiElementMultiLine = new int[] {
+         1,
+         2,
+-        3 // violation 'Array should contain trailing comma.'
++        3,
+     };
+ 
+     String[] stringArray = new String[] {
+         "hello",
+-        "world" // violation 'Array should contain trailing comma.'
++        "world",
+     };
+ 
+     int[] alreadyHasComma = new int[] {
+@@ -38,8 +38,8 @@
+     int[] sizedArray = new int[5];
+ 
+     int[][] nestedArray = new int[][] {
+-        { // violation 'Array should contain trailing comma.'
+-            1 // violation 'Array should contain trailing comma.'
+-        }
++        {
++            1,
++        },
+     };
+ }
