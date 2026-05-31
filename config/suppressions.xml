@@ -35,6 +35,7 @@
     <suppress checks="ImportControlCheck" files="[\\/]src[\\/]test[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]MissingOverrideTest\.java"/>
     <suppress checks="ImportControlCheck" files="[\\/]src[\\/]test[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]RedundantImportTest\.java"/>
     <suppress checks="ImportControlCheck" files="[\\/]src[\\/]test[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]ConstructorsDeclarationGroupingTest\.java"/>
+    <suppress checks="ImportControlCheck" files="[\\/]src[\\/]test[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]ArrayTrailingCommaTest\.java"/>
     <suppress checks="ImportControlCheck" files="[\\/]src[\\/]test[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]MissingDeprecatedTest\.java"/>
     <suppress checks="ImportControlCheck" files="[\\/]src[\\/]test[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]UpperEllTest\.java"/>
     <suppress checks="ImportControlCheck" files="[\\/]src[\\/]test[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]MissingSwitchDefaultTest\.java"/>

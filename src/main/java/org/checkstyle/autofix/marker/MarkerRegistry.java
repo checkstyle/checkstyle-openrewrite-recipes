@@ -24,6 +24,7 @@ import java.util.function.BiFunction;
 
 import org.checkstyle.autofix.CheckFullName;
 import org.checkstyle.autofix.marker.checks.AnnotationOnSameLineMarker;
+import org.checkstyle.autofix.marker.checks.ArrayTrailingCommaMarker;
 import org.checkstyle.autofix.marker.checks.AvoidStarImportMarker;
 import org.checkstyle.autofix.marker.checks.ConstructorsDeclarationGroupingMarker;
 import org.checkstyle.autofix.marker.checks.EmptyStatementMarker;
@@ -52,6 +53,7 @@ public final class MarkerRegistry {
     }
 
     static {
+        FACTORIES.put(CheckFullName.ARRAY_TRAILING_COMMA, ArrayTrailingCommaMarker::new);
         FACTORIES.put(CheckFullName.FINAL_LOCAL_VARIABLE, FinalLocalVariableMarker::new);
         FACTORIES.put(CheckFullName.AVOID_STAR_IMPORT, AvoidStarImportMarker::new);
         FACTORIES.put(CheckFullName.EMPTY_STATEMENT, EmptyStatementMarker::new);
