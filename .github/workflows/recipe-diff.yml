@@ -1,0 +1,53 @@
+name: Generate Recipe Diff Report
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  generate-diff:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup local maven cache
+        uses: actions/cache/restore@v6
+        with:
+          path: ~/.m2/repository
+          key: checkstyle-maven-cache-${{ hashFiles('**/pom.xml') }}
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Run diff report script
+        run: ./.ci/generate-diff-report-for-checkstyle.sh
+
+      - name: Upload diff HTML
+        uses: actions/upload-artifact@v7
+        with:
+          name: recipe-diff-html
+          path: .ci-temp/diff-report/recipe-diff.html
+          archive: false
+          retention-days: 30
+
+      - name: Upload line-by-line diff HTML
+        uses: actions/upload-artifact@v7
+        with:
+          name: recipe-diff-line-by-line-html
+          path: .ci-temp/diff-report/recipe-diff-line-by-line.html
+          archive: false
+          retention-days: 30
+
+      - name: Upload diff patch
+        uses: actions/upload-artifact@v7
+        with:
+          name: recipe-diff-patch
+          path: .ci-temp/diff-report/recipe-diff.patch
+          archive: false
+          retention-days: 30

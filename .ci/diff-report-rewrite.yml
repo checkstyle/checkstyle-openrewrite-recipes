@@ -1,0 +1,9 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: org.checkstyle.AllAutoFixes
+displayName: Checkstyle Auto Fix For Diff Report
+description: Auto-fix checkstyle violations for diff report generation.
+recipeList:
+  - org.checkstyle.autofix.CheckstyleAutoFix:
+      violationReportPath: "@WORK_DIR@/checkstyle-report.xml"
+      configurationPath: "@WORK_DIR@/checkstyle-config.xml"
