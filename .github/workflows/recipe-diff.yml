@@ -1,0 +1,35 @@
+name: Generate Recipe Diff Report
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  generate-diff:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: 'maven'
+
+      - name: Make script executable
+        run: chmod +x .ci/generate-diff-report.sh
+
+      - name: Run diff report script
+        run: ./.ci/generate-diff-report.sh
+
+      - name: Upload patch artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: recipe-diff-patch
+          path: |
+            target/diff-report/recipe-diff.patch
+            target/diff-report/recipe-diff.html
+          retention-days: 30
