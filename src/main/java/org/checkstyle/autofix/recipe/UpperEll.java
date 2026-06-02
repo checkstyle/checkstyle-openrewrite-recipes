@@ -27,7 +27,6 @@ import org.openrewrite.Recipe;
 import org.openrewrite.TreeVisitor;
 import org.openrewrite.java.JavaIsoVisitor;
 import org.openrewrite.java.tree.J;
-import org.openrewrite.java.tree.JavaType;
 
 /**
  * Fixes Checkstyle UpperEll violations by replacing lowercase 'l' suffix
@@ -67,21 +66,19 @@ public class UpperEll extends Recipe {
         @Override
         public J.CompilationUnit visitCompilationUnit(
                 J.CompilationUnit cu, ExecutionContext executionContext) {
-            this.sourcePath = cu.getSourcePath().toAbsolutePath();
+            this.sourcePath = cu.getSourcePath();
             return super.visitCompilationUnit(cu, executionContext);
         }
 
         @Override
         public J.Literal visitLiteral(J.Literal literal, ExecutionContext executionContext) {
-            J.Literal result = super.visitLiteral(literal, executionContext);
-            final String valueSource = result.getValueSource();
+            final String valueSource = literal.getValueSource();
+            J.Literal result = literal;
 
-            if (valueSource != null && valueSource.endsWith(LOWERCASE_L)
-                    && result.getType() == JavaType.Primitive.Long
-                    && isAtViolationLocation(result)) {
-
+            if (valueSource.endsWith(LOWERCASE_L)
+                    && isAtViolationLocation(literal)) {
                 final String numericPart = valueSource.substring(0, valueSource.length() - 1);
-                result = result.withValueSource(numericPart + UPPERCASE_L);
+                result = literal.withValueSource(numericPart + UPPERCASE_L);
             }
 
             return result;
@@ -94,10 +91,10 @@ public class UpperEll extends Recipe {
             final int column = PositionHelper.computeColumnPosition(cursor, literal, getCursor());
 
             return violations.stream().anyMatch(violation -> {
-                final Path absolutePath = violation.getFilePath().toAbsolutePath();
+                final Path violationPath = violation.getFilePath();
                 return violation.getLine() == line
                         && violation.getColumn() == column
-                        && absolutePath.endsWith(sourcePath);
+                        && violationPath.endsWith(sourcePath);
             });
         }
     }

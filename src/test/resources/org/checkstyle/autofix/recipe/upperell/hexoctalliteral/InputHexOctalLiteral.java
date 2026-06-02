@@ -22,6 +22,8 @@ public class InputHexOctalLiteral {
                            12345l;      // violation 'Should use uppercase 'L'.'
 
     public void calculateValues() {
+        long alignment1 = 0xDEADBEFl;
+        long alignment2 = 0x1234567l; // violation 'Should use uppercase 'L'.'
         // violation below, 'Should use uppercase 'L'.'
         long hexResult = 0xDEADBEEFl + 0xDEADBEFl; //suppressed violation for 0xDEADBEFl
         // violation below, 'Should use uppercase 'L'.'

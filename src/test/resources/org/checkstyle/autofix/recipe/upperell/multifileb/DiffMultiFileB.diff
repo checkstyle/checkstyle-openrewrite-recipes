@@ -1,0 +1,10 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/upperell/multifileb/InputMultiFileB.java
++++ src/test/resources/org/checkstyle/autofix/recipe/upperell/multifileb/OutputMultiFileB.java
+@@ -10,6 +10,6 @@
+ </module>
+ */
+ package org.checkstyle.autofix.recipe.upperell.multifileb;
+-public class InputMultiFileB {
++public class OutputMultiFileB {
+     long a = 1l;
+ }

@@ -22,6 +22,8 @@ public class OutputHexOctalLiteral {
                            12345L;
 
     public void calculateValues() {
+        long alignment1 = 0xDEADBEFl;
+        long alignment2 = 0x1234567L;
         long hexResult = 0xDEADBEEFL + 0xDEADBEFl; //suppressed violation for 0xDEADBEFl
         long octalResult = 01234l + 0xDEADBEEFL;   //suppressed violation for 01234l
         long binaryResult = 0b11110000L;

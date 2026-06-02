@@ -1,6 +1,6 @@
 --- src/test/resources/org/checkstyle/autofix/recipe/upperell/hexoctalliteral/InputHexOctalLiteral.java
 +++ src/test/resources/org/checkstyle/autofix/recipe/upperell/hexoctalliteral/OutputHexOctalLiteral.java
-@@ -13,19 +13,17 @@
+@@ -13,21 +13,19 @@
  
  package org.checkstyle.autofix.recipe.upperell.hexoctalliteral;
  
@@ -19,11 +19,14 @@
 +                           12345L;
  
      public void calculateValues() {
+         long alignment1 = 0xDEADBEFl;
+-        long alignment2 = 0x1234567l; // violation 'Should use uppercase 'L'.'
 -        // violation below, 'Should use uppercase 'L'.'
 -        long hexResult = 0xDEADBEEFl + 0xDEADBEFl; //suppressed violation for 0xDEADBEFl
 -        // violation below, 'Should use uppercase 'L'.'
 -        long octalResult = 01234l + 0xDEADBEEFl;   //suppressed violation for 01234l
 -        long binaryResult = 0b11110000l;           // violation 'Should use uppercase 'L'.'
++        long alignment2 = 0x1234567L;
 +        long hexResult = 0xDEADBEEFL + 0xDEADBEFl; //suppressed violation for 0xDEADBEFl
 +        long octalResult = 01234l + 0xDEADBEEFL;   //suppressed violation for 01234l
 +        long binaryResult = 0b11110000L;
