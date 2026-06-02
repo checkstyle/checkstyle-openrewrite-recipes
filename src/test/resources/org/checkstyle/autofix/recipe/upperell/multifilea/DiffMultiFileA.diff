@@ -1,0 +1,11 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/upperell/multifilea/InputMultiFileA.java
++++ src/test/resources/org/checkstyle/autofix/recipe/upperell/multifilea/OutputMultiFileA.java
+@@ -10,6 +10,6 @@
+ </module>
+ */
+ package org.checkstyle.autofix.recipe.upperell.multifilea;
+-public class InputMultiFileA {
+-    long a = 1l; // violation 'Should use uppercase 'L'.'
++public class OutputMultiFileA {
++    long a = 1L;
+ }

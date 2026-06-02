@@ -17,13 +17,40 @@
 
 package org.checkstyle.autofix.recipe;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.List;
+
 import org.checkstyle.autofix.parser.ReportParser;
+import org.junit.jupiter.api.Test;
 
 public class UpperEllTest extends AbstractRecipeTestSupport {
 
     @Override
     protected String getSubpackage() {
         return "upperell";
+    }
+
+    @Test
+    public void checkDescription() {
+        final UpperEll recipe = new UpperEll(List.of());
+
+        final String expectedDescription =
+                "Replace lowercase 'l' suffix in long literals with uppercase 'L' "
+                        + "to improve readability.";
+
+        assertEquals(expectedDescription, recipe.getDescription(),
+                "Invalid description");
+    }
+
+    @Test
+    public void checkDisplayName() {
+        final UpperEll recipe = new UpperEll(List.of());
+
+        final String expectedDisplayName = "UpperEll recipe";
+
+        assertEquals(expectedDisplayName, recipe.getDisplayName(),
+                "Invalid display name");
     }
 
     @RecipeTest
@@ -44,6 +71,11 @@ public class UpperEllTest extends AbstractRecipeTestSupport {
     @RecipeTest
     void symbolicLiteral(ReportParser parser) throws Exception {
         verify(parser, "SymbolicLiterals");
+    }
+
+    @RecipeTest
+    void multiFile(ReportParser parser) throws Exception {
+        verify(parser, "MultiFileA", "MultiFileB");
     }
 
 }
