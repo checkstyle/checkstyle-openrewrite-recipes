@@ -84,6 +84,7 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 | 🟢     | [`MissingOverrideOnRecordAccessor`](https://checkstyle.sourceforge.io/checks/annotation/missingoverrideonrecordaccessor.html#MissingOverrideOnRecordAccessor) | `TBD`           |                |
 | 🟢     | [`PackageAnnotation`](https://checkstyle.sourceforge.io/checks/annotation/packageannotation.html#PackageAnnotation)         | `TBD`            |                |
 | 🔴     | [`SuppressWarnings`](https://checkstyle.sourceforge.io/checks/annotation/suppresswarnings.html#SuppressWarnings)           |            | Remove inappropriate suppressions |
+| 🔴     | [`SuppressWarningsHolder`](https://checkstyle.sourceforge.io/checks/annotation/suppresswarningsholder.html#SuppressWarningsHolder) |            | Infrastructural module for SuppressWarningsFilter |
 
 ### Block Checks
 
