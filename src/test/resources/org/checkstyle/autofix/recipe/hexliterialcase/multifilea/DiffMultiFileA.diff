@@ -1,0 +1,11 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/hexliterialcase/multifilea/InputMultiFileA.java
++++ src/test/resources/org/checkstyle/autofix/recipe/hexliterialcase/multifilea/OutputMultiFileA.java
+@@ -8,6 +8,6 @@
+ 
+ package org.checkstyle.autofix.recipe.hexliterialcase.multifilea;
+ 
+-class InputMultiFileA {
+-    int h = 0xb; // violation 'Should use uppercase hexadecimal letters.'
++class OutputMultiFileA {
++    int h = 0xB;
+ }

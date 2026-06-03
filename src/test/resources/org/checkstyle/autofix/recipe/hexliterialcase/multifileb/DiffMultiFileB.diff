@@ -1,0 +1,10 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/hexliterialcase/multifileb/InputMultiFileB.java
++++ src/test/resources/org/checkstyle/autofix/recipe/hexliterialcase/multifileb/OutputMultiFileB.java
+@@ -8,6 +8,6 @@
+ 
+ package org.checkstyle.autofix.recipe.hexliterialcase.multifileb;
+ 
+-class InputMultiFileB {
++class OutputMultiFileB {
+     int h = 5;
+ }

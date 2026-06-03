@@ -388,60 +388,6 @@
   </mutation>
 
   <mutation unstable="false">
-    <sourceFile>HexLiteralCase.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.HexLiteralCase</mutatedClass>
-    <mutatedMethod>getDescription</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.EmptyObjectReturnValsMutator</mutator>
-    <description>replaced return value with &quot;&quot; for org/checkstyle/autofix/recipe/HexLiteralCase::getDescription</description>
-    <lineContent>return &quot;Replace HexLiteral lowercase (a-f) with UpperCase (A-F) &quot;</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>HexLiteralCase.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.HexLiteralCase</mutatedClass>
-    <mutatedMethod>getDisplayName</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.EmptyObjectReturnValsMutator</mutator>
-    <description>replaced return value with &quot;&quot; for org/checkstyle/autofix/recipe/HexLiteralCase::getDisplayName</description>
-    <lineContent>return &quot;HexLiteralCase Recipe&quot;;</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>HexLiteralCase.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.HexLiteralCase$HexLiteralCaseVisitor</mutatedClass>
-    <mutatedMethod>lambda$isAtViolationLocation$0</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
-    <description>removed conditional - replaced equality check with true</description>
-    <lineContent>&amp;&amp; absolutePath.endsWith(sourcePath);</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>HexLiteralCase.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.HexLiteralCase$HexLiteralCaseVisitor</mutatedClass>
-    <mutatedMethod>lambda$isAtViolationLocation$0</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.NakedReceiverMutator</mutator>
-    <description>replaced call to java/nio/file/Path::toAbsolutePath with receiver</description>
-    <lineContent>final Path absolutePath = violation.getFilePath().toAbsolutePath();</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>HexLiteralCase.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.HexLiteralCase$HexLiteralCaseVisitor</mutatedClass>
-    <mutatedMethod>visitCompilationUnit</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.NakedReceiverMutator</mutator>
-    <description>replaced call to java/nio/file/Path::toAbsolutePath with receiver</description>
-    <lineContent>this.sourcePath = cu.getSourcePath().toAbsolutePath();</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>HexLiteralCase.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.HexLiteralCase$HexLiteralCaseVisitor</mutatedClass>
-    <mutatedMethod>visitLiteral</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.ArgumentPropagationMutator</mutator>
-    <description>replaced call to org/openrewrite/java/JavaIsoVisitor::visitLiteral with argument</description>
-    <lineContent>J.Literal result = super.visitLiteral(literal, executionContext);</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
     <sourceFile>PositionHelper.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.PositionHelper</mutatedClass>
     <mutatedMethod>calculateColumnOffset</mutatedMethod>
