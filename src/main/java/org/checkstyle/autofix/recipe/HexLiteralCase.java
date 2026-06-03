@@ -67,13 +67,13 @@ public class HexLiteralCase extends Recipe {
         @Override
         public J.CompilationUnit visitCompilationUnit(
                 J.CompilationUnit cu, ExecutionContext executionContext) {
-            this.sourcePath = cu.getSourcePath().toAbsolutePath();
+            this.sourcePath = cu.getSourcePath();
             return super.visitCompilationUnit(cu, executionContext);
         }
 
         @Override
         public J.Literal visitLiteral(J.Literal literal, ExecutionContext executionContext) {
-            J.Literal result = super.visitLiteral(literal, executionContext);
+            J.Literal result = literal;
             final String valueSource = result.getValueSource();
 
             if (shouldProcessLongAndIntLiteral(result)) {
@@ -154,10 +154,9 @@ public class HexLiteralCase extends Recipe {
             final int column = PositionHelper.computeColumnPosition(cursor, literal, getCursor());
 
             return violations.stream().anyMatch(violation -> {
-                final Path absolutePath = violation.getFilePath().toAbsolutePath();
                 return violation.getLine() == line
                         && violation.getColumn() == column
-                        && absolutePath.endsWith(sourcePath);
+                        && violation.getFilePath().endsWith(sourcePath);
             });
         }
     }

@@ -17,7 +17,12 @@
 
 package org.checkstyle.autofix.recipe;
 
+import static com.google.common.truth.Truth.assertWithMessage;
+
+import java.util.Collections;
+
 import org.checkstyle.autofix.parser.ReportParser;
+import org.junit.jupiter.api.Test;
 
 public class HexLiteralCaseTest extends AbstractRecipeTestSupport {
 
@@ -39,5 +44,31 @@ public class HexLiteralCaseTest extends AbstractRecipeTestSupport {
     @RecipeTest
     void hexLiteralThree(ReportParser parser) throws Exception {
         verify(parser, "HexLiteralCaseThree");
+    }
+
+    @Test
+    public void checkDisplayName() {
+        final HexLiteralCase recipe = new HexLiteralCase(Collections.emptyList());
+        final String expectedDisplayName = "HexLiteralCase Recipe";
+
+        assertWithMessage("Invalid display name")
+                .that(recipe.getDisplayName())
+                .isEqualTo(expectedDisplayName);
+    }
+
+    @Test
+    public void checkDescription() {
+        final HexLiteralCase recipe = new HexLiteralCase(Collections.emptyList());
+        final String expectedDescription =
+                "Replace HexLiteral lowercase (a-f) with UpperCase (A-F) to improve readability.";
+
+        assertWithMessage("Invalid description")
+                .that(recipe.getDescription())
+                .isEqualTo(expectedDescription);
+    }
+
+    @RecipeTest
+    void multiFile(ReportParser parser) throws Exception {
+        verify(parser, "MultiFileA", "MultiFileB");
     }
 }
