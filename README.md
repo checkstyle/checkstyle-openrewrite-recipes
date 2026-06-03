@@ -81,6 +81,7 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 | 🔴     | [`AnnotationUseStyle`](https://checkstyle.sourceforge.io/checks/annotation/annotationusestyle.html#AnnotationUseStyle)       |            | Standardize annotation syntax |
 | 🟢     | [`MissingDeprecated`](https://checkstyle.sourceforge.io/checks/annotation/missingdeprecated.html#MissingDeprecated)         | `TBD`            |                |
 | 🟢     | [`MissingOverride`](https://checkstyle.sourceforge.io/checks/annotation/missingoverride.html#MissingOverride)               |[`MissingOverride`](https://github.com/checkstyle/checkstyle-openrewrite-recipes/blob/main/src/main/java/org/checkstyle/autofix/recipe/MissingOverride.java)           |                |
+| 🟢     | [`MissingOverrideOnRecordAccessor`](https://checkstyle.sourceforge.io/checks/annotation/missingoverrideonrecordaccessor.html#MissingOverrideOnRecordAccessor) | `TBD`           |                |
 | 🟢     | [`PackageAnnotation`](https://checkstyle.sourceforge.io/checks/annotation/packageannotation.html#PackageAnnotation)         | `TBD`            |                |
 | 🔴     | [`SuppressWarnings`](https://checkstyle.sourceforge.io/checks/annotation/suppresswarnings.html#SuppressWarnings)           |            | Remove inappropriate suppressions |
 
@@ -133,6 +134,7 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 | 🔴     | [`HiddenField`](https://checkstyle.sourceforge.io/checks/coding/hiddenfield.html#HiddenField)                             |           | Rename variables or use this. prefix |
 | 🔴     | [`IllegalCatch`](https://checkstyle.sourceforge.io/checks/coding/illegalcatch.html#IllegalCatch)                           |           | Change catch block exception types |
 | 🔴     | [`IllegalInstantiation`](https://checkstyle.sourceforge.io/checks/coding/illegalinstantiation.html#IllegalInstantiation)   |           | Replace with factory methods |
+| 🔴     | [`IllegalSymbol`](https://checkstyle.sourceforge.io/checks/coding/illegalsymbol.html#IllegalSymbol) |                 |                |
 | 🔴     | [`IllegalThrows`](https://checkstyle.sourceforge.io/checks/coding/illegalthrows.html#IllegalThrows)                       |           | Change throws declarations |
 | 🔴     | [`IllegalToken`](https://checkstyle.sourceforge.io/checks/coding/illegaltoken.html#IllegalToken)                         |           | Replace illegal tokens |
 | 🔴     | [`IllegalTokenText`](https://checkstyle.sourceforge.io/checks/coding/illegaltokentext.html#IllegalTokenText)               |           | Change token text |
@@ -153,10 +155,32 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 | 🔴     | [`NoClone`](https://checkstyle.sourceforge.io/checks/coding/noclone.html#NoClone)                                       |           | Remove clone() method |
 | 🟢     | [`NoEnumTrailingComma`](https://checkstyle.sourceforge.io/checks/coding/noenumtrailingcomma.html#NoEnumTrailingComma)     | `TBD`           |                |
 | 🔴     | [`NoFinalizer`](https://checkstyle.sourceforge.io/checks/coding/nofinalizer.html#NoFinalizer)                             |           | Remove finalize() method |
+| 🟢     | [`OneStatementPerLine`](https://checkstyle.sourceforge.io/checks/coding/onestatementperline.html#OneStatementPerLine) | `TBD`           |                |
+| 🟢     | [`OverloadMethodsDeclarationOrder`](https://checkstyle.sourceforge.io/checks/coding/overloadmethodsdeclarationorder.html#OverloadMethodsDeclarationOrder) | `TBD`           |                |
+| 🟢     | [`PackageDeclaration`](https://checkstyle.sourceforge.io/checks/coding/packagedeclaration.html#PackageDeclaration) | `TBD`           |                |
+| 🔴     | [`ParameterAssignment`](https://checkstyle.sourceforge.io/checks/coding/parameterassignment.html#ParameterAssignment) |                 |                |
+| 🔴     | [`PatternVariableAssignment`](https://checkstyle.sourceforge.io/checks/coding/patternvariableassignment.html#PatternVariableAssignment) |                 |                |
+| 🟢     | [`RequireThis`](https://checkstyle.sourceforge.io/checks/coding/requirethis.html#RequireThis) | `TBD`           |                |
+| 🔴     | [`ReturnCount`](https://checkstyle.sourceforge.io/checks/coding/returncount.html#ReturnCount) |                 |                |
+| 🟢     | [`SimplifyBooleanExpression`](https://checkstyle.sourceforge.io/checks/coding/simplifybooleanexpression.html#SimplifyBooleanExpression) | `TBD`           |                |
+| 🟢     | [`SimplifyBooleanReturn`](https://checkstyle.sourceforge.io/checks/coding/simplifybooleanreturn.html#SimplifyBooleanReturn) | `TBD`           |                |
+| 🟢     | [`StringLiteralEquality`](https://checkstyle.sourceforge.io/checks/coding/stringliteralequality.html#StringLiteralEquality) | `TBD`           |                |
+| 🔴     | [`SuperClone`](https://checkstyle.sourceforge.io/checks/coding/superclone.html#SuperClone) |                 |                |
+| 🟢     | [`SuperFinalize`](https://checkstyle.sourceforge.io/checks/coding/superfinalize.html#SuperFinalize) | `TBD`           |                |
+| 🟢     | [`TextBlockGoogleStyleFormatting`](https://checkstyle.sourceforge.io/checks/coding/textblockgooglestyleformatting.html#TextBlockGoogleStyleFormatting) | `TBD`           |                |
+| 🟢     | [`UnnecessaryNullCheckWithInstanceOf`](https://checkstyle.sourceforge.io/checks/coding/unnecessarynullcheckwithinstanceof.html#UnnecessaryNullCheckWithInstanceOf) | `TBD`           |                |
+| 🟢     | [`UnnecessaryParentheses`](https://checkstyle.sourceforge.io/checks/coding/unnecessaryparentheses.html#UnnecessaryParentheses) | `TBD`           |                |
+| 🟢     | [`UnnecessarySemicolonAfterOuterTypeDeclaration`](https://checkstyle.sourceforge.io/checks/coding/unnecessarysemicolonafteroutertypedeclaration.html#UnnecessarySemicolonAfterOuterTypeDeclaration) | `TBD`           |                |
+| 🟢     | [`UnnecessarySemicolonAfterTypeMemberDeclaration`](https://checkstyle.sourceforge.io/checks/coding/unnecessarysemicolonaftertypememberdeclaration.html#UnnecessarySemicolonAfterTypeMemberDeclaration) | `TBD`           |                |
+| 🟢     | [`UnnecessarySemicolonInEnumeration`](https://checkstyle.sourceforge.io/checks/coding/unnecessarysemicoloninenumeration.html#UnnecessarySemicolonInEnumeration) | `TBD`           |                |
+| 🟢     | [`UnnecessarySemicolonInTryWithResources`](https://checkstyle.sourceforge.io/checks/coding/unnecessarysemicolonintrywithresources.html#UnnecessarySemicolonInTryWithResources) | `TBD`           |                |
+| 🟢     | [`UnusedCatchParameterShouldBeUnnamed`](https://checkstyle.sourceforge.io/checks/coding/unusedcatchparametershouldbeunnamed.html#UnusedCatchParameterShouldBeUnnamed) | `TBD`           |                |
+| 🟢     | [`UnusedLambdaParameterShouldBeUnnamed`](https://checkstyle.sourceforge.io/checks/coding/unusedlambdaparametershouldbeunnamed.html#UnusedLambdaParameterShouldBeUnnamed) | `TBD`           |                |
 | 🟢     | [`UnusedLocalVariable`](https://checkstyle.sourceforge.io/checks/coding/unusedlocalvariable.html#UnusedLocalVariable)   | [`UnusedLocalVariable`](https://github.com/checkstyle/checkstyle-openrewrite-recipes/blob/main/src/main/java/org/checkstyle/autofix/recipe/UnusedLocalVariable.java)           |                |
-| 🔴     | [`NoFinalizer`](https://checkstyle.sourceforge.io/checks/coding/nofinalizer.html#NoFinalizer)                           |           | Remove finalize() method |
+| 🟢     | [`UnusedTryResourceShouldBeUnnamed`](https://checkstyle.sourceforge.io/checks/coding/unusedtryresourceshouldbeunnamed.html#UnusedTryResourceShouldBeUnnamed) | `TBD`           |                |
 | 🟢     | [`UseEnhancedSwitch`](https://checkstyle.sourceforge.io/checks/coding/useenhancedswitch.html#UseEnhancedSwitch)           | [`UseEnhancedSwitch`](https://github.com/checkstyle/checkstyle-openrewrite-recipes/blob/main/src/main/java/org/checkstyle/autofix/recipe/UseEnhancedSwitch.java)       |                |
-
+| 🔴     | [`VariableDeclarationUsageDistance`](https://checkstyle.sourceforge.io/checks/coding/variabledeclarationusagedistance.html#VariableDeclarationUsageDistance) |                 |                |
+| 🔴     | [`WhenShouldBeUsed`](https://checkstyle.sourceforge.io/checks/coding/whenshouldbeused.html#WhenShouldBeUsed) |                 |                |
 
 ### Headers
 
@@ -231,8 +255,10 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 | 🟢     | [`FinalParameters`](https://checkstyle.sourceforge.io/checks/misc/finalparameters.html#FinalParameters)       | `TBD`                                                                                                                                                              |                |
 | 🟢     | [`HexLiteralCase`](https://checkstyle.sourceforge.io/checks/misc/hexliteralcase.html#HexLiteralCase)                                       | [`HexLiteralCase`](https://github.com/checkstyle/checkstyle-openrewrite-recipes/blob/main/src/main/java/org/checkstyle/autofix/recipe/HexLiteralCase.java)         |                |
 | 🟢     | [`Indentation`](https://checkstyle.sourceforge.io/checks/misc/indentation.html#Indentation)                 | `TBD`                                                                                                                                                              |                |
+| 🟢     | [`LineEnding`](https://checkstyle.sourceforge.io/checks/misc/lineending.html#LineEnding) | `TBD`           |                |
 | 🟢     | [`NewlineAtEndOfFile`](https://checkstyle.sourceforge.io/checks/misc/newlineatendoffile.html#NewlineAtEndOfFile) | [`NewlineAtEndOfFile`](https://github.com/checkstyle/checkstyle-openrewrite-recipes/blob/main/src/main/java/org/checkstyle/autofix/recipe/NewlineAtEndOfFile.java) |                |
 | 🔴     | [`NoCodeInFile`](https://checkstyle.sourceforge.io/checks/misc/nocodeinfile.html#NoCodeInFile)             |                                                                                                                                                                    | Add code or remove file |
+| 🟢     | [`NumericalPrefixesInfixesSuffixesCharacterCase`](https://checkstyle.sourceforge.io/checks/misc/numericalprefixesinfixessuffixescharactercase.html#NumericalPrefixesInfixesSuffixesCharacterCase)                         | [`NumericalPrefixesInfixesSuffixesCharacterCase`](https://github.com/checkstyle/checkstyle-openrewrite-recipes/blob/main/src/main/java/org/checkstyle/autofix/recipe/NumericalPrefixesInfixesSuffixesCharacterCase.java)                     |                |
 | 🔴     | [`OrderedProperties`](https://checkstyle.sourceforge.io/checks/misc/orderedproperties.html#OrderedProperties) |                                                                                                                                                                    | Reorder properties |
 | 🔴     | [`OuterTypeFilename`](https://checkstyle.sourceforge.io/checks/misc/outertypefilename.html#OuterTypeFilename) |                                                                                                                                                                    | Rename file or class |
 | 🔴     | [`TodoComment`](https://checkstyle.sourceforge.io/checks/misc/todocomment.html#TodoComment)                 |                                                                                                                                                                    | Resolve TODO comments |
@@ -241,7 +267,6 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 | 🟢     | [`UncommentedMain`](https://checkstyle.sourceforge.io/checks/misc/uncommentedmain.html#UncommentedMain)     | `TBD`                                                                                                                                                              |                |
 | 🔴     | [`UniqueProperties`](https://checkstyle.sourceforge.io/checks/misc/uniqueproperties.html#UniqueProperties)   |                                                                                                                                                                    | Remove duplicate properties |
 | 🟢     | [`UpperEll`](https://checkstyle.sourceforge.io/checks/misc/upperell.html#UpperEll)                         | [`UpperEll`](https://github.com/checkstyle/checkstyle-openrewrite-recipes/blob/main/src/main/java/org/checkstyle/autofix/recipe/UpperEll.java)                     |                |
-| 🟢     | [`NumericalPrefixesInfixesSuffixesCharacterCase`](https://checkstyle.sourceforge.io/checks/misc/numericalprefixesinfixessuffixescharactercase.html#NumericalPrefixesInfixesSuffixesCharacterCase)                         | [`NumericalPrefixesInfixesSuffixesCharacterCase`](https://github.com/checkstyle/checkstyle-openrewrite-recipes/blob/main/src/main/java/org/checkstyle/autofix/recipe/NumericalPrefixesInfixesSuffixesCharacterCase.java)                     |                |
 
 ### Modifiers
 
@@ -261,6 +286,7 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 | 🟢     | [`CatchParameterName`](https://checkstyle.sourceforge.io/checks/naming/catchparametername.html#CatchParameterName)           | `TBD`            |                |
 | 🟢     | [`ClassTypeParameterName`](https://checkstyle.sourceforge.io/checks/naming/classtypeparametername.html#ClassTypeParameterName) | `TBD`            |                |
 | 🟢     | [`ConstantName`](https://checkstyle.sourceforge.io/checks/naming/constantname.html#ConstantName)                           | `TBD`            |                |
+| 🔴     | [`GoogleNonConstantFieldName`](https://checkstyle.sourceforge.io/checks/naming/googlenonconstantfieldname.html#GoogleNonConstantFieldName) |                 |                |
 | 🔴     | [`IllegalIdentifierName`](https://checkstyle.sourceforge.io/checks/naming/illegalidentifiername.html#IllegalIdentifierName) |            | Rename identifiers |
 | 🟢     | [`InterfaceTypeParameterName`](https://checkstyle.sourceforge.io/checks/naming/interfacetypeparametername.html#InterfaceTypeParameterName) | `TBD`            |                |
 | 🟢     | [`LambdaParameterName`](https://checkstyle.sourceforge.io/checks/naming/lambdaparametername.html#LambdaParameterName)       | `TBD`            |                |
