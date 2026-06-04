@@ -1,0 +1,11 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/redundantimport/multifileb/InputMultiFileB.java
++++ src/test/resources/org/checkstyle/autofix/recipe/redundantimport/multifileb/OutputMultiFileB.java
+@@ -7,7 +7,5 @@
+ */
+ package org.checkstyle.autofix.recipe.redundantimport.multifile;
+ 
+-import java.lang.String; // violation 'Redundant import from the java.lang package'
+-
+-class InputMultiFileB {
++class OutputMultiFileB {
+ }

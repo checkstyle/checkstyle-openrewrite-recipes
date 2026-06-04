@@ -11,6 +11,8 @@ package org.checkstyle.autofix.recipe.redundantimport.complexcase;
 import java.io.*;
 
 import java.util.List;
+import java.util.HashMap;
+import static java.lang.Math.E;
 import java.util.Iterator;
 import java.util.Enumeration;
 import java.util.Arrays;

@@ -63,7 +63,7 @@ public class RedundantImport extends Recipe {
         public J.CompilationUnit visitCompilationUnit(J.CompilationUnit cu,
                                                       ExecutionContext executionContext) {
 
-            this.sourcePath = cu.getSourcePath().toAbsolutePath();
+            this.sourcePath = cu.getSourcePath();
 
             final Set<String> seenImports = new HashSet<>();
             final String currentPackage = getCurrentPackage(cu);
@@ -89,11 +89,10 @@ public class RedundantImport extends Recipe {
             else {
                 seenImports.add(importName);
 
-                if (!importStmt.isStatic() && importName.startsWith(JAVA_LANG_PREFIX)) {
+                if (importName.startsWith(JAVA_LANG_PREFIX)) {
                     isRedundant = true;
                 }
-                else if (currentPackage != null && !importStmt.isStatic()
-                        && importName.startsWith(currentPackage + ".")) {
+                else if (importName.startsWith(currentPackage + ".")) {
                     isRedundant = true;
                 }
             }
@@ -116,7 +115,7 @@ public class RedundantImport extends Recipe {
             final int line = PositionHelper.computeLinePosition(cursor, literal, getCursor());
             final int column = PositionHelper.computeColumnPosition(cursor, literal, getCursor());
             return violations.removeIf(violation -> {
-                final Path absolutePath = violation.getFilePath().toAbsolutePath();
+                final Path absolutePath = violation.getFilePath();
                 return violation.getLine() == line
                         && violation.getColumn() == column
                         && absolutePath.endsWith(sourcePath);

@@ -15,6 +15,8 @@ import java.io.*;
 
 import java.util.List;
 import java.util.List; // violation 'Duplicate import'
+import java.util.HashMap;
+import static java.lang.Math.E; import java.lang.String; // violation 'Redundant import from the java.lang package'
 import java.util.Iterator;
 import java.util.Enumeration;
 import java.util.Arrays;

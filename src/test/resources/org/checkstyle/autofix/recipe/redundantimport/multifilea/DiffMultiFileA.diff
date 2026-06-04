@@ -1,0 +1,9 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/redundantimport/multifilea/InputMultiFileA.java
++++ src/test/resources/org/checkstyle/autofix/recipe/redundantimport/multifilea/OutputMultiFileA.java
+@@ -9,5 +9,5 @@
+ 
+ import static java.lang.Math.PI;
+ 
+-class InputMultiFileA {
++class OutputMultiFileA {
+ }
