@@ -1,0 +1,11 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/redundantimport/defaultpackage/InputDefaultPackage.java
++++ src/test/resources/org/checkstyle/autofix/recipe/redundantimport/defaultpackage/OutputDefaultPackage.java
+@@ -7,7 +7,6 @@
+ */
+ 
+ import java.util.List;
+-import java.util.List; // violation 'Duplicate import'
+ 
+-class InputDefaultPackage {
++class OutputDefaultPackage {
+ }

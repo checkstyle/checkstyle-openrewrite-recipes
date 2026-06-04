@@ -1,6 +1,6 @@
 --- src/test/resources/org/checkstyle/autofix/recipe/redundantimport/complexcase/InputComplexCase.java
 +++ src/test/resources/org/checkstyle/autofix/recipe/redundantimport/complexcase/OutputComplexCase.java
-@@ -8,13 +8,9 @@
+@@ -8,15 +8,11 @@
  */
  
  package org.checkstyle.autofix.recipe.redundantimport.complexcase;
@@ -11,10 +11,13 @@
  
  import java.util.List;
 -import java.util.List; // violation 'Duplicate import'
+ import java.util.HashMap;
+-import static java.lang.Math.E; import java.lang.String; // violation 'Redundant import from the java.lang package'
++import static java.lang.Math.E;
  import java.util.Iterator;
  import java.util.Enumeration;
  import java.util.Arrays;
-@@ -26,7 +22,6 @@
+@@ -28,7 +24,6 @@
  
  import static java.io.File.listRoots;
  import static javax.swing.WindowConstants.*;
@@ -22,7 +25,7 @@
  import static java.io.File.createTempFile;
  import static java.io.File.pathSeparator;
  import static org.checkstyle.autofix.recipe.redundantimport.complexcase.InputComplexCase.myStaticMethod;
-@@ -41,6 +36,6 @@
+@@ -43,6 +38,6 @@
  
  import static java.lang.Math.PI;
  
