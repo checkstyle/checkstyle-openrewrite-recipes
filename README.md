@@ -117,7 +117,7 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 
 | Status | Check                                                                                                                        | Recipe          | Coverage Notes |
 |--------|------------------------------------------------------------------------------------------------------------------------------|-----------------|----------------|
-| 🟢     | [`ArrayTrailingComma`](https://checkstyle.sourceforge.io/checks/coding/arraytrailingcomma.html#ArrayTrailingComma)         | `TBD`           |                |
+| 🟢     | [`ArrayTrailingComma`](https://checkstyle.sourceforge.io/checks/coding/arraytrailingcomma.html#ArrayTrailingComma)         | [ArrayTrailingComma](https://github.com/checkstyle/checkstyle-openrewrite-recipes/blob/main/src/main/java/org/checkstyle/autofix/recipe/ArrayTrailingComma.java)           |                |
 | 🔴     | [`AvoidDoubleBraceInitialization`](https://checkstyle.sourceforge.io/checks/coding/avoiddoublebraceinitialization.html#AvoidDoubleBraceInitialization) |           | Requires refactoring initialization logic |
 | 🔴     | [`AvoidInlineConditionals`](https://checkstyle.sourceforge.io/checks/coding/avoidinlineconditionals.html#AvoidInlineConditionals) |           | Requires extracting to if-else statements |
 | 🟢     | [`AvoidNoArgumentSuperConstructorCall`](https://checkstyle.sourceforge.io/checks/coding/avoidnoargumentsuperconstructorcall.html#AvoidNoArgumentSuperConstructorCall) | `TBD`           |                |

@@ -24,9 +24,12 @@ import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
 import org.openrewrite.TreeVisitor;
 import org.openrewrite.java.JavaIsoVisitor;
+import org.openrewrite.java.marker.TrailingComma;
 import org.openrewrite.java.tree.Comment;
 import org.openrewrite.java.tree.Space;
 import org.openrewrite.java.tree.TextComment;
+import org.openrewrite.marker.Marker;
+import org.openrewrite.marker.Markers;
 
 public class RemoveViolationComments extends Recipe {
 
@@ -50,6 +53,43 @@ public class RemoveViolationComments extends Recipe {
         @Override
         public Space visitSpace(
                 Space space, Space.Location loc, ExecutionContext executionContext) {
+            final Space result = removeViolationCommentsFromSpace(space);
+            return super.visitSpace(result, loc, executionContext);
+        }
+
+        @Override
+        public Markers visitMarkers(
+                Markers markers, ExecutionContext executionContext) {
+            final Markers visitedMarkers =
+                    super.visitMarkers(markers, executionContext);
+
+            boolean changed = false;
+            final List<Marker> newMarkers =
+                    new ArrayList<>(visitedMarkers.getMarkers().size());
+
+            for (Marker marker : visitedMarkers.getMarkers()) {
+                if (marker instanceof TrailingComma) {
+                    final TrailingComma trailingComma =
+                            (TrailingComma) marker;
+                    final Space newSuffix =
+                            removeViolationCommentsFromSpace(trailingComma.getSuffix());
+                    if (newSuffix != trailingComma.getSuffix()) {
+                        newMarkers.add(trailingComma.withSuffix(newSuffix));
+                        changed = true;
+                        continue;
+                    }
+                }
+                newMarkers.add(marker);
+            }
+
+            Markers result = visitedMarkers;
+            if (changed) {
+                result = visitedMarkers.withMarkers(newMarkers);
+            }
+            return result;
+        }
+
+        private Space removeViolationCommentsFromSpace(Space space) {
             String suffixAccumulator = null;
             final List<Comment> filteredComments = new ArrayList<>();
 
@@ -78,7 +118,6 @@ public class RemoveViolationComments extends Recipe {
             }
 
             Space result;
-
             if (filteredComments.size() == space.getComments().size()) {
                 result = space;
             }
@@ -89,7 +128,7 @@ public class RemoveViolationComments extends Recipe {
                             mergeWhitespace(result.getWhitespace(), suffixAccumulator));
                 }
             }
-            return super.visitSpace(result, loc, executionContext);
+            return result;
         }
 
         private String mergeWhitespace(String original, String suffix) {

@@ -28,6 +28,7 @@ import java.util.stream.Collectors;
 import org.checkstyle.autofix.parser.CheckConfiguration;
 import org.checkstyle.autofix.parser.CheckstyleViolation;
 import org.checkstyle.autofix.recipe.AnnotationOnSameLine;
+import org.checkstyle.autofix.recipe.ArrayTrailingComma;
 import org.checkstyle.autofix.recipe.AvoidStarImport;
 import org.checkstyle.autofix.recipe.ConstructorsDeclarationGrouping;
 import org.checkstyle.autofix.recipe.EmptyStatement;
@@ -73,6 +74,7 @@ public final class CheckstyleRecipeRegistry {
         RECIPE_MAP.put(CheckFullName.USE_ENHANCED_SWITCH, UseEnhancedSwitch::new);
         RECIPE_MAP.put(CheckFullName.MISSING_OVERRIDE, MissingOverride::new);
         RECIPE_MAP.put(CheckFullName.UNUSED_IMPORT, UnusedImports::new);
+        RECIPE_MAP.put(CheckFullName.ARRAY_TRAILING_COMMA, ArrayTrailingComma::new);
     }
 
     private CheckstyleRecipeRegistry() {
