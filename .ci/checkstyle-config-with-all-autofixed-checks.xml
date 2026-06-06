@@ -14,6 +14,7 @@
             <property name="allowSamelineSingleParameterlessAnnotation" value="false"/>
         </module>
         <module name="AnnotationOnSameLine"/>
+        <module name="AvoidNoArgumentSuperConstructorCall"/>
         <module name="ArrayTrailingComma"/>
         <module name="AvoidStarImport"/>
         <module name="ConstructorsDeclarationGrouping"/>

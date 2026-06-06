@@ -1,0 +1,16 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/avoidnoargumentsuperconstructorcall/nestedsupercall/InputNestedSuperCall.java
++++ src/test/resources/org/checkstyle/autofix/recipe/avoidnoargumentsuperconstructorcall/nestedsupercall/OutputNestedSuperCall.java
+@@ -8,12 +8,11 @@
+ 
+ package org.checkstyle.autofix.recipe.avoidnoargumentsuperconstructorcall.nestedsupercall;
+ 
+-class InputNestedSuperCall {
++class OutputNestedSuperCall {
+     void test() {
+         consume(() -> {
+             class Local {
+                 Local() {
+-                    super(); // violation 'Unnecessary call to superclass constructor with no arguments.'
+                 }
+             }
+         });

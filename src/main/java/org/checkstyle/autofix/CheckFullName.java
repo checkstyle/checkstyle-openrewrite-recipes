@@ -25,6 +25,8 @@ public enum CheckFullName {
     ARRAY_TRAILING_COMMA(
         "com.puppycrawl.tools.checkstyle.checks.coding.ArrayTrailingCommaCheck"),
 
+    AVOID_NO_ARGUMENT_SUPER_CONSTRUCTOR_CALL(
+      "com.puppycrawl.tools.checkstyle.checks.coding.AvoidNoArgumentSuperConstructorCallCheck"),
     AVOID_STAR_IMPORT("com.puppycrawl.tools.checkstyle.checks.imports.AvoidStarImportCheck"),
     EMPTY_STATEMENT("com.puppycrawl.tools.checkstyle.checks.coding.EmptyStatementCheck"),
     ANNOTATION_LOCATION(

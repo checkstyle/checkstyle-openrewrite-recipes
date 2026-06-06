@@ -26,6 +26,7 @@ import org.checkstyle.autofix.CheckFullName;
 import org.checkstyle.autofix.marker.checks.AnnotationLocationMarker;
 import org.checkstyle.autofix.marker.checks.AnnotationOnSameLineMarker;
 import org.checkstyle.autofix.marker.checks.ArrayTrailingCommaMarker;
+import org.checkstyle.autofix.marker.checks.AvoidNoArgumentSuperConstructorCallMarker;
 import org.checkstyle.autofix.marker.checks.AvoidStarImportMarker;
 import org.checkstyle.autofix.marker.checks.ConstructorsDeclarationGroupingMarker;
 import org.checkstyle.autofix.marker.checks.EmptyForInitializerPadMarker;
@@ -84,6 +85,9 @@ public final class MarkerRegistry {
         FACTORIES.put(CheckFullName.MISSING_SWITCH_DEFAULT, MissingSwitchDefaultMarker::new);
         FACTORIES.put(CheckFullName.UNUSED_IMPORT, UnusedImportsMarker::new);
         FACTORIES.put(CheckFullName.UNNECESSARY_PARENTHESES, UnnecessaryParenthesesMarker::new);
+        FACTORIES.put(
+                CheckFullName.AVOID_NO_ARGUMENT_SUPER_CONSTRUCTOR_CALL,
+                AvoidNoArgumentSuperConstructorCallMarker::new);
     }
 
     public static CheckstyleViolationMarker create(UUID id, CheckstyleViolation violation) {
