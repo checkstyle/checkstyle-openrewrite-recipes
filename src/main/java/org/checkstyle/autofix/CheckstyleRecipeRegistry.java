@@ -28,6 +28,7 @@ import java.util.stream.Collectors;
 import org.checkstyle.autofix.parser.CheckConfiguration;
 import org.checkstyle.autofix.parser.CheckstyleViolation;
 import org.checkstyle.autofix.recipe.AnnotationOnSameLine;
+import org.checkstyle.autofix.recipe.AvoidNoArgumentSuperConstructorCall;
 import org.checkstyle.autofix.recipe.AvoidStarImport;
 import org.checkstyle.autofix.recipe.ConstructorsDeclarationGrouping;
 import org.checkstyle.autofix.recipe.EmptyStatement;
@@ -56,6 +57,8 @@ public final class CheckstyleRecipeRegistry {
             new EnumMap<>(CheckFullName.class);
 
     static {
+        RECIPE_MAP.put(CheckFullName.AVOID_NO_ARGUMENT_SUPER_CONSTRUCTOR_CALL,
+            AvoidNoArgumentSuperConstructorCall::new);
         RECIPE_MAP.put(CheckFullName.AVOID_STAR_IMPORT, AvoidStarImport::new);
         RECIPE_MAP.put(CheckFullName.EMPTY_STATEMENT, EmptyStatement::new);
         RECIPE_MAP.put(CheckFullName.CONSTRUCTORS_DECLARATION_GROUPING,

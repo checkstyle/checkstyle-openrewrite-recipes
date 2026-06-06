@@ -1,0 +1,18 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/avoidnoargumentsuperconstructorcall/otherfile/InputOtherFile.java
++++ src/test/resources/org/checkstyle/autofix/recipe/avoidnoargumentsuperconstructorcall/otherfile/OutputOtherFile.java
+@@ -10,12 +10,12 @@
+ 
+ import java.util.ArrayList;
+ 
+-public class InputOtherFile extends ArrayList<Object> {
+-    public InputOtherFile() {
++public class OutputOtherFile extends ArrayList<Object> {
++    public OutputOtherFile() {
+         super(1);
+     }
+ 
+-    public InputOtherFile(int x) {
++    public OutputOtherFile(int x) {
+         super(x);
+     }
+ }
