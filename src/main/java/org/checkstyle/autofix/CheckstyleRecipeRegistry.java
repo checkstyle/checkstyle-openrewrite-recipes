@@ -31,6 +31,7 @@ import org.checkstyle.autofix.parser.CheckstyleViolation;
 import org.checkstyle.autofix.recipe.AnnotationLocation;
 import org.checkstyle.autofix.recipe.AnnotationOnSameLine;
 import org.checkstyle.autofix.recipe.ArrayTrailingComma;
+import org.checkstyle.autofix.recipe.AvoidNoArgumentSuperConstructorCall;
 import org.checkstyle.autofix.recipe.AvoidStarImport;
 import org.checkstyle.autofix.recipe.ConstructorsDeclarationGrouping;
 import org.checkstyle.autofix.recipe.EmptyForInitializerPad;
@@ -64,6 +65,8 @@ public final class CheckstyleRecipeRegistry {
         RECIPE_MAP_WITH_CONFIG.put(CheckFullName.NEWLINE_AT_END_OF_FILE, NewlineAtEndOfFile::new);
         RECIPE_MAP_WITH_CONFIG.put(CheckFullName.HEADER, Header::new);
         RECIPE_MAP.put(CheckFullName.ANNOTATION_LOCATION, AnnotationLocation::new);
+        RECIPE_MAP.put(CheckFullName.AVOID_NO_ARGUMENT_SUPER_CONSTRUCTOR_CALL,
+                AvoidNoArgumentSuperConstructorCall::new);
         RECIPE_MAP.put(CheckFullName.USE_ENHANCED_SWITCH, UseEnhancedSwitch::new);
         RECIPE_MAP.put(CheckFullName.ARRAY_TRAILING_COMMA, ArrayTrailingComma::new);
         RECIPE_MAP.put(CheckFullName.ANNOTATION_ON_SAME_LINE, AnnotationOnSameLine::new);
