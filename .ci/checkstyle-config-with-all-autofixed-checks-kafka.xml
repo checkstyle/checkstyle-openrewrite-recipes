@@ -17,6 +17,7 @@
 
     <module name="TreeWalker">
         <module name="AnnotationOnSameLine"/>
+        <module name="AvoidNoArgumentSuperConstructorCall"/>
         <module name="AvoidStarImport"/>
         <module name="ConstructorsDeclarationGrouping"/>
         <module name="EmptyStatement"/>

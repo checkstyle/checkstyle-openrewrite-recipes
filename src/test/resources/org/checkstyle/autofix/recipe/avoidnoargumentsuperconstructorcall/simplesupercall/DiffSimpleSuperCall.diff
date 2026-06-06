@@ -1,0 +1,18 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/avoidnoargumentsuperconstructorcall/simplesupercall/InputSimpleSuperCall.java
++++ src/test/resources/org/checkstyle/autofix/recipe/avoidnoargumentsuperconstructorcall/simplesupercall/OutputSimpleSuperCall.java
+@@ -10,12 +10,11 @@
+ 
+ import java.util.ArrayList;
+ 
+-public class InputSimpleSuperCall extends ArrayList<Object> {
+-    public InputSimpleSuperCall() {
+-        super(); System.out.println(); // violation 'Unnecessary call to superclass constructor with no arguments.'
++public class OutputSimpleSuperCall extends ArrayList<Object> {
++    public OutputSimpleSuperCall() { System.out.println();
+     }
+ 
+-    public InputSimpleSuperCall(int x) {
++    public OutputSimpleSuperCall(int x) {
+         super(x);
+     }
+ }

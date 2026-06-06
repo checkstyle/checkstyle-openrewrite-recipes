@@ -54,6 +54,8 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
             new EnumMap<>(CheckFullName.class);
 
     static {
+        TARGET_TYPES.put(CheckFullName.AVOID_NO_ARGUMENT_SUPER_CONSTRUCTOR_CALL,
+                J.MethodInvocation.class);
         TARGET_TYPES.put(CheckFullName.HEADER, J.CompilationUnit.class);
         TARGET_TYPES.put(CheckFullName.FINAL_CLASS, J.ClassDeclaration.class);
         TARGET_TYPES.put(CheckFullName.FINAL_LOCAL_VARIABLE,
