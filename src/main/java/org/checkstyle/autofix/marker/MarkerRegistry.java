@@ -37,6 +37,7 @@ import org.checkstyle.autofix.marker.checks.MissingSwitchDefaultMarker;
 import org.checkstyle.autofix.marker.checks.NewlineAtEndOfFileMarker;
 import org.checkstyle.autofix.marker.checks.NumericalPrefixesInfixesSuffixesCharacterCaseMarker;
 import org.checkstyle.autofix.marker.checks.RedundantImportMarker;
+import org.checkstyle.autofix.marker.checks.UnnecessaryParenthesesMarker;
 import org.checkstyle.autofix.marker.checks.UnusedImportsMarker;
 import org.checkstyle.autofix.marker.checks.UnusedLocalVariableMarker;
 import org.checkstyle.autofix.marker.checks.UpperEllMarker;
@@ -74,6 +75,7 @@ public final class MarkerRegistry {
                 ConstructorsDeclarationGroupingMarker::new);
         FACTORIES.put(CheckFullName.MISSING_SWITCH_DEFAULT, MissingSwitchDefaultMarker::new);
         FACTORIES.put(CheckFullName.UNUSED_IMPORT, UnusedImportsMarker::new);
+        FACTORIES.put(CheckFullName.UNNECESSARY_PARENTHESES, UnnecessaryParenthesesMarker::new);
     }
 
     public static CheckstyleViolationMarker create(UUID id, CheckstyleViolation violation) {

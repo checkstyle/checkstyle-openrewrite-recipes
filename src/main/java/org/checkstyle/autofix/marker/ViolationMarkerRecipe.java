@@ -68,6 +68,7 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
         TARGET_TYPES.put(CheckFullName.MISSING_SWITCH_DEFAULT, J.Switch.class);
         TARGET_TYPES.put(CheckFullName.CONSTRUCTORS_DECLARATION_GROUPING,
                 J.MethodDeclaration.class);
+        TARGET_TYPES.put(CheckFullName.UNNECESSARY_PARENTHESES, J.Parentheses.class);
     }
 
     private final List<CheckstyleViolation> violations;
