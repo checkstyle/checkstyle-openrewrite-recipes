@@ -559,6 +559,7 @@
                                 <param>org.checkstyle.autofix.recipe.Header*</param>
                                 <param>org.checkstyle.autofix.recipe.HexLiteralCase*</param>
                                 <param>org.checkstyle.autofix.recipe.MissingOverride*</param>
+                                <param>org.checkstyle.autofix.recipe.UnnecessaryParentheses*</param>
                                 <param>org.checkstyle.autofix.recipe.AvoidStarImport*</param>
                                 <param>org.checkstyle.autofix.recipe.MissingSwitchDefault*</param>
                                 <param>org.checkstyle.autofix.recipe.AnnotationLocation*</param>
@@ -570,6 +571,7 @@
                                 <param>org.checkstyle.autofix.recipe.HeaderTest</param>
                                 <param>org.checkstyle.autofix.recipe.HexLiteralCaseTest</param>
                                 <param>org.checkstyle.autofix.recipe.MissingOverrideTest</param>
+                                <param>org.checkstyle.autofix.recipe.UnnecessaryParenthesesTest</param>
                                 <param>org.checkstyle.autofix.recipe.AvoidStarImportTest</param>
                                 <param>org.checkstyle.autofix.recipe.RecipeTest</param>
                                 <param>org.checkstyle.autofix.recipe.RemoveViolationCommentsTest</param>
