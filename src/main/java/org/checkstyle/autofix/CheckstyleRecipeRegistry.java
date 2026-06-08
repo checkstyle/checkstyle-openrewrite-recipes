@@ -40,6 +40,7 @@ import org.checkstyle.autofix.recipe.MissingOverride;
 import org.checkstyle.autofix.recipe.NewlineAtEndOfFile;
 import org.checkstyle.autofix.recipe.NumericalPrefixesInfixesSuffixesCharacterCase;
 import org.checkstyle.autofix.recipe.RedundantImport;
+import org.checkstyle.autofix.recipe.UnnecessaryParentheses;
 import org.checkstyle.autofix.recipe.UnusedImports;
 import org.checkstyle.autofix.recipe.UnusedLocalVariable;
 import org.checkstyle.autofix.recipe.UpperEll;
@@ -75,6 +76,7 @@ public final class CheckstyleRecipeRegistry {
         RECIPE_MAP.put(CheckFullName.MISSING_OVERRIDE, MissingOverride::new);
         RECIPE_MAP.put(CheckFullName.MISSING_DEPRECATED, MissingDeprecated::new);
         RECIPE_MAP.put(CheckFullName.UNUSED_IMPORT, UnusedImports::new);
+        RECIPE_MAP.put(CheckFullName.UNNECESSARY_PARENTHESES, UnnecessaryParentheses::new);
     }
 
     private CheckstyleRecipeRegistry() {

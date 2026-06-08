@@ -334,6 +334,7 @@
                                 <param>org.checkstyle.autofix.recipe.HexLiteralCase*</param>
                                 <param>org.checkstyle.autofix.recipe.MissingOverride*</param>
                                 <param>org.checkstyle.autofix.recipe.AvoidStarImport*</param>
+                                <param>org.checkstyle.autofix.recipe.UnnecessaryParentheses*</param>
                             </targetClasses>
                             <targetTests>
                                 <param>org.checkstyle.autofix.parser.*</param>
@@ -346,6 +347,7 @@
                                 <param>org.checkstyle.autofix.recipe.AvoidStarImportTest</param>
                                 <param>org.checkstyle.autofix.recipe.RecipeTest</param>
                                 <param>org.checkstyle.autofix.recipe.RemoveViolationCommentsTest</param>
+                                <param>org.checkstyle.autofix.recipe.UnnecessaryParenthesesTest</param>
                             </targetTests>
 
                             <mutators>
