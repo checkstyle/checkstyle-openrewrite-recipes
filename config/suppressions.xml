@@ -22,6 +22,7 @@
     <suppress checks="ImportControlCheck" files="[\\/]src[\\/]test[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]EmptyStatementTest\.java"/>
     <suppress checks="ImportControlCheck" files="[\\/]src[\\/]test[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]UnusedImportsTest\.java"/>
     <suppress checks="ImportControlCheck" files="[\\/]src[\\/]test[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]FinalClassTest\.java"/>
+    <suppress checks="ImportControlCheck" files="[\\/]src[\\/]test[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]UnnecessaryParenthesesTest\.java"/>
     <suppress checks="ImportControlCheck" files="[\\/]src[\\/]test[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]UnusedLocalVariableTest\.java"/>
     <suppress checks="ImportControlCheck" files="[\\/]src[\\/]test[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]FinalLocalVariableTest\.java"/>
     <suppress checks="ImportControlCheck" files="[\\/]src[\\/]test[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]HexLiteralCaseTest\.java"/>
