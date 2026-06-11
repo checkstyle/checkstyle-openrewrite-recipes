@@ -19,8 +19,6 @@ package org.checkstyle.autofix.recipe;
 
 import static com.google.common.truth.Truth.assertWithMessage;
 
-import java.util.List;
-
 import org.checkstyle.autofix.parser.ReportParser;
 import org.junit.jupiter.api.Test;
 
@@ -33,8 +31,7 @@ public class RedundantImportTest extends AbstractRecipeTestSupport {
 
     @Test
     public void checkDisplayName() {
-        final RedundantImport recipe =
-                new RedundantImport(List.of());
+        final RedundantImport recipe = new RedundantImport();
 
         final String expectedDisplayName =
                 "Remove redundant imports";
@@ -46,8 +43,7 @@ public class RedundantImportTest extends AbstractRecipeTestSupport {
 
     @Test
     public void checkDescription() {
-        final RedundantImport recipe =
-                new RedundantImport(List.of());
+        final RedundantImport recipe = new RedundantImport();
 
         final String expectedDescription =
                 "Remove duplicate imports, java.lang imports, and same package imports";
