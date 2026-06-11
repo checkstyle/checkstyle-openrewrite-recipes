@@ -21,14 +21,13 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.List;
 import java.util.stream.Collectors;
 
+import org.checkstyle.autofix.CheckFullName;
+import org.checkstyle.autofix.marker.CheckstyleViolationMarker;
 import org.checkstyle.autofix.parser.CheckConfiguration;
-import org.checkstyle.autofix.parser.CheckstyleViolation;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
-import org.openrewrite.Tree;
 import org.openrewrite.TreeVisitor;
 import org.openrewrite.java.JavaIsoVisitor;
 import org.openrewrite.java.tree.J;
@@ -41,11 +40,9 @@ public class Header extends Recipe {
     private static final String CHARSET_PROPERTY = "charset";
     private static final String LINE_SEPARATOR = "\n";
 
-    private final List<CheckstyleViolation> violations;
     private final CheckConfiguration config;
 
-    public Header(List<CheckstyleViolation> violations, CheckConfiguration config) {
-        this.violations = violations;
+    public Header(CheckConfiguration config) {
         this.config = config;
     }
 
@@ -62,7 +59,7 @@ public class Header extends Recipe {
     @Override
     public TreeVisitor<?, ExecutionContext> getVisitor() {
         final String licenseHeader = extractLicenseHeader(config);
-        return new HeaderVisitor(violations, licenseHeader);
+        return new HeaderVisitor(licenseHeader);
     }
 
     private static String extractLicenseHeader(CheckConfiguration config) {
@@ -90,31 +87,29 @@ public class Header extends Recipe {
     }
 
     private static class HeaderVisitor extends JavaIsoVisitor<ExecutionContext> {
-        private final List<CheckstyleViolation> violations;
         private final String licenseHeader;
 
-        HeaderVisitor(List<CheckstyleViolation> violations, String licenseHeader) {
-            this.violations = violations;
+        HeaderVisitor(String licenseHeader) {
             this.licenseHeader = licenseHeader;
         }
 
         @Override
-        public J visit(Tree tree, ExecutionContext executionContext) {
-            J result = super.visit(tree, executionContext);
+        public J.CompilationUnit visitCompilationUnit(J.CompilationUnit cu,
+                                                      ExecutionContext executionContext) {
+            J.CompilationUnit result = super.visitCompilationUnit(cu, executionContext);
 
-            if (tree instanceof JavaSourceFile) {
-                JavaSourceFile sourceFile = (JavaSourceFile) tree;
-                final Path filePath = sourceFile.getSourcePath().toAbsolutePath();
-                final String currentHeader = extractCurrentHeader(sourceFile);
-                final String fixedHeader = licenseHeader + LINE_SEPARATOR + currentHeader;
+            final boolean hasMarker = result.getMarkers()
+                    .findAll(CheckstyleViolationMarker.class).stream()
+                    .anyMatch(marker -> marker.isFor(CheckFullName.HEADER));
 
-                if (hasViolation(filePath) && !currentHeader.startsWith(licenseHeader)) {
-
-                    sourceFile = sourceFile.withPrefix(
-                            Space.format(fixedHeader));
+            if (hasMarker) {
+                final String currentHeader = extractCurrentHeader(result);
+                if (!currentHeader.startsWith(licenseHeader)) {
+                    final String fixedHeader = licenseHeader + LINE_SEPARATOR + currentHeader;
+                    result = result.withPrefix(Space.format(fixedHeader));
                 }
-                result = super.visit(sourceFile, executionContext);
             }
+
             return result;
         }
 
@@ -125,12 +120,6 @@ public class Header extends Recipe {
                                 + toLfLineEnding(comment.getSuffix());
                     })
                     .collect(Collectors.joining(""));
-        }
-
-        private boolean hasViolation(Path filePath) {
-            return violations.removeIf(violation -> {
-                return violation.getFilePath().endsWith(filePath);
-            });
         }
     }
 }

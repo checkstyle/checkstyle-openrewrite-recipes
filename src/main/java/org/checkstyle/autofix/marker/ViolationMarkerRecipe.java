@@ -25,7 +25,6 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.UUID;
 
 import org.checkstyle.autofix.CheckFullName;
@@ -96,7 +95,7 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
             else {
                 final Path sourcePath = compUnit.getSourcePath();
                 final List<CheckstyleViolation> fileViolations = violations.stream()
-                        .filter(violation -> Objects.equals(violation.getFilePath(), sourcePath))
+                        .filter(violation -> violation.getFilePath().endsWith(sourcePath))
                         .toList();
 
                 if (!fileViolations.isEmpty()) {
@@ -184,6 +183,7 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
             final CheckFullName checkFullName = violation.getSource().checkName();
             if (checkFullName != null) {
                 final Class<? extends Tree> targetType = switch (checkFullName) {
+                    case HEADER -> J.CompilationUnit.class;
                     case FINAL_CLASS -> J.ClassDeclaration.class;
                     case FINAL_LOCAL_VARIABLE -> J.VariableDeclarations.NamedVariable.class;
                     case AVOID_STAR_IMPORT -> J.Import.class;
@@ -229,7 +229,7 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
             boolean result = false;
             if (range.startLine() == violation.getLine()
                     && range.endLine() > violation.getLine()) {
-                if (range.startCol() <= violation.getColumn()) {
+                if (violation.getColumn() <= 0 || range.startCol() <= violation.getColumn()) {
                     result = true;
                 }
             }
@@ -320,6 +320,13 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
                 fileMarkers = acc.getByFile(compUnit.getSourcePath());
                 if (!fileMarkers.isEmpty()) {
                     result = super.visitCompilationUnit(compUnit, executionContext);
+
+                    final List<CheckstyleViolationMarker> markers = fileMarkers.get(result.getId());
+                    if (markers != null) {
+                        for (CheckstyleViolationMarker marker : markers) {
+                            result = result.withMarkers(result.getMarkers().add(marker));
+                        }
+                    }
                 }
                 result = result.withMarkers(result.getMarkers().add(APPLIED_MARKER));
             }
