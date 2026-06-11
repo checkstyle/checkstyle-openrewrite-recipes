@@ -17,13 +17,8 @@
 
 package org.checkstyle.autofix.recipe;
 
-import java.nio.file.Path;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import org.checkstyle.autofix.PositionHelper;
-import org.checkstyle.autofix.parser.CheckstyleViolation;
+import org.checkstyle.autofix.CheckFullName;
+import org.checkstyle.autofix.marker.CheckstyleViolationMarker;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
 import org.openrewrite.TreeVisitor;
@@ -31,14 +26,6 @@ import org.openrewrite.java.JavaIsoVisitor;
 import org.openrewrite.java.tree.J;
 
 public class RedundantImport extends Recipe {
-
-    private static final String JAVA_LANG_PREFIX = "java.lang.";
-
-    private final List<CheckstyleViolation> violations;
-
-    public RedundantImport(List<CheckstyleViolation> violations) {
-        this.violations = violations;
-    }
 
     @Override
     public String getDisplayName() {
@@ -55,71 +42,24 @@ public class RedundantImport extends Recipe {
         return new RemoveRedundantImportsVisitor();
     }
 
-    private final class RemoveRedundantImportsVisitor extends JavaIsoVisitor<ExecutionContext> {
-
-        private Path sourcePath;
+    private static final class RemoveRedundantImportsVisitor
+            extends JavaIsoVisitor<ExecutionContext> {
 
         @Override
         public J.CompilationUnit visitCompilationUnit(J.CompilationUnit cu,
                                                       ExecutionContext executionContext) {
 
-            this.sourcePath = cu.getSourcePath();
-
-            final Set<String> seenImports = new HashSet<>();
-            final String currentPackage = getCurrentPackage(cu);
-
             return cu.withImports(
                     cu.getImports().stream()
-                            .filter(importStmt -> {
-                                return !isRedundant(importStmt, seenImports,
-                                    currentPackage) || !isAtViolationLocation(importStmt); })
+                            .filter(importStmt -> !hasRedundantImportMarker(importStmt))
                             .toList()
             );
         }
 
-        private boolean isRedundant(J.Import importStmt,
-                                    Set<String> seenImports, String currentPackage) {
-            final String importName = importStmt.getQualid().toString();
-
-            boolean isRedundant = false;
-
-            if (seenImports.contains(importName)) {
-                isRedundant = true;
-            }
-            else {
-                seenImports.add(importName);
-
-                if (importName.startsWith(JAVA_LANG_PREFIX)) {
-                    isRedundant = true;
-                }
-                else if (importName.startsWith(currentPackage + ".")) {
-                    isRedundant = true;
-                }
-            }
-
-            return isRedundant;
-        }
-
-        private String getCurrentPackage(J.CompilationUnit compilationUnit) {
-            String currentPackage = null;
-            if (compilationUnit.getPackageDeclaration() != null) {
-                currentPackage = compilationUnit.getPackageDeclaration()
-                        .getExpression().printTrimmed(getCursor());
-            }
-            return currentPackage;
-        }
-
-        private boolean isAtViolationLocation(J.Import literal) {
-            final J.CompilationUnit cursor = getCursor().firstEnclosing(J.CompilationUnit.class);
-
-            final int line = PositionHelper.computeLinePosition(cursor, literal, getCursor());
-            final int column = PositionHelper.computeColumnPosition(cursor, literal, getCursor());
-            return violations.removeIf(violation -> {
-                final Path absolutePath = violation.getFilePath();
-                return violation.getLine() == line
-                        && violation.getColumn() == column
-                        && absolutePath.endsWith(sourcePath);
-            });
+        private boolean hasRedundantImportMarker(J.Import importStmt) {
+            return importStmt.getMarkers()
+                    .findAll(CheckstyleViolationMarker.class).stream()
+                    .anyMatch(marker -> marker.isFor(CheckFullName.REDUNDANT_IMPORT));
         }
 
     }
