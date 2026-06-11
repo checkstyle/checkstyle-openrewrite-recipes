@@ -175,7 +175,43 @@
   <mutation unstable="false">
     <sourceFile>CheckstyleRecipeRegistry.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.CheckstyleRecipeRegistry</mutatedClass>
+    <mutatedMethod>addRecipe</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to java/util/EnumMap::get</description>
+    <lineContent>Optional.ofNullable(RECIPE_MAP_WITH_CONFIG.get(checkName))</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>CheckstyleRecipeRegistry.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.CheckstyleRecipeRegistry</mutatedClass>
     <mutatedMethod>lambda$addRecipe$3</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to java/util/List::add</description>
+    <lineContent>recipes.add(factory.apply(violations, checkConfig));</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>CheckstyleRecipeRegistry.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.CheckstyleRecipeRegistry</mutatedClass>
+    <mutatedMethod>lambda$addRecipe$3</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to java/util/function/BiFunction::apply</description>
+    <lineContent>recipes.add(factory.apply(violations, checkConfig));</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>CheckstyleRecipeRegistry.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.CheckstyleRecipeRegistry</mutatedClass>
+    <mutatedMethod>lambda$addRecipe$3</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.ArgumentPropagationMutator</mutator>
+    <description>replaced call to java/util/function/BiFunction::apply with argument</description>
+    <lineContent>recipes.add(factory.apply(violations, checkConfig));</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>CheckstyleRecipeRegistry.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.CheckstyleRecipeRegistry</mutatedClass>
+    <mutatedMethod>lambda$addRecipe$4</mutatedMethod>
     <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
     <description>removed call to java/util/List::add</description>
     <lineContent>recipes.add(factory.apply(violations));</lineContent>
@@ -184,7 +220,7 @@
   <mutation unstable="false">
     <sourceFile>CheckstyleRecipeRegistry.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.CheckstyleRecipeRegistry</mutatedClass>
-    <mutatedMethod>lambda$addRecipe$3</mutatedMethod>
+    <mutatedMethod>lambda$addRecipe$4</mutatedMethod>
     <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
     <description>removed call to java/util/function/Function::apply</description>
     <lineContent>recipes.add(factory.apply(violations));</lineContent>
@@ -193,10 +229,19 @@
   <mutation unstable="false">
     <sourceFile>CheckstyleRecipeRegistry.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.CheckstyleRecipeRegistry</mutatedClass>
-    <mutatedMethod>lambda$addRecipe$3</mutatedMethod>
+    <mutatedMethod>lambda$addRecipe$4</mutatedMethod>
     <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.ArgumentPropagationMutator</mutator>
     <description>replaced call to java/util/function/Function::apply with argument</description>
     <lineContent>recipes.add(factory.apply(violations));</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>CheckstyleRecipeRegistry.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.CheckstyleRecipeRegistry</mutatedClass>
+    <mutatedMethod>lambda$getRecipes$0</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to java/util/Map$Entry::getValue</description>
+    <lineContent>.ifPresent(checkConfig -&gt; addRecipe(recipes, checkConfig, entry.getValue()));</lineContent>
   </mutation>
 
   <mutation unstable="false">
@@ -322,16 +367,7 @@
   <mutation unstable="false">
     <sourceFile>Header.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.recipe.Header$HeaderVisitor</mutatedClass>
-    <mutatedMethod>hasViolation</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.BooleanTrueReturnValsMutator</mutator>
-    <description>replaced boolean return with true for org/checkstyle/autofix/recipe/Header$HeaderVisitor::hasViolation</description>
-    <lineContent>return violations.removeIf(violation -&gt; {</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>Header.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.Header$HeaderVisitor</mutatedClass>
-    <mutatedMethod>lambda$extractCurrentHeader$0</mutatedMethod>
+    <mutatedMethod>lambda$extractCurrentHeader$1</mutatedMethod>
     <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.ArgumentPropagationMutator</mutator>
     <description>replaced call to org/checkstyle/autofix/recipe/Header::toLfLineEnding with argument</description>
     <lineContent>+ toLfLineEnding(comment.getSuffix());</lineContent>
@@ -340,7 +376,7 @@
   <mutation unstable="false">
     <sourceFile>Header.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.recipe.Header$HeaderVisitor</mutatedClass>
-    <mutatedMethod>lambda$extractCurrentHeader$0</mutatedMethod>
+    <mutatedMethod>lambda$extractCurrentHeader$1</mutatedMethod>
     <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
     <description>removed call to org/checkstyle/autofix/recipe/Header$HeaderVisitor::getCursor</description>
     <lineContent>return comment.printComment(getCursor())</lineContent>
@@ -349,46 +385,28 @@
   <mutation unstable="false">
     <sourceFile>Header.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.recipe.Header$HeaderVisitor</mutatedClass>
-    <mutatedMethod>lambda$hasViolation$1</mutatedMethod>
+    <mutatedMethod>lambda$visitCompilationUnit$0</mutatedMethod>
     <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.BooleanTrueReturnValsMutator</mutator>
-    <description>replaced boolean return with true for org/checkstyle/autofix/recipe/Header$HeaderVisitor::lambda$hasViolation$1</description>
-    <lineContent>return violation.getFilePath().endsWith(filePath);</lineContent>
+    <description>replaced boolean return with true for org/checkstyle/autofix/recipe/Header$HeaderVisitor::lambda$visitCompilationUnit$0</description>
+    <lineContent>.anyMatch(marker -&gt; marker.isFor(CheckFullName.HEADER));</lineContent>
   </mutation>
 
   <mutation unstable="false">
     <sourceFile>Header.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.recipe.Header$HeaderVisitor</mutatedClass>
-    <mutatedMethod>visit</mutatedMethod>
+    <mutatedMethod>visitCompilationUnit</mutatedMethod>
     <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.ArgumentPropagationMutator</mutator>
-    <description>replaced call to org/openrewrite/java/JavaIsoVisitor::visit with argument</description>
-    <lineContent>J result = super.visit(tree, executionContext);</lineContent>
+    <description>replaced call to org/openrewrite/java/JavaIsoVisitor::visitCompilationUnit with argument</description>
+    <lineContent>J.CompilationUnit result = super.visitCompilationUnit(cu, executionContext);</lineContent>
   </mutation>
 
   <mutation unstable="false">
     <sourceFile>Header.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.recipe.Header$HeaderVisitor</mutatedClass>
-    <mutatedMethod>visit</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.NakedReceiverMutator</mutator>
-    <description>replaced call to java/nio/file/Path::toAbsolutePath with receiver</description>
-    <lineContent>final Path filePath = sourceFile.getSourcePath().toAbsolutePath();</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>Header.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.Header$HeaderVisitor</mutatedClass>
-    <mutatedMethod>visit</mutatedMethod>
+    <mutatedMethod>visitCompilationUnit</mutatedMethod>
     <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
     <description>removed conditional - replaced equality check with true</description>
-    <lineContent>if (hasViolation(filePath) &amp;&amp; !currentHeader.startsWith(licenseHeader)) {</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>Header.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.Header$HeaderVisitor</mutatedClass>
-    <mutatedMethod>visit</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.ArgumentPropagationMutator</mutator>
-    <description>replaced call to org/openrewrite/java/JavaIsoVisitor::visit with argument</description>
-    <lineContent>result = super.visit(sourceFile, executionContext);</lineContent>
+    <lineContent>if (hasMarker) {</lineContent>
   </mutation>
 
   <!-- Cannot be killed by integration tests until a second recipe lands a marker on this node type. See issue #236 -->

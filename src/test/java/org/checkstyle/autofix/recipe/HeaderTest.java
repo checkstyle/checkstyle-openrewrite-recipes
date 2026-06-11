@@ -19,8 +19,6 @@ package org.checkstyle.autofix.recipe;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.Collections;
-
 import org.checkstyle.autofix.parser.ReportParser;
 import org.junit.jupiter.api.Test;
 
@@ -36,7 +34,7 @@ public class HeaderTest extends AbstractRecipeTestSupport {
 
     @Test
     void metadata() {
-        final Header recipe = new Header(Collections.emptyList(), null);
+        final Header recipe = new Header(null);
         assertEquals("Header recipe",
                 recipe.getDisplayName());
         assertEquals("Adds headers to Java source files when missing.",

@@ -58,6 +58,9 @@ public final class CheckstyleRecipeRegistry {
             CheckConfiguration, Recipe>> RECIPE_MAP_WITH_CONFIG =
             new EnumMap<>(CheckFullName.class);
 
+    private static final EnumMap<CheckFullName, Function<CheckConfiguration, Recipe>>
+            RECIPE_MAP_WITH_CONFIG_NO_VIOLATIONS = new EnumMap<>(CheckFullName.class);
+
     private static final EnumMap<CheckFullName, Supplier<Recipe>>
             RECIPE_MAP_NO_VIOLATIONS = new EnumMap<>(CheckFullName.class);
 
@@ -65,7 +68,7 @@ public final class CheckstyleRecipeRegistry {
         RECIPE_MAP.put(CheckFullName.CONSTRUCTORS_DECLARATION_GROUPING,
             ConstructorsDeclarationGrouping::new);
         RECIPE_MAP.put(CheckFullName.UPPER_ELL, UpperEll::new);
-        RECIPE_MAP_WITH_CONFIG.put(CheckFullName.HEADER, Header::new);
+        RECIPE_MAP_WITH_CONFIG_NO_VIOLATIONS.put(CheckFullName.HEADER, Header::new);
         RECIPE_MAP_WITH_CONFIG.put(CheckFullName.NEWLINE_AT_END_OF_FILE, NewlineAtEndOfFile::new);
         RECIPE_MAP.put(CheckFullName.NUMERICAL_PREFIXES_INF_SUF_CASE,
             NumericalPrefixesInfixesSuffixesCharacterCase::new);
@@ -123,6 +126,9 @@ public final class CheckstyleRecipeRegistry {
 
         Optional.ofNullable(RECIPE_MAP_NO_VIOLATIONS.get(checkName))
                 .ifPresent(factory -> recipes.add(factory.get()));
+
+        Optional.ofNullable(RECIPE_MAP_WITH_CONFIG_NO_VIOLATIONS.get(checkName))
+                .ifPresent(factory -> recipes.add(factory.apply(checkConfig)));
 
         Optional.ofNullable(RECIPE_MAP_WITH_CONFIG.get(checkName))
                 .ifPresent(factory -> {
