@@ -24,8 +24,11 @@ jobs:
     strategy:
       matrix:
         profile:
-          - coding-1
-          - coding-2
+          - common
+          - marker
+          - parser
+          - recipe-1
+          - recipe-2
 
     steps:
       - name: Checkout code
