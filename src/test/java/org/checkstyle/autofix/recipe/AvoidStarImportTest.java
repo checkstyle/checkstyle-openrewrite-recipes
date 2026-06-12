@@ -19,8 +19,6 @@ package org.checkstyle.autofix.recipe;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.List;
-
 import org.checkstyle.autofix.parser.ReportParser;
 import org.junit.jupiter.api.Test;
 
@@ -33,8 +31,7 @@ public class AvoidStarImportTest extends AbstractRecipeTestSupport {
 
     @Test
     public void checkDescription() {
-        final AvoidStarImport recipe =
-                new AvoidStarImport(List.of());
+        final AvoidStarImport recipe = new AvoidStarImport();
 
         final String expectedDescription =
                 "Expands star imports into individual ones to avoid star imports.";
@@ -44,8 +41,7 @@ public class AvoidStarImportTest extends AbstractRecipeTestSupport {
 
     @Test
     public void checkDisplayName() {
-        final AvoidStarImport recipe =
-                new AvoidStarImport(List.of());
+        final AvoidStarImport recipe = new AvoidStarImport();
 
         final String expectedDisplayName =
                 "Avoid Star Import recipe";
@@ -81,5 +77,10 @@ public class AvoidStarImportTest extends AbstractRecipeTestSupport {
     @RecipeTest
     void inheritedInstanceFieldReference(ReportParser parser) throws Exception {
         verify(parser, "InheritedInstanceFieldChild", "InheritedInstanceFieldParent");
+    }
+
+    @RecipeTest
+    void proveMarkersAreGood(ReportParser parser) throws Exception {
+        verify(parser, "MarkerCheck");
     }
 }
