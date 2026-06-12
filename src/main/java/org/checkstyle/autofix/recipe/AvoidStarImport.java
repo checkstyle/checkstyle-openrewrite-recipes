@@ -17,15 +17,13 @@
 
 package org.checkstyle.autofix.recipe;
 
-import java.nio.file.Path;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
-import org.checkstyle.autofix.PositionHelper;
-import org.checkstyle.autofix.parser.CheckstyleViolation;
+import org.checkstyle.autofix.CheckFullName;
+import org.checkstyle.autofix.marker.CheckstyleViolationMarker;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
 import org.openrewrite.TreeVisitor;
@@ -38,12 +36,6 @@ import org.openrewrite.java.tree.JavaType;
  * Fixes Checkstyle AvoidStarImport violations by expanding star imports into individual imports.
  */
 public class AvoidStarImport extends Recipe {
-
-    private final List<CheckstyleViolation> violations;
-
-    public AvoidStarImport(List<CheckstyleViolation> violations) {
-        this.violations = violations;
-    }
 
     @Override
     public String getDisplayName() {
@@ -62,18 +54,15 @@ public class AvoidStarImport extends Recipe {
 
     private final class AvoidStarImportVisitor extends JavaIsoVisitor<ExecutionContext> {
 
-        private Path sourcePath;
         private final Set<String> packagesToExpand = new HashSet<>();
         private final Set<UUID> starImportIdsToRemove = new HashSet<>();
 
         @Override
         public J.CompilationUnit visitCompilationUnit(J.CompilationUnit compilationUnit,
                                                       ExecutionContext executionContext) {
-            this.sourcePath = compilationUnit.getSourcePath();
 
             for (J.Import importStmt : compilationUnit.getImports()) {
-                if ("*".equals(importStmt.getQualid().getSimpleName())
-                        && isAtViolationLocation(importStmt)) {
+                if (isAtViolationLocation(importStmt)) {
                     starImportIdsToRemove.add(importStmt.getId());
                     final String packageName = importStmt.getQualid().getTarget()
                             .printTrimmed(getCursor());
@@ -138,14 +127,9 @@ public class AvoidStarImport extends Recipe {
         }
 
         private boolean isAtViolationLocation(J.Import importStmt) {
-            final J.CompilationUnit compilationUnit = getCursor()
-                    .firstEnclosing(J.CompilationUnit.class);
-            final int line = PositionHelper.computeLinePosition(compilationUnit, importStmt,
-                    getCursor());
-            return violations.removeIf(violation -> {
-                return violation.getLine() == line
-                        && violation.getFilePath().endsWith(sourcePath);
-            });
+            return importStmt.getMarkers()
+                    .findAll(CheckstyleViolationMarker.class).stream()
+                    .anyMatch(marker -> marker.isFor(CheckFullName.AVOID_STAR_IMPORT));
         }
     }
 }

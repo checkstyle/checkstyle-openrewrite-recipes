@@ -1,0 +1,15 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/avoidstarimport/markercheck/InputMarkerCheck.java
++++ src/test/resources/org/checkstyle/autofix/recipe/avoidstarimport/markercheck/OutputMarkerCheck.java
+@@ -11,9 +11,10 @@
+ 
+ package org.checkstyle.autofix.recipe.avoidstarimport.markercheck;
+ 
+-import java.io.*; import java.util.*; // violation 'Using the .* form of import should be avoided'
++import java.io.*;
++import java.util.List;
+ 
+-public class InputMarkerCheck {
++public class OutputMarkerCheck {
+     List<String> list;
+     java.io.File file;
+ }
