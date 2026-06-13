@@ -19,8 +19,6 @@ package org.checkstyle.autofix.recipe;
 
 import static com.google.common.truth.Truth.assertWithMessage;
 
-import java.util.List;
-
 import org.checkstyle.autofix.parser.ReportParser;
 import org.junit.jupiter.api.Test;
 
@@ -38,8 +36,7 @@ public class EmptyStatementTest extends AbstractRecipeTestSupport {
 
     @Test
     public void checkDescription() {
-        final EmptyStatement recipe =
-                new EmptyStatement(List.of());
+        final EmptyStatement recipe = new EmptyStatement();
 
         final String expectedDescription =
                 "Remove empty statements (standalone semicolons) from code.";
@@ -51,8 +48,7 @@ public class EmptyStatementTest extends AbstractRecipeTestSupport {
 
     @Test
     public void checkDisplayName() {
-        final EmptyStatement recipe =
-                new EmptyStatement(List.of());
+        final EmptyStatement recipe = new EmptyStatement();
 
         final String expectedDisplayName =
                 "EmptyStatement recipe";

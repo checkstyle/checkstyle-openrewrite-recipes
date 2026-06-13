@@ -63,7 +63,6 @@ public final class CheckstyleRecipeRegistry {
 
     static {
         RECIPE_MAP.put(CheckFullName.AVOID_STAR_IMPORT, AvoidStarImport::new);
-        RECIPE_MAP.put(CheckFullName.EMPTY_STATEMENT, EmptyStatement::new);
         RECIPE_MAP.put(CheckFullName.CONSTRUCTORS_DECLARATION_GROUPING,
             ConstructorsDeclarationGrouping::new);
         RECIPE_MAP.put(CheckFullName.UPPER_ELL, UpperEll::new);
@@ -81,6 +80,7 @@ public final class CheckstyleRecipeRegistry {
         RECIPE_MAP.put(CheckFullName.UNUSED_IMPORT, UnusedImports::new);
         RECIPE_MAP_NO_VIOLATIONS.put(CheckFullName.FINAL_CLASS, FinalClass::new);
         RECIPE_MAP_NO_VIOLATIONS.put(CheckFullName.FINAL_LOCAL_VARIABLE, FinalLocalVariable::new);
+        RECIPE_MAP_NO_VIOLATIONS.put(CheckFullName.EMPTY_STATEMENT, EmptyStatement::new);
     }
 
     private CheckstyleRecipeRegistry() {

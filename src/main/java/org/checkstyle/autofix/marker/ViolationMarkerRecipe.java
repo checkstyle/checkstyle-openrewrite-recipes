@@ -140,13 +140,27 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
             UUID smallestNodeId = null;
             int minLines = Integer.MAX_VALUE;
             int minCols = Integer.MAX_VALUE;
+            boolean foundExactMatch = false;
 
             for (Map.Entry<UUID, Range> entry : nodeRanges.entrySet()) {
                 final Range range = entry.getValue();
                 if (encloses(range, violation)) {
+                    final boolean exactMatch = range.endLine() == violation.getLine()
+                            && range.endCol() == violation.getColumn();
+
                     final int lines = range.endLine() - range.startLine();
                     final int cols = range.endCol() - range.startCol();
-                    if (lines < minLines || lines == minLines && cols <= minCols) {
+
+                    boolean update = false;
+                    if (exactMatch && !foundExactMatch) {
+                        foundExactMatch = true;
+                        update = true;
+                    }
+                    else if (exactMatch || !foundExactMatch) {
+                        update = lines < minLines || lines == minLines && cols <= minCols;
+                    }
+
+                    if (update) {
                         minLines = lines;
                         minCols = cols;
                         smallestNodeId = entry.getKey();
