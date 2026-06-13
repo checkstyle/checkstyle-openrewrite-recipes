@@ -20,8 +20,8 @@ package org.checkstyle.autofix.recipe;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.checkstyle.autofix.PositionHelper;
-import org.checkstyle.autofix.parser.CheckstyleViolation;
+import org.checkstyle.autofix.CheckFullName;
+import org.checkstyle.autofix.marker.CheckstyleViolationMarker;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
 import org.openrewrite.Tree;
@@ -39,12 +39,6 @@ import org.openrewrite.marker.Markers;
  */
 public class EmptyStatement extends Recipe {
 
-    private final List<CheckstyleViolation> violations;
-
-    public EmptyStatement(List<CheckstyleViolation> violations) {
-        this.violations = violations;
-    }
-
     @Override
     public String getDisplayName() {
         return "EmptyStatement recipe";
@@ -61,15 +55,6 @@ public class EmptyStatement extends Recipe {
     }
 
     private final class EmptyStatementVisitor extends JavaIsoVisitor<ExecutionContext> {
-
-        private J.CompilationUnit compilationUnit;
-
-        @Override
-        public J.CompilationUnit visitCompilationUnit(J.CompilationUnit cu,
-                                                      ExecutionContext executionContext) {
-            compilationUnit = cu;
-            return super.visitCompilationUnit(cu, executionContext);
-        }
 
         @Override
         public J.Block visitBlock(J.Block block, ExecutionContext executionContext) {
@@ -150,15 +135,10 @@ public class EmptyStatement extends Recipe {
         }
 
         private boolean isAtViolationLocation(J.Empty empty) {
-            final int line =
-                    PositionHelper.computeLinePosition(compilationUnit, empty, getCursor());
-            final int column =
-                    PositionHelper.computeColumnPosition(compilationUnit, empty, getCursor());
-            return violations.stream().anyMatch(violation -> {
-                return violation.getFilePath().endsWith(compilationUnit.getSourcePath())
-                        && violation.getLine() == line
-                        && violation.getColumn() == column;
-            });
+            return empty.getMarkers()
+                    .findAll(CheckstyleViolationMarker.class)
+                    .stream()
+                    .anyMatch(marker -> marker.isFor(CheckFullName.EMPTY_STATEMENT));
         }
 
     }

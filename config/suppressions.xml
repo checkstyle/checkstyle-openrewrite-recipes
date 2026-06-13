@@ -19,6 +19,7 @@
     <suppress checks="ExecutableStatementCount" files="[\\/]src[\\/]test[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]marker[\\/]ViolationMarkerRecipeTest\.java"/>
     <suppress checks="ClassFanOutComplexity" files="[\\/]src[\\/]test[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]marker[\\/]ViolationMarkerRecipeTest\.java"/>
     <suppress checks="JavaNCSS" files="[\\/]src[\\/]test[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]marker[\\/]ViolationMarkerRecipeTest\.java"/>
+    <suppress checks="CyclomaticComplexity" files="[\\/]src[\\/]main[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]marker[\\/]ViolationMarkerRecipe\.java"/>
     <suppress checks="ClassFanOutComplexity" files="[\\/]src[\\/]test[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]AbstractRecipeTestSupport\.java"/>
     <suppress checks="MissingNullCaseInSwitch" files="[\\/]src[\\/]main[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]NewlineAtEndOfFile\.java"/>
 
