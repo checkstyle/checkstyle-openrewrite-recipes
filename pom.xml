@@ -421,6 +421,7 @@
                                 <param>org.checkstyle.autofix.recipe.UnusedImports*</param>
                                 <param>org.checkstyle.autofix.recipe.MissingDeprecated*</param>
                                 <param>org.checkstyle.autofix.recipe.UnusedLocalVariable*</param>
+                                <param>org.checkstyle.autofix.recipe.AvoidNoArgumentSuperConstructorCall*</param>
                             </targetClasses>
                             <targetTests>
                                 <param>org.checkstyle.autofix.recipe.NewLineAtEndOfFileTest</param>
@@ -433,6 +434,7 @@
                                 <param>org.checkstyle.autofix.recipe.ConstructorsDeclarationGroupingTest</param>
                                 <param>org.checkstyle.autofix.recipe.UnusedImportsTest</param>
                                 <param>org.checkstyle.autofix.recipe.MissingDeprecatedTest</param>
+                                <param>org.checkstyle.autofix.recipe.AvoidNoArgumentSuperConstructorCallTest</param>
                             </targetTests>
 
                             <mutators>
