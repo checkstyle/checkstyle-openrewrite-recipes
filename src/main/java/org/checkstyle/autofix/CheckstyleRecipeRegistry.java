@@ -71,9 +71,10 @@ public final class CheckstyleRecipeRegistry {
         RECIPE_MAP_WITH_CONFIG_NO_VIOLATIONS.put(CheckFullName.HEADER, Header::new);
         RECIPE_MAP_WITH_CONFIG.put(CheckFullName.NEWLINE_AT_END_OF_FILE, NewlineAtEndOfFile::new);
         RECIPE_MAP.put(CheckFullName.UNUSED_LOCAL_VARIABLE, UnusedLocalVariable::new);
-        RECIPE_MAP.put(CheckFullName.ANNOTATION_ON_SAME_LINE, AnnotationOnSameLine::new);
         RECIPE_MAP.put(CheckFullName.USE_ENHANCED_SWITCH, UseEnhancedSwitch::new);
         RECIPE_MAP.put(CheckFullName.UNUSED_IMPORT, UnusedImports::new);
+        RECIPE_MAP_NO_VIOLATIONS.put(CheckFullName.ANNOTATION_ON_SAME_LINE,
+            AnnotationOnSameLine::new);
         RECIPE_MAP_NO_VIOLATIONS.put(CheckFullName.FINAL_CLASS, FinalClass::new);
         RECIPE_MAP_NO_VIOLATIONS.put(CheckFullName.AVOID_STAR_IMPORT, AvoidStarImport::new);
         RECIPE_MAP_NO_VIOLATIONS.put(CheckFullName.FINAL_LOCAL_VARIABLE, FinalLocalVariable::new);

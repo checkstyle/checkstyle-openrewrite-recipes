@@ -20,8 +20,8 @@ package org.checkstyle.autofix.recipe;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.checkstyle.autofix.PositionHelper;
-import org.checkstyle.autofix.parser.CheckstyleViolation;
+import org.checkstyle.autofix.CheckFullName;
+import org.checkstyle.autofix.marker.CheckstyleViolationMarker;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
 import org.openrewrite.TreeVisitor;
@@ -34,12 +34,6 @@ import org.openrewrite.java.tree.TextComment;
 public class AnnotationOnSameLine extends Recipe {
 
     private static final String SINGLE_SPACE = " ";
-
-    private final List<CheckstyleViolation> violations;
-
-    public AnnotationOnSameLine(final List<CheckstyleViolation> violations) {
-        this.violations = violations;
-    }
 
     @Override
     public String getDisplayName() {
@@ -57,14 +51,6 @@ public class AnnotationOnSameLine extends Recipe {
     }
 
     private final class AnnotationModifierVisitor extends JavaIsoVisitor<ExecutionContext> {
-        private J.CompilationUnit compilationUnit;
-
-        @Override
-        public J.CompilationUnit visitCompilationUnit(J.CompilationUnit unit,
-                                                      ExecutionContext executionContext) {
-            this.compilationUnit = unit;
-            return super.visitCompilationUnit(unit, executionContext);
-        }
 
         private static Space forceSingleSpace(Space space) {
             final List<Comment> updatedComments = new ArrayList<>();
@@ -152,19 +138,15 @@ public class AnnotationOnSameLine extends Recipe {
             return decl;
         }
 
-        private boolean isViolationLine(int line) {
-            return violations.stream()
-                    .filter(violation -> violation.getLine() == line)
-                    .map(CheckstyleViolation::getFilePath)
-                    .anyMatch(path -> path.endsWith(compilationUnit.getSourcePath()));
+        private boolean hasMarker(J.Annotation anno) {
+            return anno.getMarkers().findAll(CheckstyleViolationMarker.class).stream()
+                    .anyMatch(marker -> marker.isFor(CheckFullName.ANNOTATION_ON_SAME_LINE));
         }
 
         private boolean lastAnnotationViolates(List<J.Annotation> annos) {
             boolean result = false;
             if (!annos.isEmpty()) {
-                final int line = PositionHelper.computeLinePosition(
-                        compilationUnit, annos.get(annos.size() - 1), getCursor());
-                result = isViolationLine(line);
+                result = hasMarker(annos.get(annos.size() - 1));
             }
             return result;
         }
@@ -173,9 +155,7 @@ public class AnnotationOnSameLine extends Recipe {
                                                       int index, J.Annotation anno) {
             J.Annotation result = anno;
             if (index > 0) {
-                final int previousAnnotationLine = PositionHelper.computeLinePosition(
-                        compilationUnit, annos.get(index - 1), getCursor());
-                if (isViolationLine(previousAnnotationLine)) {
+                if (hasMarker(annos.get(index - 1))) {
                     result = anno.withPrefix(forceSingleSpace(anno.getPrefix()));
                 }
             }
