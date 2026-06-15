@@ -19,8 +19,6 @@ package org.checkstyle.autofix.recipe;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.Collections;
-
 import org.checkstyle.autofix.parser.ReportParser;
 import org.junit.jupiter.api.Test;
 
@@ -28,8 +26,7 @@ public class AnnotationOnSameLineTest extends AbstractRecipeTestSupport {
 
     @Test
     void metadata() {
-        final AnnotationOnSameLine recipe =
-                new AnnotationOnSameLine(Collections.emptyList());
+        final AnnotationOnSameLine recipe = new AnnotationOnSameLine();
         assertEquals("Annotation on same line",
                 recipe.getDisplayName());
         assertEquals("Checks whether annotation is on the same line "

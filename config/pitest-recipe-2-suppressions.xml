@@ -2,6 +2,16 @@
 <suppressedMutations>
   <!-- Cannot be killed by integration tests until a second recipe lands a marker on this node type. See issue #236 -->
   <mutation unstable="false">
+    <sourceFile>AnnotationOnSameLine.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.AnnotationOnSameLine$AnnotationModifierVisitor</mutatedClass>
+    <mutatedMethod>lambda$hasMarker$0</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.BooleanTrueReturnValsMutator</mutator>
+    <description>replaced boolean return with true for org/checkstyle/autofix/recipe/AnnotationOnSameLine$AnnotationModifierVisitor::lambda$hasMarker$0</description>
+    <lineContent>.anyMatch(marker -&gt; marker.isFor(CheckFullName.ANNOTATION_ON_SAME_LINE));</lineContent>
+  </mutation>
+
+  <!-- Cannot be killed by integration tests until a second recipe lands a marker on this node type. See issue #236 -->
+  <mutation unstable="false">
     <sourceFile>MissingDeprecated.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.recipe.MissingDeprecated$MissingDeprecatedVisitor</mutatedClass>
     <mutatedMethod>lambda$hasMissingDeprecatedMarker$0</mutatedMethod>
