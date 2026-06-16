@@ -191,24 +191,6 @@
     <lineContent>.anyMatch(marker -&gt; marker.isFor(CheckFullName.FINAL_CLASS));</lineContent>
   </mutation>
 
-  <mutation unstable="false">
-    <sourceFile>FinalLocalVariable.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.FinalLocalVariable$LocalVariableVisitor</mutatedClass>
-    <mutatedMethod>handleMultiVariableDeclaration</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
-    <description>removed call to java/util/List::isEmpty</description>
-    <lineContent>if (violationsList.isEmpty()) {</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>FinalLocalVariable.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.FinalLocalVariable$LocalVariableVisitor</mutatedClass>
-    <mutatedMethod>handleMultiVariableDeclaration</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_ELSE</mutator>
-    <description>removed conditional - replaced equality check with false</description>
-    <lineContent>if (violationsList.isEmpty()) {</lineContent>
-  </mutation>
-
   <!-- Cannot be killed by integration tests until a second recipe lands a marker on this node type. See issue #236 -->
   <mutation unstable="false">
     <sourceFile>FinalLocalVariable.java</sourceFile>
@@ -217,15 +199,6 @@
     <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.BooleanTrueReturnValsMutator</mutator>
     <description>replaced boolean return with true for org/checkstyle/autofix/recipe/FinalLocalVariable$LocalVariableVisitor::lambda$isViolationMarked$0</description>
     <lineContent>.anyMatch(marker -&gt; marker.isFor(CheckFullName.FINAL_LOCAL_VARIABLE));</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>FinalLocalVariable.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.FinalLocalVariable$LocalVariableVisitor</mutatedClass>
-    <mutatedMethod>visitBlock</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_ORDER_IF</mutator>
-    <description>removed conditional - replaced comparison check with true</description>
-    <lineContent>&amp;&amp; varDecl.getVariables().size() &gt; 1</lineContent>
   </mutation>
 
   <mutation unstable="false">
