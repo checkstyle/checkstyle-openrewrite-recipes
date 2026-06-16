@@ -17,12 +17,10 @@
 
 package org.checkstyle.autofix.recipe;
 
-import java.nio.file.Path;
-import java.util.List;
 import java.util.Locale;
 
-import org.checkstyle.autofix.PositionHelper;
-import org.checkstyle.autofix.parser.CheckstyleViolation;
+import org.checkstyle.autofix.CheckFullName;
+import org.checkstyle.autofix.marker.CheckstyleViolationMarker;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
 import org.openrewrite.TreeVisitor;
@@ -35,12 +33,6 @@ import org.openrewrite.java.tree.JavaType;
  * with uppercase literals.
  */
 public class HexLiteralCase extends Recipe {
-
-    private final List<CheckstyleViolation> violations;
-
-    public HexLiteralCase(List<CheckstyleViolation> violations) {
-        this.violations = violations;
-    }
 
     @Override
     public String getDisplayName() {
@@ -61,15 +53,6 @@ public class HexLiteralCase extends Recipe {
     private final class HexLiteralCaseVisitor extends JavaIsoVisitor<ExecutionContext> {
 
         private static final String HEX_PREFIX = "0x";
-
-        private Path sourcePath;
-
-        @Override
-        public J.CompilationUnit visitCompilationUnit(
-                J.CompilationUnit cu, ExecutionContext executionContext) {
-            this.sourcePath = cu.getSourcePath();
-            return super.visitCompilationUnit(cu, executionContext);
-        }
 
         @Override
         public J.Literal visitLiteral(J.Literal literal, ExecutionContext executionContext) {
@@ -148,16 +131,10 @@ public class HexLiteralCase extends Recipe {
         }
 
         private boolean isAtViolationLocation(J.Literal literal) {
-            final J.CompilationUnit cursor = getCursor().firstEnclosing(J.CompilationUnit.class);
-
-            final int line = PositionHelper.computeLinePosition(cursor, literal, getCursor());
-            final int column = PositionHelper.computeColumnPosition(cursor, literal, getCursor());
-
-            return violations.stream().anyMatch(violation -> {
-                return violation.getLine() == line
-                        && violation.getColumn() == column
-                        && violation.getFilePath().endsWith(sourcePath);
-            });
+            return literal.getMarkers()
+                    .findAll(CheckstyleViolationMarker.class)
+                    .stream()
+                    .anyMatch(marker -> marker.isFor(CheckFullName.HEX_LITERAL_CASE));
         }
     }
 }
