@@ -66,7 +66,6 @@ public final class CheckstyleRecipeRegistry {
         RECIPE_MAP.put(CheckFullName.CONSTRUCTORS_DECLARATION_GROUPING,
             ConstructorsDeclarationGrouping::new);
         RECIPE_MAP.put(CheckFullName.UPPER_ELL, UpperEll::new);
-        RECIPE_MAP.put(CheckFullName.HEX_LITERAL_CASE, HexLiteralCase::new);
         RECIPE_MAP_WITH_CONFIG.put(CheckFullName.HEADER, Header::new);
         RECIPE_MAP_WITH_CONFIG.put(CheckFullName.NEWLINE_AT_END_OF_FILE, NewlineAtEndOfFile::new);
         RECIPE_MAP.put(CheckFullName.NUMERICAL_PREFIXES_INF_SUF_CASE,
@@ -80,6 +79,7 @@ public final class CheckstyleRecipeRegistry {
         RECIPE_MAP_NO_VIOLATIONS.put(CheckFullName.FINAL_CLASS, FinalClass::new);
         RECIPE_MAP_NO_VIOLATIONS.put(CheckFullName.FINAL_LOCAL_VARIABLE, FinalLocalVariable::new);
         RECIPE_MAP_NO_VIOLATIONS.put(CheckFullName.EMPTY_STATEMENT, EmptyStatement::new);
+        RECIPE_MAP_NO_VIOLATIONS.put(CheckFullName.HEX_LITERAL_CASE, HexLiteralCase::new);
         RECIPE_MAP_NO_VIOLATIONS.put(CheckFullName.REDUNDANT_IMPORT, RedundantImport::new);
     }
 

@@ -363,6 +363,43 @@
     <lineContent>result = super.visit(sourceFile, executionContext);</lineContent>
   </mutation>
 
+  <!-- Cannot be killed by integration tests until a second recipe lands a marker on this node type. See issue #236 -->
+  <mutation unstable="false">
+    <sourceFile>HexLiteralCase.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.HexLiteralCase$HexLiteralCaseVisitor</mutatedClass>
+    <mutatedMethod>lambda$isAtViolationLocation$0</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.BooleanTrueReturnValsMutator</mutator>
+    <description>replaced boolean return with true for org/checkstyle/autofix/recipe/HexLiteralCase$HexLiteralCaseVisitor::lambda$isAtViolationLocation$0</description>
+    <lineContent>.anyMatch(marker -&gt; marker.isFor(CheckFullName.HEX_LITERAL_CASE));</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>PositionHelper.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.PositionHelper</mutatedClass>
+    <mutatedMethod>calculateColumnOffset</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to java/lang/String::lastIndexOf</description>
+    <lineContent>final int lineBreakIndex = out.lastIndexOf(&apos;\n&apos;);</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>PositionHelper.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.PositionHelper</mutatedClass>
+    <mutatedMethod>calculateColumnOffset</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.ArgumentPropagationMutator</mutator>
+    <description>replaced call to java/lang/String::lastIndexOf with argument</description>
+    <lineContent>final int lineBreakIndex = out.lastIndexOf(&apos;\n&apos;);</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>PositionHelper.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.PositionHelper</mutatedClass>
+    <mutatedMethod>calculateColumnOffset</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NegateConditionalsMutator</mutator>
+    <description>negated conditional</description>
+    <lineContent>if (lineBreakIndex == -1) {</lineContent>
+  </mutation>
+
   <mutation unstable="false">
     <sourceFile>PositionHelper.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.PositionHelper</mutatedClass>
@@ -376,9 +413,63 @@
     <sourceFile>PositionHelper.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.PositionHelper</mutatedClass>
     <mutatedMethod>calculateColumnOffset</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>if (lineBreakIndex == -1) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>PositionHelper.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.PositionHelper</mutatedClass>
+    <mutatedMethod>calculateColumnOffset</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.MathMutator</mutator>
+    <description>Replaced integer subtraction with addition</description>
+    <lineContent>result = out.length() - lineBreakIndex;</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>PositionHelper.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.PositionHelper</mutatedClass>
+    <mutatedMethod>calculateColumnOffset</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to java/lang/String::length</description>
+    <lineContent>result = out.length() - lineBreakIndex;</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>PositionHelper.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.PositionHelper</mutatedClass>
+    <mutatedMethod>calculateColumnOffset</mutatedMethod>
     <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
     <description>removed call to java/lang/String::length</description>
     <lineContent>result = out.length();</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>PositionHelper.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.PositionHelper</mutatedClass>
+    <mutatedMethod>calculateColumnOffset</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.PrimitiveReturnsMutator</mutator>
+    <description>replaced int return with 0 for org/checkstyle/autofix/PositionHelper::calculateColumnOffset</description>
+    <lineContent>return result;</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>PositionHelper.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.PositionHelper</mutatedClass>
+    <mutatedMethod>computeColumnPosition</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to org/checkstyle/autofix/PositionHelper::computePosition</description>
+    <lineContent>return computePosition(tree, targetElement, cursor, out -&gt; {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>PositionHelper.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.PositionHelper</mutatedClass>
+    <mutatedMethod>computeColumnPosition</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.PrimitiveReturnsMutator</mutator>
+    <description>replaced int return with 0 for org/checkstyle/autofix/PositionHelper::computeColumnPosition</description>
+    <lineContent>return computePosition(tree, targetElement, cursor, out -&gt; {</lineContent>
   </mutation>
 
   <mutation unstable="false">
@@ -520,6 +611,15 @@
     <sourceFile>PositionHelper.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.PositionHelper</mutatedClass>
     <mutatedMethod>lambda$computeColumnPosition$2</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NegateConditionalsMutator</mutator>
+    <description>negated conditional</description>
+    <lineContent>&amp;&amp; literal.getValueSource().matches(&quot;^[+-].*&quot;)) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>PositionHelper.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.PositionHelper</mutatedClass>
+    <mutatedMethod>lambda$computeColumnPosition$2</mutatedMethod>
     <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
     <description>removed call to java/lang/String::matches</description>
     <lineContent>&amp;&amp; literal.getValueSource().matches(&quot;^[+-].*&quot;)) {</lineContent>
@@ -529,8 +629,26 @@
     <sourceFile>PositionHelper.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.PositionHelper</mutatedClass>
     <mutatedMethod>lambda$computeColumnPosition$2</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to org/openrewrite/java/tree/J$Literal::getValueSource</description>
+    <lineContent>&amp;&amp; literal.getValueSource().matches(&quot;^[+-].*&quot;)) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>PositionHelper.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.PositionHelper</mutatedClass>
+    <mutatedMethod>lambda$computeColumnPosition$2</mutatedMethod>
     <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_ELSE</mutator>
     <description>removed conditional - replaced equality check with false</description>
+    <lineContent>&amp;&amp; literal.getValueSource().matches(&quot;^[+-].*&quot;)) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>PositionHelper.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.PositionHelper</mutatedClass>
+    <mutatedMethod>lambda$computeColumnPosition$2</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
     <lineContent>&amp;&amp; literal.getValueSource().matches(&quot;^[+-].*&quot;)) {</lineContent>
   </mutation>
 
@@ -568,6 +686,33 @@
     <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
     <description>removed conditional - replaced equality check with true</description>
     <lineContent>if (targetElement instanceof J.Literal literal</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>PositionHelper.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.PositionHelper</mutatedClass>
+    <mutatedMethod>lambda$computeColumnPosition$2</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to org/checkstyle/autofix/PositionHelper::calculateColumnOffset</description>
+    <lineContent>int column = calculateColumnOffset(out);</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>PositionHelper.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.PositionHelper</mutatedClass>
+    <mutatedMethod>lambda$computeColumnPosition$2</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to java/lang/Integer::valueOf</description>
+    <lineContent>return column;</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>PositionHelper.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.PositionHelper</mutatedClass>
+    <mutatedMethod>lambda$computeColumnPosition$2</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.EmptyObjectReturnValsMutator</mutator>
+    <description>replaced Integer return value with 0 for org/checkstyle/autofix/PositionHelper::lambda$computeColumnPosition$2</description>
+    <lineContent>return column;</lineContent>
   </mutation>
 
   <mutation unstable="false">
