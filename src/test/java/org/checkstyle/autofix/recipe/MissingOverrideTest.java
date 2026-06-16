@@ -31,8 +31,7 @@ public class MissingOverrideTest extends AbstractRecipeTestSupport {
 
     @Test
     public void checkDescription() {
-        final MissingOverride recipe =
-            new MissingOverride(null);
+        final MissingOverride recipe = new MissingOverride();
         final String expectedDescription = "Add @Override annotation to methods "
                 + "that override a method from a superclass or interface.";
         assertWithMessage("Invalid description")
@@ -42,7 +41,7 @@ public class MissingOverrideTest extends AbstractRecipeTestSupport {
 
     @Test
     public void checkDisplayName() {
-        final MissingOverride recipe = new MissingOverride(null);
+        final MissingOverride recipe = new MissingOverride();
         final String expectedDisplayName = "Missing Override annotation";
         assertWithMessage("Invalid display name")
                 .that(recipe.getDisplayName())

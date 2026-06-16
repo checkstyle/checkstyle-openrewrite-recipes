@@ -17,12 +17,11 @@
 
 package org.checkstyle.autofix.recipe;
 
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.checkstyle.autofix.PositionHelper;
-import org.checkstyle.autofix.parser.CheckstyleViolation;
+import org.checkstyle.autofix.CheckFullName;
+import org.checkstyle.autofix.marker.CheckstyleViolationMarker;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
 import org.openrewrite.Tree;
@@ -39,13 +38,6 @@ import org.openrewrite.marker.Markers;
  * override a method from a superclass or interface.
  */
 public class MissingOverride extends Recipe {
-
-    private final List<CheckstyleViolation> violations;
-
-    public MissingOverride(List<CheckstyleViolation> violations) {
-        this.violations = violations;
-    }
-
     @Override
     public String getDisplayName() {
         return "Missing Override annotation";
@@ -66,15 +58,6 @@ public class MissingOverride extends Recipe {
 
         private static final String OVERRIDE = "Override";
 
-        private Path sourcePath;
-
-        @Override
-        public J.CompilationUnit visitCompilationUnit(
-                J.CompilationUnit cu, ExecutionContext executionContext) {
-            this.sourcePath = cu.getSourcePath();
-            return super.visitCompilationUnit(cu, executionContext);
-        }
-
         @Override
         public J.MethodDeclaration visitMethodDeclaration(J.MethodDeclaration method,
             ExecutionContext executionContext) {
@@ -83,7 +66,7 @@ public class MissingOverride extends Recipe {
             final boolean hasOverride = newMethod.getLeadingAnnotations().stream()
                     .anyMatch(annotation -> OVERRIDE.equals(annotation.getSimpleName()));
 
-            if (!hasOverride && isAtViolationLocation(newMethod)) {
+            if (!hasOverride && isViolationMarked(newMethod)) {
 
                 final J.Identifier overrideIdentifier = new J.Identifier(
                     Tree.randomId(),
@@ -131,15 +114,9 @@ public class MissingOverride extends Recipe {
             return super.visitMethodDeclaration(newMethod, executionContext);
         }
 
-        public boolean isAtViolationLocation(J.MethodDeclaration methodDeclaration) {
-            final J.CompilationUnit cursor = getCursor().firstEnclosing(J.CompilationUnit.class);
-
-            final int line = PositionHelper
-                                .computeLinePosition(cursor, methodDeclaration, getCursor());
-            return violations.stream().anyMatch(violation -> {
-                return violation.getLine() == line
-                        && violation.getFilePath().endsWith(sourcePath);
-            });
+        private boolean isViolationMarked(J.MethodDeclaration methodDeclaration) {
+            return methodDeclaration.getMarkers().findAll(CheckstyleViolationMarker.class).stream()
+                    .anyMatch(marker -> marker.isFor(CheckFullName.MISSING_OVERRIDE));
         }
     }
 }

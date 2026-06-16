@@ -186,6 +186,7 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
                 final Class<? extends Tree> targetType = switch (checkFullName) {
                     case FINAL_CLASS -> J.ClassDeclaration.class;
                     case FINAL_LOCAL_VARIABLE -> J.VariableDeclarations.NamedVariable.class;
+                    case MISSING_OVERRIDE -> J.MethodDeclaration.class;
                     default -> null;
                 };
 
