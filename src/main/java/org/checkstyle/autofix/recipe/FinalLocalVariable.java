@@ -92,7 +92,6 @@ public class FinalLocalVariable extends Recipe {
 
             for (Statement stmt : visited.getStatements()) {
                 if (stmt instanceof J.VariableDeclarations varDecl
-                        && varDecl.getVariables().size() > 1
                         && !varDecl.hasModifier(J.Modifier.Type.Final)) {
                     handleMultiVariableDeclaration(varDecl, newStatements);
                 }
@@ -117,10 +116,7 @@ public class FinalLocalVariable extends Recipe {
                     nonViolations.add(variable);
                 }
             }
-            if (violationsList.isEmpty()) {
-                newStatements.add(varDecl);
-            }
-            else if (nonViolations.isEmpty()) {
+            if (violationsList.size() == varDecl.getVariables().size()) {
                 newStatements.add(addFinalModifier(varDecl));
             }
             else {
