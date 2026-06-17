@@ -17,13 +17,12 @@
 
 package org.checkstyle.autofix.recipe;
 
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import org.checkstyle.autofix.PositionHelper;
-import org.checkstyle.autofix.parser.CheckstyleViolation;
+import org.checkstyle.autofix.CheckFullName;
+import org.checkstyle.autofix.marker.CheckstyleViolationMarker;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
 import org.openrewrite.Tree;
@@ -45,12 +44,6 @@ import org.openrewrite.marker.Markers;
  */
 public class MissingDeprecated extends Recipe {
 
-    private final List<CheckstyleViolation> violations;
-
-    public MissingDeprecated(List<CheckstyleViolation> violations) {
-        this.violations = violations;
-    }
-
     @Override
     public String getDisplayName() {
         return "Missing Deprecated annotation or Javadoc tag";
@@ -67,27 +60,20 @@ public class MissingDeprecated extends Recipe {
         return new MissingDeprecatedVisitor();
     }
 
-    private final class MissingDeprecatedVisitor extends JavaIsoVisitor<ExecutionContext> {
+    private static final class MissingDeprecatedVisitor extends JavaIsoVisitor<ExecutionContext> {
 
         private static final String DEPRECATED = "Deprecated";
         private static final String NEWLINE = "\n";
         private static final String SPACE = " ";
-
-        private Path sourcePath;
-
-        @Override
-        public J.CompilationUnit visitCompilationUnit(
-                J.CompilationUnit cu, ExecutionContext executionContext) {
-            this.sourcePath = cu.getSourcePath();
-            return super.visitCompilationUnit(cu, executionContext);
-        }
 
         @Override
         public J.MethodDeclaration visitMethodDeclaration(J.MethodDeclaration method,
                 ExecutionContext executionContext) {
             J.MethodDeclaration result = method;
 
-            if (isAtViolationLocation(result)) {
+            final boolean hasMarker = hasMissingDeprecatedMarker(result);
+
+            if (hasMarker) {
                 final boolean hasAnnotation = hasDeprecatedAnnotation(
                         result.getLeadingAnnotations());
                 final boolean hasJavadocTag = hasDeprecatedJavadocTag(result.getPrefix());
@@ -108,18 +94,18 @@ public class MissingDeprecated extends Recipe {
                 ExecutionContext executionContext) {
             J.VariableDeclarations result = multiVariable;
 
-            if (isAtViolationLocation(result)) {
-                if (getCursor().firstEnclosing(J.MethodDeclaration.class) == null) {
-                    final boolean hasAnnotation = hasDeprecatedAnnotation(
-                            result.getLeadingAnnotations());
-                    final boolean hasJavadocTag = hasDeprecatedJavadocTag(result.getPrefix());
+            final boolean hasMarker = hasMissingDeprecatedMarker(result);
 
-                    if (!hasAnnotation) {
-                        result = addDeprecatedAnnotationToVariable(result);
-                    }
-                    if (!hasJavadocTag) {
-                        result = addDeprecatedJavadocTagToVariable(result);
-                    }
+            if (hasMarker) {
+                final boolean hasAnnotation = hasDeprecatedAnnotation(
+                        result.getLeadingAnnotations());
+                final boolean hasJavadocTag = hasDeprecatedJavadocTag(result.getPrefix());
+
+                if (!hasAnnotation) {
+                    result = addDeprecatedAnnotationToVariable(result);
+                }
+                if (!hasJavadocTag) {
+                    result = addDeprecatedJavadocTagToVariable(result);
                 }
             }
             return super.visitVariableDeclarations(result, executionContext);
@@ -130,7 +116,9 @@ public class MissingDeprecated extends Recipe {
                 ExecutionContext executionContext) {
             J.ClassDeclaration result = classDecl;
 
-            if (isAtViolationLocation(result)) {
+            final boolean hasMarker = hasMissingDeprecatedMarker(result);
+
+            if (hasMarker) {
                 final boolean hasAnnotation = hasDeprecatedAnnotation(
                         result.getLeadingAnnotations());
                 final boolean hasJavadocTag = hasDeprecatedJavadocTag(result.getPrefix());
@@ -143,6 +131,12 @@ public class MissingDeprecated extends Recipe {
                 }
             }
             return super.visitClassDeclaration(result, executionContext);
+        }
+
+        private boolean hasMissingDeprecatedMarker(Tree tree) {
+            return tree.getMarkers()
+                    .findAll(CheckstyleViolationMarker.class).stream()
+                    .anyMatch(marker -> marker.isFor(CheckFullName.MISSING_DEPRECATED));
         }
 
         private boolean hasDeprecatedAnnotation(List<J.Annotation> annotations) {
@@ -355,17 +349,6 @@ public class MissingDeprecated extends Recipe {
                 }
             }
             return result;
-        }
-
-        private boolean isAtViolationLocation(J tree) {
-            final J.CompilationUnit cursor = getCursor().firstEnclosing(J.CompilationUnit.class);
-
-            final int line = PositionHelper
-                    .computeLinePosition(cursor, tree, getCursor());
-            return violations.stream().anyMatch(violation -> {
-                return violation.getLine() == line
-                        && violation.getFilePath().endsWith(sourcePath);
-            });
         }
     }
 }

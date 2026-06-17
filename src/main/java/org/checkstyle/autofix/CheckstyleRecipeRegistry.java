@@ -72,13 +72,13 @@ public final class CheckstyleRecipeRegistry {
         RECIPE_MAP.put(CheckFullName.UNUSED_LOCAL_VARIABLE, UnusedLocalVariable::new);
         RECIPE_MAP.put(CheckFullName.ANNOTATION_ON_SAME_LINE, AnnotationOnSameLine::new);
         RECIPE_MAP.put(CheckFullName.USE_ENHANCED_SWITCH, UseEnhancedSwitch::new);
-        RECIPE_MAP.put(CheckFullName.MISSING_DEPRECATED, MissingDeprecated::new);
         RECIPE_MAP.put(CheckFullName.UNUSED_IMPORT, UnusedImports::new);
         RECIPE_MAP_NO_VIOLATIONS.put(CheckFullName.FINAL_CLASS, FinalClass::new);
         RECIPE_MAP_NO_VIOLATIONS.put(CheckFullName.AVOID_STAR_IMPORT, AvoidStarImport::new);
         RECIPE_MAP_NO_VIOLATIONS.put(CheckFullName.FINAL_LOCAL_VARIABLE, FinalLocalVariable::new);
         RECIPE_MAP_NO_VIOLATIONS.put(CheckFullName.EMPTY_STATEMENT, EmptyStatement::new);
         RECIPE_MAP_NO_VIOLATIONS.put(CheckFullName.HEX_LITERAL_CASE, HexLiteralCase::new);
+        RECIPE_MAP_NO_VIOLATIONS.put(CheckFullName.MISSING_DEPRECATED, MissingDeprecated::new);
         RECIPE_MAP_NO_VIOLATIONS.put(CheckFullName.MISSING_OVERRIDE, MissingOverride::new);
         RECIPE_MAP_NO_VIOLATIONS.put(CheckFullName.REDUNDANT_IMPORT, RedundantImport::new);
     }

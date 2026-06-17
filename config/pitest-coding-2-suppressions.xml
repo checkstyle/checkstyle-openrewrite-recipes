@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suppressedMutations>
+  <!-- Cannot be killed by integration tests until a second recipe lands a marker on this node type. See issue #236 -->
+  <mutation unstable="false">
+    <sourceFile>MissingDeprecated.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.MissingDeprecated$MissingDeprecatedVisitor</mutatedClass>
+    <mutatedMethod>lambda$hasMissingDeprecatedMarker$0</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.BooleanTrueReturnValsMutator</mutator>
+    <description>replaced boolean return with true for org/checkstyle/autofix/recipe/MissingDeprecated$MissingDeprecatedVisitor::lambda$hasMissingDeprecatedMarker$0</description>
+    <lineContent>.anyMatch(marker -&gt; marker.isFor(CheckFullName.MISSING_DEPRECATED));</lineContent>
+  </mutation>
+
   <mutation unstable="false">
     <sourceFile>NewlineAtEndOfFile.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
