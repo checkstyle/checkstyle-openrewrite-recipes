@@ -32,7 +32,7 @@ public class NumericalPrefixesInfixesSuffixesCharacterCaseTest extends AbstractR
     @Test
     public void checkDescription() {
         final NumericalPrefixesInfixesSuffixesCharacterCase recipe =
-            new NumericalPrefixesInfixesSuffixesCharacterCase(null);
+            new NumericalPrefixesInfixesSuffixesCharacterCase();
         final String expectedDescription = "Replace Uppercase numerical prefixes, infixes "
                 + "and suffixes with lowercase literals to improve readability.";
         assertWithMessage("Invalid description")
@@ -43,7 +43,7 @@ public class NumericalPrefixesInfixesSuffixesCharacterCaseTest extends AbstractR
     @Test
     public void checkDisplayName() {
         final NumericalPrefixesInfixesSuffixesCharacterCase recipe =
-            new NumericalPrefixesInfixesSuffixesCharacterCase(null);
+            new NumericalPrefixesInfixesSuffixesCharacterCase();
         final String expectedDisplayName = "NumericalPrefixesInfixesSuffixesCharacterCase Recipe";
         assertWithMessage("Invalid display name")
                 .that(recipe.getDisplayName())
