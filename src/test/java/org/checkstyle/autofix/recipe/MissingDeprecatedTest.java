@@ -32,7 +32,7 @@ public class MissingDeprecatedTest extends AbstractRecipeTestSupport {
     @Test
     public void checkDescription() {
         final MissingDeprecated recipe =
-            new MissingDeprecated(null);
+            new MissingDeprecated();
         final String expectedDescription = "Add @Deprecated annotation or {@code @deprecated} "
                 + "Javadoc tag when either is missing.";
         assertWithMessage("Invalid description")
@@ -42,7 +42,7 @@ public class MissingDeprecatedTest extends AbstractRecipeTestSupport {
 
     @Test
     public void checkDisplayName() {
-        final MissingDeprecated recipe = new MissingDeprecated(null);
+        final MissingDeprecated recipe = new MissingDeprecated();
         final String expectedDisplayName = "Missing Deprecated annotation or Javadoc tag";
         assertWithMessage("Invalid display name")
                 .that(recipe.getDisplayName())
