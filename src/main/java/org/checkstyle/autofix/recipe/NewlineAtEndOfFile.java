@@ -17,12 +17,12 @@
 
 package org.checkstyle.autofix.recipe;
 
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.checkstyle.autofix.CheckFullName;
+import org.checkstyle.autofix.marker.CheckstyleViolationMarker;
 import org.checkstyle.autofix.parser.CheckConfiguration;
-import org.checkstyle.autofix.parser.CheckstyleViolation;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
 import org.openrewrite.TreeVisitor;
@@ -37,15 +37,9 @@ import org.openrewrite.style.Style;
 
 public class NewlineAtEndOfFile extends Recipe {
 
-    private final List<CheckstyleViolation> violations;
     private final CheckConfiguration config;
 
-    public NewlineAtEndOfFile(List<CheckstyleViolation> violations) {
-        this(violations, null);
-    }
-
-    public NewlineAtEndOfFile(List<CheckstyleViolation> violations, CheckConfiguration config) {
-        this.violations = violations;
+    public NewlineAtEndOfFile(CheckConfiguration config) {
         this.config = config;
     }
 
@@ -62,16 +56,13 @@ public class NewlineAtEndOfFile extends Recipe {
     @Override
     public TreeVisitor<?, ExecutionContext> getVisitor() {
         final String lineSeparator = config.getProperty("lineSeparator");
-        return new NewLineAtEndOfFileVisitor(violations, lineSeparator);
+        return new NewLineAtEndOfFileVisitor(lineSeparator);
     }
 
     private static class NewLineAtEndOfFileVisitor extends JavaIsoVisitor<ExecutionContext> {
-        private final List<CheckstyleViolation> violations;
         private final String lineSeparatorConfig;
 
-        NewLineAtEndOfFileVisitor(List<CheckstyleViolation> violations,
-                                         String lineSeparatorConfig) {
-            this.violations = violations;
+        NewLineAtEndOfFileVisitor(String lineSeparatorConfig) {
             this.lineSeparatorConfig = lineSeparatorConfig.toLowerCase();
         }
 
@@ -80,9 +71,11 @@ public class NewlineAtEndOfFile extends Recipe {
                 J.CompilationUnit compUnit, ExecutionContext executionContext) {
             J.CompilationUnit result = super.visitCompilationUnit(compUnit, executionContext);
 
-            final Path filePath = compUnit.getSourcePath();
+            final boolean hasMarker = result.getMarkers()
+                    .findAll(CheckstyleViolationMarker.class).stream()
+                    .anyMatch(marker -> marker.isFor(CheckFullName.NEWLINE_AT_END_OF_FILE));
 
-            if (hasViolation(filePath)) {
+            if (hasMarker) {
                 final String expectedLineEnding = determineLineEnding(result);
                 result = result.withEof(
                         buildNewEof(result.getEof(), expectedLineEnding));
@@ -136,9 +129,5 @@ public class NewlineAtEndOfFile extends Recipe {
             return generalFormatStyle.newLine();
         }
 
-        private boolean hasViolation(Path filePath) {
-            return violations.stream()
-                    .anyMatch(violation -> violation.getFilePath().endsWith(filePath));
-        }
     }
 }

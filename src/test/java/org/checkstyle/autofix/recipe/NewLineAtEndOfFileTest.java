@@ -19,8 +19,10 @@ package org.checkstyle.autofix.recipe;
 
 import static com.google.common.truth.Truth.assertWithMessage;
 
-import java.util.List;
+import java.util.Map;
 
+import org.checkstyle.autofix.CheckFullName;
+import org.checkstyle.autofix.parser.CheckConfiguration;
 import org.checkstyle.autofix.parser.ReportParser;
 import org.junit.jupiter.api.Test;
 
@@ -32,7 +34,8 @@ public class NewLineAtEndOfFileTest extends AbstractRecipeTestSupport {
 
     @Test
     public void checkDisplayName() {
-        final NewlineAtEndOfFile recipe = new NewlineAtEndOfFile(List.of());
+        final NewlineAtEndOfFile recipe = new NewlineAtEndOfFile(
+            new CheckConfiguration(CheckFullName.NEWLINE_AT_END_OF_FILE, Map.of(), Map.of()));
 
         final String expectedDisplayName = "End files with a single newline";
 
@@ -43,7 +46,8 @@ public class NewLineAtEndOfFileTest extends AbstractRecipeTestSupport {
 
     @Test
     public void checkDescription() {
-        final NewlineAtEndOfFile recipe = new NewlineAtEndOfFile(List.of());
+        final NewlineAtEndOfFile recipe = new NewlineAtEndOfFile(
+            new CheckConfiguration(CheckFullName.NEWLINE_AT_END_OF_FILE, Map.of(), Map.of()));
 
         final String expectedDescription =
                 "Some tools work better when files end with an empty line.";
