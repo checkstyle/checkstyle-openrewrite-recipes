@@ -86,16 +86,7 @@
   <mutation unstable="false">
     <sourceFile>NewlineAtEndOfFile.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
-    <mutatedMethod>hasViolation</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.BooleanTrueReturnValsMutator</mutator>
-    <description>replaced boolean return with true for org/checkstyle/autofix/recipe/NewlineAtEndOfFile$NewLineAtEndOfFileVisitor::hasViolation</description>
-    <lineContent>return violations.stream()</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
-    <mutatedMethod>lambda$getAutodetectedLineEnding$0</mutatedMethod>
+    <mutatedMethod>lambda$getAutodetectedLineEnding$1</mutatedMethod>
     <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
     <description>removed call to org/openrewrite/java/format/AutodetectGeneralFormatStyle::autodetectGeneralFormatStyle</description>
     <lineContent>.autodetectGeneralFormatStyle(sourceFile);</lineContent>
@@ -104,19 +95,20 @@
   <mutation unstable="false">
     <sourceFile>NewlineAtEndOfFile.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
-    <mutatedMethod>lambda$getAutodetectedLineEnding$0</mutatedMethod>
+    <mutatedMethod>lambda$getAutodetectedLineEnding$1</mutatedMethod>
     <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.NullReturnValsMutator</mutator>
-    <description>replaced return value with null for org/checkstyle/autofix/recipe/NewlineAtEndOfFile$NewLineAtEndOfFileVisitor::lambda$getAutodetectedLineEnding$0</description>
+    <description>replaced return value with null for org/checkstyle/autofix/recipe/NewlineAtEndOfFile$NewLineAtEndOfFileVisitor::lambda$getAutodetectedLineEnding$1</description>
     <lineContent>return AutodetectGeneralFormatStyle</lineContent>
   </mutation>
 
+  <!-- Cannot be killed by integration tests until a second recipe lands a marker on this node type. See issue #236 -->
   <mutation unstable="false">
     <sourceFile>NewlineAtEndOfFile.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
-    <mutatedMethod>lambda$hasViolation$1</mutatedMethod>
+    <mutatedMethod>lambda$visitCompilationUnit$0</mutatedMethod>
     <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.BooleanTrueReturnValsMutator</mutator>
-    <description>replaced boolean return with true for org/checkstyle/autofix/recipe/NewlineAtEndOfFile$NewLineAtEndOfFileVisitor::lambda$hasViolation$1</description>
-    <lineContent>.anyMatch(violation -&gt; violation.getFilePath().endsWith(filePath));</lineContent>
+    <description>replaced boolean return with true for org/checkstyle/autofix/recipe/NewlineAtEndOfFile$NewLineAtEndOfFileVisitor::lambda$visitCompilationUnit$0</description>
+    <lineContent>.anyMatch(marker -&gt; marker.isFor(CheckFullName.NEWLINE_AT_END_OF_FILE));</lineContent>
   </mutation>
 
   <mutation unstable="false">
@@ -134,7 +126,7 @@
     <mutatedMethod>visitCompilationUnit</mutatedMethod>
     <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
     <description>removed conditional - replaced equality check with true</description>
-    <lineContent>if (hasViolation(filePath)) {</lineContent>
+    <lineContent>if (hasMarker) {</lineContent>
   </mutation>
 
   <!-- Cannot be killed by integration tests until a second recipe lands a marker on this node type. See issue #236 -->
