@@ -17,10 +17,8 @@
 
 package org.checkstyle.autofix.recipe;
 
-import java.nio.file.Path;
-import java.util.List;
-
-import org.checkstyle.autofix.parser.CheckstyleViolation;
+import org.checkstyle.autofix.CheckFullName;
+import org.checkstyle.autofix.marker.CheckstyleViolationMarker;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
 import org.openrewrite.TreeVisitor;
@@ -31,12 +29,6 @@ import org.openrewrite.java.tree.J;
  * Fixes Checkstyle UnusedImports violations by removing unused imports.
  */
 public class UnusedImports extends Recipe {
-
-    private final List<CheckstyleViolation> violations;
-
-    public UnusedImports(List<CheckstyleViolation> violations) {
-        this.violations = violations;
-    }
 
     @Override
     public String getDisplayName() {
@@ -50,43 +42,26 @@ public class UnusedImports extends Recipe {
 
     @Override
     public TreeVisitor<?, ExecutionContext> getVisitor() {
-        return new UnusedImports.UnusedImportsVisitor();
+        return new UnusedImportsVisitor();
     }
 
-    private final class UnusedImportsVisitor extends JavaIsoVisitor<ExecutionContext> {
-
-        private static final String DOT_OPERATOR = ".";
-
-        private Path sourcePath;
+    private static final class UnusedImportsVisitor extends JavaIsoVisitor<ExecutionContext> {
 
         @Override
         public J.CompilationUnit visitCompilationUnit(J.CompilationUnit cu,
                                                       ExecutionContext executionContext) {
 
-            this.sourcePath = cu.getSourcePath();
             return cu.withImports(
                     cu.getImports().stream()
-                            .filter(importStmt -> !isAtViolationLocation(importStmt))
+                            .filter(importStmt -> !hasUnusedImportMarker(importStmt))
                             .toList()
             );
         }
 
-        private String createMessage(J.Import literal) {
-            String fullImport = literal.getTypeName();
-            if (literal.isStatic()) {
-                fullImport += DOT_OPERATOR + literal.getQualid().getSimpleName();
-            }
-            return "Unused import - " + fullImport + DOT_OPERATOR;
-        }
-
-        private boolean isAtViolationLocation(J.Import literal) {
-
-            final String message = createMessage(literal);
-            return violations.stream().anyMatch(violation -> {
-                final Path absolutePath = violation.getFilePath();
-                return violation.getMessage().equals(message)
-                        && absolutePath.endsWith(sourcePath);
-            });
+        private boolean hasUnusedImportMarker(J.Import importStmt) {
+            return importStmt.getMarkers()
+                    .findAll(CheckstyleViolationMarker.class).stream()
+                    .anyMatch(marker -> marker.isFor(CheckFullName.UNUSED_IMPORT));
         }
     }
 }
