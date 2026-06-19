@@ -20,6 +20,7 @@ package org.checkstyle.autofix.marker;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -171,45 +172,44 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
         private UUID findEnclosingNode(CheckstyleViolation violation,
                                        Map<UUID, Range> nodeRanges,
                                        boolean lineOnly) {
-            UUID smallestNodeId = null;
-            int minLines = Integer.MAX_VALUE;
-            int minCols = Integer.MAX_VALUE;
-            boolean foundExactMatch = false;
+            final Comparator<Map.Entry<UUID, Range>> cmp = Comparator
+                    .<Map.Entry<UUID, Range>, Boolean>comparing(entry -> {
+                        final Range range = entry.getValue();
+                        final boolean exactMatch = !lineOnly
+                                && range.endLine() == violation.getLine()
+                                && range.endCol() == violation.getColumn();
+                        return !exactMatch;
+                    })
+                    .thenComparingInt(entry -> {
+                        return entry.getValue().endLine() - entry.getValue().startLine();
+                    })
+                    .thenComparingInt(entry -> {
+                        return entry.getValue().endCol() - entry.getValue().startCol();
+                    });
 
-            for (Map.Entry<UUID, Range> entry : nodeRanges.entrySet()) {
-                final Range range = entry.getValue();
-                final boolean matches;
-                if (lineOnly) {
-                    matches = enclosesLine(range, violation);
-                }
-                else {
-                    matches = encloses(range, violation);
-                }
-                if (matches) {
-                    final boolean exactMatch = !lineOnly
-                            && range.endLine() == violation.getLine()
-                            && range.endCol() == violation.getColumn();
-
-                    final int lines = range.endLine() - range.startLine();
-                    final int cols = range.endCol() - range.startCol();
-
-                    boolean update = false;
-                    if (exactMatch && !foundExactMatch) {
-                        foundExactMatch = true;
-                        update = true;
-                    }
-                    else if (exactMatch || !foundExactMatch) {
-                        update = lines < minLines || lines == minLines && cols <= minCols;
-                    }
-
-                    if (update) {
-                        minLines = lines;
-                        minCols = cols;
-                        smallestNodeId = entry.getKey();
-                    }
-                }
-            }
-            return smallestNodeId;
+            return nodeRanges.entrySet().stream()
+                    .filter(entry -> {
+                        final boolean matches;
+                        if (lineOnly) {
+                            matches = enclosesLine(entry.getValue(), violation);
+                        }
+                        else {
+                            matches = encloses(entry.getValue(), violation);
+                        }
+                        return matches;
+                    })
+                    .reduce((prev, next) -> {
+                        final Map.Entry<UUID, Range> better;
+                        if (cmp.compare(prev, next) < 0) {
+                            better = prev;
+                        }
+                        else {
+                            better = next;
+                        }
+                        return better;
+                    })
+                    .map(Map.Entry::getKey)
+                    .orElse(null);
         }
 
         private boolean enclosesLine(Range range, CheckstyleViolation violation) {
@@ -280,6 +280,10 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
         private final Map<UUID, Tree> nodeTrees;
         private int line;
         private int column;
+        // Index in out where last append(String) ended. The printer may also write
+        // to out directly (bypassing this override), so anything past this offset is
+        // output we haven't yet counted into line/column.
+        private int lastAppendEnd;
 
         BoundingBoxCapture(TreeVisitor<?, PrintOutputCapture<TreeVisitor<?, ?>>> printer,
                            Map<UUID, Range> nodeRanges,
@@ -292,8 +296,22 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
             this.line = 1;
         }
 
+        private void advance(String segment) {
+            for (int index = 0; index < segment.length(); index++) {
+                if (segment.charAt(index) == '\n') {
+                    line++;
+                    column = 1;
+                }
+                else {
+                    column++;
+                }
+            }
+        }
+
         @Override
         public PrintOutputCapture<TreeVisitor<?, ?>> append(String text) {
+            advance(out.substring(lastAppendEnd));
+
             final Cursor currentCursor = getContext().getCursor();
             final Iterator<Object> it = currentCursor.getPath();
             final List<Tree> pathTrees = new ArrayList<>();
@@ -314,15 +332,7 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
                 }
             }
 
-            for (int index = 0; index < text.length(); index++) {
-                if (text.charAt(index) == '\n') {
-                    line++;
-                    column = 1;
-                }
-                else {
-                    column++;
-                }
-            }
+            advance(text);
 
             for (Tree treeNode : pathTrees) {
                 final UUID currentId = treeNode.getId();
@@ -331,7 +341,9 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
                         new Range(range.startLine(), range.startCol(), line, column));
             }
 
-            return super.append(text);
+            super.append(text);
+            lastAppendEnd = out.length();
+            return this;
         }
     }
 

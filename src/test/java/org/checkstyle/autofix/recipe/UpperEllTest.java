@@ -19,8 +19,6 @@ package org.checkstyle.autofix.recipe;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.List;
-
 import org.checkstyle.autofix.parser.ReportParser;
 import org.junit.jupiter.api.Test;
 
@@ -33,7 +31,7 @@ public class UpperEllTest extends AbstractRecipeTestSupport {
 
     @Test
     public void checkDescription() {
-        final UpperEll recipe = new UpperEll(List.of());
+        final UpperEll recipe = new UpperEll();
 
         final String expectedDescription =
                 "Replace lowercase 'l' suffix in long literals with uppercase 'L' "
@@ -45,7 +43,7 @@ public class UpperEllTest extends AbstractRecipeTestSupport {
 
     @Test
     public void checkDisplayName() {
-        final UpperEll recipe = new UpperEll(List.of());
+        final UpperEll recipe = new UpperEll();
 
         final String expectedDisplayName = "UpperEll recipe";
 
