@@ -24,8 +24,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-import org.checkstyle.autofix.PositionHelper;
-import org.checkstyle.autofix.parser.CheckstyleViolation;
+import org.checkstyle.autofix.CheckFullName;
+import org.checkstyle.autofix.marker.CheckstyleViolationMarker;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
 import org.openrewrite.TreeVisitor;
@@ -41,12 +41,6 @@ import org.openrewrite.java.tree.Statement;
  * declarations that are never used.
  */
 public class UnusedLocalVariable extends Recipe {
-
-    private final List<CheckstyleViolation> violations;
-
-    public UnusedLocalVariable(List<CheckstyleViolation> violations) {
-        this.violations = violations;
-    }
 
     @Override
     public String getDisplayName() {
@@ -78,15 +72,6 @@ public class UnusedLocalVariable extends Recipe {
         private final Set<UUID> namedVariablesToRemove = new HashSet<>();
         private Set<String> removedVarNamesInMethod = new HashSet<>();
 
-        private J.CompilationUnit originalCu;
-
-        @Override
-        public J.CompilationUnit visitCompilationUnit(J.CompilationUnit compilationUnit,
-                ExecutionContext executionContext) {
-            originalCu = compilationUnit;
-            return super.visitCompilationUnit(compilationUnit, executionContext);
-        }
-
         @Override
         public J.MethodDeclaration visitMethodDeclaration(J.MethodDeclaration method,
                 ExecutionContext executionContext) {
@@ -115,21 +100,12 @@ public class UnusedLocalVariable extends Recipe {
 
         private boolean isAtViolationLocation(J.VariableDeclarations varDecl,
                 J.VariableDeclarations.NamedVariable variable) {
-            boolean matches = false;
-            final int line = PositionHelper
-                    .computeLinePosition(originalCu, varDecl, getCursor());
-
-            for (CheckstyleViolation violation : violations) {
-                final String violationPath = violation.getFilePath().toString();
-                if (violation.getLine() == line
-                        && violationPath.endsWith(originalCu.getSourcePath().toString())
-                        && violation.getMessage().contains(
-                                QUOTE + variable.getSimpleName() + QUOTE)) {
-                    matches = true;
-                    break;
-                }
-            }
-            return matches;
+            return varDecl.getMarkers().findAll(CheckstyleViolationMarker.class).stream()
+                    .anyMatch(marker -> {
+                        return marker.isFor(CheckFullName.UNUSED_LOCAL_VARIABLE)
+                                & marker.violation().getMessage()
+                                    .contains(QUOTE + variable.getSimpleName() + QUOTE);
+                    });
         }
 
         @Override
