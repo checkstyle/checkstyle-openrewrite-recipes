@@ -136,6 +136,25 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
         private Map<UUID, List<CheckstyleViolationMarker>> findSmallestNode(
                 CheckstyleViolation violation, Map<UUID, Range> nodeRanges,
                 Map<UUID, UUID> parentMap, Map<UUID, Tree> nodeTrees) {
+            UUID smallestNodeId = findEnclosingNode(violation, nodeRanges, false);
+
+            if (smallestNodeId == null && violation.getColumn() <= 0) {
+                smallestNodeId = findEnclosingNode(violation, nodeRanges, true);
+            }
+
+            final Map<UUID, List<CheckstyleViolationMarker>> result = new HashMap<>();
+            if (smallestNodeId != null) {
+                final UUID targetId = resolveTargetNode(smallestNodeId, violation,
+                        parentMap, nodeTrees);
+                result.computeIfAbsent(targetId, nodeId -> new ArrayList<>())
+                        .add(new CheckstyleViolationMarker(Tree.randomId(), violation));
+            }
+            return result;
+        }
+
+        private UUID findEnclosingNode(CheckstyleViolation violation,
+                                       Map<UUID, Range> nodeRanges,
+                                       boolean lineOnly) {
             UUID smallestNodeId = null;
             int minLines = Integer.MAX_VALUE;
             int minCols = Integer.MAX_VALUE;
@@ -143,8 +162,16 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
 
             for (Map.Entry<UUID, Range> entry : nodeRanges.entrySet()) {
                 final Range range = entry.getValue();
-                if (encloses(range, violation)) {
-                    final boolean exactMatch = range.endLine() == violation.getLine()
+                final boolean matches;
+                if (lineOnly) {
+                    matches = enclosesLine(range, violation);
+                }
+                else {
+                    matches = encloses(range, violation);
+                }
+                if (matches) {
+                    final boolean exactMatch = !lineOnly
+                            && range.endLine() == violation.getLine()
                             && range.endCol() == violation.getColumn();
 
                     final int lines = range.endLine() - range.startLine();
@@ -166,15 +193,12 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
                     }
                 }
             }
+            return smallestNodeId;
+        }
 
-            final Map<UUID, List<CheckstyleViolationMarker>> result = new HashMap<>();
-            if (smallestNodeId != null) {
-                final UUID targetId = resolveTargetNode(smallestNodeId, violation,
-                        parentMap, nodeTrees);
-                result.computeIfAbsent(targetId, nodeId -> new ArrayList<>())
-                        .add(new CheckstyleViolationMarker(Tree.randomId(), violation));
-            }
-            return result;
+        private boolean enclosesLine(Range range, CheckstyleViolation violation) {
+            return range.startLine() <= violation.getLine()
+                    && range.endLine() >= violation.getLine();
         }
 
         private UUID resolveTargetNode(UUID startNodeId, CheckstyleViolation violation,
@@ -229,7 +253,7 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
             boolean result = false;
             if (range.startLine() == violation.getLine()
                     && range.endLine() > violation.getLine()) {
-                if (violation.getColumn() <= 0 || range.startCol() <= violation.getColumn()) {
+                if (range.startCol() <= violation.getColumn()) {
                     result = true;
                 }
             }

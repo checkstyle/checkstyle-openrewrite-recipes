@@ -1335,4 +1335,111 @@ public class ViolationMarkerRecipeTest {
         Assertions.assertTrue(result3.containsKey(id5), "id5 should win");
     }
 
+    @Test
+    public void testFindSmallestNodeFallbackMutations() throws Exception {
+        final Class<?> scannerClass = Class.forName(
+            "org.checkstyle.autofix.marker.ViolationMarkerRecipe$ScannerVisitor");
+        final Class<?> rangeClass = Class.forName(
+            "org.checkstyle.autofix.marker.ViolationMarkerRecipe$Range");
+        final Method findMethod = scannerClass.getDeclaredMethod(
+            "findSmallestNode",
+            CheckstyleViolation.class,
+            Map.class, Map.class, Map.class);
+        findMethod.setAccessible(true);
+
+        final Constructor<?> rangeCtor = rangeClass.getDeclaredConstructor(
+            int.class, int.class, int.class, int.class);
+        rangeCtor.setAccessible(true);
+
+        final ViolationMarkerRecipe recipe = new ViolationMarkerRecipe(Collections.emptyList());
+        final Object scanner = recipe.getScanner(
+            recipe.getInitialValue(new InMemoryExecutionContext()));
+
+        final CheckstyleCheck check = new CheckstyleCheck(
+            CheckFullName.FINAL_LOCAL_VARIABLE, "id");
+        final Map<UUID, UUID> parentMap = new HashMap<>();
+        final Map<UUID, Tree> nodeTrees = new HashMap<>();
+
+        final CheckstyleViolation viol1 = new CheckstyleViolation(
+            2, -1, "err", check, "msg", Paths.get("a"));
+
+        final UUID id1 = Tree.randomId();
+        final UUID id2 = Tree.randomId();
+        final Map<UUID, Object> ranges1 = new LinkedHashMap<>();
+
+        ranges1.put(id1, rangeCtor.newInstance(1, 1, 3, 10));
+        ranges1.put(id2, rangeCtor.newInstance(2, 5, 2, 15));
+
+        final Map<UUID, ?> result1 = (Map<UUID, ?>) findMethod.invoke(
+            scanner, viol1, ranges1, parentMap, nodeTrees);
+        Assertions.assertTrue(result1.containsKey(id1), "id1 should win as fallback is skipped");
+
+        final CheckstyleViolation viol2 = new CheckstyleViolation(
+            2, 5, "err", check, "msg", Paths.get("a"));
+
+        final UUID id3 = Tree.randomId();
+        final Map<UUID, Object> ranges2 = new LinkedHashMap<>();
+
+        ranges2.put(id3, rangeCtor.newInstance(2, 10, 2, 15));
+
+        final Map<UUID, ?> result2 = (Map<UUID, ?>) findMethod.invoke(
+            scanner, viol2, ranges2, parentMap, nodeTrees);
+
+        Assertions.assertTrue(result2.isEmpty(),
+                "Result should be empty as fallback is skipped");
+
+        final CheckstyleViolation viol3 = new CheckstyleViolation(
+            5, -1, "err", check, "msg", Paths.get("a"));
+
+        final UUID id4 = Tree.randomId();
+        final UUID id5 = Tree.randomId();
+        final Map<UUID, Object> ranges3 = new LinkedHashMap<>();
+        ranges3.put(id4, rangeCtor.newInstance(1, 1, 4, 10));
+        ranges3.put(id5, rangeCtor.newInstance(6, 1, 8, 10));
+
+        final Map<UUID, ?> result3 = (Map<UUID, ?>) findMethod.invoke(
+            scanner, viol3, ranges3, parentMap, nodeTrees);
+
+        Assertions.assertTrue(result3.isEmpty(),
+                "Nodes not on the violation line should be rejected");
+
+        final CheckstyleViolation viol4 = new CheckstyleViolation(
+            2, 10, "err", check, "msg", Paths.get("a"));
+
+        final UUID id6 = Tree.randomId();
+        final UUID id7 = Tree.randomId();
+        final Map<UUID, Object> ranges4 = new LinkedHashMap<>();
+        ranges4.put(id6, rangeCtor.newInstance(1, 1, 3, 10));
+        ranges4.put(id7, rangeCtor.newInstance(1, 1, 2, 15));
+
+        final Map<UUID, ?> result4 = (Map<UUID, ?>) findMethod.invoke(
+            scanner, viol4, ranges4, parentMap, nodeTrees);
+        Assertions.assertTrue(result4.containsKey(id7),
+                "id7 should win because it is smaller, and id6 is not an exact match");
+
+        final UUID id8 = Tree.randomId();
+        final UUID id9 = Tree.randomId();
+        final Map<UUID, Object> ranges5 = new LinkedHashMap<>();
+        ranges5.put(id8, rangeCtor.newInstance(1, 1, 2, 20));
+        ranges5.put(id9, rangeCtor.newInstance(2, 1, 3, 5));
+
+        final Map<UUID, ?> result5 = (Map<UUID, ?>) findMethod.invoke(
+            scanner, viol4, ranges5, parentMap, nodeTrees);
+        Assertions.assertTrue(result5.containsKey(id9),
+                "id9 should win because it is smaller, and id8 is not an exact match");
+
+        final CheckstyleViolation viol6 = new CheckstyleViolation(
+            2, -1, "err", check, "msg", Paths.get("a"));
+
+        final UUID id10 = Tree.randomId();
+        final UUID id11 = Tree.randomId();
+        final Map<UUID, Object> ranges6 = new LinkedHashMap<>();
+        ranges6.put(id10, rangeCtor.newInstance(2, 5, 2, -1));
+        ranges6.put(id11, rangeCtor.newInstance(2, 5, 2, -5));
+
+        final Map<UUID, ?> result6 = (Map<UUID, ?>) findMethod.invoke(
+            scanner, viol6, ranges6, parentMap, nodeTrees);
+        Assertions.assertTrue(result6.containsKey(id11),
+                "id11 should win because it is smaller, and !lineOnly prevents exact match");
+    }
 }
