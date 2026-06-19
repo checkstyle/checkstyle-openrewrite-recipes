@@ -31,7 +31,7 @@ public class UnusedImportsTest extends AbstractRecipeTestSupport {
 
     @Test
     public void checkDescription() {
-        final UnusedImports recipe = new UnusedImports(null);
+        final UnusedImports recipe = new UnusedImports();
         final String expectedDescription = "Remove unused imports";
         assertWithMessage("Invalid description")
                 .that(recipe.getDescription())
@@ -40,7 +40,7 @@ public class UnusedImportsTest extends AbstractRecipeTestSupport {
 
     @Test
     public void checkDisplayName() {
-        final UnusedImports recipe = new UnusedImports(null);
+        final UnusedImports recipe = new UnusedImports();
         final String expectedDisplayName = "UnusedImports Recipe";
         assertWithMessage("Invalid display name")
                 .that(recipe.getDisplayName())

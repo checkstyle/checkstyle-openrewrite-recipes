@@ -211,7 +211,7 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
                     case FINAL_CLASS -> J.ClassDeclaration.class;
                     case FINAL_LOCAL_VARIABLE -> J.VariableDeclarations.NamedVariable.class;
                     case ANNOTATION_ON_SAME_LINE -> J.Annotation.class;
-                    case AVOID_STAR_IMPORT -> J.Import.class;
+                    case AVOID_STAR_IMPORT, UNUSED_IMPORT -> J.Import.class;
                     case MISSING_OVERRIDE -> J.MethodDeclaration.class;
                     default -> null;
                 };

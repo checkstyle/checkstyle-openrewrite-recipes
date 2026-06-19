@@ -149,6 +149,16 @@
     <lineContent>.anyMatch(marker -&gt; marker.isFor(CheckFullName.REDUNDANT_IMPORT));</lineContent>
   </mutation>
 
+  <!-- Cannot be killed by integration tests until a second recipe lands a marker on this node type. See issue #236 -->
+  <mutation unstable="false">
+    <sourceFile>UnusedImports.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.UnusedImports$UnusedImportsVisitor</mutatedClass>
+    <mutatedMethod>lambda$hasUnusedImportMarker$1</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.BooleanTrueReturnValsMutator</mutator>
+    <description>replaced boolean return with true for org/checkstyle/autofix/recipe/UnusedImports$UnusedImportsVisitor::lambda$hasUnusedImportMarker$1</description>
+    <lineContent>.anyMatch(marker -&gt; marker.isFor(CheckFullName.UNUSED_IMPORT));</lineContent>
+  </mutation>
+
   <mutation unstable="false">
     <sourceFile>UseEnhancedSwitch.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.recipe.UseEnhancedSwitch$UseEnhancedSwitchVisitor$ControlFlowVisitor</mutatedClass>
