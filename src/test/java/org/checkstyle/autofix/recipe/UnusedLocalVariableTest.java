@@ -31,7 +31,7 @@ public class UnusedLocalVariableTest extends AbstractRecipeTestSupport {
 
     @Test
     public void checkDisplayName() {
-        final UnusedLocalVariable recipe = new UnusedLocalVariable(null);
+        final UnusedLocalVariable recipe = new UnusedLocalVariable();
         assertWithMessage("Invalid display name")
                 .that(recipe.getDisplayName())
                 .isEqualTo("UnusedLocalVariable recipe");
@@ -39,7 +39,7 @@ public class UnusedLocalVariableTest extends AbstractRecipeTestSupport {
 
     @Test
     public void checkDescription() {
-        final UnusedLocalVariable recipe = new UnusedLocalVariable(null);
+        final UnusedLocalVariable recipe = new UnusedLocalVariable();
         assertWithMessage("Invalid description")
                 .that(recipe.getDescription())
                 .isEqualTo("Removes pure unused variables while keeping statements with "
