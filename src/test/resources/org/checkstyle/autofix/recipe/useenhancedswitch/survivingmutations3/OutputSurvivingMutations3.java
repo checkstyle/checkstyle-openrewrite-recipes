@@ -14,7 +14,7 @@
 package org.checkstyle.autofix.recipe.useenhancedswitch.survivingmutations3;
 
 public class OutputSurvivingMutations3 {
-    
+
     void m6(int x) {
           switch (x) {
             case 1 -> {}
@@ -36,7 +36,7 @@ System.out.println("0b");
     }
 
     void m8(int x, int y) {
-        switch (x) { case 1 -> { switch (y) { case 1 -> System.out.println("1"); case 2 -> {} default -> {} }}
+        switch (x) { case 1 -> { switch (y) { case 1: System.out.println("1"); case 2: break; default: break; }}
             default -> {}
         }
     }
@@ -55,6 +55,25 @@ System.out.println("0b");
 
     void emptySwitch(int x) {
         switch (x) {
+        }
+    }
+
+    void m11(int x, int y) {
+        switch (x) {
+            case 1 -> {
+                switch (y) {
+                    case 1 -> System.out.println("1");
+                    case 2 -> {}
+                    default -> {}
+                }
+            }
+            default -> {}
+        }
+    }
+
+    void m12(int x, int y) {
+        switch (x) { case 1 -> { switch (y) { case 1 -> System.out.println("1"); case 2 -> {} default -> {} }}
+            default -> {}
         }
     }
 

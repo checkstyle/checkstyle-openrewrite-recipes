@@ -214,6 +214,7 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
                     case AVOID_STAR_IMPORT, UNUSED_IMPORT -> J.Import.class;
                     case UNUSED_LOCAL_VARIABLE -> J.VariableDeclarations.class;
                     case MISSING_OVERRIDE -> J.MethodDeclaration.class;
+                    case USE_ENHANCED_SWITCH -> J.Switch.class;
                     default -> null;
                 };
 

@@ -19,8 +19,6 @@ package org.checkstyle.autofix.recipe;
 
 import static com.google.common.truth.Truth.assertWithMessage;
 
-import java.util.Collections;
-
 import org.checkstyle.autofix.parser.ReportParser;
 import org.junit.jupiter.api.Test;
 
@@ -33,7 +31,7 @@ public class UseEnhancedSwitchTest extends AbstractRecipeTestSupport {
 
     @Test
     public void checkDisplayName() {
-        final UseEnhancedSwitch recipe = new UseEnhancedSwitch(Collections.emptyList());
+        final UseEnhancedSwitch recipe = new UseEnhancedSwitch();
         final String expectedDisplayName = "UseEnhancedSwitch recipe";
 
         assertWithMessage("Invalid display name")
@@ -42,7 +40,7 @@ public class UseEnhancedSwitchTest extends AbstractRecipeTestSupport {
 
     @Test
     public void checkDescription() {
-        final UseEnhancedSwitch recipe = new UseEnhancedSwitch(Collections.emptyList());
+        final UseEnhancedSwitch recipe = new UseEnhancedSwitch();
         final String expectedDescription = "Convert switch statements using "
                 + "colon syntax to enhanced switch using arrow syntax.";
 
