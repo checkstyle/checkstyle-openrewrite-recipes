@@ -17,15 +17,14 @@
 
 package org.checkstyle.autofix.recipe;
 
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.checkstyle.autofix.PositionHelper;
-import org.checkstyle.autofix.parser.CheckstyleViolation;
+import org.checkstyle.autofix.CheckFullName;
+import org.checkstyle.autofix.marker.CheckstyleViolationMarker;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
 import org.openrewrite.Tree;
@@ -48,12 +47,6 @@ import org.openrewrite.marker.Markers;
  */
 public class UseEnhancedSwitch extends Recipe {
 
-    private final List<CheckstyleViolation> violations;
-
-    public UseEnhancedSwitch(List<CheckstyleViolation> violations) {
-        this.violations = violations;
-    }
-
     @Override
     public String getDisplayName() {
         return "UseEnhancedSwitch recipe";
@@ -73,16 +66,6 @@ public class UseEnhancedSwitch extends Recipe {
     private final class UseEnhancedSwitchVisitor extends JavaVisitor<ExecutionContext> {
 
         private static final String DEFAULT_LABEL = "default";
-        private Path sourcePath;
-        private J.CompilationUnit compUnit;
-
-        @Override
-        public J.CompilationUnit visitCompilationUnit(
-                J.CompilationUnit cu, ExecutionContext executionContext) {
-            this.sourcePath = cu.getSourcePath();
-            this.compUnit = cu;
-            return (J.CompilationUnit) super.visitCompilationUnit(cu, executionContext);
-        }
 
         @Override
         public Statement visitSwitch(J.Switch switchNode, ExecutionContext executionContext) {
@@ -612,15 +595,8 @@ public class UseEnhancedSwitch extends Recipe {
         }
 
         private boolean isAtViolationLocation(final J switchNode) {
-            final int line = PositionHelper.computeLinePosition(compUnit, switchNode, getCursor());
-            return violations.stream().anyMatch(violation -> {
-                return violation.getLine() == line
-                        && isSameFile(violation.getFilePath(), sourcePath);
-            });
-        }
-
-        private boolean isSameFile(final Path path1, final Path path2) {
-            return path1.equals(path2);
+            return switchNode.getMarkers().findAll(CheckstyleViolationMarker.class).stream()
+                    .anyMatch(marker -> marker.isFor(CheckFullName.USE_ENHANCED_SWITCH));
         }
 
         private static int computeIndentDelta(

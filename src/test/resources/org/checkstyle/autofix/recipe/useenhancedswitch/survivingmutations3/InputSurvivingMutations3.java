@@ -14,7 +14,7 @@
 package org.checkstyle.autofix.recipe.useenhancedswitch.survivingmutations3;
 
 public class InputSurvivingMutations3 {
-    
+
     void m6(int x) {
           // violation below, 'Switch can be replaced with enhanced switch'
           switch (x) {
@@ -60,6 +60,32 @@ break;
 
     void emptySwitch(int x) {
         switch (x) {
+        }
+    }
+
+    void m11(int x, int y) {
+        // violation below, 'Switch can be replaced with enhanced switch'
+        switch (x) {
+            case 1:
+                // violation below, 'Switch can be replaced with enhanced switch'
+                switch (y) {
+                    case 1:
+                        System.out.println("1");
+                        break;
+                    case 2:
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    void m12(int x, int y) {
+        switch (x) { case 1: switch (y) { case 1: System.out.println("1"); break; case 2: break; default: break; } break; // 2 violations
+            default: break;
         }
     }
 

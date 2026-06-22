@@ -6,7 +6,7 @@
  
 -public class InputSurvivingMutations3 {
 +public class OutputSurvivingMutations3 {
-     
+ 
      void m6(int x) {
 -          // violation below, 'Switch can be replaced with enhanced switch'
            switch (x) {
@@ -39,7 +39,7 @@
 -        // violation below, 'Switch can be replaced with enhanced switch'
 -        switch (x) { case 1: switch (y) { case 1: System.out.println("1"); case 2: break; default: break; } break;
 -            default: break;
-+        switch (x) { case 1 -> { switch (y) { case 1 -> System.out.println("1"); case 2 -> {} default -> {} }}
++        switch (x) { case 1 -> { switch (y) { case 1: System.out.println("1"); case 2: break; default: break; }}
 +            default -> {}
          }
      }
@@ -57,6 +57,43 @@
 -        switch (x) { case 1:      System.out.println("1"); System.out.println("1b"); break;
 -            default: break;
 +        switch (x) { case 1 -> {      System.out.println("1"); System.out.println("1b");}
++            default -> {}
+         }
+     }
+ 
+@@ -64,28 +59,21 @@
+     }
+ 
+     void m11(int x, int y) {
+-        // violation below, 'Switch can be replaced with enhanced switch'
+         switch (x) {
+-            case 1:
+-                // violation below, 'Switch can be replaced with enhanced switch'
++            case 1 -> {
+                 switch (y) {
+-                    case 1:
+-                        System.out.println("1");
+-                        break;
+-                    case 2:
+-                        break;
+-                    default:
+-                        break;
++                    case 1 -> System.out.println("1");
++                    case 2 -> {}
++                    default -> {}
+                 }
+-                break;
+-            default:
+-                break;
++            }
++            default -> {}
+         }
+     }
+ 
+     void m12(int x, int y) {
+-        switch (x) { case 1: switch (y) { case 1: System.out.println("1"); break; case 2: break; default: break; } break; // 2 violations
+-            default: break;
++        switch (x) { case 1 -> { switch (y) { case 1 -> System.out.println("1"); case 2 -> {} default -> {} }}
 +            default -> {}
          }
      }
