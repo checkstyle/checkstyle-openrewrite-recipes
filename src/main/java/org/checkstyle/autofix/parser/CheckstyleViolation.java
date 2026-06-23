@@ -35,6 +35,11 @@ public final class CheckstyleViolation {
 
     private final Path filePath;
 
+    public CheckstyleViolation(int line, String severity,
+                               CheckstyleCheck source, String message, Path filePath) {
+        this(line, -1, severity, source, message, filePath);
+    }
+
     public CheckstyleViolation(int line, int column, String severity,
                                CheckstyleCheck source, String message, Path filePath) {
         this.line = line;
@@ -43,11 +48,6 @@ public final class CheckstyleViolation {
         this.source = source;
         this.message = message;
         this.filePath = filePath;
-    }
-
-    public CheckstyleViolation(int line, String severity,
-                               CheckstyleCheck source, String message, Path filePath) {
-        this(line, -1, severity, source, message, filePath);
     }
 
     public Integer getLine() {
