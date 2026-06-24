@@ -17,12 +17,11 @@
 
 package org.checkstyle.autofix.recipe;
 
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.checkstyle.autofix.PositionHelper;
-import org.checkstyle.autofix.parser.CheckstyleViolation;
+import org.checkstyle.autofix.CheckFullName;
+import org.checkstyle.autofix.marker.CheckstyleViolationMarker;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
 import org.openrewrite.TreeVisitor;
@@ -35,12 +34,6 @@ import org.openrewrite.java.tree.Statement;
  * out-of-order constructors to group them together with other constructors.
  */
 public class ConstructorsDeclarationGrouping extends Recipe {
-
-    private final List<CheckstyleViolation> violations;
-
-    public ConstructorsDeclarationGrouping(List<CheckstyleViolation> violations) {
-        this.violations = violations;
-    }
 
     @Override
     public String getDisplayName() {
@@ -57,17 +50,8 @@ public class ConstructorsDeclarationGrouping extends Recipe {
         return new ConstructorsDeclarationGroupingVisitor();
     }
 
-    private final class ConstructorsDeclarationGroupingVisitor
+    private static final class ConstructorsDeclarationGroupingVisitor
             extends JavaIsoVisitor<ExecutionContext> {
-
-        private Path sourcePath;
-
-        @Override
-        public J.CompilationUnit visitCompilationUnit(
-                J.CompilationUnit cu, ExecutionContext executionContext) {
-            this.sourcePath = cu.getSourcePath();
-            return super.visitCompilationUnit(cu, executionContext);
-        }
 
         @Override
         public J.ClassDeclaration visitClassDeclaration(
@@ -85,8 +69,8 @@ public class ConstructorsDeclarationGrouping extends Recipe {
 
             final J.ClassDeclaration newClassDeclaration;
 
-            // keep code intact if there are no constructors at all
-            if (firstConstructorIndex == -1) {
+            // keep code intact if there are no constructors or no violations
+            if (firstConstructorIndex == -1 || violatingConstructors.isEmpty()) {
                 newClassDeclaration = classDeclaration;
             }
             else {
@@ -111,16 +95,43 @@ public class ConstructorsDeclarationGrouping extends Recipe {
             return firstConstructorIndex;
         }
 
-        private List<J.MethodDeclaration> findViolatingConstructors(List<Statement> statements) {
+        private static List<J.MethodDeclaration> findViolatingConstructors(
+            List<Statement> statements) {
+            // Only scan past the initial constructor group so leftover
+            // markers on already-moved constructors don't cause infinite reordering.
+            final int groupEnd = findFirstConstructorGroupEnd(statements);
             final List<J.MethodDeclaration> violating = new ArrayList<>();
-            for (final Statement statement : statements) {
-                if (statement instanceof J.MethodDeclaration method
-                        && method.isConstructor()
-                        && isAtViolationLocation(method)) {
-                    violating.add(method);
+            if (groupEnd != -1) {
+                for (int index = groupEnd; index < statements.size(); index++) {
+                    final Statement statement = statements.get(index);
+                    if (statement instanceof J.MethodDeclaration method
+                            && isViolationMarked(method)) {
+                        violating.add(method);
+                    }
                 }
             }
             return violating;
+        }
+
+        private static int findFirstConstructorGroupEnd(List<Statement> statements) {
+            int result = findFirstConstructorIndex(statements);
+            if (result != -1) {
+                while (result < statements.size()
+                        && statements.get(result) instanceof J.MethodDeclaration method
+                        && method.isConstructor()) {
+                    result++;
+                }
+            }
+            return result;
+        }
+
+        private static boolean isViolationMarked(J.MethodDeclaration method) {
+            final List<CheckstyleViolationMarker> markers =
+                method.getMarkers().findAll(CheckstyleViolationMarker.class);
+            final CheckFullName targetCheck =
+                    CheckFullName.CONSTRUCTORS_DECLARATION_GROUPING;
+            return markers.stream()
+                    .anyMatch(marker -> marker.isFor(targetCheck));
         }
 
         private static List<Statement> reorderConstructors(
@@ -128,7 +139,8 @@ public class ConstructorsDeclarationGrouping extends Recipe {
             List<J.MethodDeclaration> violatingConstructors) {
 
             int insertIndex = firstConstructorIndex;
-            while (statements.get(insertIndex) instanceof J.MethodDeclaration method
+            while (insertIndex < statements.size()
+                    && statements.get(insertIndex) instanceof J.MethodDeclaration method
                     && method.isConstructor()) {
                 insertIndex++;
             }
@@ -141,30 +153,6 @@ public class ConstructorsDeclarationGrouping extends Recipe {
             }
 
             return result;
-        }
-
-        private boolean isAtViolationLocation(J.MethodDeclaration methodDeclaration) {
-            final J.CompilationUnit cursor =
-                    getCursor().firstEnclosing(J.CompilationUnit.class);
-
-            final int line = PositionHelper.computeLinePosition(
-                    cursor, methodDeclaration, getCursor());
-
-            final int column = PositionHelper.computeColumnPosition(
-                    cursor, methodDeclaration, getCursor());
-
-            boolean matches = false;
-
-            for (final CheckstyleViolation violation : violations) {
-                if (violation.getLine() == line
-                        && violation.getColumn() == column
-                        && violation.getFilePath().endsWith(sourcePath)) {
-                    matches = true;
-                    break;
-                }
-            }
-
-            return matches;
         }
     }
 }

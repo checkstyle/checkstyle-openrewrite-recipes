@@ -11,23 +11,24 @@
 </module>
 */
 
-package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.error1;
+package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.idempotent1;
 
 /**
- * The constructor InputError1(int x) ends up at the violation location after first cycle.
+ * The constructor Idempotent1(int x) ends up at the violation location after first cycle.
  * It should remain at the same position after second cycle.
  */
-public class OutputError1 {
+public class InputIdempotent1 {
 
     int x;
 
-    OutputError1() {}
+    InputIdempotent1() {}
 
-    OutputError1(String s) {}
-
-    OutputError1(String s, int x) {}
+    InputIdempotent1(String s) {}
 
     void foo() {}
 
-    OutputError1(int x) {}
+    InputIdempotent1(int x) {}
+
+    InputIdempotent1(String s, int x) {}
+    // violation above 'Constructors should be grouped together.*'
 }
