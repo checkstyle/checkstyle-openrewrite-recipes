@@ -415,6 +415,7 @@
                                 <param>org.checkstyle.autofix.recipe.UnusedLocalVariableTest</param>
                                 <param>org.checkstyle.autofix.recipe.AvoidStarImportTest</param>
                                 <param>org.checkstyle.autofix.recipe.MissingOverrideTest</param>
+                                <param>org.checkstyle.autofix.recipe.ConstructorsDeclarationGroupingTest</param>
                             </targetTests>
 
                             <mutators>

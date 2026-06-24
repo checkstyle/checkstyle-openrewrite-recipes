@@ -65,8 +65,6 @@ public final class CheckstyleRecipeRegistry {
             RECIPE_MAP_NO_VIOLATIONS = new EnumMap<>(CheckFullName.class);
 
     static {
-        RECIPE_MAP.put(CheckFullName.CONSTRUCTORS_DECLARATION_GROUPING,
-            ConstructorsDeclarationGrouping::new);
         RECIPE_MAP.put(CheckFullName.UPPER_ELL, UpperEll::new);
         RECIPE_MAP_WITH_CONFIG_NO_VIOLATIONS.put(CheckFullName.NEWLINE_AT_END_OF_FILE,
             NewlineAtEndOfFile::new);
@@ -86,6 +84,8 @@ public final class CheckstyleRecipeRegistry {
         RECIPE_MAP_NO_VIOLATIONS.put(CheckFullName.MISSING_DEPRECATED, MissingDeprecated::new);
         RECIPE_MAP_NO_VIOLATIONS.put(CheckFullName.MISSING_OVERRIDE, MissingOverride::new);
         RECIPE_MAP_NO_VIOLATIONS.put(CheckFullName.REDUNDANT_IMPORT, RedundantImport::new);
+        RECIPE_MAP_NO_VIOLATIONS.put(CheckFullName.CONSTRUCTORS_DECLARATION_GROUPING,
+            ConstructorsDeclarationGrouping::new);
     }
 
     private CheckstyleRecipeRegistry() {

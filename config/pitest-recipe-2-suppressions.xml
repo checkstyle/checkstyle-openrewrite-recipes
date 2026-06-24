@@ -12,6 +12,52 @@
 
   <!-- Cannot be killed by integration tests until a second recipe lands a marker on this node type. See issue #236 -->
   <mutation unstable="false">
+    <sourceFile>ConstructorsDeclarationGrouping.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.ConstructorsDeclarationGrouping$ConstructorsDeclarationGroupingVisitor</mutatedClass>
+    <mutatedMethod>lambda$isViolationMarked$0</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.BooleanTrueReturnValsMutator</mutator>
+    <description>replaced boolean return with true for org/checkstyle/autofix/recipe/ConstructorsDeclarationGrouping$ConstructorsDeclarationGroupingVisitor::lambda$isViolationMarked$0</description>
+    <lineContent>.anyMatch(marker -&gt; marker.isFor(targetCheck));</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>ConstructorsDeclarationGrouping.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.ConstructorsDeclarationGrouping$ConstructorsDeclarationGroupingVisitor</mutatedClass>
+    <mutatedMethod>reorderConstructors</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_ORDER_IF</mutator>
+    <description>removed conditional - replaced comparison check with true</description>
+    <lineContent>while (insertIndex &lt; statements.size()</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>ConstructorsDeclarationGrouping.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.ConstructorsDeclarationGrouping$ConstructorsDeclarationGroupingVisitor</mutatedClass>
+    <mutatedMethod>visitClassDeclaration</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to java/util/List::isEmpty</description>
+    <lineContent>if (firstConstructorIndex == -1 || violatingConstructors.isEmpty()) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>ConstructorsDeclarationGrouping.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.ConstructorsDeclarationGrouping$ConstructorsDeclarationGroupingVisitor</mutatedClass>
+    <mutatedMethod>visitClassDeclaration</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_ELSE</mutator>
+    <description>removed conditional - replaced equality check with false</description>
+    <lineContent>if (firstConstructorIndex == -1 || violatingConstructors.isEmpty()) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>ConstructorsDeclarationGrouping.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.ConstructorsDeclarationGrouping$ConstructorsDeclarationGroupingVisitor</mutatedClass>
+    <mutatedMethod>visitClassDeclaration</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>if (firstConstructorIndex == -1 || violatingConstructors.isEmpty()) {</lineContent>
+  </mutation>
+
+  <!-- Cannot be killed by integration tests until a second recipe lands a marker on this node type. See issue #236 -->
+  <mutation unstable="false">
     <sourceFile>MissingDeprecated.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.recipe.MissingDeprecated$MissingDeprecatedVisitor</mutatedClass>
     <mutatedMethod>lambda$hasMissingDeprecatedMarker$0</mutatedMethod>

@@ -19,10 +19,7 @@ package org.checkstyle.autofix.recipe;
 
 import static com.google.common.truth.Truth.assertWithMessage;
 
-import java.util.List;
-
 import org.checkstyle.autofix.parser.ReportParser;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 public class ConstructorsDeclarationGroupingTest extends AbstractRecipeTestSupport {
@@ -35,7 +32,7 @@ public class ConstructorsDeclarationGroupingTest extends AbstractRecipeTestSuppo
     @Test
     public void checkDescription() {
         final ConstructorsDeclarationGrouping recipe =
-                new ConstructorsDeclarationGrouping(List.of());
+                new ConstructorsDeclarationGrouping();
 
         final String expectedDescription =
                 "Groups all constructors together in a class.";
@@ -48,7 +45,7 @@ public class ConstructorsDeclarationGroupingTest extends AbstractRecipeTestSuppo
     @Test
     public void checkDisplayName() {
         final ConstructorsDeclarationGrouping recipe =
-                new ConstructorsDeclarationGrouping(List.of());
+                new ConstructorsDeclarationGrouping();
 
         final String expectedDisplayName =
                 "ConstructorsDeclarationGrouping recipe";
@@ -253,16 +250,24 @@ public class ConstructorsDeclarationGroupingTest extends AbstractRecipeTestSuppo
     }
 
     /**
-     * Cases where some constructors end up at violation locations after first cycle.
-     * Verifies that these constructors are not wrongly moved at second cycle.
-     * Disabled until
-     *     <a href="https://github.com/checkstyle/checkstyle-openrewrite-recipes/issues/175">
-     *     #175</a>.
+     * Constructors that end up at violation locations after the first cycle of reordering
+     * must not be wrongly moved again in a second cycle. Idempotent1 tests that
+     * XPath-suppressed constructors at violation positions are correctly ignored;
+     * Idempotent2 tests that already-moved constructors stay put.
      */
-    @Disabled("To be fixed after introduction of markers")
     @RecipeTest
-    void error(ReportParser parser) throws Exception {
-        verify(parser, "Error1");
-        verify(parser, "Error2");
+    void idempotent(ReportParser parser) throws Exception {
+        verify(parser, "Idempotent1");
+        verify(parser, "Idempotent2");
+    }
+
+    /**
+     * A class whose last declaration is a constructor, and an inner class whose last
+     * declaration is also a constructor. Verifies that no IndexOutOfBoundsException occurs
+     * when the constructor group extends to the end of the class body.
+     */
+    @RecipeTest
+    void classEndsWithConstructor(ReportParser parser) throws Exception {
+        verify(parser, "ClassEndsWithConstructor");
     }
 }

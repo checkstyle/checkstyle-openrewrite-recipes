@@ -1,0 +1,27 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/idempotent1/InputIdempotent1.java
++++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/idempotent1/OutputIdempotent1.java
+@@ -17,18 +17,17 @@
+  * The constructor Idempotent1(int x) ends up at the violation location after first cycle.
+  * It should remain at the same position after second cycle.
+  */
+-public class InputIdempotent1 {
++public class OutputIdempotent1 {
+ 
+     int x;
+ 
+-    InputIdempotent1() {}
++    OutputIdempotent1() {}
+ 
+-    InputIdempotent1(String s) {}
++    OutputIdempotent1(String s) {}
++
++    OutputIdempotent1(String s, int x) {}
+ 
+     void foo() {}
+ 
+-    InputIdempotent1(int x) {}
+-
+-    InputIdempotent1(String s, int x) {}
+-    // violation above 'Constructors should be grouped together.*'
++    OutputIdempotent1(int x) {}
+ }

@@ -1,0 +1,21 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/classendswithconstructor/InputClassEndsWithConstructor.java
++++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/classendswithconstructor/OutputClassEndsWithConstructor.java
+@@ -9,14 +9,14 @@
+ 
+ package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.classendswithconstructor;
+ 
+-public class InputClassEndsWithConstructor {
++public class OutputClassEndsWithConstructor {
+ 
+-    InputClassEndsWithConstructor(int x) {}
++    OutputClassEndsWithConstructor(int x) {}
++
++    OutputClassEndsWithConstructor() {}
+ 
+     void foo() {}
+ 
+-    InputClassEndsWithConstructor() {} // violation 'Constructors should be grouped together.*'
+-
+     static class AnotherClass {
+ 
+         AnotherClass() {}
