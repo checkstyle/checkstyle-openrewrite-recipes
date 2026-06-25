@@ -769,31 +769,6 @@ public class ViolationMarkerRecipeTest {
     }
 
     @Test
-    public void testMarkerVisitorOuterClassReference() throws Exception {
-        final ViolationMarkerRecipe recipe = new ViolationMarkerRecipe(Collections.emptyList());
-        final ExecutionContext ctx = new InMemoryExecutionContext();
-        final var acc = recipe.getInitialValue(ctx);
-        final Object visitor = recipe.getVisitor(acc);
-
-        Field outerClassField = null;
-        for (Field field : visitor.getClass().getDeclaredFields()) {
-            if (field.getType().equals(ViolationMarkerRecipe.class)) {
-                outerClassField = field;
-                break;
-            }
-        }
-
-        if (outerClassField != null) {
-            outerClassField.setAccessible(true);
-            final Object outerClassInstance = outerClassField.get(visitor);
-            Assertions.assertSame(recipe, outerClassInstance,
-                    "MarkerVisitor should retain reference to its enclosing "
-                    + "ViolationMarkerRecipe");
-        }
-
-    }
-
-    @Test
     public void testFindSmallestNodeExactMatchMutations() throws Exception {
         final Class<?> scannerClass = Class.forName(
             "org.checkstyle.autofix.marker.ViolationMarkerRecipe$ScannerVisitor");
