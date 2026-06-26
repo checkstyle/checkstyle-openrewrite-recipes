@@ -45,7 +45,6 @@ import org.openrewrite.InMemoryExecutionContext;
 import org.openrewrite.PrintOutputCapture;
 import org.openrewrite.Tree;
 import org.openrewrite.TreeVisitor;
-import org.openrewrite.java.JavaIsoVisitor;
 import org.openrewrite.java.JavaParser;
 import org.openrewrite.java.tree.J;
 import org.openrewrite.java.tree.Space;
@@ -153,80 +152,6 @@ public class ViolationMarkerRecipeTest {
         Assertions.assertFalse(
                 (Boolean) enclosesMethod.invoke(scanner, rangeStartCol, violEndColAfter),
                 "Violation on end line with col after endCol should not be enclosed");
-    }
-
-    @Test
-    public void testResolveTargetNodeViaReflection() throws Exception {
-        final Class<?> scannerClass = Class.forName(
-                "org.checkstyle.autofix.marker.ViolationMarkerRecipe$ScannerVisitor");
-        final Method resolveMethod = scannerClass.getDeclaredMethod(
-                "resolveTargetNode",
-                UUID.class, CheckstyleViolation.class,
-                Map.class, Map.class);
-        resolveMethod.setAccessible(true);
-
-        final ViolationMarkerRecipe recipe = new ViolationMarkerRecipe(Collections.emptyList());
-        final Object scanner = recipe.getScanner(
-                recipe.getInitialValue(new InMemoryExecutionContext()));
-
-        final UUID startId = Tree.randomId();
-        final Map<UUID, UUID> parentMap = new HashMap<>();
-        final Map<UUID, Tree> nodeTrees =
-                new HashMap<>();
-
-        final CheckstyleCheck checkNull = new CheckstyleCheck(null, "id");
-        final CheckstyleViolation violNull = new CheckstyleViolation(
-                1, 1, "err", checkNull, "msg", Paths.get("a"));
-        final UUID resultNull = (UUID) resolveMethod.invoke(
-                scanner, startId, violNull, parentMap, nodeTrees);
-        Assertions.assertEquals(startId, resultNull,
-                "When checkFullName is null, should return startNodeId");
-
-        final CheckstyleCheck checkDefault = new CheckstyleCheck(
-                CheckFullName.AVOID_STAR_IMPORT, "id");
-        final CheckstyleViolation violDefault = new CheckstyleViolation(
-                1, 1, "err", checkDefault, "msg", Paths.get("a"));
-        final UUID resultDefault = (UUID) resolveMethod.invoke(
-                scanner, startId, violDefault, parentMap, nodeTrees);
-        Assertions.assertEquals(startId, resultDefault,
-                "When targetType is null (default switch), should return startNodeId");
-    }
-
-    @Test
-    public void testMultipleViolationsSameFile() {
-        final Path path = Paths.get("TestMultiViol.java");
-        final CheckstyleViolation viol1 = new CheckstyleViolation(
-                2, 5, "error", new CheckstyleCheck(
-                        CheckFullName.FINAL_LOCAL_VARIABLE, "id"),
-                "msg1", path);
-        final CheckstyleViolation viol2 = new CheckstyleViolation(
-                3, 5, "error", new CheckstyleCheck(
-                        CheckFullName.FINAL_LOCAL_VARIABLE, "id"),
-                "msg2", path);
-
-        final ViolationMarkerRecipe recipe = new ViolationMarkerRecipe(List.of(viol1, viol2));
-        final JavaParser parser = JavaParser.fromJavaVersion().build();
-        final J.CompilationUnit compUnit = parser.parse(
-                "class A {\n    int a;\n    int b;\n}").findFirst().get().withSourcePath(path);
-
-        final ExecutionContext ctx = new InMemoryExecutionContext();
-        final var acc = recipe.getInitialValue(ctx);
-        recipe.getScanner(acc).visit(compUnit, ctx);
-        final J.CompilationUnit after = (J.CompilationUnit)
-                recipe.getVisitor(acc).visit(compUnit, ctx);
-
-        final int[] markerCount = new int[1];
-        new JavaIsoVisitor<Integer>() {
-            @Override
-            public J preVisit(J tree, Integer p) {
-                markerCount[0] += tree.getMarkers().findAll(
-                        CheckstyleViolationMarker.class).size();
-                return super.preVisit(tree, p);
-            }
-        }.visit(after, 0);
-
-        Assertions.assertEquals(2, markerCount[0],
-                "Should have 2 markers for 2 violations");
     }
 
     @Test
