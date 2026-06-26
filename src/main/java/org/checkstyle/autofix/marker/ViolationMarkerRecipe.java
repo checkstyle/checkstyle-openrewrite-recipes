@@ -98,9 +98,7 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
                         .filter(violation -> violation.getFilePath().endsWith(sourcePath))
                         .toList();
 
-                if (!fileViolations.isEmpty()) {
-                    processFileViolations(compUnit, sourcePath, fileViolations);
-                }
+                processFileViolations(compUnit, sourcePath, fileViolations);
                 result = compUnit;
             }
             return result;
@@ -111,12 +109,13 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
             final Map<UUID, Range> nodeRanges = new LinkedHashMap<>();
             final Map<UUID, UUID> parentMap = new HashMap<>();
             final Map<UUID, Tree> nodeTrees = new HashMap<>();
+            final Cursor rootCursor = new Cursor(null, "root");
             final TreeVisitor<?, PrintOutputCapture<TreeVisitor<?, ?>>> printer =
-                    compilationUnit.printer(new Cursor(null, "root"));
+                    compilationUnit.printer(rootCursor);
 
             final BoundingBoxCapture capture = new BoundingBoxCapture(
                     printer, nodeRanges, parentMap, nodeTrees);
-            printer.visit(compilationUnit, capture, getCursor().getParentOrThrow());
+            printer.visit(compilationUnit, capture, rootCursor);
 
             final Map<UUID, List<CheckstyleViolationMarker>> markersToAdd = new HashMap<>();
             for (CheckstyleViolation violation : fileViolations) {
@@ -205,29 +204,27 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
                                        Map<UUID, UUID> parentMap, Map<UUID, Tree> nodeTrees) {
             UUID resultId = startNodeId;
             final CheckFullName checkFullName = violation.getSource().checkName();
-            if (checkFullName != null) {
-                final Class<? extends Tree> targetType = switch (checkFullName) {
-                    case HEADER -> J.CompilationUnit.class;
-                    case FINAL_CLASS -> J.ClassDeclaration.class;
-                    case FINAL_LOCAL_VARIABLE -> J.VariableDeclarations.NamedVariable.class;
-                    case ANNOTATION_ON_SAME_LINE -> J.Annotation.class;
-                    case AVOID_STAR_IMPORT, UNUSED_IMPORT -> J.Import.class;
-                    case UNUSED_LOCAL_VARIABLE -> J.VariableDeclarations.class;
-                    case MISSING_OVERRIDE -> J.MethodDeclaration.class;
-                    case USE_ENHANCED_SWITCH -> J.Switch.class;
-                    default -> null;
-                };
+            final Class<? extends Tree> targetType = switch (checkFullName) {
+                case HEADER -> J.CompilationUnit.class;
+                case FINAL_CLASS -> J.ClassDeclaration.class;
+                case FINAL_LOCAL_VARIABLE -> J.VariableDeclarations.NamedVariable.class;
+                case ANNOTATION_ON_SAME_LINE -> J.Annotation.class;
+                case AVOID_STAR_IMPORT, UNUSED_IMPORT -> J.Import.class;
+                case UNUSED_LOCAL_VARIABLE -> J.VariableDeclarations.class;
+                case MISSING_OVERRIDE -> J.MethodDeclaration.class;
+                case USE_ENHANCED_SWITCH -> J.Switch.class;
+                default -> null;
+            };
 
-                if (targetType != null) {
-                    UUID currentId = startNodeId;
-                    boolean found = false;
-                    while (currentId != null && !found) {
-                        if (targetType.isInstance(nodeTrees.get(currentId))) {
-                            resultId = currentId;
-                            found = true;
-                        }
-                        currentId = parentMap.get(currentId);
+            if (targetType != null) {
+                UUID currentId = startNodeId;
+                boolean found = false;
+                while (currentId != null && !found) {
+                    if (targetType.isInstance(nodeTrees.get(currentId))) {
+                        resultId = currentId;
+                        found = true;
                     }
+                    currentId = parentMap.get(currentId);
                 }
             }
             return resultId;
