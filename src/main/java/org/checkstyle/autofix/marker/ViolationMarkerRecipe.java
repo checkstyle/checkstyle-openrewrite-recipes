@@ -20,6 +20,7 @@ package org.checkstyle.autofix.marker;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -46,6 +47,22 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
             "Marks AST nodes that correspond to Checkstyle violations.";
 
     private static final MarkersApplied APPLIED_MARKER = new MarkersApplied(Tree.randomId());
+
+    private static final Map<CheckFullName, Class<? extends Tree>> TARGET_TYPES =
+            new EnumMap<>(CheckFullName.class);
+
+    static {
+        TARGET_TYPES.put(CheckFullName.HEADER, J.CompilationUnit.class);
+        TARGET_TYPES.put(CheckFullName.FINAL_CLASS, J.ClassDeclaration.class);
+        TARGET_TYPES.put(CheckFullName.FINAL_LOCAL_VARIABLE,
+                J.VariableDeclarations.NamedVariable.class);
+        TARGET_TYPES.put(CheckFullName.ANNOTATION_ON_SAME_LINE, J.Annotation.class);
+        TARGET_TYPES.put(CheckFullName.AVOID_STAR_IMPORT, J.Import.class);
+        TARGET_TYPES.put(CheckFullName.UNUSED_IMPORT, J.Import.class);
+        TARGET_TYPES.put(CheckFullName.UNUSED_LOCAL_VARIABLE, J.VariableDeclarations.class);
+        TARGET_TYPES.put(CheckFullName.MISSING_OVERRIDE, J.MethodDeclaration.class);
+        TARGET_TYPES.put(CheckFullName.USE_ENHANCED_SWITCH, J.Switch.class);
+    }
 
     private final List<CheckstyleViolation> violations;
 
@@ -204,17 +221,7 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
                                        Map<UUID, UUID> parentMap, Map<UUID, Tree> nodeTrees) {
             UUID resultId = startNodeId;
             final CheckFullName checkFullName = violation.getSource().checkName();
-            final Class<? extends Tree> targetType = switch (checkFullName) {
-                case HEADER -> J.CompilationUnit.class;
-                case FINAL_CLASS -> J.ClassDeclaration.class;
-                case FINAL_LOCAL_VARIABLE -> J.VariableDeclarations.NamedVariable.class;
-                case ANNOTATION_ON_SAME_LINE -> J.Annotation.class;
-                case AVOID_STAR_IMPORT, UNUSED_IMPORT -> J.Import.class;
-                case UNUSED_LOCAL_VARIABLE -> J.VariableDeclarations.class;
-                case MISSING_OVERRIDE -> J.MethodDeclaration.class;
-                case USE_ENHANCED_SWITCH -> J.Switch.class;
-                default -> null;
-            };
+            final Class<? extends Tree> targetType = TARGET_TYPES.get(checkFullName);
 
             if (targetType != null) {
                 UUID currentId = startNodeId;
