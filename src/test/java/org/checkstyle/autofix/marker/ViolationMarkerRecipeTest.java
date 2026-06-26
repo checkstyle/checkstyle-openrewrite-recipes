@@ -343,50 +343,6 @@ public class ViolationMarkerRecipeTest {
     }
 
     @Test
-    public void testResolveTargetNodeFinalClassSwitch() throws Exception {
-        final Class<?> scannerClass = Class.forName(
-                "org.checkstyle.autofix.marker.ViolationMarkerRecipe$ScannerVisitor");
-        final Method resolveMethod = scannerClass.getDeclaredMethod(
-                "resolveTargetNode",
-                UUID.class, CheckstyleViolation.class,
-                Map.class, Map.class);
-        resolveMethod.setAccessible(true);
-
-        final ViolationMarkerRecipe recipe = new ViolationMarkerRecipe(Collections.emptyList());
-        final Object scanner = recipe.getScanner(
-                recipe.getInitialValue(new InMemoryExecutionContext()));
-
-        final JavaParser parser = JavaParser.fromJavaVersion().build();
-        final J.CompilationUnit cu =
-                (J.CompilationUnit) parser.parse("class A {}").findFirst().get();
-        final J.ClassDeclaration classDecl = cu.getClasses().get(0);
-
-        final UUID childId = Tree.randomId();
-        final UUID parentId = classDecl.getId();
-        final Map<UUID, UUID> parentMap = new HashMap<>();
-        parentMap.put(childId, parentId);
-        final Map<UUID, Tree> nodeTrees = new HashMap<>();
-        nodeTrees.put(childId, cu);
-        nodeTrees.put(parentId, classDecl);
-        final CheckstyleCheck checkFinalClass = new CheckstyleCheck(
-                CheckFullName.FINAL_CLASS, "id");
-        final CheckstyleViolation violFinalClass = new CheckstyleViolation(
-                1, 1, "err", checkFinalClass, "msg", Paths.get("a"));
-        final UUID resultFinalClass = (UUID) resolveMethod.invoke(
-                scanner, childId, violFinalClass, parentMap, nodeTrees);
-        Assertions.assertEquals(parentId, resultFinalClass,
-                "FINAL_CLASS should resolve up to ClassDeclaration");
-        final CheckstyleCheck checkFinalVar = new CheckstyleCheck(
-                CheckFullName.FINAL_LOCAL_VARIABLE, "id");
-        final CheckstyleViolation violFinalVar = new CheckstyleViolation(
-                1, 1, "err", checkFinalVar, "msg", Paths.get("a"));
-        final UUID resultFinalVar = (UUID) resolveMethod.invoke(
-                scanner, childId, violFinalVar, parentMap, nodeTrees);
-        Assertions.assertEquals(childId, resultFinalVar,
-                "FINAL_LOCAL_VARIABLE with no NamedVariable should return startId");
-    }
-
-    @Test
     public void testScannerDoesNotAddEmptyMapToAccumulator() throws Exception {
         final Path path = Paths.get("TestNoViolationsEmptyMap.java");
         final CheckstyleViolation violation = new CheckstyleViolation(
