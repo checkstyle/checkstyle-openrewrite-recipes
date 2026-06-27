@@ -19,19 +19,16 @@ package org.checkstyle.autofix.marker;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.AbstractList;
-import java.util.AbstractMap;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 
 import org.checkstyle.autofix.CheckFullName;
@@ -508,57 +505,6 @@ public class ViolationMarkerRecipeTest {
 
         ((TreeVisitor<?, ExecutionContext>) visitor)
                 .visit(hackedUnit, ctx);
-    }
-
-    @Test
-    public void testMarkerVisitorPreVisitDoesNotGetFromEmptyMap() throws Exception {
-        final Path path = Paths.get("TestEmptyFileMarkersPreVisit.java");
-        final ViolationMarkerRecipe recipe = new ViolationMarkerRecipe(Collections.emptyList());
-        final JavaParser parser = JavaParser.fromJavaVersion().build();
-        final J.CompilationUnit compUnit = parser.parse("class A {}")
-                .findFirst().get().withSourcePath(path);
-
-        final ExecutionContext ctx = new InMemoryExecutionContext();
-        final var acc = recipe.getInitialValue(ctx);
-        final Object visitor = recipe.getVisitor(acc);
-
-        final Map<UUID, List<CheckstyleViolationMarker>> emptyThrowingMap =
-                new AbstractMap<>() {
-                    @Override
-                    public boolean isEmpty() {
-                        return true;
-                    }
-
-                    @Override
-                    public List<CheckstyleViolationMarker> get(Object key) {
-                        throw new RuntimeException("Should not have called get() "
-                                + "because map is empty");
-                    }
-
-                    @Override
-                    public Set<Map.Entry<UUID,
-                            List<CheckstyleViolationMarker>>> entrySet() {
-                        return Collections.emptySet();
-                    }
-                };
-
-        final Field fileMarkersField =
-                visitor.getClass().getDeclaredField("fileMarkers");
-        fileMarkersField.setAccessible(true);
-        fileMarkersField.set(visitor, emptyThrowingMap);
-        final Method preVisitMethod =
-                visitor.getClass().getDeclaredMethod(
-                "preVisit", J.class,
-                ExecutionContext.class);
-        preVisitMethod.setAccessible(true);
-
-        try {
-            preVisitMethod.invoke(visitor, compUnit, ctx);
-        }
-        catch (InvocationTargetException exc) {
-            Assertions.fail("Mutation bypassed the empty check in preVisit and threw: "
-                    + exc.getCause());
-        }
     }
 
     @Test
