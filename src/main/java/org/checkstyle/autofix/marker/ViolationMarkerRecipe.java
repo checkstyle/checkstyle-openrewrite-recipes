@@ -367,13 +367,11 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
         @Override
         public J preVisit(J tree, ExecutionContext executionContext) {
             J result = tree;
-            if (!fileMarkers.isEmpty()) {
-                final List<CheckstyleViolationMarker> markers =
-                        fileMarkers.get(result.getId());
-                if (markers != null) {
-                    for (CheckstyleViolationMarker marker : markers) {
-                        result = result.withMarkers(result.getMarkers().add(marker));
-                    }
+            final List<CheckstyleViolationMarker> markers =
+                    fileMarkers.get(result.getId());
+            if (markers != null) {
+                for (CheckstyleViolationMarker marker : markers) {
+                    result = result.withMarkers(result.getMarkers().add(marker));
                 }
             }
             return result;
