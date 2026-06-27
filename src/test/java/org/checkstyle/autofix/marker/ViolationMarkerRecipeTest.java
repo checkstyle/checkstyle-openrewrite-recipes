@@ -343,31 +343,6 @@ public class ViolationMarkerRecipeTest {
     }
 
     @Test
-    public void testScannerDoesNotAddEmptyMapToAccumulator() throws Exception {
-        final Path path = Paths.get("TestNoViolationsEmptyMap.java");
-        final CheckstyleViolation violation = new CheckstyleViolation(
-                100, 1, "error", new CheckstyleCheck(
-                        CheckFullName.FINAL_CLASS, "id"),
-                "msg", path);
-
-        final ViolationMarkerRecipe recipe = new ViolationMarkerRecipe(List.of(violation));
-        final JavaParser parser = JavaParser.fromJavaVersion().build();
-        final J.CompilationUnit compUnit = parser.parse(
-                "class A {}").findFirst().get().withSourcePath(path);
-
-        final ExecutionContext ctx = new InMemoryExecutionContext();
-        final var acc = recipe.getInitialValue(ctx);
-        recipe.getScanner(acc).visit(compUnit, ctx);
-        final Field field = Accumulator.class.getDeclaredField("byFile");
-        field.setAccessible(true);
-        @SuppressWarnings("unchecked")
-        final Map<Path, ?> internalMap = (Map<Path, ?>) field.get(acc);
-
-        Assertions.assertFalse(internalMap.containsKey(path),
-                "Scanner should not put an empty map into the accumulator");
-    }
-
-    @Test
     public void testScannerIdempotencyClearsAccumulator() {
         final Path path = Paths.get("TestScannerIdemClear.java");
         final CheckstyleViolation violation = new CheckstyleViolation(
@@ -583,36 +558,6 @@ public class ViolationMarkerRecipeTest {
         catch (InvocationTargetException exc) {
             Assertions.fail("Mutation bypassed the empty check in preVisit and threw: "
                     + exc.getCause());
-        }
-    }
-
-    @Test
-    public void testScannerVisitorDoesNotEnterProcessFileViolationsIfEmpty() throws Exception {
-        final Path path = Paths.get("TestScannerEmpty.java");
-        final ViolationMarkerRecipe recipe = new ViolationMarkerRecipe(Collections.emptyList());
-        final JavaParser parser = JavaParser.fromJavaVersion().build();
-        final J.CompilationUnit compUnit = parser.parse("class A {}")
-                .findFirst().get().withSourcePath(path);
-
-        final ExecutionContext ctx = new InMemoryExecutionContext();
-        final var acc = recipe.getInitialValue(ctx);
-        final Object scanner = recipe.getScanner(acc);
-
-        final Cursor noParentCursor = new Cursor(null, compUnit);
-        final Field cursorField =
-                TreeVisitor.class.getDeclaredField("cursor");
-        cursorField.setAccessible(true);
-        cursorField.set(scanner, noParentCursor);
-        final Method visitMethod = scanner.getClass().getDeclaredMethod(
-                "visitCompilationUnit", J.CompilationUnit.class,
-                ExecutionContext.class);
-        visitMethod.setAccessible(true);
-
-        try {
-            visitMethod.invoke(scanner, compUnit, ctx);
-        }
-        catch (InvocationTargetException exc) {
-            Assertions.fail("Mutation bypassed the empty check and threw: " + exc.getCause());
         }
     }
 

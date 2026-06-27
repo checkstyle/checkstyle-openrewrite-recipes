@@ -144,9 +144,7 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
                 }
             }
 
-            if (!markersToAdd.isEmpty()) {
-                acc.putByFile(sourcePath, markersToAdd);
-            }
+            acc.putByFile(sourcePath, markersToAdd);
         }
 
         private Map<UUID, List<CheckstyleViolationMarker>> findSmallestNode(
