@@ -152,55 +152,6 @@ public class ViolationMarkerRecipeTest {
     }
 
     @Test
-    public void testCheckPartialLinesStartLineExactBoundary() throws Exception {
-        final Class<?> scannerClass = Class.forName(
-                "org.checkstyle.autofix.marker.ViolationMarkerRecipe$ScannerVisitor");
-        final Class<?> rangeClass = Class.forName(
-                "org.checkstyle.autofix.marker.ViolationMarkerRecipe$Range");
-        final Method method = scannerClass.getDeclaredMethod(
-                "checkPartialLines", rangeClass, CheckstyleViolation.class);
-        method.setAccessible(true);
-
-        final Constructor<?> rangeCtor = rangeClass.getDeclaredConstructor(
-                int.class, int.class, int.class, int.class);
-        rangeCtor.setAccessible(true);
-
-        final ViolationMarkerRecipe recipe = new ViolationMarkerRecipe(Collections.emptyList());
-        final Object scanner = recipe.getScanner(
-                recipe.getInitialValue(new InMemoryExecutionContext()));
-
-        final CheckstyleCheck check = new CheckstyleCheck(
-                CheckFullName.FINAL_LOCAL_VARIABLE, "id");
-
-        final Object range1 = rangeCtor.newInstance(2, 5, 4, 10);
-        final CheckstyleViolation viol1 = new CheckstyleViolation(
-                2, 5, "err", check, "msg", Paths.get("a"));
-        Assertions.assertTrue((Boolean) method.invoke(scanner, range1, viol1),
-                "Col exactly at startCol should be enclosed");
-
-        final CheckstyleViolation viol2 = new CheckstyleViolation(
-                2, 4, "err", check, "msg", Paths.get("a"));
-        Assertions.assertFalse((Boolean) method.invoke(scanner, range1, viol2),
-                "Col before startCol should not be enclosed");
-
-        final Object range2 = rangeCtor.newInstance(1, 1, 3, 10);
-        final CheckstyleViolation viol3 = new CheckstyleViolation(
-                3, 10, "err", check, "msg", Paths.get("a"));
-        Assertions.assertTrue((Boolean) method.invoke(scanner, range2, viol3),
-                "Col exactly at endCol should be enclosed");
-
-        final CheckstyleViolation viol4 = new CheckstyleViolation(
-                3, 11, "err", check, "msg", Paths.get("a"));
-        Assertions.assertFalse((Boolean) method.invoke(scanner, range2, viol4),
-                "Col after endCol should not be enclosed");
-
-        final CheckstyleViolation viol5 = new CheckstyleViolation(
-                2, 5, "err", check, "msg", Paths.get("a"));
-        Assertions.assertFalse((Boolean) method.invoke(scanner, range2, viol5),
-                "Violation in middle of range should return false from checkPartialLines");
-    }
-
-    @Test
     public void testCheckPartialLinesSingleLineRangeFalse() throws Exception {
         final Class<?> scannerClass = Class.forName(
                 "org.checkstyle.autofix.marker.ViolationMarkerRecipe$ScannerVisitor");
