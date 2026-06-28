@@ -20,7 +20,6 @@ CI runs `clean install` then `git diff --exit-code`. The rewrite plugin runs in 
 - Entry recipe `CheckstyleAutoFix` (`src/main/java/org/checkstyle/autofix/`) reads violation report + Checkstyle config, then `CheckstyleRecipeRegistry.getRecipes(...)` groups violations by check source and returns sub-recipes.
 - Two factory maps in `CheckstyleRecipeRegistry`: `RECIPE_MAP` for recipes needing only violations, `RECIPE_MAP_WITH_CONFIG` for recipes that also need `CheckConfiguration` (currently `Header`, `NewlineAtEndOfFile`).
 - Per-check recipes live in `org.checkstyle.autofix.recipe.*`, extend `org.openrewrite.Recipe`, take `List<CheckstyleViolation>` (and optionally `CheckConfiguration`) via constructor.
-- Recipes must only mutate AST nodes whose line/column matches a reported violation — use `PositionHelper.computeLinePosition` / `computeColumnPosition`. Follow the pattern in `UpperEll.UpperEllVisitor#isAtViolationLocation`.
 - Match source path with `violation.getFilePath().toAbsolutePath().endsWith(sourcePath)`, not equality.
 
 ## Adding a new per-check recipe
