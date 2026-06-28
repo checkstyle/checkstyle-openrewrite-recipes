@@ -336,7 +336,6 @@
                                 <param>org.checkstyle.autofix.CheckstyleAutoFix*</param>
                                 <param>org.checkstyle.autofix.CheckstyleCheck*</param>
                                 <param>org.checkstyle.autofix.CheckstyleRecipeRegistry*</param>
-                                <param>org.checkstyle.autofix.PositionHelper*</param>
                             </targetClasses>
                             <targetTests>
                                 <param>org.checkstyle.autofix.parser.CheckstyleReportsParserTest</param>

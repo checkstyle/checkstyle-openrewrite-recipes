@@ -22,10 +22,8 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 import org.checkstyle.autofix.marker.ViolationMarkerRecipe;
 import org.checkstyle.autofix.parser.CheckConfiguration;
@@ -51,40 +49,31 @@ import org.openrewrite.Recipe;
 
 public final class CheckstyleRecipeRegistry {
 
-    private static final EnumMap<CheckFullName, Function<List<CheckstyleViolation>,
-            Recipe>> RECIPE_MAP = new EnumMap<>(CheckFullName.class);
-
-    private static final EnumMap<CheckFullName, BiFunction<List<CheckstyleViolation>,
-            CheckConfiguration, Recipe>> RECIPE_MAP_WITH_CONFIG =
-            new EnumMap<>(CheckFullName.class);
-
     private static final EnumMap<CheckFullName, Function<CheckConfiguration, Recipe>>
-            RECIPE_MAP_WITH_CONFIG_NO_VIOLATIONS = new EnumMap<>(CheckFullName.class);
+            RECIPE_MAP_WITH_CONFIG = new EnumMap<>(CheckFullName.class);
 
     private static final EnumMap<CheckFullName, Supplier<Recipe>>
-            RECIPE_MAP_NO_VIOLATIONS = new EnumMap<>(CheckFullName.class);
+            RECIPE_MAP = new EnumMap<>(CheckFullName.class);
 
     static {
-        RECIPE_MAP_WITH_CONFIG_NO_VIOLATIONS.put(CheckFullName.NEWLINE_AT_END_OF_FILE,
-            NewlineAtEndOfFile::new);
-        RECIPE_MAP_WITH_CONFIG_NO_VIOLATIONS.put(CheckFullName.HEADER, Header::new);
-        RECIPE_MAP_NO_VIOLATIONS.put(CheckFullName.USE_ENHANCED_SWITCH, UseEnhancedSwitch::new);
-        RECIPE_MAP_NO_VIOLATIONS.put(CheckFullName.ANNOTATION_ON_SAME_LINE,
-            AnnotationOnSameLine::new);
-        RECIPE_MAP_NO_VIOLATIONS.put(CheckFullName.UNUSED_IMPORT, UnusedImports::new);
-        RECIPE_MAP_NO_VIOLATIONS.put(CheckFullName.FINAL_CLASS, FinalClass::new);
-        RECIPE_MAP_NO_VIOLATIONS.put(CheckFullName.AVOID_STAR_IMPORT, AvoidStarImport::new);
-        RECIPE_MAP_NO_VIOLATIONS.put(CheckFullName.FINAL_LOCAL_VARIABLE, FinalLocalVariable::new);
-        RECIPE_MAP_NO_VIOLATIONS.put(CheckFullName.UNUSED_LOCAL_VARIABLE, UnusedLocalVariable::new);
-        RECIPE_MAP_NO_VIOLATIONS.put(CheckFullName.EMPTY_STATEMENT, EmptyStatement::new);
-        RECIPE_MAP_NO_VIOLATIONS.put(CheckFullName.HEX_LITERAL_CASE, HexLiteralCase::new);
-        RECIPE_MAP_NO_VIOLATIONS.put(CheckFullName.NUMERICAL_PREFIXES_INF_SUF_CASE,
+        RECIPE_MAP_WITH_CONFIG.put(CheckFullName.NEWLINE_AT_END_OF_FILE, NewlineAtEndOfFile::new);
+        RECIPE_MAP_WITH_CONFIG.put(CheckFullName.HEADER, Header::new);
+        RECIPE_MAP.put(CheckFullName.USE_ENHANCED_SWITCH, UseEnhancedSwitch::new);
+        RECIPE_MAP.put(CheckFullName.ANNOTATION_ON_SAME_LINE, AnnotationOnSameLine::new);
+        RECIPE_MAP.put(CheckFullName.UNUSED_IMPORT, UnusedImports::new);
+        RECIPE_MAP.put(CheckFullName.FINAL_CLASS, FinalClass::new);
+        RECIPE_MAP.put(CheckFullName.AVOID_STAR_IMPORT, AvoidStarImport::new);
+        RECIPE_MAP.put(CheckFullName.FINAL_LOCAL_VARIABLE, FinalLocalVariable::new);
+        RECIPE_MAP.put(CheckFullName.UNUSED_LOCAL_VARIABLE, UnusedLocalVariable::new);
+        RECIPE_MAP.put(CheckFullName.EMPTY_STATEMENT, EmptyStatement::new);
+        RECIPE_MAP.put(CheckFullName.HEX_LITERAL_CASE, HexLiteralCase::new);
+        RECIPE_MAP.put(CheckFullName.NUMERICAL_PREFIXES_INF_SUF_CASE,
             NumericalPrefixesInfixesSuffixesCharacterCase::new);
-        RECIPE_MAP_NO_VIOLATIONS.put(CheckFullName.MISSING_DEPRECATED, MissingDeprecated::new);
-        RECIPE_MAP_NO_VIOLATIONS.put(CheckFullName.MISSING_OVERRIDE, MissingOverride::new);
-        RECIPE_MAP_NO_VIOLATIONS.put(CheckFullName.REDUNDANT_IMPORT, RedundantImport::new);
-        RECIPE_MAP_NO_VIOLATIONS.put(CheckFullName.UPPER_ELL, UpperEll::new);
-        RECIPE_MAP_NO_VIOLATIONS.put(CheckFullName.CONSTRUCTORS_DECLARATION_GROUPING,
+        RECIPE_MAP.put(CheckFullName.MISSING_DEPRECATED, MissingDeprecated::new);
+        RECIPE_MAP.put(CheckFullName.MISSING_OVERRIDE, MissingOverride::new);
+        RECIPE_MAP.put(CheckFullName.REDUNDANT_IMPORT, RedundantImport::new);
+        RECIPE_MAP.put(CheckFullName.UPPER_ELL, UpperEll::new);
+        RECIPE_MAP.put(CheckFullName.CONSTRUCTORS_DECLARATION_GROUPING,
             ConstructorsDeclarationGrouping::new);
     }
 
@@ -107,40 +96,25 @@ public final class CheckstyleRecipeRegistry {
 
         recipes.add(new ViolationMarkerRecipe(violations));
 
-        final Map<CheckstyleCheck, List<CheckstyleViolation>> groupedViolations =
-                violations.stream()
-                        .collect(Collectors.groupingBy(CheckstyleViolation::getSource));
-
-        for (Map.Entry<CheckstyleCheck, List<CheckstyleViolation>> entry
-                : groupedViolations.entrySet()) {
-            final CheckstyleCheck check = entry.getKey();
-
-            Optional.ofNullable(config.get(check))
-                    .ifPresent(checkConfig -> addRecipe(recipes, checkConfig, entry.getValue()));
-        }
+        violations.stream()
+                .map(CheckstyleViolation::getSource)
+                .distinct()
+                .forEach(check -> {
+                    Optional.ofNullable(config.get(check))
+                            .ifPresent(checkConfig -> addRecipe(recipes, checkConfig));
+                });
 
         return recipes;
     }
 
-    private static void addRecipe(List<Recipe> recipes, CheckConfiguration checkConfig,
-                                  List<CheckstyleViolation> violations) {
+    private static void addRecipe(List<Recipe> recipes, CheckConfiguration checkConfig) {
         final CheckFullName checkName = checkConfig.getCheckName();
 
-        Optional.ofNullable(RECIPE_MAP_NO_VIOLATIONS.get(checkName))
+        Optional.ofNullable(RECIPE_MAP.get(checkName))
                 .ifPresent(factory -> recipes.add(factory.get()));
 
-        Optional.ofNullable(RECIPE_MAP_WITH_CONFIG_NO_VIOLATIONS.get(checkName))
-                .ifPresent(factory -> recipes.add(factory.apply(checkConfig)));
-
         Optional.ofNullable(RECIPE_MAP_WITH_CONFIG.get(checkName))
-                .ifPresent(factory -> {
-                    recipes.add(factory.apply(violations, checkConfig));
-                });
-
-        Optional.ofNullable(RECIPE_MAP.get(checkName))
-                .ifPresent(factory -> {
-                    recipes.add(factory.apply(violations));
-                });
+                .ifPresent(factory -> recipes.add(factory.apply(checkConfig)));
     }
 
 }
