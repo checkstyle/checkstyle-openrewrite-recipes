@@ -258,16 +258,16 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
 
         private boolean checkPartialLines(Range range, CheckstyleViolation violation) {
             boolean result = false;
-            if (range.startLine() == violation.getLine()
-                    && range.endLine() > violation.getLine()) {
-                if (range.startCol() <= violation.getColumn()) {
-                    result = true;
+            if (range.startLine() != range.endLine()) {
+                if (range.startLine() == violation.getLine()) {
+                    if (range.startCol() <= violation.getColumn()) {
+                        result = true;
+                    }
                 }
-            }
-            else if (range.startLine() < violation.getLine()
-                    && range.endLine() == violation.getLine()) {
-                if (range.endCol() >= violation.getColumn()) {
-                    result = true;
+                if (range.endLine() == violation.getLine()) {
+                    if (range.endCol() >= violation.getColumn()) {
+                        result = true;
+                    }
                 }
             }
             return result;
