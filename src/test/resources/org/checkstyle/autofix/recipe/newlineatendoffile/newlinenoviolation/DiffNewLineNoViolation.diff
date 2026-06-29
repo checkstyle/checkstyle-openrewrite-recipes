@@ -1,0 +1,9 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/newlineatendoffile/newlinenoviolation/InputNewLineNoViolation.java
++++ src/test/resources/org/checkstyle/autofix/recipe/newlineatendoffile/newlinenoviolation/OutputNewLineNoViolation.java
+@@ -7,5 +7,5 @@
+ 
+ package org.checkstyle.autofix.recipe.newlineatendoffile.newlinenoviolation;
+ 
+-public class InputNewLineNoViolation {
++public class OutputNewLineNoViolation {
+ }

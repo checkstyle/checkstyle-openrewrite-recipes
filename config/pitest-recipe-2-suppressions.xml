@@ -66,87 +66,6 @@
     <lineContent>.anyMatch(marker -&gt; marker.isFor(CheckFullName.MISSING_DEPRECATED));</lineContent>
   </mutation>
 
-  <mutation unstable="false">
-    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
-    <mutatedMethod>determineLineEnding</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
-    <description>removed call to org/checkstyle/autofix/recipe/NewlineAtEndOfFile$NewLineAtEndOfFileVisitor::getAutodetectedLineEnding</description>
-    <lineContent>case &quot;lf_cr_crlf&quot; -&gt; getAutodetectedLineEnding(sourceFile);</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
-    <mutatedMethod>determineLineEnding</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
-    <description>removed call to java/lang/System::lineSeparator</description>
-    <lineContent>case &quot;system&quot; -&gt; System.lineSeparator();</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
-    <mutatedMethod>determineLineEnding</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.RemoveSwitchMutator_3</mutator>
-    <description>RemoveSwitch 3 (case value 3)</description>
-    <lineContent>return switch (lineSeparatorConfig) {</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
-    <mutatedMethod>determineLineEnding</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.RemoveSwitchMutator_4</mutator>
-    <description>RemoveSwitch 4 (case value 4)</description>
-    <lineContent>return switch (lineSeparatorConfig) {</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
-    <mutatedMethod>getAutodetectedLineEnding</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
-    <description>removed call to org/openrewrite/style/Style::from</description>
-    <lineContent>Style.from(GeneralFormatStyle.class, sourceFile, () -&gt; {</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
-    <mutatedMethod>getAutodetectedLineEnding</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
-    <description>removed call to org/openrewrite/style/GeneralFormatStyle::newLine</description>
-    <lineContent>return generalFormatStyle.newLine();</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
-    <mutatedMethod>getAutodetectedLineEnding</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.EmptyObjectReturnValsMutator</mutator>
-    <description>replaced return value with &quot;&quot; for org/checkstyle/autofix/recipe/NewlineAtEndOfFile$NewLineAtEndOfFileVisitor::getAutodetectedLineEnding</description>
-    <lineContent>return generalFormatStyle.newLine();</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
-    <mutatedMethod>lambda$getAutodetectedLineEnding$1</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
-    <description>removed call to org/openrewrite/java/format/AutodetectGeneralFormatStyle::autodetectGeneralFormatStyle</description>
-    <lineContent>.autodetectGeneralFormatStyle(sourceFile);</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
-    <mutatedMethod>lambda$getAutodetectedLineEnding$1</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.NullReturnValsMutator</mutator>
-    <description>replaced return value with null for org/checkstyle/autofix/recipe/NewlineAtEndOfFile$NewLineAtEndOfFileVisitor::lambda$getAutodetectedLineEnding$1</description>
-    <lineContent>return AutodetectGeneralFormatStyle</lineContent>
-  </mutation>
-
   <!-- Cannot be killed by integration tests until a second recipe lands a marker on this node type. See issue #236 -->
   <mutation unstable="false">
     <sourceFile>NewlineAtEndOfFile.java</sourceFile>
@@ -155,15 +74,6 @@
     <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.BooleanTrueReturnValsMutator</mutator>
     <description>replaced boolean return with true for org/checkstyle/autofix/recipe/NewlineAtEndOfFile$NewLineAtEndOfFileVisitor::lambda$visitCompilationUnit$0</description>
     <lineContent>.anyMatch(marker -&gt; marker.isFor(CheckFullName.NEWLINE_AT_END_OF_FILE));</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>NewlineAtEndOfFile.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.NewlineAtEndOfFile$NewLineAtEndOfFileVisitor</mutatedClass>
-    <mutatedMethod>visitCompilationUnit</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.ArgumentPropagationMutator</mutator>
-    <description>replaced call to org/openrewrite/java/JavaIsoVisitor::visitCompilationUnit with argument</description>
-    <lineContent>J.CompilationUnit result = super.visitCompilationUnit(compUnit, executionContext);</lineContent>
   </mutation>
 
   <mutation unstable="false">
@@ -215,6 +125,16 @@
     <lineContent>.anyMatch(marker -&gt; marker.isFor(CheckFullName.UPPER_ELL));</lineContent>
   </mutation>
 
+  <!-- Cannot be killed by integration tests until a second recipe lands a marker on this node type. See issue #236 -->
+  <mutation unstable="false">
+    <sourceFile>UseEnhancedSwitch.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.UseEnhancedSwitch$UseEnhancedSwitchVisitor</mutatedClass>
+    <mutatedMethod>lambda$isAtViolationLocation$2</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.BooleanTrueReturnValsMutator</mutator>
+    <description>replaced boolean return with true for org/checkstyle/autofix/recipe/UseEnhancedSwitch$UseEnhancedSwitchVisitor::lambda$isAtViolationLocation$2</description>
+    <lineContent>.anyMatch(marker -&gt; marker.isFor(CheckFullName.USE_ENHANCED_SWITCH));</lineContent>
+  </mutation>
+
   <mutation unstable="false">
     <sourceFile>UseEnhancedSwitch.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.recipe.UseEnhancedSwitch$UseEnhancedSwitchVisitor$ControlFlowVisitor</mutatedClass>
@@ -240,15 +160,5 @@
     <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.NullReturnValsMutator</mutator>
     <description>replaced return value with null for org/checkstyle/autofix/recipe/UseEnhancedSwitch$UseEnhancedSwitchVisitor$ControlFlowVisitor::visitReturn</description>
     <lineContent>return returnObj;</lineContent>
-  </mutation>
-
-  <!-- Cannot be killed by integration tests until a second recipe lands a marker on this node type. See issue #236 -->
-  <mutation unstable="false">
-    <sourceFile>UseEnhancedSwitch.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.UseEnhancedSwitch$UseEnhancedSwitchVisitor</mutatedClass>
-    <mutatedMethod>lambda$isAtViolationLocation$2</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.BooleanTrueReturnValsMutator</mutator>
-    <description>replaced boolean return with true for org/checkstyle/autofix/recipe/UseEnhancedSwitch$UseEnhancedSwitchVisitor::lambda$isAtViolationLocation$2</description>
-    <lineContent>.anyMatch(marker -&gt; marker.isFor(CheckFullName.USE_ENHANCED_SWITCH));</lineContent>
   </mutation>
 </suppressedMutations>

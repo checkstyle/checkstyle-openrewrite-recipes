@@ -60,16 +60,27 @@ public class NewlineAtEndOfFile extends Recipe {
     }
 
     private static class NewLineAtEndOfFileVisitor extends JavaIsoVisitor<ExecutionContext> {
+
+        private static final String LF = "lf";
+        private static final String CRLF = "crlf";
+        private static final String CR = "cr";
+        private static final String LF_CR_CRLF = "lf_cr_crlf";
+
         private final String lineSeparatorConfig;
 
         NewLineAtEndOfFileVisitor(String lineSeparatorConfig) {
-            this.lineSeparatorConfig = lineSeparatorConfig.toLowerCase();
+            if (lineSeparatorConfig == null) {
+                this.lineSeparatorConfig = LF_CR_CRLF;
+            }
+            else {
+                this.lineSeparatorConfig = lineSeparatorConfig.toLowerCase();
+            }
         }
 
         @Override
         public J.CompilationUnit visitCompilationUnit(
                 J.CompilationUnit compUnit, ExecutionContext executionContext) {
-            J.CompilationUnit result = super.visitCompilationUnit(compUnit, executionContext);
+            J.CompilationUnit result = compUnit;
 
             final boolean hasMarker = result.getMarkers()
                     .findAll(CheckstyleViolationMarker.class).stream()
@@ -109,11 +120,10 @@ public class NewlineAtEndOfFile extends Recipe {
 
         private String determineLineEnding(JavaSourceFile sourceFile) {
             return switch (lineSeparatorConfig) {
-                case "lf" -> "\n";
-                case "crlf" -> "\r\n";
-                case "cr" -> "\r";
-                case "system" -> System.lineSeparator();
-                case "lf_cr_crlf" -> getAutodetectedLineEnding(sourceFile);
+                case LF -> "\n";
+                case CRLF -> "\r\n";
+                case CR -> "\r";
+                case LF_CR_CRLF -> getAutodetectedLineEnding(sourceFile);
                 default -> {
                     throw new IllegalStateException("Unexpected value: " + lineSeparatorConfig);
                 }
