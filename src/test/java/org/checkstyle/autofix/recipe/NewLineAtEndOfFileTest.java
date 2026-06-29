@@ -81,4 +81,14 @@ public class NewLineAtEndOfFileTest extends AbstractRecipeTestSupport {
     void newLineLf(ReportParser parser) throws Exception {
         verify(parser, "NewlineAtEndOfFileLf");
     }
+
+    @RecipeTest
+    void newLineLfCrCrlf(ReportParser parser) throws Exception {
+        verify(parser, "NewlineAtEndOfFileLfCrCrlf");
+    }
+
+    @RecipeTest
+    void newLineNoViolation(ReportParser parser) throws Exception {
+        verify(parser, "NewLineNoViolation");
+    }
 }

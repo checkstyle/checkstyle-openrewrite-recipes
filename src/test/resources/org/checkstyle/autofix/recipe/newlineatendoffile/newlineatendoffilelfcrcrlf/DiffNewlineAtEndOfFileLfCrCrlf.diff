@@ -1,0 +1,15 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/newlineatendoffile/newlineatendoffilelfcrcrlf/InputNewlineAtEndOfFileLfCrCrlf.java
++++ src/test/resources/org/checkstyle/autofix/recipe/newlineatendoffile/newlineatendoffilelfcrcrlf/OutputNewlineAtEndOfFileLfCrCrlf.java
+@@ -4,9 +4,8 @@
+ fileExtensions = (default)""
+ 
+ */
+-// violation 6 lines above 'File does not end with a newline.'
+ 
+ package org.checkstyle.autofix.recipe.newlineatendoffile.newlineatendoffilelfcrcrlf;
+ 
+-public class InputNewlineAtEndOfFileLfCrCrlf {
+-}
+\ No newline at end of file
++public class OutputNewlineAtEndOfFileLfCrCrlf {
++}
