@@ -8,7 +8,10 @@
 
 package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.innerenum;
 
-/** Class containing an enum with ungrouped constructors. */
+/**
+ * A private enum nested in a class has a constructor separated by a field.
+ * Verifies that the fix works correctly inside enum bodies.
+ */
 public class OutputInnerEnum {
 
     OutputInnerEnum() {}

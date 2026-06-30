@@ -9,8 +9,9 @@
 package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.separatedbycomment;
 
 /**
- * Class where constructors are separated only by comments.
- * Comments between constructors are allowed, so no violations should occur.
+ * Constructors are separated only by comments (single-line and block).
+ * According to the rule, comments between constructors are allowed.
+ * Verifies that no modification is made.
  */
 public class OutputSeparatedByComment {
 

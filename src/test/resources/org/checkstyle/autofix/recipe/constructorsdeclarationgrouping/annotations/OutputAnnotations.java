@@ -8,7 +8,11 @@
 
 package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.annotations;
 
-/** Class with annotated constructors that are not grouped together. */
+/**
+ * Constructors carrying annotations ({@code @SuppressWarnings}, {@code @Deprecated})
+ * are separated by a method. Verifies that annotations are preserved correctly after
+ * moving.
+ */
 public class OutputAnnotations {
 
     @SuppressWarnings("unused")

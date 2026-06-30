@@ -1,8 +1,8 @@
 --- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/withcomments/InputWithComments.java
 +++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/withcomments/OutputWithComments.java
 @@ -13,20 +13,31 @@
-  * Class where all methods have Javadoc.
-  * Javadoc of moved constructors should be moved together.
+  * All constructors and methods have Javadoc. Verifies that Javadoc of moved
+  * constructors are moved together.
   */
 -public class InputWithComments {
 +public class OutputWithComments {

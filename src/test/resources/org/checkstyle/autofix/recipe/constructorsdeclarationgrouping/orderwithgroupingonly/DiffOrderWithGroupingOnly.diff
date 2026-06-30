@@ -1,0 +1,21 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/orderwithgroupingonly/InputOrderWithGroupingOnly.java
++++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/orderwithgroupingonly/OutputOrderWithGroupingOnly.java
+@@ -22,13 +22,13 @@
+  * violation suppressed. It should be grouped but not reordered - moving
+  * one position forward to join the constructor group.
+  */
+-public class InputOrderWithGroupingOnly {
++public class OutputOrderWithGroupingOnly {
+ 
+-    InputOrderWithGroupingOnly() {}
++    OutputOrderWithGroupingOnly() {}
+ 
+-    InputOrderWithGroupingOnly(boolean b, int x) {}
++    OutputOrderWithGroupingOnly(boolean b, int x) {}
++
++    OutputOrderWithGroupingOnly(String s) {}
+ 
+     void foo(int a, int b, int c) {}
+-
+-    InputOrderWithGroupingOnly(String s) {} // violation 'Constructors should be grouped together.*'
+ }

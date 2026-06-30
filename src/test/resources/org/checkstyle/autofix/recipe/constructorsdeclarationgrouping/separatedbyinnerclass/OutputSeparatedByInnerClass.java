@@ -8,7 +8,11 @@
 
 package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.separatedbyinnerclass;
 
-/** Class where constructors are separated by an inner class declaration. */
+/**
+ * A single constructor is separated from the initial group by an inner class declaration.
+ * Inner class declarations are non-constructor members and therefore trigger a violation.
+ * Verifies the inner-class-separation scenario.
+ */
 public class OutputSeparatedByInnerClass {
 
     OutputSeparatedByInnerClass() {}

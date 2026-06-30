@@ -1,8 +1,8 @@
 --- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/idempotent2/InputIdempotent2.java
 +++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/idempotent2/OutputIdempotent2.java
-@@ -12,20 +12,20 @@
-  * The constructor Idempotent2(String b) ends up at the violation location after first cycle.
-  * It should remain at the same position after second cycle.
+@@ -13,20 +13,20 @@
+  * must not be wrongly moved again in a second cycle. Tests that already-moved
+  * constructors stay put.
   */
 -public class InputIdempotent2 {
 +public class OutputIdempotent2 {

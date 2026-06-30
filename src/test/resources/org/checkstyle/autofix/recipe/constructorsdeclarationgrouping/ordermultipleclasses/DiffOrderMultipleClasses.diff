@@ -1,0 +1,33 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/ordermultipleclasses/InputOrderMultipleClasses.java
++++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/ordermultipleclasses/OutputOrderMultipleClasses.java
+@@ -16,24 +16,20 @@
+  * out-of-order constructors. Verifies that the ordering fix is
+  * correctly scoped to each class body.
+  */
+-public class InputOrderMultipleClasses {
++public class OutputOrderMultipleClasses {
+ 
+-    InputOrderMultipleClasses(String s) {}
++    OutputOrderMultipleClasses() {}
+ 
+-    InputOrderMultipleClasses() {}
+-    // violation above 'Constructors should be ordered.*'
++    OutputOrderMultipleClasses(String s) {}
+ 
+-    InputOrderMultipleClasses(int x) {}
+-    // violation above 'Constructors should be ordered.*'
++    OutputOrderMultipleClasses(int x) {}
+ 
+     static class Inner {
+ 
+-        Inner(String s, int x) {}
++        Inner() {}
+ 
+         Inner(String s) {}
+-        // violation above 'Constructors should be ordered.*'
+ 
+-        Inner() {}
+-        // violation above 'Constructors should be ordered.*'
++        Inner(String s, int x) {}
+     }
+ }

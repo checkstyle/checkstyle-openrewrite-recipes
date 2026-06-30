@@ -8,7 +8,11 @@
 
 package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.multipleviolations;
 
-/** Class where multiple constructors are scattered across the class body. */
+/**
+ * Three constructors are each separated by a different member (field, field, method).
+ * Verifies that all violating constructors are collected and inserted in their
+ * original relative order after the initial constructor group.
+ */
 public class InputMultipleViolations {
 
     InputMultipleViolations() {}

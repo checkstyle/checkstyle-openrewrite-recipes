@@ -9,6 +9,10 @@
 
 package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.samelinedeclarations;
 
+/**
+ * Multiple constructors or methods are declared on the same line.
+ * Verifies that ungrouped constructors are moved correctly.
+ */
 public class InputSameLineDeclarations {
 
     int x;

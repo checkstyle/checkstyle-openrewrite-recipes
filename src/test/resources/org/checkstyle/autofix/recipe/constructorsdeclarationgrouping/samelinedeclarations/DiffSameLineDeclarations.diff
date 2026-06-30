@@ -1,9 +1,9 @@
 --- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/samelinedeclarations/InputSameLineDeclarations.java
 +++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/samelinedeclarations/OutputSameLineDeclarations.java
-@@ -9,15 +9,13 @@
- 
- package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.samelinedeclarations;
- 
+@@ -13,15 +13,13 @@
+  * Multiple constructors or methods are declared on the same line.
+  * Verifies that ungrouped constructors are moved correctly.
+  */
 -public class InputSameLineDeclarations {
 +public class OutputSameLineDeclarations {
  

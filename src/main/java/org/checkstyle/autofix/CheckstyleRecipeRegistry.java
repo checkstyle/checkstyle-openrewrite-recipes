@@ -73,7 +73,7 @@ public final class CheckstyleRecipeRegistry {
         RECIPE_MAP.put(CheckFullName.MISSING_OVERRIDE, MissingOverride::new);
         RECIPE_MAP.put(CheckFullName.REDUNDANT_IMPORT, RedundantImport::new);
         RECIPE_MAP.put(CheckFullName.UPPER_ELL, UpperEll::new);
-        RECIPE_MAP.put(CheckFullName.CONSTRUCTORS_DECLARATION_GROUPING,
+        RECIPE_MAP_WITH_CONFIG.put(CheckFullName.CONSTRUCTORS_DECLARATION_GROUPING,
             ConstructorsDeclarationGrouping::new);
     }
 

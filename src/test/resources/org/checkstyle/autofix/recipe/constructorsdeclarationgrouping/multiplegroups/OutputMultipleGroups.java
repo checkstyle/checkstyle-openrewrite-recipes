@@ -8,7 +8,11 @@
 
 package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.multiplegroups;
 
-/** Class where both the outer class and an inner class have ungrouped constructors. */
+/**
+ * Both the outer class and a nested static inner class independently have
+ * ungrouped constructors. Verifies that the fix is applied correctly and
+ * independently in each class scope.
+ */
 public class OutputMultipleGroups {
 
     OutputMultipleGroups() {}

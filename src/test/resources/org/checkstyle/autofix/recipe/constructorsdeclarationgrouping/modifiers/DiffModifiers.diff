@@ -1,9 +1,9 @@
 --- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/modifiers/InputModifiers.java
 +++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/modifiers/OutputModifiers.java
-@@ -9,14 +9,14 @@
- package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.modifiers;
- 
- /** Class with constructors of different access modifiers that are ungrouped. */
+@@ -12,14 +12,14 @@
+  * Constructors with different access modifiers (public, protected, private) are
+  * separated by a field. Verifies that modifiers are preserved correctly after moving.
+  */
 -public class InputModifiers {
 +public class OutputModifiers {
  

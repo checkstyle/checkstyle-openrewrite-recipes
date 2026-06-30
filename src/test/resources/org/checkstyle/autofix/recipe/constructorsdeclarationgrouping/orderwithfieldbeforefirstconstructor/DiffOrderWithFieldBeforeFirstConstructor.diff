@@ -1,0 +1,18 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/orderwithfieldbeforefirstconstructor/InputOrderWithFieldBeforeFirstConstructor.java
++++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/orderwithfieldbeforefirstconstructor/OutputOrderWithFieldBeforeFirstConstructor.java
+@@ -16,12 +16,11 @@
+  * of order by parameter count. Verifies that the first constructor index is
+  * correctly located when it is not at statement index 0.
+  */
+-public class InputOrderWithFieldBeforeFirstConstructor {
++public class OutputOrderWithFieldBeforeFirstConstructor {
+ 
+     private int field = 0;
+ 
+-    InputOrderWithFieldBeforeFirstConstructor(int x, boolean b) {}
++    OutputOrderWithFieldBeforeFirstConstructor(int x) {}
+ 
+-    InputOrderWithFieldBeforeFirstConstructor(int x) {}
+-    // violation above 'Constructors should be ordered.*'
++    OutputOrderWithFieldBeforeFirstConstructor(int x, boolean b) {}
+ }

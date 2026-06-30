@@ -1,9 +1,9 @@
 --- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/separatedbyfield/InputSeparatedByField.java
 +++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/separatedbyfield/OutputSeparatedByField.java
-@@ -9,12 +9,12 @@
- package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.separatedbyfield;
- 
- /** Class where constructors are separated by a field declaration. */
+@@ -12,12 +12,12 @@
+  * A single constructor is separated from the first constructor by a field declaration.
+  * Verifies the minimal field-separation scenario.
+  */
 -public class InputSeparatedByField {
 +public class OutputSeparatedByField {
  

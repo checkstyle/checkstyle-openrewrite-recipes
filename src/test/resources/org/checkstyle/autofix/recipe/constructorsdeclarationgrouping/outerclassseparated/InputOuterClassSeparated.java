@@ -8,7 +8,11 @@
 
 package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.outerclassseparated;
 
-/** Class with fields and methods before any constructor, then a separated constructor at the end. */
+/**
+ * The first constructor is preceded by fields and methods; a second constructor
+ * appears after another method. Verifies that the fix works when the constructor
+ * group does not start at the top of the class body.
+ */
 public class InputOuterClassSeparated {
 
     int x;

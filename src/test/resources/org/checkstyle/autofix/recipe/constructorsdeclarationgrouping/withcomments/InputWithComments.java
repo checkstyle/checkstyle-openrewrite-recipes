@@ -10,8 +10,8 @@
 package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.withcomments;
 
 /**
- * Class where all methods have Javadoc.
- * Javadoc of moved constructors should be moved together.
+ * All constructors and methods have Javadoc. Verifies that Javadoc of moved
+ * constructors are moved together.
  */
 public class InputWithComments {
 

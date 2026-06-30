@@ -1,9 +1,9 @@
 --- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/separatedbyinnerclass/InputSeparatedByInnerClass.java
 +++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/separatedbyinnerclass/OutputSeparatedByInnerClass.java
-@@ -9,14 +9,14 @@
- package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.separatedbyinnerclass;
- 
- /** Class where constructors are separated by an inner class declaration. */
+@@ -13,14 +13,14 @@
+  * Inner class declarations are non-constructor members and therefore trigger a violation.
+  * Verifies the inner-class-separation scenario.
+  */
 -public class InputSeparatedByInnerClass {
 +public class OutputSeparatedByInnerClass {
  

@@ -8,7 +8,10 @@
 
 package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.noviolation;
 
-/** Class where all constructors are already properly grouped together. */
+/**
+ * All constructors are already grouped together with no violations.
+ * Verifies that the Recipe makes no changes when the code is already compliant.
+ */
 public class OutputNoViolation {
 
     int x;

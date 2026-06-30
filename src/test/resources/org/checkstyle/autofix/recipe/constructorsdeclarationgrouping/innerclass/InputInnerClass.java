@@ -8,7 +8,11 @@
 
 package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.innerclass;
 
-/** Outer class with an inner class that has ungrouped constructors. */
+/**
+ * An inner static class has a constructor separated from its group by a field.
+ * Verifies that the fix is correctly scoped to the inner class body without
+ * affecting the outer class.
+ */
 public class InputInnerClass {
 
     InputInnerClass() {}

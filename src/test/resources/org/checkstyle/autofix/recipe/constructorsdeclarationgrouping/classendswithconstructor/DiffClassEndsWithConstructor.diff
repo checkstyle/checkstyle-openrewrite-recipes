@@ -1,9 +1,9 @@
 --- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/classendswithconstructor/InputClassEndsWithConstructor.java
 +++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/classendswithconstructor/OutputClassEndsWithConstructor.java
-@@ -9,14 +9,14 @@
- 
- package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.classendswithconstructor;
- 
+@@ -14,14 +14,14 @@
+  * declaration is also a constructor. Verifies that no IndexOutOfBoundsException
+  * occurs when the constructor group extends to the end of the class body.
+  */
 -public class InputClassEndsWithConstructor {
 +public class OutputClassEndsWithConstructor {
  

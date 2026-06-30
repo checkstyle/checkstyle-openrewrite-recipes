@@ -1,9 +1,9 @@
 --- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/noviolation/InputNoViolation.java
 +++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/noviolation/OutputNoViolation.java
-@@ -9,15 +9,15 @@
- package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.noviolation;
- 
- /** Class where all constructors are already properly grouped together. */
+@@ -12,15 +12,15 @@
+  * All constructors are already grouped together with no violations.
+  * Verifies that the Recipe makes no changes when the code is already compliant.
+  */
 -public class InputNoViolation {
 +public class OutputNoViolation {
  

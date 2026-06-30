@@ -1,9 +1,9 @@
 --- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/simple/InputSimple.java
 +++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/simple/OutputSimple.java
-@@ -9,16 +9,15 @@
- 
- package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.simple;
- 
+@@ -13,16 +13,15 @@
+  * Baseline test: two constructors separated by a method and a field.
+  * Verifies that all violating constructors are moved to follow the initial group.
+  */
 -public class InputSimple {
 +public class OutputSimple {
  

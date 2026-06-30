@@ -9,6 +9,10 @@
 
 package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.simple;
 
+/**
+ * Baseline test: two constructors separated by a method and a field.
+ * Verifies that all violating constructors are moved to follow the initial group.
+ */
 public class OutputSimple {
 
     int x;

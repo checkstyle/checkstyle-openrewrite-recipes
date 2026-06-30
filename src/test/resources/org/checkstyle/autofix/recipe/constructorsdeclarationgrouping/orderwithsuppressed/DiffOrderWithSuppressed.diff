@@ -1,0 +1,21 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/orderwithsuppressed/InputOrderWithSuppressed.java
++++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/orderwithsuppressed/OutputOrderWithSuppressed.java
+@@ -21,14 +21,13 @@
+  * The 0-arg constructor is XPath-suppressed and stays in its original
+  * position. Non-suppressed constructors are grouped and sorted around it.
+  */
+-public class InputOrderWithSuppressed {
++public class OutputOrderWithSuppressed {
+ 
+-    InputOrderWithSuppressed(String s) {}
++    OutputOrderWithSuppressed() {}
+ 
+-    InputOrderWithSuppressed() {}
+-    // violation above 'Constructors should be ordered.*'
++    OutputOrderWithSuppressed(String s) {}
+ 
+     void foo() {}
+ 
+-    InputOrderWithSuppressed(int x) {}
++    OutputOrderWithSuppressed(int x) {}
+ }
