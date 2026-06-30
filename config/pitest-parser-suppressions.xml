@@ -57,15 +57,6 @@
   <mutation unstable="false">
     <sourceFile>CheckConfiguration.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.parser.CheckConfiguration</mutatedClass>
-    <mutatedMethod>hasProperty</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
-    <description>removed conditional - replaced equality check with true</description>
-    <lineContent>return properties.containsKey(key) || globalProperties.containsKey(key);</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>CheckConfiguration.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.parser.CheckConfiguration</mutatedClass>
     <mutatedMethod>setGlobalProperty</mutatedMethod>
     <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
     <description>removed call to java/util/Map::put</description>
