@@ -627,21 +627,12 @@ public class UseEnhancedSwitch extends Recipe {
             }
 
             @Override
-            public J.Return visitReturn(J.Return returnObj, Void voidObj) {
-                hasDisallowedFlow = true;
-                return returnObj;
-            }
-
-            @Override
-            public J.Break visitBreak(J.Break breakObj, Void voidObj) {
-                hasDisallowedFlow = true;
-                return breakObj;
-            }
-
-            @Override
-            public J.Continue visitContinue(J.Continue continueObj, Void voidObj) {
-                hasDisallowedFlow = true;
-                return continueObj;
+            public J visit(Tree tree, Void unused) {
+                if (tree instanceof J.Return || tree instanceof J.Break
+                            || tree instanceof J.Continue) {
+                    hasDisallowedFlow = true;
+                }
+                return super.visit(tree, unused);
             }
         }
 
