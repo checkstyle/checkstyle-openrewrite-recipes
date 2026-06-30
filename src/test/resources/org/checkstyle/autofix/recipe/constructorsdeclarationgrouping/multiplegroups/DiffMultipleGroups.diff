@@ -1,9 +1,9 @@
 --- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/multiplegroups/InputMultipleGroups.java
 +++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/multiplegroups/OutputMultipleGroups.java
-@@ -9,21 +9,21 @@
- package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.multiplegroups;
- 
- /** Class where both the outer class and an inner class have ungrouped constructors. */
+@@ -13,21 +13,21 @@
+  * ungrouped constructors. Verifies that the fix is applied correctly and
+  * independently in each class scope.
+  */
 -public class InputMultipleGroups {
 +public class OutputMultipleGroups {
  

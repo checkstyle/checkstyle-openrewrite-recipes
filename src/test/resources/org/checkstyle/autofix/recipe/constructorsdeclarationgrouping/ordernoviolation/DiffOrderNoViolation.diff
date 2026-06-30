@@ -1,0 +1,18 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/ordernoviolation/InputOrderNoViolation.java
++++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/ordernoviolation/OutputOrderNoViolation.java
+@@ -15,11 +15,11 @@
+  * Constructors are already grouped and correctly ordered by increasing
+  * parameter count. Verifies that the recipe makes no changes.
+  */
+-public class InputOrderNoViolation {
++public class OutputOrderNoViolation {
+ 
+-    InputOrderNoViolation() {}
++    OutputOrderNoViolation() {}
+ 
+-    InputOrderNoViolation(int x) {}
++    OutputOrderNoViolation(int x) {}
+ 
+-    InputOrderNoViolation(String s) {}
++    OutputOrderNoViolation(String s) {}
+ }

@@ -9,8 +9,9 @@
 package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.idempotent2;
 
 /**
- * The constructor Idempotent2(String b) ends up at the violation location after first cycle.
- * It should remain at the same position after second cycle.
+ * Constructors that end up at violation locations after the first cycle of reordering
+ * must not be wrongly moved again in a second cycle. Tests that already-moved
+ * constructors stay put.
  */
 public class OutputIdempotent2 {
 

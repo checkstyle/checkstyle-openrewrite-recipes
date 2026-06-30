@@ -1,9 +1,9 @@
 --- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/annotations/InputAnnotations.java
 +++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/annotations/OutputAnnotations.java
-@@ -9,16 +9,16 @@
- package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.annotations;
- 
- /** Class with annotated constructors that are not grouped together. */
+@@ -13,16 +13,16 @@
+  * are separated by a method. Verifies that annotations are preserved correctly after
+  * moving.
+  */
 -public class InputAnnotations {
 +public class OutputAnnotations {
  

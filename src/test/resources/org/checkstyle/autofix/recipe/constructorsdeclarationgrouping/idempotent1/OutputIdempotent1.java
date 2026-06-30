@@ -14,8 +14,9 @@
 package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.idempotent1;
 
 /**
- * The constructor Idempotent1(int x) ends up at the violation location after first cycle.
- * It should remain at the same position after second cycle.
+ * Constructors that end up at violation locations after the first cycle of reordering
+ * must not be wrongly moved again in a second cycle. Tests that XPath-suppressed
+ * constructors at violation positions are correctly ignored.
  */
 public class OutputIdempotent1 {
 

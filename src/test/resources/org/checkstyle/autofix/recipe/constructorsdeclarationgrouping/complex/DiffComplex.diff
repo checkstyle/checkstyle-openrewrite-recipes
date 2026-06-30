@@ -1,0 +1,45 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/complex/InputComplex.java
++++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/complex/OutputComplex.java
+@@ -40,29 +40,25 @@
+  * grouping violations via {@code SuppressionXpathSingleFilter}.
+  * Verifies that the recipe respects suppression granularity.
+  */
+-public class InputComplex {
++public class OutputComplex {
+ 
+-    InputComplex(int x) {}
++    OutputComplex(int x) {}
+ 
+-    InputComplex(String s) {}
++    OutputComplex(String s) {}
+ 
+-    InputComplex(int x, String s, boolean b) {}
++    OutputComplex(short s) {}
+ 
+-    InputComplex(long l) {}
++    OutputComplex(double d, int x) {}
+ 
+-    InputComplex(double d, int x) {}
+-    // violation above 'Constructors should be ordered.*'
++    OutputComplex(float f, String s) {}
++
++    OutputComplex(int x, String s, boolean b) {}
++
++    OutputComplex(byte b, char c) {}
++
++    OutputComplex(long l) {}
+ 
+     void foo() {}
+ 
+-    InputComplex(float f, String s) {} // violation 'Constructors should be grouped together.*'
+-    // violation above 'Constructors should be ordered.*'
+-
+-    InputComplex(short s) {}
+-    // violation above 'Constructors should be ordered.*'
+-
+-    InputComplex(byte b, char c) {}
+-    // violation above 'Constructors should be grouped together.*'
+-
+-    InputComplex() {}
++    OutputComplex() {}
+ }

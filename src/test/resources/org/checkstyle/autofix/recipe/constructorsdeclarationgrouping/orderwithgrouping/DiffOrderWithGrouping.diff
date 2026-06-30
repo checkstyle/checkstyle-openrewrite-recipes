@@ -1,0 +1,23 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/orderwithgrouping/InputOrderWithGrouping.java
++++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/orderwithgrouping/OutputOrderWithGrouping.java
+@@ -16,15 +16,13 @@
+  * Verifies that all non-suppressed constructors are grouped together and
+  * sorted by increasing parameter count when the ordering property is enabled.
+  */
+-public class InputOrderWithGrouping {
++public class OutputOrderWithGrouping {
+ 
+-    InputOrderWithGrouping(String s, int x) {}
++    OutputOrderWithGrouping() {}
+ 
+-    InputOrderWithGrouping(int x) {}
+-    // violation above 'Constructors should be ordered.*'
++    OutputOrderWithGrouping(int x) {}
++
++    OutputOrderWithGrouping(String s, int x) {}
+ 
+     void foo() {}
+-
+-    InputOrderWithGrouping() {} // violation 'Constructors should be grouped together.*'
+-    // violation above 'Constructors should be ordered.*'
+ }

@@ -13,6 +13,10 @@
 
 package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.multiplefiles1;
 
+/**
+ * Multiple files.
+ * Verifies that violating constructors from the correct files are moved.
+ */
 public class InputMultipleFiles1 {
 
     int x;

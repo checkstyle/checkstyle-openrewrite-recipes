@@ -8,7 +8,10 @@
 
 package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.separatedbymethod;
 
-/** Class where constructors are separated by a method. */
+/**
+ * A single constructor is separated from the initial group by a method.
+ * Verifies the minimal method-separation scenario.
+ */
 public class InputSeparatedByMethod {
 
     InputSeparatedByMethod() {}

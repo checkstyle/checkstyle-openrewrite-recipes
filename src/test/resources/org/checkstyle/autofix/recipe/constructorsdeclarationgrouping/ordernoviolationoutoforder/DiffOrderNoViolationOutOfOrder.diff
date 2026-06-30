@@ -1,0 +1,17 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/ordernoviolationoutoforder/InputOrderNoViolationOutOfOrder.java
++++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/ordernoviolationoutoforder/OutputOrderNoViolationOutOfOrder.java
+@@ -19,11 +19,11 @@
+  * All violations are suppressed in the nested class, while the outer class have
+  * violations. Verifies that only the outer class is modified.
+  */
+-public class InputOrderNoViolationOutOfOrder {
++public class OutputOrderNoViolationOutOfOrder {
+ 
+-    InputOrderNoViolationOutOfOrder(int x) {}
++    OutputOrderNoViolationOutOfOrder() {}
+ 
+-    InputOrderNoViolationOutOfOrder() {} // violation 'Constructors should be ordered by increasing parameter count.'
++    OutputOrderNoViolationOutOfOrder(int x) {}
+ 
+     static class NestedClass {
+         NestedClass(int x) {}

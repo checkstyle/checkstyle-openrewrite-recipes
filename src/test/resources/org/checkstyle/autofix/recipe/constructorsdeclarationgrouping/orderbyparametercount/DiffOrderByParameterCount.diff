@@ -1,0 +1,16 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/orderbyparametercount/InputOrderByParameterCount.java
++++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/orderbyparametercount/OutputOrderByParameterCount.java
+@@ -17,10 +17,9 @@
+  * increasing parameter count when {@code orderByIncreasingParameterCount}
+  * is enabled.
+  */
+-public class InputOrderByParameterCount {
++public class OutputOrderByParameterCount {
+ 
+-    InputOrderByParameterCount(String s) {}
++    OutputOrderByParameterCount() {}
+ 
+-    InputOrderByParameterCount() {}
+-    // violation above 'Constructors should be ordered.*'
++    OutputOrderByParameterCount(String s) {}
+ }

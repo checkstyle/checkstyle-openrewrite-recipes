@@ -1,9 +1,9 @@
 --- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/multiplefiles1/InputMultipleFiles1.java
 +++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/multiplefiles1/OutputMultipleFiles1.java
-@@ -13,16 +13,15 @@
- 
- package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.multiplefiles1;
- 
+@@ -17,16 +17,15 @@
+  * Multiple files.
+  * Verifies that violating constructors from the correct files are moved.
+  */
 -public class InputMultipleFiles1 {
 +public class OutputMultipleFiles1 {
  

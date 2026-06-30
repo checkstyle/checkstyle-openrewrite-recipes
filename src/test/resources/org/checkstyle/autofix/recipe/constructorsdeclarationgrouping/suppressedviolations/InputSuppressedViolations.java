@@ -13,6 +13,10 @@
 
 package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.suppressedviolations;
 
+/**
+ * Not all constructors are grouped together, but violations are suppressed.
+ * Verifies that no modification is made.
+ */
 public class InputSuppressedViolations {
 
     int x;

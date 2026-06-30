@@ -1,9 +1,9 @@
 --- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/withprefixwhitespaces/InputWithPrefixWhitespaces.java
 +++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/withprefixwhitespaces/OutputWithPrefixWhitespaces.java
-@@ -9,19 +9,17 @@
- 
- package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.withprefixwhitespaces;
- 
+@@ -13,19 +13,17 @@
+  * Contains ungrouped constructors with irregular leading whitespaces.
+  * Verifies that leading whitespaces are carried along.
+  */
 -public class InputWithPrefixWhitespaces {
 +public class OutputWithPrefixWhitespaces {
  

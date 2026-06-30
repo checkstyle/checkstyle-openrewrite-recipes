@@ -8,7 +8,10 @@
 
 package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.modifiers;
 
-/** Class with constructors of different access modifiers that are ungrouped. */
+/**
+ * Constructors with different access modifiers (public, protected, private) are
+ * separated by a field. Verifies that modifiers are preserved correctly after moving.
+ */
 public class InputModifiers {
 
     public InputModifiers() {}

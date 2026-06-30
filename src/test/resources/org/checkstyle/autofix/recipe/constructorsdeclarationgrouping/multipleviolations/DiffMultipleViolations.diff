@@ -1,9 +1,9 @@
 --- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/multipleviolations/InputMultipleViolations.java
 +++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/multipleviolations/OutputMultipleViolations.java
-@@ -9,18 +9,18 @@
- package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.multipleviolations;
- 
- /** Class where multiple constructors are scattered across the class body. */
+@@ -13,18 +13,18 @@
+  * Verifies that all violating constructors are collected and inserted in their
+  * original relative order after the initial constructor group.
+  */
 -public class InputMultipleViolations {
 +public class OutputMultipleViolations {
  

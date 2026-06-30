@@ -1,9 +1,9 @@
 --- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/separatedbymethod/InputSeparatedByMethod.java
 +++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/separatedbymethod/OutputSeparatedByMethod.java
-@@ -9,14 +9,14 @@
- package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.separatedbymethod;
- 
- /** Class where constructors are separated by a method. */
+@@ -12,14 +12,14 @@
+  * A single constructor is separated from the initial group by a method.
+  * Verifies the minimal method-separation scenario.
+  */
 -public class InputSeparatedByMethod {
 +public class OutputSeparatedByMethod {
  

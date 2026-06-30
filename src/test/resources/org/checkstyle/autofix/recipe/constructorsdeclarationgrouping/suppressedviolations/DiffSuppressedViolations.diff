@@ -1,9 +1,9 @@
 --- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/suppressedviolations/InputSuppressedViolations.java
 +++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/suppressedviolations/OutputSuppressedViolations.java
-@@ -13,18 +13,17 @@
- 
- package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.suppressedviolations;
- 
+@@ -17,18 +17,17 @@
+  * Not all constructors are grouped together, but violations are suppressed.
+  * Verifies that no modification is made.
+  */
 -public class InputSuppressedViolations {
 +public class OutputSuppressedViolations {
  

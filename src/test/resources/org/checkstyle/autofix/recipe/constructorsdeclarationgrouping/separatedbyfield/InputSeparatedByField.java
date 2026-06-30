@@ -8,7 +8,10 @@
 
 package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.separatedbyfield;
 
-/** Class where constructors are separated by a field declaration. */
+/**
+ * A single constructor is separated from the first constructor by a field declaration.
+ * Verifies the minimal field-separation scenario.
+ */
 public class InputSeparatedByField {
 
     InputSeparatedByField() {}

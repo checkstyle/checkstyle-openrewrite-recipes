@@ -1,9 +1,9 @@
 --- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/innerenum/InputInnerEnum.java
 +++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/innerenum/OutputInnerEnum.java
-@@ -9,9 +9,9 @@
- package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.innerenum;
- 
- /** Class containing an enum with ungrouped constructors. */
+@@ -12,9 +12,9 @@
+  * A private enum nested in a class has a constructor separated by a field.
+  * Verifies that the fix works correctly inside enum bodies.
+  */
 -public class InputInnerEnum {
 +public class OutputInnerEnum {
  
@@ -12,7 +12,7 @@
  
      private enum Status {
  
-@@ -21,9 +21,9 @@
+@@ -24,9 +24,9 @@
  
          Status(String label) {}
  

@@ -9,9 +9,7 @@
 
 package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.noconstructors;
 
-/**
- * Class without any constructors.
- */
+/** There are no constructors at all. Verifies that no modification is made. */
 public class InputNoConstructors {
 
     private void doNothing() {}

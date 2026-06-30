@@ -9,6 +9,10 @@
 
 package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.withprefixwhitespaces;
 
+/**
+ * Contains ungrouped constructors with irregular leading whitespaces.
+ * Verifies that leading whitespaces are carried along.
+ */
 public class OutputWithPrefixWhitespaces {
 
     int x;

@@ -8,7 +8,10 @@
 
 package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.onlyoneviolation;
 
-/** Class with exactly one constructor that is separated from the group. */
+/**
+ * Exactly one constructor is separated from the sole initial constructor.
+ * Verifies the simplest possible violation: a single isolated constructor.
+ */
 public class OutputOnlyOneViolation {
 
     OutputOnlyOneViolation() {}
