@@ -25,6 +25,7 @@ import java.util.Set;
 
 import org.checkstyle.autofix.CheckFullName;
 import org.checkstyle.autofix.marker.CheckstyleViolationMarker;
+import org.jspecify.annotations.Nullable;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
 import org.openrewrite.Tree;
@@ -627,21 +628,21 @@ public class UseEnhancedSwitch extends Recipe {
             }
 
             @Override
-            public J.Return visitReturn(J.Return returnObj, Void voidObj) {
+            public J.@Nullable Return visitReturn(J.Return returnObj, Void voidObj) {
                 hasDisallowedFlow = true;
-                return returnObj;
+                return null;
             }
 
             @Override
-            public J.Break visitBreak(J.Break breakObj, Void voidObj) {
+            public J.@Nullable Break visitBreak(J.Break breakObj, Void voidObj) {
                 hasDisallowedFlow = true;
-                return breakObj;
+                return null;
             }
 
             @Override
-            public J.Continue visitContinue(J.Continue continueObj, Void voidObj) {
+            public J.@Nullable Continue visitContinue(J.Continue continueObj, Void voidObj) {
                 hasDisallowedFlow = true;
-                return continueObj;
+                return null;
             }
         }
 
