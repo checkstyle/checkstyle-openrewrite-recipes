@@ -60,22 +60,21 @@ public class ConstructorsDeclarationGrouping extends Recipe {
             final J.ClassDeclaration classDeclaration =
                 super.visitClassDeclaration(classDecl, executionContext);
 
-            final List<Statement> statements =
-                new ArrayList<>(classDeclaration.getBody().getStatements());
+            final List<Statement> statements = classDeclaration.getBody().getStatements();
 
-            final int firstConstructorIndex = findFirstConstructorIndex(statements);
+            final int groupEnd = findFirstConstructorGroupEnd(statements);
             final List<J.MethodDeclaration> violatingConstructors =
-                findViolatingConstructors(statements);
+                findViolatingConstructors(statements, groupEnd);
 
             final J.ClassDeclaration newClassDeclaration;
 
-            // keep code intact if there are no constructors or no violations
-            if (firstConstructorIndex == -1 || violatingConstructors.isEmpty()) {
+            // keep code intact if there are no violations
+            if (violatingConstructors.isEmpty()) {
                 newClassDeclaration = classDeclaration;
             }
             else {
                 final List<Statement> reordered =
-                    reorderConstructors(statements, firstConstructorIndex, violatingConstructors);
+                    reorderConstructors(statements, groupEnd, violatingConstructors);
 
                 newClassDeclaration = classDeclaration.withBody(
                     classDeclaration.getBody().withStatements(reordered));
@@ -95,11 +94,22 @@ public class ConstructorsDeclarationGrouping extends Recipe {
             return firstConstructorIndex;
         }
 
+        private static int findFirstConstructorGroupEnd(List<Statement> statements) {
+            int result = findFirstConstructorIndex(statements);
+            if (result != -1) {
+                while (result < statements.size()
+                        && statements.get(result) instanceof J.MethodDeclaration method
+                        && method.isConstructor()) {
+                    result++;
+                }
+            }
+            return result;
+        }
+
         private static List<J.MethodDeclaration> findViolatingConstructors(
-            List<Statement> statements) {
+            List<Statement> statements, int groupEnd) {
             // Only scan past the initial constructor group so leftover
             // markers on already-moved constructors don't cause infinite reordering.
-            final int groupEnd = findFirstConstructorGroupEnd(statements);
             final List<J.MethodDeclaration> violating = new ArrayList<>();
             if (groupEnd != -1) {
                 for (int index = groupEnd; index < statements.size(); index++) {
@@ -113,18 +123,6 @@ public class ConstructorsDeclarationGrouping extends Recipe {
             return violating;
         }
 
-        private static int findFirstConstructorGroupEnd(List<Statement> statements) {
-            int result = findFirstConstructorIndex(statements);
-            if (result != -1) {
-                while (result < statements.size()
-                        && statements.get(result) instanceof J.MethodDeclaration method
-                        && method.isConstructor()) {
-                    result++;
-                }
-            }
-            return result;
-        }
-
         private static boolean isViolationMarked(J.MethodDeclaration method) {
             final List<CheckstyleViolationMarker> markers =
                 method.getMarkers().findAll(CheckstyleViolationMarker.class);
@@ -135,20 +133,14 @@ public class ConstructorsDeclarationGrouping extends Recipe {
         }
 
         private static List<Statement> reorderConstructors(
-            List<Statement> statements, int firstConstructorIndex,
+            List<Statement> statements, int insertIndex,
             List<J.MethodDeclaration> violatingConstructors) {
-
-            int insertIndex = firstConstructorIndex;
-            while (insertIndex < statements.size()
-                    && statements.get(insertIndex) instanceof J.MethodDeclaration method
-                    && method.isConstructor()) {
-                insertIndex++;
-            }
 
             final List<Statement> result = new ArrayList<>(statements);
             result.removeAll(violatingConstructors);
 
-            for (int index = 0; index < violatingConstructors.size(); index++) {
+            result.add(insertIndex, violatingConstructors.get(0));
+            for (int index = 1; index < violatingConstructors.size(); index++) {
                 result.add(insertIndex + index, violatingConstructors.get(index));
             }
 
