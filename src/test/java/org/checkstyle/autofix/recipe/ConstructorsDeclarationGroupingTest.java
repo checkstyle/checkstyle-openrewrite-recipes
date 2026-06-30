@@ -32,7 +32,7 @@ public class ConstructorsDeclarationGroupingTest extends AbstractRecipeTestSuppo
     @Test
     public void checkDescription() {
         final ConstructorsDeclarationGrouping recipe =
-                new ConstructorsDeclarationGrouping();
+                new ConstructorsDeclarationGrouping(null);
 
         final String expectedDescription =
                 "Groups all constructors together in a class.";
@@ -45,7 +45,7 @@ public class ConstructorsDeclarationGroupingTest extends AbstractRecipeTestSuppo
     @Test
     public void checkDisplayName() {
         final ConstructorsDeclarationGrouping recipe =
-                new ConstructorsDeclarationGrouping();
+                new ConstructorsDeclarationGrouping(null);
 
         final String expectedDisplayName =
                 "ConstructorsDeclarationGrouping recipe";
@@ -269,5 +269,86 @@ public class ConstructorsDeclarationGroupingTest extends AbstractRecipeTestSuppo
     @RecipeTest
     void classEndsWithConstructor(ReportParser parser) throws Exception {
         verify(parser, "ClassEndsWithConstructor");
+    }
+
+    /**
+     * Two constructors are out of param-count order: a 1-param constructor
+     * comes before a 0-param constructor. Verifies that they are swapped to
+     * increasing parameter count when {@code orderByIncreasingParameterCount}
+     * is enabled.
+     */
+    @RecipeTest
+    void orderByParameterCount(ReportParser parser) throws Exception {
+        verify(parser, "OrderByParameterCount");
+    }
+
+    /**
+     * Constructors are out of param-count order AND separated by a method.
+     * Verifies that all non-suppressed constructors are grouped together and
+     * sorted by increasing parameter count when the ordering property is enabled.
+     */
+    @RecipeTest
+    void orderWithGrouping(ReportParser parser) throws Exception {
+        verify(parser, "OrderWithGrouping");
+    }
+
+    /**
+     * Multiple constructors have the same parameter count. Verifies that the
+     * sort is stable &mdash; constructors with equal parameter counts preserve
+     * their original relative order.
+     */
+    @RecipeTest
+    void orderStableTieBreak(ReportParser parser) throws Exception {
+        verify(parser, "OrderStableTieBreak");
+    }
+
+    /**
+     * The 0-arg constructor is XPath-suppressed and stays in its original
+     * position. Non-suppressed constructors are grouped and sorted around it.
+     */
+    @RecipeTest
+    void orderWithSuppressed(ReportParser parser) throws Exception {
+        verify(parser, "OrderWithSuppressed");
+    }
+
+    /**
+     * Constructors are already grouped and correctly ordered by increasing
+     * parameter count. Verifies that the recipe makes no changes.
+     */
+    @RecipeTest
+    void orderNoViolation(ReportParser parser) throws Exception {
+        verify(parser, "OrderNoViolation");
+    }
+
+    /**
+     * An outer class and a static inner class each independently have
+     * out-of-order constructors. Verifies that the ordering fix is
+     * correctly scoped to each class body.
+     */
+    @RecipeTest
+    void orderMultipleClasses(ReportParser parser) throws Exception {
+        verify(parser, "OrderMultipleClasses");
+    }
+
+    /**
+     * A field is declared before the first constructor and constructors are out
+     * of order by parameter count. Verifies that the first constructor index is
+     * correctly located when it is not at statement index 0.
+     */
+    @RecipeTest
+    void orderWithFieldBeforeFirstConstructor(ReportParser parser) throws Exception {
+        verify(parser, "OrderWithFieldBeforeFirstConstructor");
+    }
+
+    /**
+     * Grouping violations on the last two constructors are suppressed via
+     * {@code SuppressionXpathSingleFilter} with a {@code message} filter.
+     * Ordering violations are not suppressed, so only the 3-param constructor
+     * (which has an ordering violation) is moved to the group. The 0-param
+     * constructor stays in place since it has no violations at all.
+     */
+    @RecipeTest
+    void orderWithGroupingViolationSuppressed(ReportParser parser) throws Exception {
+        verify(parser, "OrderWithGroupingViolationSuppressed");
     }
 }

@@ -1,0 +1,25 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/orderwithgroupingviolationsuppressed/InputOrderWithGroupingViolationSuppressed.java
++++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/orderwithgroupingviolationsuppressed/OutputOrderWithGroupingViolationSuppressed.java
+@@ -18,16 +18,15 @@
+ 
+ package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.orderwithgroupingviolationsuppressed;
+ 
+-public class InputOrderWithGroupingViolationSuppressed {
++public class OutputOrderWithGroupingViolationSuppressed {
+ 
+-    InputOrderWithGroupingViolationSuppressed(int x) {}
++    OutputOrderWithGroupingViolationSuppressed() {}
+ 
+-    InputOrderWithGroupingViolationSuppressed(int x, boolean b) {}
++    OutputOrderWithGroupingViolationSuppressed(int x) {}
++
++    OutputOrderWithGroupingViolationSuppressed(int x, boolean b) {}
+ 
+     void foo() {}
+ 
+-    InputOrderWithGroupingViolationSuppressed(String s, int x, int y) {}
+-
+-    InputOrderWithGroupingViolationSuppressed() {}
+-    // violation above 'Constructors should be ordered.*'
++    OutputOrderWithGroupingViolationSuppressed(String s, int x, int y) {}
+ }

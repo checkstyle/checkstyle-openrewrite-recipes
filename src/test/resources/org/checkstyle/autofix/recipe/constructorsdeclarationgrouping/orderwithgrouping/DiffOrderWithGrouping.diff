@@ -1,0 +1,23 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/orderwithgrouping/InputOrderWithGrouping.java
++++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/orderwithgrouping/OutputOrderWithGrouping.java
+@@ -11,15 +11,13 @@
+ 
+ package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.orderwithgrouping;
+ 
+-public class InputOrderWithGrouping {
++public class OutputOrderWithGrouping {
+ 
+-    InputOrderWithGrouping(String s, int x) {}
++    OutputOrderWithGrouping() {}
+ 
+-    InputOrderWithGrouping(int x) {}
+-    // violation above 'Constructors should be ordered.*'
++    OutputOrderWithGrouping(int x) {}
++
++    OutputOrderWithGrouping(String s, int x) {}
+ 
+     void foo() {}
+-
+-    InputOrderWithGrouping() {} // violation 'Constructors should be grouped together.*'
+-    // violation above 'Constructors should be ordered.*'
+ }
