@@ -61,6 +61,17 @@ public class HeaderTest extends AbstractRecipeTestSupport {
         verify(parser, getHeaderConfig(), "HeaderValid");
     }
 
+    @RecipeTest
+    void headerPropertyTest(ReportParser parser) throws Exception {
+        verify(parser, getHeaderPropertyConfig(), "HeaderProperty");
+    }
+
+    private DefaultConfiguration getHeaderPropertyConfig() {
+        final DefaultConfiguration checkConfig = createModuleConfig(HeaderCheck.class);
+        checkConfig.addProperty("header", "// Checkstyle-OpenRewrite");
+        return checkConfig;
+    }
+
     private DefaultConfiguration getHeaderConfig() {
         final DefaultConfiguration checkConfig = createModuleConfig(HeaderCheck.class);
         final String headerPath = "src/test/resources/org/checkstyle/"

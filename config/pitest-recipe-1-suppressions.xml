@@ -53,45 +53,9 @@
     <sourceFile>Header.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.recipe.Header</mutatedClass>
     <mutatedMethod>extractLicenseHeader</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
-    <description>removed call to org/checkstyle/autofix/parser/CheckConfiguration::getProperty</description>
-    <lineContent>header = config.getProperty(HEADER_PROPERTY);</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>Header.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.Header</mutatedClass>
-    <mutatedMethod>extractLicenseHeader</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.ArgumentPropagationMutator</mutator>
-    <description>replaced call to org/checkstyle/autofix/parser/CheckConfiguration::getProperty with argument</description>
-    <lineContent>header = config.getProperty(HEADER_PROPERTY);</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>Header.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.Header</mutatedClass>
-    <mutatedMethod>extractLicenseHeader</mutatedMethod>
     <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.ArgumentPropagationMutator</mutator>
     <description>replaced call to org/checkstyle/autofix/recipe/Header::toLfLineEnding with argument</description>
     <lineContent>header = toLfLineEnding(Files.readString(Path.of(headerFilePath), charsetToUse));</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>Header.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.Header</mutatedClass>
-    <mutatedMethod>extractLicenseHeader</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
-    <description>removed call to org/checkstyle/autofix/parser/CheckConfiguration::hasProperty</description>
-    <lineContent>if (config.hasProperty(HEADER_PROPERTY)) {</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>Header.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.Header</mutatedClass>
-    <mutatedMethod>extractLicenseHeader</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_ELSE</mutator>
-    <description>removed conditional - replaced equality check with false</description>
-    <lineContent>if (config.hasProperty(HEADER_PROPERTY)) {</lineContent>
   </mutation>
 
   <mutation unstable="false">
