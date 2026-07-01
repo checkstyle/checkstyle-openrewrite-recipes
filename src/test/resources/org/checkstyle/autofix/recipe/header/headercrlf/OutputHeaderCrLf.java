@@ -1,11 +1,11 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////
 // Unit test for checkstyle-openrewrite-recipes.
-// Dated: 01.01.2025
+// Dated: XX.XX.XX
 // Copyright (C) 2025 Authors. Licensed under Apache 2.0.
 // This file is part of the Checkstyle OpenRewrite test suite.
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
-package org.checkstyle.autofix.recipe.header.headervalid;
-
-public class InputHeaderValid {
+// Comment
+package org.checkstyle.autofix.recipe.header.headercrlf;
+public class OutputHeaderCrLf {
 }

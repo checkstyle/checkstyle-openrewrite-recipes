@@ -43,7 +43,7 @@ public class HeaderTest extends AbstractRecipeTestSupport {
 
     @RecipeTest
     void headerTest(ReportParser parser) throws Exception {
-        verify(parser, getHeaderConfig(), "HeaderBlankLines");
+        verify(parser, getHeaderConfig(), "HeaderBlankLines", "HeaderValid");
     }
 
     @RecipeTest
@@ -64,6 +64,25 @@ public class HeaderTest extends AbstractRecipeTestSupport {
     @RecipeTest
     void headerPropertyTest(ReportParser parser) throws Exception {
         verify(parser, getHeaderPropertyConfig(), "HeaderProperty");
+    }
+
+    @RecipeTest
+    void headerCrLfTest(ReportParser parser) throws Exception {
+        verify(parser, getHeaderConfig(), "HeaderCrLf");
+    }
+
+    @RecipeTest
+    void headerCharsetTest(ReportParser parser) throws Exception {
+        verify(parser, getHeaderCharsetConfig(), "HeaderCharset");
+    }
+
+    private DefaultConfiguration getHeaderCharsetConfig() {
+        final DefaultConfiguration checkConfig = createModuleConfig(HeaderCheck.class);
+        final String headerPath = "src/test/resources/org/checkstyle/"
+                + "autofix/recipe/header/header_utf16.txt";
+        checkConfig.addProperty("headerFile", headerPath);
+        checkConfig.addProperty("charset", "UTF-16");
+        return checkConfig;
     }
 
     private DefaultConfiguration getHeaderPropertyConfig() {

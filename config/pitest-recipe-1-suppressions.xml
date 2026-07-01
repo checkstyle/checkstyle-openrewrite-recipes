@@ -20,51 +20,6 @@
     <lineContent>.anyMatch(marker -&gt; marker.isFor(CheckFullName.FINAL_LOCAL_VARIABLE));</lineContent>
   </mutation>
 
-  <mutation unstable="false">
-    <sourceFile>Header.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.Header</mutatedClass>
-    <mutatedMethod>extractLicenseHeader</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.ArgumentPropagationMutator</mutator>
-    <description>replaced call to org/checkstyle/autofix/parser/CheckConfiguration::getPropertyOrDefault with argument</description>
-    <lineContent>.getPropertyOrDefault(CHARSET_PROPERTY, Charset.defaultCharset().name()));</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>Header.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.Header</mutatedClass>
-    <mutatedMethod>extractLicenseHeader</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.ArgumentPropagationMutator</mutator>
-    <description>replaced call to org/checkstyle/autofix/recipe/Header::toLfLineEnding with argument</description>
-    <lineContent>header = toLfLineEnding(Files.readString(Path.of(headerFilePath), charsetToUse));</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>Header.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.Header</mutatedClass>
-    <mutatedMethod>toLfLineEnding</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.NakedReceiverMutator</mutator>
-    <description>replaced call to java/lang/String::replaceAll with receiver</description>
-    <lineContent>return text.replaceAll(&quot;(?x)\\\\r(?=\\\\n)|\\r(?=\\n)&quot;, &quot;&quot;);</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>Header.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.Header$HeaderVisitor</mutatedClass>
-    <mutatedMethod>lambda$extractCurrentHeader$1</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.ArgumentPropagationMutator</mutator>
-    <description>replaced call to org/checkstyle/autofix/recipe/Header::toLfLineEnding with argument</description>
-    <lineContent>+ toLfLineEnding(comment.getSuffix());</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>Header.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.Header$HeaderVisitor</mutatedClass>
-    <mutatedMethod>lambda$extractCurrentHeader$1</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
-    <description>removed call to org/checkstyle/autofix/recipe/Header$HeaderVisitor::getCursor</description>
-    <lineContent>return comment.printComment(getCursor())</lineContent>
-  </mutation>
-
   <!-- Cannot be killed by integration tests until a second recipe lands a marker on this node type. See issue #236 -->
   <mutation unstable="false">
     <sourceFile>Header.java</sourceFile>
@@ -73,24 +28,6 @@
     <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.BooleanTrueReturnValsMutator</mutator>
     <description>replaced boolean return with true for org/checkstyle/autofix/recipe/Header$HeaderVisitor::lambda$visitCompilationUnit$0</description>
     <lineContent>.anyMatch(marker -&gt; marker.isFor(CheckFullName.HEADER));</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>Header.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.Header$HeaderVisitor</mutatedClass>
-    <mutatedMethod>visitCompilationUnit</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.ArgumentPropagationMutator</mutator>
-    <description>replaced call to org/openrewrite/java/JavaIsoVisitor::visitCompilationUnit with argument</description>
-    <lineContent>J.CompilationUnit result = super.visitCompilationUnit(cu, executionContext);</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>Header.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.Header$HeaderVisitor</mutatedClass>
-    <mutatedMethod>visitCompilationUnit</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
-    <description>removed conditional - replaced equality check with true</description>
-    <lineContent>if (hasMarker) {</lineContent>
   </mutation>
 
   <!-- Cannot be killed by integration tests until a second recipe lands a marker on this node type. See issue #236 -->

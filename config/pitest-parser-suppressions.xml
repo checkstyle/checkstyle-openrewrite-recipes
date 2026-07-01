@@ -21,24 +21,6 @@
   <mutation unstable="false">
     <sourceFile>CheckConfiguration.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.parser.CheckConfiguration</mutatedClass>
-    <mutatedMethod>getPropertyOrDefault</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
-    <description>removed call to org/checkstyle/autofix/parser/CheckConfiguration::getProperty</description>
-    <lineContent>String result = getProperty(key);</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>CheckConfiguration.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.parser.CheckConfiguration</mutatedClass>
-    <mutatedMethod>getPropertyOrDefault</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
-    <description>removed conditional - replaced equality check with true</description>
-    <lineContent>if (result == null) {</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>CheckConfiguration.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.parser.CheckConfiguration</mutatedClass>
     <mutatedMethod>hasProperty</mutatedMethod>
     <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
     <description>removed call to java/util/Map::containsKey</description>
