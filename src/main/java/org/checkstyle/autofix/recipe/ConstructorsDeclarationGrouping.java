@@ -18,10 +18,12 @@
 package org.checkstyle.autofix.recipe;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import org.checkstyle.autofix.CheckFullName;
 import org.checkstyle.autofix.marker.CheckstyleViolationMarker;
+import org.checkstyle.autofix.parser.CheckConfiguration;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
 import org.openrewrite.TreeVisitor;
@@ -31,9 +33,24 @@ import org.openrewrite.java.tree.Statement;
 
 /**
  * Fixes Checkstyle ConstructorsDeclarationGrouping violations by moving
- * out-of-order constructors to group them together with other constructors.
+ * out-of-order constructors to group them together.
  */
 public class ConstructorsDeclarationGrouping extends Recipe {
+    private static final String ORDER_BY_PARAM_COUNT_PROPERTY =
+        "orderByIncreasingParameterCount";
+
+    private final boolean orderByIncreasingParameterCount;
+
+    public ConstructorsDeclarationGrouping(CheckConfiguration config) {
+        final String value;
+        if (config != null) {
+            value = config.getProperty(ORDER_BY_PARAM_COUNT_PROPERTY);
+        }
+        else {
+            value = null;
+        }
+        this.orderByIncreasingParameterCount = "true".equals(value);
+    }
 
     @Override
     public String getDisplayName() {
@@ -50,12 +67,12 @@ public class ConstructorsDeclarationGrouping extends Recipe {
         return new ConstructorsDeclarationGroupingVisitor();
     }
 
-    private static final class ConstructorsDeclarationGroupingVisitor
+    private final class ConstructorsDeclarationGroupingVisitor
             extends JavaIsoVisitor<ExecutionContext> {
 
         @Override
         public J.ClassDeclaration visitClassDeclaration(
-            J.ClassDeclaration classDecl, ExecutionContext executionContext) {
+                J.ClassDeclaration classDecl, ExecutionContext executionContext) {
 
             final J.ClassDeclaration classDeclaration =
                 super.visitClassDeclaration(classDecl, executionContext);
@@ -64,25 +81,147 @@ public class ConstructorsDeclarationGrouping extends Recipe {
                 new ArrayList<>(classDeclaration.getBody().getStatements());
 
             final int firstConstructorIndex = findFirstConstructorIndex(statements);
-            final List<J.MethodDeclaration> violatingConstructors =
-                findViolatingConstructors(statements);
 
             final J.ClassDeclaration newClassDeclaration;
-
-            // keep code intact if there are no constructors or no violations
-            if (firstConstructorIndex == -1 || violatingConstructors.isEmpty()) {
-                newClassDeclaration = classDeclaration;
-            }
-            else {
-                final List<Statement> reordered =
-                    reorderConstructors(statements, firstConstructorIndex, violatingConstructors);
-
+            if (firstConstructorIndex != -1) {
+                final int groupEnd =
+                    findFirstConstructorGroupEnd(statements, firstConstructorIndex);
+                final List<J.MethodDeclaration> candidates;
+                if (orderByIncreasingParameterCount) {
+                    candidates = findConstructorsToSort(
+                        statements, firstConstructorIndex, groupEnd);
+                }
+                else {
+                    candidates = findConstructorsToGroup(statements, groupEnd);
+                }
+                final List<Statement> reordered;
+                if (orderByIncreasingParameterCount) {
+                    reordered = sortConstructors(statements,
+                        firstConstructorIndex, candidates);
+                }
+                else {
+                    reordered = groupConstructors(
+                        statements, groupEnd, candidates);
+                }
                 newClassDeclaration = classDeclaration.withBody(
                     classDeclaration.getBody().withStatements(reordered));
+            }
+            else {
+                newClassDeclaration = classDeclaration;
             }
             return newClassDeclaration;
         }
 
+        /**
+         * Scans past the initial constructor group for constructors that carry
+         * a violation marker and need to be moved into the group.
+         *
+         * @param statements the class body statements
+         * @param groupEnd the exclusive end of the initial constructor group
+         * @return violating constructors found after the initial group
+         */
+        private static List<J.MethodDeclaration> findConstructorsToGroup(
+                List<Statement> statements, int groupEnd) {
+            final List<J.MethodDeclaration> violating = new ArrayList<>();
+            for (int index = groupEnd; index < statements.size(); index++) {
+                final Statement statement = statements.get(index);
+                if (statement instanceof J.MethodDeclaration method
+                        && isViolationMarked(method)) {
+                    violating.add(method);
+                }
+            }
+            return violating;
+        }
+
+        /**
+         * Moves each violating constructor to the end of the initial group,
+         * preserving their original relative order.
+         *
+         * @param statements the original class body statements
+         * @param groupEnd the exclusive end of the initial group, also the insert
+         *     position
+         * @param candidates the constructors to move into the group
+         * @return the reordered statement list
+         */
+        private static List<Statement> groupConstructors(
+                List<Statement> statements, int groupEnd, List<J.MethodDeclaration> candidates) {
+
+            final List<Statement> result = new ArrayList<>(statements);
+            result.removeAll(candidates);
+            result.addAll(groupEnd, candidates);
+            return result;
+        }
+
+        /**
+         * Collects constructors for parameter-count ordering: the entire initial
+         * group (they all participate in sorting) plus any violation-marked
+         * constructors after it. Unmarked constructors after the group are
+         * skipped — their violations were suppressed.
+         *
+         * @param statements the class body statements
+         * @param firstConstructorIndex the index of the first constructor
+         * @param groupEnd the exclusive end of the initial constructor group
+         * @return constructors to sort, in original declaration order
+         */
+        private static List<J.MethodDeclaration> findConstructorsToSort(
+                List<Statement> statements, int firstConstructorIndex, int groupEnd) {
+            final List<J.MethodDeclaration> result = new ArrayList<>();
+            // Every element in [firstConstructorIndex, groupEnd) is guaranteed
+            // a constructor — no instanceof or isConstructor() guard needed.
+            for (int index = firstConstructorIndex; index < groupEnd; index++) {
+                result.add((J.MethodDeclaration) statements.get(index));
+            }
+            for (int index = groupEnd; index < statements.size(); index++) {
+                final Statement statement = statements.get(index);
+                if (statement instanceof J.MethodDeclaration method
+                        && isViolationMarked(method)) {
+                    result.add(method);
+                }
+            }
+            return result;
+        }
+
+        /**
+         * Sorts the candidates by parameter count ascending, removes them from
+         * their original positions, and re-inserts them as a contiguous block
+         * at the first constructor index.
+         *
+         * @param statements the original class body statements
+         * @param firstConstructorIndex the insertion position
+         * @param candidates the constructors to sort
+         * @return the reordered statement list
+         */
+        private static List<Statement> sortConstructors(List<Statement> statements,
+                int firstConstructorIndex,
+                List<J.MethodDeclaration> candidates) {
+            final Comparator<J.MethodDeclaration> cmp =
+                Comparator.comparingInt(ConstructorsDeclarationGroupingVisitor
+                    ::countParameters);
+            candidates.sort(cmp);
+
+            final List<Statement> result = new ArrayList<>(statements);
+            result.removeAll(candidates);
+            result.addAll(firstConstructorIndex, candidates);
+            return result;
+        }
+
+        /**
+         * Returns the number of parameters of a constructor.
+         *
+         * @param method the constructor
+         * @return parameter count, 0 for a no-arg constructor
+         */
+        private static int countParameters(J.MethodDeclaration method) {
+            return method.getMethodType().getParameterTypes().size();
+        }
+
+        /**
+         * Returns the index of the first constructor in the statement list,
+         * or -1 if the class has no constructors.
+         *
+         * @param statements the class body statements
+         * @return index of the first constructor, or -1
+         */
         private static int findFirstConstructorIndex(List<Statement> statements) {
             int firstConstructorIndex = -1;
             for (int index = 0; index < statements.size(); index++) {
@@ -95,36 +234,34 @@ public class ConstructorsDeclarationGrouping extends Recipe {
             return firstConstructorIndex;
         }
 
-        private static List<J.MethodDeclaration> findViolatingConstructors(
-            List<Statement> statements) {
-            // Only scan past the initial constructor group so leftover
-            // markers on already-moved constructors don't cause infinite reordering.
-            final int groupEnd = findFirstConstructorGroupEnd(statements);
-            final List<J.MethodDeclaration> violating = new ArrayList<>();
-            if (groupEnd != -1) {
-                for (int index = groupEnd; index < statements.size(); index++) {
-                    final Statement statement = statements.get(index);
-                    if (statement instanceof J.MethodDeclaration method
-                            && isViolationMarked(method)) {
-                        violating.add(method);
-                    }
-                }
-            }
-            return violating;
-        }
-
-        private static int findFirstConstructorGroupEnd(List<Statement> statements) {
-            int result = findFirstConstructorIndex(statements);
-            if (result != -1) {
-                while (result < statements.size()
-                        && statements.get(result) instanceof J.MethodDeclaration method
-                        && method.isConstructor()) {
-                    result++;
-                }
+        /**
+         * Returns the exclusive end index of the initial contiguous block of
+         * constructors. Stops at the first non-constructor statement or end
+         * of list.
+         *
+         * @param statements the class body statements
+         * @param firstConstructorIndex the index of the first constructor
+         * @return the index after the last constructor in the initial group
+         */
+        private static int findFirstConstructorGroupEnd(List<Statement> statements,
+                int firstConstructorIndex) {
+            int result = firstConstructorIndex;
+            while (result < statements.size()
+                    && statements.get(result) instanceof J.MethodDeclaration method
+                    && method.isConstructor()) {
+                result++;
             }
             return result;
         }
 
+        /**
+         * Checks whether a constructor carries a violation marker for this check.
+         * A constructor without a marker either has no violation or its violation
+         * was suppressed — in either case the recipe leaves it alone.
+         *
+         * @param method the constructor to check
+         * @return true if the method has a relevant violation marker
+         */
         private static boolean isViolationMarked(J.MethodDeclaration method) {
             final List<CheckstyleViolationMarker> markers =
                 method.getMarkers().findAll(CheckstyleViolationMarker.class);
@@ -132,27 +269,6 @@ public class ConstructorsDeclarationGrouping extends Recipe {
                     CheckFullName.CONSTRUCTORS_DECLARATION_GROUPING;
             return markers.stream()
                     .anyMatch(marker -> marker.isFor(targetCheck));
-        }
-
-        private static List<Statement> reorderConstructors(
-            List<Statement> statements, int firstConstructorIndex,
-            List<J.MethodDeclaration> violatingConstructors) {
-
-            int insertIndex = firstConstructorIndex;
-            while (insertIndex < statements.size()
-                    && statements.get(insertIndex) instanceof J.MethodDeclaration method
-                    && method.isConstructor()) {
-                insertIndex++;
-            }
-
-            final List<Statement> result = new ArrayList<>(statements);
-            result.removeAll(violatingConstructors);
-
-            for (int index = 0; index < violatingConstructors.size(); index++) {
-                result.add(insertIndex + index, violatingConstructors.get(index));
-            }
-
-            return result;
         }
     }
 }

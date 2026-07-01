@@ -1,0 +1,18 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/orderwithfieldbeforefirstconstructor/InputOrderWithFieldBeforeFirstConstructor.java
++++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/orderwithfieldbeforefirstconstructor/OutputOrderWithFieldBeforeFirstConstructor.java
+@@ -11,12 +11,11 @@
+ 
+ package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.orderwithfieldbeforefirstconstructor;
+ 
+-public class InputOrderWithFieldBeforeFirstConstructor {
++public class OutputOrderWithFieldBeforeFirstConstructor {
+ 
+     private int field = 0;
+ 
+-    InputOrderWithFieldBeforeFirstConstructor(int x, boolean b) {}
++    OutputOrderWithFieldBeforeFirstConstructor(int x) {}
+ 
+-    InputOrderWithFieldBeforeFirstConstructor(int x) {}
+-    // violation above 'Constructors should be ordered.*'
++    OutputOrderWithFieldBeforeFirstConstructor(int x, boolean b) {}
+ }

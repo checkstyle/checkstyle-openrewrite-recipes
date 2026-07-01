@@ -1,0 +1,21 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/orderwithsuppressed/InputOrderWithSuppressed.java
++++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/orderwithsuppressed/OutputOrderWithSuppressed.java
+@@ -17,14 +17,13 @@
+ 
+ package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.orderwithsuppressed;
+ 
+-public class InputOrderWithSuppressed {
++public class OutputOrderWithSuppressed {
+ 
+-    InputOrderWithSuppressed(String s) {}
++    OutputOrderWithSuppressed() {}
+ 
+-    InputOrderWithSuppressed() {}
+-    // violation above 'Constructors should be ordered.*'
++    OutputOrderWithSuppressed(String s) {}
+ 
+     void foo() {}
+ 
+-    InputOrderWithSuppressed(int x) {}
++    OutputOrderWithSuppressed(int x) {}
+ }

@@ -1,0 +1,26 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/orderstabletiebreak/InputOrderStableTieBreak.java
++++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/orderstabletiebreak/OutputOrderStableTieBreak.java
+@@ -11,17 +11,15 @@
+ 
+ package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.orderstabletiebreak;
+ 
+-public class InputOrderStableTieBreak {
++public class OutputOrderStableTieBreak {
+ 
+-    InputOrderStableTieBreak(int y) {}
++    OutputOrderStableTieBreak() {}
+ 
+-    InputOrderStableTieBreak(long x) {}
++    OutputOrderStableTieBreak(int y) {}
+ 
+-    InputOrderStableTieBreak() {}
+-    // violation above 'Constructors should be ordered.*'
++    OutputOrderStableTieBreak(long x) {}
++
++    OutputOrderStableTieBreak(String s) {}
+ 
+     void foo() {}
+-
+-    InputOrderStableTieBreak(String s) {} // violation 'Constructors should be grouped together.*'
+-    // violation above 'Constructors should be ordered.*'
+ }
