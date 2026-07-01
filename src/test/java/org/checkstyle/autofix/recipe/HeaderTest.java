@@ -43,7 +43,7 @@ public class HeaderTest extends AbstractRecipeTestSupport {
 
     @RecipeTest
     void headerTest(ReportParser parser) throws Exception {
-        verify(parser, getHeaderConfig(), "HeaderBlankLines");
+        verify(parser, getHeaderConfig(), "HeaderBlankLines", "HeaderValid");
     }
 
     @RecipeTest
