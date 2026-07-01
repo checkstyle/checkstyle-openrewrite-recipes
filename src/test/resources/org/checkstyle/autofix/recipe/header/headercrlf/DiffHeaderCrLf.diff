@@ -1,0 +1,16 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/header/headercrlf/InputHeaderCrLf.java
++++ src/test/resources/org/checkstyle/autofix/recipe/header/headercrlf/OutputHeaderCrLf.java
+@@ -1,4 +1,11 @@
+-// Comment
++///////////////////////////////////////////////////////////////////////////////////////////////
++// Unit test for checkstyle-openrewrite-recipes.
++// Dated: XX.XX.XX
++// Copyright (C) 2025 Authors. Licensed under Apache 2.0.
++// This file is part of the Checkstyle OpenRewrite test suite.
++///////////////////////////////////////////////////////////////////////////////////////////////
++
++// Comment
+ package org.checkstyle.autofix.recipe.header.headercrlf;
+-public class InputHeaderCrLf {
++public class OutputHeaderCrLf {
+ }

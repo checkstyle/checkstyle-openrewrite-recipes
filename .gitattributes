@@ -6,3 +6,6 @@
 
 # Test resources that need specific eol
 src/test/resources/org/checkstyle/autofix/recipe/newlineatendoffile/** -text
+
+src/test/resources/org/checkstyle/autofix/recipe/header/headercrlf/** -text
+src/test/resources/org/checkstyle/autofix/recipe/header/header.txt -text

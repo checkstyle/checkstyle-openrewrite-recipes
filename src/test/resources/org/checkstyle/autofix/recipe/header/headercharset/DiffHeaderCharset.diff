@@ -1,0 +1,9 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/header/headercharset/InputHeaderCharset.java
++++ src/test/resources/org/checkstyle/autofix/recipe/header/headercharset/OutputHeaderCharset.java
+@@ -1,4 +1,5 @@
++/* UTF-16 Header */
+ package org.checkstyle.autofix.recipe.header.headercharset;
+ 
+-public class InputHeaderCharset {
++public class OutputHeaderCharset {
+ }
