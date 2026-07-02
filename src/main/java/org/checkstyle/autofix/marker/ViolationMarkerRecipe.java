@@ -200,7 +200,7 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
                     })
                     .reduce((prev, next) -> {
                         final Map.Entry<UUID, Range> better;
-                        if (cmp.compare(prev, next) < 0) {
+                        if (cmp.compare(prev, next) <= 0) {
                             better = prev;
                         }
                         else {
@@ -239,19 +239,18 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
 
         private boolean encloses(Range range, CheckstyleViolation violation) {
             boolean result = false;
-            if (range.startLine() <= violation.getLine()
-                    && range.endLine() >= violation.getLine()) {
-                if (range.startLine() < violation.getLine()
-                        && range.endLine() > violation.getLine()) {
-                    result = true;
-                }
-                else if (range.startLine() == range.endLine()) {
+            if (range.startLine() < violation.getLine()
+                    && range.endLine() > violation.getLine()) {
+                result = true;
+            }
+            else if (range.startLine() == range.endLine()) {
+                if (range.startLine() == violation.getLine()) {
                     result = range.startCol() <= violation.getColumn()
                             && range.endCol() >= violation.getColumn();
                 }
-                else {
-                    result = checkPartialLines(range, violation);
-                }
+            }
+            else {
+                result = checkPartialLines(range, violation);
             }
             return result;
         }
