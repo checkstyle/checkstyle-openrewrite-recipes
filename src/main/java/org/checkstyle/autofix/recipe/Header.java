@@ -21,11 +21,13 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import org.checkstyle.autofix.CheckFullName;
 import org.checkstyle.autofix.marker.CheckstyleViolationMarker;
 import org.checkstyle.autofix.parser.CheckConfiguration;
+import org.openrewrite.Cursor;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
 import org.openrewrite.TreeVisitor;
@@ -39,6 +41,9 @@ public class Header extends Recipe {
     private static final String HEADER_FILE_PROPERTY = "headerFile";
     private static final String CHARSET_PROPERTY = "charset";
     private static final String LINE_SEPARATOR = "\n";
+    private static final String LITERAL_NEWLINE = "\\n";
+    private static final Pattern CRLF_PATTERN =
+            Pattern.compile("\\r\\n?");
 
     private final CheckConfiguration config;
 
@@ -63,16 +68,26 @@ public class Header extends Recipe {
     }
 
     private static String extractLicenseHeader(CheckConfiguration config) {
-        final String header;
+        String header;
         if (config.hasProperty(HEADER_PROPERTY)) {
             header = config.getProperty(HEADER_PROPERTY);
+            if (header != null && header.contains(LITERAL_NEWLINE)) {
+                header = header.replace(LITERAL_NEWLINE, LINE_SEPARATOR);
+            }
         }
         else {
-            final Charset charsetToUse = Charset.forName(config
-                    .getPropertyOrDefault(CHARSET_PROPERTY, Charset.defaultCharset().name()));
+            final String charsetName = config.getProperty(CHARSET_PROPERTY);
+            final Charset charsetToUse;
+            if (charsetName != null) {
+                charsetToUse = Charset.forName(charsetName);
+            }
+            else {
+                charsetToUse = Charset.defaultCharset();
+            }
             final String headerFilePath = config.getProperty(HEADER_FILE_PROPERTY);
             try {
-                header = toLfLineEnding(Files.readString(Path.of(headerFilePath), charsetToUse));
+                final String rawHeader = Files.readString(Path.of(headerFilePath), charsetToUse);
+                header = CRLF_PATTERN.matcher(rawHeader).replaceAll(LINE_SEPARATOR);
             }
             catch (IOException exception) {
                 throw new IllegalArgumentException("Failed to extract header from config",
@@ -80,10 +95,6 @@ public class Header extends Recipe {
             }
         }
         return header;
-    }
-
-    private static String toLfLineEnding(String text) {
-        return text.replaceAll("(?x)\\\\r(?=\\\\n)|\\r(?=\\n)", "");
     }
 
     private static class HeaderVisitor extends JavaIsoVisitor<ExecutionContext> {
@@ -96,12 +107,11 @@ public class Header extends Recipe {
         @Override
         public J.CompilationUnit visitCompilationUnit(J.CompilationUnit cu,
                                                       ExecutionContext executionContext) {
-            J.CompilationUnit result = super.visitCompilationUnit(cu, executionContext);
-
-            final boolean hasMarker = result.getMarkers()
+            final boolean hasMarker = cu.getMarkers()
                     .findAll(CheckstyleViolationMarker.class).stream()
                     .anyMatch(marker -> marker.isFor(CheckFullName.HEADER));
 
+            J.CompilationUnit result = cu;
             if (hasMarker) {
                 final String currentHeader = extractCurrentHeader(result);
                 if (!currentHeader.startsWith(licenseHeader)) {
@@ -114,10 +124,12 @@ public class Header extends Recipe {
         }
 
         private String extractCurrentHeader(JavaSourceFile sourceFile) {
+            final Cursor cursor = new Cursor(null, sourceFile);
             return sourceFile.getComments().stream()
                     .map(comment -> {
-                        return comment.printComment(getCursor())
-                                + toLfLineEnding(comment.getSuffix());
+                        return comment.printComment(cursor)
+                                + CRLF_PATTERN.matcher(comment.getSuffix())
+                                        .replaceAll(LINE_SEPARATOR);
                     })
                     .collect(Collectors.joining(""));
         }
