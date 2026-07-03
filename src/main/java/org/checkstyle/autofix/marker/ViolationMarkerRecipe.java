@@ -173,14 +173,7 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
                                        Map<UUID, Range> nodeRanges,
                                        boolean lineOnly) {
             final Comparator<Map.Entry<UUID, Range>> cmp = Comparator
-                    .<Map.Entry<UUID, Range>, Boolean>comparing(entry -> {
-                        final Range range = entry.getValue();
-                        final boolean exactMatch = !lineOnly
-                                && range.endLine() == violation.getLine()
-                                && range.endCol() == violation.getColumn();
-                        return !exactMatch;
-                    })
-                    .thenComparingInt(entry -> {
+                    .<Map.Entry<UUID, Range>>comparingInt(entry -> {
                         return entry.getValue().endLine() - entry.getValue().startLine();
                     })
                     .thenComparingInt(entry -> {
@@ -198,16 +191,7 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
                         }
                         return matches;
                     })
-                    .reduce((prev, next) -> {
-                        final Map.Entry<UUID, Range> better;
-                        if (cmp.compare(prev, next) <= 0) {
-                            better = prev;
-                        }
-                        else {
-                            better = next;
-                        }
-                        return better;
-                    })
+                    .min(cmp)
                     .map(Map.Entry::getKey)
                     .orElse(null);
         }
