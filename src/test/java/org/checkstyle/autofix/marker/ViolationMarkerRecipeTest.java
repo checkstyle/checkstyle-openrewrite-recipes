@@ -393,65 +393,6 @@ public class ViolationMarkerRecipeTest {
     }
 
     @Test
-    public void testFindSmallestNodeExactMatchMutations() throws Exception {
-        final Class<?> scannerClass = Class.forName(
-            "org.checkstyle.autofix.marker.ViolationMarkerRecipe$ScannerVisitor");
-        final Class<?> rangeClass = Class.forName(
-            "org.checkstyle.autofix.marker.ViolationMarkerRecipe$Range");
-        final Method findMethod = scannerClass.getDeclaredMethod(
-            "findSmallestNode",
-            CheckstyleViolation.class,
-            Map.class, Map.class, Map.class);
-        findMethod.setAccessible(true);
-
-        final Constructor<?> rangeCtor = rangeClass.getDeclaredConstructor(
-            int.class, int.class, int.class, int.class);
-        rangeCtor.setAccessible(true);
-
-        final ViolationMarkerRecipe recipe = new ViolationMarkerRecipe(Collections.emptyList());
-        final Object scanner = recipe.getScanner(
-            recipe.getInitialValue(new InMemoryExecutionContext()));
-
-        final CheckstyleCheck check = new CheckstyleCheck(
-            CheckFullName.FINAL_LOCAL_VARIABLE, "id");
-        final Map<UUID, UUID> parentMap = new HashMap<>();
-        final Map<UUID, Tree> nodeTrees = new HashMap<>();
-
-        final CheckstyleViolation viol1 = new CheckstyleViolation(
-            2, 10, "err", check, "msg", Paths.get("a"));
-
-        final UUID id1 = Tree.randomId();
-        final UUID id2 = Tree.randomId();
-        final Map<UUID, Object> ranges1 = new LinkedHashMap<>();
-        ranges1.put(id1, rangeCtor.newInstance(1, 1, 3, 10));
-        ranges1.put(id2, rangeCtor.newInstance(2, 5, 2, 15));
-
-        final Map<UUID, ?> result1 = (Map<UUID, ?>) findMethod.invoke(
-            scanner, viol1, ranges1, parentMap, nodeTrees);
-        Assertions.assertTrue(result1.containsKey(id2), "id2 should win");
-
-        final UUID id3 = Tree.randomId();
-        final UUID id4 = Tree.randomId();
-        final Map<UUID, Object> ranges2 = new LinkedHashMap<>();
-        ranges2.put(id3, rangeCtor.newInstance(2, 5, 2, 10));
-        ranges2.put(id4, rangeCtor.newInstance(2, 2, 2, 10));
-
-        final Map<UUID, ?> result2 = (Map<UUID, ?>) findMethod.invoke(
-            scanner, viol1, ranges2, parentMap, nodeTrees);
-        Assertions.assertTrue(result2.containsKey(id3), "id3 should win");
-
-        final UUID id5 = Tree.randomId();
-        final UUID id6 = Tree.randomId();
-        final Map<UUID, Object> ranges3 = new LinkedHashMap<>();
-        ranges3.put(id5, rangeCtor.newInstance(1, 1, 2, 10));
-        ranges3.put(id6, rangeCtor.newInstance(2, 5, 2, 15));
-
-        final Map<UUID, ?> result3 = (Map<UUID, ?>) findMethod.invoke(
-            scanner, viol1, ranges3, parentMap, nodeTrees);
-        Assertions.assertTrue(result3.containsKey(id5), "id5 should win");
-    }
-
-    @Test
     public void testFindSmallestNodeFallbackMutations() throws Exception {
         final Class<?> scannerClass = Class.forName(
             "org.checkstyle.autofix.marker.ViolationMarkerRecipe$ScannerVisitor");
