@@ -27,6 +27,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.checkstyle.autofix.CheckFullName;
@@ -153,38 +154,38 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
         private Map<UUID, List<CheckstyleViolationMarker>> findSmallestNode(
                 CheckstyleViolation violation, Map<UUID, Range> nodeRanges,
                 Map<UUID, UUID> parentMap, Map<UUID, Tree> nodeTrees) {
-            UUID smallestNodeId = findEnclosingNode(violation, nodeRanges, false);
 
-            if (smallestNodeId == null && violation.getColumn() <= 0) {
-                smallestNodeId = findEnclosingNode(violation, nodeRanges, true);
-            }
+            return findEnclosingNodeId(violation, nodeRanges)
+                    .map(smallestNodeId -> {
+                        final UUID targetId = resolveTargetNode(smallestNodeId, violation,
+                                parentMap, nodeTrees);
+                        final List<CheckstyleViolationMarker> markerList =
+                            new ArrayList<>(List.of(
+                                new CheckstyleViolationMarker(Tree.randomId(), violation)));
+                        return Map.of(targetId, markerList);
+                    })
+                    .orElseGet(Collections::emptyMap);
+        }
 
-            final Map<UUID, List<CheckstyleViolationMarker>> result = new HashMap<>();
-            if (smallestNodeId != null) {
-                final UUID targetId = resolveTargetNode(smallestNodeId, violation,
-                        parentMap, nodeTrees);
-                result.computeIfAbsent(targetId, nodeId -> new ArrayList<>())
-                        .add(new CheckstyleViolationMarker(Tree.randomId(), violation));
-            }
-            return result;
+        private Optional<UUID> findEnclosingNodeId(CheckstyleViolation violation,
+                                                   Map<UUID, Range> nodeRanges) {
+            return Optional.ofNullable(findEnclosingNode(violation, nodeRanges, false))
+                    .or(() -> Optional.ofNullable(findEnclosingNode(violation, nodeRanges, true)));
         }
 
         private UUID findEnclosingNode(CheckstyleViolation violation,
                                        Map<UUID, Range> nodeRanges,
                                        boolean lineOnly) {
-            final Comparator<Map.Entry<UUID, Range>> cmp = Comparator
-                    .<Map.Entry<UUID, Range>>comparingInt(entry -> {
-                        return entry.getValue().endLine() - entry.getValue().startLine();
-                    })
-                    .thenComparingInt(entry -> {
-                        return entry.getValue().endCol() - entry.getValue().startCol();
-                    });
+            final Comparator<Range> rangeCmp = Comparator.comparingInt(Range::startLine)
+                    .thenComparingInt(Range::startCol)
+                    .reversed();
+            final Comparator<Map.Entry<UUID, Range>> cmp = Map.Entry.comparingByValue(rangeCmp);
 
             return nodeRanges.entrySet().stream()
                     .filter(entry -> {
                         final boolean matches;
                         if (lineOnly) {
-                            matches = enclosesLine(entry.getValue(), violation);
+                            matches = startsBeforeOrAtLine(entry.getValue(), violation);
                         }
                         else {
                             matches = encloses(entry.getValue(), violation);
@@ -196,9 +197,8 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
                     .orElse(null);
         }
 
-        private boolean enclosesLine(Range range, CheckstyleViolation violation) {
-            return range.startLine() <= violation.getLine()
-                    && range.endLine() >= violation.getLine();
+        private boolean startsBeforeOrAtLine(Range range, CheckstyleViolation violation) {
+            return range.startLine() <= violation.getLine();
         }
 
         private UUID resolveTargetNode(UUID startNodeId, CheckstyleViolation violation,
@@ -222,36 +222,12 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
         }
 
         private boolean encloses(Range range, CheckstyleViolation violation) {
-            boolean result = false;
-            if (range.startLine() < violation.getLine()
-                    && range.endLine() > violation.getLine()) {
-                result = true;
-            }
-            else if (range.startLine() == range.endLine()) {
-                if (range.startLine() == violation.getLine()) {
-                    result = range.startCol() <= violation.getColumn()
-                            && range.endCol() >= violation.getColumn();
-                }
+            final boolean result;
+            if (range.startLine() == violation.getLine()) {
+                result = range.startCol() <= violation.getColumn();
             }
             else {
-                result = checkPartialLines(range, violation);
-            }
-            return result;
-        }
-
-        private boolean checkPartialLines(Range range, CheckstyleViolation violation) {
-            boolean result = false;
-            if (range.startLine() != range.endLine()) {
-                if (range.startLine() == violation.getLine()) {
-                    if (range.startCol() <= violation.getColumn()) {
-                        result = true;
-                    }
-                }
-                if (range.endLine() == violation.getLine()) {
-                    if (range.endCol() >= violation.getColumn()) {
-                        result = true;
-                    }
-                }
+                result = range.startLine() < violation.getLine();
             }
             return result;
         }
@@ -297,14 +273,12 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
 
             final Cursor currentCursor = getContext().getCursor();
             final Iterator<Object> it = currentCursor.getPath();
-            final List<Tree> pathTrees = new ArrayList<>();
 
             UUID childId = null;
             while (it.hasNext()) {
                 final Object obj = it.next();
                 if (obj instanceof Tree treeNode) {
                     final UUID currentId = treeNode.getId();
-                    pathTrees.add(treeNode);
                     nodeRanges.putIfAbsent(currentId,
                             new Range(line, column, 0, 0));
                     nodeTrees.putIfAbsent(currentId, treeNode);
@@ -316,13 +290,6 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
             }
 
             advance(text);
-
-            for (Tree treeNode : pathTrees) {
-                final UUID currentId = treeNode.getId();
-                final Range range = nodeRanges.get(currentId);
-                nodeRanges.put(currentId,
-                        new Range(range.startLine(), range.startCol(), line, column));
-            }
 
             super.append(text);
             lastAppendEnd = out.length();
