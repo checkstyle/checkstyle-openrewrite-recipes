@@ -91,4 +91,9 @@ public class NewLineAtEndOfFileTest extends AbstractRecipeTestSupport {
     void newLineNoViolation(ReportParser parser) throws Exception {
         verify(parser, "NewLineNoViolation");
     }
+
+    @RecipeTest
+    void killMutation(ReportParser parser) throws Exception {
+        verify(parser, "KillMutation1", "KillMutation2");
+    }
 }
