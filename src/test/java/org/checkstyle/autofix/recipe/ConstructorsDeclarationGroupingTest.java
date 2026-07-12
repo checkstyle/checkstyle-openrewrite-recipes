@@ -225,4 +225,9 @@ public class ConstructorsDeclarationGroupingTest extends AbstractRecipeTestSuppo
     void orderWithGroupingOnly(ReportParser parser) throws Exception {
         verify(parser, "OrderWithGroupingOnly");
     }
+
+    @RecipeTest
+    void killMutation2(ReportParser parser) throws Exception {
+        verify(parser, "KillMutation1");
+    }
 }

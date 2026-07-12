@@ -1,0 +1,23 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/killmutation1/InputKillMutation1.java
++++ src/test/resources/org/checkstyle/autofix/recipe/constructorsdeclarationgrouping/killmutation1/OutputKillMutation1.java
+@@ -16,15 +16,16 @@
+ */
+ package org.checkstyle.autofix.recipe.constructorsdeclarationgrouping.killmutation1;
+ 
+-public class InputKillMutation1 {
+-    public InputKillMutation1(int X) {}
++public class OutputKillMutation1 {
++    public OutputKillMutation1(int X) {}
+ 
+     public void someOtherMethod() {}
+ 
+-    public InputKillMutation1() {} // violation 'Bait message'
++    public OutputKillMutation1() {}
+ 
+     public void methodThatSeparates() {}
+ 
+     /** {@inheritDoc} */
+-    public String toString() { return ""; } // violation 'Constructors should be grouped together'
++    @Override
++    public String toString() { return ""; }
+ }
