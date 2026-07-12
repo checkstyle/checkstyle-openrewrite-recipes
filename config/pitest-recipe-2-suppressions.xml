@@ -12,36 +12,6 @@
 
   <!-- Cannot be killed by integration tests until a second recipe lands a marker on this node type. See issue #236 -->
   <mutation unstable="false">
-    <sourceFile>ConstructorsDeclarationGrouping.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.ConstructorsDeclarationGrouping$ConstructorsDeclarationGroupingVisitor</mutatedClass>
-    <mutatedMethod>hasViolationMarkerMatching</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.NakedReceiverMutator</mutator>
-    <description>replaced call to java/util/stream/Stream::filter with receiver</description>
-    <lineContent>.filter(marker -&gt; marker.isFor(targetCheck))</lineContent>
-  </mutation>
-
-  <!-- This boolean method is currently equivalent to hasViolationMarker until the check has a third violation type -->
-  <mutation unstable="false">
-    <sourceFile>ConstructorsDeclarationGrouping.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.ConstructorsDeclarationGrouping$ConstructorsDeclarationGroupingVisitor</mutatedClass>
-    <mutatedMethod>lambda$hasGroupingViolationMarker$0</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.BooleanTrueReturnValsMutator</mutator>
-    <description>replaced boolean return with true for org/checkstyle/autofix/recipe/ConstructorsDeclarationGrouping$ConstructorsDeclarationGroupingVisitor::lambda$hasGroupingViolationMarker$0</description>
-    <lineContent>return marker.violation().getMessage()</lineContent>
-  </mutation>
-
-  <!-- Cannot be killed by integration tests until a second recipe lands a marker on this node type. See issue #236 -->
-  <mutation unstable="false">
-    <sourceFile>ConstructorsDeclarationGrouping.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.ConstructorsDeclarationGrouping$ConstructorsDeclarationGroupingVisitor</mutatedClass>
-    <mutatedMethod>lambda$hasViolationMarkerMatching$2</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.BooleanTrueReturnValsMutator</mutator>
-    <description>replaced boolean return with true for org/checkstyle/autofix/recipe/ConstructorsDeclarationGrouping$ConstructorsDeclarationGroupingVisitor::lambda$hasViolationMarkerMatching$2</description>
-    <lineContent>.filter(marker -&gt; marker.isFor(targetCheck))</lineContent>
-  </mutation>
-
-  <!-- Cannot be killed by integration tests until a second recipe lands a marker on this node type. See issue #236 -->
-  <mutation unstable="false">
     <sourceFile>MissingDeprecated.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.recipe.MissingDeprecated$MissingDeprecatedVisitor</mutatedClass>
     <mutatedMethod>lambda$hasMissingDeprecatedMarker$0</mutatedMethod>
