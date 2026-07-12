@@ -2,16 +2,6 @@
 <suppressedMutations>
   <!-- Cannot be killed by integration tests until a second recipe lands a marker on this node type. See issue #236 -->
   <mutation unstable="false">
-    <sourceFile>AvoidStarImport.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.AvoidStarImport$AvoidStarImportVisitor</mutatedClass>
-    <mutatedMethod>lambda$isAtViolationLocation$3</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.BooleanTrueReturnValsMutator</mutator>
-    <description>replaced boolean return with true for org/checkstyle/autofix/recipe/AvoidStarImport$AvoidStarImportVisitor::lambda$isAtViolationLocation$3</description>
-    <lineContent>.anyMatch(marker -&gt; marker.isFor(CheckFullName.AVOID_STAR_IMPORT));</lineContent>
-  </mutation>
-
-  <!-- Cannot be killed by integration tests until a second recipe lands a marker on this node type. See issue #236 -->
-  <mutation unstable="false">
     <sourceFile>EmptyStatement.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.recipe.EmptyStatement$EmptyStatementVisitor</mutatedClass>
     <mutatedMethod>lambda$isAtViolationLocation$1</mutatedMethod>

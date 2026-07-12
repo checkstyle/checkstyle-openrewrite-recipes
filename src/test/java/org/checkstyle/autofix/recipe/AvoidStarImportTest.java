@@ -83,4 +83,9 @@ public class AvoidStarImportTest extends AbstractRecipeTestSupport {
     void proveMarkersAreGood(ReportParser parser) throws Exception {
         verify(parser, "MarkerCheck");
     }
+
+    @RecipeTest
+    void killMutation1(ReportParser parser) throws Exception {
+        verify(parser, "KillMutation1");
+    }
 }

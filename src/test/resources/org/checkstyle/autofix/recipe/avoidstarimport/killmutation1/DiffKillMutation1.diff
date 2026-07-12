@@ -1,0 +1,13 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/avoidstarimport/killmutation1/InputKillMutation1.java
++++ src/test/resources/org/checkstyle/autofix/recipe/avoidstarimport/killmutation1/OutputKillMutation1.java
+@@ -8,9 +8,6 @@
+ */
+ package org.checkstyle.autofix.recipe.avoidstarimport.killmutation1;
+ 
+-import java.io.*; // violation
+-import java.io.File; // violation
+-
+-public class InputKillMutation1 {
++public class OutputKillMutation1 {
+     java.io.File f;
+ }
