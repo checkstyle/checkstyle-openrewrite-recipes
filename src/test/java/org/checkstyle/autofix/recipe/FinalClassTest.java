@@ -130,4 +130,8 @@ public class FinalClassTest extends AbstractRecipeTestSupport {
         verify(parser, "MultiFileA", "MultiFileB");
     }
 
+    @RecipeTest
+    void killMutation1(ReportParser parser) throws Exception {
+        verify(parser, "KillMutation1");
+    }
 }

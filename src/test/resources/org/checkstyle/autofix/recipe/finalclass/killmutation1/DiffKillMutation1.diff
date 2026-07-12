@@ -1,0 +1,22 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/finalclass/killmutation1/InputKillMutation1.java
++++ src/test/resources/org/checkstyle/autofix/recipe/finalclass/killmutation1/OutputKillMutation1.java
+@@ -8,15 +8,16 @@
+ */
+ package org.checkstyle.autofix.recipe.finalclass.killmutation1;
+ 
+-public class InputKillMutation1 {
++public class OutputKillMutation1 {
+ 
+-    static class ClassA { // violation
++    static final class ClassA {
+         private ClassA() {}
+     }
+ 
+     /**
+      * @deprecated
+      */
+-    static class ClassB { // violation
++    @Deprecated
++    static class ClassB {
+     }
+ }
