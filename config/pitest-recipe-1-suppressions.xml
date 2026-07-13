@@ -29,14 +29,4 @@
     <description>replaced boolean return with true for org/checkstyle/autofix/recipe/Header$HeaderVisitor::lambda$visitCompilationUnit$0</description>
     <lineContent>.anyMatch(marker -&gt; marker.isFor(CheckFullName.HEADER));</lineContent>
   </mutation>
-
-  <!-- Cannot be killed by integration tests until a second recipe lands a marker on this node type. See issue #236 -->
-  <mutation unstable="false">
-    <sourceFile>HexLiteralCase.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.HexLiteralCase$HexLiteralCaseVisitor</mutatedClass>
-    <mutatedMethod>lambda$isAtViolationLocation$0</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.BooleanTrueReturnValsMutator</mutator>
-    <description>replaced boolean return with true for org/checkstyle/autofix/recipe/HexLiteralCase$HexLiteralCaseVisitor::lambda$isAtViolationLocation$0</description>
-    <lineContent>.anyMatch(marker -&gt; marker.isFor(CheckFullName.HEX_LITERAL_CASE));</lineContent>
-  </mutation>
 </suppressedMutations>

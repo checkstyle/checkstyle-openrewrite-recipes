@@ -1,0 +1,13 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/hexliterialcase/killmutation/InputKillMutation.java
++++ src/test/resources/org/checkstyle/autofix/recipe/hexliterialcase/killmutation/OutputKillMutation.java
+@@ -9,7 +9,7 @@
+ 
+ package org.checkstyle.autofix.recipe.hexliterialcase.killmutation;
+ 
+-public class InputKillMutation {
+-    long value1 = 0x1aL; // violation 'Should use uppercase hexadecimal letters.'
+-    long value2 = 0l; // violation 'Should use uppercase 'L'.'
++public class OutputKillMutation {
++    long value1 = 0x1AL;
++    long value2 = 0L;
+ }

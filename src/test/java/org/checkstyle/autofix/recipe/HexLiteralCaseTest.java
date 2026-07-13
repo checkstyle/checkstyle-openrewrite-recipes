@@ -69,4 +69,9 @@ public class HexLiteralCaseTest extends AbstractRecipeTestSupport {
     void multiFile(ReportParser parser) throws Exception {
         verify(parser, "MultiFileA", "MultiFileB");
     }
+
+    @RecipeTest
+    void testKillMutation(ReportParser parser) throws Exception {
+        verify(parser, "KillMutation");
+    }
 }
