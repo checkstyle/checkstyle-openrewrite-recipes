@@ -40,7 +40,7 @@
 
         <rewrite.maven.plugin>6.43.0</rewrite.maven.plugin>
         <recipe.bom.version>3.34.0</recipe.bom.version>
-        <junit.version>6.1.1</junit.version>
+        <junit.version>6.1.2</junit.version>
         <assertj.version>3.27.7</assertj.version>
 
         <!-- Checkstyle properties -->
