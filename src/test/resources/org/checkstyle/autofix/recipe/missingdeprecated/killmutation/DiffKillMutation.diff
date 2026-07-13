@@ -1,0 +1,22 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/missingdeprecated/killmutation/InputKillMutation.java
++++ src/test/resources/org/checkstyle/autofix/recipe/missingdeprecated/killmutation/OutputKillMutation.java
+@@ -9,15 +9,16 @@
+ 
+ package org.checkstyle.autofix.recipe.missingdeprecated.killmutation;
+ 
+-public class InputKillMutation {
++public class OutputKillMutation {
+ 
+     /**
+      * @deprecated
+      */
+-    static class ClassB { // violation
++    @Deprecated
++    static class ClassB {
+     }
+ 
+-    static class ClassA { // violation
++    static final class ClassA {
+         private ClassA() {}
+     }
+ 

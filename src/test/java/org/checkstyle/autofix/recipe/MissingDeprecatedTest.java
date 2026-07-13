@@ -68,4 +68,9 @@ public class MissingDeprecatedTest extends AbstractRecipeTestSupport {
     void testMissingDeprecatedMultiFile(ReportParser parser) throws Exception {
         verify(parser, "MultiFile1", "MultiFile2");
     }
+
+    @RecipeTest
+    void killMutation(ReportParser parser) throws Exception {
+        verify(parser, "KillMutation");
+    }
 }
