@@ -100,4 +100,8 @@ public class HeaderTest extends AbstractRecipeTestSupport {
         return checkConfig;
     }
 
+    @RecipeTest
+    void killMutation(ReportParser parser) throws Exception {
+        verify(parser, "KillMutation1", "KillMutation2");
+    }
 }
