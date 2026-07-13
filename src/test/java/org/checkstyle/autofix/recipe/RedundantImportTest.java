@@ -73,4 +73,9 @@ public class RedundantImportTest extends AbstractRecipeTestSupport {
         verify(parser, "ComplexCase");
     }
 
+    @RecipeTest
+    void killMutation(ReportParser parser) throws Exception {
+        verify(parser, "KillMutation");
+    }
+
 }
