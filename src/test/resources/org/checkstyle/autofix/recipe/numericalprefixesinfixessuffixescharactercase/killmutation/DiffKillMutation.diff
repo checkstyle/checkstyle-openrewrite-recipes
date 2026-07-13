@@ -1,0 +1,13 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/numericalprefixesinfixessuffixescharactercase/killmutation/InputKillMutation.java
++++ src/test/resources/org/checkstyle/autofix/recipe/numericalprefixesinfixessuffixescharactercase/killmutation/OutputKillMutation.java
+@@ -9,7 +9,7 @@
+ 
+ package org.checkstyle.autofix.recipe.numericalprefixesinfixessuffixescharactercase.killmutation;
+ 
+-public class InputKillMutation {
+-    long trigger = 0X1L; // violation 'Numerical prefix should be in lowercase.'
+-    long value = 123l; // violation 'Should use uppercase 'L'.'
++public class OutputKillMutation {
++    long trigger = 0x1L;
++    long value = 123L;
+ }
