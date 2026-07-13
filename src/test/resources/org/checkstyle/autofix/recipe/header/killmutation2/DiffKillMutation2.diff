@@ -1,0 +1,14 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/header/killmutation2/InputKillMutation2.java
++++ src/test/resources/org/checkstyle/autofix/recipe/header/killmutation2/OutputKillMutation2.java
+@@ -10,8 +10,7 @@
+ </module>
+ */
+ // MATCH THIS
+-// violation 12 lines above 'File does not end with a newline.'
+ package org.checkstyle.autofix.recipe.header.killmutation2;
+ 
+-public class InputKillMutation2 {
+-}
+\ No newline at end of file
++public class OutputKillMutation2 {
++}

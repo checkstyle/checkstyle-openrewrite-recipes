@@ -47,5 +47,8 @@ indent_style = tab
 [src/test/resources/org/checkstyle/autofix/recipe/newlineatendoffile/killmutation1/InputKillMutation1.java]
 insert_final_newline = false
 
+[{src/test/resources/org/checkstyle/autofix/recipe/header/killmutation2/InputKillMutation2.java}]
+insert_final_newline = false
+
 [src/test/resources/org/checkstyle/autofix/recipe/header/header.txt]
 end_of_line = crlf
