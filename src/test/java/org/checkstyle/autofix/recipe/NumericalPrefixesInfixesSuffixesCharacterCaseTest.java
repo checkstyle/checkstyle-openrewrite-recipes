@@ -69,4 +69,9 @@ public class NumericalPrefixesInfixesSuffixesCharacterCaseTest extends AbstractR
     void numericalPrefixesInfixesSuffixesCharacterCaseFour(ReportParser parser) throws Exception {
         verify(parser, "NumericalCharacterCase", "NumericalCharacterCaseFour");
     }
+
+    @RecipeTest
+    void killMutation(ReportParser parser) throws Exception {
+        verify(parser, "KillMutation");
+    }
 }
