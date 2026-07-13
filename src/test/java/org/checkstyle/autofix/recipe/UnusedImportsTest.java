@@ -66,4 +66,9 @@ public class UnusedImportsTest extends AbstractRecipeTestSupport {
     void unusedImportsCaseFour(ReportParser parser) throws Exception {
         verify(parser, "UnusedCaseThree");
     }
+
+    @RecipeTest
+    void killMutation(ReportParser parser) throws Exception {
+        verify(parser, "KillMutation");
+    }
 }

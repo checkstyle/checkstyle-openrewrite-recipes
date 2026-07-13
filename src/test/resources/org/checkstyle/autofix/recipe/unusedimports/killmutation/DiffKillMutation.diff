@@ -1,0 +1,14 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/unusedimports/killmutation/InputKillMutation.java
++++ src/test/resources/org/checkstyle/autofix/recipe/unusedimports/killmutation/OutputKillMutation.java
+@@ -8,9 +8,8 @@
+ */
+ package org.checkstyle.autofix.recipe.unusedimports.killmutation;
+ 
+-import java.io.File; // violation
+-import java.util.*; // violation
++import java.util.List;
+ 
+-public class InputKillMutation {
++public class OutputKillMutation {
+     List<String> x;
+ }
