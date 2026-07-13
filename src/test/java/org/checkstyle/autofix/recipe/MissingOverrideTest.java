@@ -67,4 +67,9 @@ public class MissingOverrideTest extends AbstractRecipeTestSupport {
     void testMissingOverrideCaseFour(ReportParser parser) throws Exception {
         verify(parser, "OverrideCaseFour", "OverrideCaseFive");
     }
+
+    @RecipeTest
+    void testKillMutation(ReportParser parser) throws Exception {
+        verify(parser, "KillMutation");
+    }
 }

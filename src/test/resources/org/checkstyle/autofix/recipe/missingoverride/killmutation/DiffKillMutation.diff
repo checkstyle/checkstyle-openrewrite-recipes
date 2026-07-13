@@ -1,0 +1,22 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/missingoverride/killmutation/InputKillMutation.java
++++ src/test/resources/org/checkstyle/autofix/recipe/missingoverride/killmutation/OutputKillMutation.java
+@@ -9,14 +9,16 @@
+ 
+ package org.checkstyle.autofix.recipe.missingoverride.killmutation;
+ 
+-public class InputKillMutation {
++public class OutputKillMutation {
+     /**
+      * {@inheritDoc}
+      */
+-    public String toString() { return ""; } // violation 'include @java.lang.Override annotation when '@inheritDoc''
++    @Override
++    public String toString() { return ""; }
+ 
+     /**
+      * @deprecated something
+      */
+-    public void doSomethingElse() {} // violation 'Must include both @java.lang.Deprecated annotation and @deprecated Javadoc tag with description.'
++    @Deprecated
++    public void doSomethingElse() {}
+ }
