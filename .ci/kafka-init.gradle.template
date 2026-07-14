@@ -1,0 +1,84 @@
+initscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+    dependencies {
+        classpath("org.openrewrite:plugin:@REWRITE_GRADLE_PLUGIN_VERSION@")
+    }
+}
+
+rootProject {
+    repositories {
+        mavenLocal()
+    }
+    plugins.apply(org.openrewrite.gradle.RewritePlugin)
+    rewrite {
+        activeRecipe("org.checkstyle.AllAutoFixes")
+        configFile = file("@WORK_DIR@/resolved-diff-report-rewrite.yml")
+
+        // until https://github.com/checkstyle/checkstyle-openrewrite-recipes/issues/322
+        exclusion(
+            "**/KafkaProducer.java",
+            "**/clients/consumer/internals/Utils.java",
+            "**/clients/consumer/internals/AbstractStickyAssignor.java",
+            "**/JmxReporter.java",
+            "**/CompressionType.java",
+            "**/ScramMessages.java",
+            "**/ByteBufferUnmapper.java",
+            "**/DescribeConfigsResponse.java",
+            "**/FetchRequestManagerTest.java",
+            "**/ShareConsumeRequestManagerTest.java",
+            "**/FetcherTest.java",
+            "**/MemoryRecordsTest.java",
+            "**/AbstractConfigTest.java",
+            "**/SaslAuthenticatorTest.java",
+            "**/MessageTest.java",
+            "**/ImplicitLinkedHashCollectionTest.java",
+            "**/FieldType.java",
+            "**/StreamsGroup.java",
+            "**/MetadataNodeRedactionCriteria.java",
+            "**/DynamicBrokerConfig.java",
+            "**/FetchContext.java",
+            "**/MonitorablePluginsIntegrationTest.java",
+            "**/UnitTestFeatureVersion.java",
+            "**/PersisterStateManager.java",
+            "**/EventQueue.java",
+            "**/SessionStoreFetchTest.java",
+            "**/TransactionsCommand.java",
+            "**/CsvUtils.java",
+            "**/ErrorHandlingTaskTest.java",
+            "**/TestUtil.java",
+            "**/SharePartitionTest.java",
+            "**/GroupMetadataManager.java",
+            "**/GroupMetadataManagerTest.java",
+            "**/ConsumerGroupTest.java",
+            "**/DefaultApiVersionManager.java",
+            "**/ClientQuotasRequestTest.java",
+            "**/ShareFetchTest.java",
+            "**/LogManager.java",
+            "**/LogCleanerManager.java",
+            "**/UnifiedLogTest.java",
+            "**/LogTestUtils.java",
+            "**/LogLoaderTest.java",
+            "**/LogValidatorTest.java",
+            "**/LogCleanerTest.java",
+            "**/StreamThread.java",
+            "**/StreamTask.java",
+            "**/AbstractMergedSortedCacheStoreIterator.java",
+            "**/AbstractProcessorContextTest.java",
+            "**/InMemoryWindowStoreTest.java",
+            "**/WindowStoreFetchTest.java",
+            "**/TimeDefinitions.java",
+            "**/StreamsMembershipManager.java",
+            "**/ClassicGroup.java",
+            "**/RecordTestUtils.java",
+            "**/*.yaml",
+            "**/ReadVersionFromResource.java"
+        )
+    }
+    dependencies {
+        rewrite("com.puppycrawl.tools:checkstyle-openrewrite-recipes:@RECIPES_VERSION@")
+    }
+}
