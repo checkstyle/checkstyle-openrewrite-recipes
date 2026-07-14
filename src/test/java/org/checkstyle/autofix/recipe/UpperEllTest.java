@@ -76,4 +76,9 @@ public class UpperEllTest extends AbstractRecipeTestSupport {
         verify(parser, "MultiFileA", "MultiFileB");
     }
 
+    @RecipeTest
+    void killMutation(ReportParser parser) throws Exception {
+        verify(parser, "KillMutation");
+    }
+
 }

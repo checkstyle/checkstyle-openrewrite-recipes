@@ -1,0 +1,13 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/upperell/killmutation/InputKillMutation.java
++++ src/test/resources/org/checkstyle/autofix/recipe/upperell/killmutation/OutputKillMutation.java
+@@ -15,7 +15,7 @@
+ */
+ package org.checkstyle.autofix.recipe.upperell.killmutation;
+ 
+-public class InputKillMutation {
+-    long a = 1l; // violation
+-    long b = 0x2al; // violation
++public class OutputKillMutation {
++    long a = 1L;
++    long b = 0x2Al;
+ }
