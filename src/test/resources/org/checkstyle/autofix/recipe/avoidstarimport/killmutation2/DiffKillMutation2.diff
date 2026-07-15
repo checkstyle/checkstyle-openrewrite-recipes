@@ -1,0 +1,18 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/avoidstarimport/killmutation2/InputKillMutation2.java
++++ src/test/resources/org/checkstyle/autofix/recipe/avoidstarimport/killmutation2/OutputKillMutation2.java
+@@ -9,12 +9,11 @@
+ 
+ package org.checkstyle.autofix.recipe.avoidstarimport.killmutation2;
+ 
+-// violation below 'Using the .* form of import should be avoided'
+-import static org.checkstyle.autofix.recipe.avoidstarimport.killmutation2supportclass.InputKillMutation2SupportClass.*;
+-
+ import org.checkstyle.autofix.recipe.avoidstarimport.killmutation2supportclass.InputKillMutation2SupportClass;
+ 
+-public class InputKillMutation2 {
++import static org.checkstyle.autofix.recipe.avoidstarimport.killmutation2supportclass.InputKillMutation2SupportClass.STATIC_CONSTANT;
++
++public class OutputKillMutation2 {
+ 
+     int value = STATIC_CONSTANT;
+ 

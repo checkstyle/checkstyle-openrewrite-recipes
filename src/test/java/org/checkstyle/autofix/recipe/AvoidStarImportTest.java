@@ -88,4 +88,14 @@ public class AvoidStarImportTest extends AbstractRecipeTestSupport {
     void killMutation1(ReportParser parser) throws Exception {
         verify(parser, "KillMutation1");
     }
+
+    @RecipeTest
+    void primitiveClassAccess(ReportParser parser) throws Exception {
+        verify(parser, "PrimitiveClassAccess");
+    }
+
+    @RecipeTest
+    void killMutation2(ReportParser parser) throws Exception {
+        verify(parser, "KillMutation2", "KillMutation2SupportClass");
+    }
 }

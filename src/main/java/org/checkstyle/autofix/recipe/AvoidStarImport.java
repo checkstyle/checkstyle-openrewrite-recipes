@@ -113,16 +113,18 @@ public class AvoidStarImport extends Recipe {
                     .filter(type -> type.hasFlags(Flag.Static))
                     .map(JavaType.Method::getDeclaringType)
                     .map(JavaType.FullyQualified::getFullyQualifiedName)
-                    .ifPresent(ownerFqn -> maybeAddImport(ownerFqn, method.getSimpleName(), true));
+                    .filter(packagesToExpand::contains)
+                    .ifPresent(ownerFqn -> maybeAddImport(ownerFqn, method.getSimpleName(), false));
         }
 
         private void addStaticImportForField(J.Identifier identifier) {
             final JavaType.Variable fieldType = identifier.getFieldType();
-            if (fieldType != null && fieldType.hasFlags(Flag.Static)) {
-                final JavaType.FullyQualified fullyQualifiedOwner =
-                        (JavaType.FullyQualified) fieldType.getOwner();
-                maybeAddImport(fullyQualifiedOwner.getFullyQualifiedName(),
-                        identifier.getSimpleName(), true);
+            if (fieldType != null && fieldType.hasFlags(Flag.Static)
+                    && fieldType.getOwner() instanceof JavaType.FullyQualified fqOwner) {
+                final String ownerFqn = fqOwner.getFullyQualifiedName();
+                if (packagesToExpand.contains(ownerFqn)) {
+                    maybeAddImport(ownerFqn, identifier.getSimpleName(), false);
+                }
             }
         }
 
