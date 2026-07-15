@@ -244,4 +244,9 @@ public class UseEnhancedSwitchTest extends AbstractRecipeTestSupport {
         verify(parser, "MutationTests28");
     }
 
+    @RecipeTest
+    void emptyCaseAndDefault(ReportParser parser) throws Exception {
+        verify(parser, "EmptyCaseAndDefault");
+    }
+
 }
