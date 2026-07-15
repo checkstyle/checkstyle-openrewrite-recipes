@@ -335,12 +335,17 @@ public class UseEnhancedSwitch extends Recipe {
             }
             else {
                 final List<Statement> caseStmts = caseStmt.getStatements();
-                final Statement first = caseStmts.get(0);
-                if (first instanceof J.Block block) {
-                    stmts = block.getStatements();
+                if (caseStmts.isEmpty()) {
+                    stmts = Collections.emptyList();
                 }
                 else {
-                    stmts = caseStmts;
+                    final Statement first = caseStmts.get(0);
+                    if (first instanceof J.Block block) {
+                        stmts = block.getStatements();
+                    }
+                    else {
+                        stmts = caseStmts;
+                    }
                 }
             }
             return stmts;
