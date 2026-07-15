@@ -1,0 +1,11 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/avoidstarimport/killmutation2supportclass/InputKillMutation2SupportClass.java
++++ src/test/resources/org/checkstyle/autofix/recipe/avoidstarimport/killmutation2supportclass/OutputKillMutation2SupportClass.java
+@@ -9,7 +9,7 @@
+ 
+ package org.checkstyle.autofix.recipe.avoidstarimport.killmutation2supportclass;
+ 
+-public class InputKillMutation2SupportClass {
++public class OutputKillMutation2SupportClass {
+     public static final int STATIC_CONSTANT = 42;
+     public int instanceField = 10;
+ }

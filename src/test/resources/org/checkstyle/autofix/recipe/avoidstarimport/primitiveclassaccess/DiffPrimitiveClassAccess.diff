@@ -1,0 +1,15 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/avoidstarimport/primitiveclassaccess/InputPrimitiveClassAccess.java
++++ src/test/resources/org/checkstyle/autofix/recipe/avoidstarimport/primitiveclassaccess/OutputPrimitiveClassAccess.java
+@@ -8,9 +8,10 @@
+ 
+ package org.checkstyle.autofix.recipe.avoidstarimport.primitiveclassaccess;
+ 
+-import java.util.*; // violation 'Using the .* form of import should be avoided'
++import java.util.ArrayList;
++import java.util.List;
+ 
+-public class InputPrimitiveClassAccess {
++public class OutputPrimitiveClassAccess {
+     public void method() {
+         String clazz1 = int.class.getName();
+         String clazz2 = double.class.getName();
