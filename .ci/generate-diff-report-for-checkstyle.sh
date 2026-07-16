@@ -136,20 +136,20 @@ fi
 
 echo "Generating Delta Diff report..."
 git checkout config/rewrite.yml || true
-git diff "$BASELINE_COMMIT" > "$WORK_DIR/recipe-diff.patch"
+git diff "$BASELINE_COMMIT" > "$WORK_DIR/recipe-diff.patch.txt"
 
-if [ -s "$WORK_DIR/recipe-diff.patch" ]; then
-  echo "Diff report generated: $WORK_DIR/recipe-diff.patch"
-  echo "$(wc -l < "$WORK_DIR/recipe-diff.patch") lines of changes"
+if [ -s "$WORK_DIR/recipe-diff.patch.txt" ]; then
+  echo "Diff report generated: $WORK_DIR/recipe-diff.patch.txt"
+  echo "$(wc -l < "$WORK_DIR/recipe-diff.patch.txt") lines of changes"
 
   echo "Generating HTML diff report..."
   npx -y diff2html-cli -s side -i file -F "$WORK_DIR/recipe-diff.html" \
-    -- "$WORK_DIR/recipe-diff.patch"
+    -- "$WORK_DIR/recipe-diff.patch.txt"
   echo "HTML diff report generated: $WORK_DIR/recipe-diff.html"
 
   echo "Generating line-by-line HTML diff report..."
   npx -y diff2html-cli -s line -i file -F "$WORK_DIR/recipe-diff-line-by-line.html" \
-    -- "$WORK_DIR/recipe-diff.patch"
+    -- "$WORK_DIR/recipe-diff.patch.txt"
   echo "Line-by-line HTML diff report generated: $WORK_DIR/recipe-diff-line-by-line.html"
 else
   echo "No changes produced by recipes compared to baseline"
