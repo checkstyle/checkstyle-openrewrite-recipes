@@ -47,7 +47,7 @@ jobs:
       - name: Upload diff patch
         uses: actions/upload-artifact@v7
         with:
-          name: kafka-recipe-diff-patch
-          path: .ci-temp/diff-report-kafka/recipe-diff.patch
+          name: kafka-recipe-diff-patch.txt
+          path: .ci-temp/diff-report-kafka/recipe-diff.patch.txt
           archive: false
           retention-days: 30
