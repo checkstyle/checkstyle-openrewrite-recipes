@@ -20,7 +20,7 @@ BASE_BRANCH="${GITHUB_BASE_REF:-main}"
 PR_COMMIT=$(git rev-parse HEAD)
 
 mkdir -p "$WORK_DIR"
-cp "$RECIPES_DIR/.ci/checkstyle-config-kafka.xml" \
+cp "$RECIPES_DIR/.ci/checkstyle-config-with-all-autofixed-checks-kafka.xml" \
   "$WORK_DIR/checkstyle-config.xml"
 cp "$RECIPES_DIR/.ci/diff-report-rewrite.yml" "$WORK_DIR/diff-report-rewrite.yml"
 cp "$RECIPES_DIR/.ci/kafka-header.txt" "$WORK_DIR/kafka-header.txt"
