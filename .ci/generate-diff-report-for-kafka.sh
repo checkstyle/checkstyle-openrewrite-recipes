@@ -4,7 +4,7 @@ set -e
 RECIPES_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 WORK_DIR="${RECIPES_DIR}/.ci-temp/diff-report-kafka"
 TARGET_REPO="https://github.com/apache/kafka.git"
-TARGET_BRANCH="trunk"
+TARGET_SHA="fdc59be8c84af1424b2f51a2df81386927f01a90"
 
 function getMavenProperty {
   property="\${$1}"
@@ -42,14 +42,20 @@ cd "$RECIPES_DIR"
 
 echo "Cloning target repo..."
 if [ ! -d "$WORK_DIR/kafka" ]; then
-    git clone --depth 1 --branch "$TARGET_BRANCH" "$TARGET_REPO" "$WORK_DIR/kafka"
+    mkdir -p "$WORK_DIR/kafka"
+    cd "$WORK_DIR/kafka"
+    git init
+    git remote add origin "$TARGET_REPO"
+    git fetch --depth 1 origin "$TARGET_SHA"
+    git checkout FETCH_HEAD
+    cd "$RECIPES_DIR"
 else
     echo "Target repo already cloned."
     cd "$WORK_DIR/kafka"
-    git fetch
-    git checkout -f "$TARGET_BRANCH"
-    git reset --hard origin/"$TARGET_BRANCH"
-    git clean -fd
+    git fetch origin "$TARGET_SHA"
+    git checkout -f "$TARGET_SHA"
+    git reset --hard "$TARGET_SHA"
+    git clean -fdx
     cd "$RECIPES_DIR"
 fi
 
@@ -69,6 +75,30 @@ java -jar "$CHECKSTYLE_JAR" \
   -o "$WORK_DIR/checkstyle-report.xml" \
   "$WORK_DIR/kafka" \
   || true
+
+echo "Verifying that each Checkstyle module produced at least one violation..."
+
+# until https://github.com/checkstyle/checkstyle-openrewrite-recipes/issues/330
+SUPPRESSED_MODULES="AvoidStarImport|EmptyStatement|RedundantImport|UpperEll|UnusedImports"
+MODULES=$(grep -o '<module name="[^"]*"' "$WORK_DIR/checkstyle-config.xml" \
+  | sed 's/<module name="//' | sed 's/"//' \
+  | grep -vE '^(Checker|TreeWalker|BeforeExecutionExclusionFileFilter)$' \
+  | grep -vE "^($SUPPRESSED_MODULES)$")
+
+MISSING_VIOLATIONS=0
+for MODULE in $MODULES; do
+    if ! grep -q "source=\".*\.${MODULE}Check\"" "$WORK_DIR/checkstyle-report.xml" && \
+       ! grep -q "source=\".*\.${MODULE}\"" "$WORK_DIR/checkstyle-report.xml"; then
+        echo "ERROR: No violations found for Checkstyle module: $MODULE"
+        MISSING_VIOLATIONS=1
+    fi
+done
+
+if [ "$MISSING_VIOLATIONS" = "1" ]; then
+    echo "ERROR: Some Checkstyle modules did not produce any violations in the Kafka project!"
+    echo "Please configure the check with non-default properties or find a different SHA to ensure violations."
+    exit 1
+fi
 
 echo "Generating OpenRewrite configuration..."
 cp "$WORK_DIR/diff-report-rewrite.yml" "$WORK_DIR/resolved-diff-report-rewrite.yml"
@@ -95,7 +125,7 @@ BASELINE_COMMIT=$(git rev-parse HEAD)
 echo "Resetting to original target state..."
 if [ "$BASELINE_COMMIT" != "$(git rev-parse HEAD~1 2>/dev/null || git rev-parse HEAD)" ]; then
     git reset --hard HEAD~1
-    git clean -fd
+    git clean -fdx
 fi
 
 echo "Switching back to PR branch..."
