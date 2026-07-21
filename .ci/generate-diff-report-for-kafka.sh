@@ -13,6 +13,13 @@ function getMavenProperty {
                       --non-recursive org.codehaus.mojo:exec-maven-plugin:1.3.1:exec)
 }
 
+function generateGradleInitScript {
+  sed -e "s|@REWRITE_GRADLE_PLUGIN_VERSION@|$REWRITE_GRADLE_PLUGIN_VERSION|g" \
+      -e "s|@WORK_DIR@|$WORK_DIR|g" \
+      -e "s|@RECIPES_VERSION@|$RECIPES_VERSION|g" \
+      "$RECIPES_DIR/.ci/kafka-init.gradle.template" > "$WORK_DIR/init.gradle"
+}
+
 CHECKSTYLE_VERSION=$(getMavenProperty checkstyle.version)
 REWRITE_GRADLE_PLUGIN_VERSION="latest.release"
 RECIPES_VERSION=$(getMavenProperty project.version)
@@ -24,7 +31,6 @@ cp "$RECIPES_DIR/.ci/checkstyle-config-with-all-autofixed-checks-kafka.xml" \
   "$WORK_DIR/checkstyle-config.xml"
 cp "$RECIPES_DIR/.ci/diff-report-rewrite.yml" "$WORK_DIR/diff-report-rewrite.yml"
 cp "$RECIPES_DIR/.ci/kafka-header.txt" "$WORK_DIR/kafka-header.txt"
-cp "$RECIPES_DIR/.ci/kafka-init.gradle.template" "$WORK_DIR/kafka-init.gradle.template"
 
 sed -i.bak "s|@WORK_DIR@|$WORK_DIR|g" "$WORK_DIR/checkstyle-config.xml" \
   && rm -f "$WORK_DIR/checkstyle-config.xml.bak"
@@ -106,10 +112,7 @@ sed -i.bak "s|@WORK_DIR@|$WORK_DIR|g" "$WORK_DIR/resolved-diff-report-rewrite.ym
   && rm -f "$WORK_DIR/resolved-diff-report-rewrite.yml.bak"
 
 echo "Generating Gradle init script for OpenRewrite..."
-sed -e "s|@REWRITE_GRADLE_PLUGIN_VERSION@|$REWRITE_GRADLE_PLUGIN_VERSION|g" \
-    -e "s|@WORK_DIR@|$WORK_DIR|g" \
-    -e "s|@RECIPES_VERSION@|$RECIPES_VERSION|g" \
-    "$WORK_DIR/kafka-init.gradle.template" > "$WORK_DIR/init.gradle"
+generateGradleInitScript
 
 echo "Running OpenRewrite on the target project with BASELINE recipes..."
 cd "$WORK_DIR/kafka"
@@ -135,6 +138,9 @@ git checkout -f "$PR_COMMIT"
 echo "Building and installing PR checkstyle-openrewrite-recipes locally..."
 ./mvnw clean install -DskipTests -Dcheckstyle.skip=true -Drewrite.skip=true \
   --no-transfer-progress
+
+echo "Generating Gradle init script for OpenRewrite (PR)..."
+generateGradleInitScript
 
 echo "Running OpenRewrite on the target project with PR recipes..."
 cd "$WORK_DIR/kafka"
