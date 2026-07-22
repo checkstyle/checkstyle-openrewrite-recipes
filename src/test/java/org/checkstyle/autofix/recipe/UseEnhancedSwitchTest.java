@@ -21,8 +21,19 @@ import static com.google.common.truth.Truth.assertWithMessage;
 
 import org.checkstyle.autofix.parser.ReportParser;
 import org.junit.jupiter.api.Test;
+import org.openrewrite.Tree;
+import org.openrewrite.java.marker.JavaVersion;
+import org.openrewrite.test.RecipeSpec;
 
 public class UseEnhancedSwitchTest extends AbstractRecipeTestSupport {
+
+    @Override
+    public void defaults(RecipeSpec spec) {
+        spec.allSources(source -> {
+            source.markers(new JavaVersion(
+                    Tree.randomId(), "14", "14", "14", "14"));
+        });
+    }
 
     @Override
     protected String getSubpackage() {

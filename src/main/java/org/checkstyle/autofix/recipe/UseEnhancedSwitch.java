@@ -26,10 +26,12 @@ import java.util.Set;
 import org.checkstyle.autofix.CheckFullName;
 import org.checkstyle.autofix.marker.CheckstyleViolationMarker;
 import org.openrewrite.ExecutionContext;
+import org.openrewrite.Preconditions;
 import org.openrewrite.Recipe;
 import org.openrewrite.Tree;
 import org.openrewrite.TreeVisitor;
 import org.openrewrite.java.JavaVisitor;
+import org.openrewrite.java.search.UsesJavaVersion;
 import org.openrewrite.java.tree.Expression;
 import org.openrewrite.java.tree.Flag;
 import org.openrewrite.java.tree.J;
@@ -47,6 +49,8 @@ import org.openrewrite.marker.Markers;
  */
 public class UseEnhancedSwitch extends Recipe {
 
+    private static final int MINIMUM_JAVA_VERSION = 14;
+
     @Override
     public String getDisplayName() {
         return "UseEnhancedSwitch recipe";
@@ -60,7 +64,8 @@ public class UseEnhancedSwitch extends Recipe {
 
     @Override
     public TreeVisitor<?, ExecutionContext> getVisitor() {
-        return new UseEnhancedSwitchVisitor();
+        return new Preconditions.Check(
+                new UsesJavaVersion<>(MINIMUM_JAVA_VERSION), new UseEnhancedSwitchVisitor());
     }
 
     private final class UseEnhancedSwitchVisitor extends JavaVisitor<ExecutionContext> {
