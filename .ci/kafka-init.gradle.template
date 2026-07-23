@@ -17,6 +17,11 @@ rootProject {
     rewrite {
         activeRecipe("org.checkstyle.AllAutoFixes")
         configFile = file("@WORK_DIR@/resolved-diff-report-rewrite.yml")
+
+        exclusion(
+            //until https://github.com/checkstyle/checkstyle-openrewrite-recipes/issues/339
+            "**/LogLoaderTest.java"
+        )
     }
     dependencies {
         rewrite("com.puppycrawl.tools:checkstyle-openrewrite-recipes:@RECIPES_VERSION@")
