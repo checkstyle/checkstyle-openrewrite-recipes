@@ -148,11 +148,10 @@ cd "$WORK_DIR/kafka"
 
 echo "Verifying compilability after PR recipe execution..."
 COMPILE_FAILED=0
-./gradlew compileJava compileTestJava --no-daemon 2>&1 | tee "$WORK_DIR/compile.log" || COMPILE_FAILED=1
+./gradlew compileJava compileTestJava --no-daemon || COMPILE_FAILED=1
 
 if [ "$COMPILE_FAILED" = "1" ]; then
     echo "WARNING: Recipe produced non-compilable code!"
-    echo "Compilation errors saved to: $WORK_DIR/compile.log"
 fi
 
 echo "Generating Delta Diff report..."
