@@ -109,20 +109,13 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
         @Override
         public J.CompilationUnit visitCompilationUnit(J.CompilationUnit compUnit,
                                                       ExecutionContext executionContext) {
-            final J.CompilationUnit result;
-            if (compUnit.getMarkers().findFirst(MarkersApplied.class).isPresent()) {
-                result = compUnit;
-            }
-            else {
-                final Path sourcePath = compUnit.getSourcePath();
-                final List<CheckstyleViolation> fileViolations = violations.stream()
-                        .filter(violation -> violation.getFilePath().endsWith(sourcePath))
-                        .toList();
+            final Path sourcePath = compUnit.getSourcePath();
+            final List<CheckstyleViolation> fileViolations = violations.stream()
+                    .filter(violation -> violation.getFilePath().endsWith(sourcePath))
+                    .toList();
 
-                processFileViolations(compUnit, sourcePath, fileViolations);
-                result = compUnit;
-            }
-            return result;
+            processFileViolations(compUnit, sourcePath, fileViolations);
+            return compUnit;
         }
 
         private void processFileViolations(J.CompilationUnit compilationUnit, Path sourcePath,

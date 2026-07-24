@@ -30,9 +30,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import org.checkstyle.autofix.CheckFullName;
-import org.checkstyle.autofix.CheckstyleCheck;
-import org.checkstyle.autofix.parser.CheckstyleViolation;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openrewrite.Cursor;
@@ -66,34 +63,6 @@ public class ViolationMarkerRecipeTest {
 
         Assertions.assertEquals(expectedDescription, recipe.getDescription(),
                 "Invalid description");
-    }
-
-    @Test
-    public void testScannerIdempotencyClearsAccumulator() {
-        final Path path = Paths.get("TestScannerIdemClear.java");
-        final CheckstyleViolation violation = new CheckstyleViolation(
-                1, 1, "error", new CheckstyleCheck(
-                        CheckFullName.FINAL_CLASS, "id"),
-                "msg", path);
-
-        final ViolationMarkerRecipe recipe = new ViolationMarkerRecipe(List.of(violation));
-        final JavaParser parser = JavaParser.fromJavaVersion().build();
-        final J.CompilationUnit compUnit = parser.parse(
-                "final class A {}").findFirst().get().withSourcePath(path);
-
-        final ExecutionContext ctx = new InMemoryExecutionContext();
-        final var acc = recipe.getInitialValue(ctx);
-
-        recipe.getScanner(acc).visit(compUnit, ctx);
-        Assertions.assertFalse(acc.getByFile(path).isEmpty(), "First scan should find violations");
-
-        final J.CompilationUnit afterVisit = (J.CompilationUnit)
-                recipe.getVisitor(acc).visit(compUnit, ctx);
-        acc.putByFile(path, Collections.emptyMap());
-        recipe.getScanner(acc).visit(afterVisit, ctx);
-
-        Assertions.assertTrue(acc.getByFile(path).isEmpty(),
-                "Scanner should completely skip the file, leaving accumulator empty");
     }
 
     @Test
