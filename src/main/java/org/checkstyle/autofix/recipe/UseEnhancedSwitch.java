@@ -263,6 +263,7 @@ public class UseEnhancedSwitch extends Recipe {
                 final boolean exhaustive) {
             boolean hasDefault = false;
             boolean possible = true;
+            boolean hasAssignment = false;
             for (final Statement stmt : mergedCases) {
                 final J.Case caseStmt = (J.Case) stmt;
                 if (isDefaultCase(caseStmt)) {
@@ -274,12 +275,15 @@ public class UseEnhancedSwitch extends Recipe {
                     possible = false;
                     break;
                 }
+                if (meaningful.getLast() instanceof J.Assignment) {
+                    hasAssignment = true;
+                }
                 if (hasDisallowedControlFlow(meaningful)) {
                     possible = false;
                     break;
                 }
             }
-            return possible && (hasDefault || exhaustive);
+            return possible && hasAssignment && (hasDefault || exhaustive);
         }
 
         private boolean isValidAssignment(final List<Statement> meaningful,
@@ -294,6 +298,7 @@ public class UseEnhancedSwitch extends Recipe {
                 final List<Statement> mergedCases, final boolean exhaustive) {
             boolean hasDefault = false;
             boolean possible = true;
+            boolean hasReturn = false;
             for (final Statement stmt : mergedCases) {
                 final J.Case caseStmt = (J.Case) stmt;
                 if (isDefaultCase(caseStmt)) {
@@ -315,8 +320,9 @@ public class UseEnhancedSwitch extends Recipe {
                     possible = false;
                     break;
                 }
+                hasReturn = true;
             }
-            return possible && (hasDefault || exhaustive);
+            return possible && hasReturn && (hasDefault || exhaustive);
         }
 
         private boolean hasDisallowedControlFlow(final List<Statement> stmts) {

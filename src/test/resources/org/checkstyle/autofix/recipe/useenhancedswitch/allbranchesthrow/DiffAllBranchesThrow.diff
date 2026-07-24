@@ -1,0 +1,39 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/allbranchesthrow/InputAllBranchesThrow.java
++++ src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/allbranchesthrow/OutputAllBranchesThrow.java
+@@ -8,31 +8,25 @@
+ 
+ package org.checkstyle.autofix.recipe.useenhancedswitch.allbranchesthrow;
+ 
+-public class InputAllBranchesThrow {
++public class OutputAllBranchesThrow {
+ 
+     public enum ErrorType {
+         IO_EXCEPTION, RUNTIME_EXCEPTION
+     }
+ 
+     public Object testReturn(ErrorType type) throws Exception {
+-        // violation below, 'Switch can be replaced with enhanced switch'
+         switch (type) {
+-            case IO_EXCEPTION:
+-                throw new Exception("IO");
+-            case RUNTIME_EXCEPTION:
+-                throw new RuntimeException("Runtime");
++            case IO_EXCEPTION -> throw new Exception("IO");
++            case RUNTIME_EXCEPTION -> throw new RuntimeException("Runtime");
+         }
+         return null;
+     }
+ 
+     public void testAssignment(ErrorType type) throws Exception {
+         int x;
+-        // violation below, 'Switch can be replaced with enhanced switch'
+         switch (type) {
+-            case IO_EXCEPTION:
+-                throw new Exception("IO");
+-            case RUNTIME_EXCEPTION:
+-                throw new RuntimeException("Runtime");
++            case IO_EXCEPTION -> throw new Exception("IO");
++            case RUNTIME_EXCEPTION -> throw new RuntimeException("Runtime");
+         }
+         x = 1;
+     }

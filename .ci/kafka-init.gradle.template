@@ -19,8 +19,6 @@ rootProject {
         configFile = file("@WORK_DIR@/resolved-diff-report-rewrite.yml")
 
         exclusion(
-            //until https://github.com/checkstyle/checkstyle-openrewrite-recipes/issues/339
-            "**/LogLoaderTest.java"
         )
     }
     dependencies {

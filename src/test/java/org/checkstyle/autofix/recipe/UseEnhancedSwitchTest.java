@@ -260,4 +260,9 @@ public class UseEnhancedSwitchTest extends AbstractRecipeTestSupport {
         verify(parser, "EmptyCaseAndDefault");
     }
 
+    @RecipeTest
+    void allBranchesThrow(ReportParser parser) throws Exception {
+        verify(parser, "AllBranchesThrow");
+    }
+
 }
