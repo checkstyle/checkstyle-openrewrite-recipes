@@ -122,19 +122,19 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
                                            List<CheckstyleViolation> fileViolations) {
             final Map<UUID, Range> nodeRanges = new LinkedHashMap<>();
             final Map<UUID, UUID> parentMap = new HashMap<>();
-            final Map<UUID, Tree> nodeTrees = new HashMap<>();
+            final Map<UUID, Tree> treeNodes = new HashMap<>();
             final Cursor rootCursor = new Cursor(null, "root");
             final TreeVisitor<?, PrintOutputCapture<TreeVisitor<?, ?>>> printer =
                     compilationUnit.printer(rootCursor);
 
             final BoundingBoxCapture capture = new BoundingBoxCapture(
-                    printer, nodeRanges, parentMap, nodeTrees);
-            printer.visit(compilationUnit, capture, rootCursor);
+                    printer, nodeRanges, parentMap, treeNodes);
+            printer.visit(compilationUnit, capture.append(""), rootCursor);
 
             final Map<UUID, List<CheckstyleViolationMarker>> markersToAdd = new HashMap<>();
             for (CheckstyleViolation violation : fileViolations) {
                 final Map<UUID, List<CheckstyleViolationMarker>> result = findSmallestNode(
-                        violation, nodeRanges, parentMap, nodeTrees);
+                        violation, nodeRanges, parentMap, treeNodes);
                 for (Map.Entry<UUID, List<CheckstyleViolationMarker>> entry : result.entrySet()) {
                     markersToAdd.computeIfAbsent(entry.getKey(), id -> new ArrayList<>())
                             .addAll(entry.getValue());
@@ -146,12 +146,12 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
 
         private Map<UUID, List<CheckstyleViolationMarker>> findSmallestNode(
                 CheckstyleViolation violation, Map<UUID, Range> nodeRanges,
-                Map<UUID, UUID> parentMap, Map<UUID, Tree> nodeTrees) {
+                Map<UUID, UUID> parentMap, Map<UUID, Tree> treeNodes) {
 
             return findEnclosingNodeId(violation, nodeRanges)
                     .map(smallestNodeId -> {
                         final UUID targetId = resolveTargetNode(smallestNodeId, violation,
-                                parentMap, nodeTrees);
+                                parentMap, treeNodes);
                         final List<CheckstyleViolationMarker> markerList =
                             new ArrayList<>(List.of(
                                 new CheckstyleViolationMarker(Tree.randomId(), violation)));
@@ -195,7 +195,7 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
         }
 
         private UUID resolveTargetNode(UUID startNodeId, CheckstyleViolation violation,
-                                       Map<UUID, UUID> parentMap, Map<UUID, Tree> nodeTrees) {
+                                       Map<UUID, UUID> parentMap, Map<UUID, Tree> treeNodes) {
             UUID resultId = startNodeId;
             final CheckFullName checkFullName = violation.getSource().checkName();
             final Class<? extends Tree> targetType = TARGET_TYPES.get(checkFullName);
@@ -204,7 +204,7 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
                 UUID currentId = startNodeId;
                 boolean found = false;
                 while (currentId != null && !found) {
-                    if (targetType.isInstance(nodeTrees.get(currentId))) {
+                    if (targetType.isInstance(treeNodes.get(currentId))) {
                         resultId = currentId;
                         found = true;
                     }
@@ -229,7 +229,7 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
     private static final class BoundingBoxCapture extends PrintOutputCapture<TreeVisitor<?, ?>> {
         private final Map<UUID, Range> nodeRanges;
         private final Map<UUID, UUID> parentMap;
-        private final Map<UUID, Tree> nodeTrees;
+        private final Map<UUID, Tree> treeNodes;
         private int line;
         private int column;
         // Index in out where last append(String) ended. The printer may also write
@@ -240,11 +240,11 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
         BoundingBoxCapture(TreeVisitor<?, PrintOutputCapture<TreeVisitor<?, ?>>> printer,
                            Map<UUID, Range> nodeRanges,
                            Map<UUID, UUID> parentMap,
-                           Map<UUID, Tree> nodeTrees) {
+                           Map<UUID, Tree> treeNodes) {
             super(printer);
             this.nodeRanges = nodeRanges;
             this.parentMap = parentMap;
-            this.nodeTrees = nodeTrees;
+            this.treeNodes = treeNodes;
             this.line = 1;
         }
 
@@ -263,29 +263,25 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
         @Override
         public PrintOutputCapture<TreeVisitor<?, ?>> append(String text) {
             advance(out.substring(lastAppendEnd));
+            lastAppendEnd = out.length();
 
             final Cursor currentCursor = getContext().getCursor();
-            final Iterator<Object> it = currentCursor.getPath();
-
-            UUID childId = null;
-            while (it.hasNext()) {
-                final Object obj = it.next();
-                if (obj instanceof Tree treeNode) {
-                    final UUID currentId = treeNode.getId();
-                    nodeRanges.putIfAbsent(currentId,
+            Tree node = null;
+            for (Iterator<Object> iterator = currentCursor.getPath(); iterator.hasNext();) {
+                final Object obj = iterator.next();
+                if (obj instanceof Tree nextNode) {
+                    final UUID nextId = nextNode.getId();
+                    nodeRanges.putIfAbsent(nextId,
                             new Range(line, column, 0, 0));
-                    nodeTrees.putIfAbsent(currentId, treeNode);
-                    if (childId != null) {
-                        parentMap.putIfAbsent(childId, currentId);
+                    treeNodes.putIfAbsent(nextId, nextNode);
+                    if (node != null) {
+                        parentMap.putIfAbsent(node.getId(), nextId);
                     }
-                    childId = currentId;
+                    node = nextNode;
                 }
             }
 
-            advance(text);
-
             super.append(text);
-            lastAppendEnd = out.length();
             return this;
         }
     }

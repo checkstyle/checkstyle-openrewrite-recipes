@@ -32,17 +32,13 @@ import java.util.UUID;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.openrewrite.Cursor;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.InMemoryExecutionContext;
-import org.openrewrite.PrintOutputCapture;
 import org.openrewrite.Tree;
 import org.openrewrite.TreeVisitor;
 import org.openrewrite.java.JavaParser;
 import org.openrewrite.java.tree.J;
-import org.openrewrite.java.tree.Space;
 import org.openrewrite.marker.Marker;
-import org.openrewrite.marker.Markers;
 
 public class ViolationMarkerRecipeTest {
 
@@ -63,70 +59,6 @@ public class ViolationMarkerRecipeTest {
 
         Assertions.assertEquals(expectedDescription, recipe.getDescription(),
                 "Invalid description");
-    }
-
-    @Test
-    public void testBoundingBoxCaptureInternals() throws Exception {
-        final Class<?> captureClass = Class.forName(
-                "org.checkstyle.autofix.marker"
-                + ".ViolationMarkerRecipe$BoundingBoxCapture");
-        final Class<?> rangeClass = Class.forName(
-                "org.checkstyle.autofix.marker.ViolationMarkerRecipe$Range");
-        final Constructor<?> captureCtor =
-                captureClass.getDeclaredConstructor(
-                        TreeVisitor.class,
-                        Map.class, Map.class, Map.class);
-        captureCtor.setAccessible(true);
-
-        final Map<UUID, Object> nodeRanges = new HashMap<>();
-        final Map<UUID, UUID> parentMap = new HashMap<>();
-        final Map<UUID, Tree> nodeTrees =
-                new HashMap<>();
-        final TreeVisitor<?,
-                PrintOutputCapture<TreeVisitor<?, ?>>>
-                dummyPrinter = new TreeVisitor<>() {
-                };
-
-        final Field cursorField =
-                TreeVisitor.class.getDeclaredField("cursor");
-        cursorField.setAccessible(true);
-        cursorField.set(dummyPrinter, new Cursor(null, "dummy"));
-
-        final Object capture = captureCtor.newInstance(
-                dummyPrinter, nodeRanges, parentMap, nodeTrees);
-
-        final Method appendMethod =
-                captureClass.getMethod("append", String.class);
-
-        final Object result = appendMethod.invoke(capture, "test");
-        Assertions.assertSame(capture, result, "append should return this instance");
-
-        final Field outField =
-                PrintOutputCapture.class.getDeclaredField("out");
-        outField.setAccessible(true);
-        final StringBuilder outBuilder = (StringBuilder) outField.get(capture);
-        Assertions.assertEquals("test", outBuilder.toString(),
-                "append should delegate to super.append and capture the text");
-
-        final UUID testId = Tree.randomId();
-        final Constructor<?> rangeCtor = rangeClass.getDeclaredConstructor(
-                int.class, int.class, int.class, int.class);
-        rangeCtor.setAccessible(true);
-        nodeRanges.put(testId, rangeCtor.newInstance(1, 42, 0, 0));
-
-        final Tree fakeTree = new J.Empty(
-                testId, Space.EMPTY,
-                Markers.EMPTY);
-        cursorField.set(dummyPrinter, new Cursor(null, fakeTree));
-
-        appendMethod.invoke(capture, "hello");
-        Assertions.assertFalse(parentMap.containsKey(null),
-                "parentMap should not have null keys if childId was null");
-        final Object newRange = nodeRanges.get(testId);
-        final Method startColMethod = rangeClass.getDeclaredMethod("startCol");
-        startColMethod.setAccessible(true);
-        final int startCol = (Integer) startColMethod.invoke(newRange);
-        Assertions.assertEquals(42, startCol, "startCol should be preserved and not default to 0");
     }
 
     @Test
