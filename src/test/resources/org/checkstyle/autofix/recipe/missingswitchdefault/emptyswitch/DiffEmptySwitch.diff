@@ -1,0 +1,16 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/missingswitchdefault/emptyswitch/InputEmptySwitch.java
++++ src/test/resources/org/checkstyle/autofix/recipe/missingswitchdefault/emptyswitch/OutputEmptySwitch.java
+@@ -7,9 +7,11 @@
+ */
+ package org.checkstyle.autofix.recipe.missingswitchdefault.emptyswitch;
+ 
+-public class InputEmptySwitch {
++public class OutputEmptySwitch {
+     void foo(int x) {
+-        switch (x) { // violation 'switch without "default" clause.'
++        switch (x) {
++            default:
++                break;
+         }
+     }
+ }

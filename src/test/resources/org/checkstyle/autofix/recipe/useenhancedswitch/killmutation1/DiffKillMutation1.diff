@@ -1,0 +1,27 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/killmutation1/InputKillMutation1.java
++++ src/test/resources/org/checkstyle/autofix/recipe/useenhancedswitch/killmutation1/OutputKillMutation1.java
+@@ -20,18 +20,19 @@
+ */
+ package org.checkstyle.autofix.recipe.useenhancedswitch.killmutation1;
+ 
+-public class InputKillMutation1 {
++public class OutputKillMutation1 {
+     void foo(int x) {
+-        switch (x) { // violation
+-            case 1:
+-                break;
++        switch (x) {
++            case 1 -> {}
+         }
+     }
+ 
+     void bar(int y) {
+-        switch (y) { // violation
++        switch (y) {
+             case 1:
+                 break;
++            default:
++                break;
+         }
+     }
+ }

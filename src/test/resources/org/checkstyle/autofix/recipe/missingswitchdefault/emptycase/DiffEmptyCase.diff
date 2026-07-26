@@ -1,0 +1,19 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/missingswitchdefault/emptycase/InputEmptyCase.java
++++ src/test/resources/org/checkstyle/autofix/recipe/missingswitchdefault/emptycase/OutputEmptyCase.java
+@@ -7,11 +7,14 @@
+ */
+ package org.checkstyle.autofix.recipe.missingswitchdefault.emptycase;
+ 
+-public class InputEmptyCase {
++public class OutputEmptyCase {
+     void foo(int x) {
+-        switch (x) { // violation 'switch without "default" clause.'
++        switch (x) {
+             case 1:
+             case 2:
++                break;
++            default:
++                break;
+         }
+     }
+ }

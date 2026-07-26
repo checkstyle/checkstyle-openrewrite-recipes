@@ -556,6 +556,7 @@
                                 <param>org.checkstyle.autofix.recipe.HexLiteralCase*</param>
                                 <param>org.checkstyle.autofix.recipe.MissingOverride*</param>
                                 <param>org.checkstyle.autofix.recipe.AvoidStarImport*</param>
+                                <param>org.checkstyle.autofix.recipe.MissingSwitchDefault*</param>
                             </targetClasses>
                             <targetTests>
                                 <param>org.checkstyle.autofix.recipe.EmptyStatementTest</param>
@@ -567,6 +568,7 @@
                                 <param>org.checkstyle.autofix.recipe.AvoidStarImportTest</param>
                                 <param>org.checkstyle.autofix.recipe.RecipeTest</param>
                                 <param>org.checkstyle.autofix.recipe.RemoveViolationCommentsTest</param>
+                                <param>org.checkstyle.autofix.recipe.MissingSwitchDefaultTest</param>
                             </targetTests>
 
                             <mutators>

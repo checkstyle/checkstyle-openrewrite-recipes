@@ -147,7 +147,7 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 | 🔴     | [`MatchXpath`](https://checkstyle.sourceforge.io/checks/coding/matchxpath.html#MatchXpath)                               |           | Context-dependent XPath violations |
 | 🔴     | [`MissingCtor`](https://checkstyle.sourceforge.io/checks/coding/missingctor.html#MissingCtor)                             |           | Add explicit constructor |
 | 🟢     | [`MissingNullCaseInSwitch`](https://checkstyle.sourceforge.io/checks/coding/missingnullcaseinswitch.html#MissingNullCaseInSwitch) | `TBD`           |                |
-| 🟢     | [`MissingSwitchDefault`](https://checkstyle.sourceforge.io/checks/coding/missingswitchdefault.html#MissingSwitchDefault)   | `TBD`           |                |
+| 🟢     | [`MissingSwitchDefault`](https://checkstyle.sourceforge.io/checks/coding/missingswitchdefault.html#MissingSwitchDefault)   | `org.checkstyle.autofix.recipe.MissingSwitchDefault` |                |
 | 🔴     | [`ModifiedControlVariable`](https://checkstyle.sourceforge.io/checks/coding/modifiedcontrolvariable.html#ModifiedControlVariable) |           | Restructure loop logic |
 | 🔴     | [`MultipleStringLiterals`](https://checkstyle.sourceforge.io/checks/coding/multiplestringliterals.html#MultipleStringLiterals) |           | Extract to constants |
 | 🟢     | [`MultipleVariableDeclarations`](https://checkstyle.sourceforge.io/checks/coding/multiplevariabledeclarations.html#MultipleVariableDeclarations) | `TBD`           |                |

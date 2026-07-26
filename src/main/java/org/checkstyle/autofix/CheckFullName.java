@@ -42,6 +42,8 @@ public enum CheckFullName {
     MISSING_DEPRECATED("com.puppycrawl.tools.checkstyle.checks.annotation.MissingDeprecatedCheck"),
     CONSTRUCTORS_DECLARATION_GROUPING(
         "com.puppycrawl.tools.checkstyle.checks.coding.ConstructorsDeclarationGroupingCheck"),
+    MISSING_SWITCH_DEFAULT(
+        "com.puppycrawl.tools.checkstyle.checks.coding.MissingSwitchDefaultCheck"),
     UNUSED_IMPORT("com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck");
 
     private final String id;

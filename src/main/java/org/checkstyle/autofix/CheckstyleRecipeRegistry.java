@@ -38,6 +38,7 @@ import org.checkstyle.autofix.recipe.Header;
 import org.checkstyle.autofix.recipe.HexLiteralCase;
 import org.checkstyle.autofix.recipe.MissingDeprecated;
 import org.checkstyle.autofix.recipe.MissingOverride;
+import org.checkstyle.autofix.recipe.MissingSwitchDefault;
 import org.checkstyle.autofix.recipe.NewlineAtEndOfFile;
 import org.checkstyle.autofix.recipe.NumericalPrefixesInfixesSuffixesCharacterCase;
 import org.checkstyle.autofix.recipe.RedundantImport;
@@ -71,6 +72,7 @@ public final class CheckstyleRecipeRegistry {
             NumericalPrefixesInfixesSuffixesCharacterCase::new);
         RECIPE_MAP.put(CheckFullName.MISSING_DEPRECATED, MissingDeprecated::new);
         RECIPE_MAP.put(CheckFullName.MISSING_OVERRIDE, MissingOverride::new);
+        RECIPE_MAP.put(CheckFullName.MISSING_SWITCH_DEFAULT, MissingSwitchDefault::new);
         RECIPE_MAP.put(CheckFullName.REDUNDANT_IMPORT, RedundantImport::new);
         RECIPE_MAP.put(CheckFullName.UPPER_ELL, UpperEll::new);
         RECIPE_MAP_WITH_CONFIG.put(CheckFullName.CONSTRUCTORS_DECLARATION_GROUPING,

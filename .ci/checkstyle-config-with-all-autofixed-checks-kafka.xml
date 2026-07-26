@@ -24,6 +24,7 @@
         <module name="FinalLocalVariable"/>
         <module name="HexLiteralCase"/>
         <module name="MissingDeprecated"/>
+        <module name="MissingSwitchDefault"/>
         <module name="MissingOverride"/>
         <module name="NumericalPrefixesInfixesSuffixesCharacterCase"/>
         <module name="RedundantImport"/>

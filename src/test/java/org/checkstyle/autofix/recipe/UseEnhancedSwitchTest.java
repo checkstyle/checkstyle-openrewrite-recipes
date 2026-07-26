@@ -268,4 +268,9 @@ public class UseEnhancedSwitchTest extends AbstractRecipeTestSupport {
         verify(parser, "AllBranchesThrow");
     }
 
+    @RecipeTest
+    void killMutation1(ReportParser parser) throws Exception {
+        verify(parser, "KillMutation1");
+    }
+
 }
