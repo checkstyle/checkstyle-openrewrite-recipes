@@ -1,0 +1,17 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/missingswitchdefault/arrowstyle/InputArrowStyle.java
++++ src/test/resources/org/checkstyle/autofix/recipe/missingswitchdefault/arrowstyle/OutputArrowStyle.java
+@@ -7,10 +7,12 @@
+ */
+ package org.checkstyle.autofix.recipe.missingswitchdefault.arrowstyle;
+ 
+-public class InputArrowStyle {
++public class OutputArrowStyle {
+     void foo(int x) {
+-        switch (x) { // violation 'switch without "default" clause.'
++        switch (x) {
+             case 1 -> System.out.println(1);
++            default -> {
++            }
+         }
+     }
+ }

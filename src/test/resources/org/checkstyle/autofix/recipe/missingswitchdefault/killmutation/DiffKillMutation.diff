@@ -1,0 +1,26 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/missingswitchdefault/killmutation/InputKillMutation.java
++++ src/test/resources/org/checkstyle/autofix/recipe/missingswitchdefault/killmutation/OutputKillMutation.java
+@@ -24,18 +24,20 @@
+ */
+ package org.checkstyle.autofix.recipe.missingswitchdefault.killmutation;
+ 
+-public class InputKillMutation {
++public class OutputKillMutation {
+     void foo(int x) {
+-        switch (x) { // violation
++        switch (x) {
+             case 1:
+                 break;
+         }
+     }
+ 
+     void bar(int y) {
+-        switch (y) { // violation
++        switch (y) {
+             case 1:
+                 break;
++            default:
++                break;
+         }
+     }
+ }

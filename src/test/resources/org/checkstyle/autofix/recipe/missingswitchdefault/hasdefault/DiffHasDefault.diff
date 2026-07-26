@@ -1,0 +1,11 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/missingswitchdefault/hasdefault/InputHasDefault.java
++++ src/test/resources/org/checkstyle/autofix/recipe/missingswitchdefault/hasdefault/OutputHasDefault.java
+@@ -7,7 +7,7 @@
+ */
+ package org.checkstyle.autofix.recipe.missingswitchdefault.hasdefault;
+ 
+-public class InputHasDefault {
++public class OutputHasDefault {
+     void foo(int x) {
+         switch (x) {
+             case 1:

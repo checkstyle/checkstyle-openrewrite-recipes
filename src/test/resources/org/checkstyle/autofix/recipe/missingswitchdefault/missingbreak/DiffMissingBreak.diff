@@ -1,0 +1,19 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/missingswitchdefault/missingbreak/InputMissingBreak.java
++++ src/test/resources/org/checkstyle/autofix/recipe/missingswitchdefault/missingbreak/OutputMissingBreak.java
+@@ -7,11 +7,14 @@
+ */
+ package org.checkstyle.autofix.recipe.missingswitchdefault.missingbreak;
+ 
+-public class InputMissingBreak {
++public class OutputMissingBreak {
+     void foo(int x) {
+-        switch (x) { // violation 'switch without "default" clause.'
++        switch (x) {
+             case 1:
+                 System.out.println(x);
++                break;
++            default:
++                break;
+         }
+     }
+ }

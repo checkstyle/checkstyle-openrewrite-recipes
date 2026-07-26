@@ -1,0 +1,25 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/missingswitchdefault/nested/InputNested.java
++++ src/test/resources/org/checkstyle/autofix/recipe/missingswitchdefault/nested/OutputNested.java
+@@ -7,15 +7,19 @@
+ */
+ package org.checkstyle.autofix.recipe.missingswitchdefault.nested;
+ 
+-public class InputNested {
++public class OutputNested {
+     void foo(int x, int y) {
+-        switch (x) { // violation 'switch without "default" clause.'
++        switch (x) {
+             case 1:
+-                switch (y) { // violation 'switch without "default" clause.'
++                switch (y) {
+                     case 2:
+                         break;
++                    default:
++                        break;
+                 }
+                 break;
++            default:
++                break;
+         }
+     }
+ }
