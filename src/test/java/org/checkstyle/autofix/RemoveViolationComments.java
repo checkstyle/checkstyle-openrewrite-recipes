@@ -33,6 +33,9 @@ import org.openrewrite.marker.Markers;
 
 public class RemoveViolationComments extends Recipe {
 
+    public RemoveViolationComments() {
+    }
+
     @Override
     public String getDisplayName() {
         return "Remove violation comments";
@@ -49,6 +52,9 @@ public class RemoveViolationComments extends Recipe {
     }
 
     private static final class ViolationCommentRemover extends JavaIsoVisitor<ExecutionContext> {
+
+        private ViolationCommentRemover() {
+        }
 
         @Override
         public Space visitSpace(

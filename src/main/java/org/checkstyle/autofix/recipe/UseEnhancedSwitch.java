@@ -51,6 +51,9 @@ public class UseEnhancedSwitch extends Recipe {
 
     private static final int MINIMUM_JAVA_VERSION = 14;
 
+    public UseEnhancedSwitch() {
+    }
+
     @Override
     public String getDisplayName() {
         return "UseEnhancedSwitch recipe";
@@ -71,6 +74,9 @@ public class UseEnhancedSwitch extends Recipe {
     private final class UseEnhancedSwitchVisitor extends JavaVisitor<ExecutionContext> {
 
         private static final String DEFAULT_LABEL = "default";
+
+        private UseEnhancedSwitchVisitor() {
+        }
 
         @Override
         public Statement visitSwitch(J.Switch switchNode, ExecutionContext executionContext) {
@@ -637,6 +643,9 @@ public class UseEnhancedSwitch extends Recipe {
 
         private static final class ControlFlowVisitor extends JavaVisitor<Void> {
             private boolean hasDisallowedFlow;
+
+            private ControlFlowVisitor() {
+            }
 
             public boolean hasDisallowedFlow() {
                 return hasDisallowedFlow;

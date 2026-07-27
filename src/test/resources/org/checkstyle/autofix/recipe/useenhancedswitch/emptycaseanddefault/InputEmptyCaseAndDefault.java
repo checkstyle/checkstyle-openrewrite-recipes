@@ -10,7 +10,7 @@ package org.checkstyle.autofix.recipe.useenhancedswitch.emptycaseanddefault;
 
 public class InputEmptyCaseAndDefault {
     private boolean isGroupReady(int status) {
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (status) {
             case 1:
             case 2:

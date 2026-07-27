@@ -24,6 +24,9 @@ import org.junit.jupiter.api.Test;
 
 public class EmptyStatementTest extends AbstractRecipeTestSupport {
 
+    public EmptyStatementTest() {
+    }
+
     @Override
     protected String getSubpackage() {
         return "emptystatement";
@@ -117,4 +120,5 @@ public class EmptyStatementTest extends AbstractRecipeTestSupport {
     void multiFileEmptyStatement(ReportParser parser) throws Exception {
         verify(parser, "MultiFileEmptyStatement1", "MultiFileEmptyStatement2");
     }
+
 }

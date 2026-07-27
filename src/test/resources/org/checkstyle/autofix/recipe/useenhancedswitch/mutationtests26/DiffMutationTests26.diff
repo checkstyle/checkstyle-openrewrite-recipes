@@ -9,7 +9,7 @@
  
      void assignmentArrowBlock(int x) {
 -        int val;
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
 -        switch (x) {
 -            case 1: {
 -                val = 10;
@@ -35,7 +35,7 @@
      }
  
      int blockReturnExpr(int x) {
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
 -        switch (x) {
 -            case 1:
 +        return switch (x) {
@@ -59,7 +59,7 @@
  
      void assignmentWithThrow(int x) {
 -        String val;
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
 -        switch (x) {
 -            case 1:
 -                val = "one";
@@ -75,7 +75,7 @@
      }
  
      void multiStatement(int x) {
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
          switch (x) {
 -            case 1:
 +            case 1 -> {

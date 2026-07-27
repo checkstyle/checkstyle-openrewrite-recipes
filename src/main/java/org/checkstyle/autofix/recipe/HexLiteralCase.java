@@ -34,6 +34,9 @@ import org.openrewrite.java.tree.JavaType;
  */
 public class HexLiteralCase extends Recipe {
 
+    public HexLiteralCase() {
+    }
+
     @Override
     public String getDisplayName() {
         return "HexLiteralCase Recipe";
@@ -53,6 +56,9 @@ public class HexLiteralCase extends Recipe {
     private final class HexLiteralCaseVisitor extends JavaIsoVisitor<ExecutionContext> {
 
         private static final String HEX_PREFIX = "0x";
+
+        private HexLiteralCaseVisitor() {
+        }
 
         @Override
         public J.Literal visitLiteral(J.Literal literal, ExecutionContext executionContext) {

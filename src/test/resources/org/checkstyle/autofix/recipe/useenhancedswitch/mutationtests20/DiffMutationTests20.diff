@@ -9,7 +9,7 @@
  
      void assignmentSwitchBlock(int x) {
 -        String s;
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
 -        switch (x) {
 -            case 1: {
 -                s = "one";
@@ -35,7 +35,7 @@
  
      void assignmentSwitchBlockMulti(int x) {
 -        String s;
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
 -        switch (x) {
 -            case 1: {
 +        String s = switch (x) {
@@ -57,7 +57,7 @@
  
      void assignmentSwitchInitialized(int x) {
          String s = "init";
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
          switch (x) {
 -            case 1:
 -                s = "one";

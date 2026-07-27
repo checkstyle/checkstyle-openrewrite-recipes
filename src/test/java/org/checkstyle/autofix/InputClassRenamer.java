@@ -29,6 +29,9 @@ import org.openrewrite.java.tree.J;
  */
 public class InputClassRenamer extends Recipe {
 
+    public InputClassRenamer() {
+    }
+
     @Override
     public String getDisplayName() {
         return "Rename Input-prefixed classes";
@@ -48,6 +51,9 @@ public class InputClassRenamer extends Recipe {
 
         private static final String FROM_PREFIX = "Input";
         private static final String TO_PREFIX = "Output";
+
+        private ClassRenameVisitor() {
+        }
 
         @Override
         public J.ClassDeclaration visitClassDeclaration(J.ClassDeclaration classDecl,

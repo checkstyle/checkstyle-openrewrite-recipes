@@ -29,6 +29,9 @@ import org.openrewrite.marker.Marker;
 
 public class CheckstyleViolationMarkerTest {
 
+    public CheckstyleViolationMarkerTest() {
+    }
+
     @Test
     public void testGetId() {
         final UUID id = UUID.randomUUID();

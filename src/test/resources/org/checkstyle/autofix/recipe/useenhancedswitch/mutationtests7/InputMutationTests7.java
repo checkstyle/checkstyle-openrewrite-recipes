@@ -11,7 +11,7 @@ package org.checkstyle.autofix.recipe.useenhancedswitch.mutationtests7;
 public class InputMutationTests7 {
 
     int missingDefaultReturn(int x) {
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1:
                 return 1;
@@ -20,7 +20,7 @@ public class InputMutationTests7 {
     }
 
     void notAllCasesReturn(int x) {
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1:
                 System.out.println("1");
@@ -31,7 +31,7 @@ public class InputMutationTests7 {
     }
 
     int emptyBlockReturn(int x) {
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1:
                 {}
@@ -43,7 +43,7 @@ public class InputMutationTests7 {
     }
 
     void tabIndentedSwitch(int x) {
-    	// violation below, 'Switch can be replaced with enhanced switch'
+    	// violation below 'Switch can be replaced with enhanced switch'
     	switch (x) {
     		case 1:
     			System.out.println("1");

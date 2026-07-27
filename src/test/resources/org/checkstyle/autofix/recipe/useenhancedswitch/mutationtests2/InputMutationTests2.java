@@ -14,7 +14,7 @@ public class InputMutationTests2 {
     void doSomething(String p) {}
 
     void sameLineStatements(int x) {
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1:      { doSomething("same");
                 doSomething("next");
@@ -24,7 +24,7 @@ public class InputMutationTests2 {
     }
 
     void blankLinesCase(int x) {
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
 
             case 1: {
@@ -36,7 +36,7 @@ public class InputMutationTests2 {
     }
 
     String returnOnlySwitch(int id) {
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (id) {
             case 1:
                 return "REQUEST";
@@ -48,7 +48,7 @@ public class InputMutationTests2 {
     }
 
     String multiStatementYield(int id) {
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (id) {
             case 1:
                 System.out.println("log");
@@ -62,7 +62,7 @@ public class InputMutationTests2 {
 
     void assignmentSwitch(int x) {
         String s;
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1:
                 s = "one";
@@ -78,7 +78,7 @@ public class InputMutationTests2 {
 
     void assignmentSwitchWithThrow(int x) {
         String s;
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1:
                 s = "one";
@@ -90,7 +90,7 @@ public class InputMutationTests2 {
 
     void assignmentSwitchFallthrough(int x) {
         int val;
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1:
             case 2:

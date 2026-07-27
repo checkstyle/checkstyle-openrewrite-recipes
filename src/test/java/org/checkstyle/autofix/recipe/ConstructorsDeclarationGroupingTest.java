@@ -24,6 +24,9 @@ import org.junit.jupiter.api.Test;
 
 public class ConstructorsDeclarationGroupingTest extends AbstractRecipeTestSupport {
 
+    public ConstructorsDeclarationGroupingTest() {
+    }
+
     @Override
     protected String getSubpackage() {
         return "constructorsdeclarationgrouping";
@@ -230,4 +233,5 @@ public class ConstructorsDeclarationGroupingTest extends AbstractRecipeTestSuppo
     void killMutation2(ReportParser parser) throws Exception {
         verify(parser, "KillMutation1");
     }
+
 }

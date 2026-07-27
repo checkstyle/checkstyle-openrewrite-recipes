@@ -16,7 +16,7 @@ package org.checkstyle.autofix.recipe.numericalprefixesinfixessuffixescharacterc
 public class OutputNumericalCharacterCaseThree {
     int temp = 123;
     public void calculateValues() {
-        float hexResult = 0xABC.p1f + 0XABCD.1p1F; //suppressed violation for 0XABCD.1p1F
-        float octalResult = 0X.1p2f + 0x.12p1f;   //suppressed violation for 0X.1p2f
+        float hexResult = 0xABC.p1f + 0XABCD.1p1F; //suppressed for 0XABCD.1p1F
+        float octalResult = 0X.1p2f + 0x.12p1f;   //suppressed for 0X.1p2f
     }
 }

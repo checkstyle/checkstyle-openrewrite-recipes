@@ -10,7 +10,7 @@ package org.checkstyle.autofix.recipe.useenhancedswitch.mutationtests5;
 public class InputMutationTests5 {
     void testAssignmentSwitch(int e) {
         int x;
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch(e) {
             case 1:
                 System.out.println();

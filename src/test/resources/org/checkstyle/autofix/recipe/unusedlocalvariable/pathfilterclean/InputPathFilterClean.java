@@ -14,7 +14,7 @@ package org.checkstyle.autofix.recipe.unusedlocalvariable.pathfilterclean;
 public class InputPathFilterClean {
     public void method() {
         int used = 10;
-        int unused = 20; // suppressed violation
+        int unused = 20; // suppressed
         System.out.println(used);
     }
 }

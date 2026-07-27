@@ -13,7 +13,7 @@ public class InputMutationTests3 {
     enum Day { MON, TUE, WED }
 
     int enumExhaustive(Day d) {
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (d) {
             case MON: return 1;
             case TUE: return 2;
@@ -24,7 +24,7 @@ public class InputMutationTests3 {
 
     void assignmentWithInitializer(int x) {
         String s = "initial";
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1:
                 s = "one";
@@ -38,7 +38,7 @@ public class InputMutationTests3 {
 
     void assignmentWithoutInitializer(int x) {
         String s;
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1:
                 s = "one";
@@ -51,7 +51,7 @@ public class InputMutationTests3 {
     }
 
     void trailingComment(int x) {
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1:
                 System.out.println("one");
@@ -63,7 +63,7 @@ public class InputMutationTests3 {
     }
 
     int yieldInBlock(int x) {
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         return switch (x) {
             case 1:
                 {
@@ -76,10 +76,10 @@ public class InputMutationTests3 {
     }
 
     void nestedSwitches(int x, int y) {
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1:
-                // violation below, 'Switch can be replaced with enhanced switch'
+                // violation below 'Switch can be replaced with enhanced switch'
                 switch (y) {
                     case 1: break;
                     default: break;

@@ -24,6 +24,9 @@ import org.junit.jupiter.api.Test;
 
 public class NumericalPrefixesInfixesSuffixesCharacterCaseTest extends AbstractRecipeTestSupport {
 
+    public NumericalPrefixesInfixesSuffixesCharacterCaseTest() {
+    }
+
     @Override
     protected String getSubpackage() {
         return "numericalprefixesinfixessuffixescharactercase";

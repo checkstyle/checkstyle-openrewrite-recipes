@@ -14,7 +14,7 @@ public class InputMutationTests28 {
 
     void exhaustiveNoDefaultAssignment(Season s) {
         int val = 0;
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (s) {
             case SPRING: val = 1; break;
             case SUMMER: val = 2; break;
@@ -26,7 +26,7 @@ public class InputMutationTests28 {
 
     void assignmentWithBlock(int x) {
         int val;
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1: {
                 System.out.println("block");
@@ -41,7 +41,7 @@ public class InputMutationTests28 {
 
     void assignmentWithSingleStatementBlock(int x) {
         int val;
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1: {
                 val = 1;
@@ -56,7 +56,7 @@ public class InputMutationTests28 {
     enum EmptyEnum {}
 
     void emptyEnumExhaustive(EmptyEnum e) {
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (e) {
             default:
                 System.out.println("default");
@@ -65,7 +65,7 @@ public class InputMutationTests28 {
 
     void mixedLabelsAssignment(Season s) {
         int val;
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (s) {
             case SPRING:
             case SUMMER:

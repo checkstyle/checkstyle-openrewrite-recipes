@@ -11,7 +11,7 @@
  
      void exhaustiveNoDefaultAssignment(Season s) {
          int val = 0;
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
          switch (s) {
 -            case SPRING: val = 1; break;
 -            case SUMMER: val = 2; break;
@@ -27,7 +27,7 @@
  
      void assignmentWithBlock(int x) {
 -        int val;
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
 -        switch (x) {
 -            case 1: {
 +        int val = switch (x) {
@@ -47,7 +47,7 @@
  
      void assignmentWithSingleStatementBlock(int x) {
 -        int val;
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
 -        switch (x) {
 -            case 1: {
 -                val = 1;
@@ -66,7 +66,7 @@
      enum EmptyEnum {}
  
      void emptyEnumExhaustive(EmptyEnum e) {
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
          switch (e) {
 -            default:
 -                System.out.println("default");
@@ -76,7 +76,7 @@
  
      void mixedLabelsAssignment(Season s) {
 -        int val;
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
 -        switch (s) {
 -            case SPRING:
 -            case SUMMER:

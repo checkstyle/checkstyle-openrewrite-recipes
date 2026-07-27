@@ -7,7 +7,7 @@
 -public class InputMethodAnnotation {
 +public class OutputMethodAnnotation {
  
--    @SuppressWarnings("unchecked") // violation, "should be on the same line with its target."
+-    @SuppressWarnings("unchecked") // violation "should be on the same line with its target."
 -    public    void foo() {
 +    @SuppressWarnings("unchecked") public    void foo() {
      }

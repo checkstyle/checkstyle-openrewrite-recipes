@@ -3,7 +3,7 @@
   <module name="TreeWalker">
     <module name="com.puppycrawl.tools.checkstyle.checks.coding.UseEnhancedSwitchCheck"/>
     <module name="com.puppycrawl.tools.checkstyle.filters.SuppressWithNearbyCommentFilter">
-      <property name="commentFormat" value="suppressed violation"/>
+      <property name="commentFormat" value="SUPPRESS"/>
       <property name="checkFormat" value=".*"/>
       <property name="influenceFormat" value="0"/>
     </module>
@@ -23,15 +23,15 @@ public class OutputSurvivingMutations {
     }
 
     void decoyM1a(int x) {
-              switch (x) { // (suppressed violation)
-            case 1: break; // (suppressed violation)
+              switch (x) { // (SUPPRESS)
+            case 1: break; // (SUPPRESS)
             default: break;
         }
     }
 
     void decoyM1b(int x) {
-        switch (x) { // (suppressed violation)
-            case 1: break; // (suppressed violation)
+        switch (x) { // (SUPPRESS)
+            case 1: break; // (SUPPRESS)
             default: break;
         }
     }
@@ -44,15 +44,15 @@ public class OutputSurvivingMutations {
     }
 
     int decoyM2a(int x) {
-                      return switch (x) { // (suppressed violation)
-            case 1: yield 1; // (suppressed violation)
+                      return switch (x) { // (SUPPRESS)
+            case 1: yield 1; // (SUPPRESS)
             default: yield 0;
         };
     }
 
     int decoyM2b(int x) {
-               return switch (x) { // (suppressed violation)
-            case 1: yield 1; // (suppressed violation)
+               return switch (x) { // (SUPPRESS)
+            case 1: yield 1; // (SUPPRESS)
             default: yield 0;
         };
     }
@@ -76,15 +76,15 @@ public class OutputSurvivingMutations {
     }
 
                                
-    switch (x) { // (suppressed violation)
-    case 1: break; // (suppressed violation)
+    switch (x) { // (SUPPRESS)
+    case 1: break; // (SUPPRESS)
     default: break;
     }
     }
 
     int m5(int x, int y) {
-        return switch (x) { // (suppressed violation)
-            case 1: // (suppressed violation)
+        return switch (x) { // (SUPPRESS)
+            case 1: // (SUPPRESS)
                 yield switch (y) {
                     case 2 -> 2;
                     default -> 0;

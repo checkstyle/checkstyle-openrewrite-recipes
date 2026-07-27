@@ -37,6 +37,9 @@ public class GenerateDiffFilesTest {
     private static final Logger LOGGER = Logger.getLogger(GenerateDiffFilesTest.class.getName());
     private static final String RESOURCES_DIR = "src/test/resources/org/checkstyle/autofix/recipe";
 
+    public GenerateDiffFilesTest() {
+    }
+
     @Test
     void generateDiffs() throws IOException, InterruptedException {
         LOGGER.info("Generating diffs for recipe tests....");

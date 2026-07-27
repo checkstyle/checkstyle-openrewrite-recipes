@@ -24,6 +24,9 @@ import org.junit.jupiter.api.Test;
 
 public class UnusedImportsTest extends AbstractRecipeTestSupport {
 
+    public UnusedImportsTest() {
+    }
+
     @Override
     protected String getSubpackage() {
         return "unusedimports";
@@ -71,4 +74,5 @@ public class UnusedImportsTest extends AbstractRecipeTestSupport {
     void killMutation(ReportParser parser) throws Exception {
         verify(parser, "KillMutation");
     }
+
 }

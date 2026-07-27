@@ -44,6 +44,9 @@ import org.openrewrite.marker.Markers;
  */
 public class MissingDeprecated extends Recipe {
 
+    public MissingDeprecated() {
+    }
+
     @Override
     public String getDisplayName() {
         return "Missing Deprecated annotation or Javadoc tag";
@@ -65,6 +68,9 @@ public class MissingDeprecated extends Recipe {
         private static final String DEPRECATED = "Deprecated";
         private static final String NEWLINE = "\n";
         private static final String SPACE = " ";
+
+        private MissingDeprecatedVisitor() {
+        }
 
         @Override
         public J.MethodDeclaration visitMethodDeclaration(J.MethodDeclaration method,

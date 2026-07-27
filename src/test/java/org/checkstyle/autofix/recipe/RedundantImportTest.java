@@ -24,6 +24,9 @@ import org.junit.jupiter.api.Test;
 
 public class RedundantImportTest extends AbstractRecipeTestSupport {
 
+    public RedundantImportTest() {
+    }
+
     @Override
     protected String getSubpackage() {
         return "redundantimport";

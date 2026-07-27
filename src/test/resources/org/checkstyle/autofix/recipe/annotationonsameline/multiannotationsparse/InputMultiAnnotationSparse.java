@@ -12,7 +12,10 @@ public class InputMultiAnnotationSparse {
     @interface Ann1 {}
     @interface Ann2 {}
 
-    @Ann1 @Ann2 // 2 violations
+    // violation below 'Annotation 'Ann1' should be on the same line with its target.'
+    @Ann1
+    // violation below 'Annotation 'Ann2' should be on the same line with its target.'
+    @Ann2
     class Target {
     }
 }

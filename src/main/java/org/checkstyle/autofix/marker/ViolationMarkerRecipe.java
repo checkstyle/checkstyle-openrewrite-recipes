@@ -345,4 +345,5 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
             return (M) new MarkersApplied(uuid);
         }
     }
+
 }

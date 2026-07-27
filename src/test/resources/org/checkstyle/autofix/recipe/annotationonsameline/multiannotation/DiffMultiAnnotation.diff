@@ -9,7 +9,7 @@
  
      @Target({ElementType.METHOD, ElementType.TYPE, ElementType.FIELD})
      @interface Ann1 {}
-@@ -22,20 +22,13 @@
+@@ -22,23 +22,13 @@
      @Target({ElementType.METHOD, ElementType.TYPE, ElementType.FIELD})
      @interface Ann3 {}
  
@@ -28,7 +28,10 @@
 -    @Ann2 public class TwoAnnClass {}
 +    @Ann1 @Ann2 public class TwoAnnClass {}
  
--    @Ann1 @Ann2 // 2 violations
+-    // violation below 'Annotation 'Ann1' should be on the same line with its target.'
+-    @Ann1
+-    // violation below 'Annotation 'Ann2' should be on the same line with its target.'
+-    @Ann2
 -    @Ann3 public void threeAnnMethod() {}
 +    @Ann1 @Ann2 @Ann3 public void threeAnnMethod() {}
  

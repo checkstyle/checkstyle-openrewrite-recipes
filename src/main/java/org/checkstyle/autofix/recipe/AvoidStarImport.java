@@ -37,6 +37,9 @@ import org.openrewrite.java.tree.JavaType;
  */
 public class AvoidStarImport extends Recipe {
 
+    public AvoidStarImport() {
+    }
+
     @Override
     public String getDisplayName() {
         return "Avoid Star Import recipe";
@@ -56,6 +59,9 @@ public class AvoidStarImport extends Recipe {
 
         private final Set<String> packagesToExpand = new HashSet<>();
         private final Set<UUID> starImportIdsToRemove = new HashSet<>();
+
+        private AvoidStarImportVisitor() {
+        }
 
         @Override
         public J.CompilationUnit visitCompilationUnit(J.CompilationUnit compilationUnit,

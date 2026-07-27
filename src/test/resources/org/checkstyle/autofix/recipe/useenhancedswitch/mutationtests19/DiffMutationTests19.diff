@@ -7,7 +7,7 @@
 -public class InputMutationTests19 {
 +public class OutputMutationTests19 {
      void oneLiner(int x) {
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
 -        switch (x) { case 1:        {
 +        switch (x) { case 1 -> {
              System.out.println("one");

@@ -30,6 +30,9 @@ import org.openrewrite.java.tree.J;
  */
 public class UnusedImports extends Recipe {
 
+    public UnusedImports() {
+    }
+
     @Override
     public String getDisplayName() {
         return "UnusedImports Recipe";
@@ -46,6 +49,9 @@ public class UnusedImports extends Recipe {
     }
 
     private static final class UnusedImportsVisitor extends JavaIsoVisitor<ExecutionContext> {
+
+        private UnusedImportsVisitor() {
+        }
 
         @Override
         public J.CompilationUnit visitCompilationUnit(J.CompilationUnit cu,

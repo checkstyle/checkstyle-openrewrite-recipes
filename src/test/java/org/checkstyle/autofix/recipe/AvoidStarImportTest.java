@@ -24,6 +24,9 @@ import org.junit.jupiter.api.Test;
 
 public class AvoidStarImportTest extends AbstractRecipeTestSupport {
 
+    public AvoidStarImportTest() {
+    }
+
     @Override
     protected String getSubpackage() {
         return "avoidstarimport";

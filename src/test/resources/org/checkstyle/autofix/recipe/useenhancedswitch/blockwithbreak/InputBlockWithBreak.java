@@ -15,7 +15,7 @@ public class InputBlockWithBreak {
     }
 
     void blockCasesWithBreak(int x) {
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1:
                 {
@@ -38,7 +38,7 @@ public class InputBlockWithBreak {
 
     String multiStatementBlockCases(int x) {
         String result;
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1:
                 {
@@ -62,7 +62,7 @@ public class InputBlockWithBreak {
     }
 
     void mixedBlockAndPlainCases(int x) {
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1:
                 doSomething("plain");

@@ -32,6 +32,9 @@ import com.puppycrawl.tools.checkstyle.internal.utils.CheckUtil;
 
 public class ReadmeTest {
 
+    public ReadmeTest() {
+    }
+
     @Test
     public void testAllChecksAreDocumentedInReadme() throws Exception {
         final Set<Class<?>> checks = CheckUtil.getCheckstyleChecks();

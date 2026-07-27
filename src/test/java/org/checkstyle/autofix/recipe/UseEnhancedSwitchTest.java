@@ -27,6 +27,9 @@ import org.openrewrite.test.RecipeSpec;
 
 public class UseEnhancedSwitchTest extends AbstractRecipeTestSupport {
 
+    public UseEnhancedSwitchTest() {
+    }
+
     @Override
     public void defaults(RecipeSpec spec) {
         spec.allSources(source -> {

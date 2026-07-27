@@ -24,6 +24,9 @@ import org.junit.jupiter.api.Test;
 
 public class MissingOverrideTest extends AbstractRecipeTestSupport {
 
+    public MissingOverrideTest() {
+    }
+
     @Override
     protected String getSubpackage() {
         return "missingoverride";
@@ -72,4 +75,5 @@ public class MissingOverrideTest extends AbstractRecipeTestSupport {
     void testKillMutation(ReportParser parser) throws Exception {
         verify(parser, "KillMutation");
     }
+
 }

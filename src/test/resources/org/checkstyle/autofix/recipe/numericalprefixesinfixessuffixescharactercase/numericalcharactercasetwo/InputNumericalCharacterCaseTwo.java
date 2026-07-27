@@ -16,9 +16,9 @@ package org.checkstyle.autofix.recipe.numericalprefixesinfixessuffixescharacterc
 public class InputNumericalCharacterCaseTwo {
 
     public void calculateValues() {
-        // violation below, 'Numerical prefix should be in lowercase.'
-        long hexResult = 0XDEADBEEFl + 0XDEADBEFl; //suppressed violation for 0XDEADBEFl
-        // violation below, 'Numerical prefix should be in lowercase.'
-        long octalResult = 0X12l + 0XDEADBEEFl;   //suppressed violation for 0X12l
+        // violation below 'Numerical prefix should be in lowercase.'
+        long hexResult = 0XDEADBEEFl + 0XDEADBEFl; //suppressed for 0XDEADBEFl
+        // violation below 'Numerical prefix should be in lowercase.'
+        long octalResult = 0X12l + 0XDEADBEEFl;   //suppressed for 0X12l
     }
 }

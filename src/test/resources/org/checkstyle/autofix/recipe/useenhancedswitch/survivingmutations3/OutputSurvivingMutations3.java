@@ -3,7 +3,7 @@
   <module name="TreeWalker">
     <module name="com.puppycrawl.tools.checkstyle.checks.coding.UseEnhancedSwitchCheck"/>
     <module name="com.puppycrawl.tools.checkstyle.filters.SuppressWithNearbyCommentFilter">
-      <property name="commentFormat" value="suppressed violation"/>
+      <property name="commentFormat" value="SUPPRESS"/>
       <property name="checkFormat" value=".*"/>
       <property name="influenceFormat" value="0"/>
     </module>

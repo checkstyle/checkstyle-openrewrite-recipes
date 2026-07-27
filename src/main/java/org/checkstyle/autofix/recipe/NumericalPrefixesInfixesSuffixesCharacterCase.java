@@ -35,6 +35,9 @@ import org.openrewrite.java.tree.JavaType;
  */
 public class NumericalPrefixesInfixesSuffixesCharacterCase extends Recipe {
 
+    public NumericalPrefixesInfixesSuffixesCharacterCase() {
+    }
+
     @Override
     public String getDisplayName() {
         return "NumericalPrefixesInfixesSuffixesCharacterCase Recipe";
@@ -59,6 +62,9 @@ public class NumericalPrefixesInfixesSuffixesCharacterCase extends Recipe {
         private static final String BYTE_PREFIX = "0b";
 
         private static final String EXPONENT_P = "p";
+
+        private NumericalPrefixesInfixesSuffixesCharacterCaseVisitor() {
+        }
 
         @Override
         public J.Literal visitLiteral(J.Literal literal, ExecutionContext executionContext) {
@@ -144,4 +150,5 @@ public class NumericalPrefixesInfixesSuffixesCharacterCase extends Recipe {
                     });
         }
     }
+
 }

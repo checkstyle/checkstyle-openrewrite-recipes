@@ -24,6 +24,9 @@ import org.junit.jupiter.api.Test;
 
 public class HexLiteralCaseTest extends AbstractRecipeTestSupport {
 
+    public HexLiteralCaseTest() {
+    }
+
     @Override
     protected String getSubpackage() {
         return "hexliterialcase";
@@ -74,4 +77,5 @@ public class HexLiteralCaseTest extends AbstractRecipeTestSupport {
     void testKillMutation(ReportParser parser) throws Exception {
         verify(parser, "KillMutation");
     }
+
 }

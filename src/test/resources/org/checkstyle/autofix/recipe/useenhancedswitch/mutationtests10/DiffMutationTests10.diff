@@ -12,7 +12,7 @@
      public void testEmptyAssignment() {
          int x = 0;
          int i = 1;
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
          switch(i) {
 -            case 1:
 -            case 2:
@@ -32,7 +32,7 @@
  
      public int testEmptyReturn() {
          int i = 1;
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
          switch(i) {
 -            case 1:
 -            case 2:
@@ -54,7 +54,7 @@
      public void testBreakInBlock() {
          int x = 0;
          int i = 1;
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
          switch(i) {
 -            case 1: {
 +            case 1 -> {
@@ -73,7 +73,7 @@
          int x = 0;
          int y = 0;
          int i = 1;
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
          switch(i) {
 -            case 1:
 -                x = 1;
@@ -92,7 +92,7 @@
  
      public int testEnumExhaustiveMissing() {
          Direction d = Direction.UP;
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
          switch (d) {
 -            case UP:
 +            case UP -> {
@@ -109,7 +109,7 @@
  
      public int testEnumExhaustiveComplete() {
          Direction d = Direction.UP;
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
 -        switch (d) {
 -            case UP:
 -                return 1;

@@ -14,11 +14,11 @@ public class InputMutationTests {
     void doSomething(String p) {}
 
     void singleSwitchInBlock(int x, int y) {
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1:
                 {
-                    // violation below, 'Switch can be replaced with enhanced switch'
+                    // violation below 'Switch can be replaced with enhanced switch'
                     switch (y) {
                         case 1: break;
                     }
@@ -28,7 +28,7 @@ public class InputMutationTests {
     }
 
     void emptyBlock(int x) {
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1:
                 {
@@ -38,7 +38,7 @@ public class InputMutationTests {
     }
 
     void weirdlyIndented(int x) {
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1:
                 {
@@ -49,7 +49,7 @@ doSomething("no indent");
     }
 
     void multiBreaksInBlock(int x) {
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1:
                 {
@@ -61,7 +61,7 @@ doSomething("no indent");
     }
 
     void underIndented(int x) {
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1:
                 {
@@ -73,7 +73,7 @@ doSomething("no indent");
     }
 
     void multiLinePrefix(int x) {
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1:
                 /* comment */
@@ -86,7 +86,7 @@ doSomething("no indent");
     }
 
     void blankLines(int x) {
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1:
 

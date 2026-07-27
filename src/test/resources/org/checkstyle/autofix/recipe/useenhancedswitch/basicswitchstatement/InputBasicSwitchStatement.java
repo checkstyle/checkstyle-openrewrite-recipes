@@ -15,7 +15,7 @@ public class InputBasicSwitchStatement {
     }
 
     void singleStatementCases(int x) {
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1:
                 doSomething("one");
@@ -38,7 +38,7 @@ public class InputBasicSwitchStatement {
     }
 
     void multiStatementCases(int x) {
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1:
                 doSomething("start");
@@ -51,7 +51,7 @@ public class InputBasicSwitchStatement {
     }
 
     void emptyDefaultCase(int x) {
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1:
                 doSomething("one");
@@ -62,7 +62,7 @@ public class InputBasicSwitchStatement {
     }
 
     void trailingEmptyCases(int x) {
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1:
                 doSomething("one");

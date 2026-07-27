@@ -15,7 +15,7 @@ public class InputSwitchExpressionBlock {
     }
 
     int multiStatementYield(int x) {
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         int result = switch (x) {
             case 1:
                 doSomething("processing");

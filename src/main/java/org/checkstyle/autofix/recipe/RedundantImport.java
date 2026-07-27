@@ -27,6 +27,9 @@ import org.openrewrite.java.tree.J;
 
 public class RedundantImport extends Recipe {
 
+    public RedundantImport() {
+    }
+
     @Override
     public String getDisplayName() {
         return "Remove redundant imports";
@@ -44,6 +47,9 @@ public class RedundantImport extends Recipe {
 
     private static final class RemoveRedundantImportsVisitor
             extends JavaIsoVisitor<ExecutionContext> {
+
+        private RemoveRedundantImportsVisitor() {
+        }
 
         @Override
         public J.CompilationUnit visitCompilationUnit(J.CompilationUnit cu,

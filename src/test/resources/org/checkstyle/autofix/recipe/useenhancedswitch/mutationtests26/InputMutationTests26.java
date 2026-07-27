@@ -12,7 +12,7 @@ public class InputMutationTests26 {
 
     void assignmentArrowBlock(int x) {
         int val;
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1: {
                 val = 10;
@@ -32,7 +32,7 @@ public class InputMutationTests26 {
     }
 
     int blockReturnExpr(int x) {
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1:
                 System.out.println("case1");
@@ -47,7 +47,7 @@ public class InputMutationTests26 {
 
     void assignmentWithThrow(int x) {
         String val;
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1:
                 val = "one";
@@ -59,7 +59,7 @@ public class InputMutationTests26 {
     }
 
     void multiStatement(int x) {
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1:
                 System.out.println("a");
