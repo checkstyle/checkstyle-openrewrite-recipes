@@ -10,6 +10,6 @@ package org.checkstyle.autofix.recipe.annotationonsameline.fieldannotation;
 
 public class InputFieldAnnotation {
 
-    @Deprecated // violation, "should be on the same line with its target."
+    @Deprecated // violation "should be on the same line with its target."
     private String field;
 }

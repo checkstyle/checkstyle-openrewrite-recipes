@@ -33,6 +33,9 @@ public class CheckstyleReportsParserTest {
 
     private final ReportParser reportParser = new XmlReportParser();
 
+    public CheckstyleReportsParserTest() {
+    }
+
     private static String getPath(String path) {
         return "src/test/resources/org/checkstyle/autofix/parser/" + path;
     }

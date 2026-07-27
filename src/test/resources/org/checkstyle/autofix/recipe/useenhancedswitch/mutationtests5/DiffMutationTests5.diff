@@ -8,7 +8,7 @@
 +public class OutputMutationTests5 {
      void testAssignmentSwitch(int e) {
 -        int x;
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
 -        switch(e) {
 -            case 1:
 -                System.out.println();

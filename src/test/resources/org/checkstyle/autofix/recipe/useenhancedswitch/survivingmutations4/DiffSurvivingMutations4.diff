@@ -13,7 +13,7 @@
      }
  
      int fallThrough(int x) {
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
 -        switch (x) {
 -            case 1:
 -            case 2:
@@ -29,7 +29,7 @@
  
      void fallThroughAssignment(int x) {
 -        int y;
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
 -        switch (x) {
 -            case 1:
 -            case 2:

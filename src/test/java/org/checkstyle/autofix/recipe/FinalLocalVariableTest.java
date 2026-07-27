@@ -24,6 +24,9 @@ import org.junit.jupiter.api.Test;
 
 public class FinalLocalVariableTest extends AbstractRecipeTestSupport {
 
+    public FinalLocalVariableTest() {
+    }
+
     @Test
     public void checkDisplayName() {
         final FinalLocalVariable recipe = new FinalLocalVariable();

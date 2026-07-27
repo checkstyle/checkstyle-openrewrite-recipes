@@ -15,7 +15,7 @@ public class InputAllBranchesThrow {
     }
 
     public Object testReturn(ErrorType type) throws Exception {
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (type) {
             case IO_EXCEPTION:
                 throw new Exception("IO");
@@ -27,7 +27,7 @@ public class InputAllBranchesThrow {
 
     public void testAssignment(ErrorType type) throws Exception {
         int x;
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (type) {
             case IO_EXCEPTION:
                 throw new Exception("IO");

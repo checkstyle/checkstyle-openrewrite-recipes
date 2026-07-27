@@ -13,7 +13,7 @@ public class InputMutationTests20 {
 
     void assignmentSwitchBlock(int x) {
         String s;
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1: {
                 s = "one";
@@ -33,7 +33,7 @@ public class InputMutationTests20 {
 
     void assignmentSwitchBlockMulti(int x) {
         String s;
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1: {
                 System.out.println("log1");
@@ -50,7 +50,7 @@ public class InputMutationTests20 {
 
     void assignmentSwitchInitialized(int x) {
         String s = "init";
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1:
                 s = "one";

@@ -38,6 +38,10 @@ import org.openrewrite.marker.Markers;
  * override a method from a superclass or interface.
  */
 public class MissingOverride extends Recipe {
+
+    public MissingOverride() {
+    }
+
     @Override
     public String getDisplayName() {
         return "Missing Override annotation";
@@ -57,6 +61,9 @@ public class MissingOverride extends Recipe {
     private final class MissingOverrideVisitor extends JavaIsoVisitor<ExecutionContext> {
 
         private static final String OVERRIDE = "Override";
+
+        private MissingOverrideVisitor() {
+        }
 
         @Override
         public J.MethodDeclaration visitMethodDeclaration(J.MethodDeclaration method,

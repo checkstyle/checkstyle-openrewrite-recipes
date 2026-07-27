@@ -10,7 +10,7 @@
      enum Day { MON, TUE, WED }
  
      int enumExhaustive(Day d) {
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
 -        switch (d) {
 -            case MON: return 1;
 -            case TUE: return 2;
@@ -26,7 +26,7 @@
  
      void assignmentWithInitializer(int x) {
          String s = "initial";
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
          switch (x) {
 -            case 1:
 -                s = "one";
@@ -42,7 +42,7 @@
  
      void assignmentWithoutInitializer(int x) {
 -        String s;
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
 -        switch (x) {
 -            case 1:
 -                s = "one";
@@ -59,7 +59,7 @@
      }
  
      void trailingComment(int x) {
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
          switch (x) {
 -            case 1:
 -                System.out.println("one");
@@ -73,7 +73,7 @@
      }
  
      int yieldInBlock(int x) {
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
          return switch (x) {
 -            case 1:
 -                {
@@ -91,10 +91,10 @@
      }
  
      void nestedSwitches(int x, int y) {
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
          switch (x) {
 -            case 1:
--                // violation below, 'Switch can be replaced with enhanced switch'
+-                // violation below 'Switch can be replaced with enhanced switch'
 +            case 1 -> {
                  switch (y) {
 -                    case 1: break;

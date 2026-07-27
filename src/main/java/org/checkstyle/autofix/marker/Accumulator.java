@@ -25,8 +25,12 @@ import java.util.Map;
 import java.util.UUID;
 
 public final class Accumulator {
+
     private final Map<Path, Map<UUID, List<CheckstyleViolationMarker>>> byFile =
             new HashMap<>();
+
+    public Accumulator() {
+    }
 
     public Map<UUID, List<CheckstyleViolationMarker>> getByFile(Path path) {
         return byFile.getOrDefault(path, Collections.emptyMap());
@@ -35,4 +39,5 @@ public final class Accumulator {
     public void putByFile(Path path, Map<UUID, List<CheckstyleViolationMarker>> markers) {
         byFile.put(path, markers);
     }
+
 }

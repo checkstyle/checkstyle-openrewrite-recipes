@@ -14,7 +14,7 @@ public class InputMutationTests4 {
 
     void enumExhaustiveNoDefault(Color color) {
         int x = 0;
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (color) {
             case RED: x = 1; break;
             case GREEN: x = 2; break;
@@ -25,7 +25,7 @@ public class InputMutationTests4 {
 
     void assignmentBlockMultiStmt(Color color) {
         int val;
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (color) {
             case RED:
                 System.out.println("red");
@@ -44,7 +44,7 @@ public class InputMutationTests4 {
 
     void assignmentFallthrough(int x) {
         String val;
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1:
             case 2:
@@ -61,7 +61,7 @@ public class InputMutationTests4 {
     }
 
     int returnWithThrow(int x) {
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1: return 10;
             case 2: return 20;
@@ -70,7 +70,7 @@ public class InputMutationTests4 {
     }
 
     void blockSingleStmt(int x) {
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1: {
                 System.out.println("one");
@@ -84,7 +84,7 @@ public class InputMutationTests4 {
     }
 
     int returnBlockMultiStmt(int x) {
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1: {
                 System.out.println("processing");

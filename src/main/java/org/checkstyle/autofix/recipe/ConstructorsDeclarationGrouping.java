@@ -76,6 +76,9 @@ public class ConstructorsDeclarationGrouping extends Recipe {
     private final class ConstructorsDeclarationGroupingVisitor
             extends JavaIsoVisitor<ExecutionContext> {
 
+        private ConstructorsDeclarationGroupingVisitor() {
+        }
+
         @Override
         public J.ClassDeclaration visitClassDeclaration(
                 J.ClassDeclaration classDecl, ExecutionContext executionContext) {

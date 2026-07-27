@@ -8,7 +8,7 @@
 +public class OutputMutationTests7 {
  
      int missingDefaultReturn(int x) {
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
          switch (x) {
 -            case 1:
 +            case 1 -> {
@@ -19,7 +19,7 @@
      }
  
      void notAllCasesReturn(int x) {
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
          switch (x) {
 -            case 1:
 -                System.out.println("1");
@@ -32,7 +32,7 @@
      }
  
      int emptyBlockReturn(int x) {
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
          switch (x) {
 -            case 1:
 +            case 1 -> {
@@ -48,7 +48,7 @@
      }
  
      void tabIndentedSwitch(int x) {
--    	// violation below, 'Switch can be replaced with enhanced switch'
+-    	// violation below 'Switch can be replaced with enhanced switch'
      	switch (x) {
 -    		case 1:
 -    			System.out.println("1");

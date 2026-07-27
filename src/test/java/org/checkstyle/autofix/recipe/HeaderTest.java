@@ -27,6 +27,9 @@ import com.puppycrawl.tools.checkstyle.checks.header.HeaderCheck;
 
 public class HeaderTest extends AbstractRecipeTestSupport {
 
+    public HeaderTest() {
+    }
+
     @Override
     protected String getSubpackage() {
         return "header";
@@ -104,4 +107,5 @@ public class HeaderTest extends AbstractRecipeTestSupport {
     void killMutation(ReportParser parser) throws Exception {
         verify(parser, "KillMutation1", "KillMutation2");
     }
+
 }

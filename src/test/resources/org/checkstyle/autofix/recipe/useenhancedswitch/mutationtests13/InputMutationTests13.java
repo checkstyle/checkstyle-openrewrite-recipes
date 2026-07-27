@@ -15,7 +15,7 @@ public class InputMutationTests13 {
     void differentVariableAssignment(int i) {
         int x = 0;
         int y = 0;
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (i) {
             case 1:
                 x = 1;
@@ -28,7 +28,7 @@ public class InputMutationTests13 {
 
     void emptyCaseInAssignmentSwitch(int i) {
         int x = 0;
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (i) {
             case 1:
                 break;
@@ -39,7 +39,7 @@ public class InputMutationTests13 {
     }
 
     int inexhaustiveEnumDifferentType(Color c) {
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (c) {
             case RED:
                 return 1;

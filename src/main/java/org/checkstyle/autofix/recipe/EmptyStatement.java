@@ -39,6 +39,9 @@ import org.openrewrite.marker.Markers;
  */
 public class EmptyStatement extends Recipe {
 
+    public EmptyStatement() {
+    }
+
     @Override
     public String getDisplayName() {
         return "EmptyStatement recipe";
@@ -55,6 +58,9 @@ public class EmptyStatement extends Recipe {
     }
 
     private final class EmptyStatementVisitor extends JavaIsoVisitor<ExecutionContext> {
+
+        private EmptyStatementVisitor() {
+        }
 
         @Override
         public J.Block visitBlock(J.Block block, ExecutionContext executionContext) {

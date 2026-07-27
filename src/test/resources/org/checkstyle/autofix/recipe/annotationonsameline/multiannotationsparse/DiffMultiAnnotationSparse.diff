@@ -1,6 +1,6 @@
 --- src/test/resources/org/checkstyle/autofix/recipe/annotationonsameline/multiannotationsparse/InputMultiAnnotationSparse.java
 +++ src/test/resources/org/checkstyle/autofix/recipe/annotationonsameline/multiannotationsparse/OutputMultiAnnotationSparse.java
-@@ -8,11 +8,10 @@
+@@ -8,14 +8,10 @@
  
  package org.checkstyle.autofix.recipe.annotationonsameline.multiannotationsparse;
  
@@ -9,7 +9,10 @@
      @interface Ann1 {}
      @interface Ann2 {}
  
--    @Ann1 @Ann2 // 2 violations
+-    // violation below 'Annotation 'Ann1' should be on the same line with its target.'
+-    @Ann1
+-    // violation below 'Annotation 'Ann2' should be on the same line with its target.'
+-    @Ann2
 -    class Target {
 +    @Ann1 @Ann2 class Target {
      }

@@ -15,7 +15,7 @@ public class InputMutationTests9 {
 
     public int testNestedReturn(int x) {
         int res;
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1:
                 if (x > 0) return 0; // nested return
@@ -30,7 +30,7 @@ public class InputMutationTests9 {
 
     public int testExhaustiveEnumWithDefault(Day day) {
         int res;
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (day) {
             case MON:
                 res = 1;
@@ -50,7 +50,7 @@ public class InputMutationTests9 {
 
     public int testNonEnumSwitch(String s) {
         int res;
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (s) {
             case "A":
                 res = 1;
@@ -64,11 +64,11 @@ public class InputMutationTests9 {
 
     public int testMergeAdjacent(int x) {
         int res = 0;
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1: res = 1; break;
         }
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 2: res = 2; break;
         }

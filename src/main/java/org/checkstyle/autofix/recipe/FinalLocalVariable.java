@@ -39,6 +39,9 @@ import org.openrewrite.marker.Markers;
  */
 public class FinalLocalVariable extends Recipe {
 
+    public FinalLocalVariable() {
+    }
+
     @Override
     public String getDisplayName() {
         return "FinalLocalVariable recipe";
@@ -59,6 +62,9 @@ public class FinalLocalVariable extends Recipe {
      * This visitor handles both single and multi-variable declarations.
      */
     private final class LocalVariableVisitor extends JavaIsoVisitor<ExecutionContext> {
+
+        private LocalVariableVisitor() {
+        }
 
         @Override
         public J.CompilationUnit visitCompilationUnit(

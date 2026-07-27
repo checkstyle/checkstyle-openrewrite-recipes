@@ -23,7 +23,7 @@ public class InputSelectiveSwitch {
     }
 
     void needsConversion(int x) {
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1:
                 doSomething("one");

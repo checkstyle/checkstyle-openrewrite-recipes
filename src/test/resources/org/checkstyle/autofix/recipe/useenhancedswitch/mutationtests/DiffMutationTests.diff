@@ -10,11 +10,11 @@
      void doSomething(String p) {}
  
      void singleSwitchInBlock(int x, int y) {
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
          switch (x) {
 -            case 1:
 -                {
--                    // violation below, 'Switch can be replaced with enhanced switch'
+-                    // violation below 'Switch can be replaced with enhanced switch'
 +            case 1 -> {
                      switch (y) {
 -                        case 1: break;
@@ -27,7 +27,7 @@
      }
  
      void emptyBlock(int x) {
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
          switch (x) {
 -            case 1:
 -                {
@@ -38,7 +38,7 @@
      }
  
      void weirdlyIndented(int x) {
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
          switch (x) {
 -            case 1:
 -                {
@@ -50,7 +50,7 @@
      }
  
      void multiBreaksInBlock(int x) {
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
          switch (x) {
 -            case 1:
 -                {
@@ -66,7 +66,7 @@
      }
  
      void underIndented(int x) {
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
          switch (x) {
 -            case 1:
 -                {
@@ -82,7 +82,7 @@
      }
  
      void multiLinePrefix(int x) {
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
          switch (x) {
 -            case 1:
 -                /* comment */
@@ -99,7 +99,7 @@
      }
  
      void blankLines(int x) {
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
          switch (x) {
 -            case 1:
 -

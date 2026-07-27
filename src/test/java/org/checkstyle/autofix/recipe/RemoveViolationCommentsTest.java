@@ -30,6 +30,9 @@ import com.puppycrawl.tools.checkstyle.AbstractPathTestSupport;
 
 public class RemoveViolationCommentsTest extends AbstractPathTestSupport implements RewriteTest {
 
+    public RemoveViolationCommentsTest() {
+    }
+
     @Override
     public String getPackageLocation() {
         return "org/checkstyle/autofix/recipe/removeviolationcomments/allcommentvariations";
@@ -46,4 +49,5 @@ public class RemoveViolationCommentsTest extends AbstractPathTestSupport impleme
                 }, java(beforeCode, afterCode)
         );
     }
+
 }

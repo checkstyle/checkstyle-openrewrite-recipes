@@ -38,6 +38,9 @@ import org.openrewrite.marker.Markers;
  */
 public class FinalClass extends Recipe {
 
+    public FinalClass() {
+    }
+
     @Override
     public String getDisplayName() {
         return "FinalClass recipe";
@@ -54,6 +57,9 @@ public class FinalClass extends Recipe {
     }
 
     private static final class FinalClassVisitor extends JavaIsoVisitor<ExecutionContext> {
+
+        private FinalClassVisitor() {
+        }
 
         @Override
         public J.ClassDeclaration visitClassDeclaration(

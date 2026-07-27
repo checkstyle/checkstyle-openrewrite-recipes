@@ -55,6 +55,9 @@ public class XmlReportParser implements ReportParser {
 
     private static final String SOURCE_ATTR = "source";
 
+    public XmlReportParser() {
+    }
+
     @Override
     public List<CheckstyleViolation> parse(Path xmlPath) {
 

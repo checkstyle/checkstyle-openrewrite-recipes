@@ -25,9 +25,9 @@ public class InputClassFieldTest {
     private static int globalCounter = 0;
 
     public void FieldsParametersLocalsTest(String name, int initialValue, boolean autoStart) {
-        String normalizedName = name.trim();                // violation, "should be declared final"
-        int validatedValue = Math.max(0, initialValue);     // violation, "should be declared final"
-        // violation below, "should be declared final"
+        String normalizedName = name.trim();                // violation "should be declared final"
+        int validatedValue = Math.max(0, initialValue);     // violation "should be declared final"
+        // violation below "should be declared final"
         String logMessage = "Creating instance with: " + normalizedName;
 
         this.instanceField = normalizedName;
@@ -37,14 +37,14 @@ public class InputClassFieldTest {
 
     public void complexMethod(String param1, int param2, List<String> param3,
                               Map<String, Object> param4, boolean param5) {
-        String workingData = param1 + "_processed";         // violation, "should be declared final"
-        int calculatedSize = param2 * 2;                    // violation, "should be declared final"
-        // violation below, "should be declared final"
+        String workingData = param1 + "_processed";         // violation "should be declared final"
+        int calculatedSize = param2 * 2;                    // violation "should be declared final"
+        // violation below "should be declared final"
         List<String> filteredList = new ArrayList<>(param3);
-        // violation below, "should be declared final"
+        // violation below "should be declared final"
         Map<String, Object> workingMap = new HashMap<>(param4);
-        boolean processFlag = param5 && !param3.isEmpty();  // violation, "should be declared final"
-        // violation below, "should be declared final"
+        boolean processFlag = param5 && !param3.isEmpty();  // violation "should be declared final"
+        // violation below "should be declared final"
         String statusMessage = "Processing " + calculatedSize + " items";
     }
 }

@@ -33,6 +33,9 @@ import com.google.common.truth.Truth;
 
 public class KafkaConfigTest {
 
+    public KafkaConfigTest() {
+    }
+
     private void assertRecipesAreInConfig(String configPath) throws Exception {
         final Path recipesDir = Paths.get("src/main/java/org/checkstyle/autofix/recipe");
         final Set<String> recipes = new TreeSet<>();

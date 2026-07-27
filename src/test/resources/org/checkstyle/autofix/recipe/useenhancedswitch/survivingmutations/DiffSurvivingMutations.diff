@@ -8,7 +8,7 @@
 +public class OutputSurvivingMutations {
    
      void m1(int x) {
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
          switch (x) {
 -            case 1: break;
 -            default: break;
@@ -21,7 +21,7 @@
      }
  
      int m2(int x) {
--               // violation below, 'Switch can be replaced with enhanced switch'
+-               // violation below 'Switch can be replaced with enhanced switch'
                 return switch (x) {
 -            case 1: yield 1;
 -            default: yield 0;
@@ -34,10 +34,10 @@
      }
  
      void m3(int x, int y) {
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
          switch (x) {
 -            case 1:
--                // violation below, 'Switch can be replaced with enhanced switch'
+-                // violation below 'Switch can be replaced with enhanced switch'
 +            case 1 -> {
                  switch (y) {
 -                    case 2: break;
@@ -53,7 +53,7 @@
      }
  
      void m4(int x) {
--    // violation below, 'Switch can be replaced with enhanced switch'
+-    // violation below 'Switch can be replaced with enhanced switch'
      switch (x) {
 -    case 1: break;
 -    default: break;
@@ -64,9 +64,9 @@
                                 
 @@ -90,10 +85,9 @@
      int m5(int x, int y) {
-         return switch (x) { // (suppressed violation)
-             case 1: // (suppressed violation)
--                // violation below, 'Switch can be replaced with enhanced switch'
+         return switch (x) { // (SUPPRESS)
+             case 1: // (SUPPRESS)
+-                // violation below 'Switch can be replaced with enhanced switch'
                  yield switch (y) {
 -                    case 2: yield 2;
 -                    default: yield 0;

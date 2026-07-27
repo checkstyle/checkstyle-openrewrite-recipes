@@ -24,6 +24,9 @@ import org.junit.jupiter.api.Test;
 
 public class UpperEllTest extends AbstractRecipeTestSupport {
 
+    public UpperEllTest() {
+    }
+
     @Override
     protected String getSubpackage() {
         return "upperell";

@@ -42,6 +42,9 @@ import org.openrewrite.java.tree.Statement;
  */
 public class UnusedLocalVariable extends Recipe {
 
+    public UnusedLocalVariable() {
+    }
+
     @Override
     public String getDisplayName() {
         return "UnusedLocalVariable recipe";
@@ -71,6 +74,9 @@ public class UnusedLocalVariable extends Recipe {
 
         private final Set<UUID> namedVariablesToRemove = new HashSet<>();
         private Set<String> removedVarNamesInMethod = new HashSet<>();
+
+        private RemoveUnusedVisitor() {
+        }
 
         @Override
         public J.MethodDeclaration visitMethodDeclaration(J.MethodDeclaration method,
@@ -467,6 +473,9 @@ public class UnusedLocalVariable extends Recipe {
             private String pendingWhitespace;
             private List<Comment> trailing = new ArrayList<>();
             private String unclearedPendingWhitespace;
+
+            private CommentsState() {
+            }
 
             public List<Comment> getPending() {
                 return pending;

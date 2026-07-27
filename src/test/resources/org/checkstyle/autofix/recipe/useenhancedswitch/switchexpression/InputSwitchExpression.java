@@ -12,7 +12,7 @@ package org.checkstyle.autofix.recipe.useenhancedswitch.switchexpression;
 public class InputSwitchExpression {
 
     int switchExpressions(int x) {
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         int y = switch (x) {
             case 1 : yield 1;
             case 2 : yield 2;

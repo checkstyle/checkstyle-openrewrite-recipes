@@ -31,6 +31,9 @@ import org.openrewrite.java.tree.J;
  */
 public class UpperEll extends Recipe {
 
+    public UpperEll() {
+    }
+
     @Override
     public String getDisplayName() {
         return "UpperEll recipe";
@@ -51,6 +54,9 @@ public class UpperEll extends Recipe {
 
         private static final String LOWERCASE_L = "l";
         private static final String UPPERCASE_L = "L";
+
+        private UpperEllVisitor() {
+        }
 
         @Override
         public J.Literal visitLiteral(J.Literal literal, ExecutionContext executionContext) {

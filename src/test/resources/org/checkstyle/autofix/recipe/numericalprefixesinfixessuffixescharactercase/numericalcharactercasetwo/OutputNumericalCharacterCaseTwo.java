@@ -16,7 +16,7 @@ package org.checkstyle.autofix.recipe.numericalprefixesinfixessuffixescharacterc
 public class OutputNumericalCharacterCaseTwo {
 
     public void calculateValues() {
-        long hexResult = 0xDEADBEEFl + 0XDEADBEFl; //suppressed violation for 0XDEADBEFl
-        long octalResult = 0X12l + 0xDEADBEEFl;   //suppressed violation for 0X12l
+        long hexResult = 0xDEADBEEFl + 0XDEADBEFl; //suppressed for 0XDEADBEFl
+        long octalResult = 0X12l + 0xDEADBEEFl;   //suppressed for 0X12l
     }
 }

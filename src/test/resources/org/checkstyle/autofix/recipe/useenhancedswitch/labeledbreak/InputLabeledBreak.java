@@ -17,7 +17,7 @@ public class InputLabeledBreak {
     void labeledBreakInSwitch(int x) {
         outerLoop:
         for (int i = 0; i < 10; i++) {
-            // violation below, 'Switch can be replaced with enhanced switch'
+            // violation below 'Switch can be replaced with enhanced switch'
             switch (x) {
                 case 1:
                     doSomething("one");

@@ -13,7 +13,7 @@ public class InputMutationTests12 {
 
     public int testFallthroughAssignment(int i) {
         int x = 0;
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (i) {
             case 1:
             case 2:
@@ -27,7 +27,7 @@ public class InputMutationTests12 {
     }
 
     public int testFallthroughReturn(int i) {
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (i) {
             case 1:
             case 2:
@@ -39,7 +39,7 @@ public class InputMutationTests12 {
 
     public void testNonIdentifierAssignment(int i) {
         this.field = 0;
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (i) {
             case 1:
                 this.field = 1;
@@ -53,7 +53,7 @@ public class InputMutationTests12 {
     private int field;
 
     public int testInexhaustiveEnum(Color c) {
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (c) {
             case RED:
                 return 1;
@@ -64,7 +64,7 @@ public class InputMutationTests12 {
     }
 
     public void testNoSpaceIndent(int i) {
-// violation below, 'Switch can be replaced with enhanced switch'
+// violation below 'Switch can be replaced with enhanced switch'
 switch(i) {
 case 1:
 System.out.println("1");

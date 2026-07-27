@@ -11,7 +11,7 @@
      }
  
      void singleStatementCases(int x) {
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
          switch (x) {
 -            case 1:
 -                doSomething("one");
@@ -40,7 +40,7 @@
      }
  
      void multiStatementCases(int x) {
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
          switch (x) {
 -            case 1:
 +            case 1 -> {
@@ -56,7 +56,7 @@
      }
  
      void emptyDefaultCase(int x) {
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
          switch (x) {
 -            case 1:
 -                doSomething("one");
@@ -69,7 +69,7 @@
      }
  
      void trailingEmptyCases(int x) {
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
          switch (x) {
 -            case 1:
 -                doSomething("one");

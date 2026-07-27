@@ -24,6 +24,9 @@ import org.junit.jupiter.api.Test;
 
 public class FinalClassTest extends AbstractRecipeTestSupport {
 
+    public FinalClassTest() {
+    }
+
     @Override
     protected String getSubpackage() {
         return "finalclass";
@@ -134,4 +137,5 @@ public class FinalClassTest extends AbstractRecipeTestSupport {
     void killMutation1(ReportParser parser) throws Exception {
         verify(parser, "KillMutation1");
     }
+
 }

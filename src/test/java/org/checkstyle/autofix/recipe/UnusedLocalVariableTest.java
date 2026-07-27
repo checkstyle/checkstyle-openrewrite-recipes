@@ -24,6 +24,9 @@ import org.junit.jupiter.api.Test;
 
 public class UnusedLocalVariableTest extends AbstractRecipeTestSupport {
 
+    public UnusedLocalVariableTest() {
+    }
+
     @Override
     protected String getSubpackage() {
         return "unusedlocalvariable";

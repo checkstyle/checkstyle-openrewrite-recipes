@@ -15,7 +15,7 @@ public class InputMutationTests27 {
     void multipleVarDecls(int x) {
         int a;
         int b;
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1:
                 a = 1;
@@ -23,7 +23,7 @@ public class InputMutationTests27 {
             default:
                 a = 0;
         }
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1:
                 b = 1;
@@ -35,7 +35,7 @@ public class InputMutationTests27 {
     }
 
     int switchExprTraditional(int x) {
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         return switch (x) {
             case 1: yield 10;
             case 2: yield 20;
@@ -45,7 +45,7 @@ public class InputMutationTests27 {
 
     void noAssignmentConversion(int x) {
         String s = "initial";
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1:
                 s = "one";
@@ -58,7 +58,7 @@ public class InputMutationTests27 {
 
     void enumAssignment(Season s) {
         int val;
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (s) {
             case SPRING:
                 val = 1;
@@ -80,7 +80,7 @@ public class InputMutationTests27 {
     }
 
     void singleBlockCase(int x) {
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1: {
                 System.out.println("block");
@@ -93,7 +93,7 @@ public class InputMutationTests27 {
 
     void multipleVarInOneDecl(int x) {
         int a, b;
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1:
                 a = 1;

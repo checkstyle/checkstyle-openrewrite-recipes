@@ -8,7 +8,7 @@
 +public class OutputSurvivingMutations3 {
  
      void m6(int x) {
--          // violation below, 'Switch can be replaced with enhanced switch'
+-          // violation below 'Switch can be replaced with enhanced switch'
            switch (x) {
 -            case 1: break;
 -            default: break;
@@ -18,7 +18,7 @@
      }
  
      void m7(int x) {
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
          switch (x) {
 -case 1:
 +case 1 -> {
@@ -36,7 +36,7 @@
      }
  
      void m8(int x, int y) {
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
 -        switch (x) { case 1: switch (y) { case 1: System.out.println("1"); case 2: break; default: break; } break;
 -            default: break;
 +        switch (x) { case 1 -> { switch (y) { case 1: System.out.println("1"); case 2: break; default: break; }}
@@ -45,7 +45,7 @@
      }
  
      int m9(int x, int y) {
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
 -        return switch (x) { case 1 -> switch (y) { case 1: System.out.println("1"); yield 1; case 2: yield 2; default: yield 0; };
 +        return switch (x) { case 1 -> switch (y) { case 1 -> { System.out.println("1"); yield 1;} case 2 -> 2; default -> 0; };
              default -> 0;
@@ -53,7 +53,7 @@
      }
  
      void m10(int x) {
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
 -        switch (x) { case 1:      System.out.println("1"); System.out.println("1b"); break;
 -            default: break;
 +        switch (x) { case 1 -> {      System.out.println("1"); System.out.println("1b");}
@@ -65,10 +65,10 @@
      }
  
      void m11(int x, int y) {
--        // violation below, 'Switch can be replaced with enhanced switch'
+-        // violation below 'Switch can be replaced with enhanced switch'
          switch (x) {
 -            case 1:
--                // violation below, 'Switch can be replaced with enhanced switch'
+-                // violation below 'Switch can be replaced with enhanced switch'
 +            case 1 -> {
                  switch (y) {
 -                    case 1:

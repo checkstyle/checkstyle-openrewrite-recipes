@@ -42,6 +42,9 @@ import org.openrewrite.marker.Marker;
 
 public class ViolationMarkerRecipeTest {
 
+    public ViolationMarkerRecipeTest() {
+    }
+
     @Test
     public void testGetDisplayName() {
         final ViolationMarkerRecipe recipe = new ViolationMarkerRecipe(Collections.emptyList());

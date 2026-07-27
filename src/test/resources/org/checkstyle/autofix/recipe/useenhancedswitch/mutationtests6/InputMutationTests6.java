@@ -15,7 +15,7 @@ public class InputMutationTests6 {
     void assignmentWrongVar(int x) {
         int val = 0;
         int other = 0;
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1:
                 other = 99;
@@ -29,7 +29,7 @@ public class InputMutationTests6 {
 
     void assignmentWithAllThrows(int x) {
         int val;
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1:
                 val = 10;
@@ -42,7 +42,7 @@ public class InputMutationTests6 {
 
     void blockAssignment(int x) {
         int val;
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1:
                 System.out.println("processing");
@@ -59,7 +59,7 @@ public class InputMutationTests6 {
     }
 
     void partialEnum(Season s) {
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (s) {
             case SPRING:
                 System.out.println("spring");
@@ -74,7 +74,7 @@ public class InputMutationTests6 {
     }
 
     int exhaustiveEnumReturn(Season s) {
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (s) {
             case SPRING: return 1;
             case SUMMER: return 2;
@@ -85,7 +85,7 @@ public class InputMutationTests6 {
     }
 
     int singleReturnExpr(int x) {
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1: return 10;
             case 2: return 20;
@@ -94,7 +94,7 @@ public class InputMutationTests6 {
     }
 
     int singleThrowExpr(int x) {
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (x) {
             case 1: return 10;
             default: throw new IllegalArgumentException("nope");

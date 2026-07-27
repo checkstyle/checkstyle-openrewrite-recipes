@@ -8,6 +8,6 @@
 
 package org.checkstyle.autofix.recipe.annotationonsameline.basicclassannotation;
 
-@Deprecated // violation, "should be on the same line with its target."
+@Deprecated // violation "should be on the same line with its target."
 public class InputBasicClassAnnotation {
 }

@@ -24,6 +24,9 @@ import org.junit.jupiter.api.Test;
 
 public class MissingDeprecatedTest extends AbstractRecipeTestSupport {
 
+    public MissingDeprecatedTest() {
+    }
+
     @Override
     protected String getSubpackage() {
         return "missingdeprecated";
@@ -73,4 +76,5 @@ public class MissingDeprecatedTest extends AbstractRecipeTestSupport {
     void killMutation(ReportParser parser) throws Exception {
         verify(parser, "KillMutation");
     }
+
 }

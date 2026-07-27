@@ -14,7 +14,7 @@ public class InputMutationTests10 {
     public void testEmptyAssignment() {
         int x = 0;
         int i = 1;
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch(i) {
             case 1:
             case 2:
@@ -31,7 +31,7 @@ public class InputMutationTests10 {
 
     public int testEmptyReturn() {
         int i = 1;
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch(i) {
             case 1:
             case 2:
@@ -48,7 +48,7 @@ public class InputMutationTests10 {
     public void testBreakInBlock() {
         int x = 0;
         int i = 1;
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch(i) {
             case 1: {
                 if (true) break;
@@ -65,7 +65,7 @@ public class InputMutationTests10 {
         int x = 0;
         int y = 0;
         int i = 1;
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch(i) {
             case 1:
                 x = 1;
@@ -81,7 +81,7 @@ public class InputMutationTests10 {
 
     public int testEnumExhaustiveMissing() {
         Direction d = Direction.UP;
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (d) {
             case UP:
                 return 1;
@@ -94,7 +94,7 @@ public class InputMutationTests10 {
 
     public int testEnumExhaustiveComplete() {
         Direction d = Direction.UP;
-        // violation below, 'Switch can be replaced with enhanced switch'
+        // violation below 'Switch can be replaced with enhanced switch'
         switch (d) {
             case UP:
                 return 1;

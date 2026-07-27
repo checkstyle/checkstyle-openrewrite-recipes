@@ -27,6 +27,10 @@ import org.checkstyle.autofix.parser.ReportParser;
 import org.junit.jupiter.api.Test;
 
 public class NewLineAtEndOfFileTest extends AbstractRecipeTestSupport {
+
+    public NewLineAtEndOfFileTest() {
+    }
+
     @Override
     protected String getSubpackage() {
         return "newlineatendoffile";
@@ -96,4 +100,5 @@ public class NewLineAtEndOfFileTest extends AbstractRecipeTestSupport {
     void killMutation(ReportParser parser) throws Exception {
         verify(parser, "KillMutation1", "KillMutation2");
     }
+
 }

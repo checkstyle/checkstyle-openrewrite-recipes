@@ -217,7 +217,7 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
     private static void writeModule(Configuration config, BufferedWriter writer)
             throws IOException {
 
-        writer.write("<module name=\"" + (config.getName()) + "\">\n");
+        writer.write("<module name=\"" + config.getName() + "\">\n");
 
         for (String propName : config.getPropertyNames()) {
             try {

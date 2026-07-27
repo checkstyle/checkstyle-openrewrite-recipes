@@ -35,6 +35,9 @@ public class AnnotationOnSameLine extends Recipe {
 
     private static final String SINGLE_SPACE = " ";
 
+    public AnnotationOnSameLine() {
+    }
+
     @Override
     public String getDisplayName() {
         return "Annotation on same line";
@@ -51,6 +54,9 @@ public class AnnotationOnSameLine extends Recipe {
     }
 
     private final class AnnotationModifierVisitor extends JavaIsoVisitor<ExecutionContext> {
+
+        private AnnotationModifierVisitor() {
+        }
 
         private static Space forceSingleSpace(Space space) {
             final List<Comment> updatedComments = new ArrayList<>();

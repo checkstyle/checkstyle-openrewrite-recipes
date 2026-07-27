@@ -24,6 +24,9 @@ import org.junit.jupiter.api.Test;
 
 public class AnnotationOnSameLineTest extends AbstractRecipeTestSupport {
 
+    public AnnotationOnSameLineTest() {
+    }
+
     @Test
     void metadata() {
         final AnnotationOnSameLine recipe = new AnnotationOnSameLine();

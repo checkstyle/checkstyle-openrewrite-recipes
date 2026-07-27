@@ -3,7 +3,7 @@
   <module name="TreeWalker">
     <module name="com.puppycrawl.tools.checkstyle.checks.coding.UseEnhancedSwitchCheck"/>
     <module name="com.puppycrawl.tools.checkstyle.filters.SuppressWithNearbyCommentFilter">
-      <property name="commentFormat" value="suppressed violation"/>
+      <property name="commentFormat" value="SUPPRESS"/>
       <property name="checkFormat" value=".*"/>
       <property name="influenceFormat" value="0"/>
     </module>
@@ -17,16 +17,16 @@ public class OutputSurvivingMutations4 {
     
     void m6(int x) {
                    
-          switch (x) { // (suppressed violation)
-            case 1: break; // (suppressed violation)
+          switch (x) { // (SUPPRESS)
+            case 1: break; // (SUPPRESS)
             default: break;
           }
     }
 
     void m7(int x) {
                  
-        switch (x) { // (suppressed violation)
-case 1: // (suppressed violation)
+        switch (x) { // (SUPPRESS)
+case 1: // (SUPPRESS)
 System.out.println("0");
 System.out.println("0b");
 break;
@@ -39,28 +39,28 @@ break;
 
     void m8(int x, int y) {
                  
-        switch (x) { case 1: switch (y) { case 1: System.out.println("1"); case 2: break; default: break; } break; // (suppressed violation)
+        switch (x) { case 1: switch (y) { case 1: System.out.println("1"); case 2: break; default: break; } break; // (SUPPRESS)
             default: break;
         }
     }
 
     int m9(int x, int y) {
                  
-        return switch (x) { case 1: yield switch (y) { case 1: System.out.println("1"); case 2: yield 2; default: yield 0; }; // (suppressed violation)
+        return switch (x) { case 1: yield switch (y) { case 1: System.out.println("1"); case 2: yield 2; default: yield 0; }; // (SUPPRESS)
             default: yield 0;
         };
     }
 
     void m10(int x) {
                  
-        switch (x) { case 1:      System.out.println("1"); System.out.println("1b"); break; // (suppressed violation)
+        switch (x) { case 1:      System.out.println("1"); System.out.println("1b"); break; // (SUPPRESS)
             default: break;
         }
     }
 
     void unconvertibleAssignment(int x) {
-        int y; // (suppressed violation)
-        switch (x) { // (suppressed violation)
+        int y; // (SUPPRESS)
+        switch (x) { // (SUPPRESS)
             case 1:
                 y = 1;
                 break;
@@ -74,7 +74,7 @@ break;
     }
 
     void returnVoid(int x) {
-        switch (x) { // (suppressed violation)
+        switch (x) { // (SUPPRESS)
             case 1:
                 System.out.println("1");
                 return;
