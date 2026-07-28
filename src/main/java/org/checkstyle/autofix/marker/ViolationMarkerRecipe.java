@@ -288,7 +288,7 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
 
     private final class MarkerVisitor extends JavaIsoVisitor<ExecutionContext> {
         private final Accumulator acc;
-        private Map<UUID, List<CheckstyleViolationMarker>> fileMarkers = Collections.emptyMap();
+        private Map<UUID, List<CheckstyleViolationMarker>> fileMarkers = new HashMap<>();
 
         MarkerVisitor(Accumulator acc) {
             this.acc = acc;
@@ -300,14 +300,12 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
             J.CompilationUnit result = compUnit;
             if (!compUnit.getMarkers().findFirst(MarkersApplied.class).isPresent()) {
                 fileMarkers = acc.getByFile(compUnit.getSourcePath());
-                if (!fileMarkers.isEmpty()) {
-                    result = super.visitCompilationUnit(compUnit, executionContext);
+                result = super.visitCompilationUnit(compUnit, executionContext);
 
-                    final List<CheckstyleViolationMarker> markers = fileMarkers.get(result.getId());
-                    if (markers != null) {
-                        for (CheckstyleViolationMarker marker : markers) {
-                            result = result.withMarkers(result.getMarkers().add(marker));
-                        }
+                final List<CheckstyleViolationMarker> markers = fileMarkers.get(result.getId());
+                if (markers != null) {
+                    for (CheckstyleViolationMarker marker : markers) {
+                        result = result.withMarkers(result.getMarkers().add(marker));
                     }
                 }
                 result = result.withMarkers(result.getMarkers().add(APPLIED_MARKER));
