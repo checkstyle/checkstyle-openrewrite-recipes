@@ -18,13 +18,14 @@
 package org.checkstyle.autofix.marker;
 
 import java.nio.file.Path;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 public final class Accumulator {
+
+    private static final Map<UUID, List<CheckstyleViolationMarker>> EMPTY_MARKERS = new HashMap<>();
 
     private final Map<Path, Map<UUID, List<CheckstyleViolationMarker>>> byFile =
             new HashMap<>();
@@ -33,7 +34,7 @@ public final class Accumulator {
     }
 
     public Map<UUID, List<CheckstyleViolationMarker>> getByFile(Path path) {
-        return byFile.getOrDefault(path, Collections.emptyMap());
+        return byFile.getOrDefault(path, EMPTY_MARKERS);
     }
 
     public void putByFile(Path path, Map<UUID, List<CheckstyleViolationMarker>> markers) {

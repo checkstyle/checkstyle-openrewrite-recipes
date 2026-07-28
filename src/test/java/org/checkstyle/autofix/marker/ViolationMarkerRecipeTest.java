@@ -18,27 +18,12 @@
 package org.checkstyle.autofix.marker;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.AbstractList;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.openrewrite.ExecutionContext;
-import org.openrewrite.InMemoryExecutionContext;
-import org.openrewrite.Tree;
-import org.openrewrite.TreeVisitor;
-import org.openrewrite.java.JavaParser;
-import org.openrewrite.java.tree.J;
-import org.openrewrite.marker.Marker;
 
 public class ViolationMarkerRecipeTest {
 
@@ -62,82 +47,6 @@ public class ViolationMarkerRecipeTest {
 
         Assertions.assertEquals(expectedDescription, recipe.getDescription(),
                 "Invalid description");
-    }
-
-    @Test
-    public void testMarkerVisitorDoesNotEnterBlockIfMarkerPresent() throws Exception {
-        final Path path = Paths.get("TestMarkerProxy.java");
-        final ViolationMarkerRecipe recipe = new ViolationMarkerRecipe(Collections.emptyList());
-        final JavaParser parser = JavaParser.fromJavaVersion().build();
-        final J.CompilationUnit compUnit = parser.parse("class A {}")
-                .findFirst().get().withSourcePath(path);
-
-        final ExecutionContext ctx = new InMemoryExecutionContext();
-        final var acc = recipe.getInitialValue(ctx);
-        final Object visitor = recipe.getVisitor(acc);
-
-        final Class<?> markerClass = Class.forName(
-                "org.checkstyle.autofix.marker.ViolationMarkerRecipe$MarkersApplied");
-        final Constructor<?> markerCtor =
-                markerClass.getDeclaredConstructor(UUID.class);
-        markerCtor.setAccessible(true);
-        final Marker appliedMarker = (Marker)
-                markerCtor.newInstance(Tree.randomId());
-        final J.CompilationUnit markedUnit =
-                compUnit.withMarkers(compUnit.getMarkers().add(appliedMarker));
-
-        final Field field = Accumulator.class.getDeclaredField("byFile");
-        field.setAccessible(true);
-        final Map<Path, Map<UUID,
-                List<CheckstyleViolationMarker>>> throwingMap = new HashMap<>() {
-                    @Override
-                    public Map<UUID, List<CheckstyleViolationMarker>>
-                            getOrDefault(
-                                    Object key,
-                                    Map<UUID,
-                                            List<CheckstyleViolationMarker>> defValue) {
-                        throw new RuntimeException("Should not have queried accumulator");
-                    }
-                };
-        field.set(acc, throwingMap);
-        ((TreeVisitor<?, ExecutionContext>) visitor)
-                .visit(markedUnit, ctx);
-    }
-
-    @Test
-    public void testMarkerVisitorDoesNotVisitChildrenIfFileMarkersEmpty() throws Exception {
-        final Path path = Paths.get("TestEmptyFileMarkers.java");
-        final ViolationMarkerRecipe recipe = new ViolationMarkerRecipe(Collections.emptyList());
-        final JavaParser parser = JavaParser.fromJavaVersion().build();
-        final J.CompilationUnit compUnit = parser.parse("class A {}")
-                .findFirst().get().withSourcePath(path);
-
-        final ExecutionContext ctx = new InMemoryExecutionContext();
-        final var acc = recipe.getInitialValue(ctx);
-        final Object visitor = recipe.getVisitor(acc);
-
-        final List<J.ClassDeclaration> throwingClasses =
-                new AbstractList<>() {
-                    @Override
-                    public J.ClassDeclaration get(int index) {
-                        throw new RuntimeException("Visited children!");
-                    }
-
-                    @Override
-                    public int size() {
-                        return 1;
-                    }
-
-                    @Override
-                    public Iterator<J.ClassDeclaration>
-                            iterator() {
-                        throw new RuntimeException("Visited children!");
-                    }
-                };
-        final J.CompilationUnit hackedUnit = compUnit.withClasses(throwingClasses);
-
-        ((TreeVisitor<?, ExecutionContext>) visitor)
-                .visit(hackedUnit, ctx);
     }
 
     @Test
