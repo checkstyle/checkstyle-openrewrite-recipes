@@ -78,4 +78,5 @@ public class UpperEll extends Recipe {
                     .anyMatch(marker -> marker.isFor(CheckFullName.UPPER_ELL));
         }
     }
+
 }

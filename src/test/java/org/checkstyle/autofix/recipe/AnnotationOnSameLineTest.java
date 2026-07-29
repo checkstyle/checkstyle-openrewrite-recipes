@@ -126,4 +126,5 @@ public class AnnotationOnSameLineTest extends AbstractRecipeTestSupport {
     void testSingleLineComment(ReportParser parser) throws Exception {
         verify(parser, "SingleLineComment");
     }
+
 }

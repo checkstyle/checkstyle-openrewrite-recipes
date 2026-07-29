@@ -23,4 +23,5 @@ import java.util.List;
 public interface ReportParser {
 
     List<CheckstyleViolation> parse(Path reportPath);
+
 }

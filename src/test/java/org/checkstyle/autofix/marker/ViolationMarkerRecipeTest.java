@@ -172,4 +172,5 @@ public class ViolationMarkerRecipeTest {
         Assertions.assertEquals(newId, newRetrievedId,
                 "withId() should create a new marker with the new ID");
     }
+
 }

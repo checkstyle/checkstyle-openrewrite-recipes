@@ -143,4 +143,5 @@ public class HexLiteralCase extends Recipe {
                     .anyMatch(marker -> marker.isFor(CheckFullName.HEX_LITERAL_CASE));
         }
     }
+
 }

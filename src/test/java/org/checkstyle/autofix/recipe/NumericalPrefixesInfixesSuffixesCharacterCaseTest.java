@@ -77,4 +77,5 @@ public class NumericalPrefixesInfixesSuffixesCharacterCaseTest extends AbstractR
     void killMutation(ReportParser parser) throws Exception {
         verify(parser, "KillMutation");
     }
+
 }

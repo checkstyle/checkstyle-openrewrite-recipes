@@ -154,4 +154,5 @@ public class XmlReportParser implements ReportParser {
         return Optional.ofNullable(violation);
 
     }
+
 }

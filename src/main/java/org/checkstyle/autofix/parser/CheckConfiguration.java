@@ -23,6 +23,7 @@ import java.util.Map;
 import org.checkstyle.autofix.CheckFullName;
 
 public final class CheckConfiguration {
+
     private final CheckFullName checkName;
     private final Map<String, String> globalProperties;
     private final Map<String, String> properties;
@@ -65,4 +66,5 @@ public final class CheckConfiguration {
     public void setGlobalProperty(String key, String value) {
         globalProperties.put(key, value);
     }
+
 }

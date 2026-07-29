@@ -17,7 +17,10 @@ public class InputMultiVarDeclaration {
     }
 
     public void methodTwo() {
-        int unusedFirst = 1, unusedSecond = 2; // 2 violations
+        int unusedFirst = 1, unusedSecond = 2;
+        // 2 violations above:
+        // 'Unused named local variable'
+        // 'Unused named local variable'
         int usedValue = 3;
         System.out.println(usedValue);
     }

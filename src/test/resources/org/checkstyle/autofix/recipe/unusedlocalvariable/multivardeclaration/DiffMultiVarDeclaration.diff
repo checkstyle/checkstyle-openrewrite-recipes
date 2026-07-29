@@ -1,6 +1,6 @@
 --- src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/multivardeclaration/InputMultiVarDeclaration.java
 +++ src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/multivardeclaration/OutputMultiVarDeclaration.java
-@@ -9,15 +9,14 @@
+@@ -9,18 +9,14 @@
  
  package org.checkstyle.autofix.recipe.unusedlocalvariable.multivardeclaration;
  
@@ -14,7 +14,10 @@
      }
  
      public void methodTwo() {
--        int unusedFirst = 1, unusedSecond = 2; // 2 violations
+-        int unusedFirst = 1, unusedSecond = 2;
+-        // 2 violations above:
+-        // 'Unused named local variable'
+-        // 'Unused named local variable'
          int usedValue = 3;
          System.out.println(usedValue);
      }

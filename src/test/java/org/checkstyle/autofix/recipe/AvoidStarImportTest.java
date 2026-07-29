@@ -101,4 +101,5 @@ public class AvoidStarImportTest extends AbstractRecipeTestSupport {
     void killMutation2(ReportParser parser) throws Exception {
         verify(parser, "KillMutation2", "KillMutation2SupportClass");
     }
+
 }

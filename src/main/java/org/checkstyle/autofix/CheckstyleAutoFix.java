@@ -111,4 +111,5 @@ public class CheckstyleAutoFix extends Recipe {
     private Map<CheckstyleCheck, CheckConfiguration> loadCheckstyleConfiguration() {
         return ConfigurationLoader.loadConfiguration(getConfigurationPath(), getPropertiesPath());
     }
+
 }

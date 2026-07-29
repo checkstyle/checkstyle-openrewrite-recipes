@@ -126,4 +126,5 @@ public class MissingOverride extends Recipe {
                     .anyMatch(marker -> marker.isFor(CheckFullName.MISSING_OVERRIDE));
         }
     }
+
 }
