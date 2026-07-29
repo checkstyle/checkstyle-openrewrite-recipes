@@ -73,4 +73,5 @@ public class CheckstyleViolationMarkerTest {
         Assertions.assertTrue(newMarker instanceof CheckstyleViolationMarker);
         Assertions.assertEquals(violation, ((CheckstyleViolationMarker) newMarker).violation());
     }
+
 }

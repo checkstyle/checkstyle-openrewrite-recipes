@@ -97,4 +97,5 @@ public class SarifReportParser implements ReportParser {
         }
         return result;
     }
+
 }

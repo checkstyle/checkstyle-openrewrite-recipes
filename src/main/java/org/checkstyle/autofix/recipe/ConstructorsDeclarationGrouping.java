@@ -37,6 +37,7 @@ import org.openrewrite.java.tree.Statement;
  * out-of-order constructors to group them together.
  */
 public class ConstructorsDeclarationGrouping extends Recipe {
+
     private static final String ORDER_BY_PARAM_COUNT_PROPERTY =
         "orderByIncreasingParameterCount";
 
@@ -347,4 +348,5 @@ public class ConstructorsDeclarationGrouping extends Recipe {
                     .anyMatch(predicate);
         }
     }
+
 }

@@ -90,4 +90,5 @@ public class GenerateDiffFilesTest {
         final String normalizedDiff = diff.replaceAll("\\r\\n?", "\n");
         Files.writeString(diffFile, normalizedDiff);
     }
+
 }

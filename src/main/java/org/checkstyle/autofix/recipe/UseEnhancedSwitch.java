@@ -696,4 +696,5 @@ public class UseEnhancedSwitch extends Recipe {
             }
         }
     }
+
 }

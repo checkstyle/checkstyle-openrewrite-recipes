@@ -36,6 +36,7 @@ import org.openrewrite.java.tree.JavaSourceFile;
 import org.openrewrite.java.tree.Space;
 
 public class Header extends Recipe {
+
     private static final String HEADER_PROPERTY = "header";
     private static final String HEADER_FILE_PROPERTY = "headerFile";
     private static final String CHARSET_PROPERTY = "charset";
@@ -123,4 +124,5 @@ public class Header extends Recipe {
                     .collect(Collectors.joining(""));
         }
     }
+
 }

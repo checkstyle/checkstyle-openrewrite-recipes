@@ -70,4 +70,5 @@ public class UnusedImports extends Recipe {
                     .anyMatch(marker -> marker.isFor(CheckFullName.UNUSED_IMPORT));
         }
     }
+
 }

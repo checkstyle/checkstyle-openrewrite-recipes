@@ -80,4 +80,5 @@ public class CheckstyleReportsParserTest {
         record = grouped.get(Path.of("Utils.java")).get(0);
         assertEquals("warning", record.getSeverity());
     }
+
 }

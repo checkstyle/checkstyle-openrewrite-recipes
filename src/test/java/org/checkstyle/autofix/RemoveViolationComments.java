@@ -100,7 +100,8 @@ public class RemoveViolationComments extends Recipe {
             for (Comment comment : space.getComments()) {
                 if (comment instanceof TextComment) {
                     final TextComment textComment = (TextComment) comment;
-                    if (textComment.getText().matches("\\s*(\\d+\\s*)?violation.*")) {
+                    if (textComment.getText()
+                        .matches("\\s*((\\d+\\s*)?violation.*|['\"].*['\"]\\s*)")) {
                         if (filteredComments.isEmpty()) {
                             suffixAccumulator = textComment.getSuffix();
                         }
@@ -154,4 +155,5 @@ public class RemoveViolationComments extends Recipe {
             return String.valueOf(newline).repeat((int) maxNewlines) + indent;
         }
     }
+
 }

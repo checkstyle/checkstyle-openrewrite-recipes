@@ -140,4 +140,5 @@ public class AvoidStarImport extends Recipe {
                     .anyMatch(marker -> marker.isFor(CheckFullName.AVOID_STAR_IMPORT));
         }
     }
+
 }

@@ -70,4 +70,5 @@ public class ReadmeTest {
                 .that(missingChecks)
                 .isEmpty();
     }
+
 }

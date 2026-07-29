@@ -531,7 +531,9 @@ public class UnusedLocalVariable extends Recipe {
                         currentWhitespace = comment.getSuffix();
                     }
                 }
+
             }
         }
     }
+
 }

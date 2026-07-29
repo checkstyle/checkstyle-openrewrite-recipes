@@ -140,4 +140,5 @@ public class NewlineAtEndOfFile extends Recipe {
         }
 
     }
+
 }

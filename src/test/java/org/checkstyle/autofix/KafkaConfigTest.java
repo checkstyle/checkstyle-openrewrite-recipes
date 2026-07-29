@@ -78,4 +78,5 @@ public class KafkaConfigTest {
     public void testAllRecipesAreInAllAutofixedChecksConfig() throws Exception {
         assertRecipesAreInConfig(".ci/checkstyle-config-with-all-autofixed-checks.xml");
     }
+
 }

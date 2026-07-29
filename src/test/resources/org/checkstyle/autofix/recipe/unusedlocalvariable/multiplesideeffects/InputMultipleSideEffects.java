@@ -13,7 +13,10 @@ public class InputMultipleSideEffects {
     public void method() {
         int a = 0;
         // Comment before multiple side effects
-        int unused1 = ++a, unused2 = a++; // 2 violations
+        int unused1 = ++a, unused2 = a++;
+        // 2 violations above:
+        // 'Unused named local variable'
+        // 'Unused named local variable'
         System.out.println(a);
     }
 }

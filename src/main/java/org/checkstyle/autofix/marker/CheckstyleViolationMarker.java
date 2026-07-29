@@ -43,4 +43,5 @@ public record CheckstyleViolationMarker(
     public <M extends Marker> M withId(UUID uuid) {
         return (M) new CheckstyleViolationMarker(uuid, this.violation);
     }
+
 }

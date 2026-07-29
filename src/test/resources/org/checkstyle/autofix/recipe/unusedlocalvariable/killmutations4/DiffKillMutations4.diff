@@ -1,6 +1,6 @@
 --- src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/killmutations4/InputKillMutations4.java
 +++ src/test/resources/org/checkstyle/autofix/recipe/unusedlocalvariable/killmutations4/OutputKillMutations4.java
-@@ -8,92 +8,84 @@
+@@ -8,95 +8,84 @@
  
  package org.checkstyle.autofix.recipe.unusedlocalvariable.killmutations4;
  
@@ -96,7 +96,10 @@
      }
  
      public void extractMultipleInitializers() {
--        int u1 = getString().length(), /* c */ u2 = getString().length(); // 2 violations
+-        int u1 = getString().length(), /* c */ u2 = getString().length();
+-        // 2 violations above:
+-        // 'Unused named local variable'
+-        // 'Unused named local variable'
 +        getString().length(); /* c */ getString().length();
      }
  

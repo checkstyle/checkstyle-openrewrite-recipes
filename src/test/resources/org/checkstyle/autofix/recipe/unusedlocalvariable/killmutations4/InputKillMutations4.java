@@ -87,7 +87,10 @@ public class InputKillMutations4 {
     }
 
     public void extractMultipleInitializers() {
-        int u1 = getString().length(), /* c */ u2 = getString().length(); // 2 violations
+        int u1 = getString().length(), /* c */ u2 = getString().length();
+        // 2 violations above:
+        // 'Unused named local variable'
+        // 'Unused named local variable'
     }
 
     public void trailingCommentWithSameLineNextStatement() {
