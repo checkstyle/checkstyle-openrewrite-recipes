@@ -1,0 +1,11 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/annotationlocation/basicclassannotation/InputBasicClassAnnotation.java
++++ src/test/resources/org/checkstyle/autofix/recipe/annotationlocation/basicclassannotation/OutputBasicClassAnnotation.java
+@@ -10,6 +10,7 @@
+ 
+ package org.checkstyle.autofix.recipe.annotationlocation.basicclassannotation;
+ 
+-@Deprecated public class InputBasicClassAnnotation { // violation "Annotation 'Deprecated' should be alone on line."
++@Deprecated
++public class OutputBasicClassAnnotation {
+     int    a   =   1 ;
+ }
