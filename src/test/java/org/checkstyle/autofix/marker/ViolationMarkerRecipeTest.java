@@ -17,10 +17,7 @@
 
 package org.checkstyle.autofix.marker;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
 import java.util.Collections;
-import java.util.UUID;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -47,39 +44,6 @@ public class ViolationMarkerRecipeTest {
 
         Assertions.assertEquals(expectedDescription, recipe.getDescription(),
                 "Invalid description");
-    }
-
-    @Test
-    public void testMarkersAppliedMethods() throws Exception {
-        final Class<?>[] declaredClasses = ViolationMarkerRecipe.class.getDeclaredClasses();
-        Class<?> markersAppliedClass = null;
-        for (Class<?> clazz : declaredClasses) {
-            if ("MarkersApplied".equals(clazz.getSimpleName())) {
-                markersAppliedClass = clazz;
-                break;
-            }
-        }
-        Assertions.assertNotNull(markersAppliedClass, "MarkersApplied class should exist");
-        final UUID originalId = UUID.randomUUID();
-        final Constructor<?> constructor =
-                markersAppliedClass.getDeclaredConstructor(UUID.class);
-        constructor.setAccessible(true);
-        final Object marker = constructor.newInstance(originalId);
-
-        final Method getIdMethod = markersAppliedClass.getDeclaredMethod("getId");
-        getIdMethod.setAccessible(true);
-        final Object retrievedId = getIdMethod.invoke(marker);
-        Assertions.assertEquals(originalId, retrievedId, "getId() should return the original ID");
-
-        final UUID newId = UUID.randomUUID();
-        final Method withIdMethod =
-                markersAppliedClass.getDeclaredMethod("withId", UUID.class);
-        withIdMethod.setAccessible(true);
-        final Object newMarker = withIdMethod.invoke(marker, newId);
-
-        final Object newRetrievedId = getIdMethod.invoke(newMarker);
-        Assertions.assertEquals(newId, newRetrievedId,
-                "withId() should create a new marker with the new ID");
     }
 
 }

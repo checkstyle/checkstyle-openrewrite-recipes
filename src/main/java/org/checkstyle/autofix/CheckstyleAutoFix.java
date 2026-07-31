@@ -52,6 +52,8 @@ public class CheckstyleAutoFix extends Recipe {
             required = false)
     private String propertiesPath;
 
+    private transient List<Recipe> cachedRecipeList;
+
     public CheckstyleAutoFix() {
         // default constructor
     }
@@ -85,13 +87,16 @@ public class CheckstyleAutoFix extends Recipe {
 
     @Override
     public List<Recipe> getRecipeList() {
-        final ReportParser reportParser = createReportParser(getViolationReportPath());
-        final List<CheckstyleViolation> violations = reportParser
-                .parse(Path.of(getViolationReportPath()));
-        final Map<CheckstyleCheck,
-                CheckConfiguration> configuration = loadCheckstyleConfiguration();
+        if (cachedRecipeList == null) {
+            final ReportParser reportParser = createReportParser(getViolationReportPath());
+            final List<CheckstyleViolation> violations = reportParser
+                    .parse(Path.of(getViolationReportPath()));
+            final Map<CheckstyleCheck,
+                    CheckConfiguration> configuration = loadCheckstyleConfiguration();
 
-        return CheckstyleRecipeRegistry.getRecipes(violations, configuration);
+            cachedRecipeList = CheckstyleRecipeRegistry.getRecipes(violations, configuration);
+        }
+        return cachedRecipeList;
     }
 
     private ReportParser createReportParser(String path) {
