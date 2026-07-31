@@ -308,7 +308,8 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
                         result = result.withMarkers(result.getMarkers().add(marker));
                     }
                 }
-                result = result.withMarkers(result.getMarkers().add(APPLIED_MARKER));
+                final MarkersApplied markerToAdd = APPLIED_MARKER.withId(APPLIED_MARKER.getId());
+                result = result.withMarkers(result.getMarkers().add(markerToAdd));
             }
             return result;
         }
