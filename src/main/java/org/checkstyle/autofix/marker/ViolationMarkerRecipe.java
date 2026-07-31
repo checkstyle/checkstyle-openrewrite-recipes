@@ -28,7 +28,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.checkstyle.autofix.CheckFullName;
 import org.checkstyle.autofix.parser.CheckstyleViolation;
@@ -40,15 +42,15 @@ import org.openrewrite.Tree;
 import org.openrewrite.TreeVisitor;
 import org.openrewrite.java.JavaIsoVisitor;
 import org.openrewrite.java.tree.J;
-import org.openrewrite.marker.Marker;
+import org.openrewrite.java.tree.JavaSourceFile;
 
 public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
 
+    private static final String MARKED_FILES =
+            "org.checkstyle.autofix.marker.ViolationMarkerRecipe.markedFiles";
     private static final String DISPLAY_NAME = "Checkstyle violation marker";
     private static final String DESCRIPTION =
             "Marks AST nodes that correspond to Checkstyle violations.";
-
-    private static final MarkersApplied APPLIED_MARKER = new MarkersApplied(Tree.randomId());
 
     private static final Map<CheckFullName, Class<? extends Tree>> TARGET_TYPES =
             new EnumMap<>(CheckFullName.class);
@@ -113,12 +115,19 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
         @Override
         public J.CompilationUnit visitCompilationUnit(J.CompilationUnit compUnit,
                                                       ExecutionContext executionContext) {
+            final Set<Path> processedFiles = executionContext.computeMessageIfAbsent(
+                    MARKED_FILES, key -> ConcurrentHashMap.newKeySet());
             final Path sourcePath = compUnit.getSourcePath();
-            final List<CheckstyleViolation> fileViolations = violations.stream()
-                    .filter(violation -> violation.getFilePath().endsWith(sourcePath))
-                    .toList();
 
-            processFileViolations(compUnit, sourcePath, fileViolations);
+            if (processedFiles.add(sourcePath)) {
+                final List<CheckstyleViolation> fileViolations = violations.stream()
+                        .filter(violation -> violation.getFilePath().endsWith(sourcePath))
+                        .toList();
+
+                if (!fileViolations.isEmpty()) {
+                    processFileViolations(compUnit, sourcePath, fileViolations);
+                }
+            }
             return compUnit;
         }
 
@@ -136,14 +145,16 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
             printer.visit(compilationUnit, capture.append(""), rootCursor);
 
             final Map<UUID, List<CheckstyleViolationMarker>> markersToAdd = new HashMap<>();
-            for (CheckstyleViolation violation : fileViolations) {
+            final Iterator<CheckstyleViolation> iterator = fileViolations.iterator();
+            do {
+                final CheckstyleViolation violation = iterator.next();
                 final Map<UUID, List<CheckstyleViolationMarker>> result = findSmallestNode(
                         violation, nodeRanges, parentMap, treeNodes);
                 for (Map.Entry<UUID, List<CheckstyleViolationMarker>> entry : result.entrySet()) {
                     markersToAdd.computeIfAbsent(entry.getKey(), id -> new ArrayList<>())
                             .addAll(entry.getValue());
                 }
-            }
+            } while (iterator.hasNext());
 
             acc.putByFile(sourcePath, markersToAdd);
         }
@@ -296,33 +307,18 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
 
     private final class MarkerVisitor extends JavaIsoVisitor<ExecutionContext> {
         private final Accumulator acc;
-        private Map<UUID, List<CheckstyleViolationMarker>> fileMarkers = new HashMap<>();
+        private Map<UUID, List<CheckstyleViolationMarker>> fileMarkers;
 
         MarkerVisitor(Accumulator acc) {
             this.acc = acc;
         }
 
         @Override
-        public J.CompilationUnit visitCompilationUnit(
-                J.CompilationUnit compUnit, ExecutionContext executionContext) {
-            J.CompilationUnit result = compUnit;
-            if (!compUnit.getMarkers().findFirst(MarkersApplied.class).isPresent()) {
-                fileMarkers = acc.getByFile(compUnit.getSourcePath());
-                result = super.visitCompilationUnit(compUnit, executionContext);
-
-                final List<CheckstyleViolationMarker> markers = fileMarkers.get(result.getId());
-                if (markers != null) {
-                    for (CheckstyleViolationMarker marker : markers) {
-                        result = result.withMarkers(result.getMarkers().add(marker));
-                    }
-                }
-                result = result.withMarkers(result.getMarkers().add(APPLIED_MARKER));
-            }
-            return result;
-        }
-
-        @Override
         public J preVisit(J tree, ExecutionContext executionContext) {
+            if (tree instanceof JavaSourceFile sourceFile) {
+                fileMarkers = acc.getByFile(sourceFile.getSourcePath());
+            }
+
             J result = tree;
             final List<CheckstyleViolationMarker> markers =
                     fileMarkers.get(result.getId());
@@ -336,20 +332,6 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
     }
 
     private record Range(int startLine, int startCol, int endLine, int endCol) {
-    }
-
-    private record MarkersApplied(UUID id) implements Marker {
-
-        @Override
-        public UUID getId() {
-            return id;
-        }
-
-        @Override
-        @SuppressWarnings("unchecked")
-        public <M extends Marker> M withId(UUID uuid) {
-            return (M) new MarkersApplied(uuid);
-        }
     }
 
 }

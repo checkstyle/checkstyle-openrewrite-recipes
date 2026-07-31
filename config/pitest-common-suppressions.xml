@@ -57,6 +57,15 @@
   <mutation unstable="false">
     <sourceFile>CheckstyleAutoFix.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.CheckstyleAutoFix</mutatedClass>
+    <mutatedMethod>getRecipeList</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>if (cachedRecipeList == null) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>CheckstyleAutoFix.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.CheckstyleAutoFix</mutatedClass>
     <mutatedMethod>loadCheckstyleConfiguration</mutatedMethod>
     <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
     <description>removed call to org/checkstyle/autofix/CheckstyleAutoFix::getPropertiesPath</description>
