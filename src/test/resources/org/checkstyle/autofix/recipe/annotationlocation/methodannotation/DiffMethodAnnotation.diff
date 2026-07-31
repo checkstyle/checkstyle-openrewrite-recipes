@@ -1,0 +1,17 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/annotationlocation/methodannotation/InputMethodAnnotation.java
++++ src/test/resources/org/checkstyle/autofix/recipe/annotationlocation/methodannotation/OutputMethodAnnotation.java
+@@ -10,9 +10,11 @@
+ 
+ package org.checkstyle.autofix.recipe.annotationlocation.methodannotation;
+ 
+-public class InputMethodAnnotation {
+-    @Deprecated void test() { // violation "Annotation 'Deprecated' should be alone on line."
+-        @Deprecated class LocalClass { // violation "Annotation 'Deprecated' should be alone on line."
++public class OutputMethodAnnotation {
++    @Deprecated
++    void test() {
++        @Deprecated
++        class LocalClass {
+         }
+         int    a   =   1 ;
+     }

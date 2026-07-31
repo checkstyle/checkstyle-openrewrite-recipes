@@ -558,6 +558,7 @@
                                 <param>org.checkstyle.autofix.recipe.MissingOverride*</param>
                                 <param>org.checkstyle.autofix.recipe.AvoidStarImport*</param>
                                 <param>org.checkstyle.autofix.recipe.MissingSwitchDefault*</param>
+                                <param>org.checkstyle.autofix.recipe.AnnotationLocation*</param>
                             </targetClasses>
                             <targetTests>
                                 <param>org.checkstyle.autofix.recipe.EmptyStatementTest</param>
@@ -570,6 +571,7 @@
                                 <param>org.checkstyle.autofix.recipe.RecipeTest</param>
                                 <param>org.checkstyle.autofix.recipe.RemoveViolationCommentsTest</param>
                                 <param>org.checkstyle.autofix.recipe.MissingSwitchDefaultTest</param>
+                                <param>org.checkstyle.autofix.recipe.AnnotationLocationTest</param>
                             </targetTests>
 
                             <mutators>
