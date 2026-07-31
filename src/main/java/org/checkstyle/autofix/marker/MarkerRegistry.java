@@ -23,6 +23,7 @@ import java.util.UUID;
 import java.util.function.BiFunction;
 
 import org.checkstyle.autofix.CheckFullName;
+import org.checkstyle.autofix.marker.checks.AnnotationLocationMarker;
 import org.checkstyle.autofix.marker.checks.AnnotationOnSameLineMarker;
 import org.checkstyle.autofix.marker.checks.AvoidStarImportMarker;
 import org.checkstyle.autofix.marker.checks.ConstructorsDeclarationGroupingMarker;
@@ -55,6 +56,7 @@ public final class MarkerRegistry {
         FACTORIES.put(CheckFullName.FINAL_LOCAL_VARIABLE, FinalLocalVariableMarker::new);
         FACTORIES.put(CheckFullName.AVOID_STAR_IMPORT, AvoidStarImportMarker::new);
         FACTORIES.put(CheckFullName.EMPTY_STATEMENT, EmptyStatementMarker::new);
+        FACTORIES.put(CheckFullName.ANNOTATION_LOCATION, AnnotationLocationMarker::new);
         FACTORIES.put(CheckFullName.ANNOTATION_ON_SAME_LINE, AnnotationOnSameLineMarker::new);
         FACTORIES.put(CheckFullName.FINAL_CLASS, FinalClassMarker::new);
         FACTORIES.put(CheckFullName.HEADER, HeaderMarker::new);
