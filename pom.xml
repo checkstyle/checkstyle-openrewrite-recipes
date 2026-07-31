@@ -46,6 +46,7 @@
         <!-- Checkstyle properties -->
         <maven.checkstyle.plugin.version>3.6.0</maven.checkstyle.plugin.version>
         <checkstyle.version>13.9.0</checkstyle.version>
+        <checkstyle.config>https://raw.githubusercontent.com/checkstyle/checkstyle/checkstyle-${checkstyle.version}/config/checkstyle-checks.xml</checkstyle.config>
 
         <!-- Pitest properties -->
         <pitest.version>1.25.8</pitest.version>
@@ -206,7 +207,7 @@
                     <includeTestResources>false</includeTestResources>
                     <includeTestSourceDirectory>true</includeTestSourceDirectory>
                     <configLocation>
-                        https://raw.githubusercontent.com/checkstyle/checkstyle/checkstyle-${checkstyle.version}/config/checkstyle-checks.xml
+                        ${checkstyle.config}
                     </configLocation>
                     <propertiesLocation>config/checkstyle.properties</propertiesLocation>
                     <failOnViolation>true</failOnViolation>
