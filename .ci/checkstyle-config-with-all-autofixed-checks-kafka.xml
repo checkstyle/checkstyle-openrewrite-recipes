@@ -16,6 +16,9 @@
     <module name="NewlineAtEndOfFile"/>
 
     <module name="TreeWalker">
+        <module name="AnnotationLocation">
+            <property name="allowSamelineSingleParameterlessAnnotation" value="false"/>
+        </module>
         <module name="AnnotationOnSameLine"/>
         <module name="AvoidStarImport"/>
         <module name="ConstructorsDeclarationGrouping"/>

@@ -1,0 +1,20 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/annotationlocation/integrationwithannotationonsameline/InputIntegrationWithAnnotationOnSameLine.java
++++ src/test/resources/org/checkstyle/autofix/recipe/annotationlocation/integrationwithannotationonsameline/OutputIntegrationWithAnnotationOnSameLine.java
+@@ -14,13 +14,13 @@
+ 
+ package org.checkstyle.autofix.recipe.annotationlocation.integrationwithannotationonsameline;
+ 
+-@Deprecated // violation "Annotation 'Deprecated' should be on the same line with its target."
+-interface InputAnother {
++@Deprecated interface OutputAnother {
+ }
+ 
+-public class InputIntegrationWithAnnotationOnSameLine {
++public class OutputIntegrationWithAnnotationOnSameLine {
+ 
+-    @Deprecated public void method() { // violation "Annotation 'Deprecated' should be alone on line."
++    @Deprecated
++    public void method() {
+     }
+ 
+ }

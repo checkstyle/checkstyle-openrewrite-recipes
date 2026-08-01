@@ -1,0 +1,20 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/annotationlocation/variableannotation/InputVariableAnnotation.java
++++ src/test/resources/org/checkstyle/autofix/recipe/annotationlocation/variableannotation/OutputVariableAnnotation.java
+@@ -10,10 +10,13 @@
+ 
+ package org.checkstyle.autofix.recipe.annotationlocation.variableannotation;
+ 
+-public class InputVariableAnnotation {
+-    @Deprecated int test   ; // violation "Annotation 'Deprecated' should be alone on line."
++public class OutputVariableAnnotation {
++    @Deprecated
++    int test   ;
+ 
+-    @Deprecated Object obj = new Object() { // violation "Annotation 'Deprecated' should be alone on line."
+-        @Deprecated void innerMethod() {} // violation "Annotation 'Deprecated' should be alone on line."
++    @Deprecated
++    Object obj = new Object() {
++        @Deprecated
++        void innerMethod() {}
+     };
+ }

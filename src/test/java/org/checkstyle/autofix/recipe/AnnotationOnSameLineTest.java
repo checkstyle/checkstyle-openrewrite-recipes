@@ -127,4 +127,9 @@ public class AnnotationOnSameLineTest extends AbstractRecipeTestSupport {
         verify(parser, "SingleLineComment");
     }
 
+    @RecipeTest
+    void testIntegrationWithAnnotationLocation(ReportParser parser) throws Exception {
+        verify(parser, "IntegrationWithAnnotationLocation");
+    }
+
 }
