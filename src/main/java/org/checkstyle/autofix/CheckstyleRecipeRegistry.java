@@ -33,6 +33,7 @@ import org.checkstyle.autofix.recipe.AnnotationOnSameLine;
 import org.checkstyle.autofix.recipe.ArrayTrailingComma;
 import org.checkstyle.autofix.recipe.AvoidStarImport;
 import org.checkstyle.autofix.recipe.ConstructorsDeclarationGrouping;
+import org.checkstyle.autofix.recipe.EmptyForInitializerPad;
 import org.checkstyle.autofix.recipe.EmptyStatement;
 import org.checkstyle.autofix.recipe.FinalClass;
 import org.checkstyle.autofix.recipe.FinalLocalVariable;
@@ -80,6 +81,7 @@ public final class CheckstyleRecipeRegistry {
         RECIPE_MAP.put(CheckFullName.MISSING_SWITCH_DEFAULT, MissingSwitchDefault::new);
         RECIPE_MAP.put(CheckFullName.REDUNDANT_IMPORT, RedundantImport::new);
         RECIPE_MAP.put(CheckFullName.UPPER_ELL, UpperEll::new);
+        RECIPE_MAP.put(CheckFullName.EMPTY_FOR_INITIALIZER_PAD, EmptyForInitializerPad::new);
         RECIPE_MAP_WITH_CONFIG.put(CheckFullName.CONSTRUCTORS_DECLARATION_GROUPING,
             ConstructorsDeclarationGrouping::new);
         RECIPE_MAP.put(CheckFullName.UNNECESSARY_PARENTHESES, UnnecessaryParentheses::new);

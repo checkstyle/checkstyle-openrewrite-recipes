@@ -340,7 +340,7 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 | Status | Check                                                                                                                        | Recipe           | Coverage Notes |
 |--------|------------------------------------------------------------------------------------------------------------------------------|------------------|----------------|
 | 🟢     | [`ArrayBracketNoWhitespace`](https://checkstyle.sourceforge.io/checks/whitespace/arraybracketnowhitespace.html#ArrayBracketNoWhitespace) | `TBD`            |                |
-| 🟢     | [`EmptyForInitializerPad`](https://checkstyle.sourceforge.io/checks/whitespace/emptyforinitializerpad.html#EmptyForInitializerPad) | `TBD`            |                |
+| 🟢     | [`EmptyForInitializerPad`](https://checkstyle.sourceforge.io/checks/whitespace/emptyforinitializerpad.html#EmptyForInitializerPad) | [`EmptyForInitializerPad`](src/main/java/org/checkstyle/autofix/recipe/EmptyForInitializerPad.java) |                |
 | 🟢     | [`EmptyForIteratorPad`](https://checkstyle.sourceforge.io/checks/whitespace/emptyforiteratorpad.html#EmptyForIteratorPad) | `TBD`            |                |
 | 🟢     | [`EmptyLineSeparator`](https://checkstyle.sourceforge.io/checks/whitespace/emptylineseparator.html#EmptyLineSeparator)     | `TBD`            |                |
 | 🟢     | [`FileTabCharacter`](https://checkstyle.sourceforge.io/checks/whitespace/filetabcharacter.html#FileTabCharacter)           | `TBD`            |                |

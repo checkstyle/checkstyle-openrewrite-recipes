@@ -557,6 +557,7 @@
                                 <param>org.checkstyle.autofix.recipe.FinalClass*</param>
                                 <param>org.checkstyle.autofix.recipe.FinalLocalVariable*</param>
                                 <param>org.checkstyle.autofix.recipe.Header*</param>
+                                <param>org.checkstyle.autofix.recipe.EmptyForInitializerPad*</param>
                                 <param>org.checkstyle.autofix.recipe.HexLiteralCase*</param>
                                 <param>org.checkstyle.autofix.recipe.MissingOverride*</param>
                                 <param>org.checkstyle.autofix.recipe.UnnecessaryParentheses*</param>
@@ -569,6 +570,7 @@
                                 <param>org.checkstyle.autofix.recipe.FinalClassTest</param>
                                 <param>org.checkstyle.autofix.recipe.FinalLocalVariableTest</param>
                                 <param>org.checkstyle.autofix.recipe.HeaderTest</param>
+                                <param>org.checkstyle.autofix.recipe.EmptyForInitializerPadTest</param>
                                 <param>org.checkstyle.autofix.recipe.HexLiteralCaseTest</param>
                                 <param>org.checkstyle.autofix.recipe.MissingOverrideTest</param>
                                 <param>org.checkstyle.autofix.recipe.UnnecessaryParenthesesTest</param>

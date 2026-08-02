@@ -22,6 +22,6 @@ import java.util.UUID;
 import org.checkstyle.autofix.marker.CheckstyleViolationMarker;
 import org.checkstyle.autofix.parser.CheckstyleViolation;
 
-public record UnnecessaryParenthesesMarker(UUID id, CheckstyleViolation violation)
+public record EmptyForInitializerPadMarker(UUID id, CheckstyleViolation violation)
         implements CheckstyleViolationMarker {
 }

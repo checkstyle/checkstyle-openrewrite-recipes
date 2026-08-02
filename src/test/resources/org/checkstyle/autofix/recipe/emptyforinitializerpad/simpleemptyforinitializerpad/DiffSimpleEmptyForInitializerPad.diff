@@ -1,0 +1,14 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/emptyforinitializerpad/simpleemptyforinitializerpad/InputSimpleEmptyForInitializerPad.java
++++ src/test/resources/org/checkstyle/autofix/recipe/emptyforinitializerpad/simpleemptyforinitializerpad/OutputSimpleEmptyForInitializerPad.java
+@@ -9,9 +9,9 @@
+ */
+ package org.checkstyle.autofix.recipe.emptyforinitializerpad.simpleemptyforinitializerpad;
+ 
+-public class InputSimpleEmptyForInitializerPad {
++public class OutputSimpleEmptyForInitializerPad {
+     public void test() {
+-        for ( ; true; ) { // violation "';' is preceded with whitespace."
++        for (; true; ) {
+         }
+     }
+ }
