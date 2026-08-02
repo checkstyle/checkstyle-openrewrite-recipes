@@ -28,6 +28,7 @@ import org.checkstyle.autofix.marker.checks.AnnotationOnSameLineMarker;
 import org.checkstyle.autofix.marker.checks.ArrayTrailingCommaMarker;
 import org.checkstyle.autofix.marker.checks.AvoidStarImportMarker;
 import org.checkstyle.autofix.marker.checks.ConstructorsDeclarationGroupingMarker;
+import org.checkstyle.autofix.marker.checks.EmptyForInitializerPadMarker;
 import org.checkstyle.autofix.marker.checks.EmptyStatementMarker;
 import org.checkstyle.autofix.marker.checks.FinalClassMarker;
 import org.checkstyle.autofix.marker.checks.FinalLocalVariableMarker;
@@ -58,6 +59,7 @@ public final class MarkerRegistry {
         FACTORIES.put(CheckFullName.ARRAY_TRAILING_COMMA, ArrayTrailingCommaMarker::new);
         FACTORIES.put(CheckFullName.FINAL_LOCAL_VARIABLE, FinalLocalVariableMarker::new);
         FACTORIES.put(CheckFullName.AVOID_STAR_IMPORT, AvoidStarImportMarker::new);
+        FACTORIES.put(CheckFullName.EMPTY_FOR_INITIALIZER_PAD, EmptyForInitializerPadMarker::new);
         FACTORIES.put(CheckFullName.EMPTY_STATEMENT, EmptyStatementMarker::new);
         FACTORIES.put(CheckFullName.ANNOTATION_LOCATION, AnnotationLocationMarker::new);
         FACTORIES.put(CheckFullName.ANNOTATION_ON_SAME_LINE, AnnotationOnSameLineMarker::new);

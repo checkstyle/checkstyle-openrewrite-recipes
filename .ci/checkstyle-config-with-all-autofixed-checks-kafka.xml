@@ -23,6 +23,9 @@
         <module name="ArrayTrailingComma"/>
         <module name="AvoidStarImport"/>
         <module name="ConstructorsDeclarationGrouping"/>
+        <module name="EmptyForInitializerPad">
+            <property name="option" value="space"/>
+        </module>
         <module name="EmptyStatement"/>
         <module name="FinalClass"/>
         <module name="FinalLocalVariable"/>
