@@ -1,0 +1,17 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/emptyforinitializerpad/emptyforinitializerpadandemptystatement/InputEmptyForInitializerPadAndEmptyStatement.java
++++ src/test/resources/org/checkstyle/autofix/recipe/emptyforinitializerpad/emptyforinitializerpadandemptystatement/OutputEmptyForInitializerPadAndEmptyStatement.java
+@@ -10,11 +10,11 @@
+ */
+ package org.checkstyle.autofix.recipe.emptyforinitializerpad.emptyforinitializerpadandemptystatement;
+ 
+-public class InputEmptyForInitializerPadAndEmptyStatement {
++public class OutputEmptyForInitializerPadAndEmptyStatement {
+     public void test() {
+-        for ( ; ; ) { // violation "';' is preceded with whitespace."
++        for (; ; ) {
+             break;
+         }
+-        int x = 1; ; // violation "Empty statement."
++        int x = 1;
+     }
+ }

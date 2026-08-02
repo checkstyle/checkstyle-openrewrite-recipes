@@ -1,0 +1,11 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/emptyforinitializerpad/noviolation/InputNoViolation.java
++++ src/test/resources/org/checkstyle/autofix/recipe/emptyforinitializerpad/noviolation/OutputNoViolation.java
+@@ -9,7 +9,7 @@
+ */
+ package org.checkstyle.autofix.recipe.emptyforinitializerpad.noviolation;
+ 
+-public class InputNoViolation {
++public class OutputNoViolation {
+     public void test() {
+         for (; ; ) {
+             break;
