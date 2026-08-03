@@ -1,0 +1,19 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/customimportorder/customcasethree/InputCustomCaseThree.java
++++ src/test/resources/org/checkstyle/autofix/recipe/customimportorder/customcasethree/OutputCustomCaseThree.java
+@@ -12,11 +12,11 @@
+ 
+ package org.checkstyle.autofix.recipe.customimportorder.customcasethree;
+ 
++import static java.util.Collections.emptyList;
++import java.util.List;
++import org.junit.jupiter.api.Test;
++import com.google.common.collect.ImmutableList;
+ import org.checkstyle.autofix.recipe.customimportorder.customcasethree.SamePackageClass;
+-import com.google.common.collect.ImmutableList; // violation
+-import org.junit.jupiter.api.Test; // violation
+-import java.util.List; // violation
+-import static java.util.Collections.emptyList; // violation
+ 
+-public class InputCustomCaseThree {
++public class OutputCustomCaseThree {
+ }

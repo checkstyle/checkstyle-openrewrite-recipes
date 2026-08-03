@@ -1,0 +1,24 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/customimportorder/customcasetwo/InputCustomCaseTwo.java
++++ src/test/resources/org/checkstyle/autofix/recipe/customimportorder/customcasetwo/OutputCustomCaseTwo.java
+@@ -12,11 +12,15 @@
+ 
+ package org.checkstyle.autofix.recipe.customimportorder.customcasetwo;
+ 
+-import org.checkstyle.autofix.recipe.customimportorder.customcasetwo.SamePackageClass;
+-import com.google.common.collect.ImmutableList; // violation
+-import org.junit.jupiter.api.Test; // violation
+-import java.util.List; // violation
+-import static java.util.Collections.emptyList; // violation
++import static java.util.Collections.emptyList;
+ 
+-public class InputCustomCaseTwo {
++import java.util.List;
++
++import org.junit.jupiter.api.Test;
++
++import com.google.common.collect.ImmutableList;
++
++import org.checkstyle.autofix.recipe.customimportorder.customcasetwo.SamePackageClass;
++
++public class OutputCustomCaseTwo {
+ }

@@ -552,6 +552,7 @@
                             <targetClasses>
                                 <param>org.checkstyle.autofix.recipe.EmptyStatement*</param>
                                 <param>org.checkstyle.autofix.recipe.FinalClass*</param>
+                                <param>org.checkstyle.autofix.recipe.CustomImportOrder*</param>
                                 <param>org.checkstyle.autofix.recipe.FinalLocalVariable*</param>
                                 <param>org.checkstyle.autofix.recipe.Header*</param>
                                 <param>org.checkstyle.autofix.recipe.HexLiteralCase*</param>
@@ -561,6 +562,7 @@
                             <targetTests>
                                 <param>org.checkstyle.autofix.recipe.EmptyStatementTest</param>
                                 <param>org.checkstyle.autofix.recipe.FinalClassTest</param>
+                                <param>org.checkstyle.autofix.recipe.CustomImportOrderTest</param>
                                 <param>org.checkstyle.autofix.recipe.FinalLocalVariableTest</param>
                                 <param>org.checkstyle.autofix.recipe.HeaderTest</param>
                                 <param>org.checkstyle.autofix.recipe.HexLiteralCaseTest</param>

@@ -13,6 +13,7 @@
         <module name="AnnotationOnSameLine"/>
         <module name="AvoidStarImport"/>
         <module name="ConstructorsDeclarationGrouping"/>
+        <module name="CustomImportOrder"/>
         <module name="EmptyStatement"/>
         <module name="FinalClass"/>
         <module name="FinalLocalVariable"/>

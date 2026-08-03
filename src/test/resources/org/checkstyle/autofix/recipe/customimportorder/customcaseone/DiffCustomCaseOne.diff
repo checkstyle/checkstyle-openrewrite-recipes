@@ -1,0 +1,13 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/customimportorder/customcaseone/InputCustomCaseOne.java
++++ src/test/resources/org/checkstyle/autofix/recipe/customimportorder/customcaseone/OutputCustomCaseOne.java
+@@ -10,8 +10,8 @@
+ 
+ package org.checkstyle.autofix.recipe.customimportorder.customcaseone;
+ 
++import java.util.ArrayList;
+ import java.util.List;
+-import java.util.ArrayList; // violation 'Wrong lexicographical order for 'java.util.ArrayList' import. Should be before 'java.util.List'.'
+ 
+-public class InputCustomCaseOne {
++public class OutputCustomCaseOne {
+ }

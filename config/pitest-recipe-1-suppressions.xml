@@ -1,6 +1,176 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suppressedMutations>
-  <!-- Cannot be killed by integration tests until a second recipe lands a marker on this node type. See issue #236 -->
+  <mutation unstable="false">
+    <sourceFile>CustomImportOrder.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.CustomImportOrder$CustomImportOrderVisitor</mutatedClass>
+    <mutatedMethod>applyRule</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to org/openrewrite/java/style/ImportLayoutStyle$Builder::importPackage</description>
+    <lineContent>builder.importPackage(&quot;javax.*&quot;);</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>CustomImportOrder.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.CustomImportOrder$CustomImportOrderVisitor</mutatedClass>
+    <mutatedMethod>applyRule</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.NakedReceiverMutator</mutator>
+    <description>replaced call to org/openrewrite/java/style/ImportLayoutStyle$Builder::importPackage with receiver</description>
+    <lineContent>builder.importPackage(&quot;javax.*&quot;);</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>CustomImportOrder.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.CustomImportOrder$CustomImportOrderVisitor</mutatedClass>
+    <mutatedMethod>applyRule</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>else if (rule.startsWith(&quot;SAME_PACKAGE&quot;)) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>CustomImportOrder.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.CustomImportOrder$CustomImportOrderVisitor</mutatedClass>
+    <mutatedMethod>applyRule</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to java/lang/String::isEmpty</description>
+    <lineContent>if (!rule.isEmpty()) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>CustomImportOrder.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.CustomImportOrder$CustomImportOrderVisitor</mutatedClass>
+    <mutatedMethod>applyRule</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>if (!rule.isEmpty()) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>CustomImportOrder.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.CustomImportOrder$CustomImportOrderVisitor</mutatedClass>
+    <mutatedMethod>applySamePackageRule</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>if (compilationUnit.getPackageDeclaration() != null) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>CustomImportOrder.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.CustomImportOrder$CustomImportOrderVisitor</mutatedClass>
+    <mutatedMethod>applySpecialImportsRule</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to java/lang/String::isEmpty</description>
+    <lineContent>&amp;&amp; !specialImportsRegExp.isEmpty()) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>CustomImportOrder.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.CustomImportOrder$CustomImportOrderVisitor</mutatedClass>
+    <mutatedMethod>applySpecialImportsRule</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>&amp;&amp; !specialImportsRegExp.isEmpty()) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>CustomImportOrder.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.CustomImportOrder$CustomImportOrderVisitor</mutatedClass>
+    <mutatedMethod>applySpecialImportsRule</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.NakedReceiverMutator</mutator>
+    <description>replaced call to java/lang/String::replaceAll with receiver</description>
+    <lineContent>.replaceAll(&quot;\\$$&quot;, &quot;&quot;)</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>CustomImportOrder.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.CustomImportOrder$CustomImportOrderVisitor</mutatedClass>
+    <mutatedMethod>applySpecialImportsRule</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.NakedReceiverMutator</mutator>
+    <description>replaced call to java/lang/String::replaceAll with receiver</description>
+    <lineContent>.replaceAll(&quot;\\.\\*$&quot;, &quot;&quot;)</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>CustomImportOrder.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.CustomImportOrder$CustomImportOrderVisitor</mutatedClass>
+    <mutatedMethod>applySpecialImportsRule</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.NakedReceiverMutator</mutator>
+    <description>replaced call to java/lang/String::replaceAll with receiver</description>
+    <lineContent>.replaceAll(&quot;^\\^&quot;, &quot;&quot;)</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>CustomImportOrder.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.CustomImportOrder$CustomImportOrderVisitor</mutatedClass>
+    <mutatedMethod>applySpecialImportsRule</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to java/lang/String::equals</description>
+    <lineContent>if (!DEFAULT_SPECIAL_IMPORTS_REGEXP.equals(specialImportsRegExp)</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>CustomImportOrder.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.CustomImportOrder$CustomImportOrderVisitor</mutatedClass>
+    <mutatedMethod>applySpecialImportsRule</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>if (!DEFAULT_SPECIAL_IMPORTS_REGEXP.equals(specialImportsRegExp)</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>CustomImportOrder.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.CustomImportOrder$CustomImportOrderVisitor</mutatedClass>
+    <mutatedMethod>applySpecialImportsRule</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to java/lang/String::isEmpty</description>
+    <lineContent>if (!pkg.isEmpty()) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>CustomImportOrder.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.CustomImportOrder$CustomImportOrderVisitor</mutatedClass>
+    <mutatedMethod>applySpecialImportsRule</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>if (!pkg.isEmpty()) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>CustomImportOrder.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.CustomImportOrder$CustomImportOrderVisitor</mutatedClass>
+    <mutatedMethod>buildLayoutStyle</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.NakedReceiverMutator</mutator>
+    <description>replaced call to java/lang/String::trim with receiver</description>
+    <lineContent>applyRule(builder, rule.trim(), compilationUnit, getCursor());</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>CustomImportOrder.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.CustomImportOrder$CustomImportOrderVisitor</mutatedClass>
+    <mutatedMethod>visitCompilationUnit</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to java/util/Collections::emptySet</description>
+    <lineContent>Collections.emptySet(),</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>CustomImportOrder.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.CustomImportOrder$CustomImportOrderVisitor</mutatedClass>
+    <mutatedMethod>visitCompilationUnit</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to java/util/UUID::randomUUID</description>
+    <lineContent>UUID.randomUUID(),</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>CustomImportOrder.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.CustomImportOrder$CustomImportOrderVisitor</mutatedClass>
+    <mutatedMethod>visitCompilationUnit</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to java/lang/Boolean::valueOf</description>
+    <lineContent>return (J.CompilationUnit) new OrderImports(false, null)</lineContent>
+  </mutation>
+
   <mutation unstable="false">
     <sourceFile>EmptyStatement.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.recipe.EmptyStatement$EmptyStatementVisitor</mutatedClass>
@@ -10,7 +180,6 @@
     <lineContent>.anyMatch(marker -&gt; marker.isFor(CheckFullName.EMPTY_STATEMENT));</lineContent>
   </mutation>
 
-  <!-- Cannot be killed by integration tests until a second recipe lands a marker on this node type. See issue #236 -->
   <mutation unstable="false">
     <sourceFile>FinalLocalVariable.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.recipe.FinalLocalVariable$LocalVariableVisitor</mutatedClass>
