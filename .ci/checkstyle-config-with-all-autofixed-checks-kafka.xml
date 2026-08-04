@@ -18,6 +18,7 @@
     <module name="TreeWalker">
         <module name="AnnotationOnSameLine"/>
         <module name="AvoidStarImport"/>
+        <module name="AvoidStaticImport"/>
         <module name="ConstructorsDeclarationGrouping"/>
         <module name="EmptyStatement"/>
         <module name="FinalClass"/>

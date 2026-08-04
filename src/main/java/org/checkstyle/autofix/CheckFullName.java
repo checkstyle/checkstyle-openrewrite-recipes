@@ -44,7 +44,8 @@ public enum CheckFullName {
         "com.puppycrawl.tools.checkstyle.checks.coding.ConstructorsDeclarationGroupingCheck"),
     MISSING_SWITCH_DEFAULT(
         "com.puppycrawl.tools.checkstyle.checks.coding.MissingSwitchDefaultCheck"),
-    UNUSED_IMPORT("com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck");
+    UNUSED_IMPORT("com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck"),
+    AVOID_STATIC_IMPORT("com.puppycrawl.tools.checkstyle.checks.imports.AvoidStaticImportCheck");
 
     private final String id;
 

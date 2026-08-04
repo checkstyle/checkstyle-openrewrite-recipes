@@ -1,0 +1,20 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/avoidstaticimport/methodstaticimport/InputMethodStaticImport.java
++++ src/test/resources/org/checkstyle/autofix/recipe/avoidstaticimport/methodstaticimport/OutputMethodStaticImport.java
+@@ -6,13 +6,12 @@
+ </module>
+ */
+ package org.checkstyle.autofix.recipe.avoidstaticimport.methodstaticimport;
+-
+-import static java.util.Collections.sort; // violation 'Using a static member import should be avoided - java.util.Collections.sort.'
++import java.util.Collections;
+ import java.util.List;
+ 
+-public class InputMethodStaticImport {
++public class OutputMethodStaticImport {
+     void process(List<String> list) {
+-        sort(list);
+-        java.util.Collections.sort(list);
++        Collections.sort(list);
++        Collections.sort(list);
+     }
+ }

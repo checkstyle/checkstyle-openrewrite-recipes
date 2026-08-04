@@ -30,6 +30,7 @@ import org.checkstyle.autofix.parser.CheckConfiguration;
 import org.checkstyle.autofix.parser.CheckstyleViolation;
 import org.checkstyle.autofix.recipe.AnnotationOnSameLine;
 import org.checkstyle.autofix.recipe.AvoidStarImport;
+import org.checkstyle.autofix.recipe.AvoidStaticImport;
 import org.checkstyle.autofix.recipe.ConstructorsDeclarationGrouping;
 import org.checkstyle.autofix.recipe.EmptyStatement;
 import org.checkstyle.autofix.recipe.FinalClass;
@@ -75,6 +76,7 @@ public final class CheckstyleRecipeRegistry {
         RECIPE_MAP.put(CheckFullName.MISSING_SWITCH_DEFAULT, MissingSwitchDefault::new);
         RECIPE_MAP.put(CheckFullName.REDUNDANT_IMPORT, RedundantImport::new);
         RECIPE_MAP.put(CheckFullName.UPPER_ELL, UpperEll::new);
+        RECIPE_MAP.put(CheckFullName.AVOID_STATIC_IMPORT, AvoidStaticImport::new);
         RECIPE_MAP_WITH_CONFIG.put(CheckFullName.CONSTRUCTORS_DECLARATION_GROUPING,
             ConstructorsDeclarationGrouping::new);
     }

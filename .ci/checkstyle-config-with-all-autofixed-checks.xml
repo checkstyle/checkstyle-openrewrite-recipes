@@ -12,6 +12,9 @@
     <module name="TreeWalker">
         <module name="AnnotationOnSameLine"/>
         <module name="AvoidStarImport"/>
+        <module name="AvoidStaticImport">
+            <property name="excludes" value="java.lang.Math.PI"/>
+        </module>
         <module name="ConstructorsDeclarationGrouping"/>
         <module name="EmptyStatement"/>
         <module name="FinalClass"/>

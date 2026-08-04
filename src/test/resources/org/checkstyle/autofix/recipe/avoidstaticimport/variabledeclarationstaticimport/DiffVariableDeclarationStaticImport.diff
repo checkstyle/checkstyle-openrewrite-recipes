@@ -1,0 +1,13 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/avoidstaticimport/variabledeclarationstaticimport/InputVariableDeclarationStaticImport.java
++++ src/test/resources/org/checkstyle/autofix/recipe/avoidstaticimport/variabledeclarationstaticimport/OutputVariableDeclarationStaticImport.java
+@@ -7,9 +7,7 @@
+ */
+ package org.checkstyle.autofix.recipe.avoidstaticimport.variabledeclarationstaticimport;
+ 
+-import static java.util.Collections.EMPTY_LIST; // violation 'Using a static member import should be avoided - java.util.Collections.EMPTY_LIST.'
+-
+-public class InputVariableDeclarationStaticImport {
++public class OutputVariableDeclarationStaticImport {
+     void test() {
+         int EMPTY_LIST = 5;
+     }

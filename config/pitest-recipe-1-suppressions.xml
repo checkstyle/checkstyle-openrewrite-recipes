@@ -1,6 +1,149 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suppressedMutations>
-  <!-- Cannot be killed by integration tests until a second recipe lands a marker on this node type. See issue #236 -->
+  <mutation unstable="false">
+    <sourceFile>AvoidStaticImport.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.AvoidStaticImport$AvoidStaticImportVisitor</mutatedClass>
+    <mutatedMethod>getTopLevelClassName</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to org/openrewrite/java/tree/JavaType$FullyQualified::getOwningClass</description>
+    <lineContent>while (topLevel.getOwningClass() != null) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>AvoidStaticImport.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.AvoidStaticImport$AvoidStaticImportVisitor</mutatedClass>
+    <mutatedMethod>getTopLevelClassName</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_ELSE</mutator>
+    <description>removed conditional - replaced equality check with false</description>
+    <lineContent>while (topLevel.getOwningClass() != null) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>AvoidStaticImport.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.AvoidStaticImport$AvoidStaticImportVisitor</mutatedClass>
+    <mutatedMethod>matchesClassToQualify</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to java/util/Set::contains</description>
+    <lineContent>return classesToQualify.contains(fqn)</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>AvoidStaticImport.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.AvoidStaticImport$AvoidStaticImportVisitor</mutatedClass>
+    <mutatedMethod>matchesClassToQualify</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>return classesToQualify.contains(fqn)</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>AvoidStaticImport.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.AvoidStaticImport$AvoidStaticImportVisitor</mutatedClass>
+    <mutatedMethod>shouldSkipQualifying</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_ELSE</mutator>
+    <description>removed conditional - replaced equality check with false</description>
+    <lineContent>else if (parentValue instanceof J.MethodDeclaration) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>AvoidStaticImport.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.AvoidStaticImport$AvoidStaticImportVisitor</mutatedClass>
+    <mutatedMethod>shouldSkipQualifying</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_ELSE</mutator>
+    <description>removed conditional - replaced equality check with false</description>
+    <lineContent>else if (parentValue instanceof J.MethodInvocation) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>AvoidStaticImport.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.AvoidStaticImport$AvoidStaticImportVisitor</mutatedClass>
+    <mutatedMethod>shouldSkipQualifying</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_ELSE</mutator>
+    <description>removed conditional - replaced equality check with false</description>
+    <lineContent>else if (parentValue instanceof J.VariableDeclarations.NamedVariable) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>AvoidStaticImport.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.AvoidStaticImport$AvoidStaticImportVisitor</mutatedClass>
+    <mutatedMethod>shouldSkipQualifying</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to java/util/UUID::equals</description>
+    <lineContent>skip = methodDecl.getName().getId().equals(ident.getId());</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>AvoidStaticImport.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.AvoidStaticImport$AvoidStaticImportVisitor</mutatedClass>
+    <mutatedMethod>shouldSkipQualifying</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to org/openrewrite/java/tree/J$Identifier::getId</description>
+    <lineContent>skip = methodDecl.getName().getId().equals(ident.getId());</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>AvoidStaticImport.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.AvoidStaticImport$AvoidStaticImportVisitor</mutatedClass>
+    <mutatedMethod>shouldSkipQualifying</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to org/openrewrite/java/tree/J$MethodDeclaration::getName</description>
+    <lineContent>skip = methodDecl.getName().getId().equals(ident.getId());</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>AvoidStaticImport.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.AvoidStaticImport$AvoidStaticImportVisitor</mutatedClass>
+    <mutatedMethod>shouldSkipQualifying</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to java/util/UUID::equals</description>
+    <lineContent>skip = methodInv.getName().getId().equals(ident.getId());</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>AvoidStaticImport.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.AvoidStaticImport$AvoidStaticImportVisitor</mutatedClass>
+    <mutatedMethod>shouldSkipQualifying</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to org/openrewrite/java/tree/J$Identifier::getId</description>
+    <lineContent>skip = methodInv.getName().getId().equals(ident.getId());</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>AvoidStaticImport.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.AvoidStaticImport$AvoidStaticImportVisitor</mutatedClass>
+    <mutatedMethod>shouldSkipQualifying</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to org/openrewrite/java/tree/J$MethodInvocation::getName</description>
+    <lineContent>skip = methodInv.getName().getId().equals(ident.getId());</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>AvoidStaticImport.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.AvoidStaticImport$AvoidStaticImportVisitor</mutatedClass>
+    <mutatedMethod>shouldSkipQualifying</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to java/util/UUID::equals</description>
+    <lineContent>skip = namedVar.getName().getId().equals(ident.getId());</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>AvoidStaticImport.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.AvoidStaticImport$AvoidStaticImportVisitor</mutatedClass>
+    <mutatedMethod>shouldSkipQualifying</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to org/openrewrite/java/tree/J$Identifier::getId</description>
+    <lineContent>skip = namedVar.getName().getId().equals(ident.getId());</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>AvoidStaticImport.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.AvoidStaticImport$AvoidStaticImportVisitor</mutatedClass>
+    <mutatedMethod>visitMethodInvocation</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>if (method.getSelect() == null &amp;&amp; method.getMethodType() != null) {</lineContent>
+  </mutation>
+
   <mutation unstable="false">
     <sourceFile>EmptyStatement.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.recipe.EmptyStatement$EmptyStatementVisitor</mutatedClass>
@@ -10,7 +153,6 @@
     <lineContent>.anyMatch(marker -&gt; marker.isFor(CheckFullName.EMPTY_STATEMENT));</lineContent>
   </mutation>
 
-  <!-- Cannot be killed by integration tests until a second recipe lands a marker on this node type. See issue #236 -->
   <mutation unstable="false">
     <sourceFile>FinalLocalVariable.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.recipe.FinalLocalVariable$LocalVariableVisitor</mutatedClass>

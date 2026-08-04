@@ -1,0 +1,17 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/avoidstaticimport/qualifiedmethodstaticimport/InputQualifiedMethodStaticImport.java
++++ src/test/resources/org/checkstyle/autofix/recipe/avoidstaticimport/qualifiedmethodstaticimport/OutputQualifiedMethodStaticImport.java
+@@ -7,12 +7,10 @@
+ */
+ package org.checkstyle.autofix.recipe.avoidstaticimport.qualifiedmethodstaticimport;
+ 
+-import static java.lang.Math.max; // violation 'Using a static member import should be avoided - java.lang.Math.max.'
+-
+-public class InputQualifiedMethodStaticImport {
++public class OutputQualifiedMethodStaticImport {
+     void test() {
+         int a = Math.max(1, 2);
+-        int b = max(1, 2);
++        int b = Math.max(1, 2);
+         int c = java.lang.Math.max(1, 2);
+         test();
+     }
