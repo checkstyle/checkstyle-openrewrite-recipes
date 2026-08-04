@@ -26,6 +26,7 @@
         <module name="EmptyForInitializerPad">
             <property name="option" value="space"/>
         </module>
+        <module name="EmptyForIteratorPad"/>
         <module name="EmptyStatement"/>
         <module name="FinalClass"/>
         <module name="FinalLocalVariable"/>

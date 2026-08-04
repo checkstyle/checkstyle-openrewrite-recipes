@@ -554,6 +554,7 @@
                         <configuration>
                             <targetClasses>
                                 <param>org.checkstyle.autofix.recipe.EmptyStatement*</param>
+                                <param>org.checkstyle.autofix.recipe.EmptyForIteratorPad</param>
                                 <param>org.checkstyle.autofix.recipe.FinalClass*</param>
                                 <param>org.checkstyle.autofix.recipe.FinalLocalVariable*</param>
                                 <param>org.checkstyle.autofix.recipe.Header*</param>
@@ -567,6 +568,7 @@
                             </targetClasses>
                             <targetTests>
                                 <param>org.checkstyle.autofix.recipe.EmptyStatementTest</param>
+                                <param>org.checkstyle.autofix.recipe.EmptyForIteratorPadTest</param>
                                 <param>org.checkstyle.autofix.recipe.FinalClassTest</param>
                                 <param>org.checkstyle.autofix.recipe.FinalLocalVariableTest</param>
                                 <param>org.checkstyle.autofix.recipe.HeaderTest</param>

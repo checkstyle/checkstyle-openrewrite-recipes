@@ -341,7 +341,7 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 |--------|------------------------------------------------------------------------------------------------------------------------------|------------------|----------------|
 | 🟢     | [`ArrayBracketNoWhitespace`](https://checkstyle.sourceforge.io/checks/whitespace/arraybracketnowhitespace.html#ArrayBracketNoWhitespace) | `TBD`            |                |
 | 🟢     | [`EmptyForInitializerPad`](https://checkstyle.sourceforge.io/checks/whitespace/emptyforinitializerpad.html#EmptyForInitializerPad) | [`EmptyForInitializerPad`](src/main/java/org/checkstyle/autofix/recipe/EmptyForInitializerPad.java) |                |
-| 🟢     | [`EmptyForIteratorPad`](https://checkstyle.sourceforge.io/checks/whitespace/emptyforiteratorpad.html#EmptyForIteratorPad) | `TBD`            |                |
+| 🟢     | [`EmptyForIteratorPad`](https://checkstyle.sourceforge.io/checks/whitespace/emptyforiteratorpad.html#EmptyForIteratorPad) | [`EmptyForIteratorPad`](src/main/java/org/checkstyle/autofix/recipe/EmptyForIteratorPad.java) |                |
 | 🟢     | [`EmptyLineSeparator`](https://checkstyle.sourceforge.io/checks/whitespace/emptylineseparator.html#EmptyLineSeparator)     | `TBD`            |                |
 | 🟢     | [`FileTabCharacter`](https://checkstyle.sourceforge.io/checks/whitespace/filetabcharacter.html#FileTabCharacter)           | `TBD`            |                |
 | 🟢     | [`GenericWhitespace`](https://checkstyle.sourceforge.io/checks/whitespace/genericwhitespace.html#GenericWhitespace)       | `TBD`            |                |
