@@ -17,6 +17,7 @@
         <module name="ArrayTrailingComma"/>
         <module name="AvoidStarImport"/>
         <module name="ConstructorsDeclarationGrouping"/>
+        <module name="EmptyForIteratorPad"/>
         <module name="EmptyForInitializerPad"/>
         <module name="EmptyStatement"/>
         <module name="FinalClass"/>
