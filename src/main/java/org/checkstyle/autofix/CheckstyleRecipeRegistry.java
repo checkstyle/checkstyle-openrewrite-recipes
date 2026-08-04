@@ -31,6 +31,7 @@ import org.checkstyle.autofix.parser.CheckstyleViolation;
 import org.checkstyle.autofix.recipe.AnnotationOnSameLine;
 import org.checkstyle.autofix.recipe.AvoidStarImport;
 import org.checkstyle.autofix.recipe.ConstructorsDeclarationGrouping;
+import org.checkstyle.autofix.recipe.CustomImportOrder;
 import org.checkstyle.autofix.recipe.EmptyStatement;
 import org.checkstyle.autofix.recipe.FinalClass;
 import org.checkstyle.autofix.recipe.FinalLocalVariable;
@@ -58,6 +59,7 @@ public final class CheckstyleRecipeRegistry {
     static {
         RECIPE_MAP_WITH_CONFIG.put(CheckFullName.NEWLINE_AT_END_OF_FILE, NewlineAtEndOfFile::new);
         RECIPE_MAP_WITH_CONFIG.put(CheckFullName.HEADER, Header::new);
+        RECIPE_MAP_WITH_CONFIG.put(CheckFullName.CUSTOM_IMPORT_ORDER, CustomImportOrder::new);
         RECIPE_MAP.put(CheckFullName.USE_ENHANCED_SWITCH, UseEnhancedSwitch::new);
         RECIPE_MAP.put(CheckFullName.ANNOTATION_ON_SAME_LINE, AnnotationOnSameLine::new);
         RECIPE_MAP.put(CheckFullName.UNUSED_IMPORT, UnusedImports::new);
