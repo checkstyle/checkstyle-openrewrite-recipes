@@ -1,0 +1,14 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/emptyforiteratorpad/defaultnospace/InputDefaultNoSpace.java
++++ src/test/resources/org/checkstyle/autofix/recipe/emptyforiteratorpad/defaultnospace/OutputDefaultNoSpace.java
+@@ -8,9 +8,9 @@
+ 
+ package org.checkstyle.autofix.recipe.emptyforiteratorpad.defaultnospace;
+ 
+-public class InputDefaultNoSpace {
++public class OutputDefaultNoSpace {
+     public void test() {
+-        for (int i = 0; i < 10; ) { // violation '';' is followed by whitespace.'
++        for (int i = 0; i < 10;) {
+         }
+         for (int i = 0; i < 10;) {
+         }
