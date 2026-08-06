@@ -1,0 +1,26 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/requirethis/allfields/InputAllFields.java
++++ src/test/resources/org/checkstyle/autofix/recipe/requirethis/allfields/OutputAllFields.java
+@@ -11,12 +11,12 @@
+ 
+ package org.checkstyle.autofix.recipe.requirethis.allfields;
+ 
+-public class InputAllFields {
++public class OutputAllFields {
+     int field1, field2, field3;
+ 
+-    InputAllFields(int field1) {
++    OutputAllFields(int field1) {
+         this.field1 = field1;
+-        field2 = 0; // violation 'Reference to instance variable 'field2' needs "this.".'
++        this.field2 = 0;
+         foo(5);
+     }
+ 
+@@ -25,6 +25,6 @@
+     }
+ 
+     void foo(int field3) {
+-        field3 = field3; // violation 'Reference to instance variable 'field3' needs "this.".'
++        this.field3 = field3;
+     }
+ }

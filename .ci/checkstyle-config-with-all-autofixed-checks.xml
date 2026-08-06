@@ -22,6 +22,7 @@
         <module name="MissingOverride"/>
         <module name="NumericalPrefixesInfixesSuffixesCharacterCase"/>
         <module name="RedundantImport"/>
+        <module name="RequireThis"/>
         <module name="UnusedImports"/>
         <module name="UnusedLocalVariable"/>
         <module name="UpperEll"/>
