@@ -28,6 +28,9 @@
         <module name="MissingOverride"/>
         <module name="NumericalPrefixesInfixesSuffixesCharacterCase"/>
         <module name="RedundantImport"/>
+        <module name="RequireThis">
+            <property name="validateOnlyOverlapping" value="false"/>
+        </module>
         <module name="UnusedImports"/>
         <module name="UnusedLocalVariable"/>
         <module name="UpperEll"/>

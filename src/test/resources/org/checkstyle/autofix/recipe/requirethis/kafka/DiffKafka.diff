@@ -1,0 +1,20 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/requirethis/kafka/InputKafka.java
++++ src/test/resources/org/checkstyle/autofix/recipe/requirethis/kafka/OutputKafka.java
+@@ -12,7 +12,7 @@
+ 
+ import java.util.Iterator;
+ 
+-public class InputKafka {
++public class OutputKafka {
+     public Iterator<String> iterator() {
+         return new Iterator<String>() {
+             private String buffer = "test";
+@@ -24,7 +24,7 @@
+ 
+             @Override
+             public String next() {
+-                String str = new String(buffer); // violation 'Reference to instance variable 'buffer' needs "this.".'
++                String str = new String(this.buffer);
+                 return str;
+             }
+         };

@@ -1,0 +1,17 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/requirethis/superclassmethodinvocation/InputSuperclassMethodInvocation.java
++++ src/test/resources/org/checkstyle/autofix/recipe/requirethis/superclassmethodinvocation/OutputSuperclassMethodInvocation.java
+@@ -10,12 +10,12 @@
+ 
+ package org.checkstyle.autofix.recipe.requirethis.superclassmethodinvocation;
+ 
+-public class InputSuperclassMethodInvocation {
++public class OutputSuperclassMethodInvocation {
+     public void fetch(String key, String value) {}
+ 
+     class Subclass extends InputSuperclassMethodInvocation {
+         void doFetch() {
+-            fetch("key", "value"); // violation 'Method call to 'fetch' needs "InputSuperclassMethodInvocation.this.".'
++            this.fetch("key", "value");
+         }
+     }
+ }

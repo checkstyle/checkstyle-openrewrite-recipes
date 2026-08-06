@@ -1,0 +1,18 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/requirethis/anonymousclass/InputAnonymousClass.java
++++ src/test/resources/org/checkstyle/autofix/recipe/requirethis/anonymousclass/OutputAnonymousClass.java
+@@ -10,13 +10,13 @@
+ 
+ package org.checkstyle.autofix.recipe.requirethis.anonymousclass;
+ 
+-public class InputAnonymousClass {
++public class OutputAnonymousClass {
+     void foo() {
+         Runnable r = new Runnable() {
+             private int myField;
+             @Override
+             public void run() {
+-                myField = 5; // violation 'Reference to instance variable 'myField' needs "this.".'
++                this.myField = 5;
+             }
+         };
+     }

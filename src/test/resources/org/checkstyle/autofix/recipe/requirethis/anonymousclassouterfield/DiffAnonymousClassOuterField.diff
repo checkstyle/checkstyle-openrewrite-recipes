@@ -1,0 +1,20 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/requirethis/anonymousclassouterfield/InputAnonymousClassOuterField.java
++++ src/test/resources/org/checkstyle/autofix/recipe/requirethis/anonymousclassouterfield/OutputAnonymousClassOuterField.java
+@@ -10,7 +10,7 @@
+ 
+ package org.checkstyle.autofix.recipe.requirethis.anonymousclassouterfield;
+ 
+-public class InputAnonymousClassOuterField {
++public class OutputAnonymousClassOuterField {
+     class Wrapper {
+         private int field;
+         
+@@ -18,7 +18,7 @@
+             Runnable r = new Runnable() {
+                 @Override
+                 public void run() {
+-                    field = 5; // violation 'Reference to instance variable 'field' needs "Wrapper.this."'
++                    Wrapper.this.field = 5;
+                 }
+             };
+         }

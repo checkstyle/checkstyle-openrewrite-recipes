@@ -1,0 +1,18 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/requirethis/constantvariable/InputConstantVariable.java
++++ src/test/resources/org/checkstyle/autofix/recipe/requirethis/constantvariable/OutputConstantVariable.java
+@@ -13,12 +13,12 @@
+ */
+ package org.checkstyle.autofix.recipe.requirethis.constantvariable;
+ 
+-public class InputConstantVariable {
++public class OutputConstantVariable {
+     private final short epoch = 0;
+     private final String name = "test";
+     
+     public void method() {
+-        final short bumpedEpoch = epoch + 1; // violation 'Reference to instance variable 'epoch' needs "this.".'
+-        final String bumpedName = name + "1"; // violation 'Reference to instance variable 'name' needs "this.".'
++        final short bumpedEpoch = epoch + 1;
++        final String bumpedName = name + "1";
+     }
+ }

@@ -44,6 +44,7 @@ public enum CheckFullName {
         "com.puppycrawl.tools.checkstyle.checks.coding.ConstructorsDeclarationGroupingCheck"),
     MISSING_SWITCH_DEFAULT(
         "com.puppycrawl.tools.checkstyle.checks.coding.MissingSwitchDefaultCheck"),
+    REQUIRE_THIS("com.puppycrawl.tools.checkstyle.checks.coding.RequireThisCheck"),
     UNUSED_IMPORT("com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck"),
     ILLEGAL_TOKEN("com.puppycrawl.tools.checkstyle.checks.coding.IllegalTokenCheck");
 

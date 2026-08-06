@@ -1,0 +1,15 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/requirethis/assignmentoperation/InputAssignmentOperation.java
++++ src/test/resources/org/checkstyle/autofix/recipe/requirethis/assignmentoperation/OutputAssignmentOperation.java
+@@ -10,10 +10,10 @@
+ 
+ package org.checkstyle.autofix.recipe.requirethis.assignmentoperation;
+ 
+-public class InputAssignmentOperation {
++public class OutputAssignmentOperation {
+     private String config;
+ 
+     void validate(String config) {
+-        config += "x"; // violation 'Reference to instance variable 'config' needs "this.".'
++        this.config += "x";
+     }
+ }

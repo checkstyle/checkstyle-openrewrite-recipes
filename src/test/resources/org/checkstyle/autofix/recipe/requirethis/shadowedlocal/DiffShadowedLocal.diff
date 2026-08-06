@@ -1,0 +1,20 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/requirethis/shadowedlocal/InputShadowedLocal.java
++++ src/test/resources/org/checkstyle/autofix/recipe/requirethis/shadowedlocal/OutputShadowedLocal.java
+@@ -17,14 +17,14 @@
+ import java.util.Map;
+ import java.util.function.Supplier;
+ 
+-public class InputShadowedLocal {
++public class OutputShadowedLocal {
+     private int config;
+     private String errorMsg;
+     public void validate(Map<String, String> connectorConfigs) {
+         connectorConfigs.forEach((config, errorMsg) -> {
+             Supplier<String> s = () -> {
+-                errorMsg.length(); // violation 'Reference to instance variable 'errorMsg' needs "this.".'
+-                return new String(config); // violation 'Reference to instance variable 'config' needs "this.".'
++                this.errorMsg.length();
++                return new String(config);
+             };
+         });
+     }

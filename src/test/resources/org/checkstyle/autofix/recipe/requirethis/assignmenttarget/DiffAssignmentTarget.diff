@@ -1,0 +1,16 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/requirethis/assignmenttarget/InputAssignmentTarget.java
++++ src/test/resources/org/checkstyle/autofix/recipe/requirethis/assignmenttarget/OutputAssignmentTarget.java
+@@ -10,11 +10,11 @@
+ 
+ package org.checkstyle.autofix.recipe.requirethis.assignmenttarget;
+ 
+-public class InputAssignmentTarget {
++public class OutputAssignmentTarget {
+     private String config;
+ 
+     String validate(String config) {
+-        config = "test"; // violation 'Reference to instance variable 'config' needs "this.".'
++        this.config = "test";
+         return config;
+     }
+ }

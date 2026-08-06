@@ -1,0 +1,11 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/requirethis/kafka/InputSelectorTest.java
++++ src/test/resources/org/checkstyle/autofix/recipe/requirethis/kafka/OutputSelectorTest.java
+@@ -9,7 +9,7 @@
+ */
+ package org.checkstyle.autofix.recipe.requirethis.kafka;
+ 
+-public class InputSelectorTest {
++public class OutputSelectorTest {
+     interface ChannelBuilder {
+     }
+     interface KafkaChannel {

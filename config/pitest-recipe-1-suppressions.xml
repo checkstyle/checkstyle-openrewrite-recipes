@@ -1,12 +1,498 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suppressedMutations>
-  <!-- Cannot be killed by integration tests until a second recipe lands a marker on this node type. See issue #236 -->
+
   <mutation unstable="false">
-    <sourceFile>FinalLocalVariable.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.recipe.FinalLocalVariable$LocalVariableVisitor</mutatedClass>
-    <mutatedMethod>lambda$isViolationMarked$0</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.BooleanTrueReturnValsMutator</mutator>
-    <description>replaced boolean return with true for org/checkstyle/autofix/recipe/FinalLocalVariable$LocalVariableVisitor::lambda$isViolationMarked$0</description>
-    <lineContent>.anyMatch(marker -&gt; marker.isFor(CheckFullName.FINAL_LOCAL_VARIABLE));</lineContent>
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>buildOuterThisExpression</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to org/checkstyle/autofix/recipe/RequireThis$RequireThisVisitor::getClassNameWithoutPackage</description>
+    <lineContent>String className = getClassNameWithoutPackage(ownerType);</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>buildOuterThisExpression</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to org/checkstyle/autofix/recipe/RequireThis$RequireThisVisitor::isAnonymousClass</description>
+    <lineContent>if (!isAnonymousClass(className)) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>buildOuterThisExpression</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>if (!isAnonymousClass(className)) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>buildOuterThisExpression</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>if (foundName != null) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>buildOuterThisExpression</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>if (needsOuter) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>createThisFieldAccess</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>if (ident.getFieldType() != null) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>createThisFieldAccess</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>if (thisExpression != null) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>findLexicallyEnclosingClass</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to org/openrewrite/java/tree/TypeUtils::isAssignableTo</description>
+    <lineContent>&amp;&amp; TypeUtils.isAssignableTo(</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>findLexicallyEnclosingClass</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_ELSE</mutator>
+    <description>removed conditional - replaced equality check with false</description>
+    <lineContent>&amp;&amp; TypeUtils.isAssignableTo(</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>findLexicallyEnclosingClass</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_ELSE</mutator>
+    <description>removed conditional - replaced equality check with false</description>
+    <lineContent>else if (val instanceof J.NewClass) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>findLexicallyEnclosingClass</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to org/openrewrite/java/tree/J$NewClass::getType</description>
+    <lineContent>final JavaType typeOfNew = ((J.NewClass) val).getType();</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>findLexicallyEnclosingClass</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to org/checkstyle/autofix/recipe/RequireThis$RequireThisVisitor::getClassNameWithoutPackage</description>
+    <lineContent>foundName = getClassNameWithoutPackage((JavaType.FullyQualified) typeOfNew);</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>findLexicallyEnclosingClass</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>if (fullyQualifiedType != null</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>findLexicallyEnclosingClass</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NegateConditionalsMutator</mutator>
+    <description>negated conditional</description>
+    <lineContent>if (typeOfNew instanceof JavaType.FullyQualified</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>findLexicallyEnclosingClass</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_ELSE</mutator>
+    <description>removed conditional - replaced equality check with false</description>
+    <lineContent>if (typeOfNew instanceof JavaType.FullyQualified</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>findLexicallyEnclosingClass</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>if (typeOfNew instanceof JavaType.FullyQualified</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>findLexicallyEnclosingClass</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>while (searchCursor != null &amp;&amp; foundName == null) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>getClassNameWithoutPackage</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to java/lang/String::indexOf</description>
+    <lineContent>if (className.indexOf(DOT) != -1) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>getClassNameWithoutPackage</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>if (className.indexOf(DOT) != -1) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>getClassNameWithoutPackage</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.ArgumentPropagationMutator</mutator>
+    <description>replaced call to java/lang/String::indexOf with argument</description>
+    <lineContent>if (className.indexOf(DOT) != -1) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>isAnonymousClass</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to java/lang/String::matches</description>
+    <lineContent>return className.matches(&quot;\\d+&quot;);</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>isAnonymousClass</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.BooleanFalseReturnValsMutator</mutator>
+    <description>replaced boolean return with false for org/checkstyle/autofix/recipe/RequireThis$RequireThisVisitor::isAnonymousClass</description>
+    <lineContent>return className.matches(&quot;\\d+&quot;);</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>isTypeAssignable</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to org/checkstyle/autofix/recipe/RequireThis$RequireThisVisitor::isTypeAssignable</description>
+    <lineContent>&amp;&amp; isTypeAssignable(target, source.getSupertype())) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>isTypeAssignable</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to org/openrewrite/java/tree/JavaType$FullyQualified::getSupertype</description>
+    <lineContent>&amp;&amp; isTypeAssignable(target, source.getSupertype())) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>isTypeAssignable</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_ELSE</mutator>
+    <description>removed conditional - replaced equality check with false</description>
+    <lineContent>&amp;&amp; isTypeAssignable(target, source.getSupertype())) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>isTypeAssignable</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NegateConditionalsMutator</mutator>
+    <description>negated conditional</description>
+    <lineContent>else if (source.getSupertype() != null</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>isTypeAssignable</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to org/openrewrite/java/tree/JavaType$FullyQualified::getSupertype</description>
+    <lineContent>else if (source.getSupertype() != null</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>isTypeAssignable</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_ELSE</mutator>
+    <description>removed conditional - replaced equality check with false</description>
+    <lineContent>else if (source.getSupertype() != null</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>isTypeAssignable</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>else if (source.getSupertype() != null</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>isTypeAssignable</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.NakedReceiverMutator</mutator>
+    <description>replaced call to org/openrewrite/java/tree/JavaType$FullyQualified::getSupertype with receiver</description>
+    <lineContent>else if (source.getSupertype() != null</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>isTypeAssignable</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NegateConditionalsMutator</mutator>
+    <description>negated conditional</description>
+    <lineContent>else if (target != null &amp;&amp; source != null) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>isTypeAssignable</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_ELSE</mutator>
+    <description>removed conditional - replaced equality check with false</description>
+    <lineContent>else if (target != null &amp;&amp; source != null) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>isTypeAssignable</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>else if (target != null &amp;&amp; source != null) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>isTypeAssignable</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to org/openrewrite/java/tree/TypeUtils::isAssignableTo</description>
+    <lineContent>if (TypeUtils.isAssignableTo(target, source)) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>isTypeAssignable</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_ELSE</mutator>
+    <description>removed conditional - replaced equality check with false</description>
+    <lineContent>if (TypeUtils.isAssignableTo(target, source)) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>isTypeAssignable</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to org/checkstyle/autofix/recipe/RequireThis$RequireThisVisitor::isTypeAssignable</description>
+    <lineContent>if (isTypeAssignable(target, intf)) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>isTypeAssignable</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_ELSE</mutator>
+    <description>removed conditional - replaced equality check with false</description>
+    <lineContent>if (isTypeAssignable(target, intf)) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>isTypeAssignable</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to java/lang/String::equals</description>
+    <lineContent>if (target.getFullyQualifiedName().equals(source.getFullyQualifiedName())) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>isTypeAssignable</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to org/openrewrite/java/tree/JavaType$FullyQualified::getFullyQualifiedName</description>
+    <lineContent>if (target.getFullyQualifiedName().equals(source.getFullyQualifiedName())) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>isTypeAssignable</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_ELSE</mutator>
+    <description>removed conditional - replaced equality check with false</description>
+    <lineContent>if (target.getFullyQualifiedName().equals(source.getFullyQualifiedName())) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>isTypeMismatchWithField</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to org/openrewrite/java/tree/TypeUtils::isAssignableTo</description>
+    <lineContent>&amp;&amp; !TypeUtils.isAssignableTo(</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>isTypeMismatchWithField</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>&amp;&amp; !TypeUtils.isAssignableTo(</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>isTypeMismatchWithField</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>&amp;&amp; ident.getFieldType().getOwner() instanceof JavaType.Method) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>isTypeMismatchWithField</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to org/openrewrite/java/tree/JavaType$Variable::getType</description>
+    <lineContent>field.getType(), ident.getFieldType().getType())</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>isTypeMismatchWithField</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to org/openrewrite/java/tree/JavaType$Variable::getType</description>
+    <lineContent>ident.getFieldType().getType(), field.getType());</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>isTypeMismatchWithField</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>if (enclosingClass != null &amp;&amp; enclosingClass.getType() != null) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>isTypeMismatchWithField</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>if (field != null) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>isTypeMismatchWithField</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
+    <description>removed call to org/openrewrite/java/tree/TypeUtils::isAssignableTo</description>
+    <lineContent>isMismatch = !TypeUtils.isAssignableTo(</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>isTypeMismatchWithField</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>isMismatch = !TypeUtils.isAssignableTo(</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>lambda$buildOuterThisExpression$0</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_ELSE</mutator>
+    <description>removed conditional - replaced equality check with false</description>
+    <lineContent>return node instanceof J.ClassDeclaration</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>needsOuterClass</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>else if (enclosing instanceof J.NewClass) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>needsOuterClass</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>if (enclosingType != null</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>needsOuterClass</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>if (typeOfNew instanceof JavaType.FullyQualified</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>visitMethodInvocation</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>if (result.getMethodType() != null) {</lineContent>
+  </mutation>
+
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>visitMethodInvocation</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
+    <description>removed conditional - replaced equality check with true</description>
+    <lineContent>if (thisExpr != null) {</lineContent>
   </mutation>
 </suppressedMutations>

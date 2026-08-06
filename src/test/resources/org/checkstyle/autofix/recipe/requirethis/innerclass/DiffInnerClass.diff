@@ -1,0 +1,37 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/requirethis/innerclass/InputInnerClass.java
++++ src/test/resources/org/checkstyle/autofix/recipe/requirethis/innerclass/OutputInnerClass.java
+@@ -13,28 +13,28 @@
+ import java.util.Iterator;
+ import java.util.List;
+ 
+-public class InputInnerClass {
++public class OutputInnerClass {
+     class StructRegistry {
+         private List<String> commonStructNames;
+         private String structField;
+ 
+         class NamedInner {
+             void foo() {
+-                structField = "test"; // violation 'Reference to instance variable 'structField' needs "StructRegistry.this.".'
++                StructRegistry.this.structField = "test";
+             }
+         }
+ 
+         Iterator<String> commonStructs() {
+             return new Iterator<String>() {
+-                private final Iterator<String> iter = commonStructNames.iterator(); // violation 'Reference to instance variable 'commonStructNames' needs "this.".'
++                private final Iterator<String> iter = StructRegistry.this.commonStructNames.iterator();
+ 
+                 @Override public boolean hasNext() {
+-                    structField = "test"; // violation 'Reference to instance variable 'structField' needs "StructRegistry.this.".'
+-                    return iter.hasNext(); // violation 'Reference to instance variable 'iter' needs "this.".'
++                    StructRegistry.this.structField = "test";
++                    return this.iter.hasNext();
+                 }
+ 
+                 @Override public String next() {
+-                    return iter.next(); // violation 'Reference to instance variable 'iter' needs "this.".'
++                    return this.iter.next();
+                 }
+             };
+         }
