@@ -31,14 +31,12 @@ import org.junit.jupiter.params.provider.MethodSource;
  * boilerplate code in test methods.
  *
  * <p>Usage example:
- * <pre>
- * {@code
+ * {@snippet :
  * @RecipeTest
  * void myTest(ReportParser parser) throws Exception {
  *     verify(parser, "TestCase");
  * }
  * }
- * </pre>
  *
  * <p>The test method must accept a single {@link org.checkstyle.autofix.parser.ReportParser}
  * parameter, which will be automatically provided by the test framework. Each test will
