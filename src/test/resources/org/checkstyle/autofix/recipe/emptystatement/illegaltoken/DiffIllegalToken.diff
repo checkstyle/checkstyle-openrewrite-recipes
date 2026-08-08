@@ -1,0 +1,14 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/emptystatement/illegaltoken/InputIllegalToken.java
++++ src/test/resources/org/checkstyle/autofix/recipe/emptystatement/illegaltoken/OutputIllegalToken.java
+@@ -22,9 +22,8 @@
+ */
+ package org.checkstyle.autofix.recipe.emptystatement.illegaltoken;
+ 
+-public class InputIllegalToken {
++public class OutputIllegalToken {
+     public void test() {
+-        ; // violation
+-        ; // violation
++        ;
+     }
+ }
