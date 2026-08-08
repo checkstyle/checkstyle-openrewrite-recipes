@@ -1,0 +1,18 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/avoidstaticimport/nestedclassstaticimport/InputNestedClassStaticImport.java
++++ src/test/resources/org/checkstyle/autofix/recipe/avoidstaticimport/nestedclassstaticimport/OutputNestedClassStaticImport.java
+@@ -7,13 +7,11 @@
+ */
+ package org.checkstyle.autofix.recipe.avoidstaticimport.nestedclassstaticimport;
+ 
+-import static java.util.Map.Entry; // violation 'Using a static member import should be avoided - java.util.Map.Entry.'
+-
+ import java.util.Map;
+ 
+-public class InputNestedClassStaticImport {
++public class OutputNestedClassStaticImport {
+     void test(Map<String, String> map) {
+-        for (Entry<String, String> entry : map.entrySet()) {
++        for (Map.Entry<String, String> entry : map.entrySet()) {
+         }
+     }
+ }

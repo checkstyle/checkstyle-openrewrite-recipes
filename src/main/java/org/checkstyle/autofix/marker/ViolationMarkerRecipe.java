@@ -60,6 +60,7 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
                 J.VariableDeclarations.NamedVariable.class);
         TARGET_TYPES.put(CheckFullName.ANNOTATION_ON_SAME_LINE, J.Annotation.class);
         TARGET_TYPES.put(CheckFullName.AVOID_STAR_IMPORT, J.Import.class);
+        TARGET_TYPES.put(CheckFullName.AVOID_STATIC_IMPORT, J.Import.class);
         TARGET_TYPES.put(CheckFullName.UNUSED_IMPORT, J.Import.class);
         TARGET_TYPES.put(CheckFullName.UNUSED_LOCAL_VARIABLE, J.VariableDeclarations.class);
         TARGET_TYPES.put(CheckFullName.MISSING_OVERRIDE, J.MethodDeclaration.class);

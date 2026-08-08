@@ -1,0 +1,24 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/avoidstaticimport/fieldstaticimport/InputFieldStaticImport.java
++++ src/test/resources/org/checkstyle/autofix/recipe/avoidstaticimport/fieldstaticimport/OutputFieldStaticImport.java
+@@ -14,15 +14,15 @@
+ */
+ package org.checkstyle.autofix.recipe.avoidstaticimport.fieldstaticimport;
+ 
+-import static java.util.Collections.EMPTY_LIST; // violation 'Using a static member import should be avoided - java.util.Collections.EMPTY_LIST.'
+-import static java.lang.Math.*; // violation 'Using the '.*' form of import should be avoided - java.lang.Math.*.'
++import java.util.Collections;
+ import java.util.List;
+-import static java.time.DayOfWeek.MONDAY; // violation 'Using a static member import should be avoided - java.time.DayOfWeek.MONDAY.'
+ 
+-public class InputFieldStaticImport {
+-    List list = EMPTY_LIST;
++import static java.lang.Math.PI;
++
++public class OutputFieldStaticImport {
++    List list = Collections.EMPTY_LIST;
+     double d = PI;
+-    List list2 = java.util.Collections.EMPTY_LIST;
++    List list2 = Collections.EMPTY_LIST;
+ 
+     void foo(java.time.DayOfWeek e) {
+         switch (e) {

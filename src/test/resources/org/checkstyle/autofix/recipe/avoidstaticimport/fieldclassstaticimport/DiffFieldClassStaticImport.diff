@@ -1,0 +1,15 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/avoidstaticimport/fieldclassstaticimport/InputFieldClassStaticImport.java
++++ src/test/resources/org/checkstyle/autofix/recipe/avoidstaticimport/fieldclassstaticimport/OutputFieldClassStaticImport.java
+@@ -7,10 +7,8 @@
+ */
+ package org.checkstyle.autofix.recipe.avoidstaticimport.fieldclassstaticimport;
+ 
+-import static java.util.Map.Entry; // violation 'Using a static member import should be avoided - java.util.Map.Entry.'
+-
+ import java.util.Map;
+ 
+-public class InputFieldClassStaticImport {
+-    private Entry<String, String> entry;
++public class OutputFieldClassStaticImport {
++    private Map.Entry<String, String> entry;
+ }

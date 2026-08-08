@@ -1,0 +1,18 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/avoidstaticimport/deeplynestedclassstaticimport/InputDeeplyNestedClassStaticImport.java
++++ src/test/resources/org/checkstyle/autofix/recipe/avoidstaticimport/deeplynestedclassstaticimport/OutputDeeplyNestedClassStaticImport.java
+@@ -7,13 +7,11 @@
+ */
+ package org.checkstyle.autofix.recipe.avoidstaticimport.deeplynestedclassstaticimport;
+ 
+-import static org.checkstyle.autofix.recipe.avoidstaticimport.deeplynestedclassstaticimport.InputDeeplyNestedClassStaticImport.A.B; // violation 'Using a static member import should be avoided'
+-
+-public class InputDeeplyNestedClassStaticImport {
++public class OutputDeeplyNestedClassStaticImport {
+     public static class A {
+         public static class B {
+         }
+     }
+     
+-    private B b;
++    private InputDeeplyNestedClassStaticImport.A.B b;
+ }
