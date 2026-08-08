@@ -1,0 +1,41 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/requirethis/fieldsandmethods/InputFieldsAndMethods.java
++++ src/test/resources/org/checkstyle/autofix/recipe/requirethis/fieldsandmethods/OutputFieldsAndMethods.java
+@@ -10,29 +10,29 @@
+ 
+ package org.checkstyle.autofix.recipe.requirethis.fieldsandmethods;
+ 
+-public class InputFieldsAndMethods {
++public class OutputFieldsAndMethods {
+     int field1, field2, field3;
+ 
+-    InputFieldsAndMethods(int field1) {
++    OutputFieldsAndMethods(int field1) {
+         this.field1 = field1;
+-        field2 = 0; // violation 'Reference to instance variable 'field2' needs "this.".'
+-        foo(5); // violation 'Method call to 'foo' needs "this.".'
++        this.field2 = 0;
++        this.foo(5);
+     }
+ 
+     void method2(int i) {
+-        foo(i); // violation 'Method call to 'foo' needs "this.".'
+-        foo( // violation 'Method call to 'foo' needs "this.".'
+-            field1); // violation 'Reference to instance variable 'field1' needs "this.".'
++        this.foo(i);
++        this.foo(
++            this.field1);
+         staticMethod();
+         int j = staticField;
+     }
+ 
+     void foo(int field3) {
+-        field3 = field3; // violation 'Reference to instance variable 'field3' needs "this.".'
++        this.field3 = field3;
+     }
+ 
+     int getField1() {
+-        return field1; // violation 'Reference to instance variable 'field1' needs "this.".'
++        return this.field1;
+     }
+ 
+     static int staticField = 10;

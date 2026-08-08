@@ -19,4 +19,14 @@
     <description>replaced boolean return with true for org/checkstyle/autofix/recipe/FinalLocalVariable$LocalVariableVisitor::lambda$isViolationMarked$0</description>
     <lineContent>.anyMatch(marker -&gt; marker.isFor(CheckFullName.FINAL_LOCAL_VARIABLE));</lineContent>
   </mutation>
+
+  <!-- Cannot be killed by integration tests until a second recipe lands a marker on this node type. See issue #236 -->
+  <mutation unstable="false">
+    <sourceFile>RequireThis.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.RequireThis$RequireThisVisitor</mutatedClass>
+    <mutatedMethod>lambda$isRequireThisViolation$0</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.BooleanTrueReturnValsMutator</mutator>
+    <description>replaced boolean return with true for org/checkstyle/autofix/recipe/RequireThis$RequireThisVisitor::lambda$isRequireThisViolation$0</description>
+    <lineContent>.anyMatch(marker -&gt; marker.isFor(CheckFullName.REQUIRE_THIS));</lineContent>
+  </mutation>
 </suppressedMutations>

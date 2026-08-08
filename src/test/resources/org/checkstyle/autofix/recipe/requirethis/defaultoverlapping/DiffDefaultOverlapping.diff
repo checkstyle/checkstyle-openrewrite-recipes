@@ -1,0 +1,23 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/requirethis/defaultoverlapping/InputDefaultOverlapping.java
++++ src/test/resources/org/checkstyle/autofix/recipe/requirethis/defaultoverlapping/OutputDefaultOverlapping.java
+@@ -8,10 +8,10 @@
+ 
+ package org.checkstyle.autofix.recipe.requirethis.defaultoverlapping;
+ 
+-public class InputDefaultOverlapping {
++public class OutputDefaultOverlapping {
+     int field1, field2, field3;
+ 
+-    InputDefaultOverlapping(int field1) {
++    OutputDefaultOverlapping(int field1) {
+         this.field1 = field1;
+         field2 = 0;
+         foo(5);
+@@ -23,6 +23,6 @@
+ 
+     void foo(int field3) {
+ 
+-        field3 = field3; // violation 'Reference to instance variable 'field3' needs "this.".'
++        this.field3 = field3;
+     }
+ }

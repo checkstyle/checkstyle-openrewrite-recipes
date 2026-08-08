@@ -163,7 +163,7 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 | 🟢     | [`PackageDeclaration`](https://checkstyle.sourceforge.io/checks/coding/packagedeclaration.html#PackageDeclaration) | `TBD`           |                |
 | 🔴     | [`ParameterAssignment`](https://checkstyle.sourceforge.io/checks/coding/parameterassignment.html#ParameterAssignment) |                 |                |
 | 🔴     | [`PatternVariableAssignment`](https://checkstyle.sourceforge.io/checks/coding/patternvariableassignment.html#PatternVariableAssignment) |                 |                |
-| 🟢     | [`RequireThis`](https://checkstyle.sourceforge.io/checks/coding/requirethis.html#RequireThis) | `TBD`           |                |
+| 🟢     | [`RequireThis`](https://checkstyle.sourceforge.io/checks/coding/requirethis.html#RequireThis) | [`RequireThis`](https://github.com/checkstyle/checkstyle-openrewrite-recipes/blob/main/src/main/java/org/checkstyle/autofix/recipe/RequireThis.java)           |                |
 | 🔴     | [`ReturnCount`](https://checkstyle.sourceforge.io/checks/coding/returncount.html#ReturnCount) |                 |                |
 | 🟢     | [`SimplifyBooleanExpression`](https://checkstyle.sourceforge.io/checks/coding/simplifybooleanexpression.html#SimplifyBooleanExpression) | `TBD`           |                |
 | 🟢     | [`SimplifyBooleanReturn`](https://checkstyle.sourceforge.io/checks/coding/simplifybooleanreturn.html#SimplifyBooleanReturn) | `TBD`           |                |

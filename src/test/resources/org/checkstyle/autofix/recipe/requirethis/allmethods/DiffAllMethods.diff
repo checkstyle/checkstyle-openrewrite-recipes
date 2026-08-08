@@ -1,0 +1,24 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/requirethis/allmethods/InputAllMethods.java
++++ src/test/resources/org/checkstyle/autofix/recipe/requirethis/allmethods/OutputAllMethods.java
+@@ -11,17 +11,17 @@
+ 
+ package org.checkstyle.autofix.recipe.requirethis.allmethods;
+ 
+-public class InputAllMethods {
++public class OutputAllMethods {
+     int field1, field2, field3;
+ 
+-    InputAllMethods(int field1) {
++    OutputAllMethods(int field1) {
+         this.field1 = field1;
+         field2 = 0;
+-        foo(5); // violation 'Method call to 'foo' needs "this.".'
++        this.foo(5);
+     }
+ 
+     void method2(int i) {
+-        foo(i); // violation 'Method call to 'foo' needs "this.".'
++        this.foo(i);
+     }
+ 
+     void foo(int field3) {
