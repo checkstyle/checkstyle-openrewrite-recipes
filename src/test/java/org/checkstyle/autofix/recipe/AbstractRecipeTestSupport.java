@@ -40,6 +40,7 @@ import org.checkstyle.autofix.parser.CheckstyleViolation;
 import org.checkstyle.autofix.parser.ReportParser;
 import org.checkstyle.autofix.parser.SarifReportParser;
 import org.checkstyle.autofix.parser.XmlReportParser;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Named;
 import org.junit.jupiter.params.provider.Arguments;
 import org.openrewrite.ExecutionContext;
@@ -283,6 +284,18 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
         if (result.getAfter() instanceof J tree) {
             assertAllNodesHaveId(tree);
             assertAllMarkersHaveId(tree);
+
+            final boolean hasMarkersApplied = tree.getMarkers().getMarkers().stream()
+                    .anyMatch(marker -> "MarkersApplied".equals(marker.getClass().getSimpleName()));
+            Assertions.assertTrue(
+                    hasMarkersApplied, "MarkersApplied must be present on J.CompilationUnit");
+
+            tree.getMarkers().getMarkers().stream()
+                    .filter(marker -> "MarkersApplied".equals(marker.getClass().getSimpleName()))
+                    .forEach(marker -> {
+                        Assertions.assertNotNull(
+                                marker.getId(), "MarkersApplied ID must not be null");
+                    });
         }
     }
 
