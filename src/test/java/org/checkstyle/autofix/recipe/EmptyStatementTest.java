@@ -121,4 +121,9 @@ public class EmptyStatementTest extends AbstractRecipeTestSupport {
         verify(parser, "MultiFileEmptyStatement1", "MultiFileEmptyStatement2");
     }
 
+    @RecipeTest
+    void ignoresIllegalTokenMarker(ReportParser parser) throws Exception {
+        verify(parser, "IllegalToken");
+    }
+
 }
