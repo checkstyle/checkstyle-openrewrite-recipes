@@ -19,4 +19,14 @@
     <description>replaced boolean return with true for org/checkstyle/autofix/recipe/FinalLocalVariable$LocalVariableVisitor::lambda$isViolationMarked$0</description>
     <lineContent>.anyMatch(marker -&gt; marker.isFor(CheckFullName.FINAL_LOCAL_VARIABLE));</lineContent>
   </mutation>
+
+  <!-- Cannot be killed by integration tests until a second recipe lands a marker on this node type. See issue #236 -->
+  <mutation unstable="false">
+    <sourceFile>UnnecessaryParentheses.java</sourceFile>
+    <mutatedClass>org.checkstyle.autofix.recipe.UnnecessaryParentheses$UnnecessaryParenthesesVisitor</mutatedClass>
+    <mutatedMethod>lambda$isAtViolationLocation$0</mutatedMethod>
+    <mutator>org.pitest.mutationtest.engine.gregor.mutators.returns.BooleanTrueReturnValsMutator</mutator>
+    <description>replaced boolean return with true for org/checkstyle/autofix/recipe/UnnecessaryParentheses$UnnecessaryParenthesesVisitor::lambda$isAtViolationLocation$0</description>
+    <lineContent>.anyMatch(marker -&gt; marker.isFor(CheckFullName.UNNECESSARY_PARENTHESES));</lineContent>
+  </mutation>
 </suppressedMutations>

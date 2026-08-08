@@ -1,0 +1,13 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/unnecessaryparentheses/multifile1/InputMultiFile1.java
++++ src/test/resources/org/checkstyle/autofix/recipe/unnecessaryparentheses/multifile1/OutputMultiFile1.java
+@@ -8,8 +8,8 @@
+ 
+ package org.checkstyle.autofix.recipe.unnecessaryparentheses.multifile;
+ 
+-public class InputMultiFile1 {
++public class OutputMultiFile1 {
+     public int square1(int a, int b) {
+-        return (a * b); // violation 'Unnecessary parentheses around return value'
++        return a * b;
+     }
+ }
