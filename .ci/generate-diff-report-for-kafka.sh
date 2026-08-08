@@ -38,6 +38,38 @@ sed -i.bak "s|@WORK_DIR@|$WORK_DIR|g" "$WORK_DIR/checkstyle-config.xml" \
 echo "Fetching base branch $BASE_BRANCH..."
 git fetch origin "$BASE_BRANCH"
 
+echo "Filtering Checkstyle config to run only changed recipes if applicable..."
+NON_RECIPE_CHANGES=$(git diff --name-only "origin/$BASE_BRANCH" \
+  | grep '^src/main/java/' \
+  | grep -v '^src/main/java/org/checkstyle/autofix/recipe/' || true)
+
+if [ -n "$NON_RECIPE_CHANGES" ]; then
+    echo "Core files or non-recipe files changed. Running all autofixed checks."
+else
+    CHANGED_RECIPES=$(git diff --name-only "origin/$BASE_BRANCH" \
+      | grep '^src/main/java/org/checkstyle/autofix/recipe/.*\.java$' \
+      | sed -E 's|.*/(.*)\.java$|\1|' || true)
+    if [ -n "$CHANGED_RECIPES" ]; then
+        echo "Changed recipes detected: $(echo $CHANGED_RECIPES | tr '\n' ' ')"
+        ALL_RECIPES=$(ls "$RECIPES_DIR/src/main/java/org/checkstyle/autofix/recipe/" \
+          | grep '\.java$' | grep -v package-info | sed 's/\.java$//')
+        for RECIPE in $ALL_RECIPES; do
+            if ! echo "$CHANGED_RECIPES" | grep -wq "$RECIPE"; then
+                sed -i.bak "/<module name=\"$RECIPE\"\/>/d" "$WORK_DIR/checkstyle-config.xml"
+            fi
+        done
+        rm -f "$WORK_DIR/checkstyle-config.xml.bak"
+    else
+        echo "No recipe changes detected in src/main/java. Skipping diff generation."
+        echo "<html><body><h2>No changes produced by recipes compared to baseline.</h2></body></html>" \
+          > "$WORK_DIR/recipe-diff.html"
+        echo "<html><body><h2>No changes produced by recipes compared to baseline.</h2></body></html>" \
+          > "$WORK_DIR/recipe-diff-line-by-line.html"
+        touch "$WORK_DIR/recipe-diff.patch.txt"
+        exit 0
+    fi
+fi
+
 echo "Checking out baseline recipes..."
 git checkout -f "origin/$BASE_BRANCH"
 
