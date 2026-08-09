@@ -22,8 +22,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
-import org.checkstyle.autofix.CheckFullName;
-import org.checkstyle.autofix.marker.CheckstyleViolationMarker;
+import org.checkstyle.autofix.marker.checks.AvoidStarImportMarker;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
 import org.openrewrite.TreeVisitor;
@@ -136,8 +135,7 @@ public class AvoidStarImport extends Recipe {
 
         private boolean isAtViolationLocation(J.Import importStmt) {
             return importStmt.getMarkers()
-                    .findAll(CheckstyleViolationMarker.class).stream()
-                    .anyMatch(marker -> marker.isFor(CheckFullName.AVOID_STAR_IMPORT));
+                    .findFirst(AvoidStarImportMarker.class).isPresent();
         }
     }
 

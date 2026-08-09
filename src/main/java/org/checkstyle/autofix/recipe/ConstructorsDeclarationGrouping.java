@@ -22,8 +22,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
-import org.checkstyle.autofix.CheckFullName;
-import org.checkstyle.autofix.marker.CheckstyleViolationMarker;
+import org.checkstyle.autofix.marker.checks.ConstructorsDeclarationGroupingMarker;
 import org.checkstyle.autofix.parser.CheckConfiguration;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
@@ -338,13 +337,10 @@ public class ConstructorsDeclarationGrouping extends Recipe {
          */
         private static boolean hasViolationMarkerMatching(
                 J.MethodDeclaration method,
-                Predicate<CheckstyleViolationMarker> predicate) {
-            final List<CheckstyleViolationMarker> markers =
-                method.getMarkers().findAll(CheckstyleViolationMarker.class);
-            final CheckFullName targetCheck =
-                    CheckFullName.CONSTRUCTORS_DECLARATION_GROUPING;
+                Predicate<ConstructorsDeclarationGroupingMarker> predicate) {
+            final List<ConstructorsDeclarationGroupingMarker> markers =
+                method.getMarkers().findAll(ConstructorsDeclarationGroupingMarker.class);
             return markers.stream()
-                    .filter(marker -> marker.isFor(targetCheck))
                     .anyMatch(predicate);
         }
     }

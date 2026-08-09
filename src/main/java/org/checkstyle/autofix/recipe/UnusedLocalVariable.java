@@ -24,8 +24,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-import org.checkstyle.autofix.CheckFullName;
-import org.checkstyle.autofix.marker.CheckstyleViolationMarker;
+import org.checkstyle.autofix.marker.checks.UnusedLocalVariableMarker;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
 import org.openrewrite.TreeVisitor;
@@ -106,11 +105,10 @@ public class UnusedLocalVariable extends Recipe {
 
         private boolean isAtViolationLocation(J.VariableDeclarations varDecl,
                 J.VariableDeclarations.NamedVariable variable) {
-            return varDecl.getMarkers().findAll(CheckstyleViolationMarker.class).stream()
+            return varDecl.getMarkers().findAll(UnusedLocalVariableMarker.class).stream()
                     .anyMatch(marker -> {
-                        return marker.isFor(CheckFullName.UNUSED_LOCAL_VARIABLE)
-                                & marker.violation().getMessage()
-                                    .contains(QUOTE + variable.getSimpleName() + QUOTE);
+                        return marker.violation().getMessage()
+                            .contains(QUOTE + variable.getSimpleName() + QUOTE);
                     });
         }
 

@@ -19,8 +19,7 @@ package org.checkstyle.autofix.recipe;
 
 import java.util.Locale;
 
-import org.checkstyle.autofix.CheckFullName;
-import org.checkstyle.autofix.marker.CheckstyleViolationMarker;
+import org.checkstyle.autofix.marker.checks.NumericalPrefixesInfixesSuffixesCharacterCaseMarker;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
 import org.openrewrite.TreeVisitor;
@@ -144,10 +143,8 @@ public class NumericalPrefixesInfixesSuffixesCharacterCase extends Recipe {
         }
 
         private boolean isAtViolationLocation(J.Literal literal) {
-            return literal.getMarkers().findAll(CheckstyleViolationMarker.class).stream()
-                    .anyMatch(marker -> {
-                        return marker.isFor(CheckFullName.NUMERICAL_PREFIXES_INF_SUF_CASE);
-                    });
+            return literal.getMarkers()
+                .findFirst(NumericalPrefixesInfixesSuffixesCharacterCaseMarker.class).isPresent();
         }
     }
 

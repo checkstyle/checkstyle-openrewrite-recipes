@@ -19,8 +19,7 @@ package org.checkstyle.autofix.recipe;
 
 import java.util.Locale;
 
-import org.checkstyle.autofix.CheckFullName;
-import org.checkstyle.autofix.marker.CheckstyleViolationMarker;
+import org.checkstyle.autofix.marker.checks.HexLiteralCaseMarker;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
 import org.openrewrite.TreeVisitor;
@@ -138,9 +137,7 @@ public class HexLiteralCase extends Recipe {
 
         private boolean isAtViolationLocation(J.Literal literal) {
             return literal.getMarkers()
-                    .findAll(CheckstyleViolationMarker.class)
-                    .stream()
-                    .anyMatch(marker -> marker.isFor(CheckFullName.HEX_LITERAL_CASE));
+                    .findFirst(HexLiteralCaseMarker.class).isPresent();
         }
     }
 

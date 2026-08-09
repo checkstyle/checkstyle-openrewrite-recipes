@@ -20,8 +20,7 @@ package org.checkstyle.autofix.recipe;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.checkstyle.autofix.CheckFullName;
-import org.checkstyle.autofix.marker.CheckstyleViolationMarker;
+import org.checkstyle.autofix.marker.checks.AnnotationOnSameLineMarker;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
 import org.openrewrite.TreeVisitor;
@@ -145,8 +144,7 @@ public class AnnotationOnSameLine extends Recipe {
         }
 
         private boolean hasMarker(J.Annotation anno) {
-            return anno.getMarkers().findAll(CheckstyleViolationMarker.class).stream()
-                    .anyMatch(marker -> marker.isFor(CheckFullName.ANNOTATION_ON_SAME_LINE));
+            return anno.getMarkers().findFirst(AnnotationOnSameLineMarker.class).isPresent();
         }
 
         private boolean lastAnnotationViolates(List<J.Annotation> annos) {

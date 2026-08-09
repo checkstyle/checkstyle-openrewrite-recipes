@@ -15,28 +15,13 @@
 // limitations under the License.
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
-package org.checkstyle.autofix.marker;
+package org.checkstyle.autofix.marker.checks;
 
 import java.util.UUID;
 
+import org.checkstyle.autofix.marker.CheckstyleViolationMarker;
 import org.checkstyle.autofix.parser.CheckstyleViolation;
-import org.openrewrite.marker.Marker;
 
-public interface CheckstyleViolationMarker extends Marker {
-
-    UUID id();
-
-    CheckstyleViolation violation();
-
-    @Override
-    default UUID getId() {
-        return id();
-    }
-
-    @Override
-    @SuppressWarnings("unchecked")
-    default <M extends Marker> M withId(UUID newId) {
-        return (M) MarkerRegistry.create(newId, violation());
-    }
-
+public record ConstructorsDeclarationGroupingMarker(UUID id, CheckstyleViolation violation)
+        implements CheckstyleViolationMarker {
 }

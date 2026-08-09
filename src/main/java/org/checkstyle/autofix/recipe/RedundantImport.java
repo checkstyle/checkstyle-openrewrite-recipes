@@ -17,8 +17,7 @@
 
 package org.checkstyle.autofix.recipe;
 
-import org.checkstyle.autofix.CheckFullName;
-import org.checkstyle.autofix.marker.CheckstyleViolationMarker;
+import org.checkstyle.autofix.marker.checks.RedundantImportMarker;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
 import org.openrewrite.TreeVisitor;
@@ -64,8 +63,7 @@ public class RedundantImport extends Recipe {
 
         private boolean hasRedundantImportMarker(J.Import importStmt) {
             return importStmt.getMarkers()
-                    .findAll(CheckstyleViolationMarker.class).stream()
-                    .anyMatch(marker -> marker.isFor(CheckFullName.REDUNDANT_IMPORT));
+                    .findFirst(RedundantImportMarker.class).isPresent();
         }
 
     }

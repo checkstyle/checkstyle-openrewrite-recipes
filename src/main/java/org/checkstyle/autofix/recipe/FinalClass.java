@@ -20,8 +20,7 @@ package org.checkstyle.autofix.recipe;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.checkstyle.autofix.CheckFullName;
-import org.checkstyle.autofix.marker.CheckstyleViolationMarker;
+import org.checkstyle.autofix.marker.checks.FinalClassMarker;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
 import org.openrewrite.Tree;
@@ -69,9 +68,8 @@ public class FinalClass extends Recipe {
             J.ClassDeclaration result =
                     super.visitClassDeclaration(classDeclaration, executionContext);
 
-            final boolean hasMarker = result.getMarkers()
-                    .findAll(CheckstyleViolationMarker.class).stream()
-                    .anyMatch(marker -> marker.isFor(CheckFullName.FINAL_CLASS));
+            final boolean hasMarker = classDeclaration.getMarkers()
+                    .findFirst(FinalClassMarker.class).isPresent();
 
             if (hasMarker && !hasFinalModifier(result)) {
                 result = addFinalModifier(result);

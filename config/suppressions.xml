@@ -47,4 +47,5 @@
     <suppress checks="ClassDataAbstractionCoupling" files="[\\/]src[\\/]main[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]UseEnhancedSwitch\.java"/>
 
     <suppress checks="CyclomaticComplexity" files="[\\/]src[\\/]main[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]recipe[\\/]UnusedLocalVariable\.java"/>
+    <suppress checks="ClassDataAbstractionCoupling" files="[\\/]src[\\/]main[\\/]java[\\/]org[\\/]checkstyle[\\/]autofix[\\/]marker[\\/]MarkerRegistry\.java"/>
 </suppressions>

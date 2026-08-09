@@ -20,8 +20,7 @@ package org.checkstyle.autofix.recipe;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.checkstyle.autofix.CheckFullName;
-import org.checkstyle.autofix.marker.CheckstyleViolationMarker;
+import org.checkstyle.autofix.marker.checks.EmptyStatementMarker;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
 import org.openrewrite.Tree;
@@ -142,9 +141,7 @@ public class EmptyStatement extends Recipe {
 
         private boolean isAtViolationLocation(J.Empty empty) {
             return empty.getMarkers()
-                    .findAll(CheckstyleViolationMarker.class)
-                    .stream()
-                    .anyMatch(marker -> marker.isFor(CheckFullName.EMPTY_STATEMENT));
+                    .findFirst(EmptyStatementMarker.class).isPresent();
         }
 
     }

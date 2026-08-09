@@ -20,8 +20,7 @@ package org.checkstyle.autofix.recipe;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.checkstyle.autofix.CheckFullName;
-import org.checkstyle.autofix.marker.CheckstyleViolationMarker;
+import org.checkstyle.autofix.marker.checks.NewlineAtEndOfFileMarker;
 import org.checkstyle.autofix.parser.CheckConfiguration;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
@@ -83,8 +82,7 @@ public class NewlineAtEndOfFile extends Recipe {
             J.CompilationUnit result = compUnit;
 
             final boolean hasMarker = result.getMarkers()
-                    .findAll(CheckstyleViolationMarker.class).stream()
-                    .anyMatch(marker -> marker.isFor(CheckFullName.NEWLINE_AT_END_OF_FILE));
+                    .findFirst(NewlineAtEndOfFileMarker.class).isPresent();
 
             if (hasMarker) {
                 final String expectedLineEnding = determineLineEnding(result);

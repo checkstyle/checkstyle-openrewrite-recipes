@@ -21,8 +21,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.checkstyle.autofix.CheckFullName;
-import org.checkstyle.autofix.marker.CheckstyleViolationMarker;
+import org.checkstyle.autofix.marker.checks.FinalLocalVariableMarker;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
 import org.openrewrite.Tree;
@@ -135,8 +134,7 @@ public class FinalLocalVariable extends Recipe {
         }
 
         private boolean isViolationMarked(J.VariableDeclarations.NamedVariable variable) {
-            return variable.getMarkers().findAll(CheckstyleViolationMarker.class).stream()
-                    .anyMatch(marker -> marker.isFor(CheckFullName.FINAL_LOCAL_VARIABLE));
+            return variable.getMarkers().findFirst(FinalLocalVariableMarker.class).isPresent();
         }
 
         private J.VariableDeclarations addFinalModifier(J.VariableDeclarations varDecl) {
