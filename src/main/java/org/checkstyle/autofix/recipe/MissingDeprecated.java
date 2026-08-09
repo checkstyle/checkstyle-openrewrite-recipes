@@ -21,8 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import org.checkstyle.autofix.CheckFullName;
-import org.checkstyle.autofix.marker.CheckstyleViolationMarker;
+import org.checkstyle.autofix.marker.checks.MissingDeprecatedMarker;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
 import org.openrewrite.Tree;
@@ -141,8 +140,7 @@ public class MissingDeprecated extends Recipe {
 
         private boolean hasMissingDeprecatedMarker(Tree tree) {
             return tree.getMarkers()
-                    .findAll(CheckstyleViolationMarker.class).stream()
-                    .anyMatch(marker -> marker.isFor(CheckFullName.MISSING_DEPRECATED));
+                    .findFirst(MissingDeprecatedMarker.class).isPresent();
         }
 
         private boolean hasDeprecatedAnnotation(List<J.Annotation> annotations) {

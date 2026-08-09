@@ -17,8 +17,7 @@
 
 package org.checkstyle.autofix.recipe;
 
-import org.checkstyle.autofix.CheckFullName;
-import org.checkstyle.autofix.marker.CheckstyleViolationMarker;
+import org.checkstyle.autofix.marker.checks.UpperEllMarker;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
 import org.openrewrite.TreeVisitor;
@@ -74,8 +73,7 @@ public class UpperEll extends Recipe {
 
         private boolean isAtViolationLocation(J.Literal literal) {
             return literal.getMarkers()
-                    .findAll(CheckstyleViolationMarker.class).stream()
-                    .anyMatch(marker -> marker.isFor(CheckFullName.UPPER_ELL));
+                    .findFirst(UpperEllMarker.class).isPresent();
         }
     }
 

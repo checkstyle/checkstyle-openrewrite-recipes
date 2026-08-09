@@ -17,8 +17,7 @@
 
 package org.checkstyle.autofix.recipe;
 
-import org.checkstyle.autofix.CheckFullName;
-import org.checkstyle.autofix.marker.CheckstyleViolationMarker;
+import org.checkstyle.autofix.marker.checks.UnusedImportsMarker;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
 import org.openrewrite.TreeVisitor;
@@ -66,8 +65,7 @@ public class UnusedImports extends Recipe {
 
         private boolean hasUnusedImportMarker(J.Import importStmt) {
             return importStmt.getMarkers()
-                    .findAll(CheckstyleViolationMarker.class).stream()
-                    .anyMatch(marker -> marker.isFor(CheckFullName.UNUSED_IMPORT));
+                    .findFirst(UnusedImportsMarker.class).isPresent();
         }
     }
 

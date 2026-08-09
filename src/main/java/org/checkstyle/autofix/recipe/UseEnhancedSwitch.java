@@ -23,8 +23,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.checkstyle.autofix.CheckFullName;
-import org.checkstyle.autofix.marker.CheckstyleViolationMarker;
+import org.checkstyle.autofix.marker.checks.UseEnhancedSwitchMarker;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Preconditions;
 import org.openrewrite.Recipe;
@@ -617,8 +616,7 @@ public class UseEnhancedSwitch extends Recipe {
         }
 
         private boolean isAtViolationLocation(final J switchNode) {
-            return switchNode.getMarkers().findAll(CheckstyleViolationMarker.class).stream()
-                    .anyMatch(marker -> marker.isFor(CheckFullName.USE_ENHANCED_SWITCH));
+            return switchNode.getMarkers().findFirst(UseEnhancedSwitchMarker.class).isPresent();
         }
 
         private static int computeIndentDelta(

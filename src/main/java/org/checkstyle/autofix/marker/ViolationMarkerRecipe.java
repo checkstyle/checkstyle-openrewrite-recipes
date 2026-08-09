@@ -54,6 +54,7 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
             new EnumMap<>(CheckFullName.class);
 
     static {
+
         TARGET_TYPES.put(CheckFullName.HEADER, J.CompilationUnit.class);
         TARGET_TYPES.put(CheckFullName.FINAL_CLASS, J.ClassDeclaration.class);
         TARGET_TYPES.put(CheckFullName.FINAL_LOCAL_VARIABLE,
@@ -153,12 +154,16 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
                     .map(smallestNodeId -> {
                         final UUID targetId = resolveTargetNode(smallestNodeId, violation,
                                 parentMap, treeNodes);
+                        final CheckstyleViolationMarker marker = createMarker(violation);
                         final List<CheckstyleViolationMarker> markerList =
-                            new ArrayList<>(List.of(
-                                new CheckstyleViolationMarker(Tree.randomId(), violation)));
+                                new ArrayList<>(List.of(marker));
                         return Map.of(targetId, markerList);
                     })
                     .orElseGet(Collections::emptyMap);
+        }
+
+        private CheckstyleViolationMarker createMarker(CheckstyleViolation violation) {
+            return MarkerRegistry.create(Tree.randomId(), violation);
         }
 
         private Optional<UUID> findEnclosingNodeId(CheckstyleViolation violation,

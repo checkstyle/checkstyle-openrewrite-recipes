@@ -23,8 +23,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.stream.Collectors;
 
-import org.checkstyle.autofix.CheckFullName;
-import org.checkstyle.autofix.marker.CheckstyleViolationMarker;
+import org.checkstyle.autofix.marker.checks.HeaderMarker;
 import org.checkstyle.autofix.parser.CheckConfiguration;
 import org.openrewrite.Cursor;
 import org.openrewrite.ExecutionContext;
@@ -100,8 +99,7 @@ public class Header extends Recipe {
         public J.CompilationUnit visitCompilationUnit(J.CompilationUnit cu,
                                                       ExecutionContext executionContext) {
             final boolean hasMarker = cu.getMarkers()
-                    .findAll(CheckstyleViolationMarker.class).stream()
-                    .anyMatch(marker -> marker.isFor(CheckFullName.HEADER));
+                    .findFirst(HeaderMarker.class).isPresent();
 
             J.CompilationUnit result = cu;
             if (hasMarker) {

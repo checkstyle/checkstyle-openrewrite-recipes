@@ -20,8 +20,7 @@ package org.checkstyle.autofix.recipe;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.checkstyle.autofix.CheckFullName;
-import org.checkstyle.autofix.marker.CheckstyleViolationMarker;
+import org.checkstyle.autofix.marker.checks.MissingOverrideMarker;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
 import org.openrewrite.Tree;
@@ -122,8 +121,8 @@ public class MissingOverride extends Recipe {
         }
 
         private boolean isViolationMarked(J.MethodDeclaration methodDeclaration) {
-            return methodDeclaration.getMarkers().findAll(CheckstyleViolationMarker.class).stream()
-                    .anyMatch(marker -> marker.isFor(CheckFullName.MISSING_OVERRIDE));
+            return methodDeclaration.getMarkers()
+                    .findFirst(MissingOverrideMarker.class).isPresent();
         }
     }
 

@@ -25,8 +25,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import org.checkstyle.autofix.CheckFullName;
-import org.checkstyle.autofix.marker.CheckstyleViolationMarker;
+import org.checkstyle.autofix.marker.checks.MissingSwitchDefaultMarker;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
 import org.openrewrite.Tree;
@@ -142,7 +141,7 @@ public class MissingSwitchDefault extends Recipe {
                 visited = autoFormat(visited, executionContext);
 
                 final Markers newMarkers = visited.getMarkers()
-                        .removeByType(CheckstyleViolationMarker.class);
+                        .removeByType(MissingSwitchDefaultMarker.class);
                 visited = Optional.of(newMarkers).map(visited::withMarkers).get();
             }
 
@@ -150,8 +149,7 @@ public class MissingSwitchDefault extends Recipe {
         }
 
         private boolean isViolationMarked(J.Switch switchStmt) {
-            return switchStmt.getMarkers().findAll(CheckstyleViolationMarker.class).stream()
-                    .anyMatch(marker -> marker.isFor(CheckFullName.MISSING_SWITCH_DEFAULT));
+            return switchStmt.getMarkers().findFirst(MissingSwitchDefaultMarker.class).isPresent();
         }
 
         private List<Statement> tryAddBreakToLastCase(List<Statement> cases) {

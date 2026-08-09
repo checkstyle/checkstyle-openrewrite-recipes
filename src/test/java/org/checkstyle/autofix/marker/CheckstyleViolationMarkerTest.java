@@ -39,21 +39,8 @@ public class CheckstyleViolationMarkerTest {
                 1, 1, "error", new CheckstyleCheck(
                         CheckFullName.FINAL_CLASS, "id"),
                 "msg", Paths.get("Test.java"));
-        final CheckstyleViolationMarker marker = new CheckstyleViolationMarker(id, violation);
+        final CheckstyleViolationMarker marker = MarkerRegistry.create(id, violation);
         Assertions.assertEquals(id, marker.getId());
-    }
-
-    @Test
-    public void testIsFor() {
-        final UUID id = UUID.randomUUID();
-        final CheckstyleViolation violation = new CheckstyleViolation(
-                1, 1, "error", new CheckstyleCheck(
-                        CheckFullName.FINAL_CLASS, "id"),
-                "msg", Paths.get("Test.java"));
-        final CheckstyleViolationMarker marker = new CheckstyleViolationMarker(id, violation);
-
-        Assertions.assertTrue(marker.isFor(CheckFullName.FINAL_CLASS));
-        Assertions.assertFalse(marker.isFor(CheckFullName.FINAL_LOCAL_VARIABLE));
     }
 
     @Test
@@ -63,7 +50,7 @@ public class CheckstyleViolationMarkerTest {
                 1, 1, "error", new CheckstyleCheck(
                         CheckFullName.FINAL_CLASS, "id"),
                 "msg", Paths.get("Test.java"));
-        final CheckstyleViolationMarker marker = new CheckstyleViolationMarker(id, violation);
+        final CheckstyleViolationMarker marker = MarkerRegistry.create(id, violation);
 
         final UUID newId = UUID.randomUUID();
         final Marker newMarker = marker.withId(newId);
