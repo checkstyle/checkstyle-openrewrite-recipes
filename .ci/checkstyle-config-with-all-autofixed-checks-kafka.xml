@@ -35,6 +35,11 @@
         <module name="MissingDeprecated"/>
         <module name="MissingSwitchDefault"/>
         <module name="MissingOverride"/>
+        <module name="NoWhitespaceAfter">
+            <property name="tokens"
+                      value="ARRAY_INIT, AT, INC, DEC, UNARY_MINUS, UNARY_PLUS, BNOT, LNOT, DOT,
+                             ARRAY_DECLARATOR, INDEX_OP, METHOD_REF, TYPECAST, LITERAL_SYNCHRONIZED"/>
+        </module>
         <module name="NumericalPrefixesInfixesSuffixesCharacterCase"/>
         <module name="RedundantImport"/>
         <module name="UnusedImports"/>

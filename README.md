@@ -347,7 +347,7 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 | 🟢     | [`GenericWhitespace`](https://checkstyle.sourceforge.io/checks/whitespace/genericwhitespace.html#GenericWhitespace)       | `TBD`            |                |
 | 🟢     | [`MethodParamPad`](https://checkstyle.sourceforge.io/checks/whitespace/methodparampad.html#MethodParamPad)                 | `TBD`            |                |
 | 🔴     | [`NoLineWrap`](https://checkstyle.sourceforge.io/checks/whitespace/nolinewrap.html#NoLineWrap)                           |            | Requires line unwrapping decisions |
-| 🟢     | [`NoWhitespaceAfter`](https://checkstyle.sourceforge.io/checks/whitespace/nowhitespaceafter.html#NoWhitespaceAfter)       | `TBD`            |                |
+| 🟢     | [`NoWhitespaceAfter`](https://checkstyle.sourceforge.io/checks/whitespace/nowhitespaceafter.html#NoWhitespaceAfter)       | [`NoWhitespaceAfter`](src/main/java/org/checkstyle/autofix/recipe/NoWhitespaceAfter.java)            |                |
 | 🟢     | [`NoWhitespaceBefore`](https://checkstyle.sourceforge.io/checks/whitespace/nowhitespacebefore.html#NoWhitespaceBefore)         | `TBD`            |                |
 | 🟢     | [`NoWhitespaceBeforeCaseDefaultColon`](https://checkstyle.sourceforge.io/checks/whitespace/nowhitespacebeforecasedefaultcolon.html#NoWhitespaceBeforeCaseDefaultColon) | `TBD`            |                |
 | 🟢     | [`OperatorWrap`](https://checkstyle.sourceforge.io/checks/whitespace/operatorwrap.html#OperatorWrap)                     | `TBD`            |                |

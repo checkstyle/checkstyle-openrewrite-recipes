@@ -41,6 +41,7 @@ public enum CheckFullName {
     HEX_LITERAL_CASE("com.puppycrawl.tools.checkstyle.checks.HexLiteralCaseCheck"),
     NUMERICAL_PREFIXES_INF_SUF_CASE(
       "com.puppycrawl.tools.checkstyle.checks.NumericalPrefixesInfixesSuffixesCharacterCaseCheck"),
+    NO_WHITESPACE_AFTER("com.puppycrawl.tools.checkstyle.checks.whitespace.NoWhitespaceAfterCheck"),
     UNUSED_LOCAL_VARIABLE(
         "com.puppycrawl.tools.checkstyle.checks.coding.UnusedLocalVariableCheck"),
     REDUNDANT_IMPORT("com.puppycrawl.tools.checkstyle.checks.imports.RedundantImportCheck"),

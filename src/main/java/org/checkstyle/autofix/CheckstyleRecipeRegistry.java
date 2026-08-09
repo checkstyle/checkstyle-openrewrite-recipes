@@ -47,6 +47,7 @@ import org.checkstyle.autofix.recipe.MissingDeprecated;
 import org.checkstyle.autofix.recipe.MissingOverride;
 import org.checkstyle.autofix.recipe.MissingSwitchDefault;
 import org.checkstyle.autofix.recipe.NewlineAtEndOfFile;
+import org.checkstyle.autofix.recipe.NoWhitespaceAfter;
 import org.checkstyle.autofix.recipe.NumericalPrefixesInfixesSuffixesCharacterCase;
 import org.checkstyle.autofix.recipe.RedundantImport;
 import org.checkstyle.autofix.recipe.UnnecessaryParentheses;
@@ -88,6 +89,7 @@ public final class CheckstyleRecipeRegistry {
         RECIPE_MAP.put(CheckFullName.REDUNDANT_IMPORT, RedundantImport::new);
         RECIPE_MAP.put(CheckFullName.UPPER_ELL, UpperEll::new);
         RECIPE_MAP.put(CheckFullName.EMPTY_FOR_INITIALIZER_PAD, EmptyForInitializerPad::new);
+        RECIPE_MAP.put(CheckFullName.NO_WHITESPACE_AFTER, NoWhitespaceAfter::new);
         RECIPE_MAP_WITH_CONFIG.put(CheckFullName.CONSTRUCTORS_DECLARATION_GROUPING,
             ConstructorsDeclarationGrouping::new);
         RECIPE_MAP.put(CheckFullName.UNNECESSARY_PARENTHESES, UnnecessaryParentheses::new);
