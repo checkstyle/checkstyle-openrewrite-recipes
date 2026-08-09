@@ -1,0 +1,14 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/nowhitespaceafter/alltokens/InputAllTokens.java
++++ src/test/resources/org/checkstyle/autofix/recipe/nowhitespaceafter/alltokens/OutputAllTokens.java
+@@ -9,9 +9,9 @@
+ */
+ package org.checkstyle.autofix.recipe.nowhitespaceafter.alltokens;
+ 
+-class InputAllTokens {
++class OutputAllTokens {
+     public void typeCast(int a) {
+-        Object o2 = ( Object ) a; // violation 'is followed by whitespace.'
++        Object o2 = ( Object )a;
+     }
+ 
+     public void sync() {

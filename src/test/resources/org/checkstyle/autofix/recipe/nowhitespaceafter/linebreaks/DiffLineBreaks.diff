@@ -1,0 +1,19 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/nowhitespaceafter/linebreaks/InputLineBreaks.java
++++ src/test/resources/org/checkstyle/autofix/recipe/nowhitespaceafter/linebreaks/OutputLineBreaks.java
+@@ -10,13 +10,11 @@
+ */
+ package org.checkstyle.autofix.recipe.nowhitespaceafter.linebreaks;
+ 
+-class InputLineBreaks {
++class OutputLineBreaks {
+     public void negativeCases(int a) {
+-        int
+-                [] array2; // violation ''int' is followed by whitespace.'
++        int[] array2;
+         int[] arr = new int[2];
+-        arr
+-                [0] = 1; // violation ''arr' is followed by whitespace.'
++        arr[0] = 1;
+         synchronized (this) {}
+     }
+ }

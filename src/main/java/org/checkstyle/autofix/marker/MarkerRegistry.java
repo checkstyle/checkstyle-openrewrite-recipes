@@ -40,6 +40,7 @@ import org.checkstyle.autofix.marker.checks.MissingDeprecatedMarker;
 import org.checkstyle.autofix.marker.checks.MissingOverrideMarker;
 import org.checkstyle.autofix.marker.checks.MissingSwitchDefaultMarker;
 import org.checkstyle.autofix.marker.checks.NewlineAtEndOfFileMarker;
+import org.checkstyle.autofix.marker.checks.NoWhitespaceAfterMarker;
 import org.checkstyle.autofix.marker.checks.NumericalPrefixesInfixesSuffixesCharacterCaseMarker;
 import org.checkstyle.autofix.marker.checks.RedundantImportMarker;
 import org.checkstyle.autofix.marker.checks.UnnecessaryParenthesesMarker;
@@ -69,6 +70,7 @@ public final class MarkerRegistry {
         FACTORIES.put(CheckFullName.FINAL_CLASS, FinalClassMarker::new);
         FACTORIES.put(CheckFullName.HEADER, HeaderMarker::new);
         FACTORIES.put(CheckFullName.NEWLINE_AT_END_OF_FILE, NewlineAtEndOfFileMarker::new);
+        FACTORIES.put(CheckFullName.NO_WHITESPACE_AFTER, NoWhitespaceAfterMarker::new);
         FACTORIES.put(CheckFullName.UPPER_ELL, UpperEllMarker::new);
         FACTORIES.put(CheckFullName.HEX_LITERAL_CASE, HexLiteralCaseMarker::new);
         FACTORIES.put(
