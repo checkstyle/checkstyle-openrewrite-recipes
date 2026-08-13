@@ -76,7 +76,7 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 
 | Status | Check                                                                                                                        | Recipe           | Coverage Notes |
 |--------|------------------------------------------------------------------------------------------------------------------------------|------------------|----------------|
-| 🟢     | [`AnnotatedDeclarationVisibility`](https://checkstyle.sourceforge.io/checks/annotation/annotateddeclarationvisibility.html#AnnotatedDeclarationVisibility)       | `TBD`            |                |
+| 🟢     | [`AnnotatedDeclarationVisibility`](https://checkstyle.sourceforge.io/checks/modifier/annotateddeclarationvisibility.html#AnnotatedDeclarationVisibility)       | `TBD`            |                |
 | 🟢     | [`AnnotationLocation`](https://checkstyle.sourceforge.io/checks/annotation/annotationlocation.html#AnnotationLocation)       | [`AnnotationLocation`](https://github.com/checkstyle/checkstyle-openrewrite-recipes/blob/main/src/main/java/org/checkstyle/autofix/recipe/AnnotationLocation.java) |                |
 | 🟢     | [`AnnotationOnSameLine`](https://checkstyle.sourceforge.io/checks/annotation/annotationonsameline.html#AnnotationOnSameLine) | [`AnnotationOnSameLine`](https://github.com/checkstyle/checkstyle-openrewrite-recipes/blob/main/src/main/java/org/checkstyle/autofix/recipe/AnnotationOnSameLine.java) |                |
 | 🔴     | [`AnnotationUseStyle`](https://checkstyle.sourceforge.io/checks/annotation/annotationusestyle.html#AnnotationUseStyle)       |            | Standardize annotation syntax |
@@ -111,7 +111,7 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 | 🔴     | [`InterfaceIsType`](https://checkstyle.sourceforge.io/checks/design/interfaceistype.html#InterfaceIsType)                  |            | Remove non-type interface members |
 | 🔴     | [`MutableException`](https://checkstyle.sourceforge.io/checks/design/mutableexception.html#MutableException)               |            | Make exception fields final |
 | 🔴     | [`OneTopLevelClass`](https://checkstyle.sourceforge.io/checks/design/onetoplevelclass.html#OneTopLevelClass)               |            | Split into separate files |
-| 🟢     | [`SealedShouldHavePermitsList`](https://checkstyle.sourceforge.io/checks/design/sealedshoulddhavepermitslist.html#SealedShouldHavePermitsList) | `TBD`            |                |
+| 🟢     | [`SealedShouldHavePermitsList`](https://checkstyle.sourceforge.io/checks/design/sealedshouldhavepermitslist.html#SealedShouldHavePermitsList) | `TBD`            |                |
 | 🔴     | [`ThrowsCount`](https://checkstyle.sourceforge.io/checks/design/throwscount.html#ThrowsCount)                              |            | Reduce throws declarations |
 | 🔴     | [`VisibilityModifier`](https://checkstyle.sourceforge.io/checks/design/visibilitymodifier.html#VisibilityModifier)         |            | Change visibility modifiers |
 
@@ -225,7 +225,6 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 | 🔴     | [`JavadocPackage`](https://checkstyle.sourceforge.io/checks/javadoc/javadocpackage.html#JavadocPackage)                   |            | Create package-info.java |
 | 🟢     | [`JavadocParagraph`](https://checkstyle.sourceforge.io/checks/javadoc/javadocparagraph.html#JavadocParagraph)             | `TBD`            |                |
 | 🔴     | [`JavadocRegexp`](https://checkstyle.sourceforge.io/checks/javadoc/javadocregexp.html#JavadocRegexp)                       |                  | Context-dependent pattern matching |
-| 🟢     | [`JavadocStyle`](https://checkstyle.sourceforge.io/checks/javadoc/javadocstyle.html#JavadocStyle)                         | `TBD`            |                |
 | 🟢     | [`JavadocTagContinuationIndentation`](https://checkstyle.sourceforge.io/checks/javadoc/javadoctagcontinuationindentation.html#JavadocTagContinuationIndentation) | `TBD`            |                |
 | 🔴     | [`JavadocType`](https://checkstyle.sourceforge.io/checks/javadoc/javadoctype.html#JavadocType)                           |            | Add/fix type documentation |
 | 🔴     | [`JavadocVariable`](https://checkstyle.sourceforge.io/checks/javadoc/javadocvariable.html#JavadocVariable)                 |            | Add variable documentation |
@@ -341,7 +340,7 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 | Status | Check                                                                                                                        | Recipe           | Coverage Notes |
 |--------|------------------------------------------------------------------------------------------------------------------------------|------------------|----------------|
 | 🟢     | [`ArrayBracketNoWhitespace`](https://checkstyle.sourceforge.io/checks/whitespace/arraybracketnowhitespace.html#ArrayBracketNoWhitespace) | `TBD`            |                |
-| 🟢     | [`EmptyForInitializerPad`](https://checkstyle.sourceforge.io/checks/whitespace/emptyforinitialispad.html#EmptyForInitializerPad) | `TBD`            |                |
+| 🟢     | [`EmptyForInitializerPad`](https://checkstyle.sourceforge.io/checks/whitespace/emptyforinitializerpad.html#EmptyForInitializerPad) | `TBD`            |                |
 | 🟢     | [`EmptyForIteratorPad`](https://checkstyle.sourceforge.io/checks/whitespace/emptyforiteratorpad.html#EmptyForIteratorPad) | `TBD`            |                |
 | 🟢     | [`EmptyLineSeparator`](https://checkstyle.sourceforge.io/checks/whitespace/emptylineseparator.html#EmptyLineSeparator)     | `TBD`            |                |
 | 🟢     | [`FileTabCharacter`](https://checkstyle.sourceforge.io/checks/whitespace/filetabcharacter.html#FileTabCharacter)           | `TBD`            |                |
@@ -349,7 +348,7 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 | 🟢     | [`MethodParamPad`](https://checkstyle.sourceforge.io/checks/whitespace/methodparampad.html#MethodParamPad)                 | `TBD`            |                |
 | 🔴     | [`NoLineWrap`](https://checkstyle.sourceforge.io/checks/whitespace/nolinewrap.html#NoLineWrap)                           |            | Requires line unwrapping decisions |
 | 🟢     | [`NoWhitespaceAfter`](https://checkstyle.sourceforge.io/checks/whitespace/nowhitespaceafter.html#NoWhitespaceAfter)       | `TBD`            |                |
-| 🟢     | [`NoWhitespaceBefore`](https://checkstyle.sourceforge.io/checks/whitespace/nowhitespaceto.html#NoWhitespaceBefore)         | `TBD`            |                |
+| 🟢     | [`NoWhitespaceBefore`](https://checkstyle.sourceforge.io/checks/whitespace/nowhitespacebefore.html#NoWhitespaceBefore)         | `TBD`            |                |
 | 🟢     | [`NoWhitespaceBeforeCaseDefaultColon`](https://checkstyle.sourceforge.io/checks/whitespace/nowhitespacebeforecasedefaultcolon.html#NoWhitespaceBeforeCaseDefaultColon) | `TBD`            |                |
 | 🟢     | [`OperatorWrap`](https://checkstyle.sourceforge.io/checks/whitespace/operatorwrap.html#OperatorWrap)                     | `TBD`            |                |
 | 🟢     | [`ParenPad`](https://checkstyle.sourceforge.io/checks/whitespace/parenpad.html#ParenPad)                                 | `TBD`            |                |
