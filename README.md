@@ -214,6 +214,7 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 | Status | Check                                                                                                                        | Recipe           | Coverage Notes |
 |--------|------------------------------------------------------------------------------------------------------------------------------|------------------|----------------|
 | 🟢     | [`AtclauseOrder`](https://checkstyle.sourceforge.io/checks/javadoc/atclauseorder.html#AtclauseOrder)                       | `TBD`            |                |
+| 🟢     | [`IllegalBlockTag`](https://checkstyle.sourceforge.io/checks/javadoc/illegalblocktag.html#IllegalBlockTag)                 | `TBD`            |                |
 | 🟢     | [`InvalidJavadocPosition`](https://checkstyle.sourceforge.io/checks/javadoc/invalidjavadocposition.html#InvalidJavadocPosition) | `TBD`            |                |
 | 🟢     | [`JavadocBlockTagLocation`](https://checkstyle.sourceforge.io/checks/javadoc/javadocblocktaglocation.html#JavadocBlockTagLocation) | `TBD`            |                |
 | 🟢     | [`JavadocContentLocation`](https://checkstyle.sourceforge.io/checks/javadoc/javadoccontentlocation.html#JavadocContentLocation) | `TBD`            |                |
@@ -223,6 +224,7 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 | 🟢     | [`JavadocMissingWhitespaceAfterAsterisk`](https://checkstyle.sourceforge.io/checks/javadoc/javadocmissingwhitespaceafterasterisk.html#JavadocMissingWhitespaceAfterAsterisk) | `TBD`            |                |
 | 🔴     | [`JavadocPackage`](https://checkstyle.sourceforge.io/checks/javadoc/javadocpackage.html#JavadocPackage)                   |            | Create package-info.java |
 | 🟢     | [`JavadocParagraph`](https://checkstyle.sourceforge.io/checks/javadoc/javadocparagraph.html#JavadocParagraph)             | `TBD`            |                |
+| 🔴     | [`JavadocRegexp`](https://checkstyle.sourceforge.io/checks/javadoc/javadocregexp.html#JavadocRegexp)                       |                  | Context-dependent pattern matching |
 | 🟢     | [`JavadocStyle`](https://checkstyle.sourceforge.io/checks/javadoc/javadocstyle.html#JavadocStyle)                         | `TBD`            |                |
 | 🟢     | [`JavadocTagContinuationIndentation`](https://checkstyle.sourceforge.io/checks/javadoc/javadoctagcontinuationindentation.html#JavadocTagContinuationIndentation) | `TBD`            |                |
 | 🔴     | [`JavadocType`](https://checkstyle.sourceforge.io/checks/javadoc/javadoctype.html#JavadocType)                           |            | Add/fix type documentation |
@@ -291,6 +293,7 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 | 🟢     | [`CatchParameterName`](https://checkstyle.sourceforge.io/checks/naming/catchparametername.html#CatchParameterName)           | `TBD`            |                |
 | 🟢     | [`ClassTypeParameterName`](https://checkstyle.sourceforge.io/checks/naming/classtypeparametername.html#ClassTypeParameterName) | `TBD`            |                |
 | 🟢     | [`ConstantName`](https://checkstyle.sourceforge.io/checks/naming/constantname.html#ConstantName)                           | `TBD`            |                |
+| 🔴     | [`GoogleMethodName`](https://checkstyle.sourceforge.io/checks/naming/googlemethodname.html#GoogleMethodName)               |                  | Requires manual renaming |
 | 🔴     | [`GoogleNonConstantFieldName`](https://checkstyle.sourceforge.io/checks/naming/googlenonconstantfieldname.html#GoogleNonConstantFieldName) |                 |                |
 | 🔴     | [`IllegalIdentifierName`](https://checkstyle.sourceforge.io/checks/naming/illegalidentifiername.html#IllegalIdentifierName) |            | Rename identifiers |
 | 🟢     | [`InterfaceTypeParameterName`](https://checkstyle.sourceforge.io/checks/naming/interfacetypeparametername.html#InterfaceTypeParameterName) | `TBD`            |                |
@@ -337,6 +340,7 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 
 | Status | Check                                                                                                                        | Recipe           | Coverage Notes |
 |--------|------------------------------------------------------------------------------------------------------------------------------|------------------|----------------|
+| 🟢     | [`ArrayBracketNoWhitespace`](https://checkstyle.sourceforge.io/checks/whitespace/arraybracketnowhitespace.html#ArrayBracketNoWhitespace) | `TBD`            |                |
 | 🟢     | [`EmptyForInitializerPad`](https://checkstyle.sourceforge.io/checks/whitespace/emptyforinitialispad.html#EmptyForInitializerPad) | `TBD`            |                |
 | 🟢     | [`EmptyForIteratorPad`](https://checkstyle.sourceforge.io/checks/whitespace/emptyforiteratorpad.html#EmptyForIteratorPad) | `TBD`            |                |
 | 🟢     | [`EmptyLineSeparator`](https://checkstyle.sourceforge.io/checks/whitespace/emptylineseparator.html#EmptyLineSeparator)     | `TBD`            |                |
