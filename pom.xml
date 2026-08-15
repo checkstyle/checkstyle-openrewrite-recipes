@@ -270,6 +270,9 @@
                     <exclusions>
                         <exclusion>src/test/resources/**</exclusion>
                         <exclusion>**/*.groovy</exclusion>
+                        <exclusion>mvnw</exclusion>
+                        <exclusion>mvnw.cmd</exclusion>
+                        <exclusion>.mvn/**</exclusion>
                     </exclusions>
                 </configuration>
                 <dependencies>
