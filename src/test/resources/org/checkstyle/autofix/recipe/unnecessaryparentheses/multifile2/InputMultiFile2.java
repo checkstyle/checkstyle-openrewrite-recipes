@@ -6,7 +6,7 @@
 </module>
 */
 
-package org.checkstyle.autofix.recipe.unnecessaryparentheses.multifile;
+package org.checkstyle.autofix.recipe.unnecessaryparentheses.multifile2;
 
 public class InputMultiFile2 {
     public int square2(int a, int b, int c) {
