@@ -5,7 +5,7 @@
   </module>
 </module>
 */
-package org.checkstyle.autofix.recipe.redundantimport.multifile;
+package org.checkstyle.autofix.recipe.redundantimport.multifileb;
 
 class OutputMultiFileB {
 }

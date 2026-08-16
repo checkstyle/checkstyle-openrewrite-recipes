@@ -5,7 +5,7 @@
   </module>
 </module>
 */
-package org.checkstyle.autofix.recipe.redundantimport.multifile;
+package org.checkstyle.autofix.recipe.redundantimport.multifileb;
 
 import java.lang.String; // violation 'Redundant import from the java.lang package'
 

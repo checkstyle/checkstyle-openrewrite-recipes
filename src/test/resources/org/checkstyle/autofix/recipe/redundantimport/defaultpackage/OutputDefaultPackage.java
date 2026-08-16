@@ -5,6 +5,7 @@
   </module>
 </module>
 */
+package org.checkstyle.autofix.recipe.redundantimport.defaultpackage;
 
 import java.util.List;
 
