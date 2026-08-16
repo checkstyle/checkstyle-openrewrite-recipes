@@ -18,6 +18,7 @@
 package org.checkstyle.autofix.recipe;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.openrewrite.java.Assertions.java;
 
@@ -40,6 +41,7 @@ import org.checkstyle.autofix.parser.CheckstyleViolation;
 import org.checkstyle.autofix.parser.ReportParser;
 import org.checkstyle.autofix.parser.SarifReportParser;
 import org.checkstyle.autofix.parser.XmlReportParser;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Named;
 import org.junit.jupiter.params.provider.Arguments;
 import org.openrewrite.ExecutionContext;
@@ -137,8 +139,19 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
         final Path configPath = createConfigFile(config);
 
         try {
-            final Recipe mainRecipe = new CheckstyleAutoFix(reportPath.toString(),
+            final CheckstyleAutoFix mainRecipe = new CheckstyleAutoFix(reportPath.toString(),
                     configPath.toString());
+            assertEquals("Checkstyle autoFix",
+                    mainRecipe.getDisplayName());
+            assertEquals("Automatically fixes Checkstyle violations.",
+                    mainRecipe.getDescription());
+            assertEquals(reportPath.toString(),
+                    mainRecipe.getViolationReportPath());
+            assertEquals(configPath.toString(),
+                    mainRecipe.getConfigurationPath());
+            Assertions.assertNull(
+                    mainRecipe.getPropertiesPath());
+
             final List<SourceSpecs> sources = new ArrayList<>();
 
             for (int index = 0; index < inputPaths.size(); index++) {

@@ -19,11 +19,13 @@ package org.checkstyle.autofix;
 
 import java.util.ArrayList;
 import java.util.EnumMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 import org.checkstyle.autofix.marker.ViolationMarkerRecipe;
 import org.checkstyle.autofix.parser.CheckConfiguration;
@@ -114,7 +116,7 @@ public final class CheckstyleRecipeRegistry {
 
         violations.stream()
                 .map(CheckstyleViolation::getSource)
-                .distinct()
+                .collect(Collectors.toCollection(LinkedHashSet::new))
                 .forEach(check -> {
                     Optional.ofNullable(config.get(check))
                             .ifPresent(checkConfig -> addRecipe(recipes, checkConfig));

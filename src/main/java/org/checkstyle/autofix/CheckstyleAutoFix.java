@@ -63,6 +63,12 @@ public class CheckstyleAutoFix extends Recipe {
         this.configurationPath = configurationPath;
     }
 
+    public CheckstyleAutoFix(String violationReportPath, String configurationPath,
+                             String propertiesPath) {
+        this(violationReportPath, configurationPath);
+        this.propertiesPath = propertiesPath;
+    }
+
     @Override
     public String getDisplayName() {
         return "Checkstyle autoFix";

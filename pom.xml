@@ -350,6 +350,7 @@
                                 <param>org.checkstyle.autofix.CheckstyleRecipeRegistry*</param>
                             </targetClasses>
                             <targetTests>
+                                <param>org.checkstyle.autofix.CheckstyleAutoFixTest</param>
                                 <param>org.checkstyle.autofix.parser.CheckstyleReportsParserTest</param>
                                 <param>org.checkstyle.autofix.recipe.FinalClassTest</param>
                                 <param>org.checkstyle.autofix.recipe.HeaderTest</param>
