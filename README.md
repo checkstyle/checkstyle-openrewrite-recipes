@@ -76,7 +76,6 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 
 | Status | Check                                                                                                                        | Recipe           | Coverage Notes |
 |--------|------------------------------------------------------------------------------------------------------------------------------|------------------|----------------|
-| 🟢     | [`AnnotatedDeclarationVisibility`](https://checkstyle.sourceforge.io/checks/modifier/annotateddeclarationvisibility.html#AnnotatedDeclarationVisibility)       | `TBD`            |                |
 | 🟢     | [`AnnotationLocation`](https://checkstyle.sourceforge.io/checks/annotation/annotationlocation.html#AnnotationLocation)       | [`AnnotationLocation`](https://github.com/checkstyle/checkstyle-openrewrite-recipes/blob/main/src/main/java/org/checkstyle/autofix/recipe/AnnotationLocation.java) |                |
 | 🟢     | [`AnnotationOnSameLine`](https://checkstyle.sourceforge.io/checks/annotation/annotationonsameline.html#AnnotationOnSameLine) | [`AnnotationOnSameLine`](https://github.com/checkstyle/checkstyle-openrewrite-recipes/blob/main/src/main/java/org/checkstyle/autofix/recipe/AnnotationOnSameLine.java) |                |
 | 🔴     | [`AnnotationUseStyle`](https://checkstyle.sourceforge.io/checks/annotation/annotationusestyle.html#AnnotationUseStyle)       |            | Standardize annotation syntax |
@@ -278,6 +277,7 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 
 | Status | Check                                                                                                                        | Recipe           | Coverage Notes |
 |--------|------------------------------------------------------------------------------------------------------------------------------|------------------|----------------|
+| 🟢     | [`AnnotatedDeclarationVisibility`](https://checkstyle.sourceforge.io/checks/modifier/annotateddeclarationvisibility.html#AnnotatedDeclarationVisibility)       | `TBD`            |                |
 | 🟢     | [`ClassMemberImpliedModifier`](https://checkstyle.sourceforge.io/checks/modifier/classmemberimpliedmodifier.html#ClassMemberImpliedModifier) | `TBD`            |                |
 | 🟢     | [`InterfaceMemberImpliedModifier`](https://checkstyle.sourceforge.io/checks/modifier/interfacememberimpliedmodifier.html#InterfaceMemberImpliedModifier) | `TBD`            |                |
 | 🟢     | [`ModifierOrder`](https://checkstyle.sourceforge.io/checks/modifier/modifierorder.html#ModifierOrder)                       | `TBD`            |                |
