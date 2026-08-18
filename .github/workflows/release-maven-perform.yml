@@ -1,0 +1,57 @@
+name: "R: Maven Perform"
+run-name: "R: Maven Perform ${{ inputs.version }}"
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'POM version without (-SNAPSHOT)'
+        required: true
+  workflow_call:
+    inputs:
+      version:
+        type: string
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  maven-perform:
+    name: Maven Perform ${{ inputs.version }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - name: Restore Maven release descriptor
+        uses: actions/download-artifact@v8
+        with:
+          name: maven-release-${{ inputs.version }}
+          path: .
+
+      - name: Set up JDK and Maven publishing
+        uses: actions/setup-java@v5.7.0
+        with:
+          java-version: 21
+          distribution: temurin
+          cache: maven
+
+          server-id: central
+          server-username: SONATYPE_USER
+          server-password: SONATYPE_PWD
+
+          gpg-private-key: ${{ secrets.GPG_SECRET_KEY }}
+          gpg-passphrase: MAVEN_GPG_PASSPHRASE
+
+      - name: Maven release perform
+        env:
+          SONATYPE_USER: ${{ secrets.SONATYPE_USER }}
+          SONATYPE_PWD: ${{ secrets.SONATYPE_PWD }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+        run: |
+          ./.ci/release-maven-perform.sh ${{ inputs.version }}

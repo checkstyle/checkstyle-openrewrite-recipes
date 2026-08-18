@@ -1,0 +1,31 @@
+name: "R: Release"
+run-name: "R: Release ${{ inputs.version }}"
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'POM version without (-SNAPSHOT)'
+        required: true
+        type: string
+
+concurrency:
+  group: Caller-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  maven-prepare:
+    uses: ./.github/workflows/release-maven-prepare.yml
+    with:
+      version: ${{ inputs.version }}
+    permissions:
+      contents: write
+
+  maven-perform:
+    uses: ./.github/workflows/release-maven-perform.yml
+    needs: maven-prepare
+    with:
+      version: ${{ inputs.version }}
+    secrets: inherit
+    permissions:
+      contents: read
