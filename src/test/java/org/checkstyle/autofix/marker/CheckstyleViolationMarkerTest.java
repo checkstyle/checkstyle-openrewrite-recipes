@@ -36,7 +36,7 @@ public class CheckstyleViolationMarkerTest {
     public void testGetId() {
         final UUID id = UUID.randomUUID();
         final CheckstyleViolation violation = new CheckstyleViolation(
-                1, 1, "error", new CheckstyleCheck(
+                1, 1, new CheckstyleCheck(
                         CheckFullName.FINAL_CLASS, "id"),
                 "msg", Paths.get("Test.java"));
         final CheckstyleViolationMarker marker = MarkerRegistry.create(id, violation);
@@ -47,7 +47,7 @@ public class CheckstyleViolationMarkerTest {
     public void testWithId() {
         final UUID id = UUID.randomUUID();
         final CheckstyleViolation violation = new CheckstyleViolation(
-                1, 1, "error", new CheckstyleCheck(
+                1, 1, new CheckstyleCheck(
                         CheckFullName.FINAL_CLASS, "id"),
                 "msg", Paths.get("Test.java"));
         final CheckstyleViolationMarker marker = MarkerRegistry.create(id, violation);

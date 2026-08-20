@@ -49,8 +49,6 @@ public class XmlReportParser implements ReportParser {
 
     private static final String COLUMN_ATTR = "column";
 
-    private static final String SEVERITY_ATTR = "severity";
-
     private static final String MESSAGE_ATTR = "message";
 
     private static final String SOURCE_ATTR = "source";
@@ -120,7 +118,6 @@ public class XmlReportParser implements ReportParser {
         int line = -1;
         int column = -1;
         String message = null;
-        String severity = null;
         CheckstyleViolation violation = null;
         Optional<CheckFullName> checkName = Optional.empty();
         String id = null;
@@ -132,7 +129,6 @@ public class XmlReportParser implements ReportParser {
             switch (attrName) {
                 case LINE_ATTR -> line = Integer.parseInt(attribute.getValue());
                 case COLUMN_ATTR -> column = Integer.parseInt(attribute.getValue());
-                case SEVERITY_ATTR -> severity = attribute.getValue();
                 case MESSAGE_ATTR -> message = attribute.getValue();
                 case SOURCE_ATTR -> {
                     final String attrValue = attribute.getValue();
@@ -148,7 +144,7 @@ public class XmlReportParser implements ReportParser {
             }
         }
         if (checkName.isPresent()) {
-            violation = new CheckstyleViolation(line, column, severity,
+            violation = new CheckstyleViolation(line, column,
                     new CheckstyleCheck(checkName.get(), id), message, Path.of(filename));
         }
         return Optional.ofNullable(violation);
