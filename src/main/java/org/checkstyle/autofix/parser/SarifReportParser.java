@@ -74,7 +74,6 @@ public class SarifReportParser implements ReportParser {
     }
 
     private CheckstyleViolation createViolation(CheckstyleCheck check, Result result) {
-        final String severity = result.getLevel().name();
         final String message = result.getMessage().getText();
         final PhysicalLocation location = result.getLocations().get(0).getPhysicalLocation();
         final Path filePath = getFilePath(location);
@@ -82,8 +81,8 @@ public class SarifReportParser implements ReportParser {
         final int line = region.getStartLine();
         final Optional<Integer> columnMaybe = Optional.ofNullable(region.getStartColumn());
         return columnMaybe.map(column -> {
-            return new CheckstyleViolation(line, column, severity, check, message, filePath);
-        }).orElse(new CheckstyleViolation(line, severity, check, message, filePath));
+            return new CheckstyleViolation(line, column, check, message, filePath);
+        }).orElse(new CheckstyleViolation(line, check, message, filePath));
     }
 
     private Path getFilePath(PhysicalLocation location) {

@@ -51,7 +51,6 @@ public class CheckstyleReportsParserTest {
         final CheckstyleViolation record = records.get(0);
         assertEquals(42, record.getLine());
         assertEquals(13, record.getColumn());
-        assertEquals("error", record.getSeverity());
         assertEquals("Example message", record.getMessage());
         assertEquals(new CheckstyleCheck(CheckFullName.UPPER_ELL, null),
                 record.getSource());
@@ -74,11 +73,6 @@ public class CheckstyleReportsParserTest {
         assertEquals(2, grouped.get(Path.of("Main.java")).size());
         assertEquals(1, grouped.get(Path.of("Utils.java")).size());
 
-        CheckstyleViolation record = grouped.get(Path.of("Main.java")).get(0);
-        assertEquals("error", record.getSeverity());
-
-        record = grouped.get(Path.of("Utils.java")).get(0);
-        assertEquals("warning", record.getSeverity());
     }
 
 }

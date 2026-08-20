@@ -27,24 +27,20 @@ public final class CheckstyleViolation {
 
     private final int column;
 
-    private final String severity;
-
     private final CheckstyleCheck source;
 
     private final String message;
 
     private final Path filePath;
 
-    public CheckstyleViolation(int line, String severity,
-                               CheckstyleCheck source, String message, Path filePath) {
-        this(line, -1, severity, source, message, filePath);
+    public CheckstyleViolation(int line, CheckstyleCheck source, String message, Path filePath) {
+        this(line, -1, source, message, filePath);
     }
 
-    public CheckstyleViolation(int line, int column, String severity,
-                               CheckstyleCheck source, String message, Path filePath) {
+    public CheckstyleViolation(int line, int column, CheckstyleCheck source,
+                               String message, Path filePath) {
         this.line = line;
         this.column = column;
-        this.severity = severity;
         this.source = source;
         this.message = message;
         this.filePath = filePath;
@@ -68,10 +64,6 @@ public final class CheckstyleViolation {
 
     public Path getFilePath() {
         return filePath;
-    }
-
-    public String getSeverity() {
-        return severity;
     }
 
 }
