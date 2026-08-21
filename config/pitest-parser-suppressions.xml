@@ -1,60 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suppressedMutations>
   <mutation unstable="false">
-    <sourceFile>CheckConfiguration.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.parser.CheckConfiguration</mutatedClass>
-    <mutatedMethod>getProperty</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
-    <description>removed conditional - replaced equality check with true</description>
-    <lineContent>if (properties.containsKey(key)) {</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>CheckConfiguration.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.parser.CheckConfiguration</mutatedClass>
-    <mutatedMethod>getProperty</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
-    <description>removed call to java/util/Map::get</description>
-    <lineContent>result = globalProperties.get(key);</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>CheckConfiguration.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.parser.CheckConfiguration</mutatedClass>
-    <mutatedMethod>hasProperty</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
-    <description>removed call to java/util/Map::containsKey</description>
-    <lineContent>return properties.containsKey(key) || globalProperties.containsKey(key);</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>CheckConfiguration.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.parser.CheckConfiguration</mutatedClass>
-    <mutatedMethod>hasProperty</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_ELSE</mutator>
-    <description>removed conditional - replaced equality check with false</description>
-    <lineContent>return properties.containsKey(key) || globalProperties.containsKey(key);</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>CheckConfiguration.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.parser.CheckConfiguration</mutatedClass>
-    <mutatedMethod>setGlobalProperty</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
-    <description>removed call to java/util/Map::put</description>
-    <lineContent>globalProperties.put(key, value);</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>CheckConfiguration.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.parser.CheckConfiguration</mutatedClass>
-    <mutatedMethod>setGlobalProperty</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.experimental.ArgumentPropagationMutator</mutator>
-    <description>replaced call to java/util/Map::put with argument</description>
-    <lineContent>globalProperties.put(key, value);</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
     <sourceFile>ConfigurationLoader.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.parser.ConfigurationLoader</mutatedClass>
     <mutatedMethod>lambda$mapConfiguration$1</mutatedMethod>

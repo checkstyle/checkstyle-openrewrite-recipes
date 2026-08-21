@@ -496,6 +496,7 @@
                                 <param>org.checkstyle.autofix.parser.*</param>
                             </targetClasses>
                             <targetTests>
+                                <param>org.checkstyle.autofix.parser.CheckConfigurationTest</param>
                                 <param>org.checkstyle.autofix.parser.CheckstyleReportsParserTest</param>
                                 <param>org.checkstyle.autofix.recipe.FinalLocalVariableTest</param>
                                 <param>org.checkstyle.autofix.recipe.HeaderTest</param>
