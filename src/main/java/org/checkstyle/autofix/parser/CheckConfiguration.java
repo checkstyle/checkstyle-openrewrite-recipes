@@ -41,14 +41,7 @@ public final class CheckConfiguration {
     }
 
     public String getProperty(String key) {
-        final String result;
-        if (properties.containsKey(key)) {
-            result = properties.get(key);
-        }
-        else {
-            result = globalProperties.get(key);
-        }
-        return result;
+        return properties.getOrDefault(key, globalProperties.get(key));
     }
 
     public String getPropertyOrDefault(String key, String defaultValue) {
