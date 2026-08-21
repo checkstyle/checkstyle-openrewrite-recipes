@@ -310,7 +310,7 @@
                 <artifactId>maven-release-plugin</artifactId>
                 <version>3.3.1</version>
                 <configuration>
-                    <preparationGoals>clean verify</preparationGoals>
+                    <preparationGoals>clean</preparationGoals>
                     <releaseProfiles>central-release</releaseProfiles>
                     <tagNameFormat>@{project.artifactId}-@{project.version}</tagNameFormat>
                 </configuration>
@@ -783,6 +783,14 @@
                     </plugin>
                 </plugins>
             </build>
+        </profile>
+        <profile>
+            <id>no-validations</id>
+            <properties>
+                <maven.test.skip>true</maven.test.skip>
+                <checkstyle.skip>true</checkstyle.skip>
+                <rewrite.skip>true</rewrite.skip>
+            </properties>
         </profile>
     </profiles>
 

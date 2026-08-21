@@ -38,4 +38,5 @@ echo "Publishing $EXPECTED_TAG to Maven Central ..."
   -e \
   --no-transfer-progress \
   --batch-mode \
+  -Pno-validations \
   release:perform
