@@ -231,6 +231,7 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 | 🔴     | [`MissingJavadocPackage`](https://checkstyle.sourceforge.io/checks/javadoc/missingjavadocpackage.html#MissingJavadocPackage) |            | Add package documentation |
 | 🔴     | [`MissingJavadocType`](https://checkstyle.sourceforge.io/checks/javadoc/missingjavadoctype.html#MissingJavadocType)         |            | Add type documentation |
 | 🔴     | [`NonEmptyAtclauseDescription`](https://checkstyle.sourceforge.io/checks/javadoc/nonemptyatclausedescription.html#NonEmptyAtclauseDescription) |            | Add tag descriptions |
+| 🟢     | [`PreferLiteralJavadocInlineTag`](https://checkstyle.org/checks/javadoc/preferliteraljavadocinlinetag.html#PreferLiteralJavadocInlineTag) | `TBD`            |                |
 | 🟢     | [`RequireEmptyLineBeforeBlockTagGroup`](https://checkstyle.sourceforge.io/checks/javadoc/requireemptylinebeforeblocktaggroup.html#RequireEmptyLineBeforeBlockTagGroup) | `TBD`            |                |
 | 🟢     | [`SingleLineJavadoc`](https://checkstyle.sourceforge.io/checks/javadoc/singlelinejavadoc.html#SingleLineJavadoc)           | `TBD`            |                |
 | 🔴     | [`SummaryJavadoc`](https://checkstyle.sourceforge.io/checks/javadoc/summaryjavadoc.html#SummaryJavadoc)                   |            | Rewrite summary sentences |
