@@ -19,7 +19,10 @@ package org.checkstyle.autofix.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
@@ -73,6 +76,68 @@ public class CheckstyleReportsParserTest {
         assertEquals(2, grouped.get(Path.of("Main.java")).size());
         assertEquals(1, grouped.get(Path.of("Utils.java")).size());
 
+    }
+
+    @Test
+    public void testParseMissingFileTag() throws Exception {
+        final Path tempFile = Files.createTempFile("missing-file", ".xml");
+        Files.writeString(tempFile, "<checkstyle><error line=\"1\"/></checkstyle>");
+
+        final NullPointerException exception = assertThrows(NullPointerException.class, () -> {
+            reportParser.parse(tempFile);
+        });
+        assertEquals("File name can not be null", exception.getMessage());
+    }
+
+    @Test
+    public void testParseInvalidXml() throws Exception {
+        final Path tempFile = Files.createTempFile("invalid", ".xml");
+        Files.writeString(tempFile, "<checkstyle><file");
+
+        final IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> {
+                    reportParser.parse(tempFile);
+                });
+        assertTrue(exception.getMessage()
+                .startsWith("Failed to parse checkstyle XML report from: "));
+        assertTrue(exception.getMessage().contains(tempFile.toString()));
+    }
+
+    @Test
+    public void testParseErrorTagWithoutSource() throws Exception {
+        final Path tempFile = Files.createTempFile("no-source", ".xml");
+        Files.writeString(tempFile,
+                "<checkstyle><file name=\"Main.java\"><error line=\"1\"/>"
+                        + "</file></checkstyle>");
+
+        final List<CheckstyleViolation> violations = reportParser.parse(tempFile);
+        assertTrue(violations.isEmpty());
+    }
+
+    @Test
+    public void testParseFileTagMultipleAttributes() throws Exception {
+        final Path tempFile = Files.createTempFile("multiple-attrs", ".xml");
+        Files.writeString(tempFile,
+                "<checkstyle><file other=\"x\" name=\"Main.java\">"
+                        + "<error line=\"1\" source=\"com.puppycrawl.tools.checkstyle."
+                        + "checks.UpperEllCheck\"/></file></checkstyle>");
+
+        final List<CheckstyleViolation> violations = reportParser.parse(tempFile);
+        assertEquals(1, violations.size());
+        assertEquals("Main.java", violations.get(0).getFilePath().toString());
+    }
+
+    @Test
+    public void testParseFileTagWithoutNameAttribute() throws Exception {
+        final Path tempFile = Files.createTempFile("no-name-attr", ".xml");
+        Files.writeString(tempFile,
+                "<checkstyle><file other=\"x\"><error line=\"1\"/>"
+                        + "</file></checkstyle>");
+
+        final NullPointerException exception = assertThrows(NullPointerException.class, () -> {
+            reportParser.parse(tempFile);
+        });
+        assertEquals("File name can not be null", exception.getMessage());
     }
 
 }
