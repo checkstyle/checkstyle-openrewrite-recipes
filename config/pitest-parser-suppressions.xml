@@ -3,64 +3,10 @@
   <mutation unstable="false">
     <sourceFile>ConfigurationLoader.java</sourceFile>
     <mutatedClass>org.checkstyle.autofix.parser.ConfigurationLoader</mutatedClass>
-    <mutatedMethod>lambda$mapConfiguration$1</mutatedMethod>
+    <mutatedMethod>mapConfiguration</mutatedMethod>
     <mutator>org.pitest.mutationtest.engine.gregor.mutators.VoidMethodCallMutator</mutator>
-    <description>removed call to java/util/Map::forEach</description>
-    <lineContent>inherited.forEach(childConfig::setGlobalProperty);</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>ConfigurationLoader.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.parser.ConfigurationLoader</mutatedClass>
-    <mutatedMethod>loadConfiguration</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
-    <description>removed conditional - replaced equality check with true</description>
-    <lineContent>if (propFile == null) {</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>ConfigurationLoader.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.parser.ConfigurationLoader</mutatedClass>
-    <mutatedMethod>loadConfiguration</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.VoidMethodCallMutator</mutator>
-    <description>removed call to java/util/Properties::load</description>
-    <lineContent>props.load(input);</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>SarifReportParser.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.parser.SarifReportParser</mutatedClass>
-    <mutatedMethod>getFilePath</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
-    <description>removed conditional - replaced equality check with true</description>
-    <lineContent>if (uri.startsWith(FILE_PREFIX)) {</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>SarifReportParser.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.parser.SarifReportParser</mutatedClass>
-    <mutatedMethod>getFilePath</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
-    <description>removed call to java/nio/file/Path::of</description>
-    <lineContent>result = Path.of(uri);</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>SarifReportParser.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.parser.SarifReportParser</mutatedClass>
-    <mutatedMethod>parse</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.RemoveConditionalMutator_EQUAL_IF</mutator>
-    <description>removed conditional - replaced equality check with true</description>
-    <lineContent>if (run.getResults() != null) {</lineContent>
-  </mutation>
-
-  <mutation unstable="false">
-    <sourceFile>SarifReportParser.java</sourceFile>
-    <mutatedClass>org.checkstyle.autofix.parser.SarifReportParser</mutatedClass>
-    <mutatedMethod>parse</mutatedMethod>
-    <mutator>org.pitest.mutationtest.engine.gregor.mutators.NonVoidMethodCallMutator</mutator>
-    <description>removed call to java/lang/String::valueOf</description>
-    <lineContent>throw new IllegalArgumentException(&quot;Failed to parse report: &quot; + reportPath, exception);</lineContent>
+    <description>removed call to java/util/Map::putAll</description>
+    <lineContent>newGlobals.putAll(inherited);</lineContent>
   </mutation>
 
   <mutation unstable="false">

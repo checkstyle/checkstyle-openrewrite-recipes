@@ -56,21 +56,25 @@ public class SarifReportParser implements ReportParser {
         }
         final List<CheckstyleViolation> result = new ArrayList<>();
         for (final Run run: report.getRuns()) {
-            if (run.getResults() != null) {
-                run.getResults().forEach(resultEntry -> {
-                    CheckFullName.fromSource(resultEntry.getRuleId()).ifPresent(
-                            checkName -> {
-                                final String id = Optional.of(resultEntry.getRuleId())
-                                        .filter(src -> src.contains("#"))
-                                        .map(src -> src.substring(src.indexOf('#') + 1))
-                                        .orElse(null);
-                                result.add(createViolation(new
-                                        CheckstyleCheck(checkName, id), resultEntry));
-                            }); }
-                );
-            }
+            Optional.ofNullable(run.getResults())
+                    .orElseGet(ArrayList::new)
+                    .forEach(resultEntry -> {
+                        CheckFullName.fromSource(resultEntry.getRuleId()).ifPresent(
+                                checkName -> {
+                                    final String id = extractId(resultEntry.getRuleId());
+                                    result.add(createViolation(
+                                            new CheckstyleCheck(checkName, id), resultEntry));
+                                });
+                    });
         }
         return result;
+    }
+
+    private static String extractId(String ruleId) {
+        return Optional.of(ruleId)
+                .filter(src -> src.contains("#"))
+                .map(src -> src.substring(src.indexOf('#') + 1))
+                .orElse(null);
     }
 
     private CheckstyleViolation createViolation(CheckstyleCheck check, Result result) {
@@ -86,15 +90,9 @@ public class SarifReportParser implements ReportParser {
     }
 
     private Path getFilePath(PhysicalLocation location) {
-        final Path result;
         final String uri = location.getArtifactLocation().getUri();
-        if (uri.startsWith(FILE_PREFIX)) {
-            result = Paths.get(URI.create(uri));
-        }
-        else {
-            result = Path.of(uri);
-        }
-        return result;
+        final String fileUri = FILE_PREFIX + uri.replace(FILE_PREFIX, "");
+        return Paths.get(URI.create(fileUri));
     }
 
 }

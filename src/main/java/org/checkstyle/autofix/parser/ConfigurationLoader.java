@@ -39,21 +39,27 @@ public final class ConfigurationLoader {
 
     public static Map<CheckstyleCheck,
             CheckConfiguration> mapConfiguration(Configuration config) {
+        return mapConfiguration(config, new HashMap<>());
+    }
+
+    private static Map<CheckstyleCheck,
+            CheckConfiguration> mapConfiguration(Configuration config,
+                                                 Map<String, String> globalProps) {
 
         final Map<CheckstyleCheck, CheckConfiguration> result = new HashMap<>();
         final Map<String, String> inherited = getProperties(config);
+        final Map<String, String> newGlobals = new HashMap<>(globalProps);
+        newGlobals.putAll(inherited);
+
         final Optional<CheckFullName> checkName = CheckFullName.fromSource(config.getName());
 
         checkName.ifPresent(checkstyleCheck -> {
             result.put(new CheckstyleCheck(checkstyleCheck, inherited.get("id")),
-                    new CheckConfiguration(checkstyleCheck, new HashMap<>(), inherited));
+                    new CheckConfiguration(checkstyleCheck, globalProps, inherited));
         });
 
         for (Configuration child : config.getChildren()) {
-            mapConfiguration(child).forEach((childModule, childConfig) -> {
-                inherited.forEach(childConfig::setGlobalProperty);
-                result.put(childModule, childConfig);
-            });
+            result.putAll(mapConfiguration(child, newGlobals));
         }
 
         return result;
