@@ -17,6 +17,13 @@
             <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </licenses>
+
+    <contributors>
+        <contributor>
+            <name>GitHub Contributors</name>
+            <url>https://github.com/checkstyle/checkstyle-openrewrite-recipes/graphs/contributors</url>
+        </contributor>
+    </contributors>
     <scm>
         <connection>
             scm:git:https://github.com/checkstyle/checkstyle-openrewrite-recipes.git
