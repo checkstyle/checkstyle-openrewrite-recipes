@@ -75,7 +75,7 @@ public class ReadmeUpdater {
     private static Set<String> getReadmeChecks(String readmeContent) {
         final Set<String> readmeChecks = new TreeSet<>();
         final Pattern pattern = Pattern.compile(
-                "\\[`([A-Za-z0-9]+)`\\]\\(https://checkstyle\\.(?:org|sourceforge" + "\\.io)");
+                "\\[`([A-Za-z0-9]+)`\\]\\(https://(?:checkstyle\\.(?:org|sourceforge\\.io)|github\\.com/checkstyle)");
         final Matcher matcher = pattern.matcher(readmeContent);
         while (matcher.find()) {
             readmeChecks.add(matcher.group(1));
@@ -107,7 +107,7 @@ public class ReadmeUpdater {
             Map<String, List<String>> checksByCategory) {
         final Map<String, String> categoryToHeader = getCategoryToHeaderMap();
         final Pattern pattern = Pattern.compile(
-                "\\[`([A-Za-z0-9]+)`\\]\\(https://checkstyle\\.(?:org|sourceforge" + "\\.io)");
+                "\\[`([A-Za-z0-9]+)`\\]\\(https://(?:checkstyle\\.(?:org|sourceforge\\.io)|github\\.com/checkstyle)");
 
         for (Map.Entry<String, List<String>> entry : checksByCategory.entrySet()) {
             final String category = entry.getKey();
@@ -162,12 +162,8 @@ public class ReadmeUpdater {
         readmeLines.add("");
         readmeLines.add(header);
         readmeLines.add("");
-        readmeLines.add("| Status | Check"
-                + "                                                                                "
-                + "              | Recipe           | Coverage Notes |");
-        readmeLines.add("|--------|-------------------------------------------------"
-                + "-------------------------------------------------------------"
-                + "-----------------|------------------|----------------|");
+        readmeLines.add("| Status | Check | Coverage Notes |");
+        readmeLines.add("|---|---|---|");
         return readmeLines.size() - 5;
     }
 
@@ -189,9 +185,8 @@ public class ReadmeUpdater {
         for (String missingCheck : checksToAdd) {
             final String url = "https://checkstyle.org/checks/" + category + "/"
                     + missingCheck.toLowerCase() + ".html#" + missingCheck;
-            final String circle = "\uD83D\uDFE2";
-            final String newRow = String.format("| %s     | [`%s`](%s) | `TBD`"
-                    + "            |                |", circle, missingCheck, url);
+            final String circle = "\u26AA";
+            final String newRow = String.format("| %s | [`%s`](%s) | |", circle, missingCheck, url);
 
             int insertIndex = tableDataStartIndex;
             while (insertIndex < readmeLines.size()
