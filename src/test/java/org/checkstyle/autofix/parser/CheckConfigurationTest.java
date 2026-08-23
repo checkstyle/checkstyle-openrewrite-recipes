@@ -25,7 +25,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.checkstyle.autofix.CheckFullName;
+import org.checkstyle.autofix.CheckstyleCheck;
 import org.junit.jupiter.api.Test;
+
+import com.puppycrawl.tools.checkstyle.DefaultConfiguration;
 
 public class CheckConfigurationTest {
 
@@ -77,6 +80,43 @@ public class CheckConfigurationTest {
 
         assertTrue(config.hasProperty("newProp"));
         assertEquals("newValue", config.getProperty("newProp"));
+    }
+
+    @Test
+    public void testMapConfigurationInheritsProperties() {
+        final DefaultConfiguration checkerConfig =
+                new DefaultConfiguration("Checker");
+        checkerConfig.addProperty("charset", "UTF-16");
+
+        final DefaultConfiguration treeWalkerConfig =
+                new DefaultConfiguration("TreeWalker");
+        treeWalkerConfig.addProperty("tabWidth", "4");
+
+        final DefaultConfiguration checkConfig =
+                new DefaultConfiguration(
+                        "com.puppycrawl.tools.checkstyle.checks.whitespace"
+                                + ".EmptyForIteratorPadCheck");
+        checkConfig.addProperty("option", "space");
+
+        treeWalkerConfig.addChild(checkConfig);
+        checkerConfig.addChild(treeWalkerConfig);
+
+        final Map<CheckstyleCheck, CheckConfiguration> result =
+                ConfigurationLoader.mapConfiguration(checkerConfig);
+
+        CheckConfiguration parsedCheckConfig = null;
+        for (Map.Entry<CheckstyleCheck, CheckConfiguration> entry
+                : result.entrySet()) {
+            if ("EMPTY_FOR_ITERATOR_PAD".equals(entry.getKey().checkName().name())) {
+                parsedCheckConfig = entry.getValue();
+                break;
+            }
+        }
+
+        assertTrue(parsedCheckConfig != null, "Check config should be found");
+        assertEquals("space", parsedCheckConfig.getProperty("option"));
+        assertEquals("4", parsedCheckConfig.getProperty("tabWidth"));
+        assertEquals("UTF-16", parsedCheckConfig.getProperty("charset"));
     }
 
 }
