@@ -75,7 +75,8 @@ public class ReadmeUpdater {
     private static Set<String> getReadmeChecks(String readmeContent) {
         final Set<String> readmeChecks = new TreeSet<>();
         final Pattern pattern = Pattern.compile(
-                "\\[`([A-Za-z0-9]+)`\\]\\(https://(?:checkstyle\\.(?:org|sourceforge\\.io)|github\\.com/checkstyle)");
+                "\\[`([A-Za-z0-9]+)`\\]\\(https://"
+                        + "(?:checkstyle\\.(?:org|sourceforge\\.io)|github\\.com/checkstyle)");
         final Matcher matcher = pattern.matcher(readmeContent);
         while (matcher.find()) {
             readmeChecks.add(matcher.group(1));
@@ -107,7 +108,8 @@ public class ReadmeUpdater {
             Map<String, List<String>> checksByCategory) {
         final Map<String, String> categoryToHeader = getCategoryToHeaderMap();
         final Pattern pattern = Pattern.compile(
-                "\\[`([A-Za-z0-9]+)`\\]\\(https://(?:checkstyle\\.(?:org|sourceforge\\.io)|github\\.com/checkstyle)");
+                "\\[`([A-Za-z0-9]+)`\\]\\(https://"
+                        + "(?:checkstyle\\.(?:org|sourceforge\\.io)|github\\.com/checkstyle)");
 
         for (Map.Entry<String, List<String>> entry : checksByCategory.entrySet()) {
             final String category = entry.getKey();
