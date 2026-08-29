@@ -9,3 +9,6 @@ This page lists the currently available OpenRewrite recipes designed to fix Chec
 ### Annotation
 - [AnnotationLocation](recipes/annotation/AnnotationLocation.md) - Ensures that annotations are correctly positioned relative to the annotated element.
 - [AnnotationOnSameLine](recipes/annotation/AnnotationOnSameLine.md) - Ensures that an annotation is located on the same line as its target element.
+
+### Coding
+- [AvoidNoArgumentSuperConstructorCall](recipes/coding/AvoidNoArgumentSuperConstructorCall.md) - Removes unnecessary no-argument super constructor calls.
