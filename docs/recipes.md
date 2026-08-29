@@ -11,4 +11,5 @@ This page lists the currently available OpenRewrite recipes designed to fix Chec
 - [AnnotationOnSameLine](recipes/annotation/AnnotationOnSameLine.md) - Ensures that an annotation is located on the same line as its target element.
 
 ### Coding
+- [ArrayTrailingComma](recipes/coding/ArrayTrailingComma.md) - Fixes Checkstyle ArrayTrailingComma violations by adding a trailing comma after the last element of multi-line array initializers.
 - [AvoidNoArgumentSuperConstructorCall](recipes/coding/AvoidNoArgumentSuperConstructorCall.md) - Removes unnecessary no-argument super constructor calls.
