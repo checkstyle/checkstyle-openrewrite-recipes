@@ -20,7 +20,7 @@ This project and everyone participating in it is governed by the [CheckStyle Cod
 
 ## Getting Started
 
-Please see the [Build Instructions](docs/BEGINNING_DEVELOPMENT.md) for information on how to get started with the project. This includes setting up your development environment, building the project, and running tests.
+Please see the [Build Instructions](BEGINNING_DEVELOPMENT.md) for information on how to get started with the project. This includes setting up your development environment, building the project, and running tests.
 
 Select an issue to work on from the [Issues Page](https://github.com/checkstyle/checkstyle-openrewrite-recipes/issues).
 
@@ -62,4 +62,4 @@ Do not file a public issue for security vulnerabilities. Please contact the main
 
 ## Asking Questions
 
-See our [Discussions Page](https://github.com/checkstyle/checkstyle-openrewrite-recipes/discussions). In short, GitHub issues are not the appropriate place to debug your specific project, but should be reserved for filing bugs and feature requests. You can also visit our [Google Groups Forum](https://groups.google.com/g/checkstyle-devel).
+See our [Discussions Page](https://github.com/checkstyle/checkstyle/discussions). In short, GitHub issues are not the appropriate place to debug your specific project, but should be reserved for filing bugs and feature requests. You can also visit our [Google Groups Forum](https://groups.google.com/g/checkstyle-devel).
