@@ -88,6 +88,19 @@ public class HeaderTest extends AbstractRecipeTestSupport {
         return checkConfig;
     }
 
+    @RecipeTest
+    void headerPropertyFileTest(ReportParser parser) throws Exception {
+        verifyWithProperties(parser, getHeaderPropertyFileConfig(),
+                "src/test/resources/org/checkstyle/autofix/recipe/header/header.properties",
+                "HeaderPropertyFile");
+    }
+
+    private DefaultConfiguration getHeaderPropertyFileConfig() {
+        final DefaultConfiguration checkConfig = createModuleConfig(HeaderCheck.class);
+        checkConfig.addProperty("header", "${header.value}");
+        return checkConfig;
+    }
+
     private DefaultConfiguration getHeaderPropertyConfig() {
         final DefaultConfiguration checkConfig = createModuleConfig(HeaderCheck.class);
         checkConfig.addProperty("header", "// Checkstyle-OpenRewrite");

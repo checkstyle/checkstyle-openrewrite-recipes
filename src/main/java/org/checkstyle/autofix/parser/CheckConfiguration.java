@@ -25,14 +25,10 @@ import org.checkstyle.autofix.CheckFullName;
 public final class CheckConfiguration {
 
     private final CheckFullName checkName;
-    private final Map<String, String> globalProperties;
     private final Map<String, String> properties;
 
-    public CheckConfiguration(CheckFullName checkName,
-                              Map<String, String> globalProperties,
-                              Map<String, String> properties) {
+    public CheckConfiguration(CheckFullName checkName, Map<String, String> properties) {
         this.checkName = checkName;
-        this.globalProperties = new HashMap<>(globalProperties);
         this.properties = new HashMap<>(properties);
     }
 
@@ -41,23 +37,15 @@ public final class CheckConfiguration {
     }
 
     public String getProperty(String key) {
-        return properties.getOrDefault(key, globalProperties.get(key));
+        return properties.get(key);
     }
 
     public String getPropertyOrDefault(String key, String defaultValue) {
-        String result = getProperty(key);
-        if (result == null) {
-            result = defaultValue;
-        }
-        return result;
+        return properties.getOrDefault(key, defaultValue);
     }
 
     public boolean hasProperty(String key) {
-        return properties.containsKey(key) || globalProperties.containsKey(key);
-    }
-
-    public void setGlobalProperty(String key, String value) {
-        globalProperties.put(key, value);
+        return properties.containsKey(key);
     }
 
 }
