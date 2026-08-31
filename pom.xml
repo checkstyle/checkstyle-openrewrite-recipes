@@ -63,7 +63,7 @@
         <checkstyle.config>https://raw.githubusercontent.com/checkstyle/checkstyle/checkstyle-${checkstyle.version}/config/checkstyle-checks.xml</checkstyle.config>
 
         <!-- Pitest properties -->
-        <pitest.version>1.25.9</pitest.version>
+        <pitest.version>1.30.0</pitest.version>
         <pitest.junit5.version>1.2.3</pitest.junit5.version>
     </properties>
 
