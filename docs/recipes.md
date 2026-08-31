@@ -17,3 +17,7 @@ This page lists the currently available OpenRewrite recipes designed to fix Chec
 
 ### Imports
 - [AvoidStarImport](recipes/imports/AvoidStarImport.md) - Expands star imports into individual ones to avoid star imports.
+
+### Whitespace
+- [EmptyForInitializerPad](recipes/whitespace/EmptyForInitializerPad.md) - Fixes padding around empty for-loop initializers.
+
