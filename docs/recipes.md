@@ -10,6 +10,7 @@ This page lists the currently available OpenRewrite recipes designed to fix Chec
 ### Coding
 - [ArrayTrailingComma](recipes/coding/ArrayTrailingComma.md) - Fixes Checkstyle ArrayTrailingComma violations by adding a trailing comma after the last element of multi-line array initializers.
 - [AvoidNoArgumentSuperConstructorCall](recipes/coding/AvoidNoArgumentSuperConstructorCall.md) - Removes unnecessary no-argument super constructor calls.
+- [ConstructorsDeclarationGrouping](recipes/coding/ConstructorsDeclarationGrouping.md) - Groups all constructors together in a class.
 
 ### Design
 - [FinalClass](recipes/design/FinalClass.md) - Ensures that classes which only have private constructors are declared as final.
