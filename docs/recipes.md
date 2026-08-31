@@ -20,4 +20,4 @@ This page lists the currently available OpenRewrite recipes designed to fix Chec
 
 ### Whitespace
 - [EmptyForInitializerPad](recipes/whitespace/EmptyForInitializerPad.md) - Fixes padding around empty for-loop initializers.
-
+- [EmptyForIteratorPad](recipes/whitespace/EmptyForIteratorPad.md) - Fixes padding around empty for-loop iterators.
