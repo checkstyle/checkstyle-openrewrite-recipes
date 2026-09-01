@@ -20,7 +20,7 @@ This project and everyone participating in it is governed by the [CheckStyle Cod
 
 ## Getting Started
 
-Please see the [Build Instructions](BEGINNING_DEVELOPMENT.md) for information on how to get started with the project. This includes setting up your development environment, building the project, and running tests.
+Please see the [Build Instructions](.github/BEGINNING_DEVELOPMENT.md) for information on how to get started with the project. This includes setting up your development environment, building the project, and running tests.
 
 Select an issue to work on from the [Issues Page](https://github.com/checkstyle/checkstyle-openrewrite-recipes/issues).
 
