@@ -25,6 +25,7 @@ import static org.openrewrite.java.Assertions.java;
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -32,6 +33,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 import java.util.stream.Stream;
 
 import org.checkstyle.autofix.CheckstyleAutoFix;
@@ -57,6 +59,8 @@ import org.openrewrite.test.SourceSpecs;
 
 import com.puppycrawl.tools.checkstyle.AbstractXmlTestSupport;
 import com.puppycrawl.tools.checkstyle.Checker;
+import com.puppycrawl.tools.checkstyle.ConfigurationLoader;
+import com.puppycrawl.tools.checkstyle.PropertiesExpander;
 import com.puppycrawl.tools.checkstyle.SarifLogger;
 import com.puppycrawl.tools.checkstyle.XMLLogger;
 import com.puppycrawl.tools.checkstyle.api.AuditListener;
@@ -110,7 +114,7 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
                     convertToExpectedMessages(fileViolations));
         }
 
-        verify(config, reportPath, inputPaths, outputPaths);
+        verify(config, null, reportPath, inputPaths, outputPaths);
     }
 
     protected void verify(ReportParser parser, Configuration config, String... testNames)
@@ -131,16 +135,22 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
 
         final ReportType reportType = ReportType.fromParser(parser);
         final Path reportPath = runCheckstyleOnMultipleFiles(inputPaths, config, reportType);
-        verify(config, reportPath, inputPaths, outputPaths);
+        verify(config, null, reportPath, inputPaths, outputPaths);
     }
 
-    private void verify(Configuration config, Path reportPath, List<String> inputPaths,
-                        List<String> outputPaths) throws Exception {
+    private void verify(Configuration config, String propertiesFilePath, Path reportPath,
+                        List<String> inputPaths, List<String> outputPaths) throws Exception {
         final Path configPath = createConfigFile(config);
 
         try {
-            final CheckstyleAutoFix mainRecipe = new CheckstyleAutoFix(reportPath.toString(),
-                    configPath.toString());
+            final CheckstyleAutoFix mainRecipe;
+            if (propertiesFilePath == null) {
+                mainRecipe = new CheckstyleAutoFix(reportPath.toString(), configPath.toString());
+            }
+            else {
+                mainRecipe = new CheckstyleAutoFix(reportPath.toString(), configPath.toString(),
+                        propertiesFilePath);
+            }
             assertEquals("Checkstyle autoFix",
                     mainRecipe.getDisplayName());
             assertEquals("Automatically fixes Checkstyle violations.",
@@ -149,8 +159,12 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
                     mainRecipe.getViolationReportPath());
             assertEquals(configPath.toString(),
                     mainRecipe.getConfigurationPath());
-            Assertions.assertNull(
-                    mainRecipe.getPropertiesPath());
+            if (propertiesFilePath == null) {
+                Assertions.assertNull(mainRecipe.getPropertiesPath());
+            }
+            else {
+                assertEquals(propertiesFilePath, mainRecipe.getPropertiesPath());
+            }
 
             final List<SourceSpecs> sources = new ArrayList<>();
 
@@ -171,6 +185,83 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
         finally {
             Files.deleteIfExists(configPath);
             Files.deleteIfExists(reportPath);
+        }
+    }
+
+    protected void verifyWithProperties(ReportParser parser, String propertiesFileName,
+            String... testNames) throws Exception {
+        final List<String> testCaseNames = Arrays.asList(testNames);
+        final Configuration config = getCheckConfigurations(getInputFilePath(testCaseNames.get(0)));
+
+        final List<String> inputPaths = new ArrayList<>();
+        final List<String> outputPaths = new ArrayList<>();
+
+        for (String testCaseName : testCaseNames) {
+            inputPaths.add(getInputFilePath(testCaseName));
+            outputPaths.add(getOutputFilePath(testCaseName));
+        }
+
+        for (String outputPath : outputPaths) {
+            verifyOutputFile(outputPath, config);
+        }
+
+        final String propertiesFilePath = getPath(propertiesFileName);
+        final Configuration resolvedConfig = resolveConfiguration(config, propertiesFilePath);
+
+        final ReportType reportType = ReportType.fromParser(parser);
+        final Path reportPath =
+                runCheckstyleOnMultipleFiles(inputPaths, resolvedConfig, reportType);
+
+        final List<CheckstyleViolation> allViolations = parser.parse(reportPath);
+        for (String inputPath : inputPaths) {
+            final String fullPath = getPath(inputPath);
+            final List<CheckstyleViolation> fileViolations = allViolations.stream()
+                    .filter(violation -> violation.getFilePath().endsWith(fullPath))
+                    .toList();
+            verifyWithInlineConfigParser(fullPath,
+                    convertToExpectedMessages(fileViolations));
+        }
+
+        verify(config, propertiesFilePath, reportPath, inputPaths, outputPaths);
+    }
+
+    protected void verifyWithProperties(ReportParser parser, Configuration config,
+            String propertiesFilePath, String... testNames) throws Exception {
+        final List<String> testCaseNames = Arrays.asList(testNames);
+
+        final List<String> inputPaths = new ArrayList<>();
+        final List<String> outputPaths = new ArrayList<>();
+
+        for (String testCaseName : testCaseNames) {
+            inputPaths.add(getInputFilePath(testCaseName));
+            outputPaths.add(getOutputFilePath(testCaseName));
+        }
+
+        final Configuration resolvedConfig = resolveConfiguration(config, propertiesFilePath);
+
+        for (String outputPath : outputPaths) {
+            verifyOutputFile(outputPath, resolvedConfig);
+        }
+
+        final ReportType reportType = ReportType.fromParser(parser);
+        final Path reportPath =
+                runCheckstyleOnMultipleFiles(inputPaths, resolvedConfig, reportType);
+        verify(config, propertiesFilePath, reportPath, inputPaths, outputPaths);
+    }
+
+    private Configuration resolveConfiguration(Configuration config, String propertiesFilePath)
+            throws Exception {
+        final Path rawConfigPath = createConfigFile(config);
+        try {
+            final Properties properties = new Properties();
+            try (FileInputStream input = new FileInputStream(propertiesFilePath)) {
+                properties.load(input);
+            }
+            return ConfigurationLoader.loadConfiguration(
+                    rawConfigPath.toString(), new PropertiesExpander(properties));
+        }
+        finally {
+            Files.deleteIfExists(rawConfigPath);
         }
     }
 
