@@ -135,7 +135,8 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
     }
 
     private void verify(Configuration config, Path reportPath, List<String> inputPaths,
-                        List<String> outputPaths) throws Exception {
+                        List<String> outputPaths)
+            throws Exception {
         final Path configPath = createConfigFile(config);
 
         try {
@@ -175,7 +176,8 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
     }
 
     private Path runCheckstyleOnMultipleFiles(List<String> inputPaths, Configuration config,
-                               ReportType reportType) throws Exception {
+                               ReportType reportType)
+            throws Exception {
 
         final Checker checker = createChecker(config);
         try (ByteArrayOutputStream reportOutStream = new ByteArrayOutputStream()) {
