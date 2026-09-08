@@ -19,13 +19,13 @@ CI runs `clean install` then `git diff --exit-code`. The rewrite plugin runs in 
 
 - Entry recipe `CheckstyleAutoFix` (`src/main/java/org/checkstyle/autofix/`) reads violation report + Checkstyle config, then `CheckstyleRecipeRegistry.getRecipes(...)` groups violations by check source and returns sub-recipes.
 - Two factory maps in `CheckstyleRecipeRegistry`: `RECIPE_MAP` for recipes needing only violations, `RECIPE_MAP_WITH_CONFIG` for recipes that also need `CheckConfiguration` (currently `Header`, `NewlineAtEndOfFile`).
-- Per-check recipes live in `org.checkstyle.autofix.recipe.*`, extend `org.openrewrite.Recipe`, take `List<CheckstyleViolation>` (and optionally `CheckConfiguration`) via constructor.
+- Per-check recipes live in `org.checkstyle.autofix.recipe.<category>.*`, extend `org.openrewrite.Recipe`, take `List<CheckstyleViolation>` (and optionally `CheckConfiguration`) via constructor.
 - Match source path with `violation.getFilePath().toAbsolutePath().endsWith(sourcePath)`, not equality.
 
 ## Adding a new per-check recipe
 
 1. Add the Checkstyle check's fully-qualified class name to `CheckFullName` enum.
-2. Create the recipe under `src/main/java/org/checkstyle/autofix/recipe/`.
+2. Create the recipe under `src/main/java/org/checkstyle/autofix/recipe/<category>/`.
 3. Register the constructor in `CheckstyleRecipeRegistry`'s static initializer (right map).
 4. Add test class extending `AbstractRecipeTestSupport`, override `getSubpackage()`, use `@RecipeTest`.
 5. Add `Input{Name}.java` + `Output{Name}.java` fixtures under `src/test/resources/org/checkstyle/autofix/recipe/{subpackage}/{lowercase-name}/`. The Input file must start with a `/*xml ... */` inline Checkstyle config consumed by `InlineConfigParser`.
