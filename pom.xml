@@ -357,12 +357,12 @@
                             <targetTests>
                                 <param>org.checkstyle.autofix.CheckstyleAutoFixTest</param>
                                 <param>org.checkstyle.autofix.parser.CheckstyleReportsParserTest</param>
-                                <param>org.checkstyle.autofix.recipe.FinalClassTest</param>
-                                <param>org.checkstyle.autofix.recipe.HeaderTest</param>
-                                <param>org.checkstyle.autofix.recipe.MissingOverrideTest</param>
-                                <param>org.checkstyle.autofix.recipe.RedundantImportTest</param>
-                                <param>org.checkstyle.autofix.recipe.UpperEllTest</param>
-                                <param>org.checkstyle.autofix.recipe.UseEnhancedSwitchTest</param>
+                                <param>org.checkstyle.autofix.recipe.design.FinalClassTest</param>
+                                <param>org.checkstyle.autofix.recipe.header.HeaderTest</param>
+                                <param>org.checkstyle.autofix.recipe.annotation.MissingOverrideTest</param>
+                                <param>org.checkstyle.autofix.recipe.imports.RedundantImportTest</param>
+                                <param>org.checkstyle.autofix.recipe.misc.UpperEllTest</param>
+                                <param>org.checkstyle.autofix.recipe.coding.UseEnhancedSwitchTest</param>
                             </targetTests>
 
                             <mutators>
@@ -428,18 +428,18 @@
                             <targetTests>
                                 <param>org.checkstyle.autofix.marker.CheckstyleViolationMarkerTest</param>
                                 <param>org.checkstyle.autofix.marker.ViolationMarkerRecipeTest</param>
-                                <param>org.checkstyle.autofix.recipe.FinalClassTest</param>
-                                <param>org.checkstyle.autofix.recipe.FinalLocalVariableTest</param>
-                                <param>org.checkstyle.autofix.recipe.HeaderTest</param>
-                                <param>org.checkstyle.autofix.recipe.UseEnhancedSwitchTest</param>
-                                <param>org.checkstyle.autofix.recipe.AnnotationOnSameLineTest</param>
-                                <param>org.checkstyle.autofix.recipe.NewLineAtEndOfFileTest</param>
-                                <param>org.checkstyle.autofix.recipe.UnusedImportsTest</param>
-                                <param>org.checkstyle.autofix.recipe.UpperEllTest</param>
-                                <param>org.checkstyle.autofix.recipe.UnusedLocalVariableTest</param>
-                                <param>org.checkstyle.autofix.recipe.AvoidStarImportTest</param>
-                                <param>org.checkstyle.autofix.recipe.MissingOverrideTest</param>
-                                <param>org.checkstyle.autofix.recipe.ConstructorsDeclarationGroupingTest</param>
+                                <param>org.checkstyle.autofix.recipe.design.FinalClassTest</param>
+                                <param>org.checkstyle.autofix.recipe.coding.FinalLocalVariableTest</param>
+                                <param>org.checkstyle.autofix.recipe.header.HeaderTest</param>
+                                <param>org.checkstyle.autofix.recipe.coding.UseEnhancedSwitchTest</param>
+                                <param>org.checkstyle.autofix.recipe.annotation.AnnotationOnSameLineTest</param>
+                                <param>org.checkstyle.autofix.recipe.misc.NewLineAtEndOfFileTest</param>
+                                <param>org.checkstyle.autofix.recipe.imports.UnusedImportsTest</param>
+                                <param>org.checkstyle.autofix.recipe.misc.UpperEllTest</param>
+                                <param>org.checkstyle.autofix.recipe.coding.UnusedLocalVariableTest</param>
+                                <param>org.checkstyle.autofix.recipe.imports.AvoidStarImportTest</param>
+                                <param>org.checkstyle.autofix.recipe.annotation.MissingOverrideTest</param>
+                                <param>org.checkstyle.autofix.recipe.coding.ConstructorsDeclarationGroupingTest</param>
                             </targetTests>
 
                             <mutators>
@@ -506,9 +506,9 @@
                                 <param>org.checkstyle.autofix.CheckstyleAutoFixTest</param>
                                 <param>org.checkstyle.autofix.parser.CheckConfigurationTest</param>
                                 <param>org.checkstyle.autofix.parser.CheckstyleReportsParserTest</param>
-                                <param>org.checkstyle.autofix.recipe.FinalLocalVariableTest</param>
-                                <param>org.checkstyle.autofix.recipe.HeaderTest</param>
-                                <param>org.checkstyle.autofix.recipe.UseEnhancedSwitchTest</param>
+                                <param>org.checkstyle.autofix.recipe.coding.FinalLocalVariableTest</param>
+                                <param>org.checkstyle.autofix.recipe.header.HeaderTest</param>
+                                <param>org.checkstyle.autofix.recipe.coding.UseEnhancedSwitchTest</param>
                             </targetTests>
 
                             <mutators>
@@ -569,36 +569,36 @@
                         </dependencies>
                         <configuration>
                             <targetClasses>
-                                <param>org.checkstyle.autofix.recipe.EmptyStatement*</param>
-                                <param>org.checkstyle.autofix.recipe.EmptyForIteratorPad</param>
-                                <param>org.checkstyle.autofix.recipe.FinalClass*</param>
-                                <param>org.checkstyle.autofix.recipe.FinalLocalVariable*</param>
-                                <param>org.checkstyle.autofix.recipe.Header*</param>
-                                <param>org.checkstyle.autofix.recipe.EmptyForInitializerPad*</param>
-                                <param>org.checkstyle.autofix.recipe.HexLiteralCase*</param>
-                                <param>org.checkstyle.autofix.recipe.MissingOverride*</param>
-                                <param>org.checkstyle.autofix.recipe.UnnecessaryParentheses*</param>
-                                <param>org.checkstyle.autofix.recipe.AvoidStarImport*</param>
-                                <param>org.checkstyle.autofix.recipe.MissingSwitchDefault*</param>
-                                <param>org.checkstyle.autofix.recipe.AnnotationLocation*</param>
-                                <param>org.checkstyle.autofix.recipe.NoWhitespaceAfter*</param>
+                                <param>org.checkstyle.autofix.recipe.coding.EmptyStatement*</param>
+                                <param>org.checkstyle.autofix.recipe.whitespace.EmptyForIteratorPad</param>
+                                <param>org.checkstyle.autofix.recipe.design.FinalClass*</param>
+                                <param>org.checkstyle.autofix.recipe.coding.FinalLocalVariable*</param>
+                                <param>org.checkstyle.autofix.recipe.header.Header*</param>
+                                <param>org.checkstyle.autofix.recipe.whitespace.EmptyForInitializerPad*</param>
+                                <param>org.checkstyle.autofix.recipe.misc.HexLiteralCase*</param>
+                                <param>org.checkstyle.autofix.recipe.annotation.MissingOverride*</param>
+                                <param>org.checkstyle.autofix.recipe.coding.UnnecessaryParentheses*</param>
+                                <param>org.checkstyle.autofix.recipe.imports.AvoidStarImport*</param>
+                                <param>org.checkstyle.autofix.recipe.coding.MissingSwitchDefault*</param>
+                                <param>org.checkstyle.autofix.recipe.annotation.AnnotationLocation*</param>
+                                <param>org.checkstyle.autofix.recipe.whitespace.NoWhitespaceAfter*</param>
                             </targetClasses>
                             <targetTests>
-                                <param>org.checkstyle.autofix.recipe.EmptyStatementTest</param>
-                                <param>org.checkstyle.autofix.recipe.EmptyForIteratorPadTest</param>
-                                <param>org.checkstyle.autofix.recipe.FinalClassTest</param>
-                                <param>org.checkstyle.autofix.recipe.FinalLocalVariableTest</param>
-                                <param>org.checkstyle.autofix.recipe.HeaderTest</param>
-                                <param>org.checkstyle.autofix.recipe.EmptyForInitializerPadTest</param>
-                                <param>org.checkstyle.autofix.recipe.HexLiteralCaseTest</param>
-                                <param>org.checkstyle.autofix.recipe.MissingOverrideTest</param>
-                                <param>org.checkstyle.autofix.recipe.UnnecessaryParenthesesTest</param>
-                                <param>org.checkstyle.autofix.recipe.AvoidStarImportTest</param>
+                                <param>org.checkstyle.autofix.recipe.coding.EmptyStatementTest</param>
+                                <param>org.checkstyle.autofix.recipe.whitespace.EmptyForIteratorPadTest</param>
+                                <param>org.checkstyle.autofix.recipe.design.FinalClassTest</param>
+                                <param>org.checkstyle.autofix.recipe.coding.FinalLocalVariableTest</param>
+                                <param>org.checkstyle.autofix.recipe.header.HeaderTest</param>
+                                <param>org.checkstyle.autofix.recipe.whitespace.EmptyForInitializerPadTest</param>
+                                <param>org.checkstyle.autofix.recipe.misc.HexLiteralCaseTest</param>
+                                <param>org.checkstyle.autofix.recipe.annotation.MissingOverrideTest</param>
+                                <param>org.checkstyle.autofix.recipe.coding.UnnecessaryParenthesesTest</param>
+                                <param>org.checkstyle.autofix.recipe.imports.AvoidStarImportTest</param>
                                 <param>org.checkstyle.autofix.recipe.RecipeTest</param>
                                 <param>org.checkstyle.autofix.recipe.RemoveViolationCommentsTest</param>
-                                <param>org.checkstyle.autofix.recipe.MissingSwitchDefaultTest</param>
-                                <param>org.checkstyle.autofix.recipe.AnnotationLocationTest</param>
-                                <param>org.checkstyle.autofix.recipe.NoWhitespaceAfterTest</param>
+                                <param>org.checkstyle.autofix.recipe.coding.MissingSwitchDefaultTest</param>
+                                <param>org.checkstyle.autofix.recipe.annotation.AnnotationLocationTest</param>
+                                <param>org.checkstyle.autofix.recipe.whitespace.NoWhitespaceAfterTest</param>
                             </targetTests>
 
                             <mutators>
@@ -659,32 +659,32 @@
                         </dependencies>
                         <configuration>
                             <targetClasses>
-                                <param>org.checkstyle.autofix.recipe.NewlineAtEndOfFile*</param>
-                                <param>org.checkstyle.autofix.recipe.NumericalPrefixesInfixesSuffixesCharacterCase*</param>
-                                <param>org.checkstyle.autofix.recipe.RedundantImport*</param>
-                                <param>org.checkstyle.autofix.recipe.UpperEll*</param>
-                                <param>org.checkstyle.autofix.recipe.UseEnhancedSwitch*</param>
-                                <param>org.checkstyle.autofix.recipe.AnnotationOnSameLine*</param>
-                                <param>org.checkstyle.autofix.recipe.ConstructorsDeclarationGrouping*</param>
-                                <param>org.checkstyle.autofix.recipe.UnusedImports*</param>
-                                <param>org.checkstyle.autofix.recipe.MissingDeprecated*</param>
-                                <param>org.checkstyle.autofix.recipe.UnusedLocalVariable*</param>
-                                <param>org.checkstyle.autofix.recipe.ArrayTrailingComma*</param>
-                                <param>org.checkstyle.autofix.recipe.AvoidNoArgumentSuperConstructorCall*</param>
+                                <param>org.checkstyle.autofix.recipe.misc.NewlineAtEndOfFile*</param>
+                                <param>org.checkstyle.autofix.recipe.misc.NumericalPrefixesInfixesSuffixesCharacterCase*</param>
+                                <param>org.checkstyle.autofix.recipe.imports.RedundantImport*</param>
+                                <param>org.checkstyle.autofix.recipe.misc.UpperEll*</param>
+                                <param>org.checkstyle.autofix.recipe.coding.UseEnhancedSwitch*</param>
+                                <param>org.checkstyle.autofix.recipe.annotation.AnnotationOnSameLine*</param>
+                                <param>org.checkstyle.autofix.recipe.coding.ConstructorsDeclarationGrouping*</param>
+                                <param>org.checkstyle.autofix.recipe.imports.UnusedImports*</param>
+                                <param>org.checkstyle.autofix.recipe.annotation.MissingDeprecated*</param>
+                                <param>org.checkstyle.autofix.recipe.coding.UnusedLocalVariable*</param>
+                                <param>org.checkstyle.autofix.recipe.coding.ArrayTrailingComma*</param>
+                                <param>org.checkstyle.autofix.recipe.coding.AvoidNoArgumentSuperConstructorCall*</param>
                             </targetClasses>
                             <targetTests>
-                                <param>org.checkstyle.autofix.recipe.NewLineAtEndOfFileTest</param>
-                                <param>org.checkstyle.autofix.recipe.NumericalPrefixesInfixesSuffixesCharacterCaseTest</param>
-                                <param>org.checkstyle.autofix.recipe.RedundantImportTest</param>
-                                <param>org.checkstyle.autofix.recipe.UpperEllTest</param>
-                                <param>org.checkstyle.autofix.recipe.UseEnhancedSwitchTest</param>
-                                <param>org.checkstyle.autofix.recipe.AnnotationOnSameLineTest</param>
-                                <param>org.checkstyle.autofix.recipe.UnusedLocalVariableTest</param>
-                                <param>org.checkstyle.autofix.recipe.ConstructorsDeclarationGroupingTest</param>
-                                <param>org.checkstyle.autofix.recipe.UnusedImportsTest</param>
-                                <param>org.checkstyle.autofix.recipe.ArrayTrailingCommaTest</param>
-                                <param>org.checkstyle.autofix.recipe.MissingDeprecatedTest</param>
-                                <param>org.checkstyle.autofix.recipe.AvoidNoArgumentSuperConstructorCallTest</param>
+                                <param>org.checkstyle.autofix.recipe.misc.NewLineAtEndOfFileTest</param>
+                                <param>org.checkstyle.autofix.recipe.misc.NumericalPrefixesInfixesSuffixesCharacterCaseTest</param>
+                                <param>org.checkstyle.autofix.recipe.imports.RedundantImportTest</param>
+                                <param>org.checkstyle.autofix.recipe.misc.UpperEllTest</param>
+                                <param>org.checkstyle.autofix.recipe.coding.UseEnhancedSwitchTest</param>
+                                <param>org.checkstyle.autofix.recipe.annotation.AnnotationOnSameLineTest</param>
+                                <param>org.checkstyle.autofix.recipe.coding.UnusedLocalVariableTest</param>
+                                <param>org.checkstyle.autofix.recipe.coding.ConstructorsDeclarationGroupingTest</param>
+                                <param>org.checkstyle.autofix.recipe.imports.UnusedImportsTest</param>
+                                <param>org.checkstyle.autofix.recipe.coding.ArrayTrailingCommaTest</param>
+                                <param>org.checkstyle.autofix.recipe.annotation.MissingDeprecatedTest</param>
+                                <param>org.checkstyle.autofix.recipe.coding.AvoidNoArgumentSuperConstructorCallTest</param>
                             </targetTests>
 
                             <mutators>
