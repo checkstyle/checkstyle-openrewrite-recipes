@@ -55,7 +55,7 @@ public final class ConfigurationLoader {
 
         checkName.ifPresent(checkstyleCheck -> {
             result.put(new CheckstyleCheck(checkstyleCheck, inherited.get("id")),
-                    new CheckConfiguration(checkstyleCheck, globalProps, inherited));
+                    new CheckConfiguration(checkstyleCheck, newGlobals));
         });
 
         for (Configuration child : config.getChildren()) {
