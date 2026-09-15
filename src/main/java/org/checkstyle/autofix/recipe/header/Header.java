@@ -67,12 +67,12 @@ public class Header extends Recipe {
     private static String extractLicenseHeader(CheckConfiguration config) {
         final String header;
         if (config.hasProperty(HEADER_PROPERTY)) {
-            header = config.getProperty(HEADER_PROPERTY);
+            header = config.getProperty(HEADER_PROPERTY).orElseThrow();
         }
         else {
             final Charset charsetToUse = Charset.forName(config
                     .getPropertyOrDefault(CHARSET_PROPERTY, Charset.defaultCharset().name()));
-            final String headerFilePath = config.getProperty(HEADER_FILE_PROPERTY);
+            final String headerFilePath = config.getProperty(HEADER_FILE_PROPERTY).orElse(null);
             try {
                 header = toLfLineEnding(Files.readString(Path.of(headerFilePath), charsetToUse));
             }
