@@ -94,6 +94,7 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 | 🔴     | [`AvoidNestedBlocks`](https://checkstyle.sourceforge.io/checks/blocks/avoidnestedblocks.html#AvoidNestedBlocks)             | Requires code restructuring |
 | 🟢     | [`EmptyBlock`](https://checkstyle.sourceforge.io/checks/blocks/emptyblock.html#EmptyBlock)                                  |                |
 | 🟢     | [`EmptyCatchBlock`](https://checkstyle.sourceforge.io/checks/blocks/emptycatchblock.html#EmptyCatchBlock)                   |                |
+| ⚪ | [`GoogleRightCurly`](https://checkstyle.org/checks/blocks/googlerightcurly.html#GoogleRightCurly) | |
 | 🟢     | [`LeftCurly`](https://checkstyle.sourceforge.io/checks/blocks/leftcurly.html#LeftCurly)                                     |                |
 | 🟢     | [`NeedBraces`](https://checkstyle.sourceforge.io/checks/blocks/needbraces.html#NeedBraces)                                  |                |
 | 🟢     | [`RightCurly`](https://checkstyle.sourceforge.io/checks/blocks/rightcurly.html#RightCurly)                                  |                |
@@ -171,6 +172,7 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 | 🔴     | [`SuperClone`](https://checkstyle.sourceforge.io/checks/coding/superclone.html#SuperClone) |                |
 | 🟢     | [`SuperFinalize`](https://checkstyle.sourceforge.io/checks/coding/superfinalize.html#SuperFinalize) |                |
 | 🟢     | [`TextBlockGoogleStyleFormatting`](https://checkstyle.sourceforge.io/checks/coding/textblockgooglestyleformatting.html#TextBlockGoogleStyleFormatting) |                |
+| ⚪ | [`UnnecessaryPermitsClause`](https://checkstyle.org/checks/coding/unnecessarypermitsclause.html#UnnecessaryPermitsClause) | |
 | 🟢     | [`UnnecessaryTypeArgumentsWithRecordPattern`](https://checkstyle.sourceforge.io/checks/coding/unnecessarytypeargumentswithrecordpattern.html#UnnecessaryTypeArgumentsWithRecordPattern) |                |
 | 🟢     | [`UnnecessaryNullCheckWithInstanceOf`](https://checkstyle.sourceforge.io/checks/coding/unnecessarynullcheckwithinstanceof.html#UnnecessaryNullCheckWithInstanceOf) |                |
 | 🔵     | [`UnnecessaryParentheses`](https://github.com/checkstyle/checkstyle-openrewrite-recipes/blob/main/src/main/java/org/checkstyle/autofix/recipe/coding/UnnecessaryParentheses.java) |                |
@@ -237,6 +239,7 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 | 🟢     | [`JavadocParagraph`](https://checkstyle.sourceforge.io/checks/javadoc/javadocparagraph.html#JavadocParagraph)             |                |
 | ⚪ | [`JavadocParamOrder`](https://checkstyle.org/checks/javadoc/javadocparamorder.html#JavadocParamOrder) | |
 | 🔴     | [`JavadocRegexp`](https://checkstyle.sourceforge.io/checks/javadoc/javadocregexp.html#JavadocRegexp)                       | Context-dependent pattern matching |
+| ⚪ | [`JavadocSeeTagOrder`](https://checkstyle.org/checks/javadoc/javadocseetagorder.html#JavadocSeeTagOrder) | |
 | 🟢     | [`JavadocTagContinuationIndentation`](https://checkstyle.sourceforge.io/checks/javadoc/javadoctagcontinuationindentation.html#JavadocTagContinuationIndentation) |                |
 | ⚪ | [`JavadocThrowsOrder`](https://checkstyle.org/checks/javadoc/javadocthrowsorder.html#JavadocThrowsOrder) | |
 | 🔴     | [`JavadocType`](https://checkstyle.sourceforge.io/checks/javadoc/javadoctype.html#JavadocType)                           | Add/fix type documentation |
@@ -281,6 +284,7 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 | 🔵     | [`NewlineAtEndOfFile`](https://github.com/checkstyle/checkstyle-openrewrite-recipes/blob/main/src/main/java/org/checkstyle/autofix/recipe/misc/NewlineAtEndOfFile.java) |                |
 | 🔴     | [`NoCodeInFile`](https://checkstyle.sourceforge.io/checks/misc/nocodeinfile.html#NoCodeInFile)             | Add code or remove file |
 | 🔵     | [`NumericalPrefixesInfixesSuffixesCharacterCase`](https://github.com/checkstyle/checkstyle-openrewrite-recipes/blob/main/src/main/java/org/checkstyle/autofix/recipe/misc/NumericalPrefixesInfixesSuffixesCharacterCase.java)                         |                |
+| ⚪ | [`OpenjdkMethodThrowsAlignment`](https://checkstyle.org/checks/indentation/openjdkmethodthrowsalignment.html#OpenjdkMethodThrowsAlignment) | |
 | 🔴     | [`OrderedProperties`](https://checkstyle.sourceforge.io/checks/misc/orderedproperties.html#OrderedProperties) | Reorder properties |
 | 🔴     | [`OuterTypeFilename`](https://checkstyle.sourceforge.io/checks/misc/outertypefilename.html#OuterTypeFilename) | Rename file or class |
 | 🔴     | [`TodoComment`](https://checkstyle.sourceforge.io/checks/misc/todocomment.html#TodoComment)                 | Resolve TODO comments |
