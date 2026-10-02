@@ -284,7 +284,7 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 | 🔵     | [`NewlineAtEndOfFile`](https://github.com/checkstyle/checkstyle-openrewrite-recipes/blob/main/src/main/java/org/checkstyle/autofix/recipe/misc/NewlineAtEndOfFile.java) |                |
 | 🔴     | [`NoCodeInFile`](https://checkstyle.sourceforge.io/checks/misc/nocodeinfile.html#NoCodeInFile)             | Add code or remove file |
 | 🔵     | [`NumericalPrefixesInfixesSuffixesCharacterCase`](https://github.com/checkstyle/checkstyle-openrewrite-recipes/blob/main/src/main/java/org/checkstyle/autofix/recipe/misc/NumericalPrefixesInfixesSuffixesCharacterCase.java)                         |                |
-| ⚪ | [`OpenjdkMethodThrowsAlignment`](https://checkstyle.org/checks/indentation/openjdkmethodthrowsalignment.html#OpenjdkMethodThrowsAlignment) | |
+| ⚪ | [`OpenjdkMethodThrowsAlignment`](https://checkstyle.org/checks/misc/openjdkmethodthrowsalignment.html#OpenjdkMethodThrowsAlignment) | |
 | 🔴     | [`OrderedProperties`](https://checkstyle.sourceforge.io/checks/misc/orderedproperties.html#OrderedProperties) | Reorder properties |
 | 🔴     | [`OuterTypeFilename`](https://checkstyle.sourceforge.io/checks/misc/outertypefilename.html#OuterTypeFilename) | Rename file or class |
 | 🔴     | [`TodoComment`](https://checkstyle.sourceforge.io/checks/misc/todocomment.html#TodoComment)                 | Resolve TODO comments |
