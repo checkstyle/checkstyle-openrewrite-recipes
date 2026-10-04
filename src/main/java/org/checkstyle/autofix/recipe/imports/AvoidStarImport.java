@@ -94,7 +94,7 @@ public class AvoidStarImport extends Recipe {
         }
 
         private void addImportForType(JavaType type) {
-            if (type instanceof JavaType.FullyQualified fullyQualified) {
+            if (type instanceof final JavaType.FullyQualified fullyQualified) {
                 final String fullyQualifiedName = fullyQualified.getFullyQualifiedName();
                 final int lastDot = fullyQualifiedName.lastIndexOf('.');
                 if (lastDot != -1) {
@@ -125,7 +125,7 @@ public class AvoidStarImport extends Recipe {
         private void addStaticImportForField(J.Identifier identifier) {
             final JavaType.Variable fieldType = identifier.getFieldType();
             if (fieldType != null && fieldType.hasFlags(Flag.Static)
-                    && fieldType.getOwner() instanceof JavaType.FullyQualified fqOwner) {
+                    && fieldType.getOwner() instanceof final JavaType.FullyQualified fqOwner) {
                 final String ownerFqn = fqOwner.getFullyQualifiedName();
                 if (packagesToExpand.contains(ownerFqn)) {
                     maybeAddImport(ownerFqn, identifier.getSimpleName(), false);

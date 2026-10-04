@@ -21,7 +21,7 @@ function generateGradleInitScript {
 }
 
 CHECKSTYLE_VERSION=$(getMavenProperty checkstyle.version)
-REWRITE_GRADLE_PLUGIN_VERSION="latest.release"
+REWRITE_GRADLE_PLUGIN_VERSION="7.39.0"
 RECIPES_VERSION=$(getMavenProperty project.version)
 BASE_BRANCH="${GITHUB_BASE_REF:-main}"
 PR_COMMIT=$(git rev-parse HEAD)

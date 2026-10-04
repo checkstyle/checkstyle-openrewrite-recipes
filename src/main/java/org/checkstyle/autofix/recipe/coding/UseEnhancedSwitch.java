@@ -145,10 +145,10 @@ public class UseEnhancedSwitch extends Recipe {
                 if (index < stmts.size() - 1) {
                     final Statement s1 = stmts.get(index);
                     final Statement s2 = stmts.get(index + 1);
-                    if (s1 instanceof J.VariableDeclarations vd
+                    if (s1 instanceof final J.VariableDeclarations vd
                             && vd.getVariables().size() == 1
                             && vd.getVariables().get(0).getInitializer() == null
-                            && s2 instanceof J.Switch sw) {
+                            && s2 instanceof final J.Switch sw) {
                         final String name = vd.getVariables().get(0)
                                 .getName().getSimpleName();
                         final List<Statement> mergedCases =
@@ -213,14 +213,14 @@ public class UseEnhancedSwitch extends Recipe {
         private J.Case convertArrowAssignmentCase(final J.Case caseStmt, final String varName) {
             final J body = caseStmt.getBody();
             final J.Case result;
-            if (body instanceof J.Block block) {
+            if (body instanceof final J.Block block) {
                 final List<Statement> adjusted =
                         adjustForAssignment(block.getStatements(), varName);
                 result = caseStmt.withBody(block.withStatements(adjusted));
             }
             else {
                 final J newBody;
-                if (body instanceof J.Assignment asgn) {
+                if (body instanceof final J.Assignment asgn) {
                     newBody = asgn.getAssignment();
                 }
                 else {
@@ -294,7 +294,7 @@ public class UseEnhancedSwitch extends Recipe {
         private boolean isValidAssignment(final List<Statement> meaningful,
                                           final String varName) {
             final Statement last = meaningful.getLast();
-            return last instanceof J.Throw || last instanceof J.Assignment asgn
+            return last instanceof J.Throw || last instanceof final J.Assignment asgn
                     && asgn.getVariable() instanceof J.Identifier
                     && ((J.Identifier) asgn.getVariable()).getSimpleName().equals(varName);
         }
@@ -342,7 +342,7 @@ public class UseEnhancedSwitch extends Recipe {
             final List<Statement> stmts;
             if (caseStmt.getType() == J.Case.Type.Rule) {
                 final J body = caseStmt.getBody();
-                if (body instanceof J.Block block) {
+                if (body instanceof final J.Block block) {
                     stmts = block.getStatements();
                 }
                 else {
@@ -356,7 +356,7 @@ public class UseEnhancedSwitch extends Recipe {
                 }
                 else {
                     final Statement first = caseStmts.get(0);
-                    if (first instanceof J.Block block) {
+                    if (first instanceof final J.Block block) {
                         stmts = block.getStatements();
                     }
                     else {
@@ -370,7 +370,7 @@ public class UseEnhancedSwitch extends Recipe {
         private boolean isDefaultCase(J.Case caseStmt) {
             return caseStmt.getCaseLabels().stream()
                     .anyMatch(label -> {
-                        return label instanceof J.Identifier ident
+                        return label instanceof final J.Identifier ident
                                 && DEFAULT_LABEL.equals(ident.getSimpleName());
                     });
         }
@@ -402,7 +402,7 @@ public class UseEnhancedSwitch extends Recipe {
                 final List<Statement> mergedCases) {
             boolean result = false;
             final JavaType type = selector.getTree().getType();
-            if (type instanceof FullyQualified fq
+            if (type instanceof final FullyQualified fq
                     && fq.getKind() == FullyQualified.Kind.Enum) {
                 final List<JavaType.Variable> members = fq.getMembers();
                 final Set<String> handled = collectHandled(mergedCases);
@@ -476,7 +476,7 @@ public class UseEnhancedSwitch extends Recipe {
         private J.Case convertCase(J.Case caseStmt, boolean isExpr) {
             final List<Statement> stmts = caseStmt.getStatements();
             final J.Case result;
-            if (stmts.size() == 1 && stmts.get(0) instanceof J.Block block) {
+            if (stmts.size() == 1 && stmts.get(0) instanceof final J.Block block) {
                 result = convertBlockCase(caseStmt, block, isExpr);
             }
             else {
@@ -536,10 +536,10 @@ public class UseEnhancedSwitch extends Recipe {
 
         private J getArrowTarget(Statement stmt, boolean isExpr) {
             J target = stmt;
-            if (stmt instanceof J.Yield yield) {
+            if (stmt instanceof final J.Yield yield) {
                 target = yield.getValue();
             }
-            else if (isExpr && stmt instanceof J.Return ret) {
+            else if (isExpr && stmt instanceof final J.Return ret) {
                 target = ret.getExpression();
             }
             return target;
@@ -563,7 +563,7 @@ public class UseEnhancedSwitch extends Recipe {
             if (isExpr) {
                 final Statement lastStmt = newStatements.getLast();
 
-                if (lastStmt instanceof J.Return ret) {
+                if (lastStmt instanceof final J.Return ret) {
                     newStatements.set(newStatements.size() - 1, new J.Yield(
                             Tree.randomId(),
                             lastStmt.getPrefix(),
@@ -607,7 +607,7 @@ public class UseEnhancedSwitch extends Recipe {
         private List<Statement> removeBreak(List<Statement> statements) {
             final List<Statement> filtered = new ArrayList<>();
             for (Statement stmt : statements) {
-                if (!(stmt instanceof J.Break breakStmt)
+                if (!(stmt instanceof final J.Break breakStmt)
                         || breakStmt.getLabel() != null) {
                     filtered.add(stmt);
                 }

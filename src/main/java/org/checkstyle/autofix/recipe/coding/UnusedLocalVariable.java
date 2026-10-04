@@ -163,7 +163,7 @@ public class UnusedLocalVariable extends Recipe {
 
         private RewriteResult produceReplacements(Statement stmt) {
             final RewriteResult result;
-            if (stmt instanceof J.VariableDeclarations varDecl) {
+            if (stmt instanceof final J.VariableDeclarations varDecl) {
                 result = rewriteVariableDeclaration(varDecl);
             }
             else if (isOrphanedAssignment(stmt, removedVarNamesInMethod)) {
@@ -340,13 +340,13 @@ public class UnusedLocalVariable extends Recipe {
 
         private static boolean isOrphanedAssignment(Statement stmt, Set<String> removedNames) {
             boolean result = false;
-            if (stmt instanceof J.Assignment assignment) {
-                if (assignment.getVariable() instanceof J.Identifier id) {
+            if (stmt instanceof final J.Assignment assignment) {
+                if (assignment.getVariable() instanceof final J.Identifier id) {
                     result = removedNames.contains(id.getSimpleName());
                 }
             }
-            else if (stmt instanceof J.Unary unary) {
-                if (unary.getExpression() instanceof J.Identifier id) {
+            else if (stmt instanceof final J.Unary unary) {
+                if (unary.getExpression() instanceof final J.Identifier id) {
                     result = removedNames.contains(id.getSimpleName());
                 }
             }
@@ -355,9 +355,9 @@ public class UnusedLocalVariable extends Recipe {
 
         private static Statement extractSideEffectFromAssignment(Statement stmt) {
             Statement result = null;
-            if (stmt instanceof J.Assignment assignment) {
+            if (stmt instanceof final J.Assignment assignment) {
                 final Expression assignedExpression = unwrap(assignment.getAssignment());
-                if (assignedExpression instanceof Statement assignedStmt) {
+                if (assignedExpression instanceof final Statement assignedStmt) {
                     result = assignedStmt.withPrefix(stmt.getPrefix());
                 }
             }
@@ -370,7 +370,7 @@ public class UnusedLocalVariable extends Recipe {
             final Space indentPrefix = getIndentPrefix(prefix);
             for (J.VariableDeclarations.NamedVariable variable : removed) {
                 final Expression unwrapped = unwrap(variable.getInitializer());
-                if (unwrapped instanceof Statement initStmt
+                if (unwrapped instanceof final Statement initStmt
                         && isStatementExpression(unwrapped)) {
                     result.add(initStmt.withPrefix(indentPrefix));
                 }
@@ -408,7 +408,7 @@ public class UnusedLocalVariable extends Recipe {
             for (J.VariableDeclarations.NamedVariable variable : varDecl.getVariables()) {
                 final Expression initializer = variable.getInitializer();
                 final Expression unwrapped = unwrap(initializer);
-                if (unwrapped instanceof Statement initStmt
+                if (unwrapped instanceof final Statement initStmt
                         && isStatementExpression(unwrapped)) {
                     final Space prefix;
                     if (isFirst) {
@@ -426,7 +426,7 @@ public class UnusedLocalVariable extends Recipe {
 
         private static Expression unwrap(Expression expr) {
             Expression result = expr;
-            if (result instanceof J.Parentheses<?> parens) {
+            if (result instanceof final J.Parentheses<?> parens) {
                 result = unwrap((Expression) parens.getTree());
             }
             return result;
@@ -434,7 +434,7 @@ public class UnusedLocalVariable extends Recipe {
 
         private static boolean isStatementExpression(Expression expr) {
             final boolean isUnaryIncremental;
-            if (expr instanceof J.Unary unary) {
+            if (expr instanceof final J.Unary unary) {
                 isUnaryIncremental = UNARY_TYPES.contains(unary.getOperator());
             }
             else {

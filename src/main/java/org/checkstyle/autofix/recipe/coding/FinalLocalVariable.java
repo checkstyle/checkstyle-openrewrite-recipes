@@ -96,7 +96,7 @@ public class FinalLocalVariable extends Recipe {
             final List<Statement> newStatements = new ArrayList<>();
 
             for (Statement stmt : visited.getStatements()) {
-                if (stmt instanceof J.VariableDeclarations varDecl
+                if (stmt instanceof final J.VariableDeclarations varDecl
                         && !varDecl.hasModifier(J.Modifier.Type.Final)) {
                     handleMultiVariableDeclaration(varDecl, newStatements);
                 }
