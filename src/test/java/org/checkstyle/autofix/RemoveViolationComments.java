@@ -74,7 +74,7 @@ public class RemoveViolationComments extends Recipe {
                 new ArrayList<>(visitedMarkers.getMarkers().size());
 
             for (Marker marker : visitedMarkers.getMarkers()) {
-                if (marker instanceof TrailingComma trailingComma) {
+                if (marker instanceof final TrailingComma trailingComma) {
                     final Space newSuffix =
                         removeViolationCommentsFromSpace(trailingComma.getSuffix());
                     if (newSuffix != trailingComma.getSuffix()) {

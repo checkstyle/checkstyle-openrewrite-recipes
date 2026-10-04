@@ -81,7 +81,7 @@ public class EmptyForIteratorPad extends Recipe {
                 final List<JRightPadded<Statement>> updateList = forLoop.getControl()
                         .getPadding().getUpdate();
                 if (updateList.size() == 1
-                        && updateList.getFirst().getElement() instanceof J.Empty empty) {
+                        && updateList.getFirst().getElement() instanceof final J.Empty empty) {
                     hasViolation = hasViolationMarker(empty);
                 }
             }
@@ -99,7 +99,7 @@ public class EmptyForIteratorPad extends Recipe {
             final J.ForLoop.Control control = result.getControl();
             final List<JRightPadded<Statement>> updateList = control.getPadding().getUpdate();
             if (updateList.size() == 1
-                    && updateList.getFirst().getElement() instanceof J.Empty emptyElement) {
+                    && updateList.getFirst().getElement() instanceof final J.Empty emptyElement) {
                 final JRightPadded<Statement> emptyUpdate = updateList.getFirst();
                 final String desiredWhitespace = getDesiredWhitespace(option);
                 if (!desiredWhitespace.equals(emptyElement.getPrefix().getWhitespace())) {

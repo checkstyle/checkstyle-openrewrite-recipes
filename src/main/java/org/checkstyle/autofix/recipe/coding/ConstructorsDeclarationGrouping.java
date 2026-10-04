@@ -122,7 +122,7 @@ public class ConstructorsDeclarationGrouping extends Recipe {
             final List<J.MethodDeclaration> violating = new ArrayList<>();
             for (int index = groupEnd; index < statements.size(); index++) {
                 final Statement statement = statements.get(index);
-                if (statement instanceof J.MethodDeclaration method
+                if (statement instanceof final J.MethodDeclaration method
                         && hasGroupingViolationMarker(method)) {
                     violating.add(method);
                 }
@@ -167,7 +167,7 @@ public class ConstructorsDeclarationGrouping extends Recipe {
             final List<J.MethodDeclaration> constructorsToSort =
                 collectGroupedAndSortedConstructors(statements, firstConstructorIndex);
             for (final Statement statement : statements) {
-                if (statement instanceof J.MethodDeclaration method
+                if (statement instanceof final J.MethodDeclaration method
                         && hasOrderingViolationMarker(method)
                         && !constructorsToSort.contains(method)) {
                     constructorsToSort.add(method);
@@ -185,7 +185,7 @@ public class ConstructorsDeclarationGrouping extends Recipe {
             // Append grouping-only constructors after the sorted block.
             final List<J.MethodDeclaration> constructorsToGroup = new ArrayList<>();
             for (final Statement statement : statements) {
-                if (statement instanceof J.MethodDeclaration method
+                if (statement instanceof final J.MethodDeclaration method
                         && hasGroupingViolationMarker(method)
                         && !hasOrderingViolationMarker(method)) {
                     constructorsToGroup.add(method);
@@ -233,7 +233,7 @@ public class ConstructorsDeclarationGrouping extends Recipe {
             int index = firstConstructorIndex + 1;
             int currentCount;
             while (index < statements.size()
-                    && statements.get(index) instanceof J.MethodDeclaration method
+                    && statements.get(index) instanceof final J.MethodDeclaration method
                     && method.isConstructor()
                     && (currentCount = countParameters(method)) >= prevCount) {
                 result.add(method);
@@ -270,7 +270,7 @@ public class ConstructorsDeclarationGrouping extends Recipe {
         private static int findFirstConstructorIndex(List<Statement> statements) {
             int firstConstructorIndex = -1;
             for (int index = 0; index < statements.size(); index++) {
-                if (statements.get(index) instanceof J.MethodDeclaration method
+                if (statements.get(index) instanceof final J.MethodDeclaration method
                         && method.isConstructor()) {
                     firstConstructorIndex = index;
                     break;
@@ -292,7 +292,7 @@ public class ConstructorsDeclarationGrouping extends Recipe {
                 int firstConstructorIndex) {
             int result = firstConstructorIndex;
             while (result < statements.size()
-                    && statements.get(result) instanceof J.MethodDeclaration method
+                    && statements.get(result) instanceof final J.MethodDeclaration method
                     && method.isConstructor()) {
                 result++;
             }

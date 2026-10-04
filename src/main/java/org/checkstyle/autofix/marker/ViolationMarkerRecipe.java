@@ -290,7 +290,7 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
             Tree node = null;
             for (Iterator<Object> iterator = currentCursor.getPath(); iterator.hasNext();) {
                 final Object obj = iterator.next();
-                if (obj instanceof Tree nextNode) {
+                if (obj instanceof final Tree nextNode) {
                     final UUID nextId = nextNode.getId();
                     nodeRanges.putIfAbsent(nextId,
                             new Range(line, column, 0, 0));
@@ -317,7 +317,7 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
 
         @Override
         public J preVisit(J tree, ExecutionContext executionContext) {
-            if (tree instanceof JavaSourceFile sourceFile) {
+            if (tree instanceof final JavaSourceFile sourceFile) {
                 fileMarkers = acc.getByFile(sourceFile.getSourcePath());
             }
 

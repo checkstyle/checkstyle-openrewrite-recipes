@@ -295,7 +295,7 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
     }
 
     private void validateResult(Result result) {
-        if (result.getAfter() instanceof J tree) {
+        if (result.getAfter() instanceof final J tree) {
             assertAllNodesHaveId(tree);
             assertAllMarkersHaveId(tree);
         }
