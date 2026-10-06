@@ -54,7 +54,7 @@ public class NewlineAtEndOfFile extends Recipe {
 
     @Override
     public TreeVisitor<?, ExecutionContext> getVisitor() {
-        final String lineSeparator = config.getProperty("lineSeparator");
+        final String lineSeparator = config.getProperty("lineSeparator").orElse(null);
         return new NewLineAtEndOfFileVisitor(lineSeparator);
     }
 

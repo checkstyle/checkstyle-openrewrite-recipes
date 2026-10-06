@@ -50,7 +50,7 @@ public class ConstructorsDeclarationGrouping extends Recipe {
     public ConstructorsDeclarationGrouping(CheckConfiguration config) {
         final String value;
         if (config != null) {
-            value = config.getProperty(ORDER_BY_PARAM_COUNT_PROPERTY);
+            value = config.getProperty(ORDER_BY_PARAM_COUNT_PROPERTY).orElse(null);
         }
         else {
             value = null;
