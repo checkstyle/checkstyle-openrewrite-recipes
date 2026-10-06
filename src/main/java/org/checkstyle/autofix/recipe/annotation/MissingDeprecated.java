@@ -354,6 +354,7 @@ public class MissingDeprecated extends Recipe {
             }
             return result;
         }
+
     }
 
 }

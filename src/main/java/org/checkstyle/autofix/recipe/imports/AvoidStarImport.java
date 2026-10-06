@@ -137,6 +137,7 @@ public class AvoidStarImport extends Recipe {
             return importStmt.getMarkers()
                     .findFirst(AvoidStarImportMarker.class).isPresent();
         }
+
     }
 
 }

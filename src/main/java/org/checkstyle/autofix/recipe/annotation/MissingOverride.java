@@ -124,6 +124,7 @@ public class MissingOverride extends Recipe {
             return methodDeclaration.getMarkers()
                     .findFirst(MissingOverrideMarker.class).isPresent();
         }
+
     }
 
 }

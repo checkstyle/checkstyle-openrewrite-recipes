@@ -146,6 +146,7 @@ public class FinalLocalVariable extends Recipe {
             return varDecl.withModifiers(modifiers)
                     .withTypeExpression(varDecl.getTypeExpression().withPrefix(Space.SINGLE_SPACE));
         }
+
     }
 
 }

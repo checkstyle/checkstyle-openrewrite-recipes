@@ -146,6 +146,7 @@ public class NumericalPrefixesInfixesSuffixesCharacterCase extends Recipe {
             return literal.getMarkers()
                 .findFirst(NumericalPrefixesInfixesSuffixesCharacterCaseMarker.class).isPresent();
         }
+
     }
 
 }

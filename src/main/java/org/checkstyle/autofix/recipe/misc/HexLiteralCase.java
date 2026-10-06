@@ -139,6 +139,7 @@ public class HexLiteralCase extends Recipe {
             return literal.getMarkers()
                     .findFirst(HexLiteralCaseMarker.class).isPresent();
         }
+
     }
 
 }

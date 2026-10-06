@@ -50,4 +50,5 @@ import org.junit.jupiter.params.provider.MethodSource;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface RecipeTest {
+
 }

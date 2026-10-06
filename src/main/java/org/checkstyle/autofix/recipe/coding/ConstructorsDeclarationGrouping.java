@@ -343,6 +343,7 @@ public class ConstructorsDeclarationGrouping extends Recipe {
             return markers.stream()
                     .anyMatch(predicate);
         }
+
     }
 
 }

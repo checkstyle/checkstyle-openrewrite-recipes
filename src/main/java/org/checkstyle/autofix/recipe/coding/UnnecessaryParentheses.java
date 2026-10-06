@@ -45,6 +45,7 @@ public class UnnecessaryParentheses extends Recipe {
     }
 
     private final class UnnecessaryParenthesesVisitor extends JavaVisitor<ExecutionContext> {
+
         private UnnecessaryParenthesesVisitor() {
         }
 

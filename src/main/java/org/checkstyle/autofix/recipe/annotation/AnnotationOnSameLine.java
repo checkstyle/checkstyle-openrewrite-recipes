@@ -198,6 +198,7 @@ public class AnnotationOnSameLine extends Recipe {
             }
             return result;
         }
+
     }
 
 }

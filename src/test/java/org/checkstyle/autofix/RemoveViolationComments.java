@@ -154,6 +154,7 @@ public class RemoveViolationComments extends Recipe {
 
             return String.valueOf(newline).repeat((int) maxNewlines) + indent;
         }
+
     }
 
 }

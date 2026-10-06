@@ -449,6 +449,7 @@ public class UnusedLocalVariable extends Recipe {
         }
 
         private static final class RewriteResult {
+
             private final List<Statement> statements;
             private final boolean isDerived;
 
@@ -464,9 +465,11 @@ public class UnusedLocalVariable extends Recipe {
             public boolean isDerived() {
                 return isDerived;
             }
+
         }
 
         private static final class CommentsState {
+
             private List<Comment> pending = new ArrayList<>();
             private String pendingWhitespace;
             private List<Comment> trailing = new ArrayList<>();
@@ -531,7 +534,9 @@ public class UnusedLocalVariable extends Recipe {
                 }
 
             }
+
         }
+
     }
 
 }

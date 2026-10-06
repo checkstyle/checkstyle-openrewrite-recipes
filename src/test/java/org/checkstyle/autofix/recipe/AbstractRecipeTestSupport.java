@@ -316,6 +316,7 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
     }
 
     private enum ReportType {
+
         XML(new XmlReportParser(), ".xml"),
         SARIF(new SarifReportParser(), ".sarif");
 
@@ -349,6 +350,7 @@ public abstract class AbstractRecipeTestSupport extends AbstractXmlTestSupport
             }
             return result;
         }
+
     }
 
     /**
