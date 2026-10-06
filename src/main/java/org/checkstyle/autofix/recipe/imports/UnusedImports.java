@@ -67,6 +67,7 @@ public class UnusedImports extends Recipe {
             return importStmt.getMarkers()
                     .findFirst(UnusedImportsMarker.class).isPresent();
         }
+
     }
 
 }

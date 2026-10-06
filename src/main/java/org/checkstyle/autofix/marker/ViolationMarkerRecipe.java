@@ -108,6 +108,7 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
     }
 
     private final class ScannerVisitor extends JavaIsoVisitor<ExecutionContext> {
+
         private final Accumulator acc;
 
         ScannerVisitor(Accumulator acc) {
@@ -245,9 +246,11 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
             }
             return result;
         }
+
     }
 
     private static final class BoundingBoxCapture extends PrintOutputCapture<TreeVisitor<?, ?>> {
+
         private final Map<UUID, Range> nodeRanges;
         private final Map<UUID, UUID> parentMap;
         private final Map<UUID, Tree> treeNodes;
@@ -305,9 +308,11 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
             super.append(text);
             return this;
         }
+
     }
 
     private final class MarkerVisitor extends JavaIsoVisitor<ExecutionContext> {
+
         private final Accumulator acc;
         private Map<UUID, List<CheckstyleViolationMarker>> fileMarkers;
 
@@ -331,6 +336,7 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
             }
             return result;
         }
+
     }
 
     private record Range(int startLine, int startCol, int endLine, int endCol) {

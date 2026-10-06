@@ -115,6 +115,7 @@ public class ArrayTrailingComma extends Recipe {
 
             return lastElement.getMarkers().findFirst(ArrayTrailingCommaMarker.class).isPresent();
         }
+
     }
 
 }

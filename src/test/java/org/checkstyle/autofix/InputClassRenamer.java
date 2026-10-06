@@ -103,6 +103,7 @@ public class InputClassRenamer extends Recipe {
             }
             return result;
         }
+
     }
 
 }

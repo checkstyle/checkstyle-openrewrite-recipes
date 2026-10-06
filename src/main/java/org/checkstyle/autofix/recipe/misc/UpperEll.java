@@ -75,6 +75,7 @@ public class UpperEll extends Recipe {
             return literal.getMarkers()
                     .findFirst(UpperEllMarker.class).isPresent();
         }
+
     }
 
 }

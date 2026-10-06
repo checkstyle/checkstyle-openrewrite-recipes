@@ -89,6 +89,7 @@ public class Header extends Recipe {
     }
 
     private static class HeaderVisitor extends JavaIsoVisitor<ExecutionContext> {
+
         private final String licenseHeader;
 
         HeaderVisitor(String licenseHeader) {
@@ -121,6 +122,7 @@ public class Header extends Recipe {
                     })
                     .collect(Collectors.joining(""));
         }
+
     }
 
 }

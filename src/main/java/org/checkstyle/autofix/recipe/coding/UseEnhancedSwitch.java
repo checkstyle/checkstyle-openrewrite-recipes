@@ -640,6 +640,7 @@ public class UseEnhancedSwitch extends Recipe {
         }
 
         private static final class ControlFlowVisitor extends JavaVisitor<Void> {
+
             private boolean hasDisallowedFlow;
 
             private ControlFlowVisitor() {
@@ -657,9 +658,11 @@ public class UseEnhancedSwitch extends Recipe {
                 }
                 return super.visit(tree, unused);
             }
+
         }
 
         private static final class IndentVisitor extends JavaVisitor<Void> {
+
             private final int indentDelta;
 
             private IndentVisitor(int indentDelta) {
@@ -692,7 +695,9 @@ public class UseEnhancedSwitch extends Recipe {
                 }
                 return result;
             }
+
         }
+
     }
 
 }
