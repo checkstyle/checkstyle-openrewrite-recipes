@@ -77,8 +77,8 @@ public class Header extends Recipe {
                 header = toLfLineEnding(Files.readString(Path.of(headerFilePath), charsetToUse));
             }
             catch (IOException exception) {
-                throw new IllegalArgumentException("Failed to extract header from config",
-                        exception);
+                throw new IllegalArgumentException("Failed to extract header from "
+                        + headerFilePath, exception);
             }
         }
         return header;
