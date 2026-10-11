@@ -48,6 +48,7 @@ import org.checkstyle.autofix.recipe.header.Header;
 import org.checkstyle.autofix.recipe.imports.AvoidStarImport;
 import org.checkstyle.autofix.recipe.imports.RedundantImport;
 import org.checkstyle.autofix.recipe.imports.UnusedImports;
+import org.checkstyle.autofix.recipe.javadoc.JavadocLeadingAsteriskAlign;
 import org.checkstyle.autofix.recipe.misc.HexLiteralCase;
 import org.checkstyle.autofix.recipe.misc.NewlineAtEndOfFile;
 import org.checkstyle.autofix.recipe.misc.NumericalPrefixesInfixesSuffixesCharacterCase;
@@ -95,6 +96,8 @@ public final class CheckstyleRecipeRegistry {
         RECIPE_MAP.put(CheckFullName.UNNECESSARY_PARENTHESES, UnnecessaryParentheses::new);
         RECIPE_MAP_WITH_CONFIG.put(CheckFullName.EMPTY_FOR_ITERATOR_PAD,
             EmptyForIteratorPad::new);
+        RECIPE_MAP_WITH_CONFIG.put(CheckFullName.JAVADOC_LEADING_ASTERISK_ALIGN,
+            JavadocLeadingAsteriskAlign::new);
     }
 
     private CheckstyleRecipeRegistry() {

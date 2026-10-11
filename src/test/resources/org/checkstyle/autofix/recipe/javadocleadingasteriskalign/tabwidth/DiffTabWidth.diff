@@ -1,0 +1,25 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/javadocleadingasteriskalign/tabwidth/InputTabWidth.java
++++ src/test/resources/org/checkstyle/autofix/recipe/javadocleadingasteriskalign/tabwidth/OutputTabWidth.java
+@@ -10,10 +10,9 @@
+ 
+ package org.checkstyle.autofix.recipe.javadocleadingasteriskalign.tabwidth;
+ 
+-public class InputTabWidth {
++public class OutputTabWidth {
+ 
+     public static class Inner {
+-        // violation 9 lines below 'Leading asterisk has incorrect indentation level 11, expected is 10.'
+         /**
+          * Aligned javadoc comment.
+          */
+@@ -22,8 +21,8 @@
+ 		 * Line 2
+ 	  	 * Line 2b
+          text without asterisk *
+-          * Line 3
+-        */ // violation 'Leading asterisk has incorrect indentation level 9, expected is 10.'
++         * Line 3
++         */
+         public void test() {
+         }
+     }

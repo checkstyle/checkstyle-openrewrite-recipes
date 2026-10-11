@@ -228,7 +228,7 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 | 🟢     | [`JavadocBlockTagLocation`](https://checkstyle.sourceforge.io/checks/javadoc/javadocblocktaglocation.html#JavadocBlockTagLocation) |                |
 | 🟢     | [`JavadocContentLocation`](https://checkstyle.sourceforge.io/checks/javadoc/javadoccontentlocation.html#JavadocContentLocation) |                |
 | ⚪ | [`JavadocEndCommentDelimiter`](https://checkstyle.org/checks/javadoc/javadocendcommentdelimiter.html#JavadocEndCommentDelimiter) | |
-| 🟢     | [`JavadocLeadingAsteriskAlign`](https://checkstyle.sourceforge.io/checks/javadoc/javadocleadingasteriskalign.html#JavadocLeadingAsteriskAlign) |                |
+| 🔵     | [`JavadocLeadingAsteriskAlign`](https://github.com/checkstyle/checkstyle-openrewrite-recipes/blob/main/src/main/java/org/checkstyle/autofix/recipe/javadoc/JavadocLeadingAsteriskAlign.java) |                |
 | ⚪ | [`JavadocLinkFirstOccurrence`](https://checkstyle.org/checks/javadoc/javadoclinkfirstoccurrence.html#JavadocLinkFirstOccurrence) | |
 | ⚪ | [`JavadocLinkWellKnownApi`](https://checkstyle.org/checks/javadoc/javadoclinkwellknownapi.html#JavadocLinkWellKnownApi) | |
 | 🔴     | [`JavadocMethod`](https://checkstyle.sourceforge.io/checks/javadoc/javadocmethod.html#JavadocMethod)                       | Add/fix method documentation |

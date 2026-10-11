@@ -1,0 +1,11 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/javadocleadingasteriskalign/killmutation2/InputKillMutation2.java
++++ src/test/resources/org/checkstyle/autofix/recipe/javadocleadingasteriskalign/killmutation2/OutputKillMutation2.java
+@@ -12,7 +12,7 @@
+ 
+ package org.checkstyle.autofix.recipe.javadocleadingasteriskalign.killmutation2;
+ 
+-public class InputKillMutation2 {
++public class OutputKillMutation2 {
+     /**
+      * Line 1
+       * Line 2

@@ -32,6 +32,7 @@
         <module name="FinalClass"/>
         <module name="FinalLocalVariable"/>
         <module name="HexLiteralCase"/>
+        <module name="JavadocLeadingAsteriskAlign"/>
         <module name="MissingDeprecated"/>
         <module name="MissingSwitchDefault"/>
         <module name="MissingOverride"/>
