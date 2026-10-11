@@ -74,6 +74,7 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
         TARGET_TYPES.put(CheckFullName.CONSTRUCTORS_DECLARATION_GROUPING,
                 J.MethodDeclaration.class);
         TARGET_TYPES.put(CheckFullName.UNNECESSARY_PARENTHESES, J.Parentheses.class);
+        TARGET_TYPES.put(CheckFullName.JAVADOC_LEADING_ASTERISK_ALIGN, J.CompilationUnit.class);
     }
 
     private final List<CheckstyleViolation> violations;

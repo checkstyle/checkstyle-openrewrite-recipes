@@ -31,6 +31,9 @@ This page lists the currently available OpenRewrite recipes designed to fix Chec
 - [RedundantImport](recipes/imports/RedundantImport.md) - Removes duplicate, java.lang, and same-package imports.
 - [UnusedImports](recipes/imports/UnusedImports.md) - Removes unused imports.
 
+### Javadoc
+- [JavadocLeadingAsteriskAlign](recipes/javadoc/JavadocLeadingAsteriskAlign.md) - Fixes Checkstyle JavadocLeadingAsteriskAlign violations by aligning leading asterisks in Javadoc comments.
+
 ### Miscellaneous
 - [HexLiteralCase](recipes/misc/HexLiteralCase.md) - Replaces lowercase hexadecimal letters (`a-f`) with uppercase letters (`A-F`).
 - [NewlineAtEndOfFile](recipes/misc/NewlineAtEndOfFile.md) - Ensures that files end with a trailing newline.

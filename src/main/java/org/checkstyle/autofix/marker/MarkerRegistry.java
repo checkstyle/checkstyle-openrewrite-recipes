@@ -36,6 +36,7 @@ import org.checkstyle.autofix.marker.checks.FinalClassMarker;
 import org.checkstyle.autofix.marker.checks.FinalLocalVariableMarker;
 import org.checkstyle.autofix.marker.checks.HeaderMarker;
 import org.checkstyle.autofix.marker.checks.HexLiteralCaseMarker;
+import org.checkstyle.autofix.marker.checks.JavadocLeadingAsteriskAlignMarker;
 import org.checkstyle.autofix.marker.checks.MissingDeprecatedMarker;
 import org.checkstyle.autofix.marker.checks.MissingOverrideMarker;
 import org.checkstyle.autofix.marker.checks.MissingSwitchDefaultMarker;
@@ -90,6 +91,9 @@ public final class MarkerRegistry {
         FACTORIES.put(
                 CheckFullName.AVOID_NO_ARGUMENT_SUPER_CONSTRUCTOR_CALL,
                 AvoidNoArgumentSuperConstructorCallMarker::new);
+        FACTORIES.put(
+                CheckFullName.JAVADOC_LEADING_ASTERISK_ALIGN,
+                JavadocLeadingAsteriskAlignMarker::new);
     }
 
     public static CheckstyleViolationMarker create(UUID id, CheckstyleViolation violation) {

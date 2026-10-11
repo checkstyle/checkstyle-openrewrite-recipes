@@ -671,6 +671,7 @@
                                 <param>org.checkstyle.autofix.recipe.coding.UnusedLocalVariable*</param>
                                 <param>org.checkstyle.autofix.recipe.coding.ArrayTrailingComma*</param>
                                 <param>org.checkstyle.autofix.recipe.coding.AvoidNoArgumentSuperConstructorCall*</param>
+                                <param>org.checkstyle.autofix.recipe.javadoc.JavadocLeadingAsteriskAlign*</param>
                             </targetClasses>
                             <targetTests>
                                 <param>org.checkstyle.autofix.recipe.misc.NewLineAtEndOfFileTest</param>
@@ -685,6 +686,7 @@
                                 <param>org.checkstyle.autofix.recipe.coding.ArrayTrailingCommaTest</param>
                                 <param>org.checkstyle.autofix.recipe.annotation.MissingDeprecatedTest</param>
                                 <param>org.checkstyle.autofix.recipe.coding.AvoidNoArgumentSuperConstructorCallTest</param>
+                                <param>org.checkstyle.autofix.recipe.javadoc.JavadocLeadingAsteriskAlignTest</param>
                             </targetTests>
 
                             <mutators>
