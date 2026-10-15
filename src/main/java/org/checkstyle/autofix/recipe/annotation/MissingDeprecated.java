@@ -36,10 +36,8 @@ import org.openrewrite.java.tree.TypeTree;
 import org.openrewrite.marker.Markers;
 
 /**
- * Fixes Checkstyle MissingDeprecated violations by ensuring that both
- * the @Deprecated
- * annotation and the {@code @deprecated} Javadoc tag are present when either
- * one is present.
+ * Fixes Checkstyle MissingDeprecated violations by ensuring that both the @Deprecated
+ * annotation and the {@code @deprecated} Javadoc tag are present when either one is present.
  */
 public class MissingDeprecated extends Recipe {
 
