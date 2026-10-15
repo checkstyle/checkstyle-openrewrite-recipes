@@ -135,8 +135,7 @@ public class ConstructorsDeclarationGrouping extends Recipe {
          * preserving their original relative order.
          *
          * @param statements the original class body statements
-         * @param groupEnd the exclusive end of the initial group, also the insert
-         *     position
+         * @param groupEnd the exclusive end of the initial group, also the insert position
          * @param candidates the constructors to move into the group
          * @return the reordered statement list
          */
@@ -154,8 +153,7 @@ public class ConstructorsDeclarationGrouping extends Recipe {
          * contiguous constructors and all ordering-marked constructors, removes
          * them, sorts by parameter count, and inserts them as a contiguous block
          * at the first constructor index. Then appends grouping-only constructors
-         * (those with grouping markers but no ordering markers) after the sorted
-         * block.
+         * (those with grouping markers but no ordering markers) after the sorted block.
          *
          * @param statements the class body statements
          * @param firstConstructorIndex the index of the first constructor
@@ -218,8 +216,7 @@ public class ConstructorsDeclarationGrouping extends Recipe {
         /**
          * Collects contiguous constructors that are already grouped and in
          * non-decreasing parameter-count order. Stops when the next statement
-         * is not a constructor or its parameter count is lower than the
-         * previous one.
+         * is not a constructor or its parameter count is lower than the previous one.
          *
          * @param statements the class body statements
          * @param firstConstructorIndex the index of the first constructor
@@ -281,8 +278,7 @@ public class ConstructorsDeclarationGrouping extends Recipe {
 
         /**
          * Returns the exclusive end index of the initial contiguous block of
-         * constructors. Stops at the first non-constructor statement or end
-         * of list.
+         * constructors. Stops at the first non-constructor statement or end of list.
          *
          * @param statements the class body statements
          * @param firstConstructorIndex the index of the first constructor
