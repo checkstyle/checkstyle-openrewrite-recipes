@@ -17,8 +17,5 @@
 
 package org.checkstyle.autofix;
 
-public record CheckstyleCheck(
-        CheckFullName checkName,
-        String id
-) {
+public record CheckstyleCheck(CheckFullName checkName, String id) {
 }
