@@ -1,0 +1,9 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/header/headerpropertyfile/InputHeaderPropertyFile.java
++++ src/test/resources/org/checkstyle/autofix/recipe/header/headerpropertyfile/OutputHeaderPropertyFile.java
+@@ -1,4 +1,5 @@
++// Checkstyle-OpenRewrite-File
+ package org.checkstyle.autofix.recipe.header.headerpropertyfile;
+ 
+-public class InputHeaderPropertyFile {
++public class OutputHeaderPropertyFile {
+ }

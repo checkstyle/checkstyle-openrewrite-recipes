@@ -41,7 +41,7 @@ public class NewLineAtEndOfFileTest extends AbstractRecipeTestSupport {
     @Test
     public void checkDisplayName() {
         final NewlineAtEndOfFile recipe = new NewlineAtEndOfFile(
-            new CheckConfiguration(CheckFullName.NEWLINE_AT_END_OF_FILE, Map.of(), Map.of()));
+            new CheckConfiguration(CheckFullName.NEWLINE_AT_END_OF_FILE, Map.of()));
 
         final String expectedDisplayName = "End files with a single newline";
 
@@ -53,7 +53,7 @@ public class NewLineAtEndOfFileTest extends AbstractRecipeTestSupport {
     @Test
     public void checkDescription() {
         final NewlineAtEndOfFile recipe = new NewlineAtEndOfFile(
-            new CheckConfiguration(CheckFullName.NEWLINE_AT_END_OF_FILE, Map.of(), Map.of()));
+            new CheckConfiguration(CheckFullName.NEWLINE_AT_END_OF_FILE, Map.of()));
 
         final String expectedDescription =
                 "Some tools work better when files end with an empty line.";
