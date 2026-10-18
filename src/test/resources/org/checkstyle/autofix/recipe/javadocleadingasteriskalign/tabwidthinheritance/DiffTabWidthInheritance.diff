@@ -1,0 +1,21 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/javadocleadingasteriskalign/tabwidthinheritance/InputTabWidthInheritance.java
++++ src/test/resources/org/checkstyle/autofix/recipe/javadocleadingasteriskalign/tabwidthinheritance/OutputTabWidthInheritance.java
+@@ -1,6 +1,6 @@
+ package org.checkstyle.autofix.recipe.javadocleadingasteriskalign.tabwidthinheritance;
+ 
+-public class InputTabWidthInheritance {
++public class OutputTabWidthInheritance {
+ 
+     public static class Inner {
+         /**
+@@ -11,8 +11,8 @@
+ 		 * Line 2
+ 	  	 * Line 2b
+          text without asterisk *
+-          * Line 3
+-        */
++         * Line 3
++         */
+         public void test() {
+         }
+     }

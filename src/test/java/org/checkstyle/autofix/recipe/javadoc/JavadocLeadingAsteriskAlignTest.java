@@ -17,11 +17,17 @@
 
 package org.checkstyle.autofix.recipe.javadoc;
 
+import java.util.Properties;
+
 import org.checkstyle.autofix.parser.ReportParser;
 import org.checkstyle.autofix.recipe.AbstractRecipeTestSupport;
 import org.checkstyle.autofix.recipe.RecipeTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import com.puppycrawl.tools.checkstyle.ConfigurationLoader;
+import com.puppycrawl.tools.checkstyle.PropertiesExpander;
+import com.puppycrawl.tools.checkstyle.api.Configuration;
 
 public class JavadocLeadingAsteriskAlignTest extends AbstractRecipeTestSupport {
 
@@ -62,6 +68,14 @@ public class JavadocLeadingAsteriskAlignTest extends AbstractRecipeTestSupport {
     @RecipeTest
     void tabWidth(ReportParser parser) throws Exception {
         verify(parser, "TabWidth");
+    }
+
+    @RecipeTest
+    void tabWidthInheritance(ReportParser parser) throws Exception {
+        final Configuration config = ConfigurationLoader.loadConfiguration(
+                getPath("tabwidthinheritance/checkstyle.xml"),
+                new PropertiesExpander(new Properties()));
+        verify(parser, config, "TabWidthInheritance");
     }
 
     @RecipeTest
