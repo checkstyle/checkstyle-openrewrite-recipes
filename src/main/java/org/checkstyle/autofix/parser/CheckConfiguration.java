@@ -53,11 +53,7 @@ public final class CheckConfiguration {
     }
 
     public boolean hasProperty(String key) {
-        return properties.containsKey(key) || globalProperties.containsKey(key);
-    }
-
-    public void setGlobalProperty(String key, String value) {
-        globalProperties.put(key, value);
+        return getProperty(key) != null;
     }
 
 }
