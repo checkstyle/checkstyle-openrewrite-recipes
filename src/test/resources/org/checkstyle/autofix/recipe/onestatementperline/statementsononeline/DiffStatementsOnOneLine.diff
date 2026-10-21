@@ -1,0 +1,16 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/onestatementperline/statementsononeline/InputStatementsOnOneLine.java
++++ src/test/resources/org/checkstyle/autofix/recipe/onestatementperline/statementsononeline/OutputStatementsOnOneLine.java
+@@ -8,10 +8,11 @@
+ 
+ package org.checkstyle.autofix.recipe.onestatementperline.statementsononeline;
+ 
+-public class InputStatementsOnOneLine {
++public class OutputStatementsOnOneLine {
+ 
+     void declarations() {
+-        int first = 1; int second = 2; // violation 'Only one statement per line allowed.'
++        int first = 1;
++        int second = 2;
+     }
+ 
+     void loopHeader() {

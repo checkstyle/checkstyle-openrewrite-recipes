@@ -159,7 +159,7 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 | 🔴     | [`NoClone`](https://checkstyle.sourceforge.io/checks/coding/noclone.html#NoClone)                                       | Remove clone() method |
 | 🟢     | [`NoEnumTrailingComma`](https://checkstyle.sourceforge.io/checks/coding/noenumtrailingcomma.html#NoEnumTrailingComma)     |                |
 | 🔴     | [`NoFinalizer`](https://checkstyle.sourceforge.io/checks/coding/nofinalizer.html#NoFinalizer)                             | Remove finalize() method |
-| 🟢     | [`OneStatementPerLine`](https://checkstyle.sourceforge.io/checks/coding/onestatementperline.html#OneStatementPerLine) |                |
+| 🔵     | [`OneStatementPerLine`](docs/recipes/coding/OneStatementPerLine.md) |                |
 | 🟢     | [`OverloadMethodsDeclarationOrder`](https://checkstyle.sourceforge.io/checks/coding/overloadmethodsdeclarationorder.html#OverloadMethodsDeclarationOrder) |                |
 | 🟢     | [`PackageDeclaration`](https://checkstyle.sourceforge.io/checks/coding/packagedeclaration.html#PackageDeclaration) |                |
 | 🔴     | [`ParameterAssignment`](https://checkstyle.sourceforge.io/checks/coding/parameterassignment.html#ParameterAssignment) |                |

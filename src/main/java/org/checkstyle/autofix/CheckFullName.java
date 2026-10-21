@@ -59,6 +59,8 @@ public enum CheckFullName {
         "com.puppycrawl.tools.checkstyle.checks.coding.MissingSwitchDefaultCheck"),
     UNNECESSARY_PARENTHESES(
         "com.puppycrawl.tools.checkstyle.checks.coding.UnnecessaryParenthesesCheck"),
+    ONE_STATEMENT_PER_LINE(
+        "com.puppycrawl.tools.checkstyle.checks.coding.OneStatementPerLineCheck"),
     JAVADOC_LEADING_ASTERISK_ALIGN(
         "com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocLeadingAsteriskAlignCheck");
 
