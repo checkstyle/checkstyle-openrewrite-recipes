@@ -40,6 +40,7 @@ import org.checkstyle.autofix.recipe.coding.ConstructorsDeclarationGrouping;
 import org.checkstyle.autofix.recipe.coding.EmptyStatement;
 import org.checkstyle.autofix.recipe.coding.FinalLocalVariable;
 import org.checkstyle.autofix.recipe.coding.MissingSwitchDefault;
+import org.checkstyle.autofix.recipe.coding.OneStatementPerLine;
 import org.checkstyle.autofix.recipe.coding.UnnecessaryParentheses;
 import org.checkstyle.autofix.recipe.coding.UnusedLocalVariable;
 import org.checkstyle.autofix.recipe.coding.UseEnhancedSwitch;
@@ -94,6 +95,8 @@ public final class CheckstyleRecipeRegistry {
         RECIPE_MAP_WITH_CONFIG.put(CheckFullName.CONSTRUCTORS_DECLARATION_GROUPING,
             ConstructorsDeclarationGrouping::new);
         RECIPE_MAP.put(CheckFullName.UNNECESSARY_PARENTHESES, UnnecessaryParentheses::new);
+        RECIPE_MAP_WITH_CONFIG.put(CheckFullName.ONE_STATEMENT_PER_LINE,
+            OneStatementPerLine::new);
         RECIPE_MAP_WITH_CONFIG.put(CheckFullName.EMPTY_FOR_ITERATOR_PAD,
             EmptyForIteratorPad::new);
         RECIPE_MAP_WITH_CONFIG.put(CheckFullName.JAVADOC_LEADING_ASTERISK_ALIGN,
