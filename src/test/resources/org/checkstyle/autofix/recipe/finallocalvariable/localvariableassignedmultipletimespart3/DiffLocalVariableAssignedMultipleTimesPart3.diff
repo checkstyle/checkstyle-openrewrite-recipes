@@ -13,13 +13,13 @@
  
          try {
              String className;
--            int kind; // violation, "Variable 'kind' should be declared final"
+-            int kind; // violation "Variable 'kind' should be declared final"
 +            final int kind;
              boolean isParameterToInitMethodofAnonymousInnerClass = false;
              boolean isSyntheticMethod = false;
              if (o instanceof String || o instanceof Integer) {
  
--                String m; // violation, "Variable 'm' should be declared final"
+-                String m; // violation "Variable 'm' should be declared final"
 +                final String m;
                  if (o instanceof String) {
                      m = (String) o;

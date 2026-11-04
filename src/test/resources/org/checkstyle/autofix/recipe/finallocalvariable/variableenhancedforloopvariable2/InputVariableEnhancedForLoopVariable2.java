@@ -22,7 +22,7 @@ public class InputVariableEnhancedForLoopVariable2 {
     public void method2()
     {
         final int[] squares = {0, 1, 4, 9, 16, 25};
-        int x; // violation, "Variable 'x' should be declared final"
+        int x; // violation "Variable 'x' should be declared final"
         for (final int i : squares) {
         }
 
@@ -49,7 +49,7 @@ public class InputVariableEnhancedForLoopVariable2 {
         for(Object a : list) {
         }
 
-        Object a; // violation, "Variable 'a' should be declared final"
+        Object a; // violation "Variable 'a' should be declared final"
         if (list.isEmpty())
         {
             a = new String("empty");

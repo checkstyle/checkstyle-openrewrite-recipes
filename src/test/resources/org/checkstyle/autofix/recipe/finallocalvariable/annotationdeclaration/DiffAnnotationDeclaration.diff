@@ -7,15 +7,15 @@
 -public class InputAnnotationDeclaration {
 +public class OutputAnnotationDeclaration {
      public void basicLocalVariables() {
--        @Nonnull String name = "John Doe";         // violation, "should be declared final"
+-        @Nonnull String name = "John Doe";         // violation "should be declared final"
 +        @Nonnull final String name = "John Doe";
  
          @Nonnull
--        @Deprecated String gender = "Male";         // violation, "should be declared final"
+-        @Deprecated String gender = "Male";         // violation "should be declared final"
 +        @Deprecated final String gender = "Male";
  
          @Nonnull @Deprecated
--        String text = "Hello";         // violation, "should be declared final"
+-        String text = "Hello";         // violation "should be declared final"
 +        final String text = "Hello";
      }
  }

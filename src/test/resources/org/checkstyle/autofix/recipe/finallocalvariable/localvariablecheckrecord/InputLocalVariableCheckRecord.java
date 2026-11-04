@@ -12,7 +12,7 @@ package org.checkstyle.autofix.recipe.finallocalvariable.localvariablecheckrecor
 public class InputLocalVariableCheckRecord {
     record bad(int i) {
         public bad {
-            int b = 0; // violation, "Variable 'b' should be declared final"
+            int b = 0; // violation "Variable 'b' should be declared final"
         }
     }
 }

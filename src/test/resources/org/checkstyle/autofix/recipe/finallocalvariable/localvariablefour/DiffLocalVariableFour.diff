@@ -9,7 +9,7 @@
      class Class3 {
          public void test1() {
              final boolean b = true;
--            int shouldBeFinal; // violation, "Variable 'shouldBeFinal' should be declared final"
+-            int shouldBeFinal; // violation "Variable 'shouldBeFinal' should be declared final"
 +            final int shouldBeFinal;
  
              if (b) {
@@ -18,7 +18,7 @@
  
          public void test2() {
              final int b = 10;
--            int shouldBeFinal; // violation, "Variable 'shouldBeFinal' should be declared final"
+-            int shouldBeFinal; // violation "Variable 'shouldBeFinal' should be declared final"
 +            final int shouldBeFinal;
  
              switch (b) {
@@ -27,7 +27,7 @@
  
          public void test5() {
              final boolean b = false;
--            int shouldBeFinal;    // violation, "Variable 'shouldBeFinal' should be declared final"
+-            int shouldBeFinal;    // violation "Variable 'shouldBeFinal' should be declared final"
 +            final int shouldBeFinal;
              if(b) {
              }
@@ -36,7 +36,7 @@
  
      class class4 {
          public void foo() {
--            int shouldBeFinal;    // violation, "Variable 'shouldBeFinal' should be declared final"
+-            int shouldBeFinal;    // violation "Variable 'shouldBeFinal' should be declared final"
 +            final int shouldBeFinal;
              class Bar {
                  void bar () {

@@ -17,15 +17,15 @@ public class InputEnhancedForLoop {
     {
         final java.util.List<Object> list = new java.util.ArrayList<>();
 
-        for(Object a : list){    // violation, "should be declared final"
+        for(Object a : list){    // violation "should be declared final"
         }
     }
 
     public void method2()
     {
         final int[] squares = {0, 1, 4, 9, 16, 25};
-        int x;                      // violation, "should be declared final"
-        for (int i : squares) {     // violation, "should be declared final"
+        int x;                      // violation "should be declared final"
+        for (int i : squares) {     // violation "should be declared final"
         }
 
     }
@@ -33,7 +33,7 @@ public class InputEnhancedForLoop {
     public java.util.List<String> method3(java.util.List<String> snippets) {
         // violation below "should be declared final"
         java.util.List<String> filteredSnippets = new java.util.ArrayList<>();
-        for (String snippet : snippets) {     // violation, "should be declared final"
+        for (String snippet : snippets) {     // violation "should be declared final"
             filteredSnippets.add(snippet);
         }
         if (filteredSnippets.size() == 0) {

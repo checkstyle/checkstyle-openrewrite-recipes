@@ -12,7 +12,7 @@ package org.checkstyle.autofix.recipe.finallocalvariable.localvariablecheckswitc
 public class InputLocalVariableCheckSwitchExpressionsPart2 {
     void foo3() throws Exception {
 
-        Exception e; // violation, "Variable 'e' should be declared final"
+        Exception e; // violation "Variable 'e' should be declared final"
 
         final int a = (int) Math.random();
         final int b = (int) Math.random();
@@ -46,7 +46,7 @@ public class InputLocalVariableCheckSwitchExpressionsPart2 {
 
     void foo4() throws Exception {
 
-        Exception e; // violation, "Variable 'e' should be declared final"
+        Exception e; // violation "Variable 'e' should be declared final"
 
         final int a = (int) Math.random();
         final int b = (int) Math.random();

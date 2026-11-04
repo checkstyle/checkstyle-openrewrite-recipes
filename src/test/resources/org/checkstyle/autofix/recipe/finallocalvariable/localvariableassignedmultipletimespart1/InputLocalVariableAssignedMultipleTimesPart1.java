@@ -49,7 +49,7 @@ public class InputLocalVariableAssignedMultipleTimesPart1 {
 
     void foo4() {
         final boolean some_condition = true;
-        int i; // violation, "Variable 'i' should be declared final"
+        int i; // violation "Variable 'i' should be declared final"
         if (some_condition) {
             if (true) {
             }
