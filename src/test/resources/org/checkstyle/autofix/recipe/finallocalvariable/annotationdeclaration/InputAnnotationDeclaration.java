@@ -13,12 +13,12 @@ import javax.annotation.Nonnull;
 
 public class InputAnnotationDeclaration {
     public void basicLocalVariables() {
-        @Nonnull String name = "John Doe";         // violation, "should be declared final"
+        @Nonnull String name = "John Doe";         // violation "should be declared final"
 
         @Nonnull
-        @Deprecated String gender = "Male";         // violation, "should be declared final"
+        @Deprecated String gender = "Male";         // violation "should be declared final"
 
         @Nonnull @Deprecated
-        String text = "Hello";         // violation, "should be declared final"
+        String text = "Hello";         // violation "should be declared final"
     }
 }

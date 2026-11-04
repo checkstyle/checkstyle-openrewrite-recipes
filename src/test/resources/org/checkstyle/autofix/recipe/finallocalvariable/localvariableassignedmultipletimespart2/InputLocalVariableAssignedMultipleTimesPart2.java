@@ -35,7 +35,7 @@ public class InputLocalVariableAssignedMultipleTimesPart2 {
 
     // Taken from findbugs
     public static String foo9(String filePath, String project) {
-        String path = new String(filePath); // violation, "Variable 'path' should be declared final"
+        String path = new String(filePath); // violation "Variable 'path' should be declared final"
         String commonPath;
         if (project != null) {
             commonPath = "";

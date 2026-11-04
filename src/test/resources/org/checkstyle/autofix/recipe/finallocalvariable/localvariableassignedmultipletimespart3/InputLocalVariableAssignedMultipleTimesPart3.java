@@ -20,12 +20,12 @@ public class InputLocalVariableAssignedMultipleTimesPart3 {
 
         try {
             String className;
-            int kind; // violation, "Variable 'kind' should be declared final"
+            int kind; // violation "Variable 'kind' should be declared final"
             boolean isParameterToInitMethodofAnonymousInnerClass = false;
             boolean isSyntheticMethod = false;
             if (o instanceof String || o instanceof Integer) {
 
-                String m; // violation, "Variable 'm' should be declared final"
+                String m; // violation "Variable 'm' should be declared final"
                 if (o instanceof String) {
                     m = (String) o;
                     isSyntheticMethod = m.equals("");

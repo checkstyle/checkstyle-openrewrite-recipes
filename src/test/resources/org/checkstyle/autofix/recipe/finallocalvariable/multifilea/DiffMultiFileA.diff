@@ -7,7 +7,7 @@
 -public class InputMultiFileA {
 +public class OutputMultiFileA {
      public void test() {
--        int a = 1; // violation, "should be declared final"
+-        int a = 1; // violation "should be declared final"
 +        final int a = 1;
      }
  }

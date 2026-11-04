@@ -10,6 +10,6 @@ package org.checkstyle.autofix.recipe.finallocalvariable.multifilea;
 
 public class InputMultiFileA {
     public void test() {
-        int a = 1; // violation, "should be declared final"
+        int a = 1; // violation "should be declared final"
     }
 }

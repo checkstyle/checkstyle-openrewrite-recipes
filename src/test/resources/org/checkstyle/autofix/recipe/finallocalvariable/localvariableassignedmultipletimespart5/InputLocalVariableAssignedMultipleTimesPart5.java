@@ -64,7 +64,7 @@ public class InputLocalVariableAssignedMultipleTimesPart5 {
          * signum is 1 if p and q are both nonnegative or both negative, and -1 otherwise.
          */
         final int signum = 1 | ((p ^ q) >> (Integer.SIZE - 1));
-        boolean increment; // violation, "Variable 'increment' should be declared final"
+        boolean increment; // violation "Variable 'increment' should be declared final"
         switch (mode) {
             case 1:
                 String.CASE_INSENSITIVE_ORDER.equals(rem == 0);
