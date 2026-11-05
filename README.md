@@ -131,10 +131,12 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 | 🟢     | [`EmptyStatement`](https://github.com/checkstyle/checkstyle-openrewrite-recipes/blob/main/src/main/java/org/checkstyle/autofix/recipe/coding/EmptyStatement.java)                     |                |
 | 🔵     | [`EqualsAvoidNull`](https://checkstyle.sourceforge.io/checks/coding/equalsavoidnull.html#EqualsAvoidNull)                 |                |
 | 🔴     | [`EqualsHashCode`](https://checkstyle.sourceforge.io/checks/coding/equalshashcode.html#EqualsHashCode)                     | Implement proper equals/hashCode pair |
+| ⚪ | [`ExceptionThrowShouldUseContext`](https://checkstyle.org/checks/coding/exceptionthrowshouldusecontext.html#ExceptionThrowShouldUseContext) | |
 | 🔵     | [`ExplicitInitialization`](https://checkstyle.sourceforge.io/checks/coding/explicitinitialization.html#ExplicitInitialization) |                |
 | ⚪ | [`ExpressionOverBlockLambda`](https://checkstyle.org/checks/coding/expressionoverblocklambda.html#ExpressionOverBlockLambda) | |
 | 🔴     | [`FallThrough`](https://checkstyle.sourceforge.io/checks/coding/fallthrough.html#FallThrough)                             | Add break statements or intentional comments |
 | 🟢     | [`FinalLocalVariable`](https://github.com/checkstyle/checkstyle-openrewrite-recipes/blob/main/src/main/java/org/checkstyle/autofix/recipe/coding/FinalLocalVariable.java)         |                |
+| ⚪ | [`FinalPatternVariable`](https://checkstyle.org/checks/coding/finalpatternvariable.html#FinalPatternVariable) | |
 | 🔴     | [`HiddenField`](https://checkstyle.sourceforge.io/checks/coding/hiddenfield.html#HiddenField)                             | Rename variables or use this. prefix |
 | 🔴     | [`IllegalCatch`](https://checkstyle.sourceforge.io/checks/coding/illegalcatch.html#IllegalCatch)                           | Change catch block exception types |
 | 🔴     | [`IllegalInstantiation`](https://checkstyle.sourceforge.io/checks/coding/illegalinstantiation.html#IllegalInstantiation)   | Replace with factory methods |
@@ -156,6 +158,7 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 | 🔴     | [`NestedIfDepth`](https://checkstyle.sourceforge.io/checks/coding/nestedifdepth.html#NestedIfDepth)                       | Requires conditional restructuring |
 | 🔴     | [`NestedTryDepth`](https://checkstyle.sourceforge.io/checks/coding/nestedtrydepth.html#NestedTryDepth)                   | Requires exception handling restructuring |
 | 🔵     | [`NoArrayTrailingComma`](https://checkstyle.sourceforge.io/checks/coding/noarraytrailingcomma.html#NoArrayTrailingComma) |                |
+| ⚪ | [`NoCauseGetMessageInExceptionConstructor`](https://checkstyle.org/checks/coding/nocausegetmessageinexceptionconstructor.html#NoCauseGetMessageInExceptionConstructor) | |
 | 🔴     | [`NoClone`](https://checkstyle.sourceforge.io/checks/coding/noclone.html#NoClone)                                       | Remove clone() method |
 | 🔵     | [`NoEnumTrailingComma`](https://checkstyle.sourceforge.io/checks/coding/noenumtrailingcomma.html#NoEnumTrailingComma)     |                |
 | 🔴     | [`NoFinalizer`](https://checkstyle.sourceforge.io/checks/coding/nofinalizer.html#NoFinalizer)                             | Remove finalize() method |
@@ -164,6 +167,7 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 | 🔵     | [`PackageDeclaration`](https://checkstyle.sourceforge.io/checks/coding/packagedeclaration.html#PackageDeclaration) |                |
 | 🔴     | [`ParameterAssignment`](https://checkstyle.sourceforge.io/checks/coding/parameterassignment.html#ParameterAssignment) |                |
 | 🔴     | [`PatternVariableAssignment`](https://checkstyle.sourceforge.io/checks/coding/patternvariableassignment.html#PatternVariableAssignment) |                |
+| ⚪ | [`RedundantThis`](https://checkstyle.org/checks/coding/redundantthis.html#RedundantThis) | |
 | 🔵     | [`RequireThis`](https://checkstyle.sourceforge.io/checks/coding/requirethis.html#RequireThis) |                |
 | 🔴     | [`ReturnCount`](https://checkstyle.sourceforge.io/checks/coding/returncount.html#ReturnCount) |                |
 | 🔵     | [`SimplifyBooleanExpression`](https://checkstyle.sourceforge.io/checks/coding/simplifybooleanexpression.html#SimplifyBooleanExpression) |                |
@@ -220,6 +224,7 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 | Status | Check                                                                                                                        | Coverage Notes |
 |--------|------------------------------------------------------------------------------------------------------------------------------|----------------|
 | 🔵     | [`AtclauseOrder`](https://checkstyle.sourceforge.io/checks/javadoc/atclauseorder.html#AtclauseOrder)                       |                |
+| ⚪ | [`BlockCommentEndPosition`](https://checkstyle.org/checks/javadoc/blockcommentendposition.html#BlockCommentEndPosition) | |
 | 🔵     | [`IllegalBlockTag`](https://checkstyle.sourceforge.io/checks/javadoc/illegalblocktag.html#IllegalBlockTag)                 |                |
 | ⚪ | [`InappropriateJavadocBlockTagsOnField`](https://checkstyle.org/checks/javadoc/inappropriatejavadocblocktagsonfield.html#InappropriateJavadocBlockTagsOnField) | |
 | ⚪ | [`InappropriateJavadocBlockTagsOnPackage`](https://checkstyle.org/checks/javadoc/inappropriatejavadocblocktagsonpackage.html#InappropriateJavadocBlockTagsOnPackage) | |
@@ -243,6 +248,7 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 | 🔵     | [`JavadocTagContinuationIndentation`](https://checkstyle.sourceforge.io/checks/javadoc/javadoctagcontinuationindentation.html#JavadocTagContinuationIndentation) |                |
 | ⚪ | [`JavadocThrowsOrder`](https://checkstyle.org/checks/javadoc/javadocthrowsorder.html#JavadocThrowsOrder) | |
 | 🔴     | [`JavadocType`](https://checkstyle.sourceforge.io/checks/javadoc/javadoctype.html#JavadocType)                           | Add/fix type documentation |
+| ⚪ | [`JavadocUtilizingTrailingSpace`](https://checkstyle.org/checks/javadoc/javadocutilizingtrailingspace.html#JavadocUtilizingTrailingSpace) | |
 | 🔴     | [`JavadocVariable`](https://checkstyle.sourceforge.io/checks/javadoc/javadocvariable.html#JavadocVariable)                 | Add variable documentation |
 | 🔴     | [`MissingJavadocMethod`](https://checkstyle.sourceforge.io/checks/javadoc/missingjavadocmethod.html#MissingJavadocMethod)   | Add method documentation |
 | 🔴     | [`MissingJavadocPackage`](https://checkstyle.sourceforge.io/checks/javadoc/missingjavadocpackage.html#MissingJavadocPackage) | Add package documentation |
@@ -273,6 +279,7 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 |--------|----------------------------------------------------------------------------------------------------------------|----------------|
 | 🔵     | [`ArrayTypeStyle`](https://checkstyle.sourceforge.io/checks/misc/arraytypestyle.html#ArrayTypeStyle)         |                |
 | 🔴     | [`AvoidEscapedUnicodeCharacters`](https://checkstyle.sourceforge.io/checks/misc/avoidescapedunicodecharacters.html#AvoidEscapedUnicodeCharacters) | Need to determine appropriate replacements |
+| ⚪ | [`ClassHeaderWrapOpenjdk`](https://checkstyle.org/checks/indentation/classheaderwrapopenjdk.html#ClassHeaderWrapOpenjdk) | |
 | 🔵     | [`CommentsIndentation`](https://checkstyle.sourceforge.io/checks/misc/commentsindentation.html#CommentsIndentation) |                |
 | ⚪ | [`ModuleDirectiveOrder`](https://checkstyle.org/checks/modules/moduledirectiveorder.html#ModuleDirectiveOrder) | |
 | 🔵     | [`MultilineCommentLeadingAsteriskPresence`](https://checkstyle.sourceforge.io/checks/misc/multilinecommentleadingasteriskpresence.html#MultilineCommentLeadingAsteriskPresence) | |
@@ -303,6 +310,7 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 | 🔵     | [`InterfaceMemberImpliedModifier`](https://checkstyle.sourceforge.io/checks/modifier/interfacememberimpliedmodifier.html#InterfaceMemberImpliedModifier) |                |
 | 🔵     | [`ModifierOrder`](https://checkstyle.sourceforge.io/checks/modifier/modifierorder.html#ModifierOrder)                       |                |
 | 🔵     | [`RedundantModifier`](https://checkstyle.sourceforge.io/checks/modifier/redundantmodifier.html#RedundantModifier)           |                |
+| ⚪ | [`RedundantModifierCompactSource`](https://checkstyle.org/checks/modifier/redundantmodifiercompactsource.html#RedundantModifierCompactSource) | |
 
 ### Naming Conventions
 
@@ -364,6 +372,7 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 | 🟢     | [`EmptyForInitializerPad`](https://github.com/checkstyle/checkstyle-openrewrite-recipes/blob/main/src/main/java/org/checkstyle/autofix/recipe/whitespace/EmptyForInitializerPad.java) |                |
 | 🟢     | [`EmptyForIteratorPad`](https://github.com/checkstyle/checkstyle-openrewrite-recipes/blob/main/src/main/java/org/checkstyle/autofix/recipe/whitespace/EmptyForIteratorPad.java) |                |
 | 🔵     | [`EmptyLineSeparator`](https://checkstyle.sourceforge.io/checks/whitespace/emptylineseparator.html#EmptyLineSeparator)     |                |
+| ⚪ | [`EmptyLineWrappingInBlock`](https://checkstyle.org/checks/whitespace/emptylinewrappinginblock.html#EmptyLineWrappingInBlock) | |
 | 🔵     | [`FileTabCharacter`](https://checkstyle.sourceforge.io/checks/whitespace/filetabcharacter.html#FileTabCharacter)           |                |
 | 🔵     | [`GenericWhitespace`](https://checkstyle.sourceforge.io/checks/whitespace/genericwhitespace.html#GenericWhitespace)       |                |
 | 🔵     | [`MethodParamPad`](https://checkstyle.sourceforge.io/checks/whitespace/methodparampad.html#MethodParamPad)                 |                |
@@ -371,6 +380,7 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 | 🟢     | [`NoWhitespaceAfter`](https://github.com/checkstyle/checkstyle-openrewrite-recipes/blob/main/src/main/java/org/checkstyle/autofix/recipe/whitespace/NoWhitespaceAfter.java)       |                |
 | 🔵     | [`NoWhitespaceBefore`](https://checkstyle.sourceforge.io/checks/whitespace/nowhitespacebefore.html#NoWhitespaceBefore)         |                |
 | 🔵     | [`NoWhitespaceBeforeCaseDefaultColon`](https://checkstyle.sourceforge.io/checks/whitespace/nowhitespacebeforecasedefaultcolon.html#NoWhitespaceBeforeCaseDefaultColon) |                |
+| ⚪ | [`OpenjdkMethodParameterAlignment`](https://checkstyle.org/checks/whitespace/openjdkmethodparameteralignment.html#OpenjdkMethodParameterAlignment) | |
 | 🔵     | [`OperatorWrap`](https://checkstyle.sourceforge.io/checks/whitespace/operatorwrap.html#OperatorWrap)                     |                |
 | 🔵     | [`ParenPad`](https://checkstyle.sourceforge.io/checks/whitespace/parenpad.html#ParenPad)                                 |                |
 | 🔵     | [`SeparatorWrap`](https://checkstyle.sourceforge.io/checks/whitespace/separatorwrap.html#SeparatorWrap)                   |                |
