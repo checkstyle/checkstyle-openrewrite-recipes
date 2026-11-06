@@ -71,6 +71,7 @@ public class ViolationMarkerRecipe extends ScanningRecipe<Accumulator> {
         TARGET_TYPES.put(CheckFullName.MISSING_OVERRIDE, J.MethodDeclaration.class);
         TARGET_TYPES.put(CheckFullName.USE_ENHANCED_SWITCH, J.Switch.class);
         TARGET_TYPES.put(CheckFullName.MISSING_SWITCH_DEFAULT, J.Switch.class);
+        TARGET_TYPES.put(CheckFullName.ONE_STATEMENT_PER_LINE, J.Block.class);
         TARGET_TYPES.put(CheckFullName.CONSTRUCTORS_DECLARATION_GROUPING,
                 J.MethodDeclaration.class);
         TARGET_TYPES.put(CheckFullName.UNNECESSARY_PARENTHESES, J.Parentheses.class);

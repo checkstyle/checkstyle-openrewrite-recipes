@@ -43,6 +43,7 @@ import org.checkstyle.autofix.marker.checks.MissingSwitchDefaultMarker;
 import org.checkstyle.autofix.marker.checks.NewlineAtEndOfFileMarker;
 import org.checkstyle.autofix.marker.checks.NoWhitespaceAfterMarker;
 import org.checkstyle.autofix.marker.checks.NumericalPrefixesInfixesSuffixesCharacterCaseMarker;
+import org.checkstyle.autofix.marker.checks.OneStatementPerLineMarker;
 import org.checkstyle.autofix.marker.checks.RedundantImportMarker;
 import org.checkstyle.autofix.marker.checks.UnnecessaryParenthesesMarker;
 import org.checkstyle.autofix.marker.checks.UnusedImportsMarker;
@@ -88,6 +89,7 @@ public final class MarkerRegistry {
         FACTORIES.put(CheckFullName.MISSING_SWITCH_DEFAULT, MissingSwitchDefaultMarker::new);
         FACTORIES.put(CheckFullName.UNUSED_IMPORT, UnusedImportsMarker::new);
         FACTORIES.put(CheckFullName.UNNECESSARY_PARENTHESES, UnnecessaryParenthesesMarker::new);
+        FACTORIES.put(CheckFullName.ONE_STATEMENT_PER_LINE, OneStatementPerLineMarker::new);
         FACTORIES.put(
                 CheckFullName.AVOID_NO_ARGUMENT_SUPER_CONSTRUCTOR_CALL,
                 AvoidNoArgumentSuperConstructorCallMarker::new);

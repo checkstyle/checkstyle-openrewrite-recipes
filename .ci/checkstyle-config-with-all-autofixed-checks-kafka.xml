@@ -48,5 +48,6 @@
         <module name="UnnecessaryParentheses"/>
         <module name="UpperEll"/>
         <module name="UseEnhancedSwitch"/>
+        <module name="OneStatementPerLine"/>
     </module>
 </module>
