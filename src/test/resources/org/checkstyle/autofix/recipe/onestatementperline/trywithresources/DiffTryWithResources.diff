@@ -1,0 +1,16 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/onestatementperline/trywithresources/InputTryWithResources.java
++++ src/test/resources/org/checkstyle/autofix/recipe/onestatementperline/trywithresources/OutputTryWithResources.java
+@@ -13,10 +13,11 @@
+ import java.io.ByteArrayInputStream;
+ import java.io.InputStream;
+ 
+-public class InputTryWithResources {
++public class OutputTryWithResources {
+ 
+     void test() throws Exception {
+-        try (InputStream in1 = new ByteArrayInputStream(new byte[0]); InputStream in2 = new ByteArrayInputStream(new byte[0])) { // violation 'Only one statement per line allowed.'
++        try (InputStream in1 = new ByteArrayInputStream(new byte[0]);
++             InputStream in2 = new ByteArrayInputStream(new byte[0])) {
+         }
+     }
+ }

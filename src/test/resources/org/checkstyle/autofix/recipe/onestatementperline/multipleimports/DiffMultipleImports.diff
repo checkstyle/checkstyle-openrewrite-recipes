@@ -1,0 +1,15 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/onestatementperline/multipleimports/InputMultipleImports.java
++++ src/test/resources/org/checkstyle/autofix/recipe/onestatementperline/multipleimports/OutputMultipleImports.java
+@@ -8,9 +8,10 @@
+ 
+ package org.checkstyle.autofix.recipe.onestatementperline.multipleimports;
+ 
+-import java.util.ArrayList; import java.util.List; // violation 'Only one statement per line allowed.'
++import java.util.ArrayList;
++import java.util.List;
+ 
+-public class InputMultipleImports {
++public class OutputMultipleImports {
+ 
+     List<String> values = new ArrayList<>();
+ }
