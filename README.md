@@ -279,7 +279,7 @@ This table tracks the auto-fix support status of OpenRewrite recipes for each Ch
 |--------|----------------------------------------------------------------------------------------------------------------|----------------|
 | 🔵     | [`ArrayTypeStyle`](https://checkstyle.sourceforge.io/checks/misc/arraytypestyle.html#ArrayTypeStyle)         |                |
 | 🔴     | [`AvoidEscapedUnicodeCharacters`](https://checkstyle.sourceforge.io/checks/misc/avoidescapedunicodecharacters.html#AvoidEscapedUnicodeCharacters) | Need to determine appropriate replacements |
-| ⚪ | [`ClassHeaderWrapOpenjdk`](https://checkstyle.org/checks/indentation/classheaderwrapopenjdk.html#ClassHeaderWrapOpenjdk) | |
+| ⚪ | [`ClassHeaderWrapOpenjdk`](https://checkstyle.org/checks/misc/classheaderwrapopenjdk.html#ClassHeaderWrapOpenjdk) | |
 | 🔵     | [`CommentsIndentation`](https://checkstyle.sourceforge.io/checks/misc/commentsindentation.html#CommentsIndentation) |                |
 | ⚪ | [`ModuleDirectiveOrder`](https://checkstyle.org/checks/modules/moduledirectiveorder.html#ModuleDirectiveOrder) | |
 | 🔵     | [`MultilineCommentLeadingAsteriskPresence`](https://checkstyle.sourceforge.io/checks/misc/multilinecommentleadingasteriskpresence.html#MultilineCommentLeadingAsteriskPresence) | |

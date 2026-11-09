@@ -96,6 +96,9 @@ public class ReadmeUpdater {
                         .substring("com.puppycrawl.tools.checkstyle.checks.".length());
                 if (!subpackage.isEmpty()) {
                     category = subpackage.split("\\.")[0];
+                    if ("indentation".equals(category)) {
+                        category = "misc";
+                    }
                 }
             }
             checksByCategory.computeIfAbsent(category, categoryKey -> new ArrayList<>())
