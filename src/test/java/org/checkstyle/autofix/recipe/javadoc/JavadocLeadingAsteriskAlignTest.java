@@ -83,4 +83,9 @@ public class JavadocLeadingAsteriskAlignTest extends AbstractRecipeTestSupport {
         verify(parser, "KillMutation1", "KillMutation2");
     }
 
+    @RecipeTest
+    void selectiveAlignment(ReportParser parser) throws Exception {
+        verify(parser, "SelectiveAlignment");
+    }
+
 }
