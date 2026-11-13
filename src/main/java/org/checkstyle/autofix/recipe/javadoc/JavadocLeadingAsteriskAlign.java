@@ -19,6 +19,8 @@ package org.checkstyle.autofix.recipe.javadoc;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.checkstyle.autofix.marker.checks.JavadocLeadingAsteriskAlignMarker;
 import org.checkstyle.autofix.parser.CheckConfiguration;
@@ -77,6 +79,9 @@ public class JavadocLeadingAsteriskAlign extends Recipe {
         private static final char LF_CHAR = '\n';
         private static final char TAB_CHAR = '\t';
         private static final char ASTERISK_CHAR = '*';
+        private String source;
+        private int commentSearchOffset;
+        private Set<Integer> violationLines = Set.of();
 
         private final int tabWidth;
 
@@ -84,19 +89,45 @@ public class JavadocLeadingAsteriskAlign extends Recipe {
             this.tabWidth = tabWidth;
         }
 
+        private boolean containsViolation(int commentStart, int commentLength) {
+            final int commentEnd = commentStart + commentLength;
+
+            final int startLine = 1 + (int) source.substring(0, commentStart)
+                    .chars()
+                    .filter(character -> character == LF_CHAR)
+                    .count();
+
+            final int endLine = startLine + (int) source.substring(commentStart, commentEnd)
+                    .chars()
+                    .filter(character -> character == LF_CHAR)
+                    .count();
+
+            return violationLines.stream()
+                    .anyMatch(line -> line >= startLine && line <= endLine);
+        }
+
         @Override
         public J.CompilationUnit visitCompilationUnit(
                 J.CompilationUnit compUnit, ExecutionContext executionContext) {
-            final boolean hasMarker = compUnit.getMarkers()
-                    .findFirst(JavadocLeadingAsteriskAlignMarker.class).isPresent();
+
+            final List<JavadocLeadingAsteriskAlignMarker> markers = compUnit.getMarkers()
+                    .findAll(JavadocLeadingAsteriskAlignMarker.class);
 
             final J.CompilationUnit result;
-            if (hasMarker) {
-                result = super.visitCompilationUnit(compUnit, executionContext);
-            }
-            else {
+
+            if (markers.isEmpty()) {
                 result = compUnit;
             }
+            else {
+                source = compUnit.printAll();
+                commentSearchOffset = 0;
+                violationLines = markers.stream()
+                        .map(marker -> marker.violation().getLine())
+                        .collect(Collectors.toSet());
+
+                result = super.visitCompilationUnit(compUnit, executionContext);
+            }
+
             return result;
         }
 
@@ -107,6 +138,9 @@ public class JavadocLeadingAsteriskAlign extends Recipe {
         }
 
         private Space alignJavadocComments(Space space) {
+            if (source == null) {
+                return space;
+            }
             boolean changed = false;
             final List<Comment> comments = space.getComments();
             final List<Comment> newComments = new ArrayList<>();
@@ -115,8 +149,18 @@ public class JavadocLeadingAsteriskAlign extends Recipe {
 
             for (Comment comment : comments) {
                 final String commentText = comment.printComment(getCursor());
-                if (isJavadoc(commentText)) {
+                final int commentStart = source.indexOf(commentText, commentSearchOffset);
+
+                final boolean hasViolation = commentStart != -1
+                        && containsViolation(commentStart, commentText.length());
+
+                if (commentStart != -1) {
+                    commentSearchOffset = commentStart + commentText.length();
+                }
+
+                if (isJavadoc(commentText) && hasViolation) {
                     final String aligned = alignComment(commentText, prevIndent);
+
                     if (!aligned.equals(commentText)) {
                         final String innerText = extractInnerText(aligned);
                         final Comment updatedComment = new TextComment(
@@ -135,16 +179,19 @@ public class JavadocLeadingAsteriskAlign extends Recipe {
                 else {
                     newComments.add(comment);
                 }
+
                 prevIndent = extractIndent(comment.getSuffix());
             }
 
             final Space result;
+
             if (changed) {
                 result = space.withComments(newComments);
             }
             else {
                 result = space;
             }
+
             return result;
         }
 

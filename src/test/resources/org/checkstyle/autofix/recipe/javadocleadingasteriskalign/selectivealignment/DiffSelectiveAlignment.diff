@@ -1,0 +1,19 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/javadocleadingasteriskalign/selectivealignment/InputSelectiveAlignment.java
++++ src/test/resources/org/checkstyle/autofix/recipe/javadocleadingasteriskalign/selectivealignment/OutputSelectiveAlignment.java
+@@ -12,13 +12,12 @@
+ 
+ package org.checkstyle.autofix.recipe.javadocleadingasteriskalign.selectivealignment;
+ 
+-public class InputSelectiveAlignment {
++public class OutputSelectiveAlignment {
+ 
+-    // violation 3 lines below 'Leading asterisk has incorrect indentation level 2, expected is 1.'
+     /**
+      * First line
+-      * Misaligned line
+-    */ // violation 'Leading asterisk has incorrect indentation level 0, expected is 1.'
++     * Misaligned line
++     */
+     public void firstMethod() {
+     }
+ 
