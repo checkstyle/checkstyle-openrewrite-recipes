@@ -353,6 +353,7 @@
                                 <param>org.checkstyle.autofix.CheckstyleAutoFix*</param>
                                 <param>org.checkstyle.autofix.CheckstyleCheck*</param>
                                 <param>org.checkstyle.autofix.CheckstyleRecipeRegistry*</param>
+                                <param>org.checkstyle.autofix.recipe.coding.OneStatementPerLine*</param>
                             </targetClasses>
                             <targetTests>
                                 <param>org.checkstyle.autofix.CheckstyleAutoFixTest</param>
@@ -363,6 +364,7 @@
                                 <param>org.checkstyle.autofix.recipe.imports.RedundantImportTest</param>
                                 <param>org.checkstyle.autofix.recipe.misc.UpperEllTest</param>
                                 <param>org.checkstyle.autofix.recipe.coding.UseEnhancedSwitchTest</param>
+                                <param>org.checkstyle.autofix.recipe.coding.OneStatementPerLineTest</param>
                             </targetTests>
 
                             <mutators>
@@ -570,6 +572,7 @@
                         <configuration>
                             <targetClasses>
                                 <param>org.checkstyle.autofix.recipe.coding.EmptyStatement*</param>
+                                <param>org.checkstyle.autofix.recipe.coding.OneStatementPerLine*</param>
                                 <param>org.checkstyle.autofix.recipe.whitespace.EmptyForIteratorPad</param>
                                 <param>org.checkstyle.autofix.recipe.design.FinalClass*</param>
                                 <param>org.checkstyle.autofix.recipe.coding.FinalLocalVariable*</param>
@@ -599,6 +602,7 @@
                                 <param>org.checkstyle.autofix.recipe.coding.MissingSwitchDefaultTest</param>
                                 <param>org.checkstyle.autofix.recipe.annotation.AnnotationLocationTest</param>
                                 <param>org.checkstyle.autofix.recipe.whitespace.NoWhitespaceAfterTest</param>
+                                <param>org.checkstyle.autofix.recipe.coding.OneStatementPerLineTest</param>
                             </targetTests>
 
                             <mutators>

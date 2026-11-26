@@ -1,0 +1,15 @@
+--- src/test/resources/org/checkstyle/autofix/recipe/onestatementperline/singlelineblock/InputSingleLineBlock.java
++++ src/test/resources/org/checkstyle/autofix/recipe/onestatementperline/singlelineblock/OutputSingleLineBlock.java
+@@ -8,7 +8,10 @@
+ 
+ package org.checkstyle.autofix.recipe.onestatementperline.singlelineblock;
+ 
+-public class InputSingleLineBlock {
++public class OutputSingleLineBlock {
+ 
+-    void test() { int first = 1; int second = 2; } // violation 'Only one statement per line allowed.'
++    void test() {
++        int first = 1;
++        int second = 2;
++    }
+ }
